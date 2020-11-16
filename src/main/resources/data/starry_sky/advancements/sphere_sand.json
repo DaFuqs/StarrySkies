@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:sand"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_sand.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_sand.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_common",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

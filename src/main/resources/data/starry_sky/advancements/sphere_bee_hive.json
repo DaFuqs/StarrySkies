@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:honey_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_bee_hive.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_bee_hive.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_rare",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

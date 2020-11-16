@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:packed_ice"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_packed_ice.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_packed_ice.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_uncommon",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

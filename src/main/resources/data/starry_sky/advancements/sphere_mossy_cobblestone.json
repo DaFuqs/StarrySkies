@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:mossy_cobblestone"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_mossy_cobblestone.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_mossy_cobblestone.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_rare",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

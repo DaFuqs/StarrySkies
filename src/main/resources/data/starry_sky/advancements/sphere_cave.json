@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:cobweb"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_cave.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_cave.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_uncommon",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

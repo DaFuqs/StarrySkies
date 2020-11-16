@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:yellow_stained_glass"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_rainbow_glass.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_rainbow_glass.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_rainbow",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

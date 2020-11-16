@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:diamond_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_group_rare.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_group_rare.description"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "starry_sky:starry_sky",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

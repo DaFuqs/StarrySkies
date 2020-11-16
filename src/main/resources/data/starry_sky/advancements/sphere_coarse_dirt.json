@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:coarse_dirt"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_coarse_dirt.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_coarse_dirt.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_uncommon",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

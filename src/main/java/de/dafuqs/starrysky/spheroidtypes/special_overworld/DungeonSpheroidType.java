@@ -1,0 +1,50 @@
+package de.dafuqs.starrysky.spheroidtypes.special_overworld;
+
+import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementGroup;
+import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
+import net.minecraft.world.gen.ChunkRandom;
+
+import java.util.HashMap;
+import java.util.Random;
+
+public class DungeonSpheroidType extends SpheroidType {
+
+    private final EntityType entityType;
+    private final HashMap<BlockState, Float> validShellBlocks;
+    private final int minShellRadius;
+    private final int maxShellRadius;
+
+    public DungeonSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, EntityType entityType, HashMap<BlockState, Float> validShellBlocks, int minRadius, int maxRadius, int minShellRadius, int maxShellRadius) {
+        super();
+
+        this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
+        this.entityType = entityType;
+        this.validShellBlocks = validShellBlocks;
+        this.minRadius = minRadius;
+        this.maxRadius = maxRadius;
+        this.minShellRadius = minShellRadius;
+        this.maxShellRadius = maxShellRadius;
+    }
+
+    @Override
+    public String getDescription() {
+        return "DungeonSpheroid";
+    }
+
+    public EntityType getEntityType () {
+        return this.entityType;
+    }
+
+    public BlockState getRandomShellBlock(ChunkRandom random) {
+        return Support.getWeightedRandom(validShellBlocks, random);
+    }
+
+    public int getRandomShellRadius(Random random) {
+        return random.nextInt(maxShellRadius - minShellRadius  + 1) + minShellRadius;
+    }
+
+}

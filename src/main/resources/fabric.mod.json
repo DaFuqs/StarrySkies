@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "modid",
+  "version": "${version}",
+
+  "name": "Starry Sky",
+  "description": "An implementation of the planetoids world gen for fabric",
+  "authors": [
+    "DaFuqs"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/DaFuqs/StarrySky"
+  },
+
+  "license": "MIT",
+  "icon": "assets/starry_sky/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "de.dafuqs.starrysky.StarrySkyCommon"
+    ],
+    "modmenu": [
+      "de.dafuqs.starrysky.configs.ModMenuConfig"
+    ],
+    "client": [
+    ]
+  },
+  "mixins": [
+    "starry_sky.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.7.2",
+    "fabric": "*",
+    "minecraft": ">=1.16.2",
+    "cardinal-components-base": ">=2.5.0",
+    "cardinal-components-entity": ">=2.5.0"
+  },
+  "suggests": { }
+}

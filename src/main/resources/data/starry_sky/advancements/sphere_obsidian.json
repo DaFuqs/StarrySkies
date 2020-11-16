@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:obsidian"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_obsidian.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_obsidian.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_uncommon",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

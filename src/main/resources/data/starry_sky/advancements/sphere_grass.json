@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:grass"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_grass.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_grass.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_common",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

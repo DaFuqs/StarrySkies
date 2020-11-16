@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:stone"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_stone.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_stone.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_common",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

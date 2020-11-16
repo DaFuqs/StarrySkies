@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:jungle_wood"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_jungle_wood.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_jungle_wood.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_wood",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

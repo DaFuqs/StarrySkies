@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:oak_wood"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_group_wood.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_group_wood.description"
+    },
+    "show_toast": "false",
+    "announce_to_chat": "false"
+  },
+  "parent": "starry_sky:starry_sky",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

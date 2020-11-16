@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:water_bucket"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_water.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_water.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_common",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

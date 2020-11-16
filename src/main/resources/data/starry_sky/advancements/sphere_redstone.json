@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:redstone_ore"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_redstone.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_redstone.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_ores",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
