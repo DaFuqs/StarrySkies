@@ -4,6 +4,7 @@ import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -73,5 +74,13 @@ public abstract class Spheroid implements Serializable {
 
     public void addUnfinishedChunk(ChunkPos chunkPos) {
         this.unfinishedChunks.add(chunkPos);
+    }
+
+    public boolean shouldPopulateEntities(ChunkPos chunkPos) {
+        return false;
+    }
+
+    public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
+
     }
 }

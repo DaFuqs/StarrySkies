@@ -2,12 +2,17 @@ package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 
 import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementGroup;
 import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -74,19 +79,7 @@ public class BeeHiveSpheroidType extends SpheroidType {
         return random.nextInt(maxFlowerRingSpacing - minFlowerRingSpacing  + 1) + minFlowerRingSpacing;
     }
 
-    public BeeEntity getRandomQueen(ChunkRandom random, World world) {
-        BeeEntity queen = new BeeEntity(EntityType.BEE, world);
-        queen.setCustomName(new TranslatableText("bee.queen"));
-        queen.setHealth(queen.getHealth() * (random.nextFloat()*3 + 1)); //way higher than default
-        queen.setMovementSpeed((float) (queen.getMovementSpeed() * (random.nextFloat()* 0.5 + 0.5))); //slower than default
-        queen.setAbsorptionAmount((float) (queen.getAbsorptionAmount() * (random.nextFloat()*1.5 + 1))); //higher than default
-        queen.setGlowing(true);
-        queen.setAngerTime(Integer.MAX_VALUE);
-        return queen;
-    }
-
     public BlockState getRandomFlower(ChunkRandom random) {
         return this.flowers.get(random.nextInt(flowers.size()));
     }
-
 }

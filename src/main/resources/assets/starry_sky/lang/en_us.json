@@ -21,6 +21,8 @@
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel.@PrefixText": "The '/sphere' command lists all the data of the closest sphere (position, blocks, ...)",
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel": "Required Permission Level for /sphere Command",
 
+  "bee.queen": "Queen",
+
   "advancements.dafuqs.starry_sky.starry_sky.title": "Starry Sky",
   "advancements.dafuqs.starry_sky.starry_sky.description": "Enter the Starry Sky dimension",
 
@@ -107,6 +109,8 @@
   "advancements.dafuqs.starry_sky.sphere_lava.description": "Find a lava sphere",
   "advancements.dafuqs.starry_sky.sphere_packed_ice.title": "Sphere: Packed Ice",
   "advancements.dafuqs.starry_sky.sphere_packed_ice.description": "Find a packed ice sphere",
+  "advancements.dafuqs.starry_sky.sphere_the_sun.title": "Glowstone for Ages",
+  "advancements.dafuqs.starry_sky.sphere_the_sun.description": "Find the Sun",
   "advancements.dafuqs.starry_sky.sphere_tnt.title": "Sphere: TNT",
   "advancements.dafuqs.starry_sky.sphere_tnt.description": "Find a TNT sphere",
   "advancements.dafuqs.starry_sky.sphere_rainbow_terracotta.title": "Sphere: Rainbow Terracotta",
@@ -133,7 +137,7 @@
   "advancements.dafuqs.starry_sky.sphere_slime.description": "Find a slime sphere",
   "advancements.dafuqs.starry_sky.sphere_jungle_wood.title": "Sphere: Jungle",
   "advancements.dafuqs.starry_sky.sphere_jungle_wood.description": "Find a jungle wood sphere",
-  "advancements.dafuqs.starry_sky.sphere_cave.title": "Sphere: Cave",
+  "advancements.dafuqs.starry_sky.sphere_cave.title": "You can basically live in that thing",
   "advancements.dafuqs.starry_sky.sphere_cave.description": "Find a cave sphere",
   "advancements.dafuqs.starry_sky.sphere_gold.title": "Sphere: Gold",
   "advancements.dafuqs.starry_sky.sphere_gold.description": "Find a gold sphere",

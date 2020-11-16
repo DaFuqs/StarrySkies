@@ -151,6 +151,7 @@ public class SpheroidList {
 
     // GIANT SPHERE WITH HUGE CAVE INSIDE
     public static final CaveSpheroidType HUGE_MONSTER_CAVE = new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, Blocks.DIRT.getDefaultState(), Blocks.COARSE_DIRT.getDefaultState(), 20, 30, 2, 5).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState());
+    public static final DoubleCoreSpheroidType THE_SUN = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.the_sun, Blocks.NETHERITE_BLOCK.getDefaultState(), Blocks.GOLD_BLOCK.getDefaultState(), Blocks.GLOWSTONE.getDefaultState(), 50, 50, 2, 3, 45, 45);
 
     //GLASS
     public static final ModularSpheroidType GLASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.glass, Blocks.GLASS.getDefaultState(), 5, 8);

@@ -150,24 +150,24 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         return super.getEntitySpawnList(biome, accessor, group, pos);
     }*/
 
-    /**
-     * Dedicated to spawning slimes/bees when generating chunks initially.
-     * <p>
-     * This is mainly vanilla code but with biome$spawnlistentry changed to
-     * use bee/slime and the restrictive terrain check called on the entity removed.
-     * The height is also restricted so the mob cannot spawn on the ceiling of this
-     * dimension as well.
-     */
-    /*@Override
-    public void populateEntities(ChunkRegion region) {
-        int xChunk = region.getCenterChunkX();
-        int zChunk = region.getCenterChunkZ();
+    @Override
+    public void populateEntities(ChunkRegion chunkRegion) {
+        int xChunk = chunkRegion.getCenterChunkX();
+        int zChunk = chunkRegion.getCenterChunkZ();
         int xCord = xChunk << 4;
         int zCord = zChunk << 4;
-        Biome biome = region.getBiome((new ChunkPos(xChunk, zChunk)).getCenterBlockPos());
+
+        List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(xChunk, zChunk);
         ChunkRandom sharedseedrandom = new ChunkRandom();
-        sharedseedrandom.setPopulationSeed(region.getSeed(), xCord, zCord);
-    }*/
+        sharedseedrandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
+
+        ChunkPos chunkPos = new ChunkPos(xChunk, zChunk);
+        for(Spheroid spheroid : localSystem) {
+            if (spheroid.shouldPopulateEntities(chunkPos)) {
+                spheroid.populateEntities(chunkPos, chunkRegion, sharedseedrandom);
+            }
+        }
+    }
 
     @Override
     public int getSeaLevel() {

@@ -31,8 +31,8 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nHow many spheres a system can contain max.\n"
             + "Some will fail because of distance restrictions\n"
             + "so it's not an exact value\n"
-            + "Default: 1250")
-    public int sphereDensity = 1250;
+            + "Default: 1500")
+    public int sphereDensity = 1500;
 
     @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Gui.Tooltip()

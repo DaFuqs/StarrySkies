@@ -57,6 +57,7 @@ public class SpheroidAdvancementIdentifierGroups {
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.stained_glass, SpheroidAdvancementGroup.COMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.stone,        SpheroidAdvancementGroup.COMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.stone_hollow, SpheroidAdvancementGroup.UNCOMMON);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.the_sun,      SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.tnt,          SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.water,        SpheroidAdvancementGroup.COMMON);
     }

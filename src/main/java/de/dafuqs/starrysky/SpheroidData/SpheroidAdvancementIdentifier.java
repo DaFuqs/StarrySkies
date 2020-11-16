@@ -51,6 +51,7 @@ public enum SpheroidAdvancementIdentifier {
     stained_glass,
     stone,
     stone_hollow,
+    the_sun,
     tnt,
     water
 }

@@ -3,6 +3,7 @@ package de.dafuqs.starrysky.generation;
 import de.dafuqs.starrysky.SpheroidData.SpheroidList;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.configs.StarrySkyConfig;
 import de.dafuqs.starrysky.spheroids.*;
 import de.dafuqs.starrysky.spheroids.special_overworld.BeeHiveSpheroid;
 import de.dafuqs.starrysky.spheroids.special_overworld.CaveSpheroid;
@@ -117,7 +118,7 @@ public class SystemGenerator {
             }
             tempPosition.xPos += StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 * systemPointX;
 
-            tempPosition.yPos = systemRandom.nextInt(worldHeight - currentSpheroid.getRadius() * 2 - StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight) + currentSpheroid.getRadius();
+            tempPosition.yPos = systemRandom.nextInt(worldHeight - currentSpheroid.getRadius() * 2 - StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight) + currentSpheroid.getRadius() + StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight;
 
             tempPosition.zPos = -1;
             while (tempPosition.zPos == -1) {
@@ -163,7 +164,7 @@ public class SystemGenerator {
 
     private void putAvailableSpheroidDistribution() {
         //BASIC
-        spheroidDistribution.put(SpheroidList.GRASS, 4.5F);
+        spheroidDistribution.put(SpheroidList.GRASS, 3.5F);
         spheroidDistribution.put(SpheroidList.MYCELIUM, 0.01F);
         spheroidDistribution.put(SpheroidList.PODZOL, 0.4F);
         spheroidDistribution.put(SpheroidList.STONE, 0.2F);
@@ -268,7 +269,9 @@ public class SystemGenerator {
         spheroidDistribution.put(SpheroidList.DUNGEON_SILVERFISH, 0.05F);
 
         // SPECIAL
-        spheroidDistribution.put(SpheroidList.BEE_HIVE, 0.1F);
+        //spheroidDistribution.put(SpheroidList.BEE_HIVE, 0.1F);
+        spheroidDistribution.put(SpheroidList.BEE_HIVE, 0.2F);
+        spheroidDistribution.put(SpheroidList.THE_SUN, 0.01F);
     }
 
 
