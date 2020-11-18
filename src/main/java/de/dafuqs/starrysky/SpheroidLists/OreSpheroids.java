@@ -1,10 +1,11 @@
 package de.dafuqs.starrysky.SpheroidLists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidtypes.CoreSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
+import org.apache.logging.log4j.Level;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,8 @@ public class OreSpheroids {
         put("lignite_coal", new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
         put("nickel",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
         put("antimony",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
+        put("salt",         new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
+        put("nikolite",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
     }};
 
     /**
@@ -55,6 +58,11 @@ public class OreSpheroids {
         for(Map.Entry<String, List<BlockState>> dynamicOre : dynamicOres.entrySet()) {
             BlockState firstEntry = dynamicOre.getValue().get(0); // get first entry for "copper"
             OreSpheroidDefinition entrySpheroidDefinition = dynamicOreSpheroidDefinitions.get(dynamicOre.getKey());
+
+            if(entrySpheroidDefinition == null) {
+                StarrySkyCommon.LOGGER.log(Level.ERROR, "The rarity of ore '" + dynamicOre.getKey() + "' is not defined. Blame the Starry Sky author!");
+                continue;
+            }
 
             // add a single "copper" spheroid type, even though a list of mods may add copper ore blocks
             dynamicSpheroidTypes.put(

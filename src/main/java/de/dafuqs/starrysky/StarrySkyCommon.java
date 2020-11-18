@@ -5,37 +5,25 @@ import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifierGroups;
 import de.dafuqs.starrysky.SpheroidLists.SpheroidLoader;
 import de.dafuqs.starrysky.commands.StarrySkyCommands;
+import de.dafuqs.starrysky.configs.StarrySkyConfig;
+import de.dafuqs.starrysky.dimension.StarrySkyDimension;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
-import net.fabricmc.fabric.impl.tag.extension.FabricTagHooks;
-import net.fabricmc.fabric.mixin.event.lifecycle.client.ClientPlayNetworkHandlerMixin;
-import net.fabricmc.loom.util.FabricApiExtension;
-import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.PlayerAdvancementTracker;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.PlayerManager;
 import net.minecraft.server.ServerAdvancementLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.DefaultBiomeCreator;
-import de.dafuqs.starrysky.configs.StarrySkyConfig;
-import de.dafuqs.starrysky.dimension.StarrySkyDimension;
-import net.minecraft.world.level.ServerWorldProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.awt.*;
 
 public class StarrySkyCommon implements ModInitializer {
 
