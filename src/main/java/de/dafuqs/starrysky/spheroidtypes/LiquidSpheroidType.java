@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 public class LiquidSpheroidType extends SpheroidType {
@@ -16,7 +17,7 @@ public class LiquidSpheroidType extends SpheroidType {
     }
 
     private final BlockState liquid;
-    private final HashMap<BlockState, Float> validShellBlocks;
+    private final LinkedHashMap<BlockState, Float> validShellBlocks;
 
     private final int minShellRadius;
     private final int maxShellRadius;
@@ -29,10 +30,10 @@ public class LiquidSpheroidType extends SpheroidType {
     private int maxCoreRadius;
 
     public LiquidSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState liquid, BlockState shellBlock, int minSize, int maxSize, int minShellRadius, int maxShellRadius, int minFillPercent, int maxFillPercent, int holeInBottomPercent) {
-        this (spheroidAdvancementIdentifier,  liquid, new HashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minSize, maxSize, minShellRadius, maxShellRadius, minFillPercent, maxFillPercent, holeInBottomPercent);
+        this (spheroidAdvancementIdentifier,  liquid, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minSize, maxSize, minShellRadius, maxShellRadius, minFillPercent, maxFillPercent, holeInBottomPercent);
     }
 
-    public LiquidSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState liquid, HashMap<BlockState, Float> validShellBlocks, int minSize, int maxSize, int minShellRadius, int maxShellRadius, int minFillPercent, int maxFillPercent, int holeInBottomPercent) {
+    public LiquidSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState liquid, LinkedHashMap<BlockState, Float> validShellBlocks, int minSize, int maxSize, int minShellRadius, int maxShellRadius, int minFillPercent, int maxFillPercent, int holeInBottomPercent) {
         super();
 
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;

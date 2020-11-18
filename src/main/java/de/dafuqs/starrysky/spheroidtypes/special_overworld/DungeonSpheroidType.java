@@ -9,16 +9,17 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 public class DungeonSpheroidType extends SpheroidType {
 
     private final EntityType entityType;
-    private final HashMap<BlockState, Float> validShellBlocks;
+    private final LinkedHashMap<BlockState, Float> validShellBlocks;
     private final int minShellRadius;
     private final int maxShellRadius;
 
-    public DungeonSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, EntityType entityType, HashMap<BlockState, Float> validShellBlocks, int minRadius, int maxRadius, int minShellRadius, int maxShellRadius) {
+    public DungeonSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, EntityType entityType, LinkedHashMap<BlockState, Float> validShellBlocks, int minRadius, int maxRadius, int minShellRadius, int maxShellRadius) {
         super();
 
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;

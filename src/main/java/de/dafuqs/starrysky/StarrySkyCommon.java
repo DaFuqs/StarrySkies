@@ -3,26 +3,39 @@ package de.dafuqs.starrysky;
 import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementGroup;
 import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifierGroups;
+import de.dafuqs.starrysky.SpheroidLists.SpheroidLoader;
 import de.dafuqs.starrysky.commands.StarrySkyCommands;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.impl.tag.extension.FabricTagHooks;
+import net.fabricmc.fabric.mixin.event.lifecycle.client.ClientPlayNetworkHandlerMixin;
+import net.fabricmc.loom.util.FabricApiExtension;
+import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.PlayerAdvancementTracker;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.PlayerManager;
 import net.minecraft.server.ServerAdvancementLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.DefaultBiomeCreator;
 import de.dafuqs.starrysky.configs.StarrySkyConfig;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
+import net.minecraft.world.level.ServerWorldProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.awt.*;
 
 public class StarrySkyCommon implements ModInitializer {
 
@@ -34,6 +47,7 @@ public class StarrySkyCommon implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public static ServerWorld starryWorld;
+    public static SpheroidLoader spheroidLoader;
 
     // Advancements
     private int tickCounter;
@@ -54,14 +68,22 @@ public class StarrySkyCommon implements ModInitializer {
 
         // Register all the stuff
         StarrySkyDimension.setupDimension();
+        StarrySkyDimension.setupPortal();
         StarrySkyCommands.initialize();
+
         spheroidAdvancementIdentifierGroups = new SpheroidAdvancementIdentifierGroups();
+        spheroidLoader = new SpheroidLoader();
+
+
 
         // triggers everytime a world is loaded
         // so for overworld, nether, ... (they all share the same seed)
         ServerWorldEvents.LOAD.register((server, world) -> {
             if(world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
                 StarrySkyCommon.starryWorld = world;
+
+                // make sure the spawn is safe => wood planet
+                world.setSpawnPos(new BlockPos(16, 90, 16), 0);
             }
         });
 

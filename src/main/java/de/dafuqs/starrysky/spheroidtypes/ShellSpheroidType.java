@@ -7,20 +7,21 @@ import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 
 public class ShellSpheroidType extends SpheroidType {
 
     private BlockState coreBlock;
-    private HashMap<BlockState, Float> validShellBlocks;
+    private LinkedHashMap<BlockState, Float> validShellBlocks;
     private int minShellRadius; //Minimum shell thickness, should be at least
     private int maxShellRadius; //Maximum shell thickness
 
     public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState coreBlock, BlockState shellBlock, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
-        this(spheroidAdvancementIdentifier, coreBlock, new HashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minSize, maxSize, minShellRadius, maxShellRadius);
+        this(spheroidAdvancementIdentifier, coreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minSize, maxSize, minShellRadius, maxShellRadius);
     }
 
-    public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState coreBlock, HashMap<BlockState, Float> validShellBlocks, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
+    public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState coreBlock, LinkedHashMap<BlockState, Float> validShellBlocks, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
         super();
 
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;

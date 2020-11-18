@@ -1,137 +1,16 @@
-package de.dafuqs.starrysky.SpheroidData;
+package de.dafuqs.starrysky.SpheroidLists;
 
+import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroidtypes.*;
 import de.dafuqs.starrysky.spheroidtypes.special_overworld.BeeHiveSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.special_overworld.DungeonSpheroidType;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.state.property.Properties;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
-public class SpheroidList {
-
-    //COMMONLY USED LISTS
-    public static final LinkedHashMap MAP_STONES = new LinkedHashMap() {{
-        put(Blocks.STONE.getDefaultState(), 5.0F);
-        put(Blocks.GRANITE.getDefaultState(), 1.0F);
-        put(Blocks.DIORITE.getDefaultState(), 1.0F);
-        put(Blocks.ANDESITE.getDefaultState(), 1.0F);
-        put(Blocks.COBBLESTONE.getDefaultState(), 0.1F);
-        put(Blocks.MOSSY_COBBLESTONE.getDefaultState(), 0.005F);
-        put(Blocks.INFESTED_STONE.getDefaultState(), 0.05F);
-        put(Blocks.INFESTED_COBBLESTONE.getDefaultState(), 0.002F);
-    }};
-
-    public static final LinkedHashMap MAP_DUNGEON_STONES = new LinkedHashMap() {{
-        put(Blocks.MOSSY_COBBLESTONE.getDefaultState(), 5.0F);
-        put(Blocks.INFESTED_COBBLESTONE.getDefaultState(), 0.5F);
-        put(Blocks.STONE.getDefaultState(), 1.0F);
-        put(Blocks.GRANITE.getDefaultState(), 0.2F);
-        put(Blocks.DIORITE.getDefaultState(), 0.2F);
-        put(Blocks.ANDESITE.getDefaultState(), 0.2F);
-        put(Blocks.COBBLESTONE.getDefaultState(), 0.1F);
-        put(Blocks.INFESTED_STONE.getDefaultState(), 0.1F);
-    }};
-
-    public static final LinkedHashMap MAP_GLASS = new LinkedHashMap() {{
-        put(Blocks.GLASS.getDefaultState(), 80F);
-        put(Blocks.BLACK_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.BLUE_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.BROWN_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.CYAN_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.GRAY_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.GREEN_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.LIGHT_BLUE_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.LIGHT_GRAY_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.LIME_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.MAGENTA_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.ORANGE_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.PINK_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.PURPLE_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.RED_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.WHITE_STAINED_GLASS.getDefaultState(), 1.0F);
-        put(Blocks.YELLOW_STAINED_GLASS.getDefaultState(), 1.0F);
-    }};
-
-    public static final List<BlockState> LIST_WOOL = new ArrayList<BlockState>() {{
-        add(Blocks.WHITE_WOOL.getDefaultState());
-        add(Blocks.LIGHT_GRAY_WOOL.getDefaultState());
-        add(Blocks.GRAY_WOOL.getDefaultState());
-        add(Blocks.BLACK_WOOL.getDefaultState());
-        add(Blocks.BROWN_WOOL.getDefaultState());
-        add(Blocks.RED_WOOL.getDefaultState());
-        add(Blocks.ORANGE_WOOL.getDefaultState());
-        add(Blocks.YELLOW_WOOL.getDefaultState());
-        add(Blocks.LIME_WOOL.getDefaultState());
-        add(Blocks.GREEN_WOOL.getDefaultState());
-        add(Blocks.CYAN_WOOL.getDefaultState());
-        add(Blocks.LIGHT_BLUE_WOOL.getDefaultState());
-        add(Blocks.BLUE_WOOL.getDefaultState());
-        add(Blocks.PURPLE_WOOL.getDefaultState());
-        add(Blocks.MAGENTA_WOOL.getDefaultState());
-        add(Blocks.PINK_WOOL.getDefaultState());
-    }};
-
-    public static final List<BlockState> LIST_STAINED_GLASS = new ArrayList<BlockState>() {{
-        add(Blocks.WHITE_STAINED_GLASS.getDefaultState());
-        add(Blocks.LIGHT_GRAY_STAINED_GLASS.getDefaultState());
-        add(Blocks.GRAY_STAINED_GLASS.getDefaultState());
-        add(Blocks.BLACK_STAINED_GLASS.getDefaultState());
-        add(Blocks.BROWN_STAINED_GLASS.getDefaultState());
-        add(Blocks.RED_STAINED_GLASS.getDefaultState());
-        add(Blocks.ORANGE_STAINED_GLASS.getDefaultState());
-        add(Blocks.YELLOW_STAINED_GLASS.getDefaultState());
-        add(Blocks.LIME_STAINED_GLASS.getDefaultState());
-        add(Blocks.GREEN_STAINED_GLASS.getDefaultState());
-        add(Blocks.CYAN_STAINED_GLASS.getDefaultState());
-        add(Blocks.LIGHT_BLUE_STAINED_GLASS.getDefaultState());
-        add(Blocks.BLUE_STAINED_GLASS.getDefaultState());
-        add(Blocks.PURPLE_STAINED_GLASS.getDefaultState());
-        add(Blocks.MAGENTA_STAINED_GLASS.getDefaultState());
-        add(Blocks.PINK_STAINED_GLASS.getDefaultState());
-    }};
-
-    public static final List<BlockState> LIST_CONCRETE = new ArrayList<BlockState>() {{
-        add(Blocks.WHITE_CONCRETE.getDefaultState());
-        add(Blocks.LIGHT_GRAY_CONCRETE.getDefaultState());
-        add(Blocks.GRAY_CONCRETE.getDefaultState());
-        add(Blocks.BLACK_CONCRETE.getDefaultState());
-        add(Blocks.BROWN_CONCRETE.getDefaultState());
-        add(Blocks.RED_CONCRETE.getDefaultState());
-        add(Blocks.ORANGE_CONCRETE.getDefaultState());
-        add(Blocks.YELLOW_CONCRETE.getDefaultState());
-        add(Blocks.LIME_CONCRETE.getDefaultState());
-        add(Blocks.GREEN_CONCRETE.getDefaultState());
-        add(Blocks.CYAN_CONCRETE.getDefaultState());
-        add(Blocks.LIGHT_BLUE_CONCRETE.getDefaultState());
-        add(Blocks.BLUE_CONCRETE.getDefaultState());
-        add(Blocks.PURPLE_CONCRETE.getDefaultState());
-        add(Blocks.MAGENTA_CONCRETE.getDefaultState());
-        add(Blocks.PINK_CONCRETE.getDefaultState());
-    }};
-    
-    public static final List<BlockState> LIST_TERRACOTTA = new ArrayList<BlockState>() {{
-        add(Blocks.WHITE_TERRACOTTA.getDefaultState());
-        add(Blocks.LIGHT_GRAY_TERRACOTTA.getDefaultState());
-        add(Blocks.GRAY_TERRACOTTA.getDefaultState());
-        add(Blocks.BLACK_TERRACOTTA.getDefaultState());
-        add(Blocks.BROWN_TERRACOTTA.getDefaultState());
-        add(Blocks.RED_TERRACOTTA.getDefaultState());
-        add(Blocks.ORANGE_TERRACOTTA.getDefaultState());
-        add(Blocks.YELLOW_TERRACOTTA.getDefaultState());
-        add(Blocks.LIME_TERRACOTTA.getDefaultState());
-        add(Blocks.GREEN_TERRACOTTA.getDefaultState());
-        add(Blocks.CYAN_TERRACOTTA.getDefaultState());
-        add(Blocks.LIGHT_BLUE_TERRACOTTA.getDefaultState());
-        add(Blocks.BLUE_TERRACOTTA.getDefaultState());
-        add(Blocks.PURPLE_TERRACOTTA.getDefaultState());
-        add(Blocks.MAGENTA_TERRACOTTA.getDefaultState());
-        add(Blocks.PINK_TERRACOTTA.getDefaultState());
-    }};
+public class SpheroidListVanilla extends SpheroidList {
 
     //SPHEROID TYPES
     //BASIC
@@ -242,5 +121,122 @@ public class SpheroidList {
 
     // BEES
     public static final BeeHiveSpheroidType BEE_HIVE = new BeeHiveSpheroidType(SpheroidAdvancementIdentifier.bee_hive,10, 16, 2, 4, 1, 2, 1, 2);
+
+    public static boolean isModPresent() {
+        return true;
+    }
+
+    public static LinkedHashMap<SpheroidType, Float> getSpheroidTypesWithProbabilities() {
+        LinkedHashMap<SpheroidType, Float> spheroidTypes = new LinkedHashMap<>();
+
+        //BASIC
+        spheroidTypes.put(GRASS, 3.5F);
+        spheroidTypes.put(MYCELIUM, 0.01F);
+        spheroidTypes.put(PODZOL, 0.4F);
+        spheroidTypes.put(STONE, 0.2F);
+        spheroidTypes.put(GRANITE, 0.2F);
+        spheroidTypes.put(DIORITE, 0.2F);
+        spheroidTypes.put(ANDESITE, 1.0F);
+        spheroidTypes.put(SAND, 2.0F);
+        spheroidTypes.put(RED_SAND, 0.2F);
+        spheroidTypes.put(GRAVEL, 0.3F);
+        spheroidTypes.put(COBBLESTONE, 0.2F);
+        spheroidTypes.put(MOSSY_COBBLESTONE, 0.05F);
+        spheroidTypes.put(COARSE_DIRT, 0.05F);
+
+        //GLASS
+        spheroidTypes.put(GLASS, 0.1F);
+        spheroidTypes.put(BLACK_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(BLUE_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(BROWN_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(CYAN_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(GRAY_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(GREEN_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(LIGHT_BLUE_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(LIGHT_GRAY_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(LIME_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(MAGENTA_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(ORANGE_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(PINK_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(PURPLE_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(RED_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(WHITE_STAINED_GLASS, 0.01F);
+        spheroidTypes.put(YELLOW_STAINED_GLASS, 0.01F);
+
+        //RARE
+        spheroidTypes.put(OBSIDIAN, 0.1F);
+        spheroidTypes.put(GLOWSTONE, 2.0F);
+        spheroidTypes.put(BEDROCK, 0.01F);
+        spheroidTypes.put(STONE_HOLLOW, 0.2F);
+
+        //ORES
+        spheroidTypes.put(COAL, 4.0F);
+        spheroidTypes.put(IRON, 2.0F);
+        spheroidTypes.put(GOLD, 0.5F);
+        spheroidTypes.put(DIAMOND, 0.2F);
+        spheroidTypes.put(REDSTONE, 1.0F);
+        spheroidTypes.put(LAPIS, 0.3F);
+        spheroidTypes.put(EMERALD, 0.05F);
+
+        // "ORES"
+        spheroidTypes.put(BONE, 0.02F);
+        spheroidTypes.put(HAY, 0.02F);
+        spheroidTypes.put(PRISMARINE, 0.02F);
+        spheroidTypes.put(SLIME, 0.02F);
+        spheroidTypes.put(TNT, 0.02F);
+
+        //WOOD
+        spheroidTypes.put(OAK_WOOD, 1.0F);
+        spheroidTypes.put(SPRUCE_WOOD, 0.5F);
+        spheroidTypes.put(JUNGLE_WOOD, 0.5F);
+        spheroidTypes.put(DARK_OAK_WOOD, 0.5F);
+        spheroidTypes.put(BIRCH_WOOD, 0.5F);
+        spheroidTypes.put(ACACIA_WOOD, 0.5F);
+
+        //FLUIDS
+        spheroidTypes.put(WATER_GLASS, 1.5F);
+        spheroidTypes.put(WATER_CLAY, 0.5F);
+        spheroidTypes.put(WATER_SPONGE, 0.1F);
+        spheroidTypes.put(WATER_SLIME, 0.1F);
+        spheroidTypes.put(WATER_ICE, 0.4F);
+        spheroidTypes.put(WATER_PACKED_ICE, 0.1F);
+        spheroidTypes.put(LAVA_STONE, 2.0F);
+        spheroidTypes.put(LAVA_MAGMA, 0.4F);
+        spheroidTypes.put(LAVA_OBSIDIAN, 1.0F);
+        spheroidTypes.put(LAVA_GLASS, 0.5F);
+
+        //COLD
+        spheroidTypes.put(ICE, 0.4F);
+        spheroidTypes.put(GLASS_ICE, 0.4F);
+        spheroidTypes.put(SNOW_ICE, 0.4F);
+        spheroidTypes.put(SNOW_BLUE_ICE, 0.2F);
+        spheroidTypes.put(ICE_BLUE_ICE, 0.2F);
+
+        //RAINBOW
+        spheroidTypes.put(RAINBOW_WOOL, 0.1F);
+        spheroidTypes.put(RAINBOW_GLASS, 0.1F);
+        spheroidTypes.put(RAINBOW_CONCRETE, 0.1F);
+        spheroidTypes.put(RAINBOW_TERRACOTTA, 0.1F);
+
+        // SPAWNERS
+        spheroidTypes.put(DUNGEON_ZOMBIE, 0.2F);
+        spheroidTypes.put(DUNGEON_SKELETON, 0.1F);
+        spheroidTypes.put(DUNGEON_SPIDER, 0.1F);
+        spheroidTypes.put(DUNGEON_CREEPER, 0.02F);
+        spheroidTypes.put(DUNGEON_CAVE_SPIDER, 0.05F);
+        spheroidTypes.put(DUNGEON_SLIME, 0.05F);
+        spheroidTypes.put(DUNGEON_DROWNED, 0.05F);
+        spheroidTypes.put(DUNGEON_HUSK, 0.05F);
+        spheroidTypes.put(DUNGEON_STRAY, 0.05F);
+        spheroidTypes.put(DUNGEON_WITCH, 0.05F);
+        spheroidTypes.put(DUNGEON_SILVERFISH, 0.05F);
+
+        // SPECIAL
+        spheroidTypes.put(BEE_HIVE, 0.2F);
+        spheroidTypes.put(HUGE_MONSTER_CAVE, 0.05F);
+        spheroidTypes.put(THE_SUN, 0.01F);
+
+        return spheroidTypes;
+    }
 
 }

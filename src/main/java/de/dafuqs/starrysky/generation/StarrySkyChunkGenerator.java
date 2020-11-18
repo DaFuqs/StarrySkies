@@ -8,6 +8,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.InvalidIdentifierException;
 import net.minecraft.util.math.*;
@@ -61,19 +63,8 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 
         // config values
         this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight;
-        try {
-            Identifier identifier = new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.floorBlock.toLowerCase());
-            this.FLOOR_BLOCK_STATE = Registry.BLOCK.get(identifier).getDefaultState();
-        } catch (InvalidIdentifierException e) {
-            StarrySkyCommon.LOGGER.log(Level.ERROR, "Value 'floorBlock' in the config does not correspond to an existing block. Falling back to 'WATER'...");
-            this.FLOOR_BLOCK_STATE = Blocks.WATER.getDefaultState();
-        }
-        try {
-            this.BOTTOM_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.bottomBlock.toLowerCase())).getDefaultState();
-        } catch (InvalidIdentifierException e) {
-            StarrySkyCommon.LOGGER.log(Level.ERROR, "Value 'bottomBlock' in the config does not correspond to an existing block. Falling back to 'BEDROCK'...");
-            this.BOTTOM_BLOCK_STATE = Blocks.BEDROCK.getDefaultState();
-        }
+        this.FLOOR_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.floorBlock.toLowerCase())).getDefaultState();
+        this.BOTTOM_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.bottomBlock.toLowerCase())).getDefaultState();
     }
 
     @Override

@@ -11,11 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Bootstrap.class)
 public class BootstrapMixin {
 
-    @Inject(
-            method = "initialize",
-            at = @At(value = "TAIL")
-    )
-    private static void earlyRegister(CallbackInfo ci) {
+    @Inject(method = "initialize", at = @At(value = "TAIL"))
+    private static void earlyRegister(CallbackInfo callbackInfo) {
         StarrySkyCommon.reserveBiomeIDs();
     }
 }

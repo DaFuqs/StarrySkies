@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.gen.ChunkRandom;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -43,7 +44,7 @@ public class Support {
         return new SpheroidDistance(closestSpheroid, currentMinDistance);
     }
 
-    public static <E> E getWeightedRandom(Map<E, Float> weights, ChunkRandom random) {
+    public static <E> E getWeightedRandom(LinkedHashMap<E, Float> weights, ChunkRandom random) {
         E result = null;
         double bestValue = Double.MAX_VALUE;
 

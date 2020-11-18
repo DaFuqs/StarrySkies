@@ -2,24 +2,31 @@
   "biome.starrysky.starrysky": "Starry Sky",
 
   "text.autoconfig.StarrySky.title": "Starry Sky Config",
+  "text.autoconfig.StarrySky.category.GENERAL": "General",
   "text.autoconfig.StarrySky.category.SYSTEM GENERATION": "System Generation",
   "text.autoconfig.StarrySky.category.WORLD FLOOR GENERATION": "World Floor",
-  "text.autoconfig.StarrySky.category.COMMANDS": "Commands",
+
+  "text.autoconfig.StarrySky.option.spawnInDimension.@Tooltip": "If set to true all new players will spawn in the planetoids dimension initially.",
+  "text.autoconfig.StarrySky.option.spawnInDimension": "Spawn in Spheroids Dimension",
+  "text.autoconfig.StarrySky.option.portalFrameBlock.@Tooltip": "The block the portal to the Starry Sky dimension needs to be built with. Build it like a nether portal & has to be activated with flint & steel.",
+  "text.autoconfig.StarrySky.option.portalFrameBlock": "Portal Frame Block",
+  "text.autoconfig.StarrySky.option.portalColor.@Tooltip": "The color of the Starry Sky dimensions portal.",
+  "text.autoconfig.StarrySky.option.portalColor": "Portal Color",
+  "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel.@Tooltip": "The '/sphere' command lists all the data of the closest sphere (position, blocks, ...)",
+  "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel": "Required Permission Level for /sphere Command",
 
   "text.autoconfig.StarrySky.option.systemSizeChunks.@PrefixText": "Spheroids are generated in systems. Each system consists out of x spheroids over y chunks. How big each system should be in chunks². Higher values make the very slight 'gaps' at the border between systems less common, but since systems are generating all at once high values can result in small lag spikes every time a new system is generated. (but less spikes in total)",
+  "text.autoconfig.StarrySky.option.systemSizeChunks.@Tooltip": "How many big each system should be in chunks²",
   "text.autoconfig.StarrySky.option.systemSizeChunks": "System Size in Chunks",
-  "text.autoconfig.StarrySky.option.sphereDensity.@PrefixText": "How many spheres a system can contain max. Some will fail because of distance restrictions so it's not an exact value",
+  "text.autoconfig.StarrySky.option.sphereDensity.@Tooltip": "How many spheres a system can contain max. Some will fail because of distance restrictions so it's not an exact value",
   "text.autoconfig.StarrySky.option.sphereDensity": "Sphere Density",
-  "text.autoconfig.StarrySky.option.minDistanceBetweenSpheres.@PrefixText": "How much empty blocks should be enforced between individual spheres. If the distance is too low generation of that one sphere will be cancelled.",
+  "text.autoconfig.StarrySky.option.minDistanceBetweenSpheres.@Tooltip": "How much empty blocks should be enforced between individual spheres. If the distance is too low generation of that one sphere will be cancelled.",
   "text.autoconfig.StarrySky.option.minDistanceBetweenSpheres": "Min Distance Between Spheres",
 
   "text.autoconfig.StarrySky.option.floorHeight.@PrefixText": "If (or how high) there should be a world floor. When set to 1 there will the specified BottomBlock at y=1 and the floor block up to the floor height. When set to >1 there will the specified BottomBlock at y=1. When set to 0 there will be no ground, only void",
   "text.autoconfig.StarrySky.option.floorHeight": "Floor Height",
   "text.autoconfig.StarrySky.option.floorBlock": "Floor Block",
   "text.autoconfig.StarrySky.option.bottomBlock": "Bottom Block",
-
-  "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel.@PrefixText": "The '/sphere' command lists all the data of the closest sphere (position, blocks, ...)",
-  "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel": "Required Permission Level for /sphere Command",
 
   "bee.queen": "Queen",
 

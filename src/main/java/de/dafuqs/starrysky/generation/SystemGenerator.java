@@ -1,9 +1,8 @@
 package de.dafuqs.starrysky.generation;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidList;
+import de.dafuqs.starrysky.SpheroidLists.SpheroidListVanilla;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.configs.StarrySkyConfig;
 import de.dafuqs.starrysky.spheroids.*;
 import de.dafuqs.starrysky.spheroids.special_overworld.BeeHiveSpheroid;
 import de.dafuqs.starrysky.spheroids.special_overworld.CaveSpheroid;
@@ -23,13 +22,7 @@ public class SystemGenerator {
 
     // spawning probabilities
     // normal hashmaps are not stable
-    private static final LinkedHashMap<SpheroidType, Float> spheroidDistribution = new LinkedHashMap<>();
     private HashMap<Point, List<Spheroid>> cache = new HashMap<>();
-
-
-    public SystemGenerator() {
-        putAvailableSpheroidDistribution();
-    }
 
     /**
      *
@@ -95,7 +88,7 @@ public class SystemGenerator {
 
         //If systemPointX and Z are zero, generate a log/leaf planet at 16,16
         if (systemPointX == 0 && systemPointZ == 0) {
-            Spheroid homeSpheroid = new ShellSpheroid(SpheroidList.OAK_WOOD, systemRandom);
+            Spheroid homeSpheroid = new ShellSpheroid(SpheroidListVanilla.OAK_WOOD, systemRandom);
             homeSpheroid.setPositionAndCalculateGenerationChunks(new BlockPos(16, 70, 16));
             spheroids.add(homeSpheroid);
         }
@@ -161,122 +154,8 @@ public class SystemGenerator {
         return xDist * xDist + yDist * yDist + zDist * zDist;
     }
 
-
-    private void putAvailableSpheroidDistribution() {
-        //BASIC
-        spheroidDistribution.put(SpheroidList.GRASS, 3.5F);
-        spheroidDistribution.put(SpheroidList.MYCELIUM, 0.01F);
-        spheroidDistribution.put(SpheroidList.PODZOL, 0.4F);
-        spheroidDistribution.put(SpheroidList.STONE, 0.2F);
-        spheroidDistribution.put(SpheroidList.GRANITE, 0.2F);
-        spheroidDistribution.put(SpheroidList.DIORITE, 0.2F);
-        spheroidDistribution.put(SpheroidList.ANDESITE, 1.0F);
-        spheroidDistribution.put(SpheroidList.SAND, 2.0F);
-        spheroidDistribution.put(SpheroidList.RED_SAND, 0.2F);
-        spheroidDistribution.put(SpheroidList.GRAVEL, 0.3F);
-        spheroidDistribution.put(SpheroidList.COBBLESTONE, 0.2F);
-        spheroidDistribution.put(SpheroidList.MOSSY_COBBLESTONE, 0.05F);
-        spheroidDistribution.put(SpheroidList.COARSE_DIRT, 0.05F);
-
-        // CAVE
-        spheroidDistribution.put(SpheroidList.HUGE_MONSTER_CAVE, 0.05F);
-
-        //GLASS
-        spheroidDistribution.put(SpheroidList.GLASS, 0.1F);
-        spheroidDistribution.put(SpheroidList.BLACK_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.BLUE_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.BROWN_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.CYAN_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.GRAY_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.GREEN_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.LIGHT_BLUE_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.LIGHT_GRAY_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.LIME_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.MAGENTA_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.ORANGE_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.PINK_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.PURPLE_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.RED_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.WHITE_STAINED_GLASS, 0.01F);
-        spheroidDistribution.put(SpheroidList.YELLOW_STAINED_GLASS, 0.01F);
-
-        //RARE
-        spheroidDistribution.put(SpheroidList.OBSIDIAN, 0.1F);
-        spheroidDistribution.put(SpheroidList.GLOWSTONE, 2.0F);
-        spheroidDistribution.put(SpheroidList.BEDROCK, 0.01F);
-        spheroidDistribution.put(SpheroidList.STONE_HOLLOW, 0.2F);
-
-        //ORES
-        spheroidDistribution.put(SpheroidList.COAL, 4.0F);
-        spheroidDistribution.put(SpheroidList.IRON, 2.0F);
-        spheroidDistribution.put(SpheroidList.GOLD, 0.5F);
-        spheroidDistribution.put(SpheroidList.DIAMOND, 0.2F);
-        spheroidDistribution.put(SpheroidList.REDSTONE, 1.0F);
-        spheroidDistribution.put(SpheroidList.LAPIS, 0.3F);
-        spheroidDistribution.put(SpheroidList.EMERALD, 0.05F);
-
-        // "ORES"
-        spheroidDistribution.put(SpheroidList.BONE, 0.02F);
-        spheroidDistribution.put(SpheroidList.HAY, 0.02F);
-        spheroidDistribution.put(SpheroidList.PRISMARINE, 0.02F);
-        spheroidDistribution.put(SpheroidList.SLIME, 0.02F);
-        spheroidDistribution.put(SpheroidList.TNT, 0.02F);
-
-        //WOOD
-        spheroidDistribution.put(SpheroidList.OAK_WOOD, 1.0F);
-        spheroidDistribution.put(SpheroidList.SPRUCE_WOOD, 0.5F);
-        spheroidDistribution.put(SpheroidList.JUNGLE_WOOD, 0.5F);
-        spheroidDistribution.put(SpheroidList.DARK_OAK_WOOD, 0.5F);
-        spheroidDistribution.put(SpheroidList.BIRCH_WOOD, 0.5F);
-        spheroidDistribution.put(SpheroidList.ACACIA_WOOD, 0.5F);
-
-        //FLUIDS
-        spheroidDistribution.put(SpheroidList.WATER_GLASS, 1.5F);
-        spheroidDistribution.put(SpheroidList.WATER_CLAY, 0.5F);
-        spheroidDistribution.put(SpheroidList.WATER_SPONGE, 0.1F);
-        spheroidDistribution.put(SpheroidList.WATER_SLIME, 0.1F);
-        spheroidDistribution.put(SpheroidList.WATER_ICE, 0.4F);
-        spheroidDistribution.put(SpheroidList.WATER_PACKED_ICE, 0.1F);
-        spheroidDistribution.put(SpheroidList.LAVA_STONE, 2.0F);
-        spheroidDistribution.put(SpheroidList.LAVA_MAGMA, 0.4F);
-        spheroidDistribution.put(SpheroidList.LAVA_OBSIDIAN, 1.0F);
-        spheroidDistribution.put(SpheroidList.LAVA_GLASS, 0.5F);
-
-        //COLD
-        spheroidDistribution.put(SpheroidList.ICE, 0.4F);
-        spheroidDistribution.put(SpheroidList.GLASS_ICE, 0.4F);
-        spheroidDistribution.put(SpheroidList.SNOW_ICE, 0.4F);
-        spheroidDistribution.put(SpheroidList.SNOW_BLUE_ICE, 0.2F);
-        spheroidDistribution.put(SpheroidList.ICE_BLUE_ICE, 0.2F);
-
-        //RAINBOW
-        spheroidDistribution.put(SpheroidList.RAINBOW_WOOL, 0.1F);
-        spheroidDistribution.put(SpheroidList.RAINBOW_GLASS, 0.1F);
-        spheroidDistribution.put(SpheroidList.RAINBOW_CONCRETE, 0.1F);
-        spheroidDistribution.put(SpheroidList.RAINBOW_TERRACOTTA, 0.1F);
-
-        // SPAWNERS
-        spheroidDistribution.put(SpheroidList.DUNGEON_ZOMBIE, 0.2F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_SKELETON, 0.1F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_SPIDER, 0.1F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_CREEPER, 0.02F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_CAVE_SPIDER, 0.05F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_SLIME, 0.05F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_DROWNED, 0.05F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_HUSK, 0.05F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_STRAY, 0.05F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_WITCH, 0.05F);
-        spheroidDistribution.put(SpheroidList.DUNGEON_SILVERFISH, 0.05F);
-
-        // SPECIAL
-        //spheroidDistribution.put(SpheroidList.BEE_HIVE, 0.1F);
-        spheroidDistribution.put(SpheroidList.BEE_HIVE, 0.2F);
-        spheroidDistribution.put(SpheroidList.THE_SUN, 0.01F);
-    }
-
-
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
-        SpheroidType spheroidType = Support.getWeightedRandom(spheroidDistribution, systemRandom);
+        SpheroidType spheroidType = Support.getWeightedRandom(StarrySkyCommon.spheroidLoader.getAvailableSpheroidTypesWithWeight(), systemRandom);
 
         StarrySkyCommon.LOGGER.log(Level.DEBUG, "Created a new sphere of type " + spheroidType);
         if(spheroidType instanceof CoreSpheroidType) {
