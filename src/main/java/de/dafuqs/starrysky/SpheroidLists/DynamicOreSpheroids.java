@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OreSpheroids {
+public class DynamicOreSpheroids {
 
     private static class OreSpheroidDefinition {
         LinkedHashMap<BlockState, Float> shellBlockStates; // the core
@@ -29,22 +29,25 @@ public class OreSpheroids {
             this.generationWeight = generationWeight;
         }
     }
-
+    
+    /**
+     * Builtin data on how big / with which stone the dynamic ores will generate
+     */
     private static final LinkedHashMap<String, OreSpheroidDefinition> dynamicOreSpheroidDefinitions = new LinkedHashMap<String, OreSpheroidDefinition>() {{
-        put("copper",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("tin",          new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("silver",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("lead",         new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("bauxite",      new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("galena",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("iridium",      new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 1, 2, 10F));
-        put("ruby",         new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("sapphire",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("lignite_coal", new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("nickel",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("antimony",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("salt",         new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("nikolite",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
+        put("antimony",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 8, 3, 4, 0.4F)); // low weight
+        put("bauxite",      new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 7, 3, 5, 0.3F));
+        put("galena",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 7, 10, 4, 7, 0.3F)); // same as copper, but twice as rare
+        put("iridium",      new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 5, 6, 1, 2, 0.03F)); // very low weight
+        put("lead",         new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 15, 4, 6, 0.8F));
+        put("lignite_coal", new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 14, 5, 8, 2.0F)); // high weight
+        put("nickel",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 7, 3, 4, 0.4F));
+        put("copper",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 7, 10, 4, 7, 2F));
+        put("nikolite",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 8, 3, 5, 1F));
+        put("ruby",         new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 5, 7, 3, 4, 0.3F));
+        put("salt",         new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 8, 3, 5, 0.2F)); // low weight
+        put("sapphire",     new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 5, 7, 3, 4, 0.3F));
+        put("silver",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 10, 3, 6, 0.8F));
+        put("tin",          new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 10, 5, 7, 1.5F));
     }};
 
     /**

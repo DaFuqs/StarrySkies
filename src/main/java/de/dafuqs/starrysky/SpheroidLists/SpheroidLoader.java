@@ -40,7 +40,7 @@ public class SpheroidLoader {
 
         // dynamically generate ore spheroids
         // this way we got only 1 "copper" spheroids even though lots of mods add a copper ore block
-        LinkedHashMap<SpheroidType, Float> dynamicOreSpheroids = OreSpheroids.getOreSpheroidTypesBasedOnDict(dynamicOres);
+        LinkedHashMap<SpheroidType, Float> dynamicOreSpheroids = DynamicOreSpheroids.getOreSpheroidTypesBasedOnDict(dynamicOres);
         availableSpheroidTypesWithWeight.putAll(dynamicOreSpheroids);
     }
 
