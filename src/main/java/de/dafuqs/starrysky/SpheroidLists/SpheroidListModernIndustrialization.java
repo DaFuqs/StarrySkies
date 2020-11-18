@@ -10,18 +10,20 @@ import java.util.LinkedHashMap;
 
 public class SpheroidListModernIndustrialization extends SpheroidList {
 
-    private static final BlockState modern_industrialization_copper_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","copper_ore")).getDefaultState();
-    private static final BlockState modern_industrialization_tin_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","tin_ore")).getDefaultState();
-    private static final BlockState modern_industrialization_lead_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","lead_ore")).getDefaultState();
-    private static final BlockState modern_industrialization_lignite_coal_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","lignite_coal_ore")).getDefaultState();
-    private static final BlockState modern_industrialization_nickel_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","nickel_ore")).getDefaultState();
-    private static final BlockState modern_industrialization_salt_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","salt_ore")).getDefaultState();
-    private static final BlockState modern_industrialization_silver_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","silver_ore")).getDefaultState();
-    private static final BlockState modern_industrialization_antimony_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","antimony_ore")).getDefaultState();
-    private static final BlockState modern_industrialization_bauxite_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","bauxite_ore")).getDefaultState();
+    private static final String MOD_ID = "modern_industrialization";
+
+    private static final BlockState modern_industrialization_copper_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
+    private static final BlockState modern_industrialization_tin_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
+    private static final BlockState modern_industrialization_lead_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"lead_ore")).getDefaultState();
+    private static final BlockState modern_industrialization_lignite_coal_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"lignite_coal_ore")).getDefaultState();
+    private static final BlockState modern_industrialization_nickel_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"nickel_ore")).getDefaultState();
+    private static final BlockState modern_industrialization_salt_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"salt_ore")).getDefaultState();
+    private static final BlockState modern_industrialization_silver_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"silver_ore")).getDefaultState();
+    private static final BlockState modern_industrialization_antimony_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"antimony_ore")).getDefaultState();
+    private static final BlockState modern_industrialization_bauxite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"bauxite_ore")).getDefaultState();
 
     public static boolean isModPresent() {
-        return FabricLoader.getInstance().isModLoaded("modern_industrialization");
+        return FabricLoader.getInstance().isModLoaded(MOD_ID);
     }
 
     public static LinkedHashMap<String, BlockState> getDictionaryEntries() {

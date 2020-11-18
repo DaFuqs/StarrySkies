@@ -68,7 +68,7 @@ public class StarrySkyCommon implements ModInitializer {
 
         // Register all the stuff
         StarrySkyDimension.setupDimension();
-        //StarrySkyDimension.setupPortal();
+        StarrySkyDimension.setupPortal();
         StarrySkyCommands.initialize();
 
         spheroidAdvancementIdentifierGroups = new SpheroidAdvancementIdentifierGroups();

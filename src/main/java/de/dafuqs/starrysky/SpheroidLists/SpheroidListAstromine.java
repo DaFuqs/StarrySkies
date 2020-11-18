@@ -12,20 +12,22 @@ import java.util.LinkedHashMap;
 
 public class SpheroidListAstromine extends SpheroidList {
 
-    private static final BlockState astromine_crude_oil         = Registry.BLOCK.get(new Identifier("astromine","crude_oil")).getDefaultState();
-    private static final BlockState astromine_copper_ore        = Registry.BLOCK.get(new Identifier("astromine","copper_ore")).getDefaultState();
-    private static final BlockState astromine_tin_ore           = Registry.BLOCK.get(new Identifier("astromine","tin_ore")).getDefaultState();
-    private static final BlockState astromine_silver_ore        = Registry.BLOCK.get(new Identifier("astromine","silver_ore")).getDefaultState();
-    private static final BlockState astromine_lead_ore          = Registry.BLOCK.get(new Identifier("astromine","lead_ore")).getDefaultState();
-    private static final BlockState astromine_meteor_metite_ore = Registry.BLOCK.get(new Identifier("astromine","meteor_metite_ore")).getDefaultState();
-    private static final BlockState astromine_meteor_stone      = Registry.BLOCK.get(new Identifier("astromine","meteor_stone")).getDefaultState();
+    private static final String MOD_ID = "astromine";
+
+    private static final BlockState astromine_crude_oil         = Registry.BLOCK.get(new Identifier(MOD_ID,"crude_oil")).getDefaultState();
+    private static final BlockState astromine_copper_ore        = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
+    private static final BlockState astromine_tin_ore           = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
+    private static final BlockState astromine_silver_ore        = Registry.BLOCK.get(new Identifier(MOD_ID,"silver_ore")).getDefaultState();
+    private static final BlockState astromine_lead_ore          = Registry.BLOCK.get(new Identifier(MOD_ID,"lead_ore")).getDefaultState();
+    private static final BlockState astromine_meteor_metite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"meteor_metite_ore")).getDefaultState();
+    private static final BlockState astromine_meteor_stone      = Registry.BLOCK.get(new Identifier(MOD_ID,"meteor_stone")).getDefaultState();
 
     public static final CoreSpheroidType ASTROMINE_METEORITE         = new CoreSpheroidType(null, astromine_meteor_metite_ore, astromine_meteor_stone, 8, 15, 5, 8);
     public static final CoreSpheroidType ASTROMINE_CRUDE_OIL_STONE   = new CoreSpheroidType(null, astromine_crude_oil, astromine_meteor_stone, 8, 15, 5, 8);
     public static final LiquidSpheroidType ASTROMINE_CRUDE_OIL_GLASS = new LiquidSpheroidType(null, astromine_crude_oil, MAP_STONES, 7, 12, 2, 3, 50, 90, 20);
 
     public static boolean isModPresent() {
-        return FabricLoader.getInstance().isModLoaded("astromine");
+        return FabricLoader.getInstance().isModLoaded(MOD_ID);
     }
 
     public static LinkedHashMap<String, BlockState> getDictionaryEntries() {

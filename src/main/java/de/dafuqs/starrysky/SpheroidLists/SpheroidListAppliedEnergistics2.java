@@ -10,9 +10,11 @@ import java.util.LinkedHashMap;
 
 public class SpheroidListAppliedEnergistics2 extends SpheroidList {
 
-    private static final BlockState appliedenergistics_quartz         = Registry.BLOCK.get(new Identifier("appliedenergistics2","quartz_ore")).getDefaultState();
-    private static final BlockState appliedenergistics_charged_quartz = Registry.BLOCK.get(new Identifier("appliedenergistics2","charged_quartz_ore")).getDefaultState();
-    private static final BlockState appliedenergistics_sky_stone      = Registry.BLOCK.get(new Identifier("appliedenergistics2","sky_stone_block")).getDefaultState();
+    private static final String MOD_ID = "appliedenergistics2";
+
+    private static final BlockState appliedenergistics_quartz         = Registry.BLOCK.get(new Identifier(MOD_ID,"quartz_ore")).getDefaultState();
+    private static final BlockState appliedenergistics_charged_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"charged_quartz_ore")).getDefaultState();
+    private static final BlockState appliedenergistics_sky_stone      = Registry.BLOCK.get(new Identifier(MOD_ID,"sky_stone_block")).getDefaultState();
 
     public static final CoreSpheroidType APPLIEDENERGISTRICS_QUARTZ = new CoreSpheroidType(null, appliedenergistics_quartz, MAP_STONES, 5, 7, 5, 8);
     public static final DoubleCoreSpheroidType APPLIEDENERGISTRICS_CHARGED_QUARTZ = new DoubleCoreSpheroidType(null, appliedenergistics_quartz, appliedenergistics_charged_quartz, MAP_STONES, 5, 8, 1, 2, 3, 5);
@@ -20,7 +22,7 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
     public static final ModularSpheroidType APPLIEDENERGISTRICS_ASTEROID = new ModularSpheroidType(null, appliedenergistics_sky_stone, 8, 15);
 
     public static boolean isModPresent() {
-        return FabricLoader.getInstance().isModLoaded("appliedenergistics2");
+        return FabricLoader.getInstance().isModLoaded(MOD_ID);
     }
 
     public static LinkedHashMap<SpheroidType, Float> getSpheroidTypesWithProbabilities() {
