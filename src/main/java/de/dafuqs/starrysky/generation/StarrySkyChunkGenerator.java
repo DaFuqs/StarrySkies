@@ -128,7 +128,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    public int getMaxY() {
+    public int getWorldHeight() {
         return StarrySkyCommon.starryWorld.getHeight();
     }
 

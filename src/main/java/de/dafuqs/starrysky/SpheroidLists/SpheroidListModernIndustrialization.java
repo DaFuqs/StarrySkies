@@ -21,7 +21,7 @@ public class SpheroidListModernIndustrialization extends SpheroidList {
     private static final BlockState modern_industrialization_bauxite_ore = Registry.BLOCK.get(new Identifier("modern_industrialization","bauxite_ore")).getDefaultState();
 
     public static boolean isModPresent() {
-        return FabricLoader.getInstance().isModLoaded("techreborn");
+        return FabricLoader.getInstance().isModLoaded("modern_industrialization");
     }
 
     public static LinkedHashMap<String, BlockState> getDictionaryEntries() {

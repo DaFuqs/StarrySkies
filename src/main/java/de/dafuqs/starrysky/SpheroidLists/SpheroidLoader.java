@@ -17,17 +17,25 @@ public class SpheroidLoader {
             availableSpheroidTypesWithWeight.putAll(SpheroidListVanilla.getSpheroidTypesWithProbabilities());
             addOres(dynamicOres, SpheroidListVanilla.getDictionaryEntries());
         }
-        if(SpheroidListAppliedEnergistics2.isModPresent()) {
-            availableSpheroidTypesWithWeight.putAll(SpheroidListAppliedEnergistics2.getSpheroidTypesWithProbabilities());
-            addOres(dynamicOres, SpheroidListAppliedEnergistics2.getDictionaryEntries());
+        if(SpheroidListTechReborn.isModPresent()) {
+            availableSpheroidTypesWithWeight.putAll(SpheroidListTechReborn.getSpheroidTypesWithProbabilities());
+            addOres(dynamicOres, SpheroidListTechReborn.getDictionaryEntries());
         }
         if(SpheroidListAstromine.isModPresent()) {
             availableSpheroidTypesWithWeight.putAll(SpheroidListAstromine.getSpheroidTypesWithProbabilities());
             addOres(dynamicOres, SpheroidListAstromine.getDictionaryEntries());
         }
-        if(SpheroidListTechReborn.isModPresent()) {
-            availableSpheroidTypesWithWeight.putAll(SpheroidListTechReborn.getSpheroidTypesWithProbabilities());
-            addOres(dynamicOres, SpheroidListTechReborn.getDictionaryEntries());
+        if(SpheroidListAppliedEnergistics2.isModPresent()) {
+            availableSpheroidTypesWithWeight.putAll(SpheroidListAppliedEnergistics2.getSpheroidTypesWithProbabilities());
+            addOres(dynamicOres, SpheroidListAppliedEnergistics2.getDictionaryEntries());
+        }
+        if(SpheroidListModernIndustrialization.isModPresent()) {
+            availableSpheroidTypesWithWeight.putAll(SpheroidListModernIndustrialization.getSpheroidTypesWithProbabilities());
+            addOres(dynamicOres, SpheroidListModernIndustrialization.getDictionaryEntries());
+        }
+        if(SpheroidListIndustrialRevolution.isModPresent()) {
+            availableSpheroidTypesWithWeight.putAll(SpheroidListIndustrialRevolution.getSpheroidTypesWithProbabilities());
+            addOres(dynamicOres, SpheroidListIndustrialRevolution.getDictionaryEntries());
         }
 
         // dynamically generate ore spheroids

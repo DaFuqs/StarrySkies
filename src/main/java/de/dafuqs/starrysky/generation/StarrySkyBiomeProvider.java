@@ -16,7 +16,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.registry.RegistryLookupCodec;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.layer.ScaleLayer;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.*;
@@ -49,7 +49,7 @@ public class StarrySkyBiomeProvider extends BiomeSource {
     );
 
     public StarrySkyBiomeProvider(long seed, Registry<Biome> biomeRegistry) {
-        super(BIOMES.stream().map((registryKey) -> () -> (Biome)biomeRegistry.method_31140(registryKey)));
+        super(BIOMES.stream().map((registryKey) -> () -> (Biome)biomeRegistry.get(registryKey))); // is "get" correct?
         StarrySkyBiomeLayer.setSeed(seed);
         this.SEED = seed;
         this.BIOME_REGISTRY = biomeRegistry;
@@ -92,7 +92,7 @@ public class StarrySkyBiomeProvider extends BiomeSource {
             if (SharedConstants.isDevelopment) {
                 throw Util.throwOrPause(new IllegalStateException("Unknown biome id: " + k));
             } else {
-                return registry.get(Biomes.fromRawId(0));
+                return registry.get(0);
             }
         } else {
             return biome;

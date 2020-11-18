@@ -68,7 +68,7 @@ public class StarrySkyCommon implements ModInitializer {
 
         // Register all the stuff
         StarrySkyDimension.setupDimension();
-        StarrySkyDimension.setupPortal();
+        //StarrySkyDimension.setupPortal();
         StarrySkyCommands.initialize();
 
         spheroidAdvancementIdentifierGroups = new SpheroidAdvancementIdentifierGroups();
@@ -96,26 +96,29 @@ public class StarrySkyCommon implements ModInitializer {
                         Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroidToPlayer(serverPlayerEntity);
                         if(spheroidDistance.spheroid != null && (Math.sqrt(spheroidDistance.distance)) < spheroidDistance.spheroid.getRadius()) {
                             SpheroidAdvancementIdentifier spheroidAdvancementIdentifier = spheroidDistance.spheroid.getSpheroidType().getSpheroidTypeIdentifier();
-                            SpheroidAdvancementGroup spheroidAdvancementGroup = spheroidAdvancementIdentifierGroups.spheroidAdvancementIdentifierGroups.get(spheroidAdvancementIdentifier);
 
-                            String groupAdvancementString = "sphere_group_" + spheroidAdvancementGroup.name().toLowerCase();
-                            String identifierAdvancementString = "sphere_" + spheroidAdvancementIdentifier.name().toLowerCase();
+                            if(spheroidAdvancementIdentifier != null) {
+                                SpheroidAdvancementGroup spheroidAdvancementGroup = spheroidAdvancementIdentifierGroups.spheroidAdvancementIdentifierGroups.get(spheroidAdvancementIdentifier);
 
-                            ServerAdvancementLoader sal = server.getServer().getAdvancementLoader();
-                            PlayerAdvancementTracker tracker = serverPlayerEntity.getAdvancementTracker();
+                                String groupAdvancementString = "sphere_group_" + spheroidAdvancementGroup.name().toLowerCase();
+                                String identifierAdvancementString = "sphere_" + spheroidAdvancementIdentifier.name().toLowerCase();
 
-                            // grant group advancement
-                            Identifier advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, groupAdvancementString);
-                            Advancement advancement = sal.get(advancementIdentifier);
-                            if(advancement != null) {
-                                tracker.grantCriterion(advancement, "seen");
-                            }
+                                ServerAdvancementLoader sal = server.getServer().getAdvancementLoader();
+                                PlayerAdvancementTracker tracker = serverPlayerEntity.getAdvancementTracker();
 
-                            // grant identifier advancement
-                            advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, identifierAdvancementString);
-                            advancement = sal.get(advancementIdentifier);
-                            if(advancement != null) {
-                                tracker.grantCriterion(advancement, "seen");
+                                // grant group advancement
+                                Identifier advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, groupAdvancementString);
+                                Advancement advancement = sal.get(advancementIdentifier);
+                                if (advancement != null) {
+                                    tracker.grantCriterion(advancement, "seen");
+                                }
+
+                                // grant identifier advancement
+                                advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, identifierAdvancementString);
+                                advancement = sal.get(advancementIdentifier);
+                                if (advancement != null) {
+                                    tracker.grantCriterion(advancement, "seen");
+                                }
                             }
                         }
                     }
