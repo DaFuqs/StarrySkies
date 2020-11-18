@@ -219,22 +219,22 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidTypes.put(RAINBOW_TERRACOTTA, 0.1F);
 
         // SPAWNERS
-        spheroidTypes.put(DUNGEON_ZOMBIE, 0.2F);
-        spheroidTypes.put(DUNGEON_SKELETON, 0.1F);
-        spheroidTypes.put(DUNGEON_SPIDER, 0.1F);
-        spheroidTypes.put(DUNGEON_CREEPER, 0.02F);
-        spheroidTypes.put(DUNGEON_CAVE_SPIDER, 0.05F);
-        spheroidTypes.put(DUNGEON_SLIME, 0.05F);
-        spheroidTypes.put(DUNGEON_DROWNED, 0.05F);
-        spheroidTypes.put(DUNGEON_HUSK, 0.05F);
-        spheroidTypes.put(DUNGEON_STRAY, 0.05F);
-        spheroidTypes.put(DUNGEON_WITCH, 0.05F);
-        spheroidTypes.put(DUNGEON_SILVERFISH, 0.05F);
+        spheroidTypes.put(DUNGEON_ZOMBIE, 0.02F);
+        spheroidTypes.put(DUNGEON_SKELETON, 0.02F);
+        spheroidTypes.put(DUNGEON_SPIDER, 0.02F);
+        spheroidTypes.put(DUNGEON_CREEPER, 0.08F);
+        spheroidTypes.put(DUNGEON_CAVE_SPIDER, 0.01F);
+        spheroidTypes.put(DUNGEON_SLIME, 0.01F);
+        spheroidTypes.put(DUNGEON_DROWNED, 0.01F);
+        spheroidTypes.put(DUNGEON_HUSK, 0.01F);
+        spheroidTypes.put(DUNGEON_STRAY, 0.01F);
+        spheroidTypes.put(DUNGEON_WITCH, 0.01F);
+        spheroidTypes.put(DUNGEON_SILVERFISH, 0.01F);
 
         // SPECIAL
         spheroidTypes.put(BEE_HIVE, 0.2F);
         spheroidTypes.put(HUGE_MONSTER_CAVE, 0.05F);
-        spheroidTypes.put(THE_SUN, 0.01F);
+        spheroidTypes.put(THE_SUN, 0.005F);
 
         return spheroidTypes;
     }

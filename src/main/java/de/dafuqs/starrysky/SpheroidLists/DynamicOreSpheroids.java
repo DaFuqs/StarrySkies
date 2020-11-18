@@ -29,7 +29,7 @@ public class DynamicOreSpheroids {
             this.generationWeight = generationWeight;
         }
     }
-    
+
     /**
      * Builtin data on how big / with which stone the dynamic ores will generate
      */

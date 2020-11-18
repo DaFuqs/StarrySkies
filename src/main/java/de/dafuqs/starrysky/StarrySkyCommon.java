@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.DefaultBiomeCreator;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -75,24 +76,28 @@ public class StarrySkyCommon implements ModInitializer {
             }
         });
 
-        ServerTickEvents.START_WORLD_TICK.register((server) -> {
+        ServerTickEvents.END_SERVER_TICK.register((server) -> {
             tickCounter++;
             if(tickCounter % advancementsEveryXTicks == 0) {
                 tickCounter = 0;
-                for (ServerPlayerEntity serverPlayerEntity : server.getPlayers()) {
-                    if(serverPlayerEntity.getServerWorld().equals(starryWorld)) {
+                StarrySkyCommon.LOGGER.log(Level.DEBUG, "Advancement check start. Players: " + server.getPlayerManager().getCurrentPlayerCount());
+                for (ServerPlayerEntity serverPlayerEntity : server.getPlayerManager().getPlayerList()) {
+                    StarrySkyCommon.LOGGER.log(Level.DEBUG, "checking player " +serverPlayerEntity.getEntityName());
+                    if(serverPlayerEntity.getEntityWorld().equals(starryWorld)) {
+                        StarrySkyCommon.LOGGER.log(Level.DEBUG, "In starry world");
                         Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroidToPlayer(serverPlayerEntity);
-                        if(spheroidDistance.spheroid != null && (Math.sqrt(spheroidDistance.distance)) < spheroidDistance.spheroid.getRadius()) {
+                        if(spheroidDistance.spheroid != null && (Math.sqrt(spheroidDistance.distance)) < spheroidDistance.spheroid.getRadius() + 2) {
                             SpheroidAdvancementIdentifier spheroidAdvancementIdentifier = spheroidDistance.spheroid.getSpheroidType().getSpheroidTypeIdentifier();
 
                             if(spheroidAdvancementIdentifier != null) {
+                                StarrySkyCommon.LOGGER.log(Level.DEBUG, "AdvancementIdentifier: " + spheroidAdvancementIdentifier.name());
                                 SpheroidAdvancementGroup spheroidAdvancementGroup = spheroidAdvancementIdentifierGroups.spheroidAdvancementIdentifierGroups.get(spheroidAdvancementIdentifier);
 
                                 String groupAdvancementString = "sphere_group_" + spheroidAdvancementGroup.name().toLowerCase();
                                 String identifierAdvancementString = "sphere_" + spheroidAdvancementIdentifier.name().toLowerCase();
 
-                                ServerAdvancementLoader sal = server.getServer().getAdvancementLoader();
-                                PlayerAdvancementTracker tracker = serverPlayerEntity.getAdvancementTracker();
+                                ServerAdvancementLoader sal = server.getAdvancementLoader();
+                                PlayerAdvancementTracker tracker = serverPlayerEntity .getAdvancementTracker();
 
                                 // grant group advancement
                                 Identifier advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, groupAdvancementString);
@@ -107,6 +112,8 @@ public class StarrySkyCommon implements ModInitializer {
                                 if (advancement != null) {
                                     tracker.grantCriterion(advancement, "seen");
                                 }
+                            } else {
+                                StarrySkyCommon.LOGGER.log(Level.DEBUG, "No advancementIdentifier :(...");
                             }
                         }
                     }

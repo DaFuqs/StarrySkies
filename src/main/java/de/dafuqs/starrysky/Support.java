@@ -1,16 +1,13 @@
 package de.dafuqs.starrysky;
 
 import de.dafuqs.starrysky.spheroids.Spheroid;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 import static de.dafuqs.starrysky.generation.StarrySkyChunkGenerator.systemGenerator;
 
@@ -26,7 +23,7 @@ public class Support {
         }
     }
 
-    public static SpheroidDistance getClosestSpheroidToPlayer(ServerPlayerEntity serverPlayerEntity) {
+    public static SpheroidDistance getClosestSpheroidToPlayer(PlayerEntity serverPlayerEntity) {
         Vec3d playerPos = serverPlayerEntity.getPos();
         BlockPos playerPosBlock = new BlockPos((int) playerPos.x, (int) playerPos.y, (int) playerPos.z);
         List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos( playerPosBlock.getX() / 16, playerPosBlock.getZ() / 16);
