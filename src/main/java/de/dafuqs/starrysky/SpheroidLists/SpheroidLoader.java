@@ -48,7 +48,6 @@ public class SpheroidLoader {
         }
     }
 
-    // TODO
     public LinkedHashMap<SpheroidType, Float> getAvailableSpheroidTypesWithWeight() {
         return this.availableSpheroidTypesWithWeight;
     }

@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class SpheroidList {
 
     //COMMONLY USED LISTS
-    public static final LinkedHashMap<BlockState, Float> MAP_STONES = new LinkedHashMap() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_STONES = new LinkedHashMap<BlockState, Float>() {{
         put(Blocks.STONE.getDefaultState(), 5.0F);
         put(Blocks.GRANITE.getDefaultState(), 1.0F);
         put(Blocks.DIORITE.getDefaultState(), 1.0F);
@@ -23,7 +23,7 @@ public abstract class SpheroidList {
         put(Blocks.INFESTED_COBBLESTONE.getDefaultState(), 0.002F);
     }};
 
-    public static final LinkedHashMap<BlockState, Float> MAP_DUNGEON_STONES = new LinkedHashMap() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_DUNGEON_STONES = new LinkedHashMap<BlockState, Float>() {{
         put(Blocks.MOSSY_COBBLESTONE.getDefaultState(), 5.0F);
         put(Blocks.INFESTED_COBBLESTONE.getDefaultState(), 0.5F);
         put(Blocks.STONE.getDefaultState(), 1.0F);
@@ -34,7 +34,7 @@ public abstract class SpheroidList {
         put(Blocks.INFESTED_STONE.getDefaultState(), 0.1F);
     }};
 
-    public static final LinkedHashMap<BlockState, Float> MAP_GLASS = new LinkedHashMap() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_GLASS = new LinkedHashMap<BlockState, Float>() {{
         put(Blocks.GLASS.getDefaultState(), 80F);
         put(Blocks.BLACK_STAINED_GLASS.getDefaultState(), 1.0F);
         put(Blocks.BLUE_STAINED_GLASS.getDefaultState(), 1.0F);

@@ -19,8 +19,6 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
     // TODO: The asteroid is missing the pattern chest
     public static final ModularSpheroidType APPLIEDENERGISTRICS_ASTEROID = new ModularSpheroidType(null, appliedenergistics_sky_stone, 8, 15);
 
-
-
     public static boolean isModPresent() {
         return FabricLoader.getInstance().isModLoaded("appliedenergistics2");
     }

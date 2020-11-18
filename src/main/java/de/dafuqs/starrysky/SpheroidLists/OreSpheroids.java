@@ -29,14 +29,14 @@ public class OreSpheroids {
         }
     }
 
-    private static final LinkedHashMap<String, OreSpheroidDefinition> dynamicOreSpheroidDefinitions = new LinkedHashMap() {{
+    private static final LinkedHashMap<String, OreSpheroidDefinition> dynamicOreSpheroidDefinitions = new LinkedHashMap<String, OreSpheroidDefinition>() {{
         put("copper",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
         put("tin",          new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
         put("silver",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
         put("lead",         new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
         put("bauxite",      new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
         put("galena",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
-        put("iridium",      new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
+        put("iridium",      new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 1, 2, 10F));
         put("ruby",         new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
         put("sapphire",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
         put("lignite_coal", new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 12, 5, 8, 10F));
