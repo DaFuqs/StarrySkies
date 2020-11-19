@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidlists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
@@ -16,7 +17,7 @@ public class SpheroidListIndustrialRevolution extends SpheroidList {
     private static final BlockState industrialrevolution_tin = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
 
     public static boolean shouldGenerate() {
-        return FabricLoader.getInstance().isModLoaded(MOD_ID);
+        return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkyCommon.STARRY_SKY_CONFIG.generateIndustrialRevolutionSpheroids;
     }
 
     public static LinkedHashMap<String, BlockState> getDictionaryEntries() {

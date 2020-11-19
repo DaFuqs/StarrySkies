@@ -87,6 +87,32 @@ public class StarrySkyConfig implements ConfigData {
             + "Default: BEDROCK")
     public String bottomBlock = "BEDROCK";
 
+    @ConfigEntry.Gui.PrefixText
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nGenerate Pride Spheroids")
+    public boolean generatePrideSpheroids = true;
+
+    @ConfigEntry.Gui.PrefixText
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Astromine Integration")
+    public boolean generateAstromineSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Industrial Revolution Integration")
+    public boolean generateIndustrialRevolutionSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Applied Energistics 2 Integration")
+    public boolean generateAppliedEnergistics2Spheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Modern Industrialization Integration")
+    public boolean generateModernIndustrializationSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Tech Reborn Integration")
+    public boolean generateTechRebornSpheroids = true;
+
     @Override
     public void validatePostLoad() {
 

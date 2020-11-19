@@ -28,7 +28,7 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
     public static final ModularSpheroidType    APPLIEDENERGISTRICS_ASTEROID       = new ModularSpheroidType(null, appliedenergistics_sky_stone, 8, 14).addCenterChestWithLoot(appliedenergistics_sky_stone_chest_loot_table);
 
     public static boolean shouldGenerate() {
-        return FabricLoader.getInstance().isModLoaded(MOD_ID);
+        return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkyCommon.STARRY_SKY_CONFIG.generateAppliedEnergistics2Spheroids;
     }
 
     public static LinkedHashMap<SpheroidType, Float> getSpheroidTypesWithProbabilities() {

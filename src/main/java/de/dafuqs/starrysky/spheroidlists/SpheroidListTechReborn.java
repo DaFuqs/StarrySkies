@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidlists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidtypes.ShellSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -41,7 +42,7 @@ public class SpheroidListTechReborn extends SpheroidList {
     //private static final BlockState techreborn_tungsten_ore = Registry.BLOCK.get(new Identifier("techreborn","tungsten_ore")).getDefaultState();
 
     public static boolean shouldGenerate() {
-        return FabricLoader.getInstance().isModLoaded(MOD_ID);
+        return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkyCommon.STARRY_SKY_CONFIG.generateTechRebornSpheroids;
     }
 
     public static LinkedHashMap<SpheroidType, Float> getSpheroidTypesWithProbabilities() {

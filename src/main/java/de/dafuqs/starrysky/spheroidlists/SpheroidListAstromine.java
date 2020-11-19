@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidlists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidtypes.CoreSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.LiquidSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
@@ -27,7 +28,7 @@ public class SpheroidListAstromine extends SpheroidList {
     public static final LiquidSpheroidType ASTROMINE_CRUDE_OIL_GLASS = new LiquidSpheroidType(null, astromine_crude_oil, MAP_STONES, 7, 12, 2, 3, 50, 90, 20);
 
     public static boolean shouldGenerate() {
-        return FabricLoader.getInstance().isModLoaded(MOD_ID);
+        return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkyCommon.STARRY_SKY_CONFIG.generateAstromineSpheroids;
     }
 
     public static LinkedHashMap<String, BlockState> getDictionaryEntries() {

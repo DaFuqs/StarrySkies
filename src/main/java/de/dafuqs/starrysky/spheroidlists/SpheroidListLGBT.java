@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidlists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.StripesSpheroidType;
@@ -71,7 +72,7 @@ public class SpheroidListLGBT extends SpheroidList {
     public static final StripesSpheroidType PRIDE_NONBINARY = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_NONBINARY, 5, 20);
 
     public static boolean shouldGenerate() {
-        return true;
+        return StarrySkyCommon.STARRY_SKY_CONFIG.generatePrideSpheroids;
     }
 
     public static LinkedHashMap<SpheroidType, Float> getSpheroidTypesWithProbabilities() {

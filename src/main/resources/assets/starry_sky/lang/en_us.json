@@ -5,8 +5,9 @@
   "text.autoconfig.StarrySky.category.GENERAL": "General",
   "text.autoconfig.StarrySky.category.SYSTEM GENERATION": "System Generation",
   "text.autoconfig.StarrySky.category.WORLD FLOOR GENERATION": "World Floor",
+  "text.autoconfig.StarrySky.category.SPHEROIDS": "World Floor",
 
-  "text.autoconfig.StarrySky.option.spawnInDimension.@Tooltip": "If set to true all new players will spawn in the planetoids dimension initially.",
+  "text.autoconfig.StarrySky.option.spawnInDimension.@Tooltip": "When enabled all new players will spawn in the planetoids dimension initially.",
   "text.autoconfig.StarrySky.option.spawnInDimension": "Spawn in Spheroids Dimension",
   "text.autoconfig.StarrySky.option.portalFrameBlock.@Tooltip": "The block the portal to the Starry Sky dimension needs to be built with. Build it like a nether portal & has to be activated with flint & steel.",
   "text.autoconfig.StarrySky.option.portalFrameBlock": "Portal Frame Block",
@@ -22,6 +23,15 @@
   "text.autoconfig.StarrySky.option.sphereDensity": "Sphere Density",
   "text.autoconfig.StarrySky.option.minDistanceBetweenSpheres.@Tooltip": "How much empty blocks should be enforced between individual spheres. If the distance is too low generation of that one sphere will be cancelled.",
   "text.autoconfig.StarrySky.option.minDistanceBetweenSpheres": "Min Distance Between Spheres",
+
+  "text.autoconfig.StarrySky.option.generatePrideSpheroids.@PrefixText": "Here you can activate or deactivate all kinds of spheroid types to generate in the Starry Sky dimension. Vanilla spheroids are enabled by default.",
+  "text.autoconfig.StarrySky.option.generatePrideSpheroids": "Generate Pride Spheroids",
+  "text.autoconfig.StarrySky.option.generateAstromineSpheroids.@PrefixText": "Mod Integration. You don't have to think about duplicate ores. Starry Sky does that for you. :)",
+  "text.autoconfig.StarrySky.option.generateAstromineSpheroids": "Enable Astromine Integration",
+  "text.autoconfig.StarrySky.option.generateIndustrialRevolutionSpheroids": "Enable Industrial Revolution Integration",
+  "text.autoconfig.StarrySky.option.generateAppliedEnergistics2Spheroids": "Enable Applied Energistics 2 Integration",
+  "text.autoconfig.StarrySky.option.generateModernIndustrializationSpheroids": "Enable Modern Industrialization Integration",
+  "text.autoconfig.StarrySky.option.generateTechRebornSpheroids": "Enable Tech Reborn Integration",
 
   "text.autoconfig.StarrySky.option.floorHeight.@PrefixText": "If (or how high) there should be a world floor. When set to 1 there will the specified BottomBlock at y=1 and the floor block up to the floor height. When set to >1 there will the specified BottomBlock at y=1. When set to 0 there will be no ground, only void",
   "text.autoconfig.StarrySky.option.floorHeight": "Floor Height",
