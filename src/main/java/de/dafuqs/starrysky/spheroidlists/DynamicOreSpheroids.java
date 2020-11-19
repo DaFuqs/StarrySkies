@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.SpheroidLists;
+package de.dafuqs.starrysky.spheroidlists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidtypes.CoreSpheroidType;

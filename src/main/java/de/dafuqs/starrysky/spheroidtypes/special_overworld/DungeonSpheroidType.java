@@ -1,14 +1,12 @@
 package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementGroup;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.gen.ChunkRandom;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Random;
 

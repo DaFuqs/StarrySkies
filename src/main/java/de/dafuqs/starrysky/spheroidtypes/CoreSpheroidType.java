@@ -1,11 +1,10 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.Support;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Random;
 

@@ -1,15 +1,16 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementGroup;
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Identifier;
 
 public class ModularSpheroidType extends SpheroidType {
 
-    //protected BlockState coreBlock;
-    private BlockState mainBlock;
+    private final BlockState mainBlock;
     private BlockState topBlock;
     private BlockState bottomBlock;
+
+    private Identifier centerChestLootTable;
 
 
     public ModularSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState mainBlock, int minSize, int maxSize) {
@@ -45,6 +46,19 @@ public class ModularSpheroidType extends SpheroidType {
     public ModularSpheroidType setBottomBlockState(BlockState state) {
         bottomBlock = state;
         return this;
+    }
+
+    public ModularSpheroidType addCenterChestWithLoot(Identifier lootTable) {
+        this.centerChestLootTable = lootTable;
+        return this;
+    }
+
+    public boolean hasCenterChest() {
+        return this.centerChestLootTable != null;
+    }
+
+    public Identifier getCenterChestLootTable() {
+        return this.centerChestLootTable;
     }
 
 }

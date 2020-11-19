@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.SpheroidData;
+package de.dafuqs.starrysky.advancements;
 
 public enum SpheroidAdvancementGroup {
     WOOD,

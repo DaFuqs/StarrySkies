@@ -1,7 +1,10 @@
-package de.dafuqs.starrysky.SpheroidLists;
+package de.dafuqs.starrysky.spheroidlists;
 
+import de.dafuqs.starrysky.spheroidtypes.ShellSpheroidType;
+import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -10,6 +13,10 @@ import java.util.LinkedHashMap;
 public class SpheroidListTechReborn extends SpheroidList {
 
     private static final String MOD_ID = "techreborn";
+
+    // Rubber
+    private static final BlockState techreborn_rubber_log = Registry.BLOCK.get(new Identifier(MOD_ID,"rubber_log")).getDefaultState();
+    private static final BlockState techreborn_rubber_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"rubber_leaves")).getDefaultState();
 
     // Overworld
     private static final BlockState techreborn_bauxite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"bauxite_ore")).getDefaultState();
@@ -35,6 +42,15 @@ public class SpheroidListTechReborn extends SpheroidList {
 
     public static boolean isModPresent() {
         return FabricLoader.getInstance().isModLoaded(MOD_ID);
+    }
+
+    public static LinkedHashMap<SpheroidType, Float> getSpheroidTypesWithProbabilities() {
+        LinkedHashMap<SpheroidType, Float> spheroidTypes = new LinkedHashMap<>();
+
+        // only initialize rubber leaves block with tags when tech reborn is present (else: crash)
+        spheroidTypes.put(new ShellSpheroidType(null, techreborn_rubber_log, techreborn_rubber_leaves.with(Properties.DISTANCE_1_7, 1),5, 20, 2, 4), 0.5F);
+
+        return spheroidTypes;
     }
 
     public static LinkedHashMap<String, BlockState> getDictionaryEntries() {

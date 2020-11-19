@@ -1,11 +1,10 @@
-package de.dafuqs.starrysky.SpheroidLists;
+package de.dafuqs.starrysky.spheroidlists;
 
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 

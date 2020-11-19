@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.SpheroidData;
+package de.dafuqs.starrysky.advancements;
 
 public enum SpheroidAdvancementIdentifier {
     acacia_wood,
@@ -8,6 +8,7 @@ public enum SpheroidAdvancementIdentifier {
     birch_wood,
     blue_ice,
     bone,
+    brown_mushroom,
     clay,
     coal,
     coarse_dirt,
@@ -44,6 +45,7 @@ public enum SpheroidAdvancementIdentifier {
     rainbow_wool,
     red_sand,
     redstone,
+    red_mushroom,
     sand,
     slime,
     sponge,

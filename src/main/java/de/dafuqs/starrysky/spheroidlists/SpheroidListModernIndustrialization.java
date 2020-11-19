@@ -1,6 +1,5 @@
-package de.dafuqs.starrysky.SpheroidLists;
+package de.dafuqs.starrysky.spheroidlists;
 
-import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;

@@ -1,6 +1,5 @@
 package de.dafuqs.starrysky.spheroids;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;

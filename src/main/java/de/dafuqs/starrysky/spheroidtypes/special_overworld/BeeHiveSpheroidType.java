@@ -1,19 +1,9 @@
 package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementGroup;
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.passive.BeeEntity;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
@@ -35,11 +25,20 @@ public class BeeHiveSpheroidType extends SpheroidType {
         add(Blocks.CORNFLOWER.getDefaultState());
         add(Blocks.LILY_OF_THE_VALLEY.getDefaultState());
         //add(Blocks.WITHER_ROSE.getDefaultState()); //That would be pretty fun, actually
-        //add(Blocks.SUNFLOWER.getDefaultState()); //lacks top, only stem generates
         add(Blocks.LILAC.getDefaultState());
         add(Blocks.ROSE_BUSH.getDefaultState());
         add(Blocks.PEONY.getDefaultState());
     }};
+    // TODO
+    private final List<BlockState> tallFlowers = new ArrayList<BlockState>() {{
+        add(Blocks.SUNFLOWER.getDefaultState());
+        add(Blocks.LILAC.getDefaultState());
+        add(Blocks.ROSE_BUSH.getDefaultState());
+        add(Blocks.PEONY.getDefaultState());
+        add(Blocks.TALL_GRASS.getDefaultState());
+        add(Blocks.LARGE_FERN.getDefaultState());
+    }};
+
     private final int minShellRadius;
     private final int maxShellRadius;
     private final int minFlowerRingRadius;
@@ -81,5 +80,9 @@ public class BeeHiveSpheroidType extends SpheroidType {
 
     public BlockState getRandomFlower(ChunkRandom random) {
         return this.flowers.get(random.nextInt(flowers.size()));
+    }
+
+    public BlockState getRandomTallFlower(ChunkRandom random) {
+        return this.tallFlowers.get(random.nextInt(tallFlowers.size()));
     }
 }

@@ -6,9 +6,10 @@ import de.dafuqs.starrysky.spheroidtypes.special_overworld.BeeHiveSpheroidType;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.TallPlantBlock;
 import net.minecraft.block.entity.BeehiveBlockEntity;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.BeeEntity;
@@ -74,7 +75,7 @@ public class BeeHiveSpheroid extends Spheroid {
                         } else {
                             chunk.setBlockState(currBlockPos, Blocks.AIR.getDefaultState(), false);
                         }
-                    } else if (d == shellDistance -1 && y2 - y == 0 && random.nextInt(12) == 0) {
+                    } else if (d == shellDistance -1 && y2 - y == 0 && random.nextInt(10) == 0) {
                         // middle outer shell: random hives
                         Direction direction;
                         int xDist = x2 - x;
@@ -117,8 +118,14 @@ public class BeeHiveSpheroid extends Spheroid {
                         }
                     } else if (y-y2 == 0 && d > startRingDistance && d <= endRingDistance) {
                         chunk.setBlockState(currBlockPos, Blocks.GRASS_BLOCK.getDefaultState(), false);
-                    } else if (y-y2 == -1 && d > startRingDistance && d <= endRingDistance && random.nextInt(3) == 0) {
-                        chunk.setBlockState(currBlockPos, ((BeeHiveSpheroidType) getSpheroidType()).getRandomFlower(random), false);
+                        int rand = random.nextInt(4);
+                        if (rand == 0) {
+                            chunk.setBlockState(currBlockPos.up(), ((BeeHiveSpheroidType) getSpheroidType()).getRandomFlower(random), false);
+                        } else if (rand == 1) {
+                            BlockState randomTallFlower = ((BeeHiveSpheroidType) getSpheroidType()).getRandomTallFlower(random);
+                            chunk.setBlockState(currBlockPos.up(), randomTallFlower.with(TallPlantBlock.HALF, DoubleBlockHalf.LOWER), false);
+                            chunk.setBlockState(currBlockPos.up(2), randomTallFlower.with(TallPlantBlock.HALF, DoubleBlockHalf.UPPER), false);
+                        }
                     }
                 }
             }

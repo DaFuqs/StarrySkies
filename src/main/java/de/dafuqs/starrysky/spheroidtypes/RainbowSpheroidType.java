@@ -1,7 +1,6 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementGroup;
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import net.minecraft.block.BlockState;
 
 import java.util.List;

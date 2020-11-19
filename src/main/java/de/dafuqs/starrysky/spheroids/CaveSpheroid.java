@@ -1,7 +1,6 @@
-package de.dafuqs.starrysky.spheroids.special_overworld;
+package de.dafuqs.starrysky.spheroids;
 
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroids.ShellSpheroid;
 import de.dafuqs.starrysky.spheroidtypes.CaveSpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

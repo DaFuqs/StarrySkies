@@ -3,6 +3,9 @@ package de.dafuqs.starrysky.spheroids;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroidtypes.ModularSpheroidType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
@@ -52,13 +55,17 @@ public class ModularSpheroid extends Spheroid {
         int y = this.getPosition().getY();
         int z = this.getPosition().getZ();
 
+        boolean hasCenterChest = ((ModularSpheroidType) this.getSpheroidType()).hasCenterChest();
+
         random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
         for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
-                    if (d == this.radius) {
+                    if (hasCenterChest && d == 0) {
+                        placeCenterChestWithLootTable(chunk, currBlockPos);
+                    } else if (d == this.radius) {
                         if (isBottomBlock(x2, y2, z2))
                             chunk.setBlockState(currBlockPos, this.bottomBlock, false);
                         else if (isTopBlock(x2, y2, z2))
@@ -72,7 +79,17 @@ public class ModularSpheroid extends Spheroid {
             }
         }
 
+        if(((ModularSpheroidType) this.getSpheroidType()).hasCenterChest()) {
+
+        }
+
         this.setChunkFinished(chunk.getPos());
+    }
+
+    private void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos) {
+        chunk.setBlockState(blockPos, Blocks.CHEST.getDefaultState(), false);
+        chunk.setBlockEntity(blockPos, new ChestBlockEntity());
+        LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, ((ModularSpheroidType) this.getSpheroidType()).getCenterChestLootTable());
     }
 
 }

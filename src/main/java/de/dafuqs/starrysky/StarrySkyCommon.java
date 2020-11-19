@@ -1,12 +1,12 @@
 package de.dafuqs.starrysky;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementGroup;
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifierGroups;
-import de.dafuqs.starrysky.SpheroidLists.SpheroidLoader;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementGroup;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifierGroups;
 import de.dafuqs.starrysky.commands.StarrySkyCommands;
 import de.dafuqs.starrysky.configs.StarrySkyConfig;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
+import de.dafuqs.starrysky.spheroidlists.SpheroidLoader;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -22,7 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.DefaultBiomeCreator;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -63,8 +62,6 @@ public class StarrySkyCommon implements ModInitializer {
         spheroidAdvancementIdentifierGroups = new SpheroidAdvancementIdentifierGroups();
         spheroidLoader = new SpheroidLoader();
 
-
-
         // triggers everytime a world is loaded
         // so for overworld, nether, ... (they all share the same seed)
         ServerWorldEvents.LOAD.register((server, world) -> {
@@ -80,17 +77,17 @@ public class StarrySkyCommon implements ModInitializer {
             tickCounter++;
             if(tickCounter % advancementsEveryXTicks == 0) {
                 tickCounter = 0;
-                StarrySkyCommon.LOGGER.log(Level.DEBUG, "Advancement check start. Players: " + server.getPlayerManager().getCurrentPlayerCount());
+                StarrySkyCommon.LOGGER.debug("Advancement check start. Players: " + server.getPlayerManager().getCurrentPlayerCount());
                 for (ServerPlayerEntity serverPlayerEntity : server.getPlayerManager().getPlayerList()) {
-                    StarrySkyCommon.LOGGER.log(Level.DEBUG, "checking player " +serverPlayerEntity.getEntityName());
+                    StarrySkyCommon.LOGGER.debug("checking player " +serverPlayerEntity.getEntityName());
                     if(serverPlayerEntity.getEntityWorld().equals(starryWorld)) {
-                        StarrySkyCommon.LOGGER.log(Level.DEBUG, "In starry world");
+                        StarrySkyCommon.LOGGER.debug( "In starry world");
                         Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroidToPlayer(serverPlayerEntity);
                         if(spheroidDistance.spheroid != null && (Math.sqrt(spheroidDistance.distance)) < spheroidDistance.spheroid.getRadius() + 2) {
                             SpheroidAdvancementIdentifier spheroidAdvancementIdentifier = spheroidDistance.spheroid.getSpheroidType().getSpheroidTypeIdentifier();
 
                             if(spheroidAdvancementIdentifier != null) {
-                                StarrySkyCommon.LOGGER.log(Level.DEBUG, "AdvancementIdentifier: " + spheroidAdvancementIdentifier.name());
+                                StarrySkyCommon.LOGGER.debug("AdvancementIdentifier: " + spheroidAdvancementIdentifier.name());
                                 SpheroidAdvancementGroup spheroidAdvancementGroup = spheroidAdvancementIdentifierGroups.spheroidAdvancementIdentifierGroups.get(spheroidAdvancementIdentifier);
 
                                 String groupAdvancementString = "sphere_group_" + spheroidAdvancementGroup.name().toLowerCase();
@@ -113,7 +110,7 @@ public class StarrySkyCommon implements ModInitializer {
                                     tracker.grantCriterion(advancement, "seen");
                                 }
                             } else {
-                                StarrySkyCommon.LOGGER.log(Level.DEBUG, "No advancementIdentifier :(...");
+                                StarrySkyCommon.LOGGER.debug("No advancementIdentifier :(...");
                             }
                         }
                     }

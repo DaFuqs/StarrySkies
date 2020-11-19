@@ -149,5 +149,9 @@
   "advancements.dafuqs.starry_sky.sphere_gold.title": "Sphere: Gold",
   "advancements.dafuqs.starry_sky.sphere_gold.description": "Find a gold sphere",
   "advancements.dafuqs.starry_sky.sphere_cobblestone.title": "Sphere: Cobblestone",
-  "advancements.dafuqs.starry_sky.sphere_cobblestone.description": "Find a cobblestone sphere"
+  "advancements.dafuqs.starry_sky.sphere_cobblestone.description": "Find a cobblestone sphere",
+  "advancements.dafuqs.starry_sky.sphere_red_mushroom.title": "Sphere: Red Mushroom",
+  "advancements.dafuqs.starry_sky.sphere_red_mushroom.description": "Find a red mushroom sphere",
+  "advancements.dafuqs.starry_sky.sphere_brown_mushroom.title": "Sphere: Brown Mushroom",
+  "advancements.dafuqs.starry_sky.sphere_brown_mushroom.description": "Find a brown mushroom sphere"
 }

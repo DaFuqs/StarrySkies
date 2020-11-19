@@ -1,9 +1,10 @@
-package de.dafuqs.starrysky.SpheroidLists;
+package de.dafuqs.starrysky.spheroidlists;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroidtypes.*;
 import de.dafuqs.starrysky.spheroidtypes.special_overworld.BeeHiveSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.special_overworld.DungeonSpheroidType;
+import de.dafuqs.starrysky.spheroidtypes.special_overworld.MushroomSpheroidType;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.state.property.Properties;
@@ -93,6 +94,10 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final LiquidSpheroidType LAVA_MAGMA       = new LiquidSpheroidType(SpheroidAdvancementIdentifier.magma, Blocks.LAVA.getDefaultState(), MAP_STONES,5, 20, 3, 6, 70, 100, 25).setCoreBlock(Blocks.MAGMA_BLOCK.getDefaultState(), 2, 5);
     public static final LiquidSpheroidType LAVA_OBSIDIAN    = new LiquidSpheroidType(SpheroidAdvancementIdentifier.obsidian, Blocks.LAVA.getDefaultState(), MAP_STONES,10,20, 3, 6, 50, 100, 10).setCoreBlock(Blocks.OBSIDIAN.getDefaultState(), 2, 5);
 
+    // MUSHROOMS
+    public static final ShellSpheroidType BROWN_MUSHROOM    = new MushroomSpheroidType(SpheroidAdvancementIdentifier.brown_mushroom, Blocks.MUSHROOM_STEM.getDefaultState(), Blocks.BROWN_MUSHROOM_BLOCK.getDefaultState(), 4, 8, 2, 3);
+    public static final ShellSpheroidType RED_MUSHROOM      = new MushroomSpheroidType(SpheroidAdvancementIdentifier.red_mushroom, Blocks.MUSHROOM_STEM.getDefaultState(), Blocks.RED_MUSHROOM_BLOCK.getDefaultState(), 4, 8, 2, 3);
+
     //COLD
     public static final CoreSpheroidType       ICE           = new CoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 15, 3, 6);
     public static final DoubleCoreSpheroidType GLASS_ICE     = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.GLASS.getDefaultState(), 5, 12, 2, 4, 2, 4);
@@ -118,6 +123,7 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final DungeonSpheroidType DUNGEON_STRAY = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, EntityType.STRAY, MAP_DUNGEON_STONES, 6, 12, 2, 4);
     public static final DungeonSpheroidType DUNGEON_WITCH = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, EntityType.WITCH, MAP_DUNGEON_STONES, 6, 12, 2, 4);
     public static final DungeonSpheroidType DUNGEON_SILVERFISH = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, EntityType.SILVERFISH, MAP_DUNGEON_STONES, 6, 12, 2, 4);
+    public static final DungeonSpheroidType DUNGEON_ENDERMAN = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, EntityType.ENDERMAN, MAP_DUNGEON_STONES, 6, 12, 2, 4);
 
     // BEES
     public static final BeeHiveSpheroidType BEE_HIVE = new BeeHiveSpheroidType(SpheroidAdvancementIdentifier.bee_hive,10, 16, 2, 4, 1, 2, 1, 2);
@@ -193,6 +199,10 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidTypes.put(BIRCH_WOOD, 0.5F);
         spheroidTypes.put(ACACIA_WOOD, 0.5F);
 
+        // MUSHROOMS
+        spheroidTypes.put(BROWN_MUSHROOM, 0.1F);
+        spheroidTypes.put(RED_MUSHROOM, 0.1F);
+
         //FLUIDS
         spheroidTypes.put(WATER_GLASS, 1.5F);
         spheroidTypes.put(WATER_CLAY, 0.5F);
@@ -230,6 +240,7 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidTypes.put(DUNGEON_STRAY, 0.01F);
         spheroidTypes.put(DUNGEON_WITCH, 0.01F);
         spheroidTypes.put(DUNGEON_SILVERFISH, 0.01F);
+        spheroidTypes.put(DUNGEON_ENDERMAN, 0.003F);
 
         // SPECIAL
         spheroidTypes.put(BEE_HIVE, 0.2F);

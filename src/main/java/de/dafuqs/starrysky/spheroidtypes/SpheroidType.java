@@ -1,6 +1,6 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
-import de.dafuqs.starrysky.SpheroidData.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import net.minecraft.world.gen.ChunkRandom;
 
 public abstract class SpheroidType {

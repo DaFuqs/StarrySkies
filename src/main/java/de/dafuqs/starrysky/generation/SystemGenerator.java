@@ -1,21 +1,23 @@
 package de.dafuqs.starrysky.generation;
 
-import de.dafuqs.starrysky.SpheroidLists.SpheroidListVanilla;
-import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.spheroidlists.SpheroidListVanilla;
 import de.dafuqs.starrysky.spheroids.*;
 import de.dafuqs.starrysky.spheroids.special_overworld.BeeHiveSpheroid;
-import de.dafuqs.starrysky.spheroids.special_overworld.CaveSpheroid;
 import de.dafuqs.starrysky.spheroids.special_overworld.DungeonSpheroid;
+import de.dafuqs.starrysky.spheroids.special_overworld.MushroomSpheroid;
 import de.dafuqs.starrysky.spheroidtypes.*;
 import de.dafuqs.starrysky.spheroidtypes.special_overworld.BeeHiveSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.special_overworld.DungeonSpheroidType;
+import de.dafuqs.starrysky.spheroidtypes.special_overworld.MushroomSpheroidType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.ChunkRandom;
 import org.apache.logging.log4j.Level;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SystemGenerator {
@@ -154,6 +156,7 @@ public class SystemGenerator {
         return xDist * xDist + yDist * yDist + zDist * zDist;
     }
 
+    // TODO: that's so bad
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
         SpheroidType spheroidType = Support.getWeightedRandom(StarrySkyCommon.spheroidLoader.getAvailableSpheroidTypesWithWeight(), systemRandom);
 
@@ -162,6 +165,8 @@ public class SystemGenerator {
             return new CoreSpheroid( (CoreSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof CaveSpheroidType) { // has to be checked before shellSpheroid
             return new CaveSpheroid( (CaveSpheroidType) spheroidType, systemRandom);
+        } else if(spheroidType instanceof MushroomSpheroidType) { // has to be checked before shellSpheroid
+            return new MushroomSpheroid( (MushroomSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof ShellSpheroidType) {
             return new ShellSpheroid( (ShellSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof LiquidSpheroidType) {

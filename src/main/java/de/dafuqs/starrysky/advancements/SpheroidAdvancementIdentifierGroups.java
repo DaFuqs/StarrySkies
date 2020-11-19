@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.SpheroidData;
+package de.dafuqs.starrysky.advancements;
 
 import java.util.HashMap;
 
@@ -14,6 +14,7 @@ public class SpheroidAdvancementIdentifierGroups {
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.birch_wood,   SpheroidAdvancementGroup.WOOD);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.blue_ice,     SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.bone,         SpheroidAdvancementGroup.RARE);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.brown_mushroom, SpheroidAdvancementGroup.UNCOMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.cave,         SpheroidAdvancementGroup.UNCOMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.clay,         SpheroidAdvancementGroup.UNCOMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.coal,         SpheroidAdvancementGroup.ORES);
@@ -48,6 +49,7 @@ public class SpheroidAdvancementIdentifierGroups {
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.rainbow_glass, SpheroidAdvancementGroup.RAINBOW);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.rainbow_terracotta, SpheroidAdvancementGroup.RAINBOW);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.rainbow_wool, SpheroidAdvancementGroup.RAINBOW);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.red_mushroom, SpheroidAdvancementGroup.UNCOMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.red_sand,     SpheroidAdvancementGroup.UNCOMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.redstone,     SpheroidAdvancementGroup.ORES);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.sand,         SpheroidAdvancementGroup.COMMON);
