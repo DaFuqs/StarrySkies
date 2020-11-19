@@ -43,7 +43,7 @@ public class CaveSpheroidType extends ShellSpheroidType {
     }
 
     public String getDescription() {
-        return "CoreSpheroid";
+        return "CaveSpheroid";
     }
 
 }

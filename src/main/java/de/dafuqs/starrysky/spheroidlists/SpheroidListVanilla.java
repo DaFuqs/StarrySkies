@@ -128,7 +128,7 @@ public class SpheroidListVanilla extends SpheroidList {
     // BEES
     public static final BeeHiveSpheroidType BEE_HIVE = new BeeHiveSpheroidType(SpheroidAdvancementIdentifier.bee_hive,10, 16, 2, 4, 1, 2, 1, 2);
 
-    public static boolean isModPresent() {
+    public static boolean shouldGenerate() {
         return true;
     }
 

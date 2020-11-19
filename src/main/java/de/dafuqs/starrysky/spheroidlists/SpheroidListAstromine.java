@@ -26,7 +26,7 @@ public class SpheroidListAstromine extends SpheroidList {
     public static final CoreSpheroidType ASTROMINE_CRUDE_OIL_STONE   = new CoreSpheroidType(null, astromine_crude_oil, astromine_meteor_stone, 8, 15, 5, 8);
     public static final LiquidSpheroidType ASTROMINE_CRUDE_OIL_GLASS = new LiquidSpheroidType(null, astromine_crude_oil, MAP_STONES, 7, 12, 2, 3, 50, 90, 20);
 
-    public static boolean isModPresent() {
+    public static boolean shouldGenerate() {
         return FabricLoader.getInstance().isModLoaded(MOD_ID);
     }
 

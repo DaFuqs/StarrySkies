@@ -47,8 +47,8 @@ public class RainbowSpheroid extends Spheroid {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
                      if (d < this.radius) {
-                         int currentBlockID = (Math.abs(x2) /* 16* 16*/ + Math.abs(y2) /* *16 */ + Math.abs(z2)) % this.getRainbowBlockCount();
-                         BlockState currentBlockState = this.rainbowBlocks.get(currentBlockID);
+                        int currentBlockID = (Math.abs(x2) /* 16* 16*/ + Math.abs(y2) /* *16 */ + Math.abs(z2)) % this.getRainbowBlockCount();
+                        BlockState currentBlockState = this.rainbowBlocks.get(currentBlockID);
                         chunk.setBlockState(currBlockPos, currentBlockState, false);
                     }
                 }

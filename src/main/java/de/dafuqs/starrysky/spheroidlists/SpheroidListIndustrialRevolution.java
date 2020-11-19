@@ -15,7 +15,7 @@ public class SpheroidListIndustrialRevolution extends SpheroidList {
     private static final BlockState industrialrevolution_copper = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
     private static final BlockState industrialrevolution_tin = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
 
-    public static boolean isModPresent() {
+    public static boolean shouldGenerate() {
         return FabricLoader.getInstance().isModLoaded(MOD_ID);
     }
 

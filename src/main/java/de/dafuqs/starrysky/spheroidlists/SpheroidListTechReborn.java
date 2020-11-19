@@ -40,7 +40,7 @@ public class SpheroidListTechReborn extends SpheroidList {
     //private static final BlockState techreborn_sodalite_ore = Registry.BLOCK.get(new Identifier("techreborn","sodalite_ore")).getDefaultState();
     //private static final BlockState techreborn_tungsten_ore = Registry.BLOCK.get(new Identifier("techreborn","tungsten_ore")).getDefaultState();
 
-    public static boolean isModPresent() {
+    public static boolean shouldGenerate() {
         return FabricLoader.getInstance().isModLoaded(MOD_ID);
     }
 

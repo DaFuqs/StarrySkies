@@ -5,13 +5,9 @@ import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 import me.sargunvohra.mcmods.autoconfig1u.shadowed.blue.endless.jankson.Comment;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.InvalidIdentifierException;
 import net.minecraft.util.registry.Registry;
-import org.apache.logging.log4j.Level;
 
 @Config(name = "StarrySky")
 public class StarrySkyConfig implements ConfigData {
@@ -30,12 +26,12 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nThe block the portal to the Starry Sky dimension needs to be built with."
                    + "\nBuild it like a nether portal & has to be activated with flint & steel"
                    + "\nDefault: ICE")
-    public String portalFrameBlock = "ICE";
+    public String portalFrameBlock = "PACKED_ICE";
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
     @Comment(value = "\nThe color of the Starry Sky's portal."
-                     + "\nDefault: 11983869")
+                     + "\nDefault: 11983869 (light, greyish blue)")
     public int portalColor = 11983869;
 
     @ConfigEntry.Gui.Tooltip()

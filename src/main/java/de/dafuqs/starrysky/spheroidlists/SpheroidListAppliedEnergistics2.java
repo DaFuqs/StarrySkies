@@ -27,7 +27,7 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
     public static final DoubleCoreSpheroidType APPLIEDENERGISTRICS_CHARGED_QUARTZ = new DoubleCoreSpheroidType(null, appliedenergistics_quartz, appliedenergistics_charged_quartz, MAP_STONES, 5, 8, 1, 2, 3, 5);
     public static final ModularSpheroidType    APPLIEDENERGISTRICS_ASTEROID       = new ModularSpheroidType(null, appliedenergistics_sky_stone, 8, 14).addCenterChestWithLoot(appliedenergistics_sky_stone_chest_loot_table);
 
-    public static boolean isModPresent() {
+    public static boolean shouldGenerate() {
         return FabricLoader.getInstance().isModLoaded(MOD_ID);
     }
 

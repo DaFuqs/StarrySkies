@@ -21,7 +21,7 @@ public class SpheroidListModernIndustrialization extends SpheroidList {
     private static final BlockState modern_industrialization_antimony_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"antimony_ore")).getDefaultState();
     private static final BlockState modern_industrialization_bauxite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"bauxite_ore")).getDefaultState();
 
-    public static boolean isModPresent() {
+    public static boolean shouldGenerate() {
         return FabricLoader.getInstance().isModLoaded(MOD_ID);
     }
 

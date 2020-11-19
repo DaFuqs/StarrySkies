@@ -181,6 +181,8 @@ public class SystemGenerator {
             return new BeeHiveSpheroid( (BeeHiveSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof DungeonSpheroidType) {
             return new DungeonSpheroid( (DungeonSpheroidType) spheroidType, systemRandom);
+        } else if(spheroidType instanceof StripesSpheroidType) {
+            return new StripesSpheroid( (StripesSpheroidType) spheroidType, systemRandom);
         } else {
             return null;
         }

@@ -13,27 +13,31 @@ public class SpheroidLoader {
         LinkedHashMap<String, List<BlockState>> dynamicOres = new LinkedHashMap<>();
 
         // initialize lists
-        if(SpheroidListVanilla.isModPresent()) {
+        if(SpheroidListVanilla.shouldGenerate()) {
             availableSpheroidTypesWithWeight.putAll(SpheroidListVanilla.getSpheroidTypesWithProbabilities());
             addOres(dynamicOres, SpheroidListVanilla.getDictionaryEntries());
         }
-        if(SpheroidListTechReborn.isModPresent()) {
+        if(SpheroidListLGBT.shouldGenerate()) {
+            availableSpheroidTypesWithWeight.putAll(SpheroidListLGBT.getSpheroidTypesWithProbabilities());
+            addOres(dynamicOres, SpheroidListLGBT.getDictionaryEntries());
+        }
+        if(SpheroidListTechReborn.shouldGenerate()) {
             availableSpheroidTypesWithWeight.putAll(SpheroidListTechReborn.getSpheroidTypesWithProbabilities());
             addOres(dynamicOres, SpheroidListTechReborn.getDictionaryEntries());
         }
-        if(SpheroidListAstromine.isModPresent()) {
+        if(SpheroidListAstromine.shouldGenerate()) {
             availableSpheroidTypesWithWeight.putAll(SpheroidListAstromine.getSpheroidTypesWithProbabilities());
             addOres(dynamicOres, SpheroidListAstromine.getDictionaryEntries());
         }
-        if(SpheroidListAppliedEnergistics2.isModPresent()) {
+        if(SpheroidListAppliedEnergistics2.shouldGenerate()) {
             availableSpheroidTypesWithWeight.putAll(SpheroidListAppliedEnergistics2.getSpheroidTypesWithProbabilities());
             addOres(dynamicOres, SpheroidListAppliedEnergistics2.getDictionaryEntries());
         }
-        if(SpheroidListModernIndustrialization.isModPresent()) {
+        if(SpheroidListModernIndustrialization.shouldGenerate()) {
             availableSpheroidTypesWithWeight.putAll(SpheroidListModernIndustrialization.getSpheroidTypesWithProbabilities());
             addOres(dynamicOres, SpheroidListModernIndustrialization.getDictionaryEntries());
         }
-        if(SpheroidListIndustrialRevolution.isModPresent()) {
+        if(SpheroidListIndustrialRevolution.shouldGenerate()) {
             availableSpheroidTypesWithWeight.putAll(SpheroidListIndustrialRevolution.getSpheroidTypesWithProbabilities());
             addOres(dynamicOres, SpheroidListIndustrialRevolution.getDictionaryEntries());
         }
