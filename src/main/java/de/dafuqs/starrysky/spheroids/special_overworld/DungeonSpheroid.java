@@ -16,9 +16,9 @@ import net.minecraft.world.gen.ChunkRandom;
 
 public class DungeonSpheroid extends Spheroid {
 
-    private EntityType entityType;
-    private BlockState shellBlock;
-    private int shellRadius;
+    private final EntityType entityType;
+    private final BlockState shellBlock;
+    private final int shellRadius;
 
     public DungeonSpheroid(DungeonSpheroidType dungeonSpheroidType, ChunkRandom random) {
         super(dungeonSpheroidType, random);

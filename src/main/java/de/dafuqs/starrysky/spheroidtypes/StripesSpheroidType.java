@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class StripesSpheroidType extends SpheroidType {
 
-    private ArrayList<BlockState> stripesBlockStates;
+    private final ArrayList<BlockState> stripesBlockStates;
 
     public StripesSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, ArrayList<BlockState> stripesBlockStates, int minSize, int maxSize) {
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;

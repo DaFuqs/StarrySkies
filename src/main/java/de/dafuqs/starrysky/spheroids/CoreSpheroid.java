@@ -10,8 +10,8 @@ import net.minecraft.world.gen.ChunkRandom;
 public class CoreSpheroid extends Spheroid {
 
     //STATIC CONFIG STUFF
-    private BlockState coreBlock;
-    private BlockState shellBlock;
+    private final BlockState coreBlock;
+    private final BlockState shellBlock;
     private int coreRadius;
 
     public CoreSpheroid(CoreSpheroidType coreSpheroidType, ChunkRandom random) {

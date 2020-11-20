@@ -29,7 +29,7 @@ public class BeeHiveSpheroidType extends SpheroidType {
         add(Blocks.ROSE_BUSH.getDefaultState());
         add(Blocks.PEONY.getDefaultState());
     }};
-    // TODO
+
     private final List<BlockState> tallFlowers = new ArrayList<BlockState>() {{
         add(Blocks.SUNFLOWER.getDefaultState());
         add(Blocks.LILAC.getDefaultState());

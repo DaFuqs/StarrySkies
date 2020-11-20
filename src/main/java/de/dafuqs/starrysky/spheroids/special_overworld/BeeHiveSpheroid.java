@@ -26,11 +26,11 @@ import java.util.List;
 
 public class BeeHiveSpheroid extends Spheroid {
 
-    private int shellRadius;
-    private int flowerRingRadius;
-    private int flowerRingSpacing;
+    private final int shellRadius;
+    private final int flowerRingRadius;
+    private final int flowerRingSpacing;
     private BeehiveBlockEntity queenBeehiveBlockEntity;
-    private List<BeehiveBlockEntity> outerBeehiveBlockEntities;
+    private final List<BeehiveBlockEntity> outerBeehiveBlockEntities;
 
     public BeeHiveSpheroid(BeeHiveSpheroidType beeHiveSpheroidType, ChunkRandom random) {
         super(beeHiveSpheroidType, random);
@@ -147,14 +147,10 @@ public class BeeHiveSpheroid extends Spheroid {
 
     @Override
     public boolean shouldPopulateEntities(ChunkPos chunkPos) {
-        boolean ret = (chunkPos.getStartX() >= this.getPosition().getX()
+        return (chunkPos.getStartX() >= this.getPosition().getX()
                 && chunkPos.getStartX() <= this.getPosition().getX() + 15
                 && chunkPos.getStartZ() >= this.getPosition().getZ()
                 && chunkPos.getStartZ() <= this.getPosition().getZ() + 15);
-        if(ret) {
-            return ret;
-        }
-        return ret;
     }
 
     @Override

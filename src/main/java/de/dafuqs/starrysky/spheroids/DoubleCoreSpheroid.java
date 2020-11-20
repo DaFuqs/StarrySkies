@@ -9,12 +9,12 @@ import net.minecraft.world.gen.ChunkRandom;
 
 public class DoubleCoreSpheroid extends Spheroid {
 
-    private BlockState innerCoreBlock;
-    private BlockState outerCoreBlock;
-    private BlockState shellBlock;
+    private final BlockState innerCoreBlock;
+    private final BlockState outerCoreBlock;
+    private final BlockState shellBlock;
 
     private int innerCoreRadius;
-    private int shellRadius;
+    private final int shellRadius;
 
     public DoubleCoreSpheroid(DoubleCoreSpheroidType doubleCoreSpheroidType, ChunkRandom random) {
         super(doubleCoreSpheroidType, random);

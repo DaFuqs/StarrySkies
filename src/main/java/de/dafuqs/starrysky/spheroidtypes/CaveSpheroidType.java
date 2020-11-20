@@ -7,8 +7,8 @@ import net.minecraft.block.Blocks;
 
 public class CaveSpheroidType extends ShellSpheroidType {
 
-    private BlockState shellBlock;
-    private BlockState caveFloorBlock;
+    private final BlockState shellBlock;
+    private final BlockState caveFloorBlock;
     private BlockState topBlock;
     private BlockState bottomBlock;
 

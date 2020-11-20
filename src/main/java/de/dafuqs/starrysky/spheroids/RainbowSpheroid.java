@@ -11,7 +11,7 @@ import java.util.List;
 
 public class RainbowSpheroid extends Spheroid {
 
-    private List<BlockState> rainbowBlocks;
+    private final List<BlockState> rainbowBlocks;
 
     public RainbowSpheroid(RainbowSpheroidType rainbowSpheroidType, ChunkRandom random) {
         super(rainbowSpheroidType, random);

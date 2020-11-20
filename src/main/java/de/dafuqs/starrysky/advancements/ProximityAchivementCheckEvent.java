@@ -17,7 +17,7 @@ public class ProximityAchivementCheckEvent implements ServerTickEvents.EndTick {
     // Advancements
     private int tickCounter;
     private final int advancementsEveryXTicks = 100;
-    private SpheroidAdvancementIdentifierGroups spheroidAdvancementIdentifierGroups;
+    private final SpheroidAdvancementIdentifierGroups spheroidAdvancementIdentifierGroups;
 
     public ProximityAchivementCheckEvent() {
         this.spheroidAdvancementIdentifierGroups = new SpheroidAdvancementIdentifierGroups();

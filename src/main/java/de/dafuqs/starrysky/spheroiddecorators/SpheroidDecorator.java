@@ -22,7 +22,7 @@ public abstract class SpheroidDecorator {
     public abstract void decorateSpheroid(WorldView worldView, Chunk chunk, Spheroid spheroid, ArrayList<BlockPos> blockPos, ChunkRandom random);
 
     protected ArrayList<BlockPos> getDecorationBlockPosInChunk(Chunk chunk, ArrayList<BlockPos> decorationBlocks) {
-        ArrayList<BlockPos> decorationBlockPosInChunk = new ArrayList();
+        ArrayList<BlockPos> decorationBlockPosInChunk = new ArrayList<>();
         for(BlockPos currentDecorationPos : decorationBlocks) {
             if(isBlockPosInChunk(chunk, currentDecorationPos)) {
                 decorationBlockPosInChunk.add(currentDecorationPos);

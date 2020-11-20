@@ -26,7 +26,7 @@ public class SystemGenerator {
 
     // spawning probabilities
     // normal hashmaps are not stable
-    private HashMap<Point, List<Spheroid>> cache = new HashMap<>();
+    private final HashMap<Point, List<Spheroid>> cache = new HashMap<>();
 
     /**
      *

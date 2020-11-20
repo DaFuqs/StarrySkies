@@ -99,7 +99,6 @@ public class LiquidSpheroid extends Spheroid {
         this.setChunkFinished(chunk.getPos());
     }
 
-    // TODO: FIX
     protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z) {
         if(d == (this.radius - this.shellRadius)) {
             int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));

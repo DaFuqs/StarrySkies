@@ -5,8 +5,6 @@ public class SpheroidDecorators {
     public static SpheroidDecorator CACTUS = new CactusDecorator();
     public static SpheroidDecorator SEA_GREENS = new SeaGreensDecorator();
     public static SpheroidDecorator COCOA = new CocoaDecorator();
-
-    // TODO
     public static SpheroidDecorator BAMBOO = new BambooDecorator();
     public static SpheroidDecorator SUGAR_CANE_POND = new SugarCanePondDecorator();
     public static SpheroidDecorator SWEET_BERRIES = new SweetBerryDecorator();

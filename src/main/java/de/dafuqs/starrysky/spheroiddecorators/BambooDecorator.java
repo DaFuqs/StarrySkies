@@ -27,8 +27,6 @@ public class BambooDecorator extends SpheroidDecorator {
 
         for(BlockPos bp : blockPos) {
             int r = random.nextInt(BAMBOO_CHANCE);
-            //Feature<ProbabilityConfig> bambooFeature = Feature.BAMBOO;
-            //bambooFeature.generate((StructureWorldAccess) chunk, StarrySkyChunkGenerator.STARRY_SKY_CHUNK_GENERATOR, random, bp, new ProbabilityConfig(BAMBOO_CHANCE));
 
             if(r == 0) {
                 if(bambooBlock.canPlaceAt(bambooBlockState, worldView, bp.up())) {

@@ -3,12 +3,8 @@ package de.dafuqs.starrysky.generation.layer;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.generation.StarrySkyBiomeProvider;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
 import net.minecraft.world.biome.layer.type.InitLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import net.minecraft.world.gen.ChunkRandom;
-
-import java.util.stream.IntStream;
 
 
 public enum StarrySkyBiomeLayer implements InitLayer {
@@ -24,5 +20,5 @@ public enum StarrySkyBiomeLayer implements InitLayer {
         return StarrySkyBiomeProvider.layersBiomeRegistry.getRawId(StarrySkyBiomeProvider.layersBiomeRegistry.get(STARRY_SKY_BIOME));
     }
 
-    public static void setSeed(long seed) { }
+    // public static void setSeed(long seed) { }
 }

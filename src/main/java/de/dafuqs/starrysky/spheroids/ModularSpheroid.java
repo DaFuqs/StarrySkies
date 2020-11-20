@@ -12,9 +12,9 @@ import net.minecraft.world.gen.ChunkRandom;
 
 public class ModularSpheroid extends Spheroid {
 
-    private BlockState mainBlock;
-    private BlockState topBlock;
-    private BlockState bottomBlock;
+    private final BlockState mainBlock;
+    private final BlockState topBlock;
+    private final BlockState bottomBlock;
 
     public ModularSpheroid(ModularSpheroidType modularSpheroidType, ChunkRandom random) {
         super(modularSpheroidType, random);
