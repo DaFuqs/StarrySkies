@@ -42,11 +42,11 @@ public class MushroomSpheroid extends ShellSpheroid {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     double d = Support.distance(x, y, z, x2, y2, z2);
                     long rounded = Math.round(d);
-                    if (rounded < (this.radius - this.shellRadius)) {
+                    if (rounded <= (this.radius - this.shellRadius)) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false);
-                    } else if (d < this.radius -1.2) {
+                    } else if (d <= this.radius - 1.25) {
                         chunk.setBlockState(currBlockPos, placementBlockstateInner, false);
-                    } else if (rounded < this.radius) {
+                    } else if (rounded <= this.radius) {
                         boolean up    = y2 - y > 0;
                         boolean down  = y2 - y < 0;
                         boolean north = z2 - z < 0;

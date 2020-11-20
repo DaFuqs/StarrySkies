@@ -11,9 +11,6 @@
     },
     "background": "starry_sky:textures/advancement_background.png"
   },
-  "rewards": {
-    "experience": 50
-  },
   "criteria": {
     "starry_sky_0": {
       "trigger": "minecraft:changed_dimension",

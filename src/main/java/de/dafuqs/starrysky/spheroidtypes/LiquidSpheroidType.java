@@ -10,10 +10,6 @@ import java.util.Random;
 
 public class LiquidSpheroidType extends SpheroidType {
 
-    public BlockState getLiquid() {
-        return liquid;
-    }
-
     private final BlockState liquid;
     private final LinkedHashMap<BlockState, Float> validShellBlocks;
 
@@ -52,6 +48,10 @@ public class LiquidSpheroidType extends SpheroidType {
 
     public BlockState getCoreBlock() {
         return coreBlock;
+    }
+
+    public final BlockState getLiquid() {
+        return liquid;
     }
 
     public LiquidSpheroidType setCoreBlock(BlockState coreBlock, int minCoreRadius, int maxCoreRadius) {

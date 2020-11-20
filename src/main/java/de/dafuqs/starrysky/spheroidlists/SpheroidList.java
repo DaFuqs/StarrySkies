@@ -3,6 +3,8 @@ package de.dafuqs.starrysky.spheroidlists;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CoralParentBlock;
+import net.minecraft.block.SeaPickleBlock;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -34,7 +36,7 @@ public abstract class SpheroidList {
     }};
 
     public static final LinkedHashMap<BlockState, Float> MAP_GLASS = new LinkedHashMap<BlockState, Float>() {{
-        put(Blocks.GLASS.getDefaultState(), 80F);
+        put(Blocks.GLASS.getDefaultState(), 100F);
         put(Blocks.BLACK_STAINED_GLASS.getDefaultState(), 1.0F);
         put(Blocks.BLUE_STAINED_GLASS.getDefaultState(), 1.0F);
         put(Blocks.BROWN_STAINED_GLASS.getDefaultState(), 1.0F);
@@ -128,6 +130,33 @@ public abstract class SpheroidList {
         add(Blocks.PURPLE_TERRACOTTA.getDefaultState());
         add(Blocks.MAGENTA_TERRACOTTA.getDefaultState());
         add(Blocks.PINK_TERRACOTTA.getDefaultState());
+    }};
+
+    public static final ArrayList<BlockState> LIST_FULL_CORAL_BLOCKS = new ArrayList<BlockState>() {{
+        add(Blocks.BRAIN_CORAL_BLOCK.getDefaultState());
+        add(Blocks.TUBE_CORAL_BLOCK.getDefaultState());
+        add(Blocks.BUBBLE_CORAL_BLOCK.getDefaultState());
+        add(Blocks.FIRE_CORAL_BLOCK.getDefaultState());
+        add(Blocks.HORN_CORAL_BLOCK.getDefaultState());
+    }};
+
+    public static final ArrayList<BlockState> LIST_WATERLOGGABLE_CORAL_BLOCKS = new ArrayList<BlockState>() {{
+        add(Blocks.BRAIN_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+        add(Blocks.TUBE_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+        add(Blocks.BUBBLE_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+        add(Blocks.FIRE_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+        add(Blocks.HORN_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+
+        add(Blocks.BRAIN_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+        add(Blocks.TUBE_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+        add(Blocks.BUBBLE_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+        add(Blocks.FIRE_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+        add(Blocks.HORN_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+
+        add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 1));
+        add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 2));
+        add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 3));
+        add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 4));
     }};
 
     /**

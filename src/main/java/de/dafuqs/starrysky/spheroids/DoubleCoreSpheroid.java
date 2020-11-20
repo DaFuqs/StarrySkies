@@ -55,12 +55,15 @@ public class DoubleCoreSpheroid extends Spheroid {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
-                    if (d < this.innerCoreRadius) {
+                    if (d <= this.innerCoreRadius) {
                         chunk.setBlockState(currBlockPos, this.innerCoreBlock, false);
-                    } else if (d < this.radius - this.shellRadius) {
+                    } else if (d <= this.radius - this.shellRadius) {
                         chunk.setBlockState(currBlockPos, this.outerCoreBlock, false);
-                    } else if (d < this.radius) {
+                    } else if (d <= this.radius) {
                         chunk.setBlockState(currBlockPos, this.shellBlock, false);
+                        if(isTopBlock(d, x2, y2, z2)) {
+                            this.decorationBlocks.add(currBlockPos);
+                        }
                     }
                 }
             }

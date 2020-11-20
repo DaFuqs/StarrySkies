@@ -63,13 +63,13 @@ public class SpheroidListLGBT extends SpheroidList {
 
     //SPHEROID TYPES
     //BASIC
-    public static final StripesSpheroidType PRIDE_GAY = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_GAY, 5, 20);
-    public static final StripesSpheroidType PRIDE_BI = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_BI, 5, 20);
-    public static final StripesSpheroidType PRIDE_PAN = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_PAN, 5, 20);
-    public static final StripesSpheroidType PRIDE_ASEXUAL = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_ASEXUAL, 5, 20);
-    public static final StripesSpheroidType PRIDE_GENDERQUEER = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_GENDERQUEER, 5, 20);
-    public static final StripesSpheroidType PRIDE_TRANSGENDER = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_TRANSGENDER, 5, 20);
-    public static final StripesSpheroidType PRIDE_NONBINARY = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_NONBINARY, 5, 20);
+    public static final StripesSpheroidType PRIDE_GAY = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_GAY, 6, 12);
+    public static final StripesSpheroidType PRIDE_BI = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_BI, 5, 12);
+    public static final StripesSpheroidType PRIDE_PAN = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_PAN, 5, 12);
+    public static final StripesSpheroidType PRIDE_ASEXUAL = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_ASEXUAL, 5, 12);
+    public static final StripesSpheroidType PRIDE_GENDERQUEER = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_GENDERQUEER, 5, 12);
+    public static final StripesSpheroidType PRIDE_TRANSGENDER = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_TRANSGENDER, 5, 12);
+    public static final StripesSpheroidType PRIDE_NONBINARY = new StripesSpheroidType(SpheroidAdvancementIdentifier.grass, LIST_NONBINARY, 5, 12);
 
     public static boolean shouldGenerate() {
         return StarrySkyCommon.STARRY_SKY_CONFIG.generatePrideSpheroids;
@@ -79,13 +79,13 @@ public class SpheroidListLGBT extends SpheroidList {
         LinkedHashMap<SpheroidType, Float> spheroidTypes = new LinkedHashMap<>();
 
         //BASIC
-        spheroidTypes.put(PRIDE_GAY, 0.1F);
-        spheroidTypes.put(PRIDE_BI, 0.1F);
-        spheroidTypes.put(PRIDE_PAN, 0.1F);
-        spheroidTypes.put(PRIDE_ASEXUAL, 0.1F);
-        spheroidTypes.put(PRIDE_GENDERQUEER, 0.1F);
-        spheroidTypes.put(PRIDE_TRANSGENDER, 0.1F);
-        spheroidTypes.put(PRIDE_NONBINARY, 0.1F);
+        spheroidTypes.put(PRIDE_GAY, 0.03F);
+        spheroidTypes.put(PRIDE_BI, 0.03F);
+        spheroidTypes.put(PRIDE_PAN, 0.03F);
+        spheroidTypes.put(PRIDE_ASEXUAL, 0.03F);
+        spheroidTypes.put(PRIDE_GENDERQUEER, 0.03F);
+        spheroidTypes.put(PRIDE_TRANSGENDER, 0.03F);
+        spheroidTypes.put(PRIDE_NONBINARY, 0.03F);
 
         return spheroidTypes;
     }

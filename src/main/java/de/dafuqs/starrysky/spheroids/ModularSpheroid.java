@@ -39,14 +39,6 @@ public class ModularSpheroid extends Spheroid {
         return s;
     }
 
-    private boolean isTopBlock(double x, double y, double z) {
-        return Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y, z)) == this.radius && Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y+1, z)) > this.radius;
-    }
-
-    private boolean isBottomBlock(double x, double y, double z) {
-        return Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y, z)) >= this.radius && Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z)) > this.radius;
-    }
-
     public void generate(Chunk chunk) {
         int chunkX = chunk.getPos().x;
         int chunkZ = chunk.getPos().z;
@@ -66,21 +58,19 @@ public class ModularSpheroid extends Spheroid {
                     if (hasCenterChest && d == 0) {
                         placeCenterChestWithLootTable(chunk, currBlockPos);
                     } else if (d == this.radius) {
-                        if (isBottomBlock(x2, y2, z2))
+                        if (isBottomBlock(d, x2, y2, z2)) {
                             chunk.setBlockState(currBlockPos, this.bottomBlock, false);
-                        else if (isTopBlock(x2, y2, z2))
+                        } else if (isTopBlock(d, x2, y2, z2)) {
                             chunk.setBlockState(currBlockPos, this.topBlock, false);
-                        else
+                            this.decorationBlocks.add(currBlockPos);
+                        } else {
                             chunk.setBlockState(currBlockPos, this.mainBlock, false);
-                    } else if (d < this.radius) {
+                        }
+                    } else if (d <= this.radius) {
                         chunk.setBlockState(currBlockPos, this.mainBlock, false);
                     }
                 }
             }
-        }
-
-        if(((ModularSpheroidType) this.getSpheroidType()).hasCenterChest()) {
-
         }
 
         this.setChunkFinished(chunk.getPos());

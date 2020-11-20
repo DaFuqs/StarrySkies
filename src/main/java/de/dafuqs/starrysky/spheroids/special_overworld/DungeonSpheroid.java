@@ -61,9 +61,9 @@ public class DungeonSpheroid extends Spheroid {
                         if (chestBlockEntity instanceof ChestBlockEntity) {
                             ((ChestBlockEntity)chestBlockEntity).setLootTable(LootTables.SIMPLE_DUNGEON_CHEST, random.nextLong());
                         }
-                    } else if (d < (this.radius - this.shellRadius)) {
+                    } else if (d <= (this.radius - this.shellRadius)) {
                         chunk.setBlockState(currBlockPos, Blocks.CAVE_AIR.getDefaultState(), false);
-                    } else if (d < this.radius) {
+                    } else if (d <= this.radius) {
                         chunk.setBlockState(currBlockPos, this.shellBlock, false);
                     }
                 }

@@ -35,7 +35,7 @@ public class BeeHiveSpheroidType extends SpheroidType {
         add(Blocks.LILAC.getDefaultState());
         add(Blocks.ROSE_BUSH.getDefaultState());
         add(Blocks.PEONY.getDefaultState());
-        add(Blocks.TALL_GRASS.getDefaultState());
+        //add(Blocks.TALL_GRASS.getDefaultState()); // generates more often than enough on grass planet
         add(Blocks.LARGE_FERN.getDefaultState());
     }};
 

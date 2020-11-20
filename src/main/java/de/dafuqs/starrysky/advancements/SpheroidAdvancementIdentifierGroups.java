@@ -18,6 +18,7 @@ public class SpheroidAdvancementIdentifierGroups {
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.cave,         SpheroidAdvancementGroup.UNCOMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.clay,         SpheroidAdvancementGroup.UNCOMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.coal,         SpheroidAdvancementGroup.ORES);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.coral,         SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.coarse_dirt,  SpheroidAdvancementGroup.UNCOMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.cobblestone,  SpheroidAdvancementGroup.COMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.dark_oak_wood, SpheroidAdvancementGroup.WOOD);

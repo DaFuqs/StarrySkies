@@ -11,6 +11,7 @@ public enum SpheroidAdvancementIdentifier {
     brown_mushroom,
     clay,
     coal,
+    coral,
     coarse_dirt,
     cobblestone,
     dark_oak_wood,

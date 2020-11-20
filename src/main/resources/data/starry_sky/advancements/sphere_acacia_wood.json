@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancements.dafuqs.starry_sky.sphere_acacia_wood.description"
     },
-    "hidden": true
+    "hidden": false
   },
   "parent": "starry_sky:sphere_group_wood",
   "criteria": {

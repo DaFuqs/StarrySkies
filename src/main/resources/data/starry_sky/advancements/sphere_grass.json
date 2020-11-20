@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancements.dafuqs.starry_sky.sphere_grass.description"
     },
-    "hidden": true
+    "hidden": false
   },
   "parent": "starry_sky:sphere_group_common",
   "criteria": {

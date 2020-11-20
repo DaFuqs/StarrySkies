@@ -67,7 +67,7 @@ public class BeeHiveSpheroid extends Spheroid {
                         chunk.setBlockState(currBlockPos, Blocks.BEE_NEST.getDefaultState(), false);
                         this.queenBeehiveBlockEntity = new BeehiveBlockEntity();
                         chunk.setBlockEntity(currBlockPos, queenBeehiveBlockEntity);
-                    } else if (d < coreDistance) {
+                    } else if (d <= coreDistance) {
                         // core
                         int r = random.nextInt((int) Math.ceil(coreDistance / 3F)); // way more honey in the middle
                         if (coreDistance - r <= d) {
@@ -109,7 +109,7 @@ public class BeeHiveSpheroid extends Spheroid {
                         BeehiveBlockEntity outerBeehiveBlockEntity = new BeehiveBlockEntity();
                         chunk.setBlockEntity(currBlockPos, outerBeehiveBlockEntity);
                         this.outerBeehiveBlockEntities.add(outerBeehiveBlockEntity);
-                    } else if (d < shellDistance) {
+                    } else if (d <= shellDistance) {
                         // shell
                         if (random.nextInt(10) == 0) {
                             chunk.setBlockState(currBlockPos, Blocks.HONEY_BLOCK.getDefaultState(), false);

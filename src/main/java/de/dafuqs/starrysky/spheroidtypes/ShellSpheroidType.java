@@ -10,10 +10,10 @@ import java.util.LinkedHashMap;
 
 public class ShellSpheroidType extends SpheroidType {
 
-    private BlockState coreBlock;
-    private LinkedHashMap<BlockState, Float> validShellBlocks;
-    private int minShellRadius; //Minimum shell thickness, should be at least
-    private int maxShellRadius; //Maximum shell thickness
+    private final BlockState coreBlock;
+    private final LinkedHashMap<BlockState, Float> validShellBlocks;
+    private final int minShellRadius; //Minimum shell thickness, should be at least
+    private final int maxShellRadius; //Maximum shell thickness
 
     public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState coreBlock, BlockState shellBlock, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
         this(spheroidAdvancementIdentifier, coreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minSize, maxSize, minShellRadius, maxShellRadius);

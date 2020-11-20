@@ -45,16 +45,28 @@ public class ShellSpheroid extends Spheroid {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
-                    if (d < (this.radius - this.shellRadius)) {
+                    if (d <= (this.radius - this.shellRadius)) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false);
-                    } else if (d < this.radius) {
+                    } else if (d <= this.radius) {
                         chunk.setBlockState(currBlockPos, this.shellBlock, false);
+                        if(isTopBlock(d, x2, y2, z2)) {
+                            this.decorationBlocks.add(currBlockPos);
+                        }
                     }
                 }
             }
         }
 
         this.setChunkFinished(chunk.getPos());
+    }
+
+    protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z) {
+        if(d == (this.radius - this.shellRadius)) {
+            int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));
+            return distance1 > (this.radius - this.shellRadius);
+        } else {
+            return false;
+        }
     }
 
 }

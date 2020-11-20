@@ -3,16 +3,14 @@ package de.dafuqs.starrysky.generation;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.spheroids.*;
+import de.dafuqs.starrysky.spheroids.Spheroid;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.ItemTags;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.InvalidIdentifierException;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.ChunkRegion;
@@ -26,23 +24,26 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
-import org.apache.logging.log4j.Level;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 
 public class StarrySkyChunkGenerator extends ChunkGenerator {
 
+    public static StarrySkyChunkGenerator STARRY_SKY_CHUNK_GENERATOR;
 
     private final long seed;
     protected final ChunkGeneratorSettings settings;
     public static SystemGenerator systemGenerator;
 
-    // "config"
+    // from the config
     private final int FLOOR_HEIGHT;
-    private BlockState FLOOR_BLOCK_STATE;
-    private BlockState BOTTOM_BLOCK_STATE;
+    private final BlockState FLOOR_BLOCK_STATE;
+    private final BlockState BOTTOM_BLOCK_STATE;
 
     public static final Codec<StarrySkyChunkGenerator> CODEC = RecordCodecBuilder.create(
             (instance) -> instance.group(
@@ -65,6 +66,8 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight;
         this.FLOOR_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.floorBlock.toLowerCase())).getDefaultState();
         this.BOTTOM_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.bottomBlock.toLowerCase())).getDefaultState();
+
+        STARRY_SKY_CHUNK_GENERATOR = this;
     }
 
     @Override
@@ -75,7 +78,9 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     @Override
     @Environment(EnvType.CLIENT)
     public ChunkGenerator withSeed(long seed) {
-        return new StarrySkyChunkGenerator(this.biomeSource.withSeed(seed), seed, () -> this.settings);
+        StarrySkyChunkGenerator starrySkyChunkGenerator = new StarrySkyChunkGenerator(this.biomeSource.withSeed(seed), seed, () -> this.settings);
+        STARRY_SKY_CHUNK_GENERATOR = starrySkyChunkGenerator;
+        return starrySkyChunkGenerator;
     }
 
     @Override
@@ -116,7 +121,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     @Override
     public void populateNoise(WorldAccess world, StructureAccessor accessor, Chunk chunk) {
         // generate spheres
-        placeSpheroids(chunk);
+        placeSpheroids(world, chunk);
     }
 
     private BlockState getSeaBlock(int heightY) {
@@ -165,7 +170,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         return FLOOR_HEIGHT;
     }
 
-    public void placeSpheroids(Chunk chunk) {
+    public void placeSpheroids(WorldAccess world, Chunk chunk) {
         ChunkRandom chunkRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
         chunkRandom.setTerrainSeed(chunk.getPos().getRegionX(), chunk.getPos().getRegionZ());
 
@@ -174,8 +179,11 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         for(Spheroid spheroid : localSystem) {
             if (spheroid.shouldFinishChunk(chunk.getPos())) {
                 spheroid.generate(chunk);
+                spheroid.decorate(world, chunk);
             }
         }
     }
+
+
 
 }

@@ -3,19 +3,21 @@ package de.dafuqs.starrysky.spheroids;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroidtypes.CaveSpheroidType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
 public class CaveSpheroid extends ShellSpheroid {
 
-    private BlockState caveFloorBlock;
-    private BlockState topBlock;
-    private BlockState bottomBlock;
+    private final BlockState caveFloorBlock;
+    private final BlockState topBlock;
+    private final BlockState bottomBlock;
 
     public CaveSpheroid(CaveSpheroidType caveSpheroidType, ChunkRandom random) {
         super(caveSpheroidType, random);
 
+        this.coreBlock = Blocks.CAVE_AIR.getDefaultState();
         this.radius = caveSpheroidType.getRandomRadius(random);
         this.caveFloorBlock = caveSpheroidType.getCaveFloorBlock();
         this.shellRadius = caveSpheroidType.getRandomShellRadius(random);
@@ -39,18 +41,20 @@ public class CaveSpheroid extends ShellSpheroid {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
                     if (d == this.radius) {
-                        if (isBottomBlock(x2, y2, z2))
+                        if (isBottomBlock(d, x2, y2, z2)) {
                             chunk.setBlockState(currBlockPos, this.bottomBlock, false);
-                        else if (isTopBlock(x2, y2, z2))
+                        } else if (isTopBlock(d, x2, y2, z2)) {
                             chunk.setBlockState(currBlockPos, this.topBlock, false);
-                        else
-                            chunk.setBlockState(currBlockPos, this.shellBlock, false);
-                    } else if (d < this.radius) {
-                        if(isCaveFloorBlock(x2, y2, z2, y)) {
-                            chunk.setBlockState(currBlockPos, caveFloorBlock, false);
                         } else {
-                            chunk.setBlockState(currBlockPos, this.coreBlock, false); // always CAVE_AIR
+                            chunk.setBlockState(currBlockPos, this.shellBlock, false);
                         }
+                    } else if(isAboveCaveFloorBlock(d, x2, y2, z2)) {
+                        chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock, false);
+                        this.decorationBlocks.add(currBlockPos.down());
+                    } else if(d <= this.radius - this.shellRadius) {
+                        chunk.setBlockState(currBlockPos, this.coreBlock, false); // always CAVE_AIR
+                    } else if (d < this.radius) {
+                        chunk.setBlockState(currBlockPos, this.shellBlock, false);
                     }
                 }
             }
@@ -58,25 +62,6 @@ public class CaveSpheroid extends ShellSpheroid {
 
         this.setChunkFinished(chunk.getPos());
     }
-
-    private boolean isCaveFloorBlock(double x, double y, double z, double y2) {
-        int distance  = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y, z));
-        int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));
-        return distance == (this.radius -this.shellRadius +1) && distance1 > (this.radius -this.shellRadius +1);
-    }
-
-    private boolean isTopBlock(double x, double y, double z) {
-        int distance  = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y, z));
-        int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y+1, z));
-        return distance == this.radius && distance1 > this.radius;
-    }
-
-    private boolean isBottomBlock(double x, double y, double z) {
-        int distance  = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y, z));
-        int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));
-        return distance >= this.radius && distance1 > this.radius;
-    }
-
 
     @Override
     public String getDescription() {

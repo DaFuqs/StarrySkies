@@ -7,7 +7,7 @@ import java.util.List;
 
 public class RainbowSpheroidType extends SpheroidType {
 
-    private List<BlockState> rainbowBlocks;
+    private final List<BlockState> rainbowBlocks;
 
     public RainbowSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, List<BlockState> rainbowBlocks, int minSize, int maxSize) {
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
