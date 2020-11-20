@@ -20,5 +20,5 @@ public enum StarrySkyBiomeLayer implements InitLayer {
         return StarrySkyBiomeProvider.layersBiomeRegistry.getRawId(StarrySkyBiomeProvider.layersBiomeRegistry.get(STARRY_SKY_BIOME));
     }
 
-    // public static void setSeed(long seed) { }
+    public static void setSeed(long seed) { }
 }

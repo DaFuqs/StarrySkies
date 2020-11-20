@@ -17,7 +17,7 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
 
     private static final Block SUGAR_CANE_BLOCK = Blocks.SUGAR_CANE;
     private static final BlockState SUGAR_CANE_BLOCKSTATE = Blocks.SUGAR_CANE.getDefaultState();
-    private static final int WATER_POND_TRIES  = 5;
+    private static final int WATER_POND_TRIES  = 3;
     private static final int SUGAR_CANE_CHANCE = 2;
 
     @Override
@@ -51,18 +51,20 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
                     direction = Direction.Type.HORIZONTAL.iterator();
                     while(direction.hasNext()) {
                         if (random.nextInt(SUGAR_CANE_CHANCE) == 0) {
-                            int sugarCaneHeight = random.nextInt(3);
-                            for(int i = 0; i <= sugarCaneHeight; i++) {
-                                BlockPos sugarCaneBlockPos = randomBlockPos.up().offset(direction.next()).up(i);
-                                if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCKSTATE, worldView, sugarCaneBlockPos)) {
-                                    chunk.setBlockState(sugarCaneBlockPos, SUGAR_CANE_BLOCKSTATE, false);
+                            BlockPos sugarCaneBlockPos = randomBlockPos.up().offset(direction.next());
+                            if(isBlockPosInChunk(chunk, sugarCaneBlockPos)) {
+                                int sugarCaneHeight = random.nextInt(3);
+                                for (int i = 0; i <= sugarCaneHeight; i++) {
+                                    if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCKSTATE, worldView, sugarCaneBlockPos.up(i))) {
+                                        chunk.setBlockState(sugarCaneBlockPos.up(i), SUGAR_CANE_BLOCKSTATE, false);
+                                    }
                                 }
                             }
                         }
                     }
                 }
                 currentTries++;
-            } while (!canGenerate && currentTries < WATER_POND_TRIES);
+            } while (currentTries < WATER_POND_TRIES);
         }
     }
 }

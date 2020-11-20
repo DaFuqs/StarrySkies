@@ -17,7 +17,7 @@ public class SpheroidListVanilla extends SpheroidList {
 
     //SPHEROID TYPES
     //BASIC
-    public static final ModularSpheroidType GRASS = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, Blocks.DIRT.getDefaultState(), 5, 20).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState()).addDecorator(SpheroidDecorators.SUGAR_CANE_POND, 0.5F);
+    public static final ModularSpheroidType GRASS = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, Blocks.DIRT.getDefaultState(), 5, 20).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState()).addDecorator(SpheroidDecorators.SUGAR_CANE_POND, 0.2F);
     public static final ModularSpheroidType MYCELIUM = new ModularSpheroidType(SpheroidAdvancementIdentifier.mycelium, Blocks.DIRT.getDefaultState(), 5, 8).setTopBlockState(Blocks.MYCELIUM.getDefaultState());
     public static final ModularSpheroidType PODZOL = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.podzol, Blocks.DIRT.getDefaultState(), 5, 12).setTopBlockState(Blocks.PODZOL.getDefaultState()).addDecorator(SpheroidDecorators.BAMBOO, 0.5F);
     public static final ModularSpheroidType STONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.stone, Blocks.STONE.getDefaultState(), 5, 18);
