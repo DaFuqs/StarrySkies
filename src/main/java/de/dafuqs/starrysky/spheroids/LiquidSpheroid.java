@@ -1,12 +1,15 @@
 package de.dafuqs.starrysky.spheroids;
 
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroidtypes.LiquidSpheroidType;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
+
+import java.util.ArrayList;
 
 public class LiquidSpheroid extends Spheroid {
 
@@ -20,27 +23,29 @@ public class LiquidSpheroid extends Spheroid {
     private int coreRadius;
 
 
-    public LiquidSpheroid(LiquidSpheroidType liquidSpheroidType, ChunkRandom random) {
-        super(liquidSpheroidType, random);
-        this.radius = liquidSpheroidType.getRandomRadius(random);
-        this.liquid = liquidSpheroidType.getLiquid();
-        this.shellBlock = liquidSpheroidType.getRandomShellBlock(random);
-        this.shellRadius = liquidSpheroidType.getRandomShellRadius(random);
-        this.fillPercent = liquidSpheroidType.getRandomFillPercent(random);
-        this.holeInBottom = liquidSpheroidType.getRandomHoleInBottom(random);
-        this.coreBlock = liquidSpheroidType.getCoreBlock();
+    public LiquidSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState liquid, BlockState shellBlock,
+                          int shellRadius, int fillPercent, boolean holeInBottom, BlockState coreBlock, int coreRadius) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+        this.liquid = liquid;
+        this.shellBlock = shellBlock;
+        this.shellRadius = shellRadius;
+        this.fillPercent = fillPercent;
+        this.holeInBottom = holeInBottom;
+        this.coreBlock = coreBlock;
+
         if(this.coreBlock != null) {
-            this.coreRadius = liquidSpheroidType.getRandomCoreRadius(random);
+            this.coreRadius = coreRadius;
         } else {
             this.coreRadius = 0;
         }
+
         if(this.coreRadius >= this.radius - this.shellRadius - 1) {
             this.coreRadius = this.radius - this.shellRadius - 2;
         }
     }
 
     public String getDescription() {
-        String s = this.spheroidType.getDescription() +
+        String s = "+++ LiquidSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nShell: " + this.shellBlock.toString() + "(Radius: " + this.shellRadius  + ")" +
@@ -82,8 +87,8 @@ public class LiquidSpheroid extends Spheroid {
                     } else if (d <= liquidRadius) {
                         if(y2 <= maxLiquidY) {
                             chunk.setBlockState(currBlockPos, this.liquid, false);
-                            if(isAboveCaveFloorBlock(d, x2, y2, z2)) {
-                                addDecorationBlock(currBlockPos.down());
+                            if(isAboveCaveFloorBlock(d, x2, y2, z2, shellRadius)) {
+                                addDecorationBlockPosition(currBlockPos.down());
                             }
                         } else {
                             //air
@@ -97,15 +102,6 @@ public class LiquidSpheroid extends Spheroid {
         }
 
         this.setChunkFinished(chunk.getPos());
-    }
-
-    protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z) {
-        if(d == (this.radius - this.shellRadius)) {
-            int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));
-            return distance1 > (this.radius - this.shellRadius);
-        } else {
-            return false;
-        }
     }
 
 }

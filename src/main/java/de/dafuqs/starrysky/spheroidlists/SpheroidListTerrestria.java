@@ -64,23 +64,23 @@ public class SpheroidListTerrestria extends SpheroidList {
         BlockState terrestria_aloe_vera = Registry.BLOCK.get(new Identifier(MOD_ID,"aloe_vera")).getDefaultState();
 
         // WOOD
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_redwood_log, terrestria_redwood_leaves,7, 16, 2, 3));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_hemlock_log, terrestria_hemlock_leaves,10, 17, 2, 4));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_rubber_log, terrestria_rubber_leaves,6, 10, 1, 2));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_cypress_log, terrestria_cypress_leaves,5, 9, 1, 2));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_willow_log, terrestria_willow_leaves,7, 11, 2, 3));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_japanese_maple_log, terrestria_dark_japanese_maple_leaves,6, 10, 3, 4));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_japanese_maple_log, terrestria_japanese_maple_leaves,6, 10, 3, 4));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_japanese_maple_log, terrestria_japanese_maple_shrub_leaves,4, 6, 1, 2));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_rainbow_eucalyptus_log, terrestria_rainbow_eucalyptus_leaves,7, 14, 2, 3));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.JUNGLE_WOOD.getDefaultState(), terrestria_jungle_palm_leaves,6, 10, 2, 2));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_sakura_log, terrestria_sakura_leaves,7, 12, 2, 3));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, terrestria_yucca_palm_log, terrestria_yucca_palm_leaves,5, 8, 1, 2));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 7, 16, terrestria_redwood_log, terrestria_redwood_leaves, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 10, 17, terrestria_hemlock_log, terrestria_hemlock_leaves, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 6, 10, terrestria_rubber_log, terrestria_rubber_leaves, 1, 2));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 5, 9, terrestria_cypress_log, terrestria_cypress_leaves, 1, 2));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 7, 11, terrestria_willow_log, terrestria_willow_leaves, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 6, 10, terrestria_japanese_maple_log, terrestria_dark_japanese_maple_leaves, 3, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 6, 10, terrestria_japanese_maple_log, terrestria_japanese_maple_leaves, 3, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 4, 6, terrestria_japanese_maple_log, terrestria_japanese_maple_shrub_leaves, 1, 2));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 7, 14, terrestria_rainbow_eucalyptus_log, terrestria_rainbow_eucalyptus_leaves, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 6, 10, Blocks.JUNGLE_WOOD.getDefaultState(), terrestria_jungle_palm_leaves, 2, 2));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 7, 12, terrestria_sakura_log, terrestria_sakura_leaves, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 5, 8, terrestria_yucca_palm_log, terrestria_yucca_palm_leaves, 1, 2));
 
         // VOLCANIC
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new ModularSpheroidType(null, terrestria_basalt_sand, 5, 15).setBottomBlockState(terrestria_basalt_cobblestone));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new ModularSpheroidType(null, terrestria_basalt_dirt, 5, 20).setTopBlockState(terrestria_basalt_grass_block));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, terrestria_basalt_dirt, 5, 12).setTopBlockState(terrestria_basalt_podzol));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new ModularSpheroidType(null, 5, 15, terrestria_basalt_sand).setBottomBlockState(terrestria_basalt_cobblestone));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new ModularSpheroidType(null, 5, 20, terrestria_basalt_dirt).setTopBlockState(terrestria_basalt_grass_block));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 5, 12, terrestria_basalt_dirt).setTopBlockState(terrestria_basalt_podzol));
 
         // Add common blocks to maps
         SpheroidList.MAP_STONES.put(terrestria_basalt, 0.4F);

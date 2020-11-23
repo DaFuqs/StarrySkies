@@ -1,11 +1,14 @@
 package de.dafuqs.starrysky.spheroids;
 
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroidtypes.CoreSpheroidType;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
+
+import java.util.ArrayList;
 
 public class CoreSpheroid extends Spheroid {
 
@@ -14,12 +17,11 @@ public class CoreSpheroid extends Spheroid {
     private final BlockState shellBlock;
     private int coreRadius;
 
-    public CoreSpheroid(CoreSpheroidType coreSpheroidType, ChunkRandom random) {
-        super(coreSpheroidType, random);
-        this.radius = coreSpheroidType.getRandomRadius(random);
-        this.coreBlock = coreSpheroidType.getCoreBlock();
-        this.shellBlock = coreSpheroidType.getRandomShellBlock(random);
-        this.coreRadius = coreSpheroidType.getRandomCoreRadius(random);
+    public CoreSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState coreBlock, BlockState shellBlock, int coreRadius) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+        this.coreBlock = coreBlock;
+        this.shellBlock = shellBlock;
+        this.coreRadius = coreRadius;
 
         if(this.coreRadius >= this.radius) {
             this.coreRadius = this.radius - 1;
@@ -27,7 +29,7 @@ public class CoreSpheroid extends Spheroid {
     }
 
     public String getDescription() {
-        return this.spheroidType.getDescription() +
+        return "+++ CoreSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nShell: " + this.shellBlock.toString() +
@@ -54,7 +56,7 @@ public class CoreSpheroid extends Spheroid {
                     } else if (d <= this.radius) {
                         chunk.setBlockState(currBlockPos, this.shellBlock, false);
                         if(isTopBlock(d, x2, y2, z2)) {
-                            addDecorationBlock(currBlockPos);
+                            addDecorationBlockPosition(currBlockPos);
                         }
                     }
                 }

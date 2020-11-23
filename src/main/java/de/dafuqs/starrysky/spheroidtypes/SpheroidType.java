@@ -16,6 +16,12 @@ public abstract class SpheroidType {
     protected int maxRadius;
     protected LinkedHashMap<SpheroidDecorator, Float> spheroidDecorators = new LinkedHashMap<>();
 
+    protected SpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius) {
+        this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
+        this.minRadius = minRadius;
+        this.maxRadius = maxRadius;
+    }
+
     public int getRandomRadius(ChunkRandom random) {
         int randomInt = random.nextInt(this.maxRadius - this.minRadius + 1);
         return randomInt + this.minRadius;

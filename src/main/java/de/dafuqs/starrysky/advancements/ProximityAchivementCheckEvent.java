@@ -35,7 +35,7 @@ public class ProximityAchivementCheckEvent implements ServerTickEvents.EndTick {
                     StarrySkyCommon.LOGGER.debug( "In starry world");
                     Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroidToPlayer(serverPlayerEntity);
                     if(spheroidDistance.spheroid != null && (Math.sqrt(spheroidDistance.distance)) < spheroidDistance.spheroid.getRadius() + 2) {
-                        SpheroidAdvancementIdentifier spheroidAdvancementIdentifier = spheroidDistance.spheroid.getSpheroidType().getSpheroidTypeIdentifier();
+                        SpheroidAdvancementIdentifier spheroidAdvancementIdentifier = spheroidDistance.spheroid.getSpheroidAdvancementIdentifier();
 
                         if(spheroidAdvancementIdentifier != null) {
                             StarrySkyCommon.LOGGER.debug("AdvancementIdentifier: " + spheroidAdvancementIdentifier.name());

@@ -27,9 +27,9 @@ public class SpheroidListAstromine extends SpheroidList {
         BlockState astromine_meteor_metite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"meteor_metite_ore")).getDefaultState();
         BlockState astromine_meteor_stone      = Registry.BLOCK.get(new Identifier(MOD_ID,"meteor_stone")).getDefaultState();
 
-        CoreSpheroidType ASTROMINE_METEORITE         = new CoreSpheroidType(null, astromine_meteor_metite_ore, astromine_meteor_stone, 8, 13, 5, 8);
-        LiquidSpheroidType ASTROMINE_CRUDE_OIL_STONE = new LiquidSpheroidType(null, astromine_crude_oil, MAP_STONES, 8, 15, 5, 8, 50, 100, 30);
-        LiquidSpheroidType ASTROMINE_CRUDE_OIL_GLASS = new LiquidSpheroidType(null, astromine_crude_oil, MAP_GLASS, 7, 12, 2, 3, 50, 80, 50);
+        CoreSpheroidType ASTROMINE_METEORITE         = new CoreSpheroidType(null, 8, 13, astromine_meteor_metite_ore, astromine_meteor_stone, 5, 8);
+        LiquidSpheroidType ASTROMINE_CRUDE_OIL_STONE = new LiquidSpheroidType(null, 8, 15, astromine_crude_oil, MAP_STONES, 5, 8, 50, 100, 30);
+        LiquidSpheroidType ASTROMINE_CRUDE_OIL_GLASS = new LiquidSpheroidType(null, 7, 12, astromine_crude_oil, MAP_GLASS, 2, 3, 50, 80, 50);
 
         spheroidLoader.registerDynamicOre("lead", astromine_lead_ore);
         spheroidLoader.registerDynamicOre("silver", astromine_silver_ore);

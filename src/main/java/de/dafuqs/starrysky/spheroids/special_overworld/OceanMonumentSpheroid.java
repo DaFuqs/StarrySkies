@@ -1,8 +1,9 @@
 package de.dafuqs.starrysky.spheroids.special_overworld;
 
 import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.Spheroid;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.OceanMonumentSpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -27,16 +28,15 @@ public class OceanMonumentSpheroid extends Spheroid {
 
     private final ArrayList<BlockPos> guardianPos = new ArrayList<>();
 
-    public OceanMonumentSpheroid(OceanMonumentSpheroidType doubleCoreSpheroidType, ChunkRandom random) {
-        super(doubleCoreSpheroidType, random);
-        this.radius = doubleCoreSpheroidType.getRandomRadius(random);
-        this.treasureRadius = doubleCoreSpheroidType.getRandomTreasureRadius(random);
-        this.shellRadius = doubleCoreSpheroidType.getRandomShellRadius(random);
+    public OceanMonumentSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, int treasureRadius, int shellRadius) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+        this.treasureRadius = treasureRadius;
+        this.shellRadius = shellRadius;
     }
 
     @Override
     public String getDescription() {
-        return this.spheroidType.getDescription() +
+        return "+++ OceanMonumentSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nTreasure: " + this.treasure.toString() + " (Radius: " + this.treasureRadius + ")";

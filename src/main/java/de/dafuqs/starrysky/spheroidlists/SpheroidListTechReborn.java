@@ -45,7 +45,7 @@ public class SpheroidListTechReborn extends SpheroidList {
         //BlockState techreborn_sodalite_ore = Registry.BLOCK.get(new Identifier("techreborn","sodalite_ore")).getDefaultState();
         //BlockState techreborn_tungsten_ore = Registry.BLOCK.get(new Identifier("techreborn","tungsten_ore")).getDefaultState();
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, new ShellSpheroidType(null, techreborn_rubber_log, techreborn_rubber_leaves.with(Properties.DISTANCE_1_7, 1),8, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, new ShellSpheroidType(null, 8, 14, techreborn_rubber_log, techreborn_rubber_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
 
         spheroidLoader.registerDynamicOre("bauxite", techreborn_bauxite_ore);
         spheroidLoader.registerDynamicOre("copper", techreborn_copper_ore);

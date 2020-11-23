@@ -27,9 +27,9 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
 
         Identifier  appliedenergistics_sky_stone_chest_loot_table = new Identifier(StarrySkyCommon.MOD_ID, "appliedenergistics2_meteor_chest");
 
-        CoreSpheroidType       APPLIEDENERGISTRICS_QUARTZ         = new CoreSpheroidType(null, appliedenergistics_quartz, MAP_STONES, 5, 7, 5, 8);
-        DoubleCoreSpheroidType APPLIEDENERGISTRICS_CHARGED_QUARTZ = new DoubleCoreSpheroidType(null, appliedenergistics_quartz, appliedenergistics_charged_quartz, MAP_STONES, 5, 8, 1, 2, 3, 5);
-        ModularSpheroidType    APPLIEDENERGISTRICS_ASTEROID       = new ModularSpheroidType(null, appliedenergistics_sky_stone, 8, 14).addCenterChestWithLoot(appliedenergistics_sky_stone_chest_loot_table);
+        CoreSpheroidType       APPLIEDENERGISTRICS_QUARTZ         = new CoreSpheroidType(null, 5, 7, appliedenergistics_quartz, MAP_STONES, 5, 8);
+        DoubleCoreSpheroidType APPLIEDENERGISTRICS_CHARGED_QUARTZ = new DoubleCoreSpheroidType(null, 5, 8, appliedenergistics_quartz, appliedenergistics_charged_quartz, MAP_STONES, 1, 2, 3, 5);
+        ModularSpheroidType    APPLIEDENERGISTRICS_ASTEROID       = new ModularSpheroidType(null, 8, 14, appliedenergistics_sky_stone).addCenterChestWithLoot(appliedenergistics_sky_stone_chest_loot_table);
 
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.8F, APPLIEDENERGISTRICS_QUARTZ);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.3F, APPLIEDENERGISTRICS_CHARGED_QUARTZ);

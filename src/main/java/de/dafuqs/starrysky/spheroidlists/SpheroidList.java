@@ -8,7 +8,6 @@ import net.minecraft.block.SeaPickleBlock;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 public abstract class SpheroidList {
 
@@ -56,7 +55,7 @@ public abstract class SpheroidList {
     }};
 
     // RAINBOW STUFF
-    public static final List<BlockState> LIST_WOOL = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_WOOL = new ArrayList<BlockState>() {{
         add(Blocks.WHITE_WOOL.getDefaultState());
         add(Blocks.LIGHT_GRAY_WOOL.getDefaultState());
         add(Blocks.GRAY_WOOL.getDefaultState());
@@ -75,7 +74,7 @@ public abstract class SpheroidList {
         add(Blocks.PINK_WOOL.getDefaultState());
     }};
 
-    public static final List<BlockState> LIST_STAINED_GLASS = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_STAINED_GLASS = new ArrayList<BlockState>() {{
         add(Blocks.WHITE_STAINED_GLASS.getDefaultState());
         add(Blocks.LIGHT_GRAY_STAINED_GLASS.getDefaultState());
         add(Blocks.GRAY_STAINED_GLASS.getDefaultState());
@@ -94,7 +93,7 @@ public abstract class SpheroidList {
         add(Blocks.PINK_STAINED_GLASS.getDefaultState());
     }};
 
-    public static final List<BlockState> LIST_CONCRETE = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_CONCRETE = new ArrayList<BlockState>() {{
         add(Blocks.WHITE_CONCRETE.getDefaultState());
         add(Blocks.LIGHT_GRAY_CONCRETE.getDefaultState());
         add(Blocks.GRAY_CONCRETE.getDefaultState());
@@ -113,7 +112,7 @@ public abstract class SpheroidList {
         add(Blocks.PINK_CONCRETE.getDefaultState());
     }};
 
-    public static final List<BlockState> LIST_TERRACOTTA = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_TERRACOTTA = new ArrayList<BlockState>() {{
         add(Blocks.WHITE_TERRACOTTA.getDefaultState());
         add(Blocks.LIGHT_GRAY_TERRACOTTA.getDefaultState());
         add(Blocks.GRAY_TERRACOTTA.getDefaultState());
@@ -159,7 +158,7 @@ public abstract class SpheroidList {
         add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 4));
     }};
 
-    public static List<BlockState> LIST_FLOWERS = new ArrayList<BlockState>() {{
+    public static ArrayList<BlockState> LIST_FLOWERS = new ArrayList<BlockState>() {{
         add(Blocks.DANDELION.getDefaultState());
         add(Blocks.POPPY.getDefaultState());
         add(Blocks.BLUE_ORCHID.getDefaultState());
@@ -178,7 +177,7 @@ public abstract class SpheroidList {
         add(Blocks.PEONY.getDefaultState());
     }};
 
-    public static List<BlockState> LIST_TALL_FLOWERS = new ArrayList<BlockState>() {{
+    public static ArrayList<BlockState> LIST_TALL_FLOWERS = new ArrayList<BlockState>() {{
         add(Blocks.SUNFLOWER.getDefaultState());
         add(Blocks.LILAC.getDefaultState());
         add(Blocks.ROSE_BUSH.getDefaultState());

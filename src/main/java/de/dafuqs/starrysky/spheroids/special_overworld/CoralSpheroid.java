@@ -1,13 +1,17 @@
 package de.dafuqs.starrysky.spheroids.special_overworld;
 
 import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroidlists.SpheroidList;
 import de.dafuqs.starrysky.spheroids.Spheroid;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.CoralSpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
+
+import java.util.ArrayList;
 
 public class CoralSpheroid extends Spheroid {
 
@@ -16,11 +20,10 @@ public class CoralSpheroid extends Spheroid {
     protected int shellRadius;
     protected BlockState WATER = Blocks.WATER.getDefaultState();
 
-    public CoralSpheroid(CoralSpheroidType coralSpheroidType, ChunkRandom random) {
-        super(coralSpheroidType, random);
-        this.radius = coralSpheroidType.getRandomRadius(random);
-        this.shellBlock = coralSpheroidType.getRandomShellBlock(random);
-        this.shellRadius = coralSpheroidType.getRandomShellRadius(random);
+    public CoralSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState shellBlock, int shellRadius) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+        this.shellBlock = shellBlock;
+        this.shellRadius = shellRadius;
     }
 
     @Override
@@ -32,8 +35,6 @@ public class CoralSpheroid extends Spheroid {
         int y = this.getPosition().getY();
         int z = this.getPosition().getZ();
 
-        CoralSpheroidType coralSpheroidType = (CoralSpheroidType) getSpheroidType();
-
         random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
         for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
@@ -43,10 +44,10 @@ public class CoralSpheroid extends Spheroid {
                     if (d <= (this.radius - this.shellRadius - 1)) {
                         int rand = random.nextInt(7);
                         if (rand < 2) {
-                            BlockState coral = coralSpheroidType.getRandomCoralBlock(random);
+                            BlockState coral = getRandomCoralBlock(random);
                             if (rand == 0 && chunk.getBlockState(currBlockPos.down()).getBlock() == Blocks.WATER) {
                                 chunk.setBlockState(currBlockPos.down(), coral, false);
-                                chunk.setBlockState(currBlockPos, coralSpheroidType.getRandomWaterLoggableBlock(random), false);
+                                chunk.setBlockState(currBlockPos, getRandomWaterLoggableBlock(random), false);
                             } else {
                                 chunk.setBlockState(currBlockPos, coral, false);
                             }
@@ -66,10 +67,18 @@ public class CoralSpheroid extends Spheroid {
     }
 
     public String getDescription() {
-        return this.getSpheroidType().getDescription() +
+        return "+++ CoralSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nShell: " + this.shellBlock.toString() + " (Radius: " + this.shellRadius + ")";
+    }
+
+    public BlockState getRandomCoralBlock(ChunkRandom random) {
+        return SpheroidList.LIST_FULL_CORAL_BLOCKS.get(random.nextInt(SpheroidList.LIST_FULL_CORAL_BLOCKS.size()));
+    }
+
+    public BlockState getRandomWaterLoggableBlock(ChunkRandom random) {
+        return SpheroidList.LIST_WATERLOGGABLE_CORAL_BLOCKS.get(random.nextInt(SpheroidList.LIST_WATERLOGGABLE_CORAL_BLOCKS.size()));
     }
 
 }

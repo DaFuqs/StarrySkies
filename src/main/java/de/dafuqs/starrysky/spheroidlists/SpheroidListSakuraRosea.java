@@ -24,9 +24,9 @@ public class SpheroidListSakuraRosea extends SpheroidList {
         BlockState sakurarosea_alt_sakura_leaves   = Registry.BLOCK.get(new Identifier(MOD_ID,"alt_sakura_leaves")).getDefaultState();
         BlockState sakurarosea_white_sakura_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"white_sakura_leaves")).getDefaultState();
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, sakurarosea_sakura_log, sakurarosea_sakura_leaves.with(Properties.DISTANCE_1_7, 1),7, 14, 2, 4));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, sakurarosea_sakura_log, sakurarosea_alt_sakura_leaves.with(Properties.DISTANCE_1_7, 1),7, 14, 2, 4));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, sakurarosea_sakura_log, sakurarosea_white_sakura_leaves.with(Properties.DISTANCE_1_7, 1),7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 7, 14, sakurarosea_sakura_log, sakurarosea_sakura_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 7, 14, sakurarosea_sakura_log, sakurarosea_alt_sakura_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 7, 14, sakurarosea_sakura_log, sakurarosea_white_sakura_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
     }
 
 }

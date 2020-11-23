@@ -2,7 +2,6 @@ package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidlists.SpheroidListVanilla;
-import de.dafuqs.starrysky.spheroids.ShellSpheroid;
 import de.dafuqs.starrysky.spheroids.Spheroid;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.util.math.BlockPos;
@@ -106,7 +105,7 @@ public class SystemGenerator {
 
         //If systemPointX and Z are zero, generate a log/leaf planet at 16, 16
         if (systemPointX == 0 && systemPointZ == 0) {
-            Spheroid homeSpheroid = new ShellSpheroid(SpheroidListVanilla.OAK_WOOD, systemRandom);
+            Spheroid homeSpheroid = SpheroidListVanilla.OAK_WOOD.getRandomSphere(systemRandom);
             homeSpheroid.setPositionAndCalculateGenerationChunks(new BlockPos(16, 70, 16));
             spheroids.add(homeSpheroid);
         }

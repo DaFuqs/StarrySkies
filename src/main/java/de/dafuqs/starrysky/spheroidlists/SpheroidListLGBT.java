@@ -65,13 +65,13 @@ public class SpheroidListLGBT extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StripesSpheroidType PRIDE_GAY = new StripesSpheroidType(null, LIST_GAY, 6, 12);
-        StripesSpheroidType PRIDE_BI = new StripesSpheroidType(null, LIST_BI, 6, 12);
-        StripesSpheroidType PRIDE_PAN = new StripesSpheroidType(null, LIST_PAN, 6, 12);
-        StripesSpheroidType PRIDE_ASEXUAL = new StripesSpheroidType(null, LIST_ASEXUAL, 6, 12);
-        StripesSpheroidType PRIDE_GENDERQUEER = new StripesSpheroidType(null, LIST_GENDERQUEER, 6, 12);
-        StripesSpheroidType PRIDE_TRANSGENDER = new StripesSpheroidType(null, LIST_TRANSGENDER, 6, 12);
-        StripesSpheroidType PRIDE_NONBINARY = new StripesSpheroidType(null, LIST_NONBINARY, 6, 12);
+        StripesSpheroidType PRIDE_GAY = new StripesSpheroidType(null,  6, 12, LIST_GAY);
+        StripesSpheroidType PRIDE_BI = new StripesSpheroidType(null, 6, 12, LIST_BI);
+        StripesSpheroidType PRIDE_PAN = new StripesSpheroidType(null, 6, 12, LIST_PAN);
+        StripesSpheroidType PRIDE_ASEXUAL = new StripesSpheroidType(null, 6, 12, LIST_ASEXUAL);
+        StripesSpheroidType PRIDE_GENDERQUEER = new StripesSpheroidType(null, 6, 12, LIST_GENDERQUEER);
+        StripesSpheroidType PRIDE_TRANSGENDER = new StripesSpheroidType(null, 6, 12, LIST_TRANSGENDER);
+        StripesSpheroidType PRIDE_NONBINARY = new StripesSpheroidType(null, 6, 12, LIST_NONBINARY);
 
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_GAY);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_BI);

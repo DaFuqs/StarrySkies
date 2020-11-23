@@ -1,27 +1,28 @@
 package de.dafuqs.starrysky.spheroids;
 
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroidtypes.RainbowSpheroidType;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class RainbowSpheroid extends Spheroid {
 
-    private final List<BlockState> rainbowBlocks;
+    private final ArrayList<BlockState> rainbowBlocks;
 
-    public RainbowSpheroid(RainbowSpheroidType rainbowSpheroidType, ChunkRandom random) {
-        super(rainbowSpheroidType, random);
-        this.radius = rainbowSpheroidType.getRandomRadius(random);
-        this.rainbowBlocks = rainbowSpheroidType.getRainbowBlocks();
+    public RainbowSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<BlockState> rainbowBlocks) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+        this.radius = radius;
+        this.rainbowBlocks = rainbowBlocks;
     }
 
     @Override
     public String getDescription() {
-        return this.spheroidType.getDescription() +
+        return "+++ RainbowSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nRainbow Blocks ( + " + this.getRainbowBlockCount() + "): " + this.rainbowBlocks.toString();

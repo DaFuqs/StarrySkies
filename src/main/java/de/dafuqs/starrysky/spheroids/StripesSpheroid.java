@@ -2,7 +2,8 @@ package de.dafuqs.starrysky.spheroids;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroidtypes.StripesSpheroidType;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
@@ -14,10 +15,9 @@ public class StripesSpheroid extends Spheroid {
 
     private final ArrayList<BlockState> stripesBlockStates;
 
-    public StripesSpheroid(StripesSpheroidType rainbowSpheroidType, ChunkRandom random) {
-        super(rainbowSpheroidType, random);
-        this.radius = rainbowSpheroidType.getRandomRadius(random);
-        this.stripesBlockStates = rainbowSpheroidType.getStripesBlockStates();
+    public StripesSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<BlockState> stripesBlockStates) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+        this.stripesBlockStates = stripesBlockStates;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class StripesSpheroid extends Spheroid {
 
     @Override
     public String getDescription() {
-        return this.spheroidType.getDescription() +
+        return "+++ StripesSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nStripes Blocks ( + " + stripesBlockStates.size() + "): " + this.stripesBlockStates.toString();

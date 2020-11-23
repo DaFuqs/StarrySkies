@@ -3,10 +3,12 @@ package de.dafuqs.starrysky.spheroidtypes;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.ShellSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 
@@ -18,12 +20,12 @@ public class ShellSpheroidType extends SpheroidType {
     private final int maxShellRadius; //Maximum shell thickness
     private final LinkedHashMap<BlockState, Float> shellSpeckleBlockStates = new LinkedHashMap<>();
 
-    public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState coreBlock, BlockState shellBlock, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
-        this(spheroidAdvancementIdentifier, coreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minSize, maxSize, minShellRadius, maxShellRadius);
+    public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState coreBlock, BlockState shellBlock, int minShellRadius, int maxShellRadius) {
+        this(spheroidAdvancementIdentifier, minRadius, maxRadius, coreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minShellRadius, maxShellRadius);
     }
 
-    public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState coreBlock, LinkedHashMap<BlockState, Float> validShellBlocks, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
-        super();
+    public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState coreBlock, LinkedHashMap<BlockState, Float> validShellBlocks, int minShellRadius, int maxShellRadius) {
+        super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(coreBlock == null) {
             StarrySkyCommon.LOGGER.error("ShellSpheroidType: Registered a SpheroidType with empty coreBlock!");
@@ -32,21 +34,10 @@ public class ShellSpheroidType extends SpheroidType {
             StarrySkyCommon.LOGGER.error("ShellSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
         }
 
-        this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
         this.coreBlock = coreBlock;
         this.validShellBlocks = validShellBlocks;
-        this.minRadius = minSize;
-        this.maxRadius = maxSize;
         this.minShellRadius = minShellRadius;
         this.maxShellRadius = maxShellRadius;
-    }
-
-    public BlockState getCoreBlock() {
-        return coreBlock;
-    }
-
-    public int getRandomShellRadius(ChunkRandom random) {
-        return random.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
     }
 
     public BlockState getRandomShellBlock(ChunkRandom random) {
@@ -58,16 +49,17 @@ public class ShellSpheroidType extends SpheroidType {
         return this;
     }
 
-    public LinkedHashMap<BlockState, Float> getShellSpeckleBlockStates() {
-        return this.shellSpeckleBlockStates;
-    }
-
     public String getDescription() {
         return "ShellSpheroid";
     }
 
     public ShellSpheroid getRandomSphere(ChunkRandom chunkRandom) {
-        return new ShellSpheroid(this, chunkRandom);
+        int radius = getRandomRadius(chunkRandom);
+        ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
+        BlockState shellBlock = getRandomShellBlock(chunkRandom);
+        int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
+
+        return new ShellSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, coreBlock, shellBlock, shellRadius, shellSpeckleBlockStates);
     }
 
 }

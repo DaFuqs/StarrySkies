@@ -2,21 +2,25 @@ package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.CaveSpheroid;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.ChunkRandom;
 
+import java.util.ArrayList;
 
-public class CaveSpheroidType extends ShellSpheroidType {
+
+public class CaveSpheroidType extends SpheroidType {
 
     private final BlockState shellBlock;
+    private final int minShellRadius;
+    private final int maxShellRadius;
     private final BlockState caveFloorBlock;
     private BlockState topBlock;
     private BlockState bottomBlock;
 
-    public CaveSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState shellBlock, BlockState caveFloorBlock, int minRadius, int maxRadius, int minShellRadius, int maxShellRadius) {
-        super(spheroidAdvancementIdentifier, Blocks.CAVE_AIR.getDefaultState(), shellBlock, minRadius, maxRadius, minShellRadius, maxShellRadius);
+    public CaveSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState shellBlock, BlockState caveFloorBlock, int minShellRadius, int maxShellRadius) {
+        super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(shellBlock == null) {
             StarrySkyCommon.LOGGER.error("CaveSpheroidType: Registered a SpheroidType with null shellBlock!");
@@ -27,10 +31,8 @@ public class CaveSpheroidType extends ShellSpheroidType {
 
         this.caveFloorBlock = caveFloorBlock;
         this.shellBlock = shellBlock;
-    }
-
-    public BlockState getCaveFloorBlock() {
-        return this.caveFloorBlock;
+        this.minShellRadius = minShellRadius;
+        this.maxShellRadius = maxShellRadius;
     }
 
     public CaveSpheroidType setTopBlockState(BlockState state) {
@@ -56,7 +58,13 @@ public class CaveSpheroidType extends ShellSpheroidType {
     }
 
     public CaveSpheroid getRandomSphere(ChunkRandom chunkRandom) {
-        return new CaveSpheroid(this, chunkRandom);
+        int radius = getRandomRadius(chunkRandom);
+        ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
+        BlockState topBlock = getTopBlock();
+        BlockState bottomBlock = getBottomBlock();
+        int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
+
+        return new CaveSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, caveFloorBlock, shellBlock, shellRadius, topBlock, bottomBlock);
     }
 
 }

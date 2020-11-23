@@ -1,12 +1,14 @@
 package de.dafuqs.starrysky.spheroids;
 
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroidtypes.ShellSpheroidType;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,17 +20,18 @@ public class ShellSpheroid extends Spheroid {
     protected int shellRadius;
     private final LinkedHashMap<BlockState, Float> shellSpeckleBlockStates;
 
-    public ShellSpheroid(ShellSpheroidType shellSpheroidType, ChunkRandom random) {
-        super(shellSpheroidType, random);
-        this.radius = shellSpheroidType.getRandomRadius(random);
-        this.coreBlock = shellSpheroidType.getCoreBlock();
-        this.shellBlock = shellSpheroidType.getRandomShellBlock(random);
-        this.shellRadius = shellSpheroidType.getRandomShellRadius(random);
-        this.shellSpeckleBlockStates = shellSpheroidType.getShellSpeckleBlockStates();
+    public ShellSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState coreBlock,
+                         BlockState shellBlock, int shellRadius, LinkedHashMap<BlockState, Float> shellSpeckleBlockStates) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+        this.radius = radius;
+        this.coreBlock = coreBlock;
+        this.shellBlock = shellBlock;
+        this.shellRadius = shellRadius;
+        this.shellSpeckleBlockStates = shellSpeckleBlockStates;
     }
 
     public String getDescription() {
-        return this.spheroidType.getDescription() +
+        return "+++ ShellSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nShell: " + this.shellBlock.toString() + " (Radius: " + this.shellRadius + ")" +
@@ -68,7 +71,7 @@ public class ShellSpheroid extends Spheroid {
                             chunk.setBlockState(currBlockPos, this.shellBlock, false);
                         }
                         if(isTopBlock(d, x2, y2, z2)) {
-                            addDecorationBlock(currBlockPos);
+                            addDecorationBlockPosition(currBlockPos);
                         }
                     }
                 }
@@ -80,15 +83,6 @@ public class ShellSpheroid extends Spheroid {
 
     private boolean hasSpeckles() {
         return this.shellSpeckleBlockStates.size() > 0;
-    }
-
-    protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z) {
-        if(d == (this.radius - this.shellRadius)) {
-            int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));
-            return distance1 > (this.radius - this.shellRadius);
-        } else {
-            return false;
-        }
     }
 
 }

@@ -1,8 +1,8 @@
 package de.dafuqs.starrysky.spheroids;
 
 import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ChunkRegion;
@@ -16,22 +16,23 @@ import java.util.HashSet;
 
 public abstract class Spheroid implements Serializable {
 
-    protected SpheroidType spheroidType;
+    protected SpheroidAdvancementIdentifier spheroidAdvancementIdentifier;
+    protected BlockPos position;
     protected int radius;
     protected ChunkRandom random;
-    private BlockPos position; //Position, local to the chunk
 
     /** Chunks this spheroid should be still generated in  **/
-    private HashSet<ChunkPos> chunksOfSpheroid = new HashSet<>();
+    private final HashSet<ChunkPos> chunksOfSpheroid = new HashSet<>();
     /** The decorators that should be ran after generation **/
-    private ArrayList<SpheroidDecorator> spheroidDecorators;
+    private final ArrayList<SpheroidDecorator> spheroidDecorators;
     /** The tracker for blocks to be decorated. Filled in generate() **/
-    private ArrayList<BlockPos> decorationBlocks = new ArrayList<>();
+    private final ArrayList<BlockPos> decorationBlockPositions = new ArrayList<>();
 
-    public Spheroid(SpheroidType spheroidType, ChunkRandom random) {
-        this.spheroidType = spheroidType;
+    public Spheroid(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, ChunkRandom random, ArrayList<SpheroidDecorator> spheroidDecorators, int radius) {
+        this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
         this.random = random;
-        this.spheroidDecorators = spheroidType.getSpheroidDecoratorsWithChance(random);
+        this.spheroidDecorators = spheroidDecorators;
+        this.radius = radius;
     }
 
     public abstract void generate(Chunk chunk);
@@ -52,12 +53,12 @@ public abstract class Spheroid implements Serializable {
         }
     }
 
-    public int getRadius() {
-        return radius;
+    public SpheroidAdvancementIdentifier getSpheroidAdvancementIdentifier() {
+        return spheroidAdvancementIdentifier;
     }
 
-    public SpheroidType getSpheroidType() {
-        return this.spheroidType;
+    public int getRadius() {
+        return radius;
     }
 
     public abstract String getDescription();
@@ -70,9 +71,9 @@ public abstract class Spheroid implements Serializable {
         return this.spheroidDecorators.size() > 0;
     }
 
-    public void addDecorationBlock(BlockPos blockPos) {
+    public void addDecorationBlockPosition(BlockPos blockPos) {
         if(hasDecorators()) {
-            this.decorationBlocks.add(blockPos);
+            this.decorationBlockPositions.add(blockPos);
         }
     }
 
@@ -89,7 +90,7 @@ public abstract class Spheroid implements Serializable {
 
     public void decorate(WorldView worldView, Chunk chunk) {
         for(SpheroidDecorator decorator : this.spheroidDecorators) {
-            decorator.decorateSpheroid(worldView, chunk, this, this.decorationBlocks, this.random);
+            decorator.decorateSpheroid(worldView, chunk, this, this.decorationBlockPositions, this.random);
         }
     }
 
@@ -106,6 +107,15 @@ public abstract class Spheroid implements Serializable {
         if(d == this.radius) {
             long dist2 = Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
             return dist2 > this.radius;
+        } else {
+            return false;
+        }
+    }
+
+    protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z, int shellRadius) {
+        if(d == (this.radius - shellRadius)) {
+            int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));
+            return distance1 > (this.radius - shellRadius);
         } else {
             return false;
         }

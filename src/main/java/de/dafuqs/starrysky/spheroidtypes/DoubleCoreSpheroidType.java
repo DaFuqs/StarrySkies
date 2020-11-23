@@ -3,12 +3,13 @@ package de.dafuqs.starrysky.spheroidtypes;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.DoubleCoreSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Random;
 
 public class DoubleCoreSpheroidType extends SpheroidType {
 
@@ -20,11 +21,13 @@ public class DoubleCoreSpheroidType extends SpheroidType {
     private final int minShellRadius;
     private final int maxShellRadius;
 
-    public DoubleCoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState innerCoreBlock, BlockState outerCoreBlock, BlockState shellBlock, int minSize, int maxSize, int minInnerCoreRadius, int maxInnerCoreRadius, int minShellRadius, int maxShellRadius) {
-        this(spheroidAdvancementIdentifier, innerCoreBlock, outerCoreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minSize, maxSize, minInnerCoreRadius, maxInnerCoreRadius,  minShellRadius, maxShellRadius);
+    public DoubleCoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState innerCoreBlock, BlockState outerCoreBlock, BlockState shellBlock, int minInnerCoreRadius, int maxInnerCoreRadius, int minShellRadius, int maxShellRadius) {
+        this(spheroidAdvancementIdentifier, minRadius, maxRadius, innerCoreBlock, outerCoreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minInnerCoreRadius, maxInnerCoreRadius,  minShellRadius, maxShellRadius);
     }
 
-    public DoubleCoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState innerCoreBlock, BlockState outerCoreBlock, LinkedHashMap<BlockState, Float> validShellBlocks, int minSize, int maxSize, int minInnerCoreRadius, int maxInnerCoreRadius, int minShellRadius, int maxShellRadius) {
+    public DoubleCoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState innerCoreBlock, BlockState outerCoreBlock, LinkedHashMap<BlockState, Float> validShellBlocks, int minInnerCoreRadius, int maxInnerCoreRadius, int minShellRadius, int maxShellRadius) {
+        super(spheroidAdvancementIdentifier, minRadius, maxRadius);
+
         if(innerCoreBlock == null) {
             StarrySkyCommon.LOGGER.error("DoubleCoreSpheroidType: Registered a SpheroidType with null innerCoreBlock!");
         }
@@ -35,9 +38,6 @@ public class DoubleCoreSpheroidType extends SpheroidType {
             StarrySkyCommon.LOGGER.error("DoubleCoreSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
         }
 
-        this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
-        this.minRadius = minSize;
-        this.maxRadius = maxSize;
         this.innerCoreBlock = innerCoreBlock;
         this.outerCoreBlock = outerCoreBlock;
         this.validShellBlocks = validShellBlocks;
@@ -47,32 +47,19 @@ public class DoubleCoreSpheroidType extends SpheroidType {
         this.maxShellRadius = maxShellRadius;
     }
 
-    public int getRandomInnerCoreRadius(Random random) {
-        return random.nextInt(this.maxInnerCoreRadius - this.minInnerCoreRadius + 1) + this.minInnerCoreRadius;
-    }
-
-    public int getRandomShellRadius(Random random) {
-        return random.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
-    }
-
-    public BlockState getRandomShellBlock(ChunkRandom random) {
-        return Support.getWeightedRandom(validShellBlocks, random);
-    }
-
-    public BlockState getInnerCoreBlock() {
-        return innerCoreBlock;
-    }
-
-    public BlockState getOuterCoreBlock() {
-        return outerCoreBlock;
-    }
-
     public String getDescription() {
         return "DoubleCoreSpheroid";
     }
 
     public DoubleCoreSpheroid getRandomSphere(ChunkRandom chunkRandom) {
-        return new DoubleCoreSpheroid(this, chunkRandom);
+        int radius = getRandomRadius(chunkRandom);
+        ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
+        BlockState shellBlock = Support.getWeightedRandom(validShellBlocks, chunkRandom);
+        int innerCoreRadius = chunkRandom.nextInt(this.maxInnerCoreRadius - this.minInnerCoreRadius + 1) + this.minInnerCoreRadius;
+        int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
+
+        //public DoubleCoreSpheroid(int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState innerCoreBlock, BlockState outerCoreBlock, BlockState shellBlock, int innerCoreRadius, int shellRadius) {
+        return new DoubleCoreSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, innerCoreBlock, outerCoreBlock, shellBlock, innerCoreRadius, shellRadius);
     }
 
 }

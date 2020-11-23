@@ -1,8 +1,10 @@
 package de.dafuqs.starrysky.spheroids.special_overworld;
 
 import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroidlists.SpheroidList;
 import de.dafuqs.starrysky.spheroids.Spheroid;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.BeeHiveSpheroidType;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -32,13 +34,12 @@ public class BeeHiveSpheroid extends Spheroid {
     private BeehiveBlockEntity queenBeehiveBlockEntity;
     private final List<BeehiveBlockEntity> outerBeehiveBlockEntities;
 
-    public BeeHiveSpheroid(BeeHiveSpheroidType beeHiveSpheroidType, ChunkRandom random) {
-        super(beeHiveSpheroidType, random);
+    public BeeHiveSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, int shellRadius, int flowerRingRadius, int flowerRingSpacing) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
 
-        this.shellRadius = beeHiveSpheroidType.getRandomShellRadius(random);
-        this.radius = beeHiveSpheroidType.getRandomRadius(random);
-        this.flowerRingRadius = beeHiveSpheroidType.getRandomFlowerRingRadius(random);
-        this.flowerRingSpacing = beeHiveSpheroidType.getRandomFlowerRingSpacing(random);
+        this.shellRadius = shellRadius;
+        this.flowerRingRadius = flowerRingRadius;
+        this.flowerRingSpacing = flowerRingSpacing;
         this.outerBeehiveBlockEntities = new ArrayList<>();
     }
 
@@ -120,9 +121,9 @@ public class BeeHiveSpheroid extends Spheroid {
                         chunk.setBlockState(currBlockPos, Blocks.GRASS_BLOCK.getDefaultState(), false);
                         int rand = random.nextInt(4);
                         if (rand == 0) {
-                            chunk.setBlockState(currBlockPos.up(), ((BeeHiveSpheroidType) getSpheroidType()).getRandomFlower(random), false);
+                            chunk.setBlockState(currBlockPos.up(), getRandomFlower(random), false);
                         } else if (rand == 1) {
-                            BlockState randomTallFlower = ((BeeHiveSpheroidType) getSpheroidType()).getRandomTallFlower(random);
+                            BlockState randomTallFlower = getRandomTallFlower(random);
                             chunk.setBlockState(currBlockPos.up(), randomTallFlower.with(TallPlantBlock.HALF, DoubleBlockHalf.LOWER), false);
                             chunk.setBlockState(currBlockPos.up(2), randomTallFlower.with(TallPlantBlock.HALF, DoubleBlockHalf.UPPER), false);
                         }
@@ -134,10 +135,17 @@ public class BeeHiveSpheroid extends Spheroid {
         this.setChunkFinished(chunk.getPos());
     }
 
+    public BlockState getRandomFlower(ChunkRandom random) {
+        return SpheroidList.LIST_FLOWERS.get(random.nextInt(SpheroidList.LIST_FLOWERS.size()));
+    }
+
+    public BlockState getRandomTallFlower(ChunkRandom random) {
+        return SpheroidList.LIST_TALL_FLOWERS.get(random.nextInt(SpheroidList.LIST_TALL_FLOWERS.size()));
+    }
 
     @Override
     public String getDescription() {
-        return this.getSpheroidType().getDescription() +
+        return "+++ BeeHiveSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nShellRadius: " + this.shellRadius +
@@ -170,7 +178,6 @@ public class BeeHiveSpheroid extends Spheroid {
             beehiveBlockEntity.tryEnterHive(bee2, false);
         }
     }
-
 
     public void setRandomQueenProperties(BeeEntity beeEntity, ChunkRandom chunkRandom) {
         beeEntity.setCustomName(new TranslatableText("bee.queen"));

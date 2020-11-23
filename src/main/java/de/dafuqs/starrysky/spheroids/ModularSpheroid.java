@@ -1,31 +1,36 @@
 package de.dafuqs.starrysky.spheroids;
 
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroidtypes.ModularSpheroidType;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
+
+import java.util.ArrayList;
 
 public class ModularSpheroid extends Spheroid {
 
     private final BlockState mainBlock;
     private final BlockState topBlock;
     private final BlockState bottomBlock;
+    private final Identifier centerChestLootTable;
 
-    public ModularSpheroid(ModularSpheroidType modularSpheroidType, ChunkRandom random) {
-        super(modularSpheroidType, random);
-        this.radius = modularSpheroidType.getRandomRadius(random);
-        this.mainBlock = modularSpheroidType.getMainBlock();
-        this.topBlock = modularSpheroidType.getTopBlock();
-        this.bottomBlock = modularSpheroidType.getBottomBlock();
+    public ModularSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState mainBlock, BlockState topBlock, BlockState bottomBlock, Identifier centerChestLootTable) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+        this.mainBlock = mainBlock;
+        this.topBlock = topBlock;
+        this.bottomBlock = bottomBlock;
+        this.centerChestLootTable = centerChestLootTable;
     }
 
     public String getDescription() {
-        String s = this.spheroidType.getDescription() +
+        String s = "+++ ModularSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nMaterial: " + this.mainBlock.toString();
@@ -47,7 +52,7 @@ public class ModularSpheroid extends Spheroid {
         int y = this.getPosition().getY();
         int z = this.getPosition().getZ();
 
-        boolean hasCenterChest = ((ModularSpheroidType) this.getSpheroidType()).hasCenterChest();
+        boolean hasCenterChest = centerChestLootTable != null;
 
         random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
         for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
@@ -62,7 +67,7 @@ public class ModularSpheroid extends Spheroid {
                             chunk.setBlockState(currBlockPos, this.bottomBlock, false);
                         } else if (isTopBlock(d, x2, y2, z2)) {
                             chunk.setBlockState(currBlockPos, this.topBlock, false);
-                            addDecorationBlock(currBlockPos);
+                            addDecorationBlockPosition(currBlockPos);
                         } else {
                             chunk.setBlockState(currBlockPos, this.mainBlock, false);
                         }
@@ -79,7 +84,7 @@ public class ModularSpheroid extends Spheroid {
     private void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos) {
         chunk.setBlockState(blockPos, Blocks.CHEST.getDefaultState(), false);
         chunk.setBlockEntity(blockPos, new ChestBlockEntity());
-        LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, ((ModularSpheroidType) this.getSpheroidType()).getCenterChestLootTable());
+        LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, centerChestLootTable);
     }
 
 }

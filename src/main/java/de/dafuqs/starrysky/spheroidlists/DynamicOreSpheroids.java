@@ -71,10 +71,10 @@ public class DynamicOreSpheroids {
             dynamicSpheroidTypes.put(
                     new CoreSpheroidType(
                         null,
-                        firstEntry,
-                        entrySpheroidDefinition.shellBlockStates,
                         entrySpheroidDefinition.minRadius,
                         entrySpheroidDefinition.maxRadius,
+                        firstEntry,
+                        entrySpheroidDefinition.shellBlockStates,
                         entrySpheroidDefinition.minCoreRadius,
                         entrySpheroidDefinition.maxCoreRadius),
                     entrySpheroidDefinition.generationWeight);

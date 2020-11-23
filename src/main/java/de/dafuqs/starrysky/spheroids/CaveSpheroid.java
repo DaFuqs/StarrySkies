@@ -1,28 +1,33 @@
 package de.dafuqs.starrysky.spheroids;
 
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroidtypes.CaveSpheroidType;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
-public class CaveSpheroid extends ShellSpheroid {
+import java.util.ArrayList;
 
+public class CaveSpheroid extends Spheroid {
+
+    private final BlockState coreBlock = Blocks.CAVE_AIR.getDefaultState();
     private final BlockState caveFloorBlock;
     private final BlockState topBlock;
     private final BlockState bottomBlock;
+    private final BlockState shellBlock;
+    private final int shellRadius;
 
-    public CaveSpheroid(CaveSpheroidType caveSpheroidType, ChunkRandom random) {
-        super(caveSpheroidType, random);
+    public CaveSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState caveFloorBlock, BlockState shellBlock, int shellRadius, BlockState topBlock, BlockState bottomBlock) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
 
-        this.coreBlock = Blocks.CAVE_AIR.getDefaultState();
-        this.radius = caveSpheroidType.getRandomRadius(random);
-        this.caveFloorBlock = caveSpheroidType.getCaveFloorBlock();
-        this.shellRadius = caveSpheroidType.getRandomShellRadius(random);
-        this.topBlock = caveSpheroidType.getTopBlock();
-        this.bottomBlock = caveSpheroidType.getBottomBlock();
+        this.caveFloorBlock = caveFloorBlock;
+        this.shellBlock = shellBlock;
+        this.shellRadius = shellRadius;
+        this.topBlock = topBlock;
+        this.bottomBlock = bottomBlock;
     }
 
 
@@ -48,9 +53,9 @@ public class CaveSpheroid extends ShellSpheroid {
                         } else {
                             chunk.setBlockState(currBlockPos, this.shellBlock, false);
                         }
-                    } else if(isAboveCaveFloorBlock(d, x2, y2, z2)) {
+                    } else if(isAboveCaveFloorBlock(d, x2, y2, z2, shellRadius)) {
                         chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock, false);
-                        addDecorationBlock(currBlockPos.down());
+                        addDecorationBlockPosition(currBlockPos.down());
                     } else if(d <= this.radius - this.shellRadius) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false); // always CAVE_AIR
                     } else if (d < this.radius) {
@@ -65,7 +70,7 @@ public class CaveSpheroid extends ShellSpheroid {
 
     @Override
     public String getDescription() {
-        String s = this.getSpheroidType().getDescription() +
+        String s = "+++ CaveSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nShellBlock: " + this.shellBlock +

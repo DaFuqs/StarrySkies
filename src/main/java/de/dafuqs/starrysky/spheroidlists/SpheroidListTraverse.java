@@ -27,11 +27,11 @@ public class SpheroidListTraverse extends SpheroidList {
         BlockState traverse_red_autumnal_leaves = Registry.BLOCK.get(new Identifier(MOD_ID, "red_autumnal_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);    // dark oak logs
         BlockState traverse_yellow_autumnal_leaves = Registry.BLOCK.get(new Identifier(MOD_ID, "yellow_autumnal_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1); // birch logs
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, traverse_fir_log, traverse_fir_leaves, 7, 14, 2, 4));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, Blocks.OAK_LOG.getDefaultState(), traverse_orange_autumnal_leaves, 6, 12, 2, 3));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, Blocks.OAK_LOG.getDefaultState(), traverse_brown_autumnal_leaves, 6, 12, 2, 3));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, Blocks.DARK_OAK_LOG.getDefaultState(), traverse_red_autumnal_leaves, 6, 12, 2, 3));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, Blocks.BIRCH_LOG.getDefaultState(), traverse_yellow_autumnal_leaves, 6, 12, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 7, 14, traverse_fir_log, traverse_fir_leaves, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 6, 12, Blocks.OAK_LOG.getDefaultState(), traverse_orange_autumnal_leaves, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 6, 12, Blocks.OAK_LOG.getDefaultState(), traverse_brown_autumnal_leaves, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 6, 12, Blocks.DARK_OAK_LOG.getDefaultState(), traverse_red_autumnal_leaves, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 6, 12, Blocks.BIRCH_LOG.getDefaultState(), traverse_yellow_autumnal_leaves, 2, 3));
 
     }
 }

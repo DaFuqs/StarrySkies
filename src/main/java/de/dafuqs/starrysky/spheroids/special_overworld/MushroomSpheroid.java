@@ -1,22 +1,33 @@
 package de.dafuqs.starrysky.spheroids.special_overworld;
 
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroids.ShellSpheroid;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.MushroomSpheroidType;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
-public class MushroomSpheroid extends ShellSpheroid {
+import java.util.ArrayList;
 
-    public MushroomSpheroid(MushroomSpheroidType mushroomSpheroidType, ChunkRandom random) {
-        super(mushroomSpheroidType, random);
+public class MushroomSpheroid extends Spheroid {
+
+    BlockState coreBlock;
+    BlockState shellBlock;
+    int shellRadius;
+
+    public MushroomSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState coreBlock, BlockState shellBlock, int shellRadius) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+
+        this.coreBlock = coreBlock;
+        this.shellBlock = shellBlock;
+        this.shellRadius = shellRadius;
     }
 
     public String getDescription() {
-        return getSpheroidType().getDescription() +
+        return "+++ MushroomSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nShell: " + this.shellBlock.toString() + " (Radius: " + this.shellRadius + ")" +

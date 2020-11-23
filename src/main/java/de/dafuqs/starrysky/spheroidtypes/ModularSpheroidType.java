@@ -2,31 +2,29 @@ package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.ModularSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.ChunkRandom;
+
+import java.util.ArrayList;
 
 public class ModularSpheroidType extends SpheroidType {
 
     private final BlockState mainBlock;
     private BlockState topBlock;
     private BlockState bottomBlock;
-
     private Identifier centerChestLootTable;
 
-
-    public ModularSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState mainBlock, int minSize, int maxSize) {
-        super();
+    public ModularSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState mainBlock) {
+        super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(mainBlock == null) {
             StarrySkyCommon.LOGGER.error("ModularSpheroidType: Registered a SpheroidType with null mainBlock!");
         }
 
-        this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
         this.mainBlock = mainBlock;
-        this.minRadius = minSize;
-        this.maxRadius = maxSize;
     }
 
     public String getDescription() {
@@ -39,10 +37,6 @@ public class ModularSpheroidType extends SpheroidType {
 
     public BlockState getBottomBlock() {
         return bottomBlock != null ? bottomBlock : mainBlock;
-    }
-
-    public BlockState getMainBlock() {
-        return mainBlock;
     }
 
     public ModularSpheroidType setTopBlockState(BlockState state) {
@@ -68,16 +62,14 @@ public class ModularSpheroidType extends SpheroidType {
         return this;
     }
 
-    public boolean hasCenterChest() {
-        return this.centerChestLootTable != null;
-    }
-
-    public Identifier getCenterChestLootTable() {
-        return this.centerChestLootTable;
-    }
-
     public ModularSpheroid getRandomSphere(ChunkRandom chunkRandom) {
-        return new ModularSpheroid(this, chunkRandom);
+        int radius = getRandomRadius(chunkRandom);
+        ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
+
+        BlockState topBlock = getTopBlock();
+        BlockState bottomBlock = getBottomBlock();
+
+        return new ModularSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, mainBlock, topBlock, bottomBlock, centerChestLootTable);
     }
 
 }

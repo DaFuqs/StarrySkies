@@ -1,8 +1,9 @@
 package de.dafuqs.starrysky.spheroids.special_overworld;
 
 import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.Spheroid;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.DungeonSpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -14,19 +15,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
+import java.util.ArrayList;
+
 public class DungeonSpheroid extends Spheroid {
 
     private final EntityType entityType;
     private final BlockState shellBlock;
     private final int shellRadius;
 
-    public DungeonSpheroid(DungeonSpheroidType dungeonSpheroidType, ChunkRandom random) {
-        super(dungeonSpheroidType, random);
+    public DungeonSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, EntityType entityType, BlockState shellBlock, int shellRadius) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
 
-        this.radius = dungeonSpheroidType.getRandomRadius(random);
-        this.entityType = dungeonSpheroidType.getEntityType();
-        this.shellBlock = dungeonSpheroidType.getRandomShellBlock(random);
-        this.shellRadius = dungeonSpheroidType.getRandomShellRadius(random);
+        this.entityType = entityType;
+        this.shellBlock = shellBlock;
+        this.shellRadius = shellRadius;
     }
 
 
@@ -75,7 +77,7 @@ public class DungeonSpheroid extends Spheroid {
 
     @Override
     public String getDescription() {
-        return this.getSpheroidType().getDescription() +
+        return "+++ DungeonSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
                 "\nShellBlock: " + this.shellBlock +

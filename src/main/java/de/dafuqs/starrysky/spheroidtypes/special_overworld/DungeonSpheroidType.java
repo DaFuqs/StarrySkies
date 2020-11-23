@@ -3,14 +3,15 @@ package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.special_overworld.DungeonSpheroid;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.gen.ChunkRandom;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Random;
 
 public class DungeonSpheroidType extends SpheroidType {
 
@@ -19,18 +20,15 @@ public class DungeonSpheroidType extends SpheroidType {
     private final int minShellRadius;
     private final int maxShellRadius;
 
-    public DungeonSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, EntityType entityType, LinkedHashMap<BlockState, Float> validShellBlocks, int minRadius, int maxRadius, int minShellRadius, int maxShellRadius) {
-        super();
+    public DungeonSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, EntityType entityType, LinkedHashMap<BlockState, Float> validShellBlocks, int minShellRadius, int maxShellRadius) {
+        super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(entityType == null) {
             StarrySkyCommon.LOGGER.error("DungeonSpheroidType: Registered a SpheroidType with null entity!");
         }
 
-        this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
         this.entityType = entityType;
         this.validShellBlocks = validShellBlocks;
-        this.minRadius = minRadius;
-        this.maxRadius = maxRadius;
         this.minShellRadius = minShellRadius;
         this.maxShellRadius = maxShellRadius;
     }
@@ -40,20 +38,13 @@ public class DungeonSpheroidType extends SpheroidType {
         return "DungeonSpheroid";
     }
 
-    public EntityType getEntityType () {
-        return this.entityType;
-    }
-
-    public BlockState getRandomShellBlock(ChunkRandom random) {
-        return Support.getWeightedRandom(validShellBlocks, random);
-    }
-
-    public int getRandomShellRadius(Random random) {
-        return random.nextInt(maxShellRadius - minShellRadius  + 1) + minShellRadius;
-    }
-
     public DungeonSpheroid getRandomSphere(ChunkRandom chunkRandom) {
-        return new DungeonSpheroid(this, chunkRandom);
+        int radius = getRandomRadius(chunkRandom);
+        BlockState shellBlock = Support.getWeightedRandom(validShellBlocks, chunkRandom);
+        int shellRadius = chunkRandom.nextInt(maxShellRadius - minShellRadius  + 1) + minShellRadius;
+
+        ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
+        return new DungeonSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityType, shellBlock, shellRadius);
     }
 
 }
