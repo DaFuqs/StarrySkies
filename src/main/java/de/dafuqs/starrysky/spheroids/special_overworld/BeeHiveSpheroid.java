@@ -67,7 +67,7 @@ public class BeeHiveSpheroid extends Spheroid {
                         chunk.setBlockState(currBlockPos, Blocks.BEE_NEST.getDefaultState(), false);
                         this.queenBeehiveBlockEntity = new BeehiveBlockEntity();
                         chunk.setBlockEntity(currBlockPos, queenBeehiveBlockEntity);
-                    } else if (d == startRingDistance && y2 - y == 0 && random.nextInt(10) == 0) {
+                    } else if (d == shellDistance && y2 - y == 0 && random.nextInt(10) == 0) {
                         // middle outer shell: random hives
                         Direction direction;
                         int xDist = x2 - x;

@@ -15,7 +15,7 @@ public class CactusDecorator extends SpheroidDecorator {
 
     private static final Block cactusBlock = Blocks.CACTUS;
     private static final BlockState cactusBlockState = Blocks.CACTUS.getDefaultState();
-    private static final int CACTUS_CHANCE = 30; // random. 0 = cactus with 1 height, 2 = 3 height
+    private static final int CACTUS_CHANCE = 40; // random. 0 = cactus with 1 height, 2 = 3 height
 
     @Override
     public void decorateSpheroid(WorldView worldView, Chunk chunk, Spheroid spheroid, ArrayList<BlockPos> blockPos, ChunkRandom random) {
