@@ -2,7 +2,8 @@
   "type": "starry_sky:starry_sky",
   "generator": {
     "biome_source": {
-      "type": "starry_sky:biome_source"
+      "type": "starry_sky:biome_source",
+      "seed": 0
     },
     "type": "starry_sky:starry_sky_chunk_generator",
     "settings": "minecraft:overworld",

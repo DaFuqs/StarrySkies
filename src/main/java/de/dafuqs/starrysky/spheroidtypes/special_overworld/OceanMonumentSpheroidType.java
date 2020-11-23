@@ -1,7 +1,9 @@
 package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.special_overworld.OceanMonumentSpheroid;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
+import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.Random;
 
@@ -34,6 +36,8 @@ public class OceanMonumentSpheroidType extends SpheroidType {
         return "OceanMonumentSpheroid";
     }
 
-
+    public OceanMonumentSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new OceanMonumentSpheroid(this, chunkRandom);
+    }
 
 }

@@ -1,8 +1,9 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.LiquidSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -88,4 +89,9 @@ public class LiquidSpheroidType extends SpheroidType {
     public int getRandomCoreRadius(Random random) {
         return random.nextInt(maxCoreRadius - minCoreRadius  + 1) + minCoreRadius;
     }
+
+    public LiquidSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new LiquidSpheroid(this, chunkRandom);
+    }
+
 }

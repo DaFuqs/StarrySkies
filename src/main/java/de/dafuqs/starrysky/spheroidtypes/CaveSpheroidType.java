@@ -2,8 +2,10 @@ package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.CaveSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.gen.ChunkRandom;
 
 
 public class CaveSpheroidType extends ShellSpheroidType {
@@ -51,6 +53,10 @@ public class CaveSpheroidType extends ShellSpheroidType {
 
     public String getDescription() {
         return "CaveSpheroid";
+    }
+
+    public CaveSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new CaveSpheroid(this, chunkRandom);
     }
 
 }

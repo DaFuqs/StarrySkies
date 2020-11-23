@@ -1,8 +1,9 @@
 package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.special_overworld.DungeonSpheroid;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -49,6 +50,10 @@ public class DungeonSpheroidType extends SpheroidType {
 
     public int getRandomShellRadius(Random random) {
         return random.nextInt(maxShellRadius - minShellRadius  + 1) + minShellRadius;
+    }
+
+    public DungeonSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new DungeonSpheroid(this, chunkRandom);
     }
 
 }

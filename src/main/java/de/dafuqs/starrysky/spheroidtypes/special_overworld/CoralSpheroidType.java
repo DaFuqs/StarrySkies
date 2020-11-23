@@ -3,6 +3,7 @@ package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.special_overworld.CoralSpheroid;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
@@ -59,4 +60,7 @@ public class CoralSpheroidType extends SpheroidType {
         return "CoralSpheroid";
     }
 
+    public CoralSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new CoralSpheroid(this, chunkRandom);
+    }
 }

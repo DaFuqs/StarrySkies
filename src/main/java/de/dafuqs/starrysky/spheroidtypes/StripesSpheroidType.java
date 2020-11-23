@@ -2,7 +2,9 @@ package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.StripesSpheroid;
 import net.minecraft.block.BlockState;
+import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
 
@@ -30,5 +32,8 @@ public class StripesSpheroidType extends SpheroidType {
         return "StripesSpheroid";
     }
 
+    public StripesSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new StripesSpheroid(this, chunkRandom);
+    }
 
 }

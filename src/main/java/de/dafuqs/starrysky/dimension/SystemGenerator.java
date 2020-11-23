@@ -2,10 +2,9 @@ package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidlists.SpheroidListVanilla;
-import de.dafuqs.starrysky.spheroids.*;
-import de.dafuqs.starrysky.spheroids.special_overworld.*;
-import de.dafuqs.starrysky.spheroidtypes.*;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.*;
+import de.dafuqs.starrysky.spheroids.ShellSpheroid;
+import de.dafuqs.starrysky.spheroids.Spheroid;
+import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.ChunkRandom;
 import org.apache.logging.log4j.Level;
@@ -17,8 +16,25 @@ import java.util.List;
 
 public class SystemGenerator {
 
+    public class TempPosition {
+        int xPos;
+        int yPos;
+        int zPos;
+
+        public BlockPos toBlockPos() {
+            return new BlockPos(xPos, yPos, zPos);
+        }
+
+        private int distanceSquared(Spheroid pl1) {
+            int xDist = xPos - pl1.getPosition().getX();
+            int yDist = yPos - pl1.getPosition().getY();
+            int zDist = zPos - pl1.getPosition().getZ();
+
+            return xDist * xDist + yDist * yDist + zDist * zDist;
+        }
+    }
+
     // spawning probabilities
-    // normal hashmaps are not stable
     private final HashMap<Point, List<Spheroid>> cache = new HashMap<>();
     public static SpheroidLoader spheroidLoader;
 
@@ -27,7 +43,6 @@ public class SystemGenerator {
     }
 
     /**
-     *
      * System size of 50 results in system 0,0 at 0>+800, -1,0 at -800>0
      * @param chunkX X coordinate of chunk
      * @param chunkZ Z coordinate of chunk
@@ -51,18 +66,19 @@ public class SystemGenerator {
     }
 
     /**
+     * Returns the system at the goven chunk coordinates
+     * If a system does not exist yet it will be generated
      * @param chunkX chunk chunkX location
      * @param chunkZ chunk chunkZ location
      * @return List of planetoids representing the system this chunk is in
      */
     public List<Spheroid> getSystemAtChunkPos(int chunkX, int chunkZ) {
-
         //check if the system of this chunk is cached
         Point systemPos = getSystemCoordinateFromChunkCoordinate(chunkX, chunkZ);
         List<Spheroid> curSystem = cache.get(systemPos);
 
         if (curSystem == null) {
-            //generate and cache
+            //doesn't exist. Generate new system and cache it
             curSystem = generatePlanetsAtSystemPosition(systemPos);
             cache.put(systemPos, curSystem);
         }
@@ -76,7 +92,7 @@ public class SystemGenerator {
         int firstChunkPosZ = systemPoint.y * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
         ChunkRandom systemRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
         systemRandom.setTerrainSeed(firstChunkPosX, firstChunkPosZ); // and the seed from the first chunk+
-        StarrySkyCommon.LOGGER.log(Level.INFO, "Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
+        StarrySkyCommon.LOGGER.log(Level.DEBUG, "Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
         return systemRandom;
     }
 
@@ -130,7 +146,7 @@ public class SystemGenerator {
             for (Spheroid pl : spheroids) {
                 //each spheroid has to be at least pl1.radius + pl2.radius + min distance apart
                 int distMin = pl.getRadius() + currentSpheroid.getRadius() + StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheres;
-                if (distanceSquared(pl, tempPosition) < distMin * distMin) {
+                if (tempPosition.distanceSquared(pl) < distMin * distMin) {
                     discard = true;
                     break;
                 }
@@ -147,51 +163,10 @@ public class SystemGenerator {
         return spheroids;
     }
 
-
-    private int distanceSquared(Spheroid pl1, TempPosition tempPosition) {
-        int xDist = tempPosition.xPos - pl1.getPosition().getX();
-        int yDist = tempPosition.yPos - pl1.getPosition().getY();
-        int zDist = tempPosition.zPos - pl1.getPosition().getZ();
-
-        return xDist * xDist + yDist * yDist + zDist * zDist;
-    }
-
-    // TODO: that's so bad
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
         SpheroidType spheroidType = spheroidLoader.getWeightedRandomSpheroid(systemRandom);
-
         StarrySkyCommon.LOGGER.log(Level.DEBUG, "Created a new sphere of type " + spheroidType);
-        if(spheroidType instanceof CoreSpheroidType) {
-            return new CoreSpheroid( (CoreSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof CaveSpheroidType) { // has to be checked before shellSpheroid
-            return new CaveSpheroid( (CaveSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof MushroomSpheroidType) { // has to be checked before shellSpheroid
-            return new MushroomSpheroid( (MushroomSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof SupportedRainbowSpheroidType) { // has to be checked before shellSpheroid
-            return new SupportedRainbowSpheroid( (SupportedRainbowSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof OceanMonumentSpheroidType) {
-            return new OceanMonumentSpheroid( (OceanMonumentSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof CoralSpheroidType) {
-            return new CoralSpheroid( (CoralSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof ShellSpheroidType) {
-            return new ShellSpheroid( (ShellSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof LiquidSpheroidType) {
-            return new LiquidSpheroid( (LiquidSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof ModularSpheroidType) {
-            return new ModularSpheroid( (ModularSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof DoubleCoreSpheroidType) {
-            return new DoubleCoreSpheroid( (DoubleCoreSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof RainbowSpheroidType) {
-            return new RainbowSpheroid( (RainbowSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof BeeHiveSpheroidType) {
-            return new BeeHiveSpheroid( (BeeHiveSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof DungeonSpheroidType) {
-            return new DungeonSpheroid( (DungeonSpheroidType) spheroidType, systemRandom);
-        } else if(spheroidType instanceof StripesSpheroidType) {
-            return new StripesSpheroid( (StripesSpheroidType) spheroidType, systemRandom);
-        } else {
-            return null;
-        }
+        return spheroidType.getRandomSphere(systemRandom);
     }
 
 

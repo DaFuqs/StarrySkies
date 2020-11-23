@@ -2,8 +2,10 @@ package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.special_overworld.MushroomSpheroid;
 import de.dafuqs.starrysky.spheroidtypes.ShellSpheroidType;
 import net.minecraft.block.BlockState;
+import net.minecraft.world.gen.ChunkRandom;
 
 
 /**
@@ -25,6 +27,10 @@ public class MushroomSpheroidType extends ShellSpheroidType {
 
     public String getDescription() {
         return "MushroomSpheroid";
+    }
+
+    public MushroomSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new MushroomSpheroid(this, chunkRandom);
     }
 
 }

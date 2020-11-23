@@ -2,6 +2,7 @@ package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroidlists.SpheroidList;
+import de.dafuqs.starrysky.spheroids.special_overworld.BeeHiveSpheroid;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
@@ -53,4 +54,9 @@ public class BeeHiveSpheroidType extends SpheroidType {
     public BlockState getRandomTallFlower(ChunkRandom random) {
         return SpheroidList.LIST_TALL_FLOWERS.get(random.nextInt(SpheroidList.LIST_TALL_FLOWERS.size()));
     }
+
+    public BeeHiveSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new BeeHiveSpheroid(this, chunkRandom);
+    }
+
 }

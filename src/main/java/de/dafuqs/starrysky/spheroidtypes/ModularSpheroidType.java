@@ -2,8 +2,10 @@ package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.ModularSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.gen.ChunkRandom;
 
 public class ModularSpheroidType extends SpheroidType {
 
@@ -72,6 +74,10 @@ public class ModularSpheroidType extends SpheroidType {
 
     public Identifier getCenterChestLootTable() {
         return this.centerChestLootTable;
+    }
+
+    public ModularSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new ModularSpheroid(this, chunkRandom);
     }
 
 }

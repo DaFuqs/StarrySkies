@@ -2,6 +2,7 @@ package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroids.Spheroid;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
@@ -40,5 +41,7 @@ public abstract class SpheroidType {
     public SpheroidAdvancementIdentifier getSpheroidTypeIdentifier() {
         return spheroidAdvancementIdentifier;
     }
+
+    public abstract Spheroid getRandomSphere(ChunkRandom chunkRandom);
 
 }

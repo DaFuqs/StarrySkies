@@ -1,8 +1,9 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.DoubleCoreSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -70,6 +71,8 @@ public class DoubleCoreSpheroidType extends SpheroidType {
         return "DoubleCoreSpheroid";
     }
 
-
+    public DoubleCoreSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new DoubleCoreSpheroid(this, chunkRandom);
+    }
 
 }

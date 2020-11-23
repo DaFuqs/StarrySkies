@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.config;
+package de.dafuqs.starrysky.configs;
 
 
 import io.github.prospector.modmenu.api.ConfigScreenFactory;

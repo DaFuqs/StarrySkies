@@ -2,7 +2,9 @@ package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.spheroids.SupportedRainbowSpheroid;
 import net.minecraft.block.BlockState;
+import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.List;
 
@@ -36,5 +38,7 @@ public class SupportedRainbowSpheroidType extends SpheroidType {
         return "SupportedRainbowSpheroid";
     }
 
-
+    public SupportedRainbowSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        return new SupportedRainbowSpheroid(this, chunkRandom);
+    }
 }

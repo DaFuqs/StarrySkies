@@ -2,6 +2,7 @@ package de.dafuqs.starrysky.spheroidlists;
 
 import com.terraformersmc.terraform.leaves.block.ExtendedLeavesBlock;
 import com.terraformersmc.terraform.wood.block.SmallLogBlock;
+import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidtypes.ModularSpheroidType;
