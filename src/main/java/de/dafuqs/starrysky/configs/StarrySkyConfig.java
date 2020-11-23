@@ -113,6 +113,34 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nEnable Tech Reborn Integration")
     public boolean generateTechRebornSpheroids = true;
 
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Sakura Rosea Integration")
+    public boolean generateSakuraRoseaSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Terrestria Integration")
+    public boolean generateTerrestriaSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Traverse Integration")
+    public boolean generateTraverseSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Sandwichable Integration")
+    public boolean generateSandwichableSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Biomes You Go Integration")
+    public boolean generateBYGSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Unearthed Integration")
+    public boolean generateUnearthedSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Unearthed Integration")
+    public boolean generateBlockusSpheroids = true;
+
     @Override
     public void validatePostLoad() {
 

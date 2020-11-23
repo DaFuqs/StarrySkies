@@ -1,11 +1,11 @@
 {
-  "biome.starrysky.starrysky": "Starry Sky",
+  "biome.starrysky.starrysky_biome": "Starry Sky",
 
   "text.autoconfig.StarrySky.title": "Starry Sky Config",
   "text.autoconfig.StarrySky.category.GENERAL": "General",
   "text.autoconfig.StarrySky.category.SYSTEM GENERATION": "System Generation",
   "text.autoconfig.StarrySky.category.WORLD FLOOR GENERATION": "World Floor",
-  "text.autoconfig.StarrySky.category.SPHEROIDS": "World Floor",
+  "text.autoconfig.StarrySky.category.SPHEROIDS": "Available Spheroids",
 
   "text.autoconfig.StarrySky.option.spawnInDimension.@Tooltip": "When enabled all new players will spawn in the planetoids dimension initially.",
   "text.autoconfig.StarrySky.option.spawnInDimension": "Spawn in Spheroids Dimension",
@@ -32,6 +32,13 @@
   "text.autoconfig.StarrySky.option.generateAppliedEnergistics2Spheroids": "Enable Applied Energistics 2 Integration",
   "text.autoconfig.StarrySky.option.generateModernIndustrializationSpheroids": "Enable Modern Industrialization Integration",
   "text.autoconfig.StarrySky.option.generateTechRebornSpheroids": "Enable Tech Reborn Integration",
+  "text.autoconfig.StarrySky.option.generateSakuraRoseaSpheroids": "Enable Sakura Rosea Integration",
+  "text.autoconfig.StarrySky.option.generateTerrestriaSpheroids": "Enable Terrestria Integration",
+  "text.autoconfig.StarrySky.option.generateTraverseSpheroids": "Enable Traverse Integration",
+  "text.autoconfig.StarrySky.option.generateSandwichableSpheroids": "Enable Sandwichable Integration",
+  "text.autoconfig.StarrySky.option.generateBYGSpheroids": "Enable Biomes You Go Integration",
+  "text.autoconfig.StarrySky.option.generateUnearthedSpheroids": "Enable Unearthed Integration",
+  "text.autoconfig.StarrySky.option.generateBlockusSpheroids": "Enable Unearthed Integration",
 
   "text.autoconfig.StarrySky.option.floorHeight.@PrefixText": "If (or how high) there should be a world floor. When set to 1 there will the specified BottomBlock at y=1 and the floor block up to the floor height. When set to >1 there will the specified BottomBlock at y=1. When set to 0 there will be no ground, only void",
   "text.autoconfig.StarrySky.option.floorHeight": "Floor Height",

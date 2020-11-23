@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,6 +16,13 @@ public class CaveSpheroidType extends ShellSpheroidType {
     public CaveSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState shellBlock, BlockState caveFloorBlock, int minRadius, int maxRadius, int minShellRadius, int maxShellRadius) {
         //BlockState coreBlock, BlockState shellBlock, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
         super(spheroidAdvancementIdentifier, Blocks.CAVE_AIR.getDefaultState(), shellBlock, minRadius, maxRadius, minShellRadius, maxShellRadius);
+
+        if(shellBlock == null) {
+            StarrySkyCommon.LOGGER.error("CaveSpheroidType: Registered a SpheroidType with null shellBlock!");
+        }
+        if(caveFloorBlock == null) {
+            StarrySkyCommon.LOGGER.error("CaveSpheroidType: Registered a SpheroidType with null caveFloorBlock!");
+        }
 
         this.caveFloorBlock = caveFloorBlock;
         this.shellBlock = shellBlock;

@@ -60,6 +60,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         super(biomeSource, biomeSource2, new StructuresConfig(Optional.empty(), Collections.emptyMap()), seed); // no structures
         this.seed = seed;
         this.settings = chunkGeneratorType;
+
         systemGenerator = new SystemGenerator();
 
         // config values

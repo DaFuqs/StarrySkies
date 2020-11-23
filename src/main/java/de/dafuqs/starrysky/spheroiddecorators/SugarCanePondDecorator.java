@@ -50,8 +50,9 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
                     // place sugar cane with chance
                     direction = Direction.Type.HORIZONTAL.iterator();
                     while(direction.hasNext()) {
+                        Direction currentDirection = direction.next();
                         if (random.nextInt(SUGAR_CANE_CHANCE) == 0) {
-                            BlockPos sugarCaneBlockPos = randomBlockPos.up().offset(direction.next());
+                            BlockPos sugarCaneBlockPos = randomBlockPos.up().offset(currentDirection);
                             if(isBlockPosInChunk(chunk, sugarCaneBlockPos)) {
                                 int sugarCaneHeight = random.nextInt(3);
                                 for (int i = 0; i <= sugarCaneHeight; i++) {

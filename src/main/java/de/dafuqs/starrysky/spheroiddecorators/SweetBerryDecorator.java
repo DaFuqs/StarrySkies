@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class SweetBerryDecorator extends SpheroidDecorator {
 
     private static final BlockState SWEET_BERRY_BUSH = Blocks.SWEET_BERRY_BUSH.getDefaultState();
-    private static final int SWEET_BERRY_BUSH_CHANCE = 16;
+    private static final int SWEET_BERRY_BUSH_CHANCE = 32;
 
     @Override
     public void decorateSpheroid(WorldView worldView, Chunk chunk, Spheroid spheroid, ArrayList<BlockPos> blockPos, ChunkRandom random) {

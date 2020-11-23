@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.Support;
 import net.minecraft.block.BlockState;
@@ -22,6 +23,13 @@ public class CoreSpheroidType extends SpheroidType {
 
     public CoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState coreBlock, LinkedHashMap<BlockState, Float> shellBlockStates, int minRadius, int maxRadius, int minCoreRadius, int maxCoreRadius) {
         super();
+
+        if(coreBlock == null) {
+            StarrySkyCommon.LOGGER.error("CoreSpheroidType: Registered a SpheroidType with null coreBlock!");
+        }
+        if(shellBlockStates == null || shellBlockStates.size() == 0) {
+            StarrySkyCommon.LOGGER.error("CoreSpheroidType: Registered a SpheroidType with empty shellBlockStates!");
+        }
 
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
         this.coreBlock = coreBlock;

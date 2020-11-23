@@ -4,7 +4,6 @@ import de.dafuqs.starrysky.advancements.ProximityAchivementCheckEvent;
 import de.dafuqs.starrysky.commands.StarrySkyCommands;
 import de.dafuqs.starrysky.configs.StarrySkyConfig;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
-import de.dafuqs.starrysky.spheroidlists.SpheroidLoader;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -29,7 +28,6 @@ public class StarrySkyCommon implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public static ServerWorld starryWorld;
-    public static SpheroidLoader spheroidLoader;
 
     @Override
     public void onInitialize() {
@@ -47,8 +45,6 @@ public class StarrySkyCommon implements ModInitializer {
         StarrySkyDimension.setupDimension();
         StarrySkyDimension.setupPortal();
         StarrySkyCommands.initialize();
-
-        spheroidLoader = new SpheroidLoader();
 
         // triggers everytime a world is loaded
         // so for overworld, nether, ... (they all share the same seed)

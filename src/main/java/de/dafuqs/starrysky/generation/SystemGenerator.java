@@ -1,7 +1,7 @@
 package de.dafuqs.starrysky.generation;
 
+import de.dafuqs.starrysky.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroidlists.SpheroidListVanilla;
 import de.dafuqs.starrysky.spheroids.*;
 import de.dafuqs.starrysky.spheroids.special_overworld.BeeHiveSpheroid;
@@ -27,6 +27,11 @@ public class SystemGenerator {
     // spawning probabilities
     // normal hashmaps are not stable
     private final HashMap<Point, List<Spheroid>> cache = new HashMap<>();
+    public static SpheroidLoader spheroidLoader;
+
+    public SystemGenerator() {
+        spheroidLoader = new SpheroidLoader();
+    }
 
     /**
      *
@@ -160,7 +165,7 @@ public class SystemGenerator {
 
     // TODO: that's so bad
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
-        SpheroidType spheroidType = Support.getWeightedRandom(StarrySkyCommon.spheroidLoader.getAvailableSpheroidTypesWithWeight(), systemRandom);
+        SpheroidType spheroidType = spheroidLoader.getWeightedRandomSpheroid(systemRandom);
 
         StarrySkyCommon.LOGGER.log(Level.DEBUG, "Created a new sphere of type " + spheroidType);
         if(spheroidType instanceof CoreSpheroidType) {

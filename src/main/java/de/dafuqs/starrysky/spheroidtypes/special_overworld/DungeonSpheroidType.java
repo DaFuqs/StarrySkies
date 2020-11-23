@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
@@ -19,6 +20,10 @@ public class DungeonSpheroidType extends SpheroidType {
 
     public DungeonSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, EntityType entityType, LinkedHashMap<BlockState, Float> validShellBlocks, int minRadius, int maxRadius, int minShellRadius, int maxShellRadius) {
         super();
+
+        if(entityType == null) {
+            StarrySkyCommon.LOGGER.error("DungeonSpheroidType: Registered a SpheroidType with null entity!");
+        }
 
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
         this.entityType = entityType;

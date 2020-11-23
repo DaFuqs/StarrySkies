@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
@@ -15,6 +16,10 @@ public class ModularSpheroidType extends SpheroidType {
 
     public ModularSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState mainBlock, int minSize, int maxSize) {
         super();
+
+        if(mainBlock == null) {
+            StarrySkyCommon.LOGGER.error("ModularSpheroidType: Registered a SpheroidType with null mainBlock!");
+        }
 
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
         this.mainBlock = mainBlock;
@@ -39,12 +44,20 @@ public class ModularSpheroidType extends SpheroidType {
     }
 
     public ModularSpheroidType setTopBlockState(BlockState state) {
-        topBlock = state;
+        if(mainBlock == null) {
+            StarrySkyCommon.LOGGER.error("ModularSpheroidType: Registered a SpheroidType with null mainBlock!");
+        } else {
+            topBlock = state;
+        }
         return this;
     }
 
     public ModularSpheroidType setBottomBlockState(BlockState state) {
-        bottomBlock = state;
+        if(mainBlock == null) {
+            StarrySkyCommon.LOGGER.error("ModularSpheroidType: Registered a SpheroidType with null mainBlock!");
+        } else {
+            bottomBlock = state;
+        }
         return this;
     }
 

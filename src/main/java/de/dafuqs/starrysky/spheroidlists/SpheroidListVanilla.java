@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidlists;
 
+import de.dafuqs.starrysky.SpheroidLoader;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorators;
 import de.dafuqs.starrysky.spheroidtypes.*;
@@ -11,15 +12,13 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.state.property.Properties;
 
-import java.util.LinkedHashMap;
-
 public class SpheroidListVanilla extends SpheroidList {
 
     //SPHEROID TYPES
     //BASIC
-    public static final ModularSpheroidType GRASS = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, Blocks.DIRT.getDefaultState(), 5, 20).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState()).addDecorator(SpheroidDecorators.SUGAR_CANE_POND, 0.2F);
+    public static final ModularSpheroidType GRASS = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, Blocks.DIRT.getDefaultState(), 5, 20).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState()).addDecorator(SpheroidDecorators.SUGAR_CANE_POND, 0.25F);
     public static final ModularSpheroidType MYCELIUM = new ModularSpheroidType(SpheroidAdvancementIdentifier.mycelium, Blocks.DIRT.getDefaultState(), 5, 8).setTopBlockState(Blocks.MYCELIUM.getDefaultState());
-    public static final ModularSpheroidType PODZOL = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.podzol, Blocks.DIRT.getDefaultState(), 5, 12).setTopBlockState(Blocks.PODZOL.getDefaultState()).addDecorator(SpheroidDecorators.BAMBOO, 0.5F);
+    public static final ModularSpheroidType PODZOL = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.podzol, Blocks.DIRT.getDefaultState(), 5, 12).setTopBlockState(Blocks.PODZOL.getDefaultState()).addDecorator(SpheroidDecorators.BAMBOO, 0.3F);
     public static final ModularSpheroidType STONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.stone, Blocks.STONE.getDefaultState(), 5, 18);
     public static final ModularSpheroidType GRANITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.granite, Blocks.GRANITE.getDefaultState(), 6, 13);
     public static final ModularSpheroidType DIORITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.diorite, Blocks.DIORITE.getDefaultState(), 6, 13);
@@ -32,8 +31,8 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final ModularSpheroidType COARSE_DIRT = new ModularSpheroidType(SpheroidAdvancementIdentifier.coarse_dirt, Blocks.COARSE_DIRT.getDefaultState(), 5, 6);
 
     // GIANT SPHERES
-    public static final CaveSpheroidType HUGE_MONSTER_CAVE = (CaveSpheroidType) new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, Blocks.DIRT.getDefaultState(), Blocks.COARSE_DIRT.getDefaultState(), 20, 30, 2, 5).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState()).addDecorator(SpheroidDecorators.MUSHROOMS, 0.5F);
-    public static final DoubleCoreSpheroidType THE_SUN = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.the_sun, Blocks.NETHERITE_BLOCK.getDefaultState(), Blocks.GOLD_BLOCK.getDefaultState(), Blocks.GLOWSTONE.getDefaultState(), 50, 50, 2, 3, 45, 45);
+    public static final CaveSpheroidType HUGE_MONSTER_CAVE = (CaveSpheroidType) new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, Blocks.DIRT.getDefaultState(), Blocks.COARSE_DIRT.getDefaultState(), 20, 30, 2, 5).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState()).addDecorator(SpheroidDecorators.MUSHROOMS, 0.3F);
+    public static final DoubleCoreSpheroidType THE_SUN = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.the_sun, Blocks.NETHERITE_BLOCK.getDefaultState(), Blocks.GOLD_BLOCK.getDefaultState(), Blocks.GLOWSTONE.getDefaultState(), 50, 50, 2, 2, 45, 45);
 
     // CORALS
     public static final CoralSpheroidType CORALS_GLASS = new CoralSpheroidType(SpheroidAdvancementIdentifier.coral, MAP_GLASS, SpheroidList.LIST_FULL_CORAL_BLOCKS, SpheroidList.LIST_WATERLOGGABLE_CORAL_BLOCKS, 10, 20, 1, 2);
@@ -62,7 +61,7 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final ModularSpheroidType OBSIDIAN = new ModularSpheroidType(SpheroidAdvancementIdentifier.obsidian, Blocks.OBSIDIAN.getDefaultState(),   3, 6);
     public static final ModularSpheroidType GLOWSTONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.glowstone, Blocks.GLOWSTONE.getDefaultState(), 5, 10);
     public static final ModularSpheroidType BEDROCK = new ModularSpheroidType(SpheroidAdvancementIdentifier.bedrock, Blocks.BEDROCK.getDefaultState(), 3, 5);
-    public static final ShellSpheroidType STONE_HOLLOW = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.cave, Blocks.CAVE_AIR.getDefaultState(), MAP_STONES, 5, 20, 3, 8).addDecorator(SpheroidDecorators.MUSHROOMS, 0.5F);
+    public static final ShellSpheroidType STONE_HOLLOW = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.cave, Blocks.CAVE_AIR.getDefaultState(), MAP_STONES, 5, 20, 3, 8).addDecorator(SpheroidDecorators.MUSHROOMS, 0.3F);
 
     // ORES
     public static final CoreSpheroidType COAL     = new CoreSpheroidType(SpheroidAdvancementIdentifier.coal, Blocks.COAL_ORE.getDefaultState(), MAP_STONES, 5, 15, 3, 7);
@@ -81,12 +80,12 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final CoreSpheroidType TNT      = new CoreSpheroidType(SpheroidAdvancementIdentifier.tnt, Blocks.TNT.getDefaultState(), MAP_STONES, 4, 8, 2, 4);
 
     //WOOD
-    public static final ShellSpheroidType OAK_WOOD      = new ShellSpheroidType(SpheroidAdvancementIdentifier.oak_wood, Blocks.OAK_WOOD.getDefaultState(),      Blocks.OAK_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),      8, 15, 2, 4);
-    public static final ShellSpheroidType SPRUCE_WOOD   = new ShellSpheroidType(SpheroidAdvancementIdentifier.spruce_wood, Blocks.SPRUCE_WOOD.getDefaultState(),   Blocks.SPRUCE_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   5, 15, 2, 4);
-    public static final ShellSpheroidType JUNGLE_WOOD   = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.jungle_wood, Blocks.JUNGLE_WOOD.getDefaultState(),   Blocks.JUNGLE_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   10, 20, 2, 4).addDecorator(SpheroidDecorators.COCOA, 0.5F);
-    public static final ShellSpheroidType DARK_OAK_WOOD = new ShellSpheroidType(SpheroidAdvancementIdentifier.dark_oak_wood, Blocks.DARK_OAK_WOOD.getDefaultState(), Blocks.DARK_OAK_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1), 5, 15, 2, 4);
-    public static final ShellSpheroidType BIRCH_WOOD    = new ShellSpheroidType(SpheroidAdvancementIdentifier.birch_wood, Blocks.BIRCH_WOOD.getDefaultState(),    Blocks.BIRCH_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),    5, 15, 2, 4);
-    public static final ShellSpheroidType ACACIA_WOOD   = new ShellSpheroidType(SpheroidAdvancementIdentifier.acacia_wood, Blocks.ACACIA_WOOD.getDefaultState(),   Blocks.ACACIA_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   5, 12, 2, 4);
+    public static final ShellSpheroidType OAK_WOOD      = new ShellSpheroidType(SpheroidAdvancementIdentifier.oak_wood, Blocks.OAK_WOOD.getDefaultState(),      Blocks.OAK_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),      8, 15, 2, 3);
+    public static final ShellSpheroidType SPRUCE_WOOD   = new ShellSpheroidType(SpheroidAdvancementIdentifier.spruce_wood, Blocks.SPRUCE_WOOD.getDefaultState(),   Blocks.SPRUCE_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   5, 15, 2, 3);
+    public static final ShellSpheroidType JUNGLE_WOOD   = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.jungle_wood, Blocks.JUNGLE_WOOD.getDefaultState(),   Blocks.JUNGLE_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   10, 20, 2, 3).addDecorator(SpheroidDecorators.COCOA, 0.3F);
+    public static final ShellSpheroidType DARK_OAK_WOOD = new ShellSpheroidType(SpheroidAdvancementIdentifier.dark_oak_wood, Blocks.DARK_OAK_WOOD.getDefaultState(), Blocks.DARK_OAK_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1), 5, 15, 2, 2);
+    public static final ShellSpheroidType BIRCH_WOOD    = new ShellSpheroidType(SpheroidAdvancementIdentifier.birch_wood, Blocks.BIRCH_WOOD.getDefaultState(),    Blocks.BIRCH_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),    5, 15, 2, 3);
+    public static final ShellSpheroidType ACACIA_WOOD   = new ShellSpheroidType(SpheroidAdvancementIdentifier.acacia_wood, Blocks.ACACIA_WOOD.getDefaultState(),   Blocks.ACACIA_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   5, 12, 2, 2);
 
     //FLUIDS
     public static final LiquidSpheroidType WATER_GLASS      = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.water, Blocks.WATER.getDefaultState(), MAP_GLASS, 5, 15, 1, 2, 20, 100, 75).addDecorator(SpheroidDecorators.SEA_GREENS, 0.5F);
@@ -105,11 +104,11 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final ShellSpheroidType RED_MUSHROOM      = new MushroomSpheroidType(SpheroidAdvancementIdentifier.red_mushroom, Blocks.MUSHROOM_STEM.getDefaultState(), Blocks.RED_MUSHROOM_BLOCK.getDefaultState(), 4, 8, 2, 3);
 
     //COLD
-    public static final CoreSpheroidType       ICE           = new CoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 15, 3, 6);
-    public static final DoubleCoreSpheroidType GLASS_ICE     = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.GLASS.getDefaultState(), 5, 12, 2, 4, 2, 4);
-    public static final DoubleCoreSpheroidType SNOW_ICE      = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 12, 2, 4, 2, 4).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.5F);
-    public static final DoubleCoreSpheroidType SNOW_BLUE_ICE = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 8, 2, 3, 1, 3);
-    public static final DoubleCoreSpheroidType ICE_BLUE_ICE  = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), 5, 8, 2, 3, 1, 3);
+    public static final CoreSpheroidType       SNOW_ICE        = (CoreSpheroidType) new CoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 15, 3, 6).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F);
+    public static final DoubleCoreSpheroidType GLASS_PACKED_ICE = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.GLASS.getDefaultState(), 5, 12, 2, 4, 2, 4);
+    public static final DoubleCoreSpheroidType SNOW_PACKED_ICE = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 12, 2, 4, 2, 4).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F);
+    public static final DoubleCoreSpheroidType SNOW_BLUE_ICE   = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 8, 2, 3, 1, 3).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.1F);;
+    public static final DoubleCoreSpheroidType ICE_BLUE_ICE    = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), 5, 8, 2, 3, 1, 3);
 
     //RAINBOW
     public static final RainbowSpheroidType RAINBOW_WOOL       = new RainbowSpheroidType(SpheroidAdvancementIdentifier.rainbow_wool, LIST_WOOL, 5, 16);
@@ -138,126 +137,119 @@ public class SpheroidListVanilla extends SpheroidList {
         return true;
     }
 
-    public static LinkedHashMap<SpheroidType, Float> getSpheroidTypesWithProbabilities() {
-        LinkedHashMap<SpheroidType, Float> spheroidTypes = new LinkedHashMap<>();
+    public static void setup(SpheroidLoader spheroidLoader) {
+        // COMMON
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL, 10.0F, GRASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  4.0F, SAND);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  1.0F, RED_SAND);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  1.0F, GRAVEL);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  6.0F, GLOWSTONE);
 
-        //BASIC
-        spheroidTypes.put(GRASS, 3.5F);
-        spheroidTypes.put(MYCELIUM, 0.01F);
-        spheroidTypes.put(PODZOL, 0.4F);
-        spheroidTypes.put(STONE, 0.2F);
-        spheroidTypes.put(GRANITE, 0.2F);
-        spheroidTypes.put(DIORITE, 0.2F);
-        spheroidTypes.put(ANDESITE, 1.0F);
-        spheroidTypes.put(SAND, 2.0F);
-        spheroidTypes.put(RED_SAND, 0.2F);
-        spheroidTypes.put(GRAVEL, 0.3F);
-        spheroidTypes.put(COBBLESTONE, 0.2F);
-        spheroidTypes.put(MOSSY_COBBLESTONE, 0.05F);
-        spheroidTypes.put(COARSE_DIRT, 0.05F);
+        // STONES
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 5.0F, STONE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 2.2F, GRANITE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 2.2F, DIORITE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 2.0F, ANDESITE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, COBBLESTONE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.1F, MOSSY_COBBLESTONE);
 
-        //GLASS
-        spheroidTypes.put(GLASS, 0.1F);
-        spheroidTypes.put(BLACK_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(BLUE_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(BROWN_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(CYAN_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(GRAY_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(GREEN_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(LIGHT_BLUE_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(LIGHT_GRAY_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(LIME_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(MAGENTA_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(ORANGE_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(PINK_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(PURPLE_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(RED_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(WHITE_STAINED_GLASS, 0.01F);
-        spheroidTypes.put(YELLOW_STAINED_GLASS, 0.01F);
-
-        // CORALS
-        spheroidTypes.put(CORALS_GLASS, 0.1F);
-        spheroidTypes.put(CORALS_STONE, 0.1F);
-
-        //RARE
-        spheroidTypes.put(OBSIDIAN, 0.1F);
-        spheroidTypes.put(GLOWSTONE, 2.0F);
-        spheroidTypes.put(BEDROCK, 0.01F);
-        spheroidTypes.put(STONE_HOLLOW, 0.2F);
-
-        //ORES
-        spheroidTypes.put(COAL, 4.0F);
-        spheroidTypes.put(IRON, 2.0F);
-        spheroidTypes.put(GOLD, 0.5F);
-        spheroidTypes.put(DIAMOND, 0.2F);
-        spheroidTypes.put(REDSTONE, 1.0F);
-        spheroidTypes.put(LAPIS, 0.3F);
-        spheroidTypes.put(EMERALD, 0.05F);
-
-        // "ORES"
-        spheroidTypes.put(BONE, 0.02F);
-        spheroidTypes.put(HAY, 0.02F);
-        spheroidTypes.put(PRISMARINE, 0.02F);
-        spheroidTypes.put(SLIME, 0.02F);
-        spheroidTypes.put(TNT, 0.02F);
-
-        //WOOD
-        spheroidTypes.put(OAK_WOOD, 1.0F);
-        spheroidTypes.put(SPRUCE_WOOD, 0.5F);
-        spheroidTypes.put(JUNGLE_WOOD, 0.3F);
-        spheroidTypes.put(DARK_OAK_WOOD, 0.3F);
-        spheroidTypes.put(BIRCH_WOOD, 0.5F);
-        spheroidTypes.put(ACACIA_WOOD, 0.3F);
-
-        // MUSHROOMS
-        spheroidTypes.put(BROWN_MUSHROOM, 0.1F);
-        spheroidTypes.put(RED_MUSHROOM, 0.1F);
-
-        //FLUIDS
-        spheroidTypes.put(WATER_GLASS, 1.5F);
-        spheroidTypes.put(WATER_CLAY, 0.5F);
-        spheroidTypes.put(WATER_SPONGE, 0.1F);
-        spheroidTypes.put(WATER_SLIME, 0.1F);
-        spheroidTypes.put(WATER_ICE, 0.3F);
-        spheroidTypes.put(WATER_PACKED_ICE, 0.1F);
-        spheroidTypes.put(LAVA_STONE, 2.0F);
-        spheroidTypes.put(LAVA_MAGMA, 0.4F);
-        spheroidTypes.put(LAVA_OBSIDIAN, 1.0F);
-        spheroidTypes.put(LAVA_GLASS, 0.5F);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 2.0F, PODZOL);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, STONE_HOLLOW);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, COARSE_DIRT);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, OBSIDIAN);
 
         //COLD
-        spheroidTypes.put(ICE, 0.4F);
-        spheroidTypes.put(GLASS_ICE, 0.4F);
-        spheroidTypes.put(SNOW_ICE, 0.2F);
-        spheroidTypes.put(SNOW_BLUE_ICE, 0.2F);
-        spheroidTypes.put(ICE_BLUE_ICE, 0.2F);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.5F, SNOW_ICE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.5F, SNOW_PACKED_ICE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.4F, GLASS_PACKED_ICE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, SNOW_BLUE_ICE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.4F, ICE_BLUE_ICE);
+
+        // TRANSLUCENT - GLASS
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.1F, GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, BLACK_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, BLUE_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, BROWN_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, CYAN_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, GRAY_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, GREEN_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, LIGHT_BLUE_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, LIGHT_GRAY_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, LIME_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, MAGENTA_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, ORANGE_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, PINK_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, PURPLE_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, RED_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, WHITE_STAINED_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, YELLOW_STAINED_GLASS);
+
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 5.0F, BEE_HIVE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, CORALS_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, CORALS_STONE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, BROWN_MUSHROOM);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.7F, RED_MUSHROOM);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, HUGE_MONSTER_CAVE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, MYCELIUM);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.1F, BEDROCK);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.05F, THE_SUN);
 
         //RAINBOW
-        spheroidTypes.put(RAINBOW_WOOL, 0.1F);
-        spheroidTypes.put(RAINBOW_GLASS, 0.1F);
-        spheroidTypes.put(RAINBOW_CONCRETE, 0.1F);
-        spheroidTypes.put(RAINBOW_TERRACOTTA, 0.1F);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, RAINBOW_WOOL);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, RAINBOW_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, RAINBOW_CONCRETE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, RAINBOW_TERRACOTTA);
 
-        // SPAWNERS
-        spheroidTypes.put(DUNGEON_ZOMBIE, 0.02F);
-        spheroidTypes.put(DUNGEON_SKELETON, 0.02F);
-        spheroidTypes.put(DUNGEON_SPIDER, 0.02F);
-        spheroidTypes.put(DUNGEON_CREEPER, 0.08F);
-        spheroidTypes.put(DUNGEON_CAVE_SPIDER, 0.01F);
-        spheroidTypes.put(DUNGEON_SLIME, 0.01F);
-        spheroidTypes.put(DUNGEON_DROWNED, 0.01F);
-        spheroidTypes.put(DUNGEON_HUSK, 0.01F);
-        spheroidTypes.put(DUNGEON_STRAY, 0.01F);
-        spheroidTypes.put(DUNGEON_WITCH, 0.01F);
-        spheroidTypes.put(DUNGEON_SILVERFISH, 0.01F);
-        spheroidTypes.put(DUNGEON_ENDERMAN, 0.003F);
+        // FLUID - WATER
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 5.0F, WATER_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 2.0F, WATER_CLAY);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 0.2F, WATER_SPONGE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 0.2F, WATER_SLIME);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 1.0F, WATER_ICE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 0.8F, WATER_PACKED_ICE);
 
-        // SPECIAL
-        spheroidTypes.put(BEE_HIVE, 0.2F);
-        spheroidTypes.put(HUGE_MONSTER_CAVE, 0.1F);
-        spheroidTypes.put(THE_SUN, 0.005F);
+        // FLUID - LAVA
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 3.0F, LAVA_GLASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 3.0F, LAVA_STONE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 2.0F, LAVA_OBSIDIAN);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 1.0F, LAVA_MAGMA);
 
-        return spheroidTypes;
+        //ORES
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 9.0F, COAL);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 7.0F, IRON);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 1.0F, GOLD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.5F, DIAMOND);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 4.0F, REDSTONE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.8F, LAPIS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.1F, EMERALD);
+
+        // "ORES"
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.05F, BONE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.05F, HAY);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.05F, PRISMARINE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.05F, SLIME);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.05F, TNT);
+
+        //WOOD
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 5.0F, OAK_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, SPRUCE_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, BIRCH_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, JUNGLE_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, DARK_OAK_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, ACACIA_WOOD);
+
+        // DUNGEON
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  3.0F, DUNGEON_ZOMBIE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  2.0F, DUNGEON_SKELETON);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  2.0F, DUNGEON_SPIDER);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  1.0F, DUNGEON_WITCH);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  0.8F, DUNGEON_CREEPER);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  0.3F, DUNGEON_CAVE_SPIDER);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  0.1F, DUNGEON_SLIME);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  0.1F, DUNGEON_DROWNED);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  0.1F, DUNGEON_HUSK);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  0.1F, DUNGEON_STRAY);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  0.1F, DUNGEON_SILVERFISH);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  0.05F, DUNGEON_ENDERMAN);
     }
-
 }

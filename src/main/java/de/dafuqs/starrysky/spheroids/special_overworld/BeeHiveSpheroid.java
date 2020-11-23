@@ -67,15 +67,7 @@ public class BeeHiveSpheroid extends Spheroid {
                         chunk.setBlockState(currBlockPos, Blocks.BEE_NEST.getDefaultState(), false);
                         this.queenBeehiveBlockEntity = new BeehiveBlockEntity();
                         chunk.setBlockEntity(currBlockPos, queenBeehiveBlockEntity);
-                    } else if (d <= coreDistance) {
-                        // core
-                        int r = random.nextInt((int) Math.ceil(coreDistance / 3F)); // way more honey in the middle
-                        if (coreDistance - r <= d) {
-                            chunk.setBlockState(currBlockPos, Blocks.HONEY_BLOCK.getDefaultState(), false);
-                        } else {
-                            chunk.setBlockState(currBlockPos, Blocks.AIR.getDefaultState(), false);
-                        }
-                    } else if (d == shellDistance -1 && y2 - y == 0 && random.nextInt(10) == 0) {
+                    } else if (d == shellDistance -1 && y2 - y == 0 && random.nextInt(4) == 0) { // TODO: doesn't work anymore?
                         // middle outer shell: random hives
                         Direction direction;
                         int xDist = x2 - x;
@@ -109,6 +101,14 @@ public class BeeHiveSpheroid extends Spheroid {
                         BeehiveBlockEntity outerBeehiveBlockEntity = new BeehiveBlockEntity();
                         chunk.setBlockEntity(currBlockPos, outerBeehiveBlockEntity);
                         this.outerBeehiveBlockEntities.add(outerBeehiveBlockEntity);
+                    } else if (d <= coreDistance) {
+                        // core
+                        int r = random.nextInt((int) Math.ceil(coreDistance / 3F)); // way more honey in the middle
+                        if (coreDistance - r <= d) {
+                            chunk.setBlockState(currBlockPos, Blocks.HONEY_BLOCK.getDefaultState(), false);
+                        } else {
+                            chunk.setBlockState(currBlockPos, Blocks.AIR.getDefaultState(), false);
+                        }
                     } else if (d <= shellDistance) {
                         // shell
                         if (random.nextInt(10) == 0) {

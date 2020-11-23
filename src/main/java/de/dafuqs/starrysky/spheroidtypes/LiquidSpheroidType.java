@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.Support;
 import net.minecraft.block.BlockState;
@@ -29,6 +30,13 @@ public class LiquidSpheroidType extends SpheroidType {
 
     public LiquidSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState liquid, LinkedHashMap<BlockState, Float> validShellBlocks, int minSize, int maxSize, int minShellRadius, int maxShellRadius, int minFillPercent, int maxFillPercent, int holeInBottomPercent) {
         super();
+
+        if(liquid == null) {
+            StarrySkyCommon.LOGGER.error("LiquidSpheroidType: Registered a SpheroidType with null liquid!");
+        }
+        if(validShellBlocks == null || validShellBlocks.size() == 0) {
+            StarrySkyCommon.LOGGER.error("LiquidSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
+        }
 
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
         this.liquid = liquid;

@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidtypes.special_overworld;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
@@ -20,6 +21,13 @@ public class CoralSpheroidType extends SpheroidType {
 
     public CoralSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, LinkedHashMap<BlockState, Float> validShellBlocks, ArrayList<BlockState> coralBlockStates, ArrayList<BlockState> waterloggableBlockStates, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
         super();
+
+        if(coralBlockStates == null || coralBlockStates.size() == 0) {
+            StarrySkyCommon.LOGGER.error("CoralSpheroidType: Registered a SpheroidType with empty coralBlockStates!");
+        }
+        if(validShellBlocks == null || validShellBlocks.size() == 0) {
+            StarrySkyCommon.LOGGER.error("CoralSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
+        }
 
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
         this.validShellBlocks = validShellBlocks;

@@ -28,7 +28,7 @@ public abstract class SpheroidType {
     public ArrayList<SpheroidDecorator> getSpheroidDecoratorsWithChance(ChunkRandom random) {
         ArrayList<SpheroidDecorator> resultingSpheroidDecorators = new ArrayList<>();
         for(Map.Entry<SpheroidDecorator, Float> spheroidDecorator : spheroidDecorators.entrySet()) {
-            if(spheroidDecorator.getValue() < random.nextFloat()) {
+            if(random.nextFloat() < spheroidDecorator.getValue()) {
                 resultingSpheroidDecorators.add(spheroidDecorator.getKey());
             }
         }
