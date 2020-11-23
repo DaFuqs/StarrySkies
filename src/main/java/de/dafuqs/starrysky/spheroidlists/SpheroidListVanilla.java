@@ -4,10 +4,7 @@ import de.dafuqs.starrysky.SpheroidLoader;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorators;
 import de.dafuqs.starrysky.spheroidtypes.*;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.BeeHiveSpheroidType;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.CoralSpheroidType;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.DungeonSpheroidType;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.MushroomSpheroidType;
+import de.dafuqs.starrysky.spheroidtypes.special_overworld.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.state.property.Properties;
@@ -62,6 +59,7 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final ModularSpheroidType GLOWSTONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.glowstone, Blocks.GLOWSTONE.getDefaultState(), 5, 10);
     public static final ModularSpheroidType BEDROCK = new ModularSpheroidType(SpheroidAdvancementIdentifier.bedrock, Blocks.BEDROCK.getDefaultState(), 3, 5);
     public static final ShellSpheroidType STONE_HOLLOW = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.cave, Blocks.CAVE_AIR.getDefaultState(), MAP_STONES, 5, 20, 3, 8).addDecorator(SpheroidDecorators.MUSHROOMS, 0.3F);
+    public static final OceanMonumentSpheroidType OCEAN_MONUMENT = new OceanMonumentSpheroidType(SpheroidAdvancementIdentifier.ocean_monument, 25, 35, 3, 5, 2, 3);
 
     // ORES
     public static final CoreSpheroidType COAL     = new CoreSpheroidType(SpheroidAdvancementIdentifier.coal, Blocks.COAL_ORE.getDefaultState(), MAP_STONES, 5, 15, 3, 7);
@@ -193,6 +191,7 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, MYCELIUM);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.1F, BEDROCK);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.05F, THE_SUN);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 100F, OCEAN_MONUMENT); // TODO: Lower
 
         //RAINBOW
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, RAINBOW_WOOL);

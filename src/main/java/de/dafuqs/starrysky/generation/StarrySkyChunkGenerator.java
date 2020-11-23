@@ -99,10 +99,13 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     @Override
     public void buildSurface(ChunkRegion region, Chunk chunk) {
         ChunkPos chunkPos = chunk.getPos();
+
+        /*
         int i = chunkPos.x;
         int j = chunkPos.z;
-        /*ChunkRandom chunkRandom = new ChunkRandom();
-        chunkRandom.setTerrainSeed(i, j);*/
+        ChunkRandom chunkRandom = new ChunkRandom();
+        chunkRandom.setTerrainSeed(i, j);
+        */
 
         int chunkPosStartX = chunkPos.getStartX();
         int chunkPosStartZ = chunkPos.getStartZ();

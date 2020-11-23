@@ -7,6 +7,7 @@ public class SpheroidAdvancementIdentifierGroups {
     public HashMap<SpheroidAdvancementIdentifier, SpheroidAdvancementGroup> spheroidAdvancementIdentifierGroups = new HashMap<>();
 
     public SpheroidAdvancementIdentifierGroups() {
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.ocean_monument,  SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.acacia_wood,  SpheroidAdvancementGroup.WOOD);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.andesite,     SpheroidAdvancementGroup.COMMON);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.bedrock,      SpheroidAdvancementGroup.RARE);

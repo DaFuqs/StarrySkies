@@ -13,6 +13,8 @@ import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
 
+import static de.dafuqs.starrysky.Support.isBlockPosInChunkPos;
+
 public class CocoaDecorator extends SpheroidDecorator {
 
     private static final BlockState GROWN_COCOA_BLOCKSTATE = Blocks.COCOA.getDefaultState().with(CocoaBlock.AGE, 2); // 2 = fully grown
@@ -24,7 +26,7 @@ public class CocoaDecorator extends SpheroidDecorator {
             for (int y = -2; y < 3; y++) {
                 for (int z = -2; z < 3; z++) {
                     BlockPos bp = spheroid.getPosition().up(y).north(x).east(z);
-                    if(isBlockPosInChunk(chunk, bp)) {
+                    if(isBlockPosInChunkPos(chunk.getPos(), bp)) {
                         if(y == 0 && ((Math.abs(x) == 2) && Math.abs(z) == 1 || (Math.abs(z) == 2 && Math.abs(x) == 1))) {
                             Direction direction;
                             if(x == 0) {

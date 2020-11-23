@@ -172,5 +172,7 @@
   "advancements.dafuqs.starry_sky.sphere_brown_mushroom.title": "Sphere: Brown Mushroom",
   "advancements.dafuqs.starry_sky.sphere_brown_mushroom.description": "Find a brown mushroom sphere",
   "advancements.dafuqs.starry_sky.sphere_coral.title": "Sphere: Corals",
-  "advancements.dafuqs.starry_sky.sphere_coral.description": "Find a coral sphere"
+  "advancements.dafuqs.starry_sky.sphere_coral.description": "Find a coral sphere",
+  "advancements.dafuqs.starry_sky.sphere_ocean_monument.title": "Sphere: Ocean Monument",
+  "advancements.dafuqs.starry_sky.sphere_ocean_monument.description": "Find an ocean monument sphere"
 }

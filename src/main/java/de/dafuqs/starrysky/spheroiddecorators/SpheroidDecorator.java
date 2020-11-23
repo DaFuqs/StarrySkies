@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroiddecorators;
 
+import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroids.Spheroid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
@@ -24,19 +25,11 @@ public abstract class SpheroidDecorator {
     protected ArrayList<BlockPos> getDecorationBlockPosInChunk(Chunk chunk, ArrayList<BlockPos> decorationBlocks) {
         ArrayList<BlockPos> decorationBlockPosInChunk = new ArrayList<>();
         for(BlockPos currentDecorationPos : decorationBlocks) {
-            if(isBlockPosInChunk(chunk, currentDecorationPos)) {
+            if(Support.isBlockPosInChunkPos(chunk.getPos(), currentDecorationPos)) {
                 decorationBlockPosInChunk.add(currentDecorationPos);
             }
         }
         return decorationBlockPosInChunk;
     }
-
-    protected boolean isBlockPosInChunk(Chunk chunk, BlockPos blockPos) {
-        return (blockPos.getX() >= chunk.getPos().getStartX()
-                && blockPos.getX() < chunk.getPos().getStartX() + 16
-                && blockPos.getZ() >= chunk.getPos().getStartZ()
-                && blockPos.getZ() < chunk.getPos().getStartZ() + 16);
-    }
-
 
 }

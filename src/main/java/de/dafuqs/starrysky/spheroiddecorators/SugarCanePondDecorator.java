@@ -13,6 +13,8 @@ import net.minecraft.world.gen.ChunkRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static de.dafuqs.starrysky.Support.isBlockPosInChunkPos;
+
 public class SugarCanePondDecorator extends SpheroidDecorator {
 
     private static final Block SUGAR_CANE_BLOCK = Blocks.SUGAR_CANE;
@@ -53,7 +55,7 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
                         Direction currentDirection = direction.next();
                         if (random.nextInt(SUGAR_CANE_CHANCE) == 0) {
                             BlockPos sugarCaneBlockPos = randomBlockPos.up().offset(currentDirection);
-                            if(isBlockPosInChunk(chunk, sugarCaneBlockPos)) {
+                            if(isBlockPosInChunkPos(chunk.getPos(), sugarCaneBlockPos)) {
                                 int sugarCaneHeight = random.nextInt(3);
                                 for (int i = 0; i <= sugarCaneHeight; i++) {
                                     if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCKSTATE, worldView, sugarCaneBlockPos.up(i))) {

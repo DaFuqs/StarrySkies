@@ -3,6 +3,7 @@ package de.dafuqs.starrysky;
 import de.dafuqs.starrysky.spheroids.Spheroid;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -62,6 +63,13 @@ public class Support {
 
     public static double distance(BlockPos blockPos1, BlockPos blockpos2) {
         return distance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockpos2.getX(), blockpos2.getY(), blockpos2.getZ());
+    }
+
+    public static boolean isBlockPosInChunkPos(ChunkPos chunkPos, BlockPos blockPos) {
+        return (blockPos.getX() >= chunkPos.getStartX()
+                && blockPos.getX() < chunkPos.getStartX() + 16
+                && blockPos.getZ() >= chunkPos.getStartZ()
+                && blockPos.getZ() < chunkPos.getStartZ() + 16);
     }
 
 }

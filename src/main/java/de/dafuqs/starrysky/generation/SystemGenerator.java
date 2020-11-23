@@ -4,15 +4,9 @@ import de.dafuqs.starrysky.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidlists.SpheroidListVanilla;
 import de.dafuqs.starrysky.spheroids.*;
-import de.dafuqs.starrysky.spheroids.special_overworld.BeeHiveSpheroid;
-import de.dafuqs.starrysky.spheroids.special_overworld.CoralSpheroid;
-import de.dafuqs.starrysky.spheroids.special_overworld.DungeonSpheroid;
-import de.dafuqs.starrysky.spheroids.special_overworld.MushroomSpheroid;
+import de.dafuqs.starrysky.spheroids.special_overworld.*;
 import de.dafuqs.starrysky.spheroidtypes.*;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.BeeHiveSpheroidType;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.CoralSpheroidType;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.DungeonSpheroidType;
-import de.dafuqs.starrysky.spheroidtypes.special_overworld.MushroomSpheroidType;
+import de.dafuqs.starrysky.spheroidtypes.special_overworld.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.ChunkRandom;
 import org.apache.logging.log4j.Level;
@@ -176,6 +170,8 @@ public class SystemGenerator {
             return new MushroomSpheroid( (MushroomSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof SupportedRainbowSpheroidType) { // has to be checked before shellSpheroid
             return new SupportedRainbowSpheroid( (SupportedRainbowSpheroidType) spheroidType, systemRandom);
+        } else if(spheroidType instanceof OceanMonumentSpheroidType) {
+            return new OceanMonumentSpheroid( (OceanMonumentSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof CoralSpheroidType) {
             return new CoralSpheroid( (CoralSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof ShellSpheroidType) {
