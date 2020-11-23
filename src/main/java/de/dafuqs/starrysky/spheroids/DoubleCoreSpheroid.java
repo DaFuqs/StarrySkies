@@ -62,7 +62,7 @@ public class DoubleCoreSpheroid extends Spheroid {
                     } else if (d <= this.radius) {
                         chunk.setBlockState(currBlockPos, this.shellBlock, false);
                         if(isTopBlock(d, x2, y2, z2)) {
-                            this.decorationBlocks.add(currBlockPos);
+                            addDecorationBlock(currBlockPos);
                         }
                     }
                 }

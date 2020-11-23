@@ -14,7 +14,6 @@ public class CaveSpheroidType extends ShellSpheroidType {
     private BlockState bottomBlock;
 
     public CaveSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState shellBlock, BlockState caveFloorBlock, int minRadius, int maxRadius, int minShellRadius, int maxShellRadius) {
-        //BlockState coreBlock, BlockState shellBlock, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
         super(spheroidAdvancementIdentifier, Blocks.CAVE_AIR.getDefaultState(), shellBlock, minRadius, maxRadius, minShellRadius, maxShellRadius);
 
         if(shellBlock == null) {

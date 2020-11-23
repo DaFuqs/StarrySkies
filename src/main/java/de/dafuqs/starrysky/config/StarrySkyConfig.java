@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.configs;
+package de.dafuqs.starrysky.config;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;

@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.generation;
+package de.dafuqs.starrysky.dimension;
 
 import net.minecraft.util.math.BlockPos;
 

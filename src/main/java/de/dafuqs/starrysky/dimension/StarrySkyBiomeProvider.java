@@ -1,12 +1,12 @@
-package de.dafuqs.starrysky.generation;
+package de.dafuqs.starrysky.dimension;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.generation.layer.StarrySkyBiomeLayer;
-import de.dafuqs.starrysky.generation.layer.StarrySkyBiomePillarLayer;
-import de.dafuqs.starrysky.generation.layer.StarrySkyBiomeScalePillarLayer;
+import de.dafuqs.starrysky.dimension.layer.StarrySkyBiomeLayer;
+import de.dafuqs.starrysky.dimension.layer.StarrySkyBiomePillarLayer;
+import de.dafuqs.starrysky.dimension.layer.StarrySkyBiomeScalePillarLayer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.SharedConstants;
@@ -16,7 +16,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.registry.RegistryLookupCodec;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.layer.ScaleLayer;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.*;

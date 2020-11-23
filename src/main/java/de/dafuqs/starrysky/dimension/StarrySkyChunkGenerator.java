@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.generation;
+package de.dafuqs.starrysky.dimension;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -181,7 +181,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(chunk.getPos().x, chunk.getPos().z);
 
         for(Spheroid spheroid : localSystem) {
-            if (spheroid.shouldFinishChunk(chunk.getPos())) {
+            if (spheroid.isInChunk(chunk.getPos())) {
                 spheroid.generate(chunk);
                 spheroid.decorate(world, chunk);
             }

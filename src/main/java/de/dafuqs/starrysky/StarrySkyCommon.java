@@ -2,7 +2,7 @@ package de.dafuqs.starrysky;
 
 import de.dafuqs.starrysky.advancements.ProximityAchivementCheckEvent;
 import de.dafuqs.starrysky.commands.StarrySkyCommands;
-import de.dafuqs.starrysky.configs.StarrySkyConfig;
+import de.dafuqs.starrysky.config.StarrySkyConfig;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;

@@ -83,7 +83,7 @@ public class LiquidSpheroid extends Spheroid {
                         if(y2 <= maxLiquidY) {
                             chunk.setBlockState(currBlockPos, this.liquid, false);
                             if(isAboveCaveFloorBlock(d, x2, y2, z2)) {
-                                this.decorationBlocks.add(currBlockPos.down());
+                                addDecorationBlock(currBlockPos.down());
                             }
                         } else {
                             //air

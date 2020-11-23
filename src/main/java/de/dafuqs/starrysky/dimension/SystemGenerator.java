@@ -1,6 +1,5 @@
-package de.dafuqs.starrysky.generation;
+package de.dafuqs.starrysky.dimension;
 
-import de.dafuqs.starrysky.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidlists.SpheroidListVanilla;
 import de.dafuqs.starrysky.spheroids.*;
@@ -77,7 +76,7 @@ public class SystemGenerator {
         int firstChunkPosZ = systemPoint.y * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
         ChunkRandom systemRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
         systemRandom.setTerrainSeed(firstChunkPosX, firstChunkPosZ); // and the seed from the first chunk+
-        StarrySkyCommon.LOGGER.log(Level.INFO, "generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
+        StarrySkyCommon.LOGGER.log(Level.INFO, "Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
         return systemRandom;
     }
 
@@ -89,7 +88,7 @@ public class SystemGenerator {
         ChunkRandom systemRandom = getSystemRandom(systemPoint);
         List<Spheroid> spheroids = new ArrayList<Spheroid>();
 
-        //If systemPointX and Z are zero, generate a log/leaf planet at 16,16
+        //If systemPointX and Z are zero, generate a log/leaf planet at 16, 16
         if (systemPointX == 0 && systemPointZ == 0) {
             Spheroid homeSpheroid = new ShellSpheroid(SpheroidListVanilla.OAK_WOOD, systemRandom);
             homeSpheroid.setPositionAndCalculateGenerationChunks(new BlockPos(16, 70, 16));

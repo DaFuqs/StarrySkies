@@ -1,5 +1,6 @@
-package de.dafuqs.starrysky;
+package de.dafuqs.starrysky.dimension;
 
+import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroidlists.*;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;

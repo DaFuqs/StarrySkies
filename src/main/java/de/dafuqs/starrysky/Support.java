@@ -10,7 +10,7 @@ import net.minecraft.world.gen.ChunkRandom;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import static de.dafuqs.starrysky.generation.StarrySkyChunkGenerator.systemGenerator;
+import static de.dafuqs.starrysky.dimension.StarrySkyChunkGenerator.systemGenerator;
 
 public class Support {
 

@@ -24,7 +24,7 @@ public class MushroomSpheroidType extends ShellSpheroidType {
     }
 
     public String getDescription() {
-        return "PumpkinSpheroid";
+        return "MushroomSpheroid";
     }
 
 }

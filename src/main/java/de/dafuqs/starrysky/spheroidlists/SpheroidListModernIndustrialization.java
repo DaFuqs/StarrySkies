@@ -1,6 +1,6 @@
 package de.dafuqs.starrysky.spheroidlists;
 
-import de.dafuqs.starrysky.SpheroidLoader;
+import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;

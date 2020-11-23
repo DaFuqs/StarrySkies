@@ -1,8 +1,7 @@
 package de.dafuqs.starrysky.spheroidlists;
 
-import de.dafuqs.starrysky.SpheroidLoader;
+import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorators;
 import de.dafuqs.starrysky.spheroidtypes.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
@@ -259,7 +258,7 @@ public class SpheroidListBYG extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.9F, new ShellSpheroidType(null, byg_withering_oak_log, byg_withering_oak_leaves, 5, 7, 1, 1));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.9F, new ShellSpheroidType(null, byg_pine_log, byg_araucaria_leaves, 7, 13, 2, 3));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.9F, new ShellSpheroidType(null, byg_holly_log, byg_holly_leaves, 7, 13, 2, 3).addShellSpeckles(byg_holly_berry_leaves, 0.2F));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, byg_nightshade_log, byg_nightshade_leaves, 7, 13, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, byg_nightshade_log, byg_nightshade_leaves, 7, 13, 2, 3).addShellSpeckles(byg_flowering_nightshade_leaves, 0.25F));
 
         // WOOD USING OAK LOGS
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.8F, new ShellSpheroidType(null, Blocks.OAK_LOG.getDefaultState(), byg_joshua_leaves, 6, 8, 1, 1).addShellSpeckles(byg_ripe_joshua_leaves, 0.15F));

@@ -1,6 +1,6 @@
 package de.dafuqs.starrysky.spheroidlists;
 
-import de.dafuqs.starrysky.SpheroidLoader;
+import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroidtypes.CoreSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.DoubleCoreSpheroidType;

@@ -15,7 +15,6 @@ public class BeeHiveSpheroidType extends SpheroidType {
     private final int minFlowerRingSpacing;
     private final int maxFlowerRingSpacing;
 
-
     public BeeHiveSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, int minShellRadius, int maxShellRadius, int minFlowerRingRadius, int maxFlowerRingRadius, int minFlowerRingSpacing, int maxFlowerRingSpacing) {
         super();
 

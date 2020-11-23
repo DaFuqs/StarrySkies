@@ -1,7 +1,7 @@
-package de.dafuqs.starrysky.generation.layer;
+package de.dafuqs.starrysky.dimension.layer;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.generation.StarrySkyBiomeProvider;
+import de.dafuqs.starrysky.dimension.StarrySkyBiomeProvider;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.layer.type.InitLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;

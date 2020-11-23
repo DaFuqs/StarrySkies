@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidlists;
 
+import de.dafuqs.starrysky.spheroiddecorators.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CoralParentBlock;
@@ -185,5 +186,15 @@ public abstract class SpheroidList {
         //add(Blocks.TALL_GRASS.getDefaultState()); // generates more often than enough on grass planet
         add(Blocks.LARGE_FERN.getDefaultState());
     }};
+
+    public static class SpheroidDecorators {
+        public static SpheroidDecorator CACTUS = new CactusDecorator();
+        public static SpheroidDecorator SEA_GREENS = new SeaGreensDecorator();
+        public static SpheroidDecorator COCOA = new CocoaDecorator();
+        public static SpheroidDecorator BAMBOO = new BambooDecorator();
+        public static SpheroidDecorator SUGAR_CANE_POND = new SugarCanePondDecorator();
+        public static SpheroidDecorator MUSHROOMS = new MushroomDecorator();
+        public static SpheroidDecorator SWEET_BERRIES = new PlantDecorator(Blocks.SWEET_BERRY_BUSH.getDefaultState(), 0.03F);
+    }
 
 }

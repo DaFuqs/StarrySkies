@@ -50,7 +50,7 @@ public class CaveSpheroid extends ShellSpheroid {
                         }
                     } else if(isAboveCaveFloorBlock(d, x2, y2, z2)) {
                         chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock, false);
-                        this.decorationBlocks.add(currBlockPos.down());
+                        addDecorationBlock(currBlockPos.down());
                     } else if(d <= this.radius - this.shellRadius) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false); // always CAVE_AIR
                     } else if (d < this.radius) {

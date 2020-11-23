@@ -1,8 +1,7 @@
 package de.dafuqs.starrysky.spheroidlists;
 
-import de.dafuqs.starrysky.SpheroidLoader;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorators;
+import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.spheroidtypes.*;
 import de.dafuqs.starrysky.spheroidtypes.special_overworld.*;
 import net.minecraft.block.Blocks;
@@ -191,7 +190,7 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, MYCELIUM);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.1F, BEDROCK);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.05F, THE_SUN);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 100F, OCEAN_MONUMENT); // TODO: Lower
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.5F, OCEAN_MONUMENT); // TODO: Lower
 
         //RAINBOW
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, RAINBOW_WOOL);

@@ -17,21 +17,16 @@ import java.util.HashSet;
 public abstract class Spheroid implements Serializable {
 
     protected SpheroidType spheroidType;
-
-    /** Chunks this spheroid should be still generated in  **/
-    protected HashSet<ChunkPos> unfinishedChunks = new HashSet<>();
-    /** Chunks this spheroid was already generated in **/
-    protected HashSet<ChunkPos> finishedChunks = new HashSet<>();
-
-    /** The decorators that should be ran after generation **/
-    protected ArrayList<SpheroidDecorator> spheroidDecorators;
-    /** The tracker for blocks to be decorated. Filled in generate() **/
-    protected ArrayList<BlockPos> decorationBlocks = new ArrayList<>();
-
-    private BlockPos position; //Position, local to the chunk
     protected int radius;
     protected ChunkRandom random;
+    private BlockPos position; //Position, local to the chunk
 
+    /** Chunks this spheroid should be still generated in  **/
+    private HashSet<ChunkPos> chunksOfSpheroid = new HashSet<>();
+    /** The decorators that should be ran after generation **/
+    private ArrayList<SpheroidDecorator> spheroidDecorators;
+    /** The tracker for blocks to be decorated. Filled in generate() **/
+    private ArrayList<BlockPos> decorationBlocks = new ArrayList<>();
 
     public Spheroid(SpheroidType spheroidType, ChunkRandom random) {
         this.spheroidType = spheroidType;
@@ -52,7 +47,7 @@ public abstract class Spheroid implements Serializable {
             for (int currZPos = blockPos.getZ()-Math.round(radius); currZPos <= blockPos.getZ()+Math.round(radius); currZPos++) {
                 int cx = (int) Math.floor(currXPos / 16.0D);
                 int cz = (int) Math.floor(currZPos / 16.0D);
-                addUnfinishedChunk(new ChunkPos(cx, cz));
+                this.chunksOfSpheroid.add(new ChunkPos(cx, cz));
             }
         }
     }
@@ -67,30 +62,30 @@ public abstract class Spheroid implements Serializable {
 
     public abstract String getDescription();
 
-    public boolean shouldFinishChunk(ChunkPos chunkPos) {
-        return this.unfinishedChunks.contains(chunkPos);
+    public boolean isInChunk(ChunkPos chunkPos) {
+        return this.chunksOfSpheroid.contains(chunkPos);
     }
 
+    public boolean hasDecorators() {
+        return this.spheroidDecorators.size() > 0;
+    }
+
+    public void addDecorationBlock(BlockPos blockPos) {
+        if(hasDecorators()) {
+            this.decorationBlocks.add(blockPos);
+        }
+    }
+
+    // just a small optimization
     public void setChunkFinished(ChunkPos chunkPos) {
-        this.finishedChunks.add(chunkPos);
-        this.unfinishedChunks.remove(chunkPos);
-    }
-
-    public boolean isFinished() {
-        return this.unfinishedChunks.size() == 0;
-    }
-
-    public void addUnfinishedChunk(ChunkPos chunkPos) {
-        this.unfinishedChunks.add(chunkPos);
+        this.chunksOfSpheroid.remove(chunkPos);
     }
 
     public boolean shouldPopulateEntities(ChunkPos chunkPos) {
         return false;
     }
 
-    public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-
-    }
+    public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) { }
 
     public void decorate(WorldView worldView, Chunk chunk) {
         for(SpheroidDecorator decorator : this.spheroidDecorators) {
