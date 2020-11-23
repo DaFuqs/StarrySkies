@@ -9,14 +9,14 @@ import java.util.*;
 
 public class SpheroidLoader {
 
-    private LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeight = new LinkedHashMap<>();
+    public LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeight = new LinkedHashMap<>();
     private LinkedHashMap<String, List<BlockState>> dynamicOres = new LinkedHashMap<>();
 
     private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeights = new LinkedHashMap<SpheroidDistributionType, Float>() {{
         put(SpheroidDistributionType.ESSENTIAL,  10.0F);
         put(SpheroidDistributionType.DECORATIVE, 10.0F);
         put(SpheroidDistributionType.ORE,        10.0F);
-        put(SpheroidDistributionType.FLUID,       6.0F);
+        put(SpheroidDistributionType.FLUID,       5.0F);
         put(SpheroidDistributionType.WOOD,        4.0F);
         put(SpheroidDistributionType.TREASURE,    1.0F);
         put(SpheroidDistributionType.DUNGEON,     0.1F);
@@ -56,7 +56,7 @@ public class SpheroidLoader {
         if(SpheroidListTerrestria.shouldGenerate())              { SpheroidListTerrestria.setup(this); }
         if(SpheroidListTraverse.shouldGenerate())                { SpheroidListTraverse.setup(this); }
         if(SpheroidListUnearthed.shouldGenerate())               { SpheroidListUnearthed.setup(this); }
-        if(SpheroidListSandwichable.shouldGenerate())             { SpheroidListSandwichable.setup(this); }
+        if(SpheroidListSandwichable.shouldGenerate())            { SpheroidListSandwichable.setup(this); }
 
         // dynamically generate ore spheroids
         // this way we got only 1 "copper" spheroids even though lots of mods add a copper ore block

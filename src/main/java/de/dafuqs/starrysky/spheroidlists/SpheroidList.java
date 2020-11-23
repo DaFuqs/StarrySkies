@@ -1,6 +1,5 @@
 package de.dafuqs.starrysky.spheroidlists;
 
-import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CoralParentBlock;
@@ -159,32 +158,4 @@ public abstract class SpheroidList {
         add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 4));
     }};
 
-    /**
-     * Checks if the mod that provides the blocks in the list is loaded
-     *
-     * @return true if the mod is loaded
-     */
-    public static boolean isModPresent() {
-        return false;
-    }
-
-    /**
-     * Returns a hash map of blocks that can be dictionaried.
-     * Think ores (so there aren't 5 types of copper ores)
-     *
-     * @return LinkedHashMap of "dictEntry" and BlockState
-     */
-    public static LinkedHashMap<String, BlockState> getDictionaryEntries() {
-        return new LinkedHashMap<>();
-    }
-
-    /**
-     * List of all SpheroidTypes the mod provides
-     * The dictionaried ones don't need their separate spheroids, they'll get generated dynamically
-     *
-     * @return All provided SpheroidTypes
-     */
-    public static LinkedHashMap<SpheroidType, Float> getSpheroidTypesWithProbabilities() {
-        return new LinkedHashMap<>();
-    }
 }

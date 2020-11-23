@@ -131,7 +131,7 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final DungeonSpheroidType DUNGEON_ENDERMAN = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, EntityType.ENDERMAN, MAP_DUNGEON_STONES, 6, 12, 2, 4);
 
     // BEES
-    public static final BeeHiveSpheroidType BEE_HIVE = new BeeHiveSpheroidType(SpheroidAdvancementIdentifier.bee_hive,10, 16, 2, 4, 1, 2, 1, 2);
+    public static final BeeHiveSpheroidType BEE_HIVE = new BeeHiveSpheroidType(SpheroidAdvancementIdentifier.bee_hive,10, 16, 2, 4, 1, 2, 2, 3);
 
     public static boolean shouldGenerate() {
         return true;
@@ -231,12 +231,12 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.05F, TNT);
 
         //WOOD
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 5.0F, OAK_WOOD);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, SPRUCE_WOOD);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, BIRCH_WOOD);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, JUNGLE_WOOD);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, DARK_OAK_WOOD);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, ACACIA_WOOD);
+        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 5.0F, OAK_WOOD);
+        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, SPRUCE_WOOD);
+        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, BIRCH_WOOD);
+        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, JUNGLE_WOOD);
+        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, DARK_OAK_WOOD);
+        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, ACACIA_WOOD);
 
         // DUNGEON
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  3.0F, DUNGEON_ZOMBIE);
