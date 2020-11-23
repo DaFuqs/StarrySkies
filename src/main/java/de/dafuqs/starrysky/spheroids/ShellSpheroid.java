@@ -7,12 +7,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class ShellSpheroid extends Spheroid {
 
     //STATIC CONFIG STUFF
     protected BlockState coreBlock;
     protected BlockState shellBlock;
     protected int shellRadius;
+    private final LinkedHashMap<BlockState, Float> shellSpeckleBlockStates;
 
     public ShellSpheroid(ShellSpheroidType shellSpheroidType, ChunkRandom random) {
         super(shellSpheroidType, random);
@@ -20,6 +24,7 @@ public class ShellSpheroid extends Spheroid {
         this.coreBlock = shellSpheroidType.getCoreBlock();
         this.shellBlock = shellSpheroidType.getRandomShellBlock(random);
         this.shellRadius = shellSpheroidType.getRandomShellRadius(random);
+        this.shellSpeckleBlockStates = shellSpheroidType.getShellSpeckleBlockStates();
     }
 
     public String getDescription() {
@@ -39,6 +44,8 @@ public class ShellSpheroid extends Spheroid {
         int y = this.getPosition().getY();
         int z = this.getPosition().getZ();
 
+        boolean hasSpeckles = hasSpeckles();
+
         random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
         for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
@@ -48,7 +55,18 @@ public class ShellSpheroid extends Spheroid {
                     if (d <= (this.radius - this.shellRadius)) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false);
                     } else if (d <= this.radius) {
-                        chunk.setBlockState(currBlockPos, this.shellBlock, false);
+                        if (hasSpeckles) {
+                            BlockState finalBlockState = shellBlock;
+                            for (Map.Entry<BlockState, Float> shellSpeckleBlockState : shellSpeckleBlockStates.entrySet()) {
+                                if(random.nextFloat() < shellSpeckleBlockState.getValue()) {
+                                    finalBlockState = shellSpeckleBlockState.getKey();
+                                    break;
+                                }
+                            }
+                            chunk.setBlockState(currBlockPos, finalBlockState, false);
+                        } else {
+                            chunk.setBlockState(currBlockPos, this.shellBlock, false);
+                        }
                         if(isTopBlock(d, x2, y2, z2)) {
                             this.decorationBlocks.add(currBlockPos);
                         }
@@ -58,6 +76,10 @@ public class ShellSpheroid extends Spheroid {
         }
 
         this.setChunkFinished(chunk.getPos());
+    }
+
+    private boolean hasSpeckles() {
+        return this.shellSpeckleBlockStates.size() > 0;
     }
 
     protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z) {

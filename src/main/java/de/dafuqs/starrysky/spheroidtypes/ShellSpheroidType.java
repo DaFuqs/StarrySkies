@@ -1,8 +1,8 @@
 package de.dafuqs.starrysky.spheroidtypes;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -15,6 +15,7 @@ public class ShellSpheroidType extends SpheroidType {
     private final LinkedHashMap<BlockState, Float> validShellBlocks;
     private final int minShellRadius; //Minimum shell thickness, should be at least
     private final int maxShellRadius; //Maximum shell thickness
+    private final LinkedHashMap<BlockState, Float> shellSpeckleBlockStates = new LinkedHashMap<>();
 
     public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, BlockState coreBlock, BlockState shellBlock, int minSize, int maxSize, int minShellRadius, int maxShellRadius) {
         this(spheroidAdvancementIdentifier, coreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minSize, maxSize, minShellRadius, maxShellRadius);
@@ -49,6 +50,15 @@ public class ShellSpheroidType extends SpheroidType {
 
     public BlockState getRandomShellBlock(ChunkRandom random) {
         return Support.getWeightedRandom(validShellBlocks, random);
+    }
+
+    public ShellSpheroidType addShellSpeckles(BlockState blockState, Float weight) {
+        shellSpeckleBlockStates.put(blockState, weight);
+        return this;
+    }
+
+    public LinkedHashMap<BlockState, Float> getShellSpeckleBlockStates() {
+        return this.shellSpeckleBlockStates;
     }
 
     public String getDescription() {

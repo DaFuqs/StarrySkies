@@ -174,6 +174,8 @@ public class SystemGenerator {
             return new CaveSpheroid( (CaveSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof MushroomSpheroidType) { // has to be checked before shellSpheroid
             return new MushroomSpheroid( (MushroomSpheroidType) spheroidType, systemRandom);
+        } else if(spheroidType instanceof SupportedRainbowSpheroidType) { // has to be checked before shellSpheroid
+            return new SupportedRainbowSpheroid( (SupportedRainbowSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof CoralSpheroidType) {
             return new CoralSpheroid( (CoralSpheroidType) spheroidType, systemRandom);
         } else if(spheroidType instanceof ShellSpheroidType) {

@@ -105,7 +105,7 @@ public class SpheroidListVanilla extends SpheroidList {
 
     //COLD
     public static final CoreSpheroidType       SNOW_ICE        = (CoreSpheroidType) new CoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 15, 3, 6).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F);
-    public static final DoubleCoreSpheroidType GLASS_PACKED_ICE = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.GLASS.getDefaultState(), 5, 12, 2, 4, 2, 4);
+    public static final CoreSpheroidType       ICE_PACKED_ICE  = new CoreSpheroidType(SpheroidAdvancementIdentifier.packed_ice, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), 5, 15, 3, 6);
     public static final DoubleCoreSpheroidType SNOW_PACKED_ICE = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 12, 2, 4, 2, 4).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F);
     public static final DoubleCoreSpheroidType SNOW_BLUE_ICE   = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 5, 8, 2, 3, 1, 3).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.1F);;
     public static final DoubleCoreSpheroidType ICE_BLUE_ICE    = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), 5, 8, 2, 3, 1, 3);
@@ -161,7 +161,7 @@ public class SpheroidListVanilla extends SpheroidList {
         //COLD
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.5F, SNOW_ICE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.5F, SNOW_PACKED_ICE);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.4F, GLASS_PACKED_ICE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.4F, ICE_PACKED_ICE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, SNOW_BLUE_ICE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.4F, ICE_BLUE_ICE);
 
@@ -231,12 +231,12 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.05F, TNT);
 
         //WOOD
-        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 5.0F, OAK_WOOD);
-        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, SPRUCE_WOOD);
-        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, BIRCH_WOOD);
-        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, JUNGLE_WOOD);
-        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, DARK_OAK_WOOD);
-        //spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, ACACIA_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 5.0F, OAK_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, SPRUCE_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, BIRCH_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, JUNGLE_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, DARK_OAK_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.5F, ACACIA_WOOD);
 
         // DUNGEON
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DUNGEON,  3.0F, DUNGEON_ZOMBIE);

@@ -158,4 +158,32 @@ public abstract class SpheroidList {
         add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 4));
     }};
 
+    public static List<BlockState> LIST_FLOWERS = new ArrayList<BlockState>() {{
+        add(Blocks.DANDELION.getDefaultState());
+        add(Blocks.POPPY.getDefaultState());
+        add(Blocks.BLUE_ORCHID.getDefaultState());
+        add(Blocks.ALLIUM.getDefaultState());
+        add(Blocks.AZURE_BLUET.getDefaultState());
+        add(Blocks.ORANGE_TULIP.getDefaultState());
+        add(Blocks.PINK_TULIP.getDefaultState());
+        add(Blocks.RED_TULIP.getDefaultState());
+        add(Blocks.WHITE_TULIP.getDefaultState());
+        add(Blocks.OXEYE_DAISY.getDefaultState());
+        add(Blocks.CORNFLOWER.getDefaultState());
+        add(Blocks.LILY_OF_THE_VALLEY.getDefaultState());
+        //add(Blocks.WITHER_ROSE.getDefaultState()); //That would be pretty fun, actually
+        add(Blocks.LILAC.getDefaultState());
+        add(Blocks.ROSE_BUSH.getDefaultState());
+        add(Blocks.PEONY.getDefaultState());
+    }};
+
+    public static List<BlockState> LIST_TALL_FLOWERS = new ArrayList<BlockState>() {{
+        add(Blocks.SUNFLOWER.getDefaultState());
+        add(Blocks.LILAC.getDefaultState());
+        add(Blocks.ROSE_BUSH.getDefaultState());
+        add(Blocks.PEONY.getDefaultState());
+        //add(Blocks.TALL_GRASS.getDefaultState()); // generates more often than enough on grass planet
+        add(Blocks.LARGE_FERN.getDefaultState());
+    }};
+
 }

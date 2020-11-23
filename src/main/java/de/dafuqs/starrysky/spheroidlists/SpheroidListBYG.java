@@ -2,10 +2,14 @@ package de.dafuqs.starrysky.spheroidlists;
 
 import de.dafuqs.starrysky.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.spheroidtypes.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import java.util.ArrayList;
 
 public class SpheroidListBYG extends SpheroidList {
 
@@ -67,9 +71,9 @@ public class SpheroidListBYG extends SpheroidList {
     private static final BlockState byg_willow_log          = Registry.BLOCK.get(new Identifier(MOD_ID,"willow_log")).getDefaultState();
 
     // no dedicated log types
-    private static final BlockState byg_blue_spruce_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"blue_spruce_leaves")).getDefaultState(); // spruce
-    private static final BlockState byg_brown_birch_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"brown_birch_leaves")).getDefaultState(); // birch
-    private static final BlockState byg_joshua_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"joshua_leaves")).getDefaultState();           // TODO
+    private static final BlockState byg_blue_spruce_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"blue_spruce_leaves")).getDefaultState();
+    private static final BlockState byg_brown_birch_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"brown_birch_leaves")).getDefaultState();
+    private static final BlockState byg_joshua_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"joshua_leaves")).getDefaultState();
     private static final BlockState byg_ripe_joshua_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"ripe_joshua_leaves")).getDefaultState();
     private static final BlockState byg_orange_birch_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"orange_birch_leaves")).getDefaultState();
     private static final BlockState byg_orange_oak_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"orange_oak_leaves")).getDefaultState();
@@ -116,6 +120,7 @@ public class SpheroidListBYG extends SpheroidList {
     private static final BlockState byg_packed_black_ice = Registry.BLOCK.get(new Identifier(MOD_ID,"packed_black_ice")).getDefaultState();
 
     // PLANTS
+    // TODO
     private static final BlockState byg_blueberry_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"blueberry_bush")).getDefaultState(); // => blue dye
     private static final BlockState byg_cattail = Registry.BLOCK.get(new Identifier(MOD_ID,"cattail")).getDefaultState();
     private static final BlockState byg_golden_spined_cactus = Registry.BLOCK.get(new Identifier(MOD_ID,"golden_spined_cactus")).getDefaultState();
@@ -189,14 +194,148 @@ public class SpheroidListBYG extends SpheroidList {
     private static final BlockState byg_tall_allium = Registry.BLOCK.get(new Identifier(MOD_ID,"tall_allium")).getDefaultState();
     private static final BlockState byg_tall_pink_allium = Registry.BLOCK.get(new Identifier(MOD_ID,"tall_pink_allium")).getDefaultState();
 
-
     public static boolean shouldGenerate() {
         return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkyCommon.STARRY_SKY_CONFIG.generateBYGSpheroids;
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
+        // VERY RARE ORES
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.01F, new CoreSpheroidType(null, byg_ametrine_ore, MAP_STONES, 5, 6, 2, 3));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.01F, new CoreSpheroidType(null, byg_pendorite_ore, MAP_STONES, 5, 6, 2, 3));
 
-        // TODO
+        // WOOD
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_aspen_log, byg_aspen_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_baobab_log, byg_baobab_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_blue_enchanted_log, byg_blue_enchanted_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_cherry_log, byg_pink_cherry_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_cherry_log, byg_white_cherry_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_cika_log, byg_cika_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_cypress_log, byg_cypress_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_ebony_log, byg_ebony_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_fir_log, byg_fir_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_nightshade_log, byg_flowering_nightshade_leaves, 7, 14, 2, 4).addShellSpeckles(byg_flowering_palo_verde_leaves, 0.2F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_green_enchanted_log, byg_green_enchanted_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_holly_log, byg_holly_leaves, 7, 14, 2, 4).addShellSpeckles(byg_holly_berry_leaves, 0.2F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_jacaranda_log, byg_indigo_jacaranda_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_jacaranda_log, byg_jacaranda_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_mahogany_log, byg_mahogany_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_mangrove_log, byg_mangrove_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_maple_log, byg_maple_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_nightshade_log, byg_nightshade_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_palm_log, byg_palm_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_palo_verde_log, byg_palo_verde_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_pine_log, byg_pine_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_cherry_log, byg_pink_cherry_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_rainbow_eucalyptus_log, byg_rainbow_eucalyptus_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_maple_log, byg_red_maple_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_redwood_log, byg_redwood_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_maple_log, byg_silver_maple_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_cherry_log, byg_white_cherry_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, byg_willow_log, byg_willow_leaves, 7, 14, 2, 4));
+
+        // wood using preexisting logs
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.OAK_LOG.getDefaultState(), byg_joshua_leaves, 7, 14, 1, 1).addShellSpeckles(byg_ripe_joshua_leaves, 0.15F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.OAK_LOG.getDefaultState(), byg_orchard_leaves, 7, 14, 2, 4).addShellSpeckles(byg_flowering_orchard_leaves, 0.15F).addShellSpeckles(byg_ripe_orchard_leaves, 0.15F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.SPRUCE_LOG.getDefaultState(), byg_blue_spruce_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.SPRUCE_LOG.getDefaultState(), byg_red_spruce_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.SPRUCE_LOG.getDefaultState(), byg_yellow_spruce_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.SPRUCE_LOG.getDefaultState(), byg_orange_spruce_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.BIRCH_LOG.getDefaultState(), byg_brown_birch_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.BIRCH_LOG.getDefaultState(), byg_orange_birch_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.BIRCH_LOG.getDefaultState(), byg_red_birch_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.BIRCH_LOG.getDefaultState(), byg_yellow_birch_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.OAK_LOG.getDefaultState(), byg_orange_oak_leaves, 7, 14, 2, 4));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, Blocks.OAK_LOG.getDefaultState(), byg_red_oak_leaves, 7, 14, 2, 4));
+
+        // FLOWERS
+        SpheroidList.LIST_FLOWERS.add(byg_allium_flower_bush);
+        SpheroidList.LIST_FLOWERS.add(byg_alpine_bellfower);
+        SpheroidList.LIST_FLOWERS.add(byg_amaranth);
+        SpheroidList.LIST_FLOWERS.add(byg_angelica);
+        SpheroidList.LIST_FLOWERS.add(byg_azalea);
+        SpheroidList.LIST_FLOWERS.add(byg_begonia);
+        SpheroidList.LIST_FLOWERS.add(byg_bistort);
+        SpheroidList.LIST_FLOWERS.add(byg_black_rose);
+        SpheroidList.LIST_FLOWERS.add(byg_blue_sage);
+        SpheroidList.LIST_FLOWERS.add(byg_california_poppy);
+        SpheroidList.LIST_FLOWERS.add(byg_crocus);
+        SpheroidList.LIST_FLOWERS.add(byg_cyan_amaranth);
+        SpheroidList.LIST_FLOWERS.add(byg_cyan_rose);
+        SpheroidList.LIST_FLOWERS.add(byg_cyan_tulip);
+        SpheroidList.LIST_FLOWERS.add(byg_daffodil);
+        SpheroidList.LIST_FLOWERS.add(byg_delphinium);
+        SpheroidList.LIST_FLOWERS.add(byg_fairy_slipper);
+        SpheroidList.LIST_FLOWERS.add(byg_firecrasker_flower_bush);
+        SpheroidList.LIST_FLOWERS.add(byg_foxglove);
+        SpheroidList.LIST_FLOWERS.add(byg_green_tulip);
+        SpheroidList.LIST_FLOWERS.add(byg_guzmania);
+        SpheroidList.LIST_FLOWERS.add(byg_incan_lily);
+        SpheroidList.LIST_FLOWERS.add(byg_iris);
+        SpheroidList.LIST_FLOWERS.add(byg_japanese_orchid);
+        SpheroidList.LIST_FLOWERS.add(byg_kovan_flower);
+        SpheroidList.LIST_FLOWERS.add(byg_lazarus_bellflower);
+        SpheroidList.LIST_FLOWERS.add(byg_lolipop_flower);
+        SpheroidList.LIST_FLOWERS.add(byg_magenta_amaranth);
+        SpheroidList.LIST_FLOWERS.add(byg_magenta_tulip);
+        SpheroidList.LIST_FLOWERS.add(byg_orange_amaranth);
+        SpheroidList.LIST_FLOWERS.add(byg_orange_daisy);
+        SpheroidList.LIST_FLOWERS.add(byg_osiria_rose);
+        SpheroidList.LIST_FLOWERS.add(byg_peach_leather_flower);
+        SpheroidList.LIST_FLOWERS.add(byg_pink_allium);
+        SpheroidList.LIST_FLOWERS.add(byg_pink_allium_flower_bush);
+        SpheroidList.LIST_FLOWERS.add(byg_pink_anemone);
+        SpheroidList.LIST_FLOWERS.add(byg_pink_daffodil);
+        SpheroidList.LIST_FLOWERS.add(byg_pink_orchid);
+        SpheroidList.LIST_FLOWERS.add(byg_protea_flower);
+        SpheroidList.LIST_FLOWERS.add(byg_purple_amaranth);
+        SpheroidList.LIST_FLOWERS.add(byg_purple_orchid);
+        SpheroidList.LIST_FLOWERS.add(byg_purple_sage);
+        SpheroidList.LIST_FLOWERS.add(byg_purple_tulip);
+        SpheroidList.LIST_FLOWERS.add(byg_red_cornflower);
+        SpheroidList.LIST_FLOWERS.add(byg_red_orchid);
+        SpheroidList.LIST_FLOWERS.add(byg_richea);
+        SpheroidList.LIST_FLOWERS.add(byg_rose);
+        SpheroidList.LIST_FLOWERS.add(byg_silver_vase_flower);
+        SpheroidList.LIST_FLOWERS.add(byg_snowdrops);
+        SpheroidList.LIST_FLOWERS.add(byg_torch_ginger);
+        SpheroidList.LIST_FLOWERS.add(byg_violet_leather_flower);
+        SpheroidList.LIST_FLOWERS.add(byg_white_anemone);
+        SpheroidList.LIST_FLOWERS.add(byg_white_sage);
+        SpheroidList.LIST_FLOWERS.add(byg_winter_cyclamen);
+        SpheroidList.LIST_FLOWERS.add(byg_winter_rose);
+        SpheroidList.LIST_FLOWERS.add(byg_winter_scilla);
+        SpheroidList.LIST_FLOWERS.add(byg_yellow_daffodil);
+        SpheroidList.LIST_FLOWERS.add(byg_yellow_tulip);
+
+        // TALL FLOWERS
+        SpheroidList.LIST_TALL_FLOWERS.add(byg_tall_allium);
+        SpheroidList.LIST_TALL_FLOWERS.add(byg_tall_pink_allium);
+
+        // OTHER SPHEROID TYPES
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, byg_meadow_dirt, 5, 20).setTopBlockState(byg_meadow_grass_block));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, byg_dacite, 5, 20).setTopBlockState(byg_overgrown_dacite));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, byg_dacite, 5, 20).setTopBlockState(byg_podzol_dacite));
+
+        SpheroidList.MAP_STONES.put(byg_red_rock, 1.0F);
+        SpheroidList.MAP_STONES.put(byg_rocky_stone, 1.0F);
+        SpheroidList.MAP_STONES.put(byg_scoria_stone, 1.0F);
+        SpheroidList.MAP_STONES.put(byg_soapstone, 1.0F);
+
+        SpheroidList.MAP_DUNGEON_STONES.put(byg_overgrown_stone, 1.0F);
+        SpheroidList.MAP_DUNGEON_STONES.put(byg_mossy_stone, 1.0F);
+
+        ArrayList<BlockState> coloredSand = new ArrayList<>();
+        coloredSand.add(byg_black_sand);
+        coloredSand.add(byg_white_sand);
+        coloredSand.add(byg_blue_sand);
+        coloredSand.add(byg_purple_sand);
+        coloredSand.add(byg_pink_sand);
+
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new SupportedRainbowSpheroidType(null, coloredSand, Blocks.SANDSTONE.getDefaultState(), 9, 14));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new LiquidSpheroidType(null, Blocks.WATER.getDefaultState(), MAP_GLASS, 5, 10, 1, 2, 70, 100, 75).setCoreBlock(byg_mud_block, 4, 6));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new ModularSpheroidType(null, byg_peat, 8, 12));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new CoreSpheroidType(null, byg_packed_black_ice, byg_black_ice, 5, 12, 2, 4));
+
 
     }
 }
