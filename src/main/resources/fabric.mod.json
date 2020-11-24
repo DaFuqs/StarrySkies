@@ -35,8 +35,7 @@
     "fabric": "*",
     "minecraft": ">=1.16.4",
     "cardinal-components-base": ">=2.5.0",
-    "cardinal-components-entity": ">=2.5.0",
-    "customportalapi": ">=0.0.1-beta10-1.16"
+    "cardinal-components-entity": ">=2.5.0"
   },
   "suggests": { }
 }
