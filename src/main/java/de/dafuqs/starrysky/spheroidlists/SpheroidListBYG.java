@@ -157,29 +157,27 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState byg_reeds = Registry.BLOCK.get(new Identifier(MOD_ID,"reeds")).getDefaultState(); // => brown dye
         BlockState byg_prairie_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"prairie_grass")).getDefaultState();
         BlockState byg_tall_prairie_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"tall_prairie_grass")).getDefaultState();
-        BlockState byg_white_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"white_grass")).getDefaultState();
         BlockState byg_beach_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"beach_grass")).getDefaultState();
         BlockState byg_small_beach_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"small_beach_grass")).getDefaultState();
         BlockState byg_winter_succulent = Registry.BLOCK.get(new Identifier(MOD_ID,"winter_succulent")).getDefaultState();
         BlockState byg_winter_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"winter_grass")).getDefaultState();
 
 
-        PlantDecorator byg_blueberry_bush_decorator = new PlantDecorator(byg_blueberry_bush, 0.1F); // MEADOW_GRASSBLOCK, OVERGROWN_DACITE, OVERGROWN_STONE, GRASS_BLOCK
-        PlantDecorator byg_mini_cactus_decorator = new PlantDecorator(byg_mini_cactus, 0.1F);
+        PlantDecorator byg_blueberry_bush_decorator = new PlantDecorator(byg_blueberry_bush, 0.05F); // MEADOW_GRASSBLOCK, OVERGROWN_DACITE, OVERGROWN_STONE, GRASS_BLOCK
+        PlantDecorator byg_mini_cactus_decorator = new PlantDecorator(byg_mini_cactus, 0.03F);
         PlantDecorator byg_cattail_decorator = new PlantDecorator(byg_cattail, 0.1F); // DoublePlant, in swamp water    // TODO
         PlantDecorator byg_golden_spined_cactus_decorator = new PlantDecorator(byg_golden_spined_cactus, 0.1F);    // TODO
         PlantDecorator byg_horseweed_decorator = new PlantDecorator(byg_horseweed, 0.1F);    // TODO
         PlantDecorator byg_poison_ivy_decorator = new PlantDecorator(byg_poison_ivy, 0.1F); // Vines    // TODO
-        PlantDecorator byg_prickly_pear_cactus_decorator = new PlantDecorator(byg_prickly_pear_cactus, 0.1F);    // TODO
+        PlantDecorator byg_prickly_pear_cactus_decorator = new PlantDecorator(byg_prickly_pear_cactus, 0.05F);
         PlantDecorator byg_reeds_decorator = new PlantDecorator(byg_reeds, 0.1F); // DoublePlant, in swamp water    // TODO
         PlantDecorator byg_winter_succulent_decorator = new PlantDecorator(byg_winter_succulent, 0.07F);
-        PlantDecorator byg_winter_grass_decorator = new PlantDecorator(byg_winter_grass, 0.07F);
+        PlantDecorator byg_winter_grass_decorator = new PlantDecorator(byg_winter_grass, 0.05F);
 
         PlantDecorator byg_prairie_grass_decorator = new PlantDecorator(byg_prairie_grass, 0.2F);
-        PlantDecorator byg_beach_grass_decorator = new PlantDecorator(byg_beach_grass, 0.2F);
-        PlantDecorator byg_small_beach_grass_decorator = new PlantDecorator(byg_small_beach_grass, 0.2F);
+        PlantDecorator byg_beach_grass_decorator = new PlantDecorator(byg_beach_grass, 0.1F);
+        PlantDecorator byg_small_beach_grass_decorator = new PlantDecorator(byg_small_beach_grass, 0.1F);
         DoublePlantDecorator byg_tall_prairie_grass_decorator = new DoublePlantDecorator(byg_tall_prairie_grass, 0.2F);
-        PlantDecorator byg_white_grass_decorator = new PlantDecorator(byg_white_grass, 0.1F);
 
         // FLOWERS
         BlockState byg_allium_flower_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"allium_flower_bush")).getDefaultState();
@@ -396,6 +394,8 @@ public class SpheroidListBYG extends SpheroidList {
         SpheroidListVanilla.SNOW_ICE.addDecorator(byg_winter_grass_decorator, 0.5F);
         SpheroidListVanilla.SNOW_PACKED_ICE.addDecorator(byg_winter_grass_decorator, 0.5F);
         SpheroidListVanilla.SNOW_BLUE_ICE.addDecorator(byg_winter_grass_decorator, 0.5F);
+        SpheroidListVanilla.SAND.addDecorator(byg_prickly_pear_cactus_decorator, 0.2F);
+        SpheroidListVanilla.RED_SAND.addDecorator(byg_prickly_pear_cactus_decorator, 0.1F);
 
         // prairie grass spheroid
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.4F, new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, 5, 20,  Blocks.DIRT.getDefaultState()).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState()).addDecorator(byg_prairie_grass_decorator, 1.0F).addDecorator(byg_tall_prairie_grass_decorator, 1.0F));

@@ -75,9 +75,9 @@ public class SpheroidListTerrestria extends SpheroidList {
         PlantDecorator terrestria_cattail_decorator = new PlantDecorator(terrestria_cattail, 0.1F); // TODO single block, in water
         PlantDecorator terrestria_indian_paintbrush_decorator = new PlantDecorator(terrestria_indian_paintbrush, 0.1F);
         PlantDecorator terrestria_monsteras_decorator = new PlantDecorator(terrestria_monsteras, 0.1F);
-        PlantDecorator terrestria_tiny_cactus_decorator = new PlantDecorator(terrestria_tiny_cactus, 0.1F);
-        PlantDecorator terrestria_agave_decorator = new PlantDecorator(terrestria_agave, 0.1F);
-        PlantDecorator terrestria_aloe_vera_decorator = new PlantDecorator(terrestria_aloe_vera, 0.1F);
+        PlantDecorator terrestria_tiny_cactus_decorator = new PlantDecorator(terrestria_tiny_cactus, 0.05F);
+        PlantDecorator terrestria_agave_decorator = new PlantDecorator(terrestria_agave, 0.05F);
+        PlantDecorator terrestria_aloe_vera_decorator = new PlantDecorator(terrestria_aloe_vera, 0.05F);
         PlantDecorator terrestria_dead_grass_decorator = new PlantDecorator(terrestria_dead_grass, 0.1F);
 
         // WOOD
@@ -95,9 +95,9 @@ public class SpheroidListTerrestria extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 5, 8, terrestria_yucca_palm_log, terrestria_yucca_palm_leaves, 1, 2));
 
         // VOLCANIC
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 5, 15, terrestria_basalt_sand).setBottomBlockState(terrestria_basalt_cobblestone));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new ModularSpheroidType(null, 5, 20, terrestria_basalt_dirt).setTopBlockState(terrestria_basalt_grass_block).addDecorator(terrestria_indian_paintbrush_decorator, 0.75F).addDecorator(terrestria_monsteras_decorator, 0.75F).addDecorator(FERNS_DECORATOR, 0.75F));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 5, 12, terrestria_basalt_dirt).setTopBlockState(terrestria_basalt_podzol));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.3F, new ModularSpheroidType(null, 5, 15, terrestria_basalt_sand).setBottomBlockState(terrestria_basalt_cobblestone));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 5, 20, terrestria_basalt_dirt).setTopBlockState(terrestria_basalt_grass_block).addDecorator(terrestria_indian_paintbrush_decorator, 0.75F).addDecorator(terrestria_monsteras_decorator, 0.75F).addDecorator(FERNS_DECORATOR, 0.75F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.3F, new ModularSpheroidType(null, 5, 12, terrestria_basalt_dirt).setTopBlockState(terrestria_basalt_podzol));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 0.5F, new LiquidSpheroidType(null, 5, 20, Blocks.LAVA.getDefaultState(), terrestria_basalt, 2, 4, 60, 80, 50));
 
         SpheroidListVanilla.RED_SAND.addDecorator(terrestria_agave_decorator, 0.5F);

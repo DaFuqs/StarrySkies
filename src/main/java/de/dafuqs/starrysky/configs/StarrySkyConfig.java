@@ -90,7 +90,7 @@ public class StarrySkyConfig implements ConfigData {
     @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Category("SPHEROIDS")
     @Comment(value = "\nGenerate Pride Spheroids")
-    public boolean generatePrideSpheroids = true;
+    public boolean generatePrideSpheroids = false;
 
     @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Category("SPHEROIDS")

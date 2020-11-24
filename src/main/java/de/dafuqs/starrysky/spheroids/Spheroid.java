@@ -112,13 +112,10 @@ public abstract class Spheroid implements Serializable {
         }
     }
 
+    // TODO: check
     protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z, int shellRadius) {
-        if(d == (this.radius - shellRadius)) {
-            int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));
-            return distance1 > (this.radius - shellRadius);
-        } else {
-            return false;
-        }
+        int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));
+        return d == (this.radius -shellRadius +1) && distance1 > (this.radius -shellRadius +1);
     }
 
 }

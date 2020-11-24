@@ -144,7 +144,7 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  4.0F, SAND);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  1.0F, RED_SAND);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  1.0F, GRAVEL);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  6.0F, GLOWSTONE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  8.0F, GLOWSTONE);
 
         // STONES
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 5.0F, STONE);

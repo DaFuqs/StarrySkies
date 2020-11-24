@@ -17,7 +17,7 @@ public class SpheroidLoader {
         put(SpheroidDistributionType.ESSENTIAL,  10.0F);
         put(SpheroidDistributionType.DECORATIVE, 10.0F);
         put(SpheroidDistributionType.ORE,        10.0F);
-        put(SpheroidDistributionType.FLUID,       5.0F);
+        put(SpheroidDistributionType.FLUID,       6.0F);
         put(SpheroidDistributionType.WOOD,        4.0F);
         put(SpheroidDistributionType.TREASURE,    1.0F);
         put(SpheroidDistributionType.DUNGEON,     0.1F);
