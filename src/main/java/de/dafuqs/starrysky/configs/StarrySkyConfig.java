@@ -1,6 +1,5 @@
 package de.dafuqs.starrysky.configs;
 
-import de.dafuqs.starrysky.StarrySkyCommon;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
@@ -18,14 +17,14 @@ public class StarrySkyConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
     @Comment(value = "\nIf set to true all new players will spawn in the planetoids dimension initially."
-                   + "\nStill WIP")
+                   + "\nDoesn't work yet")
     public boolean spawnInDimension = false;
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
     @Comment(value = "\nThe block the portal to the Starry Sky dimension needs to be built with."
                    + "\nBuild it like a nether portal & has to be activated with flint & steel"
-                   + "\nDefault: ICE")
+                   + "\nDefault: PACKED_ICE")
     public String portalFrameBlock = "PACKED_ICE";
 
     @ConfigEntry.Gui.Tooltip()
@@ -168,13 +167,13 @@ public class StarrySkyConfig implements ConfigData {
 
         // validate portalFrameBlock
         try {
-            Identifier identifier = new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.portalFrameBlock.toLowerCase());
+            Identifier identifier = new Identifier(portalFrameBlock.toLowerCase());
             BlockState bs = Registry.BLOCK.get(identifier).getDefaultState();
             if(bs == null) {
-                portalFrameBlock = "ICE";
+                portalFrameBlock = "PACKED_ICE";
             }
         } catch (Exception e) {
-            portalFrameBlock = "ICE";
+            portalFrameBlock = "PACKED_ICE";
         }
     }
 

@@ -20,9 +20,9 @@ Close to 0, 0 will always be a wooden sphere, so if you want to start in the Sta
 
        |  Screenshots |
 
-![Vanilla](./images/readme_screenshot_vanilla.png)
+![Vanilla](./images/readme_screenshot_vanilla_lowres.png)
 
-![With mod integration](./images/readme_screenshot_modded.png)
+![With mod integration](./images/readme_screenshot_modded_lowres.png)
 
 
 
