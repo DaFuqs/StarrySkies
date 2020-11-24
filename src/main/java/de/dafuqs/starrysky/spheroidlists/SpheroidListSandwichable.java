@@ -21,6 +21,8 @@ public class SpheroidListSandwichable extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
+        StarrySkyCommon.LOGGER.info("Loading Sandwichable integration...");
+
         SpheroidListVanilla.SAND.addDecorator(SANDWICHABLE_SALTY_SAND_DECORATOR, 0.2F);
         SpheroidListVanilla.GRASS.addDecorator(SANDWICHABLE_SHRUB_DECORATOR, 0.3F);
     }

@@ -16,6 +16,8 @@ public class SpheroidListModernIndustrialization extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
+        StarrySkyCommon.LOGGER.info("Loading Modern Industrialization integration...");
+
         BlockState modern_industrialization_copper_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
         BlockState modern_industrialization_tin_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
         BlockState modern_industrialization_lead_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"lead_ore")).getDefaultState();

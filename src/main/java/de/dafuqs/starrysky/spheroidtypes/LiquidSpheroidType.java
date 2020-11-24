@@ -6,6 +6,7 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.LiquidSpheroid;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class LiquidSpheroidType extends SpheroidType {
     public LiquidSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState liquid, LinkedHashMap<BlockState, Float> validShellBlocks, int minShellRadius, int maxShellRadius, int minFillPercent, int maxFillPercent, int holeInBottomPercent) {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
-        if(liquid == null) {
+        if(liquid == Blocks.AIR.getDefaultState()) {
             StarrySkyCommon.LOGGER.error("LiquidSpheroidType: Registered a SpheroidType with null liquid!");
         }
         if(validShellBlocks == null || validShellBlocks.size() == 0) {

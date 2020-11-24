@@ -20,6 +20,8 @@ public class SpheroidListBlockus extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
+        StarrySkyCommon.LOGGER.info("Loading Blockus integration...");
+
         BlockState blockus_limestone = Registry.BLOCK.get(new Identifier(MOD_ID,"limestone")).getDefaultState();
         BlockState blockus_marble = Registry.BLOCK.get(new Identifier(MOD_ID,"marble")).getDefaultState();
         BlockState blockus_bluestone = Registry.BLOCK.get(new Identifier(MOD_ID,"bluestone")).getDefaultState();

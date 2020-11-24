@@ -6,6 +6,7 @@ import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.special_overworld.MushroomSpheroid;
 import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
@@ -30,10 +31,10 @@ public class MushroomSpheroidType extends SpheroidType {
         this.minShellRadius = minShellRadius;
         this.maxShellRadius = maxShellRadius;
 
-        if(coreBlock == null) {
+        if(coreBlock == Blocks.AIR.getDefaultState()) {
             StarrySkyCommon.LOGGER.error("MushroomSpheroidType: Registered a SpheroidType with null coreBlock!");
         }
-        if(shellBlock == null) {
+        if(shellBlock == Blocks.AIR.getDefaultState()) {
             StarrySkyCommon.LOGGER.error("MushroomSpheroidType: Registered a SpheroidType with null shellBlock!");
         }
     }

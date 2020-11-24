@@ -19,6 +19,8 @@ public class SpheroidListTechReborn extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
+        StarrySkyCommon.LOGGER.info("Loading Tech Reborn integration...");
+
         // Rubber
         BlockState techreborn_rubber_log = Registry.BLOCK.get(new Identifier(MOD_ID,"rubber_log")).getDefaultState();
         BlockState techreborn_rubber_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"rubber_leaves")).getDefaultState();

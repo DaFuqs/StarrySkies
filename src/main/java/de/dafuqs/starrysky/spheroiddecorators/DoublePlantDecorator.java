@@ -9,7 +9,7 @@ import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
 
-public class PlantDecorator extends SpheroidDecorator {
+public class DoublePlantDecorator extends SpheroidDecorator {
 
     private final BlockState PLANT_BLOCKSTATE;
     private final float PLANT_CHANCE;
@@ -17,7 +17,7 @@ public class PlantDecorator extends SpheroidDecorator {
     /**
      * A chance of 0 = 0%, 100 = 100%
       */
-    public PlantDecorator(BlockState blockState, float chance) {
+    public DoublePlantDecorator(BlockState blockState, float chance) {
         this.PLANT_BLOCKSTATE = blockState;
         this.PLANT_CHANCE = chance;
     }
@@ -26,8 +26,8 @@ public class PlantDecorator extends SpheroidDecorator {
     public void decorateSpheroid(WorldView worldView, Chunk chunk, Spheroid spheroid, ArrayList<BlockPos> blockPos, ChunkRandom random) {
         blockPos = getDecorationBlockPosInChunk(chunk, blockPos);
         for(BlockPos bp : blockPos) {
-            if (chunk.getBlockState(bp.up()).isAir()) {
-                if(random.nextFloat() < PLANT_CHANCE) {
+            if (chunk.getBlockState(bp.up()).isAir() && chunk.getBlockState(bp.up(2)).isAir()) {
+                if (random.nextFloat() < PLANT_CHANCE) {
                     chunk.setBlockState(bp.up(), PLANT_BLOCKSTATE, false);
                 }
             }

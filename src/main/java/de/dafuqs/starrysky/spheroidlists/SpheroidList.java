@@ -193,7 +193,10 @@ public abstract class SpheroidList {
         public static SpheroidDecorator BAMBOO = new BambooDecorator();
         public static SpheroidDecorator SUGAR_CANE_POND = new SugarCanePondDecorator();
         public static SpheroidDecorator MUSHROOMS = new MushroomDecorator();
+        public static SpheroidDecorator DEAD_GRASS = new PlantDecorator(Blocks.DEAD_BUSH.getDefaultState(), 0.05F);
         public static SpheroidDecorator SWEET_BERRIES = new PlantDecorator(Blocks.SWEET_BERRY_BUSH.getDefaultState(), 0.03F);
+        public static PlantDecorator FERNS_DECORATOR = new PlantDecorator(Blocks.FERN.getDefaultState(), 0.1F);
+        public static DoublePlantDecorator LARGE_FERNS_DECORATOR = new DoublePlantDecorator(Blocks.LARGE_FERN.getDefaultState(), 0.1F);
     }
 
 }

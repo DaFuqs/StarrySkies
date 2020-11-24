@@ -5,6 +5,8 @@ import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.spheroiddecorators.PlantDecorator;
+import de.dafuqs.starrysky.spheroidtypes.LiquidSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.ModularSpheroidType;
 import de.dafuqs.starrysky.spheroidtypes.ShellSpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -13,6 +15,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import static de.dafuqs.starrysky.spheroidlists.SpheroidList.SpheroidDecorators.FERNS_DECORATOR;
 
 public class SpheroidListTerrestria extends SpheroidList {
 
@@ -23,6 +27,8 @@ public class SpheroidListTerrestria extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
+        StarrySkyCommon.LOGGER.info("Loading Terrestria integration...");
+
         // TREES
         BlockState terrestria_redwood_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"redwood_leaves")).getDefaultState().with(ExtendedLeavesBlock.DISTANCE, 1);
         BlockState terrestria_redwood_log = Registry.BLOCK.get(new Identifier(MOD_ID,"redwood_log")).getDefaultState();
@@ -55,13 +61,24 @@ public class SpheroidListTerrestria extends SpheroidList {
         BlockState terrestria_basalt_grass_block = Registry.BLOCK.get(new Identifier(MOD_ID,"basalt_grass_block")).getDefaultState(); // on top of basalt dirt
         BlockState terrestria_basalt_podzol = Registry.BLOCK.get(new Identifier(MOD_ID,"basalt_podzol")).getDefaultState(); // on top of basalt dirt
 
-        // SHRUBS - purely decorative TODO
+        // SHRUBS - purely decorative
+        BlockState terrestria_saguaro_cactus = Registry.BLOCK.get(new Identifier(MOD_ID,"saguaro_cactus")).getDefaultState(); // very dynamic cactus
         BlockState terrestria_cattail = Registry.BLOCK.get(new Identifier(MOD_ID,"cattail")).getDefaultState(); // in water
         BlockState terrestria_indian_paintbrush = Registry.BLOCK.get(new Identifier(MOD_ID,"indian_paintbrush")).getDefaultState(); // on basalt_grass
         BlockState terrestria_monsteras = Registry.BLOCK.get(new Identifier(MOD_ID,"monsteras")).getDefaultState();
         BlockState terrestria_tiny_cactus = Registry.BLOCK.get(new Identifier(MOD_ID,"tiny_cactus")).getDefaultState();
         BlockState terrestria_agave = Registry.BLOCK.get(new Identifier(MOD_ID,"agave")).getDefaultState();
         BlockState terrestria_aloe_vera = Registry.BLOCK.get(new Identifier(MOD_ID,"aloe_vera")).getDefaultState();
+        BlockState terrestria_dead_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"dead_grass")).getDefaultState();
+
+        PlantDecorator terrestria_saguaro_cactus_decorator = new PlantDecorator(terrestria_saguaro_cactus, 0.1F); // TODO on top of sand
+        PlantDecorator terrestria_cattail_decorator = new PlantDecorator(terrestria_cattail, 0.1F); // TODO single block, in water
+        PlantDecorator terrestria_indian_paintbrush_decorator = new PlantDecorator(terrestria_indian_paintbrush, 0.1F);
+        PlantDecorator terrestria_monsteras_decorator = new PlantDecorator(terrestria_monsteras, 0.1F);
+        PlantDecorator terrestria_tiny_cactus_decorator = new PlantDecorator(terrestria_tiny_cactus, 0.1F);
+        PlantDecorator terrestria_agave_decorator = new PlantDecorator(terrestria_agave, 0.1F);
+        PlantDecorator terrestria_aloe_vera_decorator = new PlantDecorator(terrestria_aloe_vera, 0.1F);
+        PlantDecorator terrestria_dead_grass_decorator = new PlantDecorator(terrestria_dead_grass, 0.1F);
 
         // WOOD
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 7, 16, terrestria_redwood_log, terrestria_redwood_leaves, 2, 3));
@@ -78,11 +95,18 @@ public class SpheroidListTerrestria extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 5, 8, terrestria_yucca_palm_log, terrestria_yucca_palm_leaves, 1, 2));
 
         // VOLCANIC
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new ModularSpheroidType(null, 5, 15, terrestria_basalt_sand).setBottomBlockState(terrestria_basalt_cobblestone));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new ModularSpheroidType(null, 5, 20, terrestria_basalt_dirt).setTopBlockState(terrestria_basalt_grass_block));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 5, 15, terrestria_basalt_sand).setBottomBlockState(terrestria_basalt_cobblestone));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, new ModularSpheroidType(null, 5, 20, terrestria_basalt_dirt).setTopBlockState(terrestria_basalt_grass_block).addDecorator(terrestria_indian_paintbrush_decorator, 0.75F).addDecorator(terrestria_monsteras_decorator, 0.75F).addDecorator(FERNS_DECORATOR, 0.75F));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 5, 12, terrestria_basalt_dirt).setTopBlockState(terrestria_basalt_podzol));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 0.5F, new LiquidSpheroidType(null, 5, 20, Blocks.LAVA.getDefaultState(), terrestria_basalt, 2, 4, 60, 80, 50));
 
-        // Add common blocks to maps
+        SpheroidListVanilla.RED_SAND.addDecorator(terrestria_agave_decorator, 0.5F);
+        SpheroidListVanilla.RED_SAND.addDecorator(terrestria_dead_grass_decorator, 0.7F);
+        SpheroidListVanilla.SAND.addDecorator(terrestria_tiny_cactus_decorator, 0.2F);
+        SpheroidListVanilla.GRASS.addDecorator(terrestria_aloe_vera_decorator, 0.1F);
+        SpheroidListVanilla.GRASS.addDecorator(terrestria_agave_decorator, 0.1F);
+
+                // Add common blocks to maps
         SpheroidList.MAP_STONES.put(terrestria_basalt, 0.4F);
         SpheroidList.MAP_DUNGEON_STONES.put(terrestria_mossy_basalt_cobblestone, 1.0F);
         SpheroidList.MAP_DUNGEON_STONES.put(terrestria_basalt_cobblestone, 0.5F);

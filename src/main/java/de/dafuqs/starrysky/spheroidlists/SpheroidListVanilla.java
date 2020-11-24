@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroidlists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
@@ -20,8 +21,8 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final ModularSpheroidType GRANITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.granite, 6, 11,  Blocks.GRANITE.getDefaultState());
     public static final ModularSpheroidType DIORITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.diorite, 6, 11,  Blocks.DIORITE.getDefaultState());
     public static final ModularSpheroidType ANDESITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.andesite, 6, 11,  Blocks.ANDESITE.getDefaultState());
-    public static final ModularSpheroidType SAND = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.sand, 5, 13,  Blocks.SAND.getDefaultState()).setBottomBlockState(Blocks.SANDSTONE.getDefaultState()).addDecorator(SpheroidDecorators.CACTUS, 0.3F);
-    public static final ModularSpheroidType RED_SAND = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.red_sand, 5, 11,  Blocks.RED_SAND.getDefaultState()).setBottomBlockState(Blocks.RED_SANDSTONE.getDefaultState()).addDecorator(SpheroidDecorators.CACTUS, 0.3F);
+    public static final ModularSpheroidType SAND = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.sand, 5, 13,  Blocks.SAND.getDefaultState()).setBottomBlockState(Blocks.SANDSTONE.getDefaultState()).addDecorator(SpheroidDecorators.CACTUS, 0.3F).addDecorator(SpheroidDecorators.DEAD_GRASS, 0.3F);
+    public static final ModularSpheroidType RED_SAND = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.red_sand, 5, 11,  Blocks.RED_SAND.getDefaultState()).setBottomBlockState(Blocks.RED_SANDSTONE.getDefaultState()).addDecorator(SpheroidDecorators.CACTUS, 0.3F).addDecorator(SpheroidDecorators.DEAD_GRASS, 0.3F);
     public static final ModularSpheroidType GRAVEL = new ModularSpheroidType(SpheroidAdvancementIdentifier.gravel, 6, 10,  Blocks.GRAVEL.getDefaultState()).setBottomBlockState(Blocks.COBBLESTONE.getDefaultState());
     public static final ModularSpheroidType COBBLESTONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.cobblestone, 5, 9,  Blocks.COBBLESTONE.getDefaultState());
     public static final ModularSpheroidType MOSSY_COBBLESTONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.mossy_cobblestone, 5, 6,  Blocks.MOSSY_COBBLESTONE.getDefaultState());
@@ -62,7 +63,7 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final OceanMonumentSpheroidType OCEAN_MONUMENT = new OceanMonumentSpheroidType(SpheroidAdvancementIdentifier.ocean_monument, 25, 35, 3, 5, 2, 3);
 
     // ORES
-    public static final CoreSpheroidType COAL     = new CoreSpheroidType(SpheroidAdvancementIdentifier.coal, 5, 15, Blocks.COAL_ORE.getDefaultState(), MAP_STONES, 3, 7);
+    public static final CoreSpheroidType COAL     = new CoreSpheroidType(SpheroidAdvancementIdentifier.coal, 5, 15, Blocks.COAL_ORE.getDefaultState(), MAP_STONES, 4, 8);
     public static final CoreSpheroidType IRON     = new CoreSpheroidType(SpheroidAdvancementIdentifier.iron, 5, 12, Blocks.IRON_ORE.getDefaultState(), MAP_STONES, 3, 5);
     public static final CoreSpheroidType GOLD     = new CoreSpheroidType(SpheroidAdvancementIdentifier.gold, 5, 10, Blocks.GOLD_ORE.getDefaultState(), MAP_STONES, 2, 4);
     public static final CoreSpheroidType DIAMOND  = new CoreSpheroidType(SpheroidAdvancementIdentifier.diamond, 3, 7, Blocks.DIAMOND_ORE.getDefaultState(), MAP_STONES, 1, 3);
@@ -136,6 +137,8 @@ public class SpheroidListVanilla extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
+        StarrySkyCommon.LOGGER.info("Loading Vanilla Spheroids...");
+
         // COMMON
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL, 10.0F, GRASS);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  4.0F, SAND);

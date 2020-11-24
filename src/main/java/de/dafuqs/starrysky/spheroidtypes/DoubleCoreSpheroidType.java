@@ -6,6 +6,7 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.DoubleCoreSpheroid;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
@@ -28,10 +29,10 @@ public class DoubleCoreSpheroidType extends SpheroidType {
     public DoubleCoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState innerCoreBlock, BlockState outerCoreBlock, LinkedHashMap<BlockState, Float> validShellBlocks, int minInnerCoreRadius, int maxInnerCoreRadius, int minShellRadius, int maxShellRadius) {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
-        if(innerCoreBlock == null) {
+        if(innerCoreBlock == Blocks.AIR.getDefaultState()) {
             StarrySkyCommon.LOGGER.error("DoubleCoreSpheroidType: Registered a SpheroidType with null innerCoreBlock!");
         }
-        if(outerCoreBlock == null) {
+        if(outerCoreBlock == Blocks.AIR.getDefaultState()) {
             StarrySkyCommon.LOGGER.error("DoubleCoreSpheroidType: Registered a SpheroidType with null outerCoreBlock!");
         }
         if(validShellBlocks == null || validShellBlocks.size() == 0) {

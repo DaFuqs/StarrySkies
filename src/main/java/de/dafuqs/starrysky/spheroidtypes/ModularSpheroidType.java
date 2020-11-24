@@ -5,6 +5,7 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroiddecorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroids.ModularSpheroid;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -20,7 +21,7 @@ public class ModularSpheroidType extends SpheroidType {
     public ModularSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState mainBlock) {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
-        if(mainBlock == null) {
+        if(mainBlock == Blocks.AIR.getDefaultState()) {
             StarrySkyCommon.LOGGER.error("ModularSpheroidType: Registered a SpheroidType with null mainBlock!");
         }
 

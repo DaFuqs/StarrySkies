@@ -19,6 +19,8 @@ public class SpheroidListAstromine extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
+        StarrySkyCommon.LOGGER.info("Loading Astromine integration...");
+
         BlockState astromine_crude_oil         = Registry.BLOCK.get(new Identifier(MOD_ID,"crude_oil")).getDefaultState();
         BlockState astromine_copper_ore        = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
         BlockState astromine_tin_ore           = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
