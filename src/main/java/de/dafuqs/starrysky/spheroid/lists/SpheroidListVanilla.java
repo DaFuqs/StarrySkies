@@ -8,6 +8,7 @@ import de.dafuqs.starrysky.spheroid.types.*;
 import de.dafuqs.starrysky.spheroid.types.special_overworld.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
+import net.minecraft.loot.LootTables;
 import net.minecraft.state.property.Properties;
 
 public class SpheroidListVanilla extends SpheroidList {
@@ -103,6 +104,7 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final MushroomSpheroidType RED_MUSHROOM      = new MushroomSpheroidType(SpheroidAdvancementIdentifier.red_mushroom, 4, 8, Blocks.MUSHROOM_STEM.getDefaultState(), Blocks.RED_MUSHROOM_BLOCK.getDefaultState(), 2, 3);
 
     //COLD
+    public static final CaveSpheroidType SNOW_CAVE = new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, 6, 10, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 2, 4).addChestWithLootTable(LootTables.IGLOO_CHEST_CHEST, 50);
     public static final CoreSpheroidType       SNOW_ICE        = (CoreSpheroidType) new CoreSpheroidType(SpheroidAdvancementIdentifier.ice, 5, 15, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 3, 6).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F);
     public static final CoreSpheroidType       ICE_PACKED_ICE  = new CoreSpheroidType(SpheroidAdvancementIdentifier.packed_ice, 5, 15, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), 3, 6);
     public static final DoubleCoreSpheroidType SNOW_PACKED_ICE = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, 5, 12, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 2, 4, 2, 4).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F);
@@ -155,6 +157,7 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.1F, MOSSY_COBBLESTONE);
 
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 2.0F, PODZOL);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, SNOW_CAVE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, STONE_HOLLOW);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, COARSE_DIRT);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, OBSIDIAN);

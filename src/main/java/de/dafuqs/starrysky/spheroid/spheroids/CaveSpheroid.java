@@ -5,6 +5,7 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
@@ -19,8 +20,9 @@ public class CaveSpheroid extends Spheroid {
     private final BlockState bottomBlock;
     private final BlockState shellBlock;
     private final int shellRadius;
+    private final Identifier chestLootTable;
 
-    public CaveSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState caveFloorBlock, BlockState shellBlock, int shellRadius, BlockState topBlock, BlockState bottomBlock) {
+    public CaveSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState caveFloorBlock, BlockState shellBlock, int shellRadius, BlockState topBlock, BlockState bottomBlock, Identifier chestLootTable) {
         super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
 
         this.caveFloorBlock = caveFloorBlock;
@@ -28,6 +30,7 @@ public class CaveSpheroid extends Spheroid {
         this.shellRadius = shellRadius;
         this.topBlock = topBlock;
         this.bottomBlock = bottomBlock;
+        this.chestLootTable = chestLootTable;
     }
 
 
@@ -39,6 +42,8 @@ public class CaveSpheroid extends Spheroid {
         int x = this.getPosition().getX();
         int y = this.getPosition().getY();
         int z = this.getPosition().getZ();
+
+        boolean hasChest = this.chestLootTable != null;
 
         for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
@@ -56,6 +61,9 @@ public class CaveSpheroid extends Spheroid {
                     } else if(isAboveCaveFloorBlock(d, x2, y2, z2, shellRadius)) {
                         chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock, false);
                         addDecorationBlockPosition(currBlockPos.down());
+                        if(hasChest && x2-x == 0 && z2-z == 0) {
+                            placeCenterChestWithLootTable(chunk, currBlockPos, chestLootTable);
+                        }
                     } else if(d <= this.radius - this.shellRadius) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false); // always CAVE_AIR
                     } else if (d < this.radius) {

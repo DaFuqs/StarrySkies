@@ -4,9 +4,6 @@ import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
@@ -61,7 +58,7 @@ public class ModularSpheroid extends Spheroid {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
                     if (hasCenterChest && d == 0) {
-                        placeCenterChestWithLootTable(chunk, currBlockPos);
+                        placeCenterChestWithLootTable(chunk, currBlockPos, this.centerChestLootTable);
                     } else if (d == this.radius) {
                         if (isBottomBlock(d, x2, y2, z2)) {
                             chunk.setBlockState(currBlockPos, this.bottomBlock, false);
@@ -79,12 +76,6 @@ public class ModularSpheroid extends Spheroid {
         }
 
         this.setChunkFinished(chunk.getPos());
-    }
-
-    private void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos) {
-        chunk.setBlockState(blockPos, Blocks.CHEST.getDefaultState(), false);
-        chunk.setBlockEntity(blockPos, new ChestBlockEntity());
-        LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, centerChestLootTable);
     }
 
 }

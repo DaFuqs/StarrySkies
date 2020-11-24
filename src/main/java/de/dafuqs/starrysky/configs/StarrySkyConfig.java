@@ -80,7 +80,7 @@ public class StarrySkyConfig implements ConfigData {
             + "When set to  0 there will be no ground, only void\n"
             + "Default: 3 (2 layers water, 1 layer bedrock)")
     @ConfigEntry.BoundedDiscrete(min = 0, max = 128)
-    public int floorHeight = 3;
+    public int floorHeight = 0;
 
     @ConfigEntry.Category("WORLD FLOOR GENERATION")
     @Comment(value = "\nThe block generating at y>1 (if floorHeight > 1)\n"

@@ -29,7 +29,7 @@ public abstract class WorldRendererMixin {
     private MinecraftClient client;
 
     @Inject(at = @At("HEAD"), method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;F)V", cancellable = true)
-    void renderStarrySky(MatrixStack matrices, float tickDelta, CallbackInfo callbackInformation) {
+    void renderSky(MatrixStack matrices, float tickDelta, CallbackInfo callbackInformation) {
         if (this.client.world.getRegistryKey().equals(StarrySkyCommon.starryWorld.getRegistryKey())) {
             starrySkyBox.render(matrices, tickDelta);
             callbackInformation.cancel();

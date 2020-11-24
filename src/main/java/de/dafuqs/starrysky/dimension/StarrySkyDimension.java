@@ -20,6 +20,7 @@ public class StarrySkyDimension {
     public static void setupPortal() {
         Block portalFrameBlock = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.portalFrameBlock.toLowerCase()));
         CustomPortalApiRegistry.addPortal(portalFrameBlock, StarrySkyCommon.MOD_DIMENSION_ID, StarrySkyCommon.STARRY_SKY_CONFIG.portalColor);
+
     }
 
 }

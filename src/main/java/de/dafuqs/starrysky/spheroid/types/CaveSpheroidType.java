@@ -6,6 +6,7 @@ import de.dafuqs.starrysky.decorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.CaveSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class CaveSpheroidType extends SpheroidType {
     private final BlockState caveFloorBlock;
     private BlockState topBlock;
     private BlockState bottomBlock;
+    private Identifier lootTable;
+    float lootTableChance;
 
     public CaveSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState shellBlock, BlockState caveFloorBlock, int minShellRadius, int maxShellRadius) {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
@@ -46,6 +49,12 @@ public class CaveSpheroidType extends SpheroidType {
         return this;
     }
 
+    public CaveSpheroidType addChestWithLootTable(Identifier lootTable, float chance) {
+        lootTable = lootTable;
+        this.lootTableChance = chance;
+        return this;
+    }
+
     public BlockState getTopBlock() {
         return topBlock != null ? topBlock : shellBlock;
     }
@@ -64,8 +73,12 @@ public class CaveSpheroidType extends SpheroidType {
         BlockState topBlock = getTopBlock();
         BlockState bottomBlock = getBottomBlock();
         int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
+        Identifier lootTable = null;
+        if( chunkRandom.nextFloat() < lootTableChance) {
+            lootTable = this.lootTable;
+        }
 
-        return new CaveSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, caveFloorBlock, shellBlock, shellRadius, topBlock, bottomBlock);
+        return new CaveSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, caveFloorBlock, shellBlock, shellRadius, topBlock, bottomBlock, lootTable);
     }
 
 }

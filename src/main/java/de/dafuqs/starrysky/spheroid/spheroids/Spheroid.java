@@ -3,6 +3,10 @@ package de.dafuqs.starrysky.spheroid.spheroids;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ChunkRegion;
@@ -117,5 +121,12 @@ public abstract class Spheroid implements Serializable {
         int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y-1, z));
         return d == (this.radius -shellRadius +1) && distance1 > (this.radius -shellRadius +1);
     }
+
+    protected void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos, Identifier lootTable) {
+        chunk.setBlockState(blockPos, Blocks.CHEST.getDefaultState(), false);
+        chunk.setBlockEntity(blockPos, new ChestBlockEntity());
+        LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, lootTable);
+    }
+
 
 }
