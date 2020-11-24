@@ -1,6 +1,6 @@
 package de.dafuqs.starrysky;
 
-import de.dafuqs.starrysky.spheroids.Spheroid;
+import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;

@@ -1,0 +1,53 @@
+package de.dafuqs.starrysky.spheroid.types.special_overworld;
+
+import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.spheroids.special_overworld.MushroomSpheroid;
+import de.dafuqs.starrysky.spheroid.types.SpheroidType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.world.gen.ChunkRandom;
+
+import java.util.ArrayList;
+
+
+/**
+ * Very similar to ShellSpheroid
+ * but uses the mushroom blocks "sides" properties
+ */
+public class MushroomSpheroidType extends SpheroidType {
+
+    BlockState coreBlock;
+    BlockState shellBlock;
+    int minShellRadius;
+    int maxShellRadius;
+
+    public MushroomSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState coreBlock, BlockState shellBlock, int minShellRadius, int maxShellRadius) {
+        super(spheroidAdvancementIdentifier, minRadius, maxRadius);
+
+        this.coreBlock = coreBlock;
+        this.shellBlock = shellBlock;
+        this.minShellRadius = minShellRadius;
+        this.maxShellRadius = maxShellRadius;
+
+        if(coreBlock == Blocks.AIR.getDefaultState()) {
+            StarrySkyCommon.LOGGER.error("MushroomSpheroidType: Registered a SpheroidType with null coreBlock!");
+        }
+        if(shellBlock == Blocks.AIR.getDefaultState()) {
+            StarrySkyCommon.LOGGER.error("MushroomSpheroidType: Registered a SpheroidType with null shellBlock!");
+        }
+    }
+
+    public String getDescription() {
+        return "MushroomSpheroid";
+    }
+
+    public MushroomSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+        int radius = getRandomRadius(chunkRandom);
+        ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
+        int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + minShellRadius;
+        return new MushroomSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, coreBlock, shellBlock, shellRadius);
+    }
+
+}

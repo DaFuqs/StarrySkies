@@ -1,9 +1,9 @@
 package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.spheroidlists.SpheroidListVanilla;
-import de.dafuqs.starrysky.spheroids.Spheroid;
-import de.dafuqs.starrysky.spheroidtypes.SpheroidType;
+import de.dafuqs.starrysky.spheroid.lists.SpheroidListVanilla;
+import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.ChunkRandom;
 import org.apache.logging.log4j.Level;

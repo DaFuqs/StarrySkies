@@ -1,6 +1,7 @@
 package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.biome.StarrySkyBiomeProvider;
 import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
@@ -20,4 +21,5 @@ public class StarrySkyDimension {
         Block portalFrameBlock = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.portalFrameBlock.toLowerCase()));
         CustomPortalApiRegistry.addPortal(portalFrameBlock, StarrySkyCommon.MOD_DIMENSION_ID, StarrySkyCommon.STARRY_SKY_CONFIG.portalColor);
     }
+
 }

@@ -25,6 +25,7 @@
       "de.dafuqs.starrysky.configs.ModMenuConfig"
     ],
     "client": [
+      "de.dafuqs.starrysky.StarrySkyClient"
     ]
   },
   "mixins": [

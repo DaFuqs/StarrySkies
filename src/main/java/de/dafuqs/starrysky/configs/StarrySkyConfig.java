@@ -35,6 +35,12 @@ public class StarrySkyConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
+    @Comment(value = "\nThe height of clouds in the Starry Sky dimension."
+                     + "\nDefault: 270")
+    public float cloudHeight = 270F;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category("GENERAL")
     @Comment(value = "\nThe '/sphere' command lists all the data of the clostest sphere (position, blocks, ...)\n"
                    + "\nDefault: 0 (OP)")
     public int sphereCommandRequiredPermissionLevel = 0;

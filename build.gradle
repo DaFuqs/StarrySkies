@@ -1,8 +1,12 @@
 plugins {
-	id 'fabric-loom' version '0.4-SNAPSHOT'
+	id 'fabric-loom' version '0.5-SNAPSHOT'
 	id 'maven-publish'
 }
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
@@ -25,6 +29,11 @@ repositories {
 	maven {
 		url "https://dl.bintray.com/kyrptonaught/customportalapi"
 	}
+	/*maven {
+		name "immersiveportals"
+		url 'https://jitpack.io'
+	}*/
+
 }
 
 dependencies {
@@ -69,11 +78,17 @@ dependencies {
 		exclude module: 'fabric-api'
 	}
 
+	// customportalapi
 	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta10-1.16' // https://github.com/kyrptonaught/customportalapi
 	include 'net.kyrptonaught:customportalapi:0.0.1-beta10-1.16' // https://github.com/kyrptonaught/customportalapi
 
+	// terrestria, traverse
 	modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:$project.terraform_wood_api_version"
 	modImplementation "com.terraformersmc.terraform-api:terraform-tree-api-v1:$project.terraform_tree_api_version"
+
+	// immersive portals
+	//modImplementation  'com.github.qouteall.ImmersivePortalsMod:imm_ptl_core:v0.48-1.16'
+	//include 'com.github.qouteall.ImmersivePortalsMod:imm_ptl_core:v0.48-1.16'
 }
 
 processResources {
