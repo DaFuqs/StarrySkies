@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.decorators;
+package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.dimension.biome.StarrySkyBiomeProvider;
@@ -13,14 +13,10 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 
-public class StarrySkyFeatures {
-
-    public static final Identifier CENTER_POND_ID = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_overworld_features");
-    public static final Feature<DefaultFeatureConfig> CENTER_POND = register(new CenterPondDecorator(DefaultFeatureConfig.CODEC), CENTER_POND_ID);
-    public static final RegistryKey<ConfiguredFeature<?, ?>> CENTER_POND_KEY = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN, CENTER_POND_ID);
+public class DecoratorFeatures {
 
     public static final Identifier SPHEROID_DECORATOR_ID = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_spheroid_decorator");
-    public static final Feature<DefaultFeatureConfig> SPHEROID_DECORATOR = register(new CenterPondDecorator(DefaultFeatureConfig.CODEC), SPHEROID_DECORATOR_ID);
+    public static final Feature<DefaultFeatureConfig> SPHEROID_DECORATOR = register(new SpheroidDecoratorFeature(DefaultFeatureConfig.CODEC), SPHEROID_DECORATOR_ID);
     public static final RegistryKey<ConfiguredFeature<?, ?>> SPHEROID_DECORATOR_KEY = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN, SPHEROID_DECORATOR_ID);
 
     public static <T extends FeatureConfig> Feature<T> register(Feature<T> feature, Identifier id) {

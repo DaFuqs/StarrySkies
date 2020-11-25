@@ -1,46 +1,36 @@
-package de.dafuqs.starrysky.decorators;
+package de.dafuqs.starrysky.dimension.decorators;
 
-import com.mojang.serialization.Codec;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.ChunkRandom;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.FeatureConfig;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class CenterPondDecorator extends SpheroidDecorator {
 
-    public CenterPondDecorator(Codec configCodec) {
-        super(configCodec);
-    }
-
-    public void decorateSpheroid(ChunkRegion chunkRegion, Chunk chunk, Spheroid spheroid, ArrayList<BlockPos> blockPos, ChunkRandom random) {
+    @Override
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
         // doesn't make sense on small spheroids
         if(spheroid.getRadius() > 10) {
-            int pondSize = spheroid.getRadius() / 3;
+            int pondSize = (int) (spheroid.getRadius() / 3.5);
             BlockPos spheroidTop = spheroid.getPosition().up(spheroid.getRadius());
 
             int waterLevelY = spheroidTop.getY();
             boolean waterLevelSet = false;
 
             for (int i = -pondSize - 1; i < pondSize + 1; i++) {
-                for (int j = -pondSize - 1; j < pondSize + 1; j++) {
-                    for (int k = -pondSize - 1; k < 0; k++) {
+                for (int j = -pondSize; j < 1; j++) {
+                    for (int k = -pondSize -1; k < pondSize; k++) {
                         BlockPos currentBlockPos = spheroidTop.add(i, j, k);
-                        if (Support.isBlockPosInChunkPos(chunk.getPos(), currentBlockPos)) {
-                            if (chunk.getBlockState(currentBlockPos).isAir()) {
-                                waterLevelY = currentBlockPos.getY() - 1;
-                                waterLevelSet = true;
-                                break;
-                            }
+                        if (world.getBlockState(currentBlockPos).isAir()) {
+                            waterLevelY = currentBlockPos.getY() - 1;
+                            waterLevelSet = true;
+                            break;
                         }
                     }
                     if (waterLevelSet) {
@@ -65,24 +55,19 @@ public class CenterPondDecorator extends SpheroidDecorator {
                             double pondDistance = distance / pondSize;
                             if (pondDistance < 1) {
                                 blockState = Blocks.WATER.getDefaultState();
-                            } else if (pondDistance < 1.65) {
+                            } else if (pondDistance < 1.70) {
                                 blockState = Blocks.SAND.getDefaultState();
                             }
                         }
 
-                        if (blockState != null && Support.isBlockPosInChunkPos(chunk.getPos(), currentBlockPos)) {
-                            if (!chunk.getBlockState(currentBlockPos).isAir()) {
-                                chunk.setBlockState(currentBlockPos, blockState, false);
+                        if (blockState != null) {
+                            if (!world.getBlockState(currentBlockPos).isAir()) {
+                                world.setBlockState(currentBlockPos, blockState, 3);
                             }
                         }
                     }
                 }
             }
         }
-    }
-
-    @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, FeatureConfig config) {
-        return false;
     }
 }

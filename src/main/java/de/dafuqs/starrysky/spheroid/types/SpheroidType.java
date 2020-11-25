@@ -2,7 +2,7 @@ package de.dafuqs.starrysky.spheroid.types;
 
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.world.gen.ChunkRandom;
 

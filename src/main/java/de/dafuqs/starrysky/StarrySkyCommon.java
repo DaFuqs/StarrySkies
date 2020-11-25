@@ -3,7 +3,7 @@ package de.dafuqs.starrysky;
 import de.dafuqs.starrysky.advancements.ProximityAchivementCheckEvent;
 import de.dafuqs.starrysky.commands.StarrySkyCommands;
 import de.dafuqs.starrysky.configs.StarrySkyConfig;
-import de.dafuqs.starrysky.decorators.StarrySkyFeatures;
+import de.dafuqs.starrysky.dimension.DecoratorFeatures;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
@@ -46,7 +46,7 @@ public class StarrySkyCommon implements ModInitializer {
         StarrySkyDimension.setupDimension();
         StarrySkyDimension.setupPortal();
         StarrySkyCommands.initialize();
-        StarrySkyFeatures.initialize();
+        DecoratorFeatures.initialize();
 
         // triggers everytime a world is loaded
         // so for overworld, nether, ... (they all share the same seed)

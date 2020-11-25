@@ -1,6 +1,5 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
-import de.dafuqs.starrysky.decorators.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CoralParentBlock;
@@ -185,19 +184,5 @@ public abstract class SpheroidList {
         //add(Blocks.TALL_GRASS.getDefaultState()); // generates more often than enough on grass planet
         add(Blocks.LARGE_FERN.getDefaultState());
     }};
-
-    public static class SpheroidDecorators {
-        public static SpheroidDecorator CACTUS = new CactusDecorator(null);
-        public static SpheroidDecorator SEA_GREENS = new SeaGreensDecorator(null);
-        public static SpheroidDecorator COCOA = new CocoaDecorator(null);
-        public static SpheroidDecorator BAMBOO = new BambooDecorator(null);
-        public static SpheroidDecorator SUGAR_CANE_POND = new SugarCanePondDecorator(null);
-        public static SpheroidDecorator CENTER_POND = new CenterPondDecorator(null);
-        public static SpheroidDecorator MUSHROOMS = new MushroomDecorator(null);
-        public static SpheroidDecorator DEAD_GRASS = new PlantDecorator(null, Blocks.DEAD_BUSH.getDefaultState(), 0.05F);
-        public static SpheroidDecorator SWEET_BERRIES = new PlantDecorator(null, Blocks.SWEET_BERRY_BUSH.getDefaultState(), 0.03F);
-        public static PlantDecorator FERNS_DECORATOR = new PlantDecorator(null, Blocks.FERN.getDefaultState(), 0.1F);
-        public static DoublePlantDecorator LARGE_FERNS_DECORATOR = new DoublePlantDecorator(null, Blocks.LARGE_FERN.getDefaultState(), 0.1F);
-    }
 
 }

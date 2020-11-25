@@ -3,7 +3,7 @@ package de.dafuqs.starrysky.spheroid.spheroids;
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;

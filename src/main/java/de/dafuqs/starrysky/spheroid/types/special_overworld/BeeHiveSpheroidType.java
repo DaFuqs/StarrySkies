@@ -2,7 +2,8 @@ package de.dafuqs.starrysky.spheroid.types.special_overworld;
 
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.SpheroidDecoratorFeature;
+import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.special_overworld.BeeHiveSpheroid;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.world.gen.ChunkRandom;

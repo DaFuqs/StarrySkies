@@ -179,7 +179,6 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         for(Spheroid spheroid : localSystem) {
             if (spheroid.isInChunk(chunk.getPos())) {
                 spheroid.generate(chunk);
-                spheroid.decorate((ChunkRegion) world, chunk);
             }
         }
     }

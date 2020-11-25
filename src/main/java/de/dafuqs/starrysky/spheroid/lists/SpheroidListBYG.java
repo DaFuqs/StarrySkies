@@ -4,8 +4,8 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.decorators.DoublePlantDecorator;
-import de.dafuqs.starrysky.decorators.PlantDecorator;
+import de.dafuqs.starrysky.dimension.decorators.DoublePlantDecorator;
+import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
 import de.dafuqs.starrysky.spheroid.types.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
@@ -163,21 +163,21 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState byg_winter_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"winter_grass")).getDefaultState();
 
 
-        PlantDecorator byg_blueberry_bush_decorator = new PlantDecorator(null, byg_blueberry_bush, 0.05F); // MEADOW_GRASSBLOCK, OVERGROWN_DACITE, OVERGROWN_STONE, GRASS_BLOCK
-        PlantDecorator byg_mini_cactus_decorator = new PlantDecorator(null, byg_mini_cactus, 0.03F);
-        PlantDecorator byg_cattail_decorator = new PlantDecorator(null, byg_cattail, 0.1F); // DoublePlant, in swamp water    // TODO
-        PlantDecorator byg_golden_spined_cactus_decorator = new PlantDecorator(null, byg_golden_spined_cactus, 0.1F);    // TODO
-        PlantDecorator byg_horseweed_decorator = new PlantDecorator(null, byg_horseweed, 0.1F);    // TODO
-        PlantDecorator byg_poison_ivy_decorator = new PlantDecorator(null, byg_poison_ivy, 0.1F); // Vines    // TODO
-        PlantDecorator byg_prickly_pear_cactus_decorator = new PlantDecorator(null, byg_prickly_pear_cactus, 0.05F);
-        PlantDecorator byg_reeds_decorator = new PlantDecorator(null, byg_reeds, 0.1F); // DoublePlant, in swamp water    // TODO
-        PlantDecorator byg_winter_succulent_decorator = new PlantDecorator(null, byg_winter_succulent, 0.07F);
-        PlantDecorator byg_winter_grass_decorator = new PlantDecorator(null, byg_winter_grass, 0.05F);
+        PlantDecorator byg_blueberry_bush_decorator = new PlantDecorator(byg_blueberry_bush, 0.05F); // MEADOW_GRASSBLOCK, OVERGROWN_DACITE, OVERGROWN_STONE, GRASS_BLOCK
+        PlantDecorator byg_mini_cactus_decorator = new PlantDecorator(byg_mini_cactus, 0.03F);
+        PlantDecorator byg_cattail_decorator = new PlantDecorator(byg_cattail, 0.1F); // DoublePlant, in swamp water    // TODO
+        PlantDecorator byg_golden_spined_cactus_decorator = new PlantDecorator(byg_golden_spined_cactus, 0.1F);    // TODO
+        PlantDecorator byg_horseweed_decorator = new PlantDecorator(byg_horseweed, 0.1F);    // TODO
+        PlantDecorator byg_poison_ivy_decorator = new PlantDecorator(byg_poison_ivy, 0.1F); // Vines    // TODO
+        PlantDecorator byg_prickly_pear_cactus_decorator = new PlantDecorator(byg_prickly_pear_cactus, 0.05F);
+        PlantDecorator byg_reeds_decorator = new PlantDecorator(byg_reeds, 0.1F); // DoublePlant, in swamp water    // TODO
+        PlantDecorator byg_winter_succulent_decorator = new PlantDecorator(byg_winter_succulent, 0.07F);
+        PlantDecorator byg_winter_grass_decorator = new PlantDecorator(byg_winter_grass, 0.05F);
 
-        PlantDecorator byg_prairie_grass_decorator = new PlantDecorator(null, byg_prairie_grass, 0.2F);
-        PlantDecorator byg_beach_grass_decorator = new PlantDecorator(null, byg_beach_grass, 0.1F);
-        PlantDecorator byg_small_beach_grass_decorator = new PlantDecorator(null, byg_small_beach_grass, 0.1F);
-        DoublePlantDecorator byg_tall_prairie_grass_decorator = new DoublePlantDecorator(null, byg_tall_prairie_grass, 0.2F);
+        PlantDecorator byg_prairie_grass_decorator = new PlantDecorator(byg_prairie_grass, 0.2F);
+        PlantDecorator byg_beach_grass_decorator = new PlantDecorator(byg_beach_grass, 0.1F);
+        PlantDecorator byg_small_beach_grass_decorator = new PlantDecorator(byg_small_beach_grass, 0.1F);
+        DoublePlantDecorator byg_tall_prairie_grass_decorator = new DoublePlantDecorator(byg_tall_prairie_grass, 0.2F);
 
         // FLOWERS
         BlockState byg_allium_flower_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"allium_flower_bush")).getDefaultState();
@@ -276,21 +276,29 @@ public class SpheroidListBYG extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.3F, new ShellSpheroidType(null, 7, 13, byg_maple_log, byg_red_maple_leaves, 2, 3));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.3F, new ShellSpheroidType(null, 7, 13, byg_maple_log, byg_silver_maple_leaves, 2, 3));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 6, 12, byg_palm_log, byg_palm_leaves, 2, 3));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 7, 10, byg_palo_verde_log, byg_palo_verde_leaves, 2, 3).addShellSpeckles(byg_flowering_palo_verde_leaves, 0.2F));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 7, 10, byg_skyris_log, byg_skyris_leaves, 2, 2).addShellSpeckles(byg_green_apple_skyris_leaves, 0.1F));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 7, 10, byg_witch_hazel_log, byg_witch_hazel_leaves, 2, 2).addShellSpeckles(byg_blooming_witch_hazel_leaves, 0.15F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 7, 10, byg_palo_verde_log, byg_palo_verde_leaves, 2, 3)
+                .addShellSpeckles(byg_flowering_palo_verde_leaves, 0.2F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 7, 10, byg_skyris_log, byg_skyris_leaves, 2, 2)
+                .addShellSpeckles(byg_green_apple_skyris_leaves, 0.1F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 7, 10, byg_witch_hazel_log, byg_witch_hazel_leaves, 2, 2)
+                .addShellSpeckles(byg_blooming_witch_hazel_leaves, 0.15F));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 8, 15, byg_pine_log, byg_pine_leaves, 2, 3));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 13, 17, byg_redwood_log, byg_redwood_leaves, 2, 3));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 7, 11, byg_willow_log, byg_willow_leaves, 2, 3));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.9F, new ShellSpheroidType(null, 6, 10, byg_zelkova_log, byg_zelkova_leaves, 1, 2));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.9F, new ShellSpheroidType(null, 5, 7, byg_withering_oak_log, byg_withering_oak_leaves, 1, 1));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.9F, new ShellSpheroidType(null, 7, 13, byg_pine_log, byg_araucaria_leaves, 2, 3));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.9F, new ShellSpheroidType(null, 7, 13, byg_holly_log, byg_holly_leaves, 2, 3).addShellSpeckles(byg_holly_berry_leaves, 0.15F));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 7, 13, byg_nightshade_log, byg_nightshade_leaves, 2, 3).addShellSpeckles(byg_flowering_nightshade_leaves, 0.15F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.9F, new ShellSpheroidType(null, 7, 13, byg_holly_log, byg_holly_leaves, 2, 3)
+                .addShellSpeckles(byg_holly_berry_leaves, 0.15F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.5F, new ShellSpheroidType(null, 7, 13, byg_nightshade_log, byg_nightshade_leaves, 2, 3)
+                .addShellSpeckles(byg_flowering_nightshade_leaves, 0.15F));
 
         // WOOD USING OAK LOGS
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.8F, new ShellSpheroidType(null, 6, 8, Blocks.OAK_LOG.getDefaultState(), byg_joshua_leaves, 1, 1).addShellSpeckles(byg_ripe_joshua_leaves, 0.08F));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 7, 14, Blocks.OAK_LOG.getDefaultState(), byg_orchard_leaves, 2, 3).addShellSpeckles(byg_flowering_orchard_leaves, 0.1F).addShellSpeckles(byg_ripe_orchard_leaves, 0.1F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.8F, new ShellSpheroidType(null, 6, 8, Blocks.OAK_LOG.getDefaultState(), byg_joshua_leaves, 1, 1)
+                .addShellSpeckles(byg_ripe_joshua_leaves, 0.08F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 7, 14, Blocks.OAK_LOG.getDefaultState(), byg_orchard_leaves, 2, 3)
+                .addShellSpeckles(byg_flowering_orchard_leaves, 0.1F)
+                .addShellSpeckles(byg_ripe_orchard_leaves, 0.1F));
 
         // ALTERNATE LEAF TYPES
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.4F, new ShellSpheroidType(null, 5, 15, Blocks.SPRUCE_LOG.getDefaultState(), byg_blue_spruce_leaves, 2, 3));
@@ -305,12 +313,21 @@ public class SpheroidListBYG extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 0.4F, new ShellSpheroidType(null, 8, 15, Blocks.OAK_LOG.getDefaultState(), byg_red_oak_leaves, 2, 3));
 
         // OTHER SPHEROID TYPES
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 5, 14, byg_meadow_dirt).setTopBlockState(byg_meadow_grass_block).addDecorator(byg_blueberry_bush_decorator, 0.3F));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 8, 14, byg_dacite).setTopBlockState(byg_overgrown_dacite).addDecorator(byg_blueberry_bush_decorator, 0.3F).addDecorator(byg_winter_succulent_decorator, 0.75F).addDecorator(SpheroidDecorators.FERNS_DECORATOR, 0.75F));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 8, 12, byg_dacite).setTopBlockState(byg_podzol_dacite).addDecorator(byg_winter_succulent_decorator, 0.75F).addDecorator(SpheroidDecorators.FERNS_DECORATOR, 0.75F).addDecorator(SpheroidDecorators.LARGE_FERNS_DECORATOR, 0.75F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 5, 14, byg_meadow_dirt)
+                .setTopBlockState(byg_meadow_grass_block).addDecorator(byg_blueberry_bush_decorator, 0.3F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 8, 14, byg_dacite)
+                .setTopBlockState(byg_overgrown_dacite).addDecorator(byg_blueberry_bush_decorator, 0.3F)
+                .addDecorator(byg_winter_succulent_decorator, 0.75F)
+                .addDecorator(SpheroidListVanilla.SpheroidDecorators.FERNS_DECORATOR, 0.75F));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new ModularSpheroidType(null, 8, 12, byg_dacite)
+                .setTopBlockState(byg_podzol_dacite)
+                .addDecorator(byg_winter_succulent_decorator, 0.75F)
+                .addDecorator(SpheroidListVanilla.SpheroidDecorators.FERNS_DECORATOR, 0.75F)
+                .addDecorator(SpheroidListVanilla.SpheroidDecorators.LARGE_FERNS_DECORATOR, 0.75F));
 
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new SupportedRainbowSpheroidType(null, 9, 14, coloredSand, Blocks.SANDSTONE.getDefaultState()));
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new LiquidSpheroidType(null, 8, 13, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 50, 80, 50).setCoreBlock(byg_mud_block, 4, 6));
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, new LiquidSpheroidType(null, 8, 13, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 50, 80, 50)
+                .setCoreBlock(byg_mud_block, 4, 6));
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.4F, new ModularSpheroidType(null, 6, 11, byg_peat));
 
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.1F, new CoreSpheroidType(null, 7, 13, byg_packed_black_ice, byg_black_ice, 3, 5));

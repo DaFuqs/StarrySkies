@@ -4,7 +4,7 @@ import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -16,12 +16,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 
 public abstract class Spheroid implements Serializable {
 
@@ -30,6 +32,7 @@ public abstract class Spheroid implements Serializable {
     protected BlockPos position;
     protected int radius;
     protected ChunkRandom random;
+    private boolean isDecorated = false;
 
     /**
      * Chunks this spheroid should be still generated in
@@ -99,9 +102,17 @@ public abstract class Spheroid implements Serializable {
         this.chunksOfSpheroid.remove(chunkPos);
     }
 
-    public void decorate(ChunkRegion chunkRegion, Chunk chunk) {
-        for (SpheroidDecorator decorator : this.spheroidDecorators) {
-            decorator.decorateSpheroid(chunkRegion, chunk, this, this.decorationBlockPositions, this.random);
+    public void decorate(StructureWorldAccess world, Random random) {
+        if(!isDecorated) {
+            for (SpheroidDecorator decorator : this.spheroidDecorators) {
+                //try {
+                    decorator.decorateSpheroid(world, this, this.decorationBlockPositions, random);
+                //} catch (Exception e) {
+                    // ??????
+                    // java.lang.RuntimeException: We are asking a region for a chunk out of bound
+                //}
+            }
+            isDecorated = true;
         }
     }
 
@@ -189,5 +200,9 @@ public abstract class Spheroid implements Serializable {
                 }
             }
         }
+    }
+
+    public boolean shouldDecorate(BlockPos blockPos) {
+        return (Math.abs(this.position.getX() - blockPos.getX()) < 16 && Math.abs(this.position.getZ() - blockPos.getZ()) < 16);
     }
 }

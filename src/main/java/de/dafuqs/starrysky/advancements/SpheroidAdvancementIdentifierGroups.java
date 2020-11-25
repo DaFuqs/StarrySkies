@@ -10,6 +10,7 @@ public class SpheroidAdvancementIdentifierGroups {
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.ocean_monument,  SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.acacia_wood,  SpheroidAdvancementGroup.WOOD);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.andesite,     SpheroidAdvancementGroup.COMMON);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.beach,        SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.bedrock,      SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.bee_hive,     SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.birch_wood,   SpheroidAdvancementGroup.WOOD);

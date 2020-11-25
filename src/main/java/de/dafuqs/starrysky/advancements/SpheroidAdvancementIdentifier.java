@@ -56,5 +56,5 @@ public enum SpheroidAdvancementIdentifier {
     stone_hollow,
     the_sun,
     tnt,
-    ocean_monument, water
+    ocean_monument, beach, water
 }

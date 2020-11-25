@@ -4,6 +4,7 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.dimension.decorators.*;
 import de.dafuqs.starrysky.spheroid.types.*;
 import de.dafuqs.starrysky.spheroid.types.special_overworld.*;
 import net.minecraft.block.Blocks;
@@ -12,6 +13,21 @@ import net.minecraft.loot.LootTables;
 import net.minecraft.state.property.Properties;
 
 public class SpheroidListVanilla extends SpheroidList {
+
+    // DECORATORS
+    public static class SpheroidDecorators {
+        public static SpheroidDecorator CACTUS = new CactusDecorator();
+        public static SpheroidDecorator SEA_GREENS = new SeaGreensDecorator();
+        public static SpheroidDecorator COCOA = new CocoaDecorator();
+        public static SpheroidDecorator BAMBOO = new BambooDecorator();
+        public static SpheroidDecorator SUGAR_CANE_POND = new SugarCanePondDecorator();
+        public static SpheroidDecorator CENTER_POND = new CenterPondDecorator();
+        public static SpheroidDecorator MUSHROOMS = new MushroomDecorator();
+        public static SpheroidDecorator DEAD_GRASS = new PlantDecorator(Blocks.DEAD_BUSH.getDefaultState(), 0.05F);
+        public static SpheroidDecorator SWEET_BERRIES = new PlantDecorator(Blocks.SWEET_BERRY_BUSH.getDefaultState(), 0.03F);
+        public static PlantDecorator FERNS_DECORATOR = new PlantDecorator(Blocks.FERN.getDefaultState(), 0.1F);
+        public static DoublePlantDecorator LARGE_FERNS_DECORATOR = new DoublePlantDecorator(Blocks.LARGE_FERN.getDefaultState(), 0.1F);
+    }
 
     // SPHEROID TYPES
     // BASIC
@@ -26,15 +42,21 @@ public class SpheroidListVanilla extends SpheroidList {
             .addSpawn(SpheroidEntitySpawnDefinitions.HORSE, 0.05F)
             .addSpawn(SpheroidEntitySpawnDefinitions.DONKEY, 0.02F)
             .addSpawn(SpheroidEntitySpawnDefinitions.MULE, 0.02F);
-    public static final SpheroidType BEACH = new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, 5, 20,  Blocks.DIRT.getDefaultState())
+    public static final SpheroidType BEACH_GRASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.beach, 10, 18,  Blocks.DIRT.getDefaultState())
             .setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState())
+            .addDecorator(SpheroidDecorators.CENTER_POND, 1.0F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.TURTLE, 0.7F);
+    public static final SpheroidType BEACH_SAND = new ModularSpheroidType(SpheroidAdvancementIdentifier.beach, 10, 16,  Blocks.SAND.getDefaultState())
+            .setBottomBlockState(Blocks.SANDSTONE.getDefaultState())
             .addDecorator(SpheroidDecorators.CENTER_POND, 1.0F)
             .addSpawn(SpheroidEntitySpawnDefinitions.TURTLE, 0.7F);
     public static final SpheroidType MYCELIUM = new ModularSpheroidType(SpheroidAdvancementIdentifier.mycelium, 5, 8,  Blocks.DIRT.getDefaultState())
             .setTopBlockState(Blocks.MYCELIUM.getDefaultState())
             .addSpawn(SpheroidEntitySpawnDefinitions.MOOSHROOM, 1.0F);
     public static final SpheroidType PODZOL = new ModularSpheroidType(SpheroidAdvancementIdentifier.podzol, 5, 12,  Blocks.DIRT.getDefaultState())
-            .setTopBlockState(Blocks.PODZOL.getDefaultState());
+            .setTopBlockState(Blocks.PODZOL.getDefaultState())
+            .addDecorator(SpheroidDecorators.FERNS_DECORATOR, 0.8F)
+            .addDecorator(SpheroidDecorators.LARGE_FERNS_DECORATOR, 0.8F);
     public static final SpheroidType JUNGLE = new ModularSpheroidType(SpheroidAdvancementIdentifier.podzol, 5, 12,  Blocks.DIRT.getDefaultState())
             .setTopBlockState(Blocks.PODZOL.getDefaultState())
             .addDecorator(SpheroidDecorators.BAMBOO, 1.0F)
@@ -213,7 +235,8 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, COBBLESTONE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.1F, MOSSY_COBBLESTONE);
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 100.0F, BEACH); // TODO: lower
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F,  BEACH_GRASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, BEACH_SAND);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, PODZOL);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, JUNGLE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, SNOW_CAVE);
