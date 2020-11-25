@@ -4,6 +4,10 @@ import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ChestBlock;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 
@@ -12,6 +16,15 @@ import java.util.Random;
 
 
 public class CenterPondDecorator extends SpheroidDecorator {
+
+    private final Identifier lootTable;
+    private final float chance;
+
+
+    public CenterPondDecorator(Identifier lootTable, float chance) {
+        this.lootTable = lootTable;
+        this.chance = chance;
+    }
 
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
@@ -23,10 +36,10 @@ public class CenterPondDecorator extends SpheroidDecorator {
             int waterLevelY = spheroidTop.getY();
             boolean waterLevelSet = false;
 
-            for (int i = -pondSize - 1; i < pondSize + 1; i++) {
-                for (int j = -pondSize; j < 1; j++) {
-                    for (int k = -pondSize -1; k < pondSize; k++) {
-                        BlockPos currentBlockPos = spheroidTop.add(i, j, k);
+            for (int x = -pondSize - 1; x < pondSize + 1; x++) {
+                for (int y = -pondSize; y < 1; y++) {
+                    for (int z = -pondSize -1; z < pondSize; z++) {
+                        BlockPos currentBlockPos = spheroidTop.add(x, y, z);
                         if (world.getBlockState(currentBlockPos).isAir()) {
                             waterLevelY = currentBlockPos.getY() - 1;
                             waterLevelSet = true;
@@ -42,10 +55,13 @@ public class CenterPondDecorator extends SpheroidDecorator {
                 }
             }
 
-            for (int i = (int) (-pondSize * 1.5); i < pondSize * 1.5; i++) {
-                for (int j = -pondSize; j < pondSize; j++) {
-                    for (int k = (int) (-pondSize * 1.5); k < pondSize * 1.5; k++) {
-                        BlockPos currentBlockPos = spheroidTop.add(i, j, k);
+            boolean hasLootChest = random.nextFloat() < this.chance;
+            BlockPos lootChestPosition = null;
+
+            for (int x = (int) (-pondSize * 1.5); x < pondSize * 1.5+1; x++) {
+                for (int y = -pondSize; y < pondSize; y++) {
+                    for (int z = (int) (-pondSize * 1.5); z < pondSize * 1.5+1; z++) {
+                        BlockPos currentBlockPos = spheroidTop.add(x, y, z);
 
                         BlockState blockState = null;
                         if (currentBlockPos.getY() > waterLevelY) {
@@ -54,7 +70,11 @@ public class CenterPondDecorator extends SpheroidDecorator {
                             double distance = Support.distance(currentBlockPos, spheroidTop);
                             double pondDistance = distance / pondSize;
                             if (pondDistance < 1) {
-                                blockState = Blocks.WATER.getDefaultState();
+                                if(hasLootChest && x == 0 && z == 0 && lootChestPosition == null) {
+                                    lootChestPosition = currentBlockPos;
+                                } else {
+                                    blockState = Blocks.WATER.getDefaultState();
+                                }
                             } else if (pondDistance < 1.70) {
                                 blockState = Blocks.SAND.getDefaultState();
                             }
@@ -65,7 +85,16 @@ public class CenterPondDecorator extends SpheroidDecorator {
                                 world.setBlockState(currentBlockPos, blockState, 3);
                             }
                         }
+
                     }
+                }
+            }
+
+            if(lootChestPosition != null) {
+                world.setBlockState(lootChestPosition, Blocks.CHEST.getDefaultState().with(ChestBlock.WATERLOGGED, true), 3);
+                BlockEntity chestBlockEntity = world.getBlockEntity(lootChestPosition);
+                if (chestBlockEntity instanceof ChestBlockEntity) {
+                    ((ChestBlockEntity) chestBlockEntity).setLootTable(this.lootTable, random.nextLong());
                 }
             }
         }
