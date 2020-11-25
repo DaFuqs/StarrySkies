@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.spheroids;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
@@ -18,8 +19,8 @@ public class DoubleCoreSpheroid extends Spheroid {
     private final int innerCoreRadius;
     private final int shellRadius;
 
-    public DoubleCoreSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState innerCoreBlock, BlockState outerCoreBlock, BlockState shellBlock, int innerCoreRadius, int shellRadius) {
-        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+    public DoubleCoreSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, BlockState innerCoreBlock, BlockState outerCoreBlock, BlockState shellBlock, int innerCoreRadius, int shellRadius) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
         this.innerCoreBlock  = innerCoreBlock;
         this.outerCoreBlock  = outerCoreBlock;
         this.shellBlock      = shellBlock;

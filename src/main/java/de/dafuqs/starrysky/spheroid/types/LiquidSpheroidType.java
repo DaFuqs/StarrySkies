@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.types;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
@@ -64,6 +65,7 @@ public class LiquidSpheroidType extends SpheroidType {
     public LiquidSpheroid getRandomSphere(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
+        ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
 
         BlockState shellBlock = Support.getWeightedRandom(validShellBlocks, chunkRandom);
         int shellRadius = chunkRandom.nextInt(maxShellRadius - minShellRadius  + 1) + minShellRadius;
@@ -71,7 +73,7 @@ public class LiquidSpheroidType extends SpheroidType {
         boolean holeInBottom = chunkRandom.nextInt(100) < this.holeInBottomPercent;
         int coreRadius = chunkRandom.nextInt(maxCoreRadius - minCoreRadius  + 1) + minCoreRadius;
 
-        return new LiquidSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, liquid, shellBlock, shellRadius, fillPercent, holeInBottom, coreBlock, coreRadius);
+        return new LiquidSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, liquid, shellBlock, shellRadius, fillPercent, holeInBottom, coreBlock, coreRadius);
     }
 
 }

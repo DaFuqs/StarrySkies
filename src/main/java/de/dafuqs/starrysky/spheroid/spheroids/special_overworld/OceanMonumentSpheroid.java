@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.spheroids.special_overworld;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
@@ -7,8 +8,6 @@ import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -28,8 +27,8 @@ public class OceanMonumentSpheroid extends Spheroid {
 
     private final ArrayList<BlockPos> guardianPos = new ArrayList<>();
 
-    public OceanMonumentSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, int treasureRadius, int shellRadius) {
-        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+    public OceanMonumentSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, int treasureRadius, int shellRadius) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
         this.treasureRadius = treasureRadius;
         this.shellRadius = shellRadius;
     }
@@ -93,30 +92,6 @@ public class OceanMonumentSpheroid extends Spheroid {
         }
 
         this.setChunkFinished(chunk.getPos());
-    }
-
-    @Override
-    public boolean shouldPopulateEntities(ChunkPos chunkPos) {
-        return (chunkPos.getStartX() >= this.getPosition().getX()
-                && chunkPos.getStartX() <= this.getPosition().getX() + 15
-                && chunkPos.getStartZ() >= this.getPosition().getZ()
-                && chunkPos.getStartZ() <= this.getPosition().getZ() + 15);
-    }
-
-    @Override
-    public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-        // TODO: hangs the internal server?
-        /*for (BlockPos currentPos : this.guardianPos) {
-            if(Support.isBlockPosInChunkPos(chunkPos, currentPos)) {
-                GuardianEntity guardian = new GuardianEntity(EntityType.GUARDIAN, chunkRegion.toServerWorld());
-                if (guardian.canSpawn(chunkRegion.toServerWorld(), SpawnReason.CHUNK_GENERATION)) {
-                    guardian.refreshPositionAndAngles(currentPos.getX(), currentPos.getY(), currentPos.getZ(), 0, 0);
-                    guardian.initialize(chunkRegion.toServerWorld(), chunkRegion.toServerWorld().getLocalDifficulty(guardian.getBlockPos()), SpawnReason.CHUNK_GENERATION, null, null);
-                    //chunkRegion.spawnEntity(guardian);
-                }
-            }
-        }*/
-
     }
 
 }

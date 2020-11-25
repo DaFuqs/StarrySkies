@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.types;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
@@ -55,12 +56,13 @@ public class DoubleCoreSpheroidType extends SpheroidType {
     public DoubleCoreSpheroid getRandomSphere(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
+        ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
         BlockState shellBlock = Support.getWeightedRandom(validShellBlocks, chunkRandom);
         int innerCoreRadius = chunkRandom.nextInt(this.maxInnerCoreRadius - this.minInnerCoreRadius + 1) + this.minInnerCoreRadius;
         int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
 
         //public DoubleCoreSpheroid(int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState innerCoreBlock, BlockState outerCoreBlock, BlockState shellBlock, int innerCoreRadius, int shellRadius) {
-        return new DoubleCoreSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, innerCoreBlock, outerCoreBlock, shellBlock, innerCoreRadius, shellRadius);
+        return new DoubleCoreSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, innerCoreBlock, outerCoreBlock, shellBlock, innerCoreRadius, shellRadius);
     }
 
 }

@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.types;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
@@ -47,10 +48,11 @@ public class CoreSpheroidType extends SpheroidType {
     public CoreSpheroid getRandomSphere(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
+        ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
         BlockState shellBlockState = Support.getWeightedRandom(shellBlockStates, chunkRandom);
         int coreRadius = chunkRandom.nextInt(this.maxCoreRadius - this.minCoreRadius + 1) + this.minCoreRadius;
 
-        return new CoreSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, coreBlock, shellBlockState, coreRadius);
+        return new CoreSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, coreBlock, shellBlockState, coreRadius);
     }
 
 }

@@ -4,7 +4,9 @@ import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.LinkedHashMap;
@@ -70,6 +72,19 @@ public class Support {
                 && blockPos.getX() < chunkPos.getStartX() + 16
                 && blockPos.getZ() >= chunkPos.getStartZ()
                 && blockPos.getZ() < chunkPos.getStartZ() + 16);
+    }
+
+    public static int getLowerGroundBlock(WorldAccess world, BlockPos position, int minHeight) {
+        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
+
+        //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
+        while (blockpos$Mutable.getY() > minHeight) {
+            if (!world.isAir(blockpos$Mutable)) {
+                break;
+            }
+            blockpos$Mutable.move(Direction.DOWN);
+        }
+        return blockpos$Mutable.getY();
     }
 
 }

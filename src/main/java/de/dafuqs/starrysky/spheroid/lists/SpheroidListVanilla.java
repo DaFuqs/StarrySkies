@@ -13,31 +13,67 @@ import net.minecraft.state.property.Properties;
 
 public class SpheroidListVanilla extends SpheroidList {
 
-    //SPHEROID TYPES
-    //BASIC
-    public static final ModularSpheroidType GRASS = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, 5, 20,  Blocks.DIRT.getDefaultState()).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState()).addDecorator(SpheroidDecorators.SUGAR_CANE_POND, 0.25F);
-    public static final ModularSpheroidType MYCELIUM = new ModularSpheroidType(SpheroidAdvancementIdentifier.mycelium, 5, 8,  Blocks.DIRT.getDefaultState()).setTopBlockState(Blocks.MYCELIUM.getDefaultState());
-    public static final ModularSpheroidType PODZOL = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.podzol, 5, 12,  Blocks.DIRT.getDefaultState()).setTopBlockState(Blocks.PODZOL.getDefaultState()).addDecorator(SpheroidDecorators.BAMBOO, 0.3F);
-    public static final ModularSpheroidType STONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.stone, 5, 13,  Blocks.STONE.getDefaultState());
+    // SPHEROID TYPES
+    // BASIC
+    public static final SpheroidType GRASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, 5, 20,  Blocks.DIRT.getDefaultState())
+            .setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState())
+            .addDecorator(SpheroidDecorators.SUGAR_CANE_POND, 0.15F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.COW, 0.2F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.SHEEP, 0.2F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.CHICKEN, 0.2F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.PIG, 0.2F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.WOLF, 0.05F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.HORSE, 0.05F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.DONKEY, 0.02F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.MULE, 0.02F);
+    public static final SpheroidType BEACH = new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, 5, 20,  Blocks.DIRT.getDefaultState())
+            .setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState())
+            .addDecorator(SpheroidDecorators.CENTER_POND, 1.0F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.TURTLE, 0.7F);
+    public static final SpheroidType MYCELIUM = new ModularSpheroidType(SpheroidAdvancementIdentifier.mycelium, 5, 8,  Blocks.DIRT.getDefaultState())
+            .setTopBlockState(Blocks.MYCELIUM.getDefaultState())
+            .addSpawn(SpheroidEntitySpawnDefinitions.MOOSHROOM, 1.0F);
+    public static final SpheroidType PODZOL = new ModularSpheroidType(SpheroidAdvancementIdentifier.podzol, 5, 12,  Blocks.DIRT.getDefaultState())
+            .setTopBlockState(Blocks.PODZOL.getDefaultState());
+    public static final SpheroidType JUNGLE = new ModularSpheroidType(SpheroidAdvancementIdentifier.podzol, 5, 12,  Blocks.DIRT.getDefaultState())
+            .setTopBlockState(Blocks.PODZOL.getDefaultState())
+            .addDecorator(SpheroidDecorators.BAMBOO, 1.0F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.PANDA, 0.2F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.OCELOT, 0.2F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.PARROT, 0.2F);
+    public static final SpheroidType STONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.stone, 5, 13,  Blocks.STONE.getDefaultState())
+            .addSpawn(SpheroidEntitySpawnDefinitions.LLAMA, 0.03F);
     public static final ModularSpheroidType GRANITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.granite, 6, 11,  Blocks.GRANITE.getDefaultState());
     public static final ModularSpheroidType DIORITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.diorite, 6, 11,  Blocks.DIORITE.getDefaultState());
     public static final ModularSpheroidType ANDESITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.andesite, 6, 11,  Blocks.ANDESITE.getDefaultState());
-    public static final ModularSpheroidType SAND = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.sand, 5, 13,  Blocks.SAND.getDefaultState()).setBottomBlockState(Blocks.SANDSTONE.getDefaultState()).addDecorator(SpheroidDecorators.CACTUS, 0.3F).addDecorator(SpheroidDecorators.DEAD_GRASS, 0.3F);
-    public static final ModularSpheroidType RED_SAND = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.red_sand, 5, 11,  Blocks.RED_SAND.getDefaultState()).setBottomBlockState(Blocks.RED_SANDSTONE.getDefaultState()).addDecorator(SpheroidDecorators.CACTUS, 0.3F).addDecorator(SpheroidDecorators.DEAD_GRASS, 0.3F);
-    public static final ModularSpheroidType GRAVEL = new ModularSpheroidType(SpheroidAdvancementIdentifier.gravel, 6, 10,  Blocks.GRAVEL.getDefaultState()).setBottomBlockState(Blocks.COBBLESTONE.getDefaultState());
+    public static final ModularSpheroidType SAND = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.sand, 5, 13,  Blocks.SAND.getDefaultState())
+            .setBottomBlockState(Blocks.SANDSTONE.getDefaultState())
+            .addDecorator(SpheroidDecorators.CACTUS, 0.3F)
+            .addDecorator(SpheroidDecorators.DEAD_GRASS, 0.3F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.RABBIT, 0.5F);
+    public static final ModularSpheroidType RED_SAND = (ModularSpheroidType) new ModularSpheroidType(SpheroidAdvancementIdentifier.red_sand, 5, 11,  Blocks.RED_SAND.getDefaultState())
+            .setBottomBlockState(Blocks.RED_SANDSTONE.getDefaultState())
+            .addDecorator(SpheroidDecorators.CACTUS, 0.3F)
+            .addDecorator(SpheroidDecorators.DEAD_GRASS, 0.3F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.RABBIT, 0.5F);
+    public static final ModularSpheroidType GRAVEL = new ModularSpheroidType(SpheroidAdvancementIdentifier.gravel, 6, 10,  Blocks.GRAVEL.getDefaultState())
+            .setBottomBlockState(Blocks.COBBLESTONE.getDefaultState());
     public static final ModularSpheroidType COBBLESTONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.cobblestone, 5, 9,  Blocks.COBBLESTONE.getDefaultState());
     public static final ModularSpheroidType MOSSY_COBBLESTONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.mossy_cobblestone, 5, 6,  Blocks.MOSSY_COBBLESTONE.getDefaultState());
     public static final ModularSpheroidType COARSE_DIRT = new ModularSpheroidType(SpheroidAdvancementIdentifier.coarse_dirt, 5, 6,  Blocks.COARSE_DIRT.getDefaultState());
 
     // GIANT SPHERES
-    public static final CaveSpheroidType HUGE_MONSTER_CAVE = (CaveSpheroidType) new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, 20, 30, Blocks.DIRT.getDefaultState(), Blocks.COARSE_DIRT.getDefaultState(), 2, 5).setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState()).addDecorator(SpheroidDecorators.MUSHROOMS, 0.3F);
+    public static final CaveSpheroidType HUGE_MONSTER_CAVE = ((CaveSpheroidType) new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, 20, 30, Blocks.DIRT.getDefaultState(), Blocks.COARSE_DIRT.getDefaultState(), 2, 5)
+            .setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState())
+            .addDecorator(SpheroidDecorators.MUSHROOMS, 0.3F))
+            .addChestWithLootTable(LootTables.ABANDONED_MINESHAFT_CHEST, 0.5F);
     public static final DoubleCoreSpheroidType THE_SUN = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.the_sun, 50, 50, Blocks.NETHERITE_BLOCK.getDefaultState(), Blocks.GOLD_BLOCK.getDefaultState(), Blocks.GLOWSTONE.getDefaultState(), 2, 2, 45, 45);
 
     // CORALS
     public static final CoralSpheroidType CORALS_GLASS = new CoralSpheroidType(SpheroidAdvancementIdentifier.coral, 10, 20, MAP_GLASS, SpheroidList.LIST_FULL_CORAL_BLOCKS, SpheroidList.LIST_WATERLOGGABLE_CORAL_BLOCKS, 1, 2);
     public static final CoralSpheroidType CORALS_STONE = new CoralSpheroidType(SpheroidAdvancementIdentifier.coral, 10, 20, MAP_STONES, SpheroidList.LIST_FULL_CORAL_BLOCKS, SpheroidList.LIST_WATERLOGGABLE_CORAL_BLOCKS, 1, 2);
 
-    //GLASS
+    // GLASS
     public static final ModularSpheroidType GLASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.glass, 5, 8,  Blocks.GLASS.getDefaultState());
     public static final ModularSpheroidType BLACK_STAINED_GLASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.stained_glass, 5, 10,  Blocks.BLACK_STAINED_GLASS.getDefaultState());
     public static final ModularSpheroidType BLUE_STAINED_GLASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.stained_glass, 5, 10,  Blocks.BLUE_STAINED_GLASS.getDefaultState());
@@ -56,11 +92,12 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final ModularSpheroidType WHITE_STAINED_GLASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.stained_glass, 5, 10,  Blocks.WHITE_STAINED_GLASS.getDefaultState());
     public static final ModularSpheroidType YELLOW_STAINED_GLASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.stained_glass, 5, 10,  Blocks.YELLOW_STAINED_GLASS.getDefaultState());
 
-    //RARE
+    // RARE
     public static final ModularSpheroidType OBSIDIAN = new ModularSpheroidType(SpheroidAdvancementIdentifier.obsidian, 3, 6,  Blocks.OBSIDIAN.getDefaultState());
     public static final ModularSpheroidType GLOWSTONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.glowstone, 5, 10,  Blocks.GLOWSTONE.getDefaultState());
     public static final ModularSpheroidType BEDROCK = new ModularSpheroidType(SpheroidAdvancementIdentifier.bedrock, 3, 5,  Blocks.BEDROCK.getDefaultState());
-    public static final ShellSpheroidType STONE_HOLLOW = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.cave, 5, 20, Blocks.CAVE_AIR.getDefaultState(), MAP_STONES, 3, 8).addDecorator(SpheroidDecorators.MUSHROOMS, 0.3F);
+    public static final ShellSpheroidType STONE_HOLLOW = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.cave, 5, 20, Blocks.CAVE_AIR.getDefaultState(), MAP_STONES, 3, 8)
+            .addDecorator(SpheroidDecorators.MUSHROOMS, 0.3F);
     public static final OceanMonumentSpheroidType OCEAN_MONUMENT = new OceanMonumentSpheroidType(SpheroidAdvancementIdentifier.ocean_monument, 25, 35, 3, 5, 2, 3);
 
     // ORES
@@ -82,42 +119,62 @@ public class SpheroidListVanilla extends SpheroidList {
     //WOOD
     public static final ShellSpheroidType OAK_WOOD      = new ShellSpheroidType(SpheroidAdvancementIdentifier.oak_wood, 8, 15, Blocks.OAK_WOOD.getDefaultState(),      Blocks.OAK_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),      2, 3);
     public static final ShellSpheroidType SPRUCE_WOOD   = new ShellSpheroidType(SpheroidAdvancementIdentifier.spruce_wood, 5, 15, Blocks.SPRUCE_WOOD.getDefaultState(),   Blocks.SPRUCE_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   2, 3);
-    public static final ShellSpheroidType JUNGLE_WOOD   = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.jungle_wood, 10, 20, Blocks.JUNGLE_WOOD.getDefaultState(),   Blocks.JUNGLE_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   2, 3).addDecorator(SpheroidDecorators.COCOA, 0.3F);
+    public static final ShellSpheroidType JUNGLE_WOOD   = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.jungle_wood, 10, 20, Blocks.JUNGLE_WOOD.getDefaultState(),   Blocks.JUNGLE_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   2, 3)
+            .addDecorator(SpheroidDecorators.COCOA, 0.3F);
     public static final ShellSpheroidType DARK_OAK_WOOD = new ShellSpheroidType(SpheroidAdvancementIdentifier.dark_oak_wood, 5, 15, Blocks.DARK_OAK_WOOD.getDefaultState(), Blocks.DARK_OAK_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1), 2, 2);
     public static final ShellSpheroidType BIRCH_WOOD    = new ShellSpheroidType(SpheroidAdvancementIdentifier.birch_wood, 5, 15, Blocks.BIRCH_WOOD.getDefaultState(),    Blocks.BIRCH_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1), 2, 3);
     public static final ShellSpheroidType ACACIA_WOOD   = new ShellSpheroidType(SpheroidAdvancementIdentifier.acacia_wood, 5, 12, Blocks.ACACIA_WOOD.getDefaultState(),   Blocks.ACACIA_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),    2, 2);
 
-    //FLUIDS
-    public static final LiquidSpheroidType WATER_GLASS      = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.water, 5, 15, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 20, 100, 75).addDecorator(SpheroidDecorators.SEA_GREENS, 0.5F);
-    public static final LiquidSpheroidType WATER_CLAY       = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.clay, 5, 10, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 70, 100, 75).setCoreBlock(Blocks.CLAY.getDefaultState(), 3, 6).addDecorator(SpheroidDecorators.SEA_GREENS, 0.5F).addDecorator(SpheroidDecorators.SEA_GREENS, 0.75F);
-    public static final LiquidSpheroidType WATER_SPONGE     = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.sponge, 5, 10, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 70, 100, 75).setCoreBlock( Blocks.WET_SPONGE.getDefaultState(), 1, 3).addDecorator(SpheroidDecorators.SEA_GREENS, 0.25F);
-    public static final LiquidSpheroidType WATER_SLIME      = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.slime, 5, 7, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 1, 70, 100, 50).setCoreBlock(Blocks.SLIME_BLOCK.getDefaultState(), 1, 3).addDecorator(SpheroidDecorators.SEA_GREENS, 0.25F);
-    public static final LiquidSpheroidType WATER_ICE        = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.ice, 8, 20, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 70, 100, 75).setCoreBlock(Blocks.ICE.getDefaultState(), 2, 4).addDecorator(SpheroidDecorators.SEA_GREENS, 0.25F);
-    public static final LiquidSpheroidType WATER_PACKED_ICE = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.packed_ice, 8, 20, Blocks.WATER.getDefaultState(), Blocks.ICE.getDefaultState(), 1, 3, 70, 100, 75).setCoreBlock(Blocks.PACKED_ICE.getDefaultState(), 2, 4).addDecorator(SpheroidDecorators.SEA_GREENS, 0.15F);
+    // WATER
+    public static final LiquidSpheroidType WATER_GLASS      = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.water, 5, 15, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 20, 100, 75)
+            .addDecorator(SpheroidDecorators.SEA_GREENS, 0.5F);
+    public static final LiquidSpheroidType WATER_CLAY       = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.clay, 5, 10, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 70, 100, 75)
+            .setCoreBlock(Blocks.CLAY.getDefaultState(), 3, 6).addDecorator(SpheroidDecorators.SEA_GREENS, 0.5F).addDecorator(SpheroidDecorators.SEA_GREENS, 0.75F);
+    public static final LiquidSpheroidType WATER_SPONGE     = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.sponge, 5, 10, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 70, 100, 75)
+            .setCoreBlock( Blocks.WET_SPONGE.getDefaultState(), 1, 3).addDecorator(SpheroidDecorators.SEA_GREENS, 0.25F);
+    public static final LiquidSpheroidType WATER_SLIME      = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.slime, 5, 7, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 1, 70, 100, 50)
+            .setCoreBlock(Blocks.SLIME_BLOCK.getDefaultState(), 1, 3).addDecorator(SpheroidDecorators.SEA_GREENS, 0.25F);
+    public static final LiquidSpheroidType WATER_ICE        = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.ice, 8, 20, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 70, 100, 75)
+            .setCoreBlock(Blocks.ICE.getDefaultState(), 2, 4).addDecorator(SpheroidDecorators.SEA_GREENS, 0.25F);
+    public static final LiquidSpheroidType WATER_PACKED_ICE = (LiquidSpheroidType) new LiquidSpheroidType(SpheroidAdvancementIdentifier.packed_ice, 8, 20, Blocks.WATER.getDefaultState(), Blocks.ICE.getDefaultState(), 1, 3, 70, 100, 75)
+            .setCoreBlock(Blocks.PACKED_ICE.getDefaultState(), 2, 4)
+            .addDecorator(SpheroidDecorators.SEA_GREENS, 0.15F);
+
+    // LAVA
     public static final LiquidSpheroidType LAVA_GLASS       = new LiquidSpheroidType(SpheroidAdvancementIdentifier.lava, 5, 20, Blocks.LAVA.getDefaultState(), MAP_GLASS, 1, 3, 25, 90,  25);
     public static final LiquidSpheroidType LAVA_STONE       = new LiquidSpheroidType(SpheroidAdvancementIdentifier.lava, 5, 20, Blocks.LAVA.getDefaultState(), MAP_STONES, 2, 6, 10, 100, 25);
-    public static final LiquidSpheroidType LAVA_MAGMA       = new LiquidSpheroidType(SpheroidAdvancementIdentifier.magma, 5, 20, Blocks.LAVA.getDefaultState(), MAP_STONES, 3, 6, 70, 100, 25).setCoreBlock(Blocks.MAGMA_BLOCK.getDefaultState(), 2, 5);
-    public static final LiquidSpheroidType LAVA_OBSIDIAN    = new LiquidSpheroidType(SpheroidAdvancementIdentifier.obsidian, 10, 20, Blocks.LAVA.getDefaultState(), MAP_STONES, 3, 6, 50, 100, 10).setCoreBlock(Blocks.OBSIDIAN.getDefaultState(), 2, 5);
+    public static final LiquidSpheroidType LAVA_MAGMA       = new LiquidSpheroidType(SpheroidAdvancementIdentifier.magma, 5, 20, Blocks.LAVA.getDefaultState(), MAP_STONES, 3, 6, 70, 100, 25)
+            .setCoreBlock(Blocks.MAGMA_BLOCK.getDefaultState(), 2, 5);
+    public static final LiquidSpheroidType LAVA_OBSIDIAN    = new LiquidSpheroidType(SpheroidAdvancementIdentifier.obsidian, 10, 20, Blocks.LAVA.getDefaultState(), MAP_STONES, 3, 6, 50, 100, 10)
+            .setCoreBlock(Blocks.OBSIDIAN.getDefaultState(), 2, 5);
 
     // MUSHROOMS
     public static final MushroomSpheroidType BROWN_MUSHROOM    = new MushroomSpheroidType(SpheroidAdvancementIdentifier.brown_mushroom, 4, 8, Blocks.MUSHROOM_STEM.getDefaultState(), Blocks.BROWN_MUSHROOM_BLOCK.getDefaultState(), 2, 3);
-    public static final MushroomSpheroidType RED_MUSHROOM      = new MushroomSpheroidType(SpheroidAdvancementIdentifier.red_mushroom, 4, 8, Blocks.MUSHROOM_STEM.getDefaultState(), Blocks.RED_MUSHROOM_BLOCK.getDefaultState(), 2, 3);
+    public static final SpheroidType RED_MUSHROOM = new MushroomSpheroidType(SpheroidAdvancementIdentifier.red_mushroom, 4, 8, Blocks.MUSHROOM_STEM.getDefaultState(), Blocks.RED_MUSHROOM_BLOCK.getDefaultState(), 2, 3)
+            .addSpawn(SpheroidEntitySpawnDefinitions.MOOSHROOM, 0.05F);
 
-    //COLD
-    public static final CaveSpheroidType SNOW_CAVE = new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, 6, 10, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 2, 4).addChestWithLootTable(LootTables.IGLOO_CHEST_CHEST, 50);
-    public static final CoreSpheroidType       SNOW_ICE        = (CoreSpheroidType) new CoreSpheroidType(SpheroidAdvancementIdentifier.ice, 5, 15, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 3, 6).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F);
-    public static final CoreSpheroidType       ICE_PACKED_ICE  = new CoreSpheroidType(SpheroidAdvancementIdentifier.packed_ice, 5, 15, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), 3, 6);
-    public static final DoubleCoreSpheroidType SNOW_PACKED_ICE = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, 5, 12, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 2, 4, 2, 4).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F);
-    public static final DoubleCoreSpheroidType SNOW_BLUE_ICE   = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, 5, 8, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 2, 3, 1, 3).addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.1F);;
-    public static final DoubleCoreSpheroidType ICE_BLUE_ICE    = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, 5, 8, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), 2, 3, 1, 3);
+    // COLD
+    public static final SpheroidType SNOW_CAVE = new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, 6, 10, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 2, 4)
+            .addChestWithLootTable(LootTables.IGLOO_CHEST_CHEST, 50)
+            .addSpawn(SpheroidEntitySpawnDefinitions.POLAR_BEAR, 0.3F);
+    public static final CoreSpheroidType SNOW_ICE = (CoreSpheroidType) new CoreSpheroidType(SpheroidAdvancementIdentifier.ice, 5, 15, Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 3, 6)
+            .addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.FOX, 0.3F);
+    public static final CoreSpheroidType ICE_PACKED_ICE = new CoreSpheroidType(SpheroidAdvancementIdentifier.packed_ice, 5, 15, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), 3, 6);
+    public static final DoubleCoreSpheroidType SNOW_PACKED_ICE = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.ice, 5, 12, Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 2, 4, 2, 4)
+            .addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.4F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.FOX, 0.2F);
+    public static final DoubleCoreSpheroidType SNOW_BLUE_ICE = (DoubleCoreSpheroidType) new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, 5, 8, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), 2, 3, 1, 3)
+            .addDecorator(SpheroidDecorators.SWEET_BERRIES, 0.1F);
+    public static final DoubleCoreSpheroidType ICE_BLUE_ICE = new DoubleCoreSpheroidType(SpheroidAdvancementIdentifier.blue_ice, 5, 8, Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), 2, 3, 1, 3);
 
-    //RAINBOW
+    // RAINBOW
     public static final RainbowSpheroidType RAINBOW_WOOL       = new RainbowSpheroidType(SpheroidAdvancementIdentifier.rainbow_wool, 5, 16, LIST_WOOL);
     public static final RainbowSpheroidType RAINBOW_GLASS      = new RainbowSpheroidType(SpheroidAdvancementIdentifier.rainbow_glass, 5, 16, LIST_STAINED_GLASS);
     public static final RainbowSpheroidType RAINBOW_CONCRETE   = new RainbowSpheroidType(SpheroidAdvancementIdentifier.rainbow_concrete, 5, 16, LIST_CONCRETE);
     public static final RainbowSpheroidType RAINBOW_TERRACOTTA = new RainbowSpheroidType(SpheroidAdvancementIdentifier.rainbow_terracotta, 5, 16, LIST_TERRACOTTA);
 
-    //SPECIAL
+    // SPECIAL
     public static final DungeonSpheroidType DUNGEON_ZOMBIE = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, 6, 12,  EntityType.ZOMBIE,  MAP_DUNGEON_STONES, 2,  4);
     public static final DungeonSpheroidType DUNGEON_SKELETON = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, 6, 12,  EntityType.SKELETON,  MAP_DUNGEON_STONES, 2,  4);
     public static final DungeonSpheroidType DUNGEON_SPIDER = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, 6, 12,  EntityType.SPIDER,  MAP_DUNGEON_STONES, 2,  4);
@@ -156,7 +213,9 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, COBBLESTONE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.1F, MOSSY_COBBLESTONE);
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 2.0F, PODZOL);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 100.0F, BEACH); // TODO: lower
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, PODZOL);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, JUNGLE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, SNOW_CAVE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, STONE_HOLLOW);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, COARSE_DIRT);
@@ -197,7 +256,7 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, MYCELIUM);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.1F, BEDROCK);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.05F, THE_SUN);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.5F, OCEAN_MONUMENT); // TODO: Lower
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 0.5F, OCEAN_MONUMENT);
 
         //RAINBOW
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, RAINBOW_WOOL);

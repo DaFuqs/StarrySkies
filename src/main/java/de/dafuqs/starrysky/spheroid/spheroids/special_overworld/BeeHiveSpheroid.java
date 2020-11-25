@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.spheroids.special_overworld;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
@@ -34,8 +35,8 @@ public class BeeHiveSpheroid extends Spheroid {
     private BeehiveBlockEntity queenBeehiveBlockEntity;
     private final List<BeehiveBlockEntity> outerBeehiveBlockEntities;
 
-    public BeeHiveSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, int shellRadius, int flowerRingRadius, int flowerRingSpacing) {
-        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+    public BeeHiveSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, int shellRadius, int flowerRingRadius, int flowerRingSpacing) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
 
         this.shellRadius = shellRadius;
         this.flowerRingRadius = flowerRingRadius;
@@ -154,36 +155,30 @@ public class BeeHiveSpheroid extends Spheroid {
     }
 
     @Override
-    public boolean shouldPopulateEntities(ChunkPos chunkPos) {
-        return (chunkPos.getStartX() >= this.getPosition().getX()
-                && chunkPos.getStartX() <= this.getPosition().getX() + 15
-                && chunkPos.getStartZ() >= this.getPosition().getZ()
-                && chunkPos.getStartZ() <= this.getPosition().getZ() + 15);
-    }
-
-    @Override
     public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-        if(queenBeehiveBlockEntity != null) {
-            // queen
-            BeeEntity queen = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
-            setRandomQueenProperties(queen, chunkRandom);
-            queenBeehiveBlockEntity.tryEnterHive(queen, false);
-        }
+        if (shouldPopulateEntities(chunkPos)) {
+            if (queenBeehiveBlockEntity != null) {
+                // queen
+                BeeEntity queen = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
+                setRandomQueenProperties(queen, chunkRandom);
+                queenBeehiveBlockEntity.tryEnterHive(queen, false);
+            }
 
-        for(BeehiveBlockEntity beehiveBlockEntity : this.outerBeehiveBlockEntities) {
-            // 2 bees
-            BeeEntity bee1 = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
-            beehiveBlockEntity.tryEnterHive(bee1, false);
-            BeeEntity bee2 = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
-            beehiveBlockEntity.tryEnterHive(bee2, false);
+            for (BeehiveBlockEntity beehiveBlockEntity : this.outerBeehiveBlockEntities) {
+                // 2 bees
+                BeeEntity bee1 = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
+                beehiveBlockEntity.tryEnterHive(bee1, false);
+                BeeEntity bee2 = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
+                beehiveBlockEntity.tryEnterHive(bee2, false);
+            }
         }
     }
 
-    public void setRandomQueenProperties(BeeEntity beeEntity, ChunkRandom chunkRandom) {
+    public void setRandomQueenProperties (BeeEntity beeEntity, ChunkRandom chunkRandom){
         beeEntity.setCustomName(new TranslatableText("bee.queen"));
-        beeEntity.setHealth(beeEntity.getHealth() * (random.nextFloat()*3 + 5)); //way higher than default
-        beeEntity.setMovementSpeed((float) (beeEntity.getMovementSpeed() * (random.nextFloat()* 0.5 + 0.5))); //slower than default
-        beeEntity.setAbsorptionAmount((float) (beeEntity.getAbsorptionAmount() * (random.nextFloat()*1.5 + 1))); //higher than default
+        beeEntity.setHealth(beeEntity.getHealth() * (random.nextFloat() * 3 + 5)); //way higher than default
+        beeEntity.setMovementSpeed((float) (beeEntity.getMovementSpeed() * (random.nextFloat() * 0.5 + 0.5))); //slower than default
+        beeEntity.setAbsorptionAmount((float) (beeEntity.getAbsorptionAmount() * (random.nextFloat() * 1.5 + 1))); //higher than default
 
         StatusEffectInstance statusEffectInstance1 = new StatusEffectInstance(StatusEffects.HASTE, Integer.MAX_VALUE, 1);
         StatusEffectInstance statusEffectInstance2 = new StatusEffectInstance(StatusEffects.STRENGTH, Integer.MAX_VALUE, 3);
@@ -194,7 +189,5 @@ public class BeeHiveSpheroid extends Spheroid {
         beeEntity.setGlowing(true);
         beeEntity.setAngerTime(Integer.MAX_VALUE);
     }
-
-
 
 }

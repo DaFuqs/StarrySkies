@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.spheroids;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
@@ -23,9 +24,9 @@ public class LiquidSpheroid extends Spheroid {
     private int coreRadius;
 
 
-    public LiquidSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState liquid, BlockState shellBlock,
+    public LiquidSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, BlockState liquid, BlockState shellBlock,
                           int shellRadius, int fillPercent, boolean holeInBottom, BlockState coreBlock, int coreRadius) {
-        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
         this.liquid = liquid;
         this.shellBlock = shellBlock;
         this.shellRadius = shellRadius;

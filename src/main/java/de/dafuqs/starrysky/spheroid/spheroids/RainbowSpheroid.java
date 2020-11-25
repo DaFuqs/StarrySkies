@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.spheroids;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
@@ -14,8 +15,8 @@ public class RainbowSpheroid extends Spheroid {
 
     private final ArrayList<BlockState> rainbowBlocks;
 
-    public RainbowSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<BlockState> rainbowBlocks) {
-        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+    public RainbowSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, ArrayList<BlockState> rainbowBlocks) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
         this.radius = radius;
         this.rainbowBlocks = rainbowBlocks;
     }

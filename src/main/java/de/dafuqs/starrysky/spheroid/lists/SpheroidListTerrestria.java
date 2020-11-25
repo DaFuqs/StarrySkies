@@ -71,14 +71,14 @@ public class SpheroidListTerrestria extends SpheroidList {
         BlockState terrestria_aloe_vera = Registry.BLOCK.get(new Identifier(MOD_ID,"aloe_vera")).getDefaultState();
         BlockState terrestria_dead_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"dead_grass")).getDefaultState();
 
-        PlantDecorator terrestria_saguaro_cactus_decorator = new PlantDecorator(terrestria_saguaro_cactus, 0.1F); // TODO on top of sand
-        PlantDecorator terrestria_cattail_decorator = new PlantDecorator(terrestria_cattail, 0.1F); // TODO single block, in water
-        PlantDecorator terrestria_indian_paintbrush_decorator = new PlantDecorator(terrestria_indian_paintbrush, 0.1F);
-        PlantDecorator terrestria_monsteras_decorator = new PlantDecorator(terrestria_monsteras, 0.1F);
-        PlantDecorator terrestria_tiny_cactus_decorator = new PlantDecorator(terrestria_tiny_cactus, 0.05F);
-        PlantDecorator terrestria_agave_decorator = new PlantDecorator(terrestria_agave, 0.05F);
-        PlantDecorator terrestria_aloe_vera_decorator = new PlantDecorator(terrestria_aloe_vera, 0.05F);
-        PlantDecorator terrestria_dead_grass_decorator = new PlantDecorator(terrestria_dead_grass, 0.1F);
+        PlantDecorator terrestria_saguaro_cactus_decorator = new PlantDecorator(null, terrestria_saguaro_cactus, 0.1F); // TODO on top of sand
+        PlantDecorator terrestria_cattail_decorator = new PlantDecorator(null, terrestria_cattail, 0.1F); // TODO single block, in water
+        PlantDecorator terrestria_indian_paintbrush_decorator = new PlantDecorator(null, terrestria_indian_paintbrush, 0.1F);
+        PlantDecorator terrestria_monsteras_decorator = new PlantDecorator(null, terrestria_monsteras, 0.1F);
+        PlantDecorator terrestria_tiny_cactus_decorator = new PlantDecorator(null, terrestria_tiny_cactus, 0.05F);
+        PlantDecorator terrestria_agave_decorator = new PlantDecorator(null, terrestria_agave, 0.05F);
+        PlantDecorator terrestria_aloe_vera_decorator = new PlantDecorator(null, terrestria_aloe_vera, 0.05F);
+        PlantDecorator terrestria_dead_grass_decorator = new PlantDecorator(null, terrestria_dead_grass, 0.1F);
 
         // WOOD
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 1.0F, new ShellSpheroidType(null, 7, 16, terrestria_redwood_log, terrestria_redwood_leaves, 2, 3));

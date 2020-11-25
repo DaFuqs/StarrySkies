@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.types;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
@@ -15,6 +16,7 @@ public abstract class SpheroidType {
     protected int minRadius;
     protected int maxRadius;
     protected LinkedHashMap<SpheroidDecorator, Float> spheroidDecorators = new LinkedHashMap<>();
+    protected LinkedHashMap<SpheroidEntitySpawnDefinition, Float> spawnableEntities = new LinkedHashMap<>();
 
     protected SpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius) {
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
@@ -29,6 +31,11 @@ public abstract class SpheroidType {
 
     public SpheroidType addDecorator(SpheroidDecorator spheroidDecorator, float decoratorChance) {
         spheroidDecorators.put(spheroidDecorator, decoratorChance);
+        return this;
+    }
+
+    public SpheroidType addSpawn(SpheroidEntitySpawnDefinition entityType, float spawnChance) {
+        spawnableEntities.put(entityType, spawnChance);
         return this;
     }
 
@@ -49,5 +56,15 @@ public abstract class SpheroidType {
     }
 
     public abstract Spheroid getRandomSphere(ChunkRandom chunkRandom);
+
+    protected ArrayList<SpheroidEntitySpawnDefinition> getRandomEntityTypesToSpawn(ChunkRandom chunkRandom) {
+        ArrayList<SpheroidEntitySpawnDefinition> entityTypes = new ArrayList<>();
+        for(Map.Entry<SpheroidEntitySpawnDefinition, Float> spawnableEntitiy : spawnableEntities.entrySet()) {
+            if(chunkRandom.nextFloat() < spawnableEntitiy.getValue()) {
+                entityTypes.add(spawnableEntitiy.getKey());
+            }
+        }
+        return entityTypes;
+    }
 
 }

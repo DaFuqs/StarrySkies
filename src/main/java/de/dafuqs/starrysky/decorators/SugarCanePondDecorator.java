@@ -1,19 +1,16 @@
 package de.dafuqs.starrysky.decorators;
 
+import com.mojang.serialization.Codec;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldView;
+import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import static de.dafuqs.starrysky.Support.isBlockPosInChunkPos;
 
 public class SugarCanePondDecorator extends SpheroidDecorator {
 
@@ -22,9 +19,17 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
     private static final int WATER_POND_TRIES  = 3;
     private static final int SUGAR_CANE_CHANCE = 2;
 
-    @Override
-    public void decorateSpheroid(WorldView worldView, Chunk chunk, Spheroid spheroid, ArrayList<BlockPos> blockPos, ChunkRandom random) {
+    public SugarCanePondDecorator(Codec configCodec) {
+        super(configCodec);
+    }
 
+    @Override
+    public void decorateSpheroid(ChunkRegion chunkRegion, Chunk chunk, Spheroid spheroid, ArrayList<BlockPos> blockPos, ChunkRandom random) {
+
+    }
+
+    /*@Override
+    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, FeatureConfig config) {
         blockPos = getDecorationBlockPosInChunk(chunk, blockPos);
 
         if(blockPos.size() > 0) {
@@ -39,8 +44,8 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
                 while(direction.hasNext() && canGenerate) {
                     BlockPos currentCheckBlockPos = randomBlockPos.offset(direction.next());
 
-                    if (!worldView.getBlockState(currentCheckBlockPos).isSolidBlock(worldView, currentCheckBlockPos)
-                        || !worldView.getBlockState(currentCheckBlockPos.up()).isAir()) {
+                    if (!chunkRegion.getBlockState(currentCheckBlockPos).isSolidBlock(chunkRegion, currentCheckBlockPos)
+                            || !chunkRegion.getBlockState(currentCheckBlockPos.up()).isAir()) {
                         canGenerate = false;
                     }
                 }
@@ -58,7 +63,7 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
                             if(isBlockPosInChunkPos(chunk.getPos(), sugarCaneBlockPos)) {
                                 int sugarCaneHeight = random.nextInt(3);
                                 for (int i = 0; i <= sugarCaneHeight; i++) {
-                                    if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCKSTATE, worldView, sugarCaneBlockPos.up(i))) {
+                                    if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCKSTATE, chunkRegion, sugarCaneBlockPos.up(i))) {
                                         chunk.setBlockState(sugarCaneBlockPos.up(i), SUGAR_CANE_BLOCKSTATE, false);
                                     }
                                 }
@@ -69,5 +74,5 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
                 currentTries++;
             } while (currentTries < WATER_POND_TRIES);
         }
-    }
+    }*/
 }

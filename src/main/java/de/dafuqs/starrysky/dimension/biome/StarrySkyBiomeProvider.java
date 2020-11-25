@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.function.LongFunction;
 
 public class StarrySkyBiomeProvider extends BiomeSource {
+
+    public static Identifier STARRY_SKY_BIOME_IDENTIFIER = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_biome");
+
     public static void registerBiomeProvider() {
         Registry.register(Registry.BIOME_SOURCE, new Identifier(StarrySkyCommon.MOD_ID, "biome_source"), StarrySkyBiomeProvider.CODEC);
     }
@@ -38,14 +41,12 @@ public class StarrySkyBiomeProvider extends BiomeSource {
     private final long SEED;
     private final Registry<Biome> BIOME_REGISTRY;
     public static Registry<Biome> layersBiomeRegistry;
+
     private static final List<RegistryKey<Biome>> BIOMES = ImmutableList.of(
-            // all the files in data.starrysky.worldgen.biome
-            // https://minecraft.gamepedia.com/Custom_world_generation#Biome
-            RegistryKey.of(Registry.BIOME_KEY, new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_biome"))
-    );
+            RegistryKey.of(Registry.BIOME_KEY, STARRY_SKY_BIOME_IDENTIFIER));
 
     public StarrySkyBiomeProvider(long seed, Registry<Biome> biomeRegistry) {
-        super(BIOMES.stream().map((registryKey) -> () -> (Biome)biomeRegistry.get(registryKey))); // is "get" correct?
+        super(BIOMES.stream().map((registryKey) -> () -> (Biome)biomeRegistry.get(registryKey)));
         StarrySkyBiomeLayer.setSeed(seed);
         this.SEED = seed;
         this.BIOME_REGISTRY = biomeRegistry;

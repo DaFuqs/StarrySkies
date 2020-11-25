@@ -13,8 +13,8 @@ public class SpheroidListSandwichable extends SpheroidList {
 
     private static final String MOD_ID = "sandwichable";
 
-    private static final SpheroidDecorator SANDWICHABLE_SALTY_SAND_DECORATOR = new GroundDecorator(Registry.BLOCK.get(new Identifier(MOD_ID,"salty_sand")).getDefaultState(), 0.08F);
-    private static final SpheroidDecorator SANDWICHABLE_SHRUB_DECORATOR = new PlantDecorator(Registry.BLOCK.get(new Identifier(MOD_ID,"shrub")).getDefaultState(), 0.04F);
+    private static final SpheroidDecorator SANDWICHABLE_SALTY_SAND_DECORATOR = new GroundDecorator(null, Registry.BLOCK.get(new Identifier(MOD_ID,"salty_sand")).getDefaultState(), 0.08F);
+    private static final SpheroidDecorator SANDWICHABLE_SHRUB_DECORATOR = new PlantDecorator(null, Registry.BLOCK.get(new Identifier(MOD_ID,"shrub")).getDefaultState(), 0.04F);
 
     public static boolean shouldGenerate() {
         return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkyCommon.STARRY_SKY_CONFIG.generateSandwichableSpheroids;

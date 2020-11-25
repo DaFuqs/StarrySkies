@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.types.special_overworld;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.special_overworld.BeeHiveSpheroid;
@@ -39,7 +40,8 @@ public class BeeHiveSpheroidType extends SpheroidType {
         int shellRadius = chunkRandom.nextInt(maxShellRadius - minShellRadius  + 1) + minShellRadius;
         int flowerRingRadius = chunkRandom.nextInt(maxFlowerRingRadius - minFlowerRingRadius  + 1) + minFlowerRingRadius;
         int flowerRingSpacing = chunkRandom.nextInt(maxFlowerRingSpacing - minFlowerRingSpacing  + 1) + minFlowerRingSpacing;
-        return new BeeHiveSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, shellRadius, flowerRingRadius, flowerRingSpacing);
+        ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
+        return new BeeHiveSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, shellRadius, flowerRingRadius, flowerRingSpacing);
     }
 
 }

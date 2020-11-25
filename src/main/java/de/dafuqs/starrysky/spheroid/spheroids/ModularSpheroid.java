@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.spheroids;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
@@ -18,8 +19,8 @@ public class ModularSpheroid extends Spheroid {
     private final BlockState bottomBlock;
     private final Identifier centerChestLootTable;
 
-    public ModularSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState mainBlock, BlockState topBlock, BlockState bottomBlock, Identifier centerChestLootTable) {
-        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+    public ModularSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, BlockState mainBlock, BlockState topBlock, BlockState bottomBlock, Identifier centerChestLootTable) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
         this.mainBlock = mainBlock;
         this.topBlock = topBlock;
         this.bottomBlock = bottomBlock;

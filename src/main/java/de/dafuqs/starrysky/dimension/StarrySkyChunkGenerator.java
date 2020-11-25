@@ -154,18 +154,14 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     public void populateEntities(ChunkRegion chunkRegion) {
         int xChunk = chunkRegion.getCenterChunkX();
         int zChunk = chunkRegion.getCenterChunkZ();
-        int xCord = xChunk << 4;
-        int zCord = zChunk << 4;
 
         List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(xChunk, zChunk);
         ChunkRandom sharedseedrandom = new ChunkRandom();
-        sharedseedrandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
+        sharedseedrandom.setPopulationSeed(chunkRegion.getSeed(), xChunk, zChunk);
 
         ChunkPos chunkPos = new ChunkPos(xChunk, zChunk);
         for(Spheroid spheroid : localSystem) {
-            if (spheroid.shouldPopulateEntities(chunkPos)) {
-                spheroid.populateEntities(chunkPos, chunkRegion, sharedseedrandom);
-            }
+            spheroid.populateEntities(chunkPos, chunkRegion, sharedseedrandom);
         }
     }
 
@@ -183,11 +179,9 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         for(Spheroid spheroid : localSystem) {
             if (spheroid.isInChunk(chunk.getPos())) {
                 spheroid.generate(chunk);
-                spheroid.decorate(world, chunk);
+                spheroid.decorate((ChunkRegion) world, chunk);
             }
         }
     }
-
-
 
 }

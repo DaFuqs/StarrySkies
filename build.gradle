@@ -29,6 +29,15 @@ repositories {
 	maven {
 		url "https://dl.bintray.com/kyrptonaught/customportalapi"
 	}
+	/*
+		maven {
+		name = "Cloth"
+		url = "https://dl.bintray.com/shedaniel/cloth"
+		content {
+			includeGroup "me.shedaniel.cloth.api"
+		}
+	}
+	 */
 	/*maven {
 		name "immersiveportals"
 		url 'https://jitpack.io'
@@ -71,6 +80,9 @@ dependencies {
 	// terrestria, traverse
 	modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:$project.terraform_wood_api_version"
 	modImplementation "com.terraformersmc.terraform-api:terraform-tree-api-v1:$project.terraform_tree_api_version"
+
+	modApi "me.shedaniel.cloth.api:cloth-api:${project.cloth_api_version}"
+	include "me.shedaniel.cloth.api:cloth-api:${project.cloth_api_version}"
 
 	// immersive portals
 	//modImplementation  'com.github.qouteall.ImmersivePortalsMod:imm_ptl_core:v0.48-1.16'

@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.spheroids.special_overworld;
 
+import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.decorators.SpheroidDecorator;
@@ -20,8 +21,8 @@ public class CoralSpheroid extends Spheroid {
     protected int shellRadius;
     protected BlockState WATER = Blocks.WATER.getDefaultState();
 
-    public CoralSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, BlockState shellBlock, int shellRadius) {
-        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius);
+    public CoralSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, BlockState shellBlock, int shellRadius) {
+        super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
         this.shellBlock = shellBlock;
         this.shellRadius = shellRadius;
     }

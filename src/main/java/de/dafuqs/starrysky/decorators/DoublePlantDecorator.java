@@ -1,13 +1,18 @@
 package de.dafuqs.starrysky.decorators;
 
+import com.mojang.serialization.Codec;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldView;
+import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.feature.FeatureConfig;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class DoublePlantDecorator extends SpheroidDecorator {
 
@@ -15,15 +20,21 @@ public class DoublePlantDecorator extends SpheroidDecorator {
     private final float PLANT_CHANCE;
 
     /**
-     * A chance of 0 = 0%, 100 = 100%
-      */
-    public DoublePlantDecorator(BlockState blockState, float chance) {
-        this.PLANT_BLOCKSTATE = blockState;
-        this.PLANT_CHANCE = chance;
+     * A chance of 0 = 0%, 1 = 100%
+     */
+    public DoublePlantDecorator(Codec configCodec, BlockState plant_blockstate, float plant_chance) {
+        super(configCodec);
+        PLANT_BLOCKSTATE = plant_blockstate;
+        PLANT_CHANCE = plant_chance;
     }
 
     @Override
-    public void decorateSpheroid(WorldView worldView, Chunk chunk, Spheroid spheroid, ArrayList<BlockPos> blockPos, ChunkRandom random) {
+    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, FeatureConfig config) {
+        return false;
+    }
+
+    @Override
+    public void decorateSpheroid(ChunkRegion chunkRegion, Chunk chunk, Spheroid spheroid, ArrayList<BlockPos> blockPos, ChunkRandom random) {
         blockPos = getDecorationBlockPosInChunk(chunk, blockPos);
         for(BlockPos bp : blockPos) {
             if (chunk.getBlockState(bp.up()).isAir() && chunk.getBlockState(bp.up(2)).isAir()) {
