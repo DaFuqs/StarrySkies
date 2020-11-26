@@ -4,9 +4,6 @@ import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
@@ -97,11 +94,7 @@ public class CenterPondDecorator extends SpheroidDecorator {
             }
 
             if(lootChestPosition != null) {
-                world.setBlockState(lootChestPosition, Blocks.CHEST.getDefaultState().with(ChestBlock.WATERLOGGED, true), 3);
-                BlockEntity chestBlockEntity = world.getBlockEntity(lootChestPosition);
-                if (chestBlockEntity instanceof ChestBlockEntity) {
-                    ((ChestBlockEntity) chestBlockEntity).setLootTable(this.lootTable, random.nextLong());
-                }
+                placeLootChestAtPosition(world, lootChestPosition, lootTable, random);
             }
         }
     }

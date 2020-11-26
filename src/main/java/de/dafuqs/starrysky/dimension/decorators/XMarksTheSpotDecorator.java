@@ -2,10 +2,6 @@ package de.dafuqs.starrysky.dimension.decorators;
 
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -38,9 +34,9 @@ public class XMarksTheSpotDecorator extends SpheroidDecorator {
 
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
-        placeTreasureChestInCenter(world, spheroid, random);
+        placeLootChestAtPosition(world, spheroid.getPosition(), lootTable, random);
 
-
+        // paint 1-3 "X"es on the sphere in random directions
         int r = random.nextInt(6);
         int amountOfXMarks = random.nextInt(2) + 1;
         for(int i = 0; i < amountOfXMarks; i++) {
@@ -118,56 +114,6 @@ public class XMarksTheSpotDecorator extends SpheroidDecorator {
                     }
                 }
             }
-        }
-
-    }
-
-
-    private BlockPos findNextNonAirBlockInDirection(StructureWorldAccess world, BlockPos blockPos, Direction direction, int maxBlocks) {
-        for(int i = 0; i < maxBlocks; i++) {
-            if(!world.getBlockState(blockPos.offset(direction, i)).isAir()) {
-                return blockPos;
-            }
-        }
-        return null;
-    }
-
-    private void placeTreasureChestInCenter(StructureWorldAccess world, Spheroid spheroid, Random random) {
-        BlockState chestBlockState = Blocks.CHEST.getDefaultState();
-        BlockPos chestBlockPos = spheroid.getPosition();
-
-        // if the chest is placed in water: waterlog it!
-        if(world.getBlockState(chestBlockPos) == Blocks.WATER.getDefaultState()) {
-            chestBlockState = chestBlockState.with(ChestBlock.WATERLOGGED, true);
-        }
-
-        // Random direction placement for the chest
-        int r = random.nextInt(4);
-        Direction randomDirection;
-        switch (r) {
-            case 0: {
-                randomDirection = Direction.NORTH;
-                break;
-            }
-            case 1: {
-                randomDirection = Direction.SOUTH;
-                break;
-            }
-            case 2: {
-                randomDirection = Direction.EAST;
-                break;
-            }
-            default: {
-                randomDirection = Direction.WEST;
-                break;
-            }
-        }
-
-        // set the chest and add loot table
-        world.setBlockState(chestBlockPos, chestBlockState.with(ChestBlock.FACING, randomDirection), 3);
-        BlockEntity chestBlockEntity = world.getBlockEntity(chestBlockPos);
-        if (chestBlockEntity instanceof ChestBlockEntity) {
-            ((ChestBlockEntity) chestBlockEntity).setLootTable(this.lootTable, random.nextLong());
         }
     }
 
