@@ -244,7 +244,7 @@ public class SpheroidListVanilla extends SpheroidList {
         StarrySkyCommon.LOGGER.info("Loading Vanilla Spheroids...");
 
         // COMMON
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL, 100.0F, GRASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL, 10.0F, GRASS);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  4.0F, SAND);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  1.0F, RED_SAND);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.ESSENTIAL,  1.0F, GRAVEL);

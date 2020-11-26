@@ -60,10 +60,10 @@ public class CaveSpheroid extends Spheroid {
                             chunk.setBlockState(currBlockPos, this.shellBlock, false);
                         }
                     } else if(isAboveCaveFloorBlock(d, x2, y2, z2, shellRadius)) {
-                        chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock, false);
+                        chunk.setBlockState(currBlockPos.down(), Blocks.PINK_STAINED_GLASS.getDefaultState(), false);
                         addDecorationBlockPosition(currBlockPos.down());
                         if(hasChest && x2-x == 0 && z2-z == 0) {
-                            placeCenterChestWithLootTable(chunk, currBlockPos, chestLootTable);
+                            placeCenterChestWithLootTable(chunk, currBlockPos, chestLootTable); // TODO: generify. Decorators use this, too
                         }
                     } else if(d <= this.radius - this.shellRadius) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false); // always CAVE_AIR
