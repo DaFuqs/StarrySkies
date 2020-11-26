@@ -73,8 +73,6 @@ public class CaveSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
     @Override

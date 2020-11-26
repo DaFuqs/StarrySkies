@@ -65,8 +65,6 @@ public class MushroomSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
 }

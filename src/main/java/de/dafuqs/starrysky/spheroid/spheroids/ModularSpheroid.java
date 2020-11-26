@@ -75,8 +75,6 @@ public class ModularSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
 }

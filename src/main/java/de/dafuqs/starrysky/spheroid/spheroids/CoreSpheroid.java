@@ -63,8 +63,6 @@ public class CoreSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
 }

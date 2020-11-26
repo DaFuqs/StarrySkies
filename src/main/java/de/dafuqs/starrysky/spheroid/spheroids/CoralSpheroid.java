@@ -69,8 +69,6 @@ public class CoralSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
     public String getDescription() {

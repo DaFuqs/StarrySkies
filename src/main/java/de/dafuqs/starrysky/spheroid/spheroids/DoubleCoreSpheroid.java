@@ -71,8 +71,6 @@ public class DoubleCoreSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
 }

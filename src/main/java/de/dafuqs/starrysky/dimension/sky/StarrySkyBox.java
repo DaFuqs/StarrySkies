@@ -101,20 +101,6 @@ public class StarrySkyBox {
             matrices.pop();
         }
 
-        /* TODO: way too large
-        textureManager.bindTexture(new Identifier(StarrySkyCommon.MOD_ID, "textures/skybox/star1.png"));
-        matrices.push();
-        int rotation = (int) world.getTimeOfDay() % 360;
-        matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
-        matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(rotation));
-        buffer.begin(7, VertexFormats.POSITION_COLOR_TEXTURE_LIGHT);
-        buffer.vertex(matrices.peek().getModel(), -distance, -distance, -distance).color(255, 255, 255, 255).texture(0.0F, 0.0F).light(vertexLight).next();
-        buffer.vertex(matrices.peek().getModel(), -distance, -distance, distance).color(255, 255, 255, 255).texture(0.0F, 1.0F).light(vertexLight).next();
-        buffer.vertex(matrices.peek().getModel(), distance, -distance, distance).color(255, 255, 255, 255).texture(1.0F, 1.0F).light(vertexLight).next();
-        buffer.vertex(matrices.peek().getModel(), distance, -distance, -distance).color(255, 255, 255, 255).texture(1.0F, 0.0F).light(vertexLight).next();
-        tessellator.draw();
-        matrices.pop();*/
-
     }
 
 }

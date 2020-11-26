@@ -131,8 +131,6 @@ public class BeeHiveSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
     public BlockState getRandomFlower(ChunkRandom random) {

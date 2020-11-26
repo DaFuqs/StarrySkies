@@ -296,7 +296,7 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, WHITE_STAINED_GLASS);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.02F, YELLOW_STAINED_GLASS);
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 5.0F, BEE_HIVE);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 4.0F, BEE_HIVE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, CORALS_GLASS);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, CORALS_STONE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.TREASURE, 1.0F, BROWN_MUSHROOM);

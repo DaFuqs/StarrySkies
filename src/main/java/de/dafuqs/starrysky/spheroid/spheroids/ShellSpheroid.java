@@ -78,8 +78,6 @@ public class ShellSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
     private boolean hasSpeckles() {

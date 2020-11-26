@@ -1,12 +1,19 @@
 package de.dafuqs.starrysky.spheroid.spheroids;
 
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -24,7 +31,7 @@ public class OceanMonumentSpheroid extends Spheroid {
     private final int treasureRadius;
     private final int shellRadius;
 
-    private final ArrayList<BlockPos> guardianPos = new ArrayList<>();
+    private final ArrayList<BlockPos> guardianPositions = new ArrayList<>();
 
     public OceanMonumentSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, int treasureRadius, int shellRadius) {
         super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
@@ -40,7 +47,6 @@ public class OceanMonumentSpheroid extends Spheroid {
                 "\nTreasure: " + this.treasure.toString() + " (Radius: " + this.treasureRadius + ")";
     }
 
-    // TODO
     @Override
     public void generate(Chunk chunk) {
         int chunkX = chunk.getPos().x;
@@ -60,6 +66,8 @@ public class OceanMonumentSpheroid extends Spheroid {
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
                     if (d <= this.treasureRadius) {
                         chunk.setBlockState(currBlockPos, this.treasure, false);
+                    } else if (d < treasureRadius + 3) {
+                        chunk.setBlockState(currBlockPos, water, false);
                     } else if (d == treasureRadius + 3) {
                         if(Math.abs(x2-x) < 2 || Math.abs(z2-z) < 2) {
                             chunk.setBlockState(currBlockPos, water, false);
@@ -67,20 +75,20 @@ public class OceanMonumentSpheroid extends Spheroid {
                             chunk.setBlockState(currBlockPos, dark_prismarine, false);
                         }
                     } else if (d <= shellDistance) {
-                        if((y2-y) % 10 == 0 || (x2-x) % 10 == 0 || (z2-z) % 10 == 0) {
-                            if((y2-y) % 6 == 0 && ((x2-x) % 4 == 2 || (z2-z) % 4 == 0)) {
+                        if (y2 % 10 == 0 || x2 % 10 == 0 || z2 % 10 == 0) {
+                            if ((y2-y) % 6 == 0 && ((x2-x) % 4 == 2 || (z2-z) % 4 == 0)) {
                                 chunk.setBlockState(currBlockPos, this.sea_lantern, false);
                             } else {
                                 chunk.setBlockState(currBlockPos, this.prismarine_bricks, false);
                             }
                         } else {
-                            if((y2-y) % 10 == 5 && (x2-x) % 10 == 5 && (z2-z) % 10 == 5) {
-                                guardianPos.add(currBlockPos);
+                            if(y2 % 10 == 5 && x2 % 10 == 5 && z2 % 10 == 5) {
+                                guardianPositions.add(currBlockPos);
                             }
                             chunk.setBlockState(currBlockPos, this.water, false);
                         }
                     } else if (d <= this.radius) {
-                        if(y2 % 2 == 0) {
+                        if (y2 % 2 == 0) {
                             chunk.setBlockState(currBlockPos, this.prismarine, false);
                         } else {
                             chunk.setBlockState(currBlockPos, this.prismarine_bricks, false);
@@ -89,8 +97,59 @@ public class OceanMonumentSpheroid extends Spheroid {
                 }
             }
         }
+    }
 
-        this.setChunkFinished(chunk.getPos());
+    /**
+     * Populate guardians in every chunk the spheroid is in
+     * The default would be just the center chunk
+     * @param chunkPos
+     * @return
+     */
+    @Override
+    public boolean shouldPopulateEntities(ChunkPos chunkPos) {
+        return isInChunk(chunkPos);
+    }
+
+    @Override
+    public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
+        if (shouldPopulateEntities(chunkPos)) {
+            for (BlockPos guardianposition : guardianPositions) {
+                if (Support.isBlockPosInChunkPos(chunkPos, guardianposition)) {
+                    int xCord = chunkPos.x;
+                    int zCord = chunkPos.z;
+
+                    ChunkRandom sharedseedrandom = new ChunkRandom();
+                    sharedseedrandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
+
+                    MobEntity mobentity;
+                    if (random.nextFloat() < 0.08) {
+                        mobentity = EntityType.ELDER_GUARDIAN.create(chunkRegion.toServerWorld());
+                    } else {
+                        mobentity = EntityType.GUARDIAN.create(chunkRegion.toServerWorld());
+                    }
+
+                    if (mobentity != null) {
+                        float width = mobentity.getWidth();
+                        double xLength = MathHelper.clamp(guardianposition.getX(), (double) chunkPos.getStartX() + (double) width, (double) chunkPos.getStartX() + 16.0D - (double) width);
+                        double zLength = MathHelper.clamp(guardianposition.getZ(), (double) chunkPos.getStartZ() + (double) width, (double) chunkPos.getStartZ() + 16.0D - (double) width);
+
+                        try {
+                            mobentity.refreshPositionAndAngles(xLength, guardianposition.getY(), zLength, sharedseedrandom.nextFloat() * 360.0F, 0.0F);
+                            mobentity.setPersistent();
+                            if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
+                                mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);
+                                boolean success = chunkRegion.spawnEntity(mobentity);
+                                if (!success) {
+                                    return;
+                                }
+                            }
+                        } catch (Exception exception) {
+                            StarrySkyCommon.LOGGER.warn("Failed to spawn mob on sphere" + this.getDescription() + "\nException: " + exception);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

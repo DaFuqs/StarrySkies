@@ -71,8 +71,6 @@ public class DungeonSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
     @Override

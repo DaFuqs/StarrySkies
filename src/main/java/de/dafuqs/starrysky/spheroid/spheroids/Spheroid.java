@@ -98,13 +98,8 @@ public abstract class Spheroid implements Serializable {
         }
     }
 
-    // just a small optimization
-    public void setChunkFinished(ChunkPos chunkPos) {
-        this.chunksOfSpheroid.remove(chunkPos);
-    }
-
     public void decorate(StructureWorldAccess world, Random random) {
-        if(!isDecorated) {
+        if (!isDecorated) {
             for (SpheroidDecorator decorator : this.spheroidDecorators) {
                 try {
                     decorator.decorateSpheroid(world, this, this.decorationBlockPositions, random);
@@ -141,7 +136,7 @@ public abstract class Spheroid implements Serializable {
 
     protected void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos, Identifier lootTable, Random random, boolean waterLogged) {
         BlockState chestBlockState;
-        if(waterLogged) {
+        if (waterLogged) {
             chestBlockState = Blocks.CHEST.getDefaultState();
         } else {
             chestBlockState = Blocks.CHEST.getDefaultState();
@@ -210,6 +205,6 @@ public abstract class Spheroid implements Serializable {
     public boolean shouldDecorate(BlockPos blockPos) {
         // blockPos and center of spheroid in same chunk
         return (!isDecorated && (blockPos.getX() / 16 == this.getPosition().getX() / 16) && (blockPos.getZ() / 16 == this.getPosition().getZ() / 16));
-        //return (Math.abs(this.position.getX() - blockPos.getX()) < 16 && Math.abs(this.position.getZ() - blockPos.getZ()) < 16);
     }
+
 }

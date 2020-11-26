@@ -56,8 +56,6 @@ public class RainbowSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
 }

@@ -60,8 +60,6 @@ public class SupportedRainbowSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
 }

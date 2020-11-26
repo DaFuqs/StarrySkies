@@ -51,8 +51,6 @@ public class StripesSpheroid extends Spheroid {
                 }
             }
         }
-
-        this.setChunkFinished(chunk.getPos());
     }
 
     @Override
