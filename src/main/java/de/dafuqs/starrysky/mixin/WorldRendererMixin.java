@@ -21,8 +21,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Environment(EnvType.CLIENT)
 public abstract class WorldRendererMixin {
 
-    private final String skyBoxTextureAllSides = "textures/skybox/all_sides.png";
-    private final StarrySkyBox starrySkyBox = new StarrySkyBox(skyBoxTextureAllSides, skyBoxTextureAllSides, skyBoxTextureAllSides, skyBoxTextureAllSides, skyBoxTextureAllSides, skyBoxTextureAllSides);
+    // up, down, west, east, north, south
+    // keep both instances loaded => not swappable
+    private final StarrySkyBox starrySkyBox = new StarrySkyBox("textures/skybox/light.png", "textures/skybox/darker.png", "textures/skybox/west.png", "textures/skybox/east.png", "textures/skybox/north.png", "textures/skybox/south.png");
+    private final StarrySkyBox starrySkyBoxRainbow = new StarrySkyBox("textures/skybox/rainbow_up.png", "textures/skybox/rainbow_down.png", "textures/skybox/rainbow_west.png", "textures/skybox/rainbow_east.png", "textures/skybox/rainbow_north.png", "textures/skybox/rainbow_south.png");
 
     @Shadow
     @Final
@@ -30,8 +32,14 @@ public abstract class WorldRendererMixin {
 
     @Inject(at = @At("HEAD"), method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;F)V", cancellable = true)
     void renderSky(MatrixStack matrices, float tickDelta, CallbackInfo callbackInformation) {
+
         if (this.client.world.getRegistryKey().equals(StarrySkyCommon.starryWorld.getRegistryKey())) {
-            starrySkyBox.render(matrices, tickDelta);
+
+            if(StarrySkyCommon.STARRY_SKY_CONFIG == null || !StarrySkyCommon.STARRY_SKY_CONFIG.rainbowSkybox) {
+                starrySkyBox.render(matrices, tickDelta);
+            } else {
+                starrySkyBoxRainbow.render(matrices, tickDelta);
+            }
             callbackInformation.cancel();
         }
     }

@@ -15,6 +15,8 @@
   "text.autoconfig.StarrySky.option.portalColor": "Portal Color",
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel.@Tooltip": "The '/sphere' command lists all the data of the closest sphere (position, blocks, ...)",
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel": "Required Permission Level for /sphere Command",
+  "text.autoconfig.StarrySky.option.cloudHeight": "Cloud Height",
+  "text.autoconfig.StarrySky.option.rainbowSkybox": "Use a fancy rainbow skybox instead of the default one",
 
   "text.autoconfig.StarrySky.option.systemSizeChunks.@PrefixText": "Spheroids are generated in systems. Each system consists out of x spheroids over y chunks. How big each system should be in chunks². Higher values make the very slight 'gaps' at the border between systems less common, but since systems are generating all at once high values can result in small lag spikes every time a new system is generated. (but less spikes in total)",
   "text.autoconfig.StarrySky.option.systemSizeChunks.@Tooltip": "How many big each system should be in chunks²",
@@ -38,7 +40,7 @@
   "text.autoconfig.StarrySky.option.generateSandwichableSpheroids": "Enable Sandwichable Integration",
   "text.autoconfig.StarrySky.option.generateBYGSpheroids": "Enable Biomes You Go Integration",
   "text.autoconfig.StarrySky.option.generateUnearthedSpheroids": "Enable Unearthed Integration",
-  "text.autoconfig.StarrySky.option.generateBlockusSpheroids": "Enable Unearthed Integration",
+  "text.autoconfig.StarrySky.option.generateBlockusSpheroids": "Enable Blockus Integration",
 
   "text.autoconfig.StarrySky.option.floorHeight.@PrefixText": "If (or how high) there should be a world floor. When set to 1 there will the specified BottomBlock at y=1 and the floor block up to the floor height. When set to >1 there will the specified BottomBlock at y=1. When set to 0 there will be no ground, only void",
   "text.autoconfig.StarrySky.option.floorHeight": "Floor Height",

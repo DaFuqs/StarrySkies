@@ -14,11 +14,11 @@ public class StarrySkyConfig implements ConfigData {
     // wiki:
     // https://gitlab.com/sargunv-mc-mods/auto-config/-/wikis/home
 
-    @ConfigEntry.Gui.Tooltip()
+    /*@ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
     @Comment(value = "\nIf set to true all new players will spawn in the planetoids dimension initially."
                    + "\nDoesn't work yet")
-    public boolean spawnInDimension = false;
+    public boolean spawnInDimension = false;*/
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
@@ -38,6 +38,12 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nThe height of clouds in the Starry Sky dimension."
                      + "\nDefault: 270")
     public float cloudHeight = 270F;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category("GENERAL")
+    @Comment(value = "\nUse a fancy rainbow skybox instead of the default one."
+                     + "\nDefault: false")
+    public boolean rainbowSkybox = false;
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
@@ -143,7 +149,7 @@ public class StarrySkyConfig implements ConfigData {
     public boolean generateUnearthedSpheroids = true;
 
     @ConfigEntry.Category("SPHEROIDS")
-    @Comment(value = "\nEnable Unearthed Integration")
+    @Comment(value = "\nEnable Blockus Integration")
     public boolean generateBlockusSpheroids = true;
 
     @Override
