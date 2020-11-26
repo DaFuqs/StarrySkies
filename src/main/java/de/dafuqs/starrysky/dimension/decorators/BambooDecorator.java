@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.dimension.decorators;
 
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BambooBlock;
 import net.minecraft.block.Block;

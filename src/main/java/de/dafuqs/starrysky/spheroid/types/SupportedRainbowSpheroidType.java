@@ -3,7 +3,7 @@ package de.dafuqs.starrysky.spheroid.types;
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.SupportedRainbowSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;

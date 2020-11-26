@@ -1,11 +1,10 @@
-package de.dafuqs.starrysky.spheroid.spheroids.special_overworld;
+package de.dafuqs.starrysky.spheroid.spheroids;
 
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.lists.SpheroidList;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
@@ -48,7 +47,7 @@ public class CoralSpheroid extends Spheroid {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
                     if(d == 0 && hasChest) {
-                        placeCenterChestWithLootTable(chunk, currBlockPos, this.centerChestLootTable, random);
+                        placeCenterChestWithLootTable(chunk, currBlockPos, this.centerChestLootTable, random, true);
                     } else if (d <= (this.radius - this.shellRadius - 1)) {
                         int rand = random.nextInt(7);
                         if (rand < 2) {

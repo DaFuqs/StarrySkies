@@ -3,7 +3,7 @@ package de.dafuqs.starrysky.spheroid.spheroids;
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
@@ -63,7 +63,7 @@ public class CaveSpheroid extends Spheroid {
                         chunk.setBlockState(currBlockPos.down(), Blocks.PINK_STAINED_GLASS.getDefaultState(), false);
                         addDecorationBlockPosition(currBlockPos.down());
                         if(hasChest && x2-x == 0 && z2-z == 0) {
-                            placeCenterChestWithLootTable(chunk, currBlockPos, chestLootTable, random);
+                            placeCenterChestWithLootTable(chunk, currBlockPos, chestLootTable, random, false);
                         }
                     } else if(d <= this.radius - this.shellRadius) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false); // always CAVE_AIR

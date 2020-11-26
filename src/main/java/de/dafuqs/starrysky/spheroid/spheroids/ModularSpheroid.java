@@ -3,7 +3,7 @@ package de.dafuqs.starrysky.spheroid.spheroids;
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -59,7 +59,7 @@ public class ModularSpheroid extends Spheroid {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
                     if (hasCenterChest && d == 0) {
-                        placeCenterChestWithLootTable(chunk, currBlockPos, this.centerChestLootTable, random);
+                        placeCenterChestWithLootTable(chunk, currBlockPos, this.centerChestLootTable, random, false);
                     } else if (d == this.radius) {
                         if (isBottomBlock(d, x2, y2, z2)) {
                             chunk.setBlockState(currBlockPos, this.bottomBlock, false);

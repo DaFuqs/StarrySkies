@@ -4,7 +4,7 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.GroundDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
-import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

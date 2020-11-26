@@ -1,10 +1,9 @@
-package de.dafuqs.starrysky.spheroid.types.special_overworld;
+package de.dafuqs.starrysky.spheroid.types;
 
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.special_overworld.OceanMonumentSpheroid;
-import de.dafuqs.starrysky.spheroid.types.SpheroidType;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.spheroids.OceanMonumentSpheroid;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;

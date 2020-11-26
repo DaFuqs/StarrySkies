@@ -1,11 +1,10 @@
-package de.dafuqs.starrysky.spheroid.spheroids.special_overworld;
+package de.dafuqs.starrysky.spheroid.spheroids;
 
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.lists.SpheroidList;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

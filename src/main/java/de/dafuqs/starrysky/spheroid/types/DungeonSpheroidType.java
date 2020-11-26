@@ -1,13 +1,11 @@
-package de.dafuqs.starrysky.spheroid.types.special_overworld;
+package de.dafuqs.starrysky.spheroid.types;
 
 import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.SpheroidDecoratorFeature;
-import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.special_overworld.DungeonSpheroid;
-import de.dafuqs.starrysky.spheroid.types.SpheroidType;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.spheroids.DungeonSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.gen.ChunkRandom;

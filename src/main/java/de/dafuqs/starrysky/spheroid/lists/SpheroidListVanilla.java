@@ -2,11 +2,11 @@ package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.*;
 import de.dafuqs.starrysky.spheroid.types.*;
-import de.dafuqs.starrysky.spheroid.types.special_overworld.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
@@ -108,9 +108,9 @@ public class SpheroidListVanilla extends SpheroidList {
 
     // CORALS
     public static final SpheroidType CORALS_GLASS = new CoralSpheroidType(SpheroidAdvancementIdentifier.coral, 10, 20, MAP_GLASS, 1, 2)
-            .addChestWithLootTable(LootTables.ABANDONED_MINESHAFT_CHEST, 0.5F);
+            .addChestWithLootTable(LootTables.BURIED_TREASURE_CHEST, 0.5F);
     public static final SpheroidType CORALS_STONE = new CoralSpheroidType(SpheroidAdvancementIdentifier.coral, 10, 20, MAP_STONES, 1, 2)
-            .addChestWithLootTable(LootTables.ABANDONED_MINESHAFT_CHEST, 0.5F);
+            .addChestWithLootTable(LootTables.BURIED_TREASURE_CHEST, 0.5F);
 
     // GLASS
     public static final ModularSpheroidType GLASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.glass, 5, 8,  Blocks.GLASS.getDefaultState());
@@ -260,9 +260,9 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, COBBLESTONE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.1F, MOSSY_COBBLESTONE);
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1000.5F, BEACH_GRASS);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1000.5F, BEACH_SAND);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1000.5F, JUNGLE_POND);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, BEACH_GRASS);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, BEACH_SAND);
+        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, JUNGLE_POND);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, PODZOL);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 1.0F, JUNGLE);
         spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, SNOW_CAVE);
