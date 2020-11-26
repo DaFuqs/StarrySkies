@@ -8,6 +8,7 @@ import de.dafuqs.starrysky.dimension.decorators.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.special_overworld.CoralSpheroid;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
@@ -16,25 +17,21 @@ import java.util.LinkedHashMap;
 
 public class CoralSpheroidType extends SpheroidType {
 
-    private final ArrayList<BlockState> coralBlockStates;
-    private final ArrayList<BlockState> waterloggableBlockStates;
     private final LinkedHashMap<BlockState, Float> validShellBlocks;
     private final int minShellRadius;
     private final int maxShellRadius;
 
-    public CoralSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, LinkedHashMap<BlockState, Float> validShellBlocks, ArrayList<BlockState> coralBlockStates, ArrayList<BlockState> waterloggableBlockStates, int minShellRadius, int maxShellRadius) {
+    private Identifier lootTable;
+    float lootTableChance;
+
+    public CoralSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, LinkedHashMap<BlockState, Float> validShellBlocks, int minShellRadius, int maxShellRadius) {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
-        if(coralBlockStates == null || coralBlockStates.size() == 0) {
-            StarrySkyCommon.LOGGER.error("CoralSpheroidType: Registered a SpheroidType with empty coralBlockStates!");
-        }
         if(validShellBlocks == null || validShellBlocks.size() == 0) {
             StarrySkyCommon.LOGGER.error("CoralSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
         }
 
         this.validShellBlocks = validShellBlocks;
-        this.coralBlockStates = coralBlockStates;
-        this.waterloggableBlockStates = waterloggableBlockStates;
         this.minShellRadius = minShellRadius;
         this.maxShellRadius = maxShellRadius;
     }
@@ -51,6 +48,18 @@ public class CoralSpheroidType extends SpheroidType {
         int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
         BlockState shellBlockState = Support.getWeightedRandom(validShellBlocks, chunkRandom);
 
-        return new CoralSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, shellBlockState, shellRadius);
+        Identifier lootTable = null;
+        if( chunkRandom.nextFloat() < lootTableChance) {
+            lootTable = this.lootTable;
+        }
+
+        return new CoralSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, shellBlockState, shellRadius, lootTable);
     }
+
+    public CoralSpheroidType addChestWithLootTable(Identifier lootTable, float chance) {
+        this.lootTable = lootTable;
+        this.lootTableChance = chance;
+        return this;
+    }
+
 }

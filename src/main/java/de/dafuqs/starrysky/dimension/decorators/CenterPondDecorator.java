@@ -54,16 +54,17 @@ public class CenterPondDecorator extends SpheroidDecorator {
 
             // if there is not enouth room for water: just cancel
             // not nice, but eh
-            if(spheroid.getPosition().getY() - waterLevelY > 5) {
+            if(spheroid.getPosition().getY() - waterLevelY > pondSize) {
                 return;
             }
 
             boolean hasLootChest = random.nextFloat() < this.chance;
             BlockPos lootChestPosition = null;
 
-            for (int x = (int) (-pondSize * 1.5); x < pondSize * 1.5+1; x++) {
+            int pond15 = (int) Math.round(pondSize * 1.5);
+            for (int x = -pond15; x < pond15; x++) {
                 for (int y = -pondSize; y < pondSize; y++) {
-                    for (int z = (int) (-pondSize * 1.5); z < pondSize * 1.5+1; z++) {
+                    for (int z = -pond15; z < pond15; z++) {
                         BlockPos currentBlockPos = spheroidTop.add(x, y, z);
 
                         BlockState blockState = null;

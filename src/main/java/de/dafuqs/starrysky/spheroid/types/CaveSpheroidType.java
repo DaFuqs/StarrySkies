@@ -51,7 +51,7 @@ public class CaveSpheroidType extends SpheroidType {
     }
 
     public CaveSpheroidType addChestWithLootTable(Identifier lootTable, float chance) {
-        lootTable = lootTable;
+        this.lootTable = lootTable;
         this.lootTableChance = chance;
         return this;
     }

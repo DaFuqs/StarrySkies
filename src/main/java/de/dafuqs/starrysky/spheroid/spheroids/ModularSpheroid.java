@@ -59,7 +59,7 @@ public class ModularSpheroid extends Spheroid {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
                     if (hasCenterChest && d == 0) {
-                        placeCenterChestWithLootTable(chunk, currBlockPos, this.centerChestLootTable);
+                        placeCenterChestWithLootTable(chunk, currBlockPos, this.centerChestLootTable, random);
                     } else if (d == this.radius) {
                         if (isBottomBlock(d, x2, y2, z2)) {
                             chunk.setBlockState(currBlockPos, this.bottomBlock, false);

@@ -41,9 +41,9 @@ public class StarrySkyConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nUse a fancy rainbow skybox instead of the default one."
-                     + "\nDefault: false")
-    public boolean rainbowSkybox = false;
+    @Comment(value = "\nUse a fancy rainbow skybox instead of a generic one."
+                     + "\nDefault: true")
+    public boolean rainbowSkybox = true;
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")

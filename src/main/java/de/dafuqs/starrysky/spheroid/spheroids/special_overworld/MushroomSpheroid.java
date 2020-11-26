@@ -56,17 +56,11 @@ public class MushroomSpheroid extends Spheroid {
                     long rounded = Math.round(d);
                     if (rounded <= (this.radius - this.shellRadius)) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false);
-                    } else if (d <= this.radius - 1.25) {
+                    } else if (d <= this.radius - 0.5) {
                         chunk.setBlockState(currBlockPos, placementBlockstateInner, false);
                     } else if (rounded <= this.radius) {
-                        boolean up    = y2 - y > 0;
-                        boolean down  = y2 - y < 0;
-                        boolean north = z2 - z < 0;
-                        boolean east  = x2 - x > 0;
-                        boolean south = z2 - z > 0;
-                        boolean west  = x2 - x < 0;
-
-                        BlockState placementBlockstateOuter = this.shellBlock.with(Properties.UP, up).with(Properties.NORTH, north).with(Properties.EAST, east).with(Properties.SOUTH, south).with(Properties.WEST, west).with(Properties.DOWN, down);
+                        // not perfectly correct, but eh
+                        BlockState placementBlockstateOuter = this.shellBlock.with(Properties.UP, true).with(Properties.NORTH, true).with(Properties.EAST, true).with(Properties.SOUTH, true).with(Properties.WEST, true).with(Properties.DOWN, true);
                         chunk.setBlockState(currBlockPos, placementBlockstateOuter, false);
                     }
                 }

@@ -21,7 +21,7 @@ public class CaveSpheroid extends Spheroid {
     private final BlockState bottomBlock;
     private final BlockState shellBlock;
     private final int shellRadius;
-    private final Identifier chestLootTable;
+    Identifier chestLootTable;
 
     public CaveSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, BlockState caveFloorBlock, BlockState shellBlock, int shellRadius, BlockState topBlock, BlockState bottomBlock, Identifier chestLootTable) {
         super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
@@ -63,7 +63,7 @@ public class CaveSpheroid extends Spheroid {
                         chunk.setBlockState(currBlockPos.down(), Blocks.PINK_STAINED_GLASS.getDefaultState(), false);
                         addDecorationBlockPosition(currBlockPos.down());
                         if(hasChest && x2-x == 0 && z2-z == 0) {
-                            placeCenterChestWithLootTable(chunk, currBlockPos, chestLootTable); // TODO: generify. Decorators use this, too
+                            placeCenterChestWithLootTable(chunk, currBlockPos, chestLootTable, random);
                         }
                     } else if(d <= this.radius - this.shellRadius) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false); // always CAVE_AIR

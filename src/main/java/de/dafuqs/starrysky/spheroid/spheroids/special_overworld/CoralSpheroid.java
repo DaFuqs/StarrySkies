@@ -8,6 +8,7 @@ import de.dafuqs.starrysky.spheroid.lists.SpheroidList;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
@@ -20,11 +21,13 @@ public class CoralSpheroid extends Spheroid {
     protected BlockState shellBlock;
     protected int shellRadius;
     protected BlockState WATER = Blocks.WATER.getDefaultState();
+    protected Identifier centerChestLootTable;
 
-    public CoralSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, BlockState shellBlock, int shellRadius) {
+    public CoralSpheroid(ChunkRandom random, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int radius, ArrayList<SpheroidDecorator> spheroidDecorators, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn, BlockState shellBlock, int shellRadius, Identifier centerChestLootTable) {
         super(spheroidAdvancementIdentifier, random, spheroidDecorators, radius, entityTypesToSpawn);
         this.shellBlock = shellBlock;
         this.shellRadius = shellRadius;
+        this.centerChestLootTable = centerChestLootTable;
     }
 
     @Override
@@ -36,13 +39,17 @@ public class CoralSpheroid extends Spheroid {
         int y = this.getPosition().getY();
         int z = this.getPosition().getZ();
 
+        boolean hasChest = this.centerChestLootTable != null;
+
         random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
         for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
-                    if (d <= (this.radius - this.shellRadius - 1)) {
+                    if(d == 0 && hasChest) {
+                        placeCenterChestWithLootTable(chunk, currBlockPos, this.centerChestLootTable, random);
+                    } else if (d <= (this.radius - this.shellRadius - 1)) {
                         int rand = random.nextInt(7);
                         if (rand < 2) {
                             BlockState coral = getRandomCoralBlock(random);

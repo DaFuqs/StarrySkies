@@ -105,12 +105,7 @@ public abstract class Spheroid implements Serializable {
     public void decorate(StructureWorldAccess world, Random random) {
         if(!isDecorated) {
             for (SpheroidDecorator decorator : this.spheroidDecorators) {
-                //try {
-                    decorator.decorateSpheroid(world, this, this.decorationBlockPositions, random);
-                //} catch (Exception e) {
-                    // ??????
-                    // java.lang.RuntimeException: We are asking a region for a chunk out of bound
-                //}
+                decorator.decorateSpheroid(world, this, this.decorationBlockPositions, random);
             }
             isDecorated = true;
         }
@@ -134,13 +129,12 @@ public abstract class Spheroid implements Serializable {
         }
     }
 
-    // TODO: check
     protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z, int shellRadius) {
         int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
         return d == (this.radius - shellRadius) && distance1 > (this.radius - shellRadius);
     }
 
-    protected void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos, Identifier lootTable) {
+    protected void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos, Identifier lootTable, Random random) {
         chunk.setBlockState(blockPos, Blocks.CHEST.getDefaultState(), false);
         chunk.setBlockEntity(blockPos, new ChestBlockEntity());
         LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, lootTable);
@@ -203,6 +197,8 @@ public abstract class Spheroid implements Serializable {
     }
 
     public boolean shouldDecorate(BlockPos blockPos) {
-        return (Math.abs(this.position.getX() - blockPos.getX()) < 16 && Math.abs(this.position.getZ() - blockPos.getZ()) < 16);
+        // blockPos and center of spheroid in same chunk
+        return (blockPos.getX() / 16 == this.getPosition().getX() / 16) && (blockPos.getZ() / 16 == this.getPosition().getZ());
+        //return (Math.abs(this.position.getX() - blockPos.getX()) < 16 && Math.abs(this.position.getZ() - blockPos.getZ()) < 16);
     }
 }
