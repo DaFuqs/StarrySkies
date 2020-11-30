@@ -156,5 +156,4 @@ public class SystemGenerator {
         return spheroidType.getRandomSpheroid(systemRandom);
     }
 
-
 }

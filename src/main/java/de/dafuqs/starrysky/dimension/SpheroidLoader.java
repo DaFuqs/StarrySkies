@@ -10,8 +10,8 @@ import java.util.*;
 
 public class SpheroidLoader {
 
-    public LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeight = new LinkedHashMap<>();
-    private LinkedHashMap<String, List<BlockState>> dynamicOres = new LinkedHashMap<>();
+    private LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeight = new LinkedHashMap<>();
+    private final LinkedHashMap<String, ArrayList<BlockState>> dynamicOres = new LinkedHashMap<>();
 
     private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeights = new LinkedHashMap<SpheroidDistributionType, Float>() {{
         put(SpheroidDistributionType.ESSENTIAL,  10.0F);

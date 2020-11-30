@@ -6,8 +6,8 @@ import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.block.BlockState;
 import org.apache.logging.log4j.Level;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DynamicOreSpheroids {
@@ -55,10 +55,10 @@ public class DynamicOreSpheroids {
      * @param dynamicOres List of "ore strings" to generate dynamic spheroids from
      * @return List of finished dynamic ore spheroids with weight
      */
-    public static LinkedHashMap<SpheroidType, Float> getOreSpheroidTypesBasedOnDict(LinkedHashMap<String, List<BlockState>> dynamicOres) {
+    public static LinkedHashMap<SpheroidType, Float> getOreSpheroidTypesBasedOnDict(LinkedHashMap<String, ArrayList<BlockState>> dynamicOres) {
         LinkedHashMap<SpheroidType, Float> dynamicSpheroidTypes = new LinkedHashMap<>();
 
-        for(Map.Entry<String, List<BlockState>> dynamicOre : dynamicOres.entrySet()) {
+        for(Map.Entry<String, ArrayList<BlockState>> dynamicOre : dynamicOres.entrySet()) {
             BlockState firstEntry = dynamicOre.getValue().get(0); // get first entry for "copper"
             OreSpheroidDefinition entrySpheroidDefinition = dynamicOreSpheroidDefinitions.get(dynamicOre.getKey());
 

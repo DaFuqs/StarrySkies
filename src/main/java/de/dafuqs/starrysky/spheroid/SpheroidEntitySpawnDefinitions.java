@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityType;
 
 public class SpheroidEntitySpawnDefinitions {
 
+    // ground
     public static SpheroidEntitySpawnDefinition LLAMA = new SpheroidEntitySpawnDefinition(EntityType.LLAMA, 1, 2);
     public static SpheroidEntitySpawnDefinition CHICKEN = new SpheroidEntitySpawnDefinition(EntityType.CHICKEN, 2, 5);
     public static SpheroidEntitySpawnDefinition COW = new SpheroidEntitySpawnDefinition(EntityType.COW, 2, 4);
@@ -17,10 +18,19 @@ public class SpheroidEntitySpawnDefinitions {
     public static SpheroidEntitySpawnDefinition PIG = new SpheroidEntitySpawnDefinition(EntityType.PIG, 2, 4);
     public static SpheroidEntitySpawnDefinition RABBIT = new SpheroidEntitySpawnDefinition(EntityType.RABBIT, 2, 3);
     public static SpheroidEntitySpawnDefinition SHEEP = new SpheroidEntitySpawnDefinition(EntityType.SHEEP, 2, 4);
-    public static SpheroidEntitySpawnDefinition SQUID = new SpheroidEntitySpawnDefinition(EntityType.SQUID, 2, 5);
     public static SpheroidEntitySpawnDefinition TURTLE = new SpheroidEntitySpawnDefinition(EntityType.TURTLE, 3, 4);
     public static SpheroidEntitySpawnDefinition PANDA = new SpheroidEntitySpawnDefinition(EntityType.PANDA, 1, 3);
     public static SpheroidEntitySpawnDefinition POLAR_BEAR = new SpheroidEntitySpawnDefinition(EntityType.POLAR_BEAR, 1, 2);
     public static SpheroidEntitySpawnDefinition WOLF = new SpheroidEntitySpawnDefinition(EntityType.WOLF, 3, 5);
 
+    // aquatic
+    // TODO: spawn them
+    public static SpheroidEntitySpawnDefinition SQUID = new SpheroidEntitySpawnDefinition(EntityType.SQUID, 2, 5);
+    public static SpheroidEntitySpawnDefinition SALMON = new SpheroidEntitySpawnDefinition(EntityType.SALMON, 2, 5);
+    public static SpheroidEntitySpawnDefinition COD = new SpheroidEntitySpawnDefinition(EntityType.COD, 2, 5);
+    public static SpheroidEntitySpawnDefinition TROPICAL_FISH = new SpheroidEntitySpawnDefinition(EntityType.TROPICAL_FISH, 2, 5);
+    public static SpheroidEntitySpawnDefinition PUFFERFISH = new SpheroidEntitySpawnDefinition(EntityType.PUFFERFISH, 2, 5);
+
+    // flying
+    //public static SpheroidEntitySpawnDefinition BAT = new SpheroidEntitySpawnDefinition(EntityType.BAT, 2, 5);
 }

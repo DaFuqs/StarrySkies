@@ -18,7 +18,7 @@ public class BambooDecorator extends SpheroidDecorator {
     private static final Block bambooBlock = Blocks.BAMBOO;
     private static final BlockState bambooBlockState = Blocks.BAMBOO.getDefaultState().with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0);
     private static final BlockState bambooSaplingBlockState = Blocks.BAMBOO_SAPLING.getDefaultState();
-    private static final int BAMBOO_CHANCE = 10;
+    private static final int BAMBOO_CHANCE = 11;
 
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {

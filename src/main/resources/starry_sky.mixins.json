@@ -3,8 +3,6 @@
   "package": "de.dafuqs.starrysky.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BiomeLayerSamplerAccessor",
-    "BootstrapMixin"
   ],
   "client": [
     "WorldRendererMixin",
