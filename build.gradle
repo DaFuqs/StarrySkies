@@ -74,8 +74,8 @@ dependencies {
 	}
 
 	// customportalapi
-	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta10-1.16' // https://github.com/kyrptonaught/customportalapi
-	include 'net.kyrptonaught:customportalapi:0.0.1-beta10-1.16' // https://github.com/kyrptonaught/customportalapi
+	modImplementation "net.kyrptonaught:customportalapi:$project.custom_portal_api_version" // https://github.com/kyrptonaught/customportalapi
+	include "net.kyrptonaught:customportalapi:$project.custom_portal_api_version" // https://github.com/kyrptonaught/customportalapi
 
 	// terrestria, traverse
 	modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:$project.terraform_wood_api_version"
@@ -83,10 +83,6 @@ dependencies {
 
 	modApi "me.shedaniel.cloth.api:cloth-api:${project.cloth_api_version}"
 	include "me.shedaniel.cloth.api:cloth-api:${project.cloth_api_version}"
-
-	// immersive portals
-	//modImplementation  'com.github.qouteall.ImmersivePortalsMod:imm_ptl_core:v0.48-1.16'
-	//include 'com.github.qouteall.ImmersivePortalsMod:imm_ptl_core:v0.48-1.16'
 }
 
 processResources {

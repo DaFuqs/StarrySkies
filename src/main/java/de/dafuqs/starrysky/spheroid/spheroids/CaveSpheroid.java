@@ -60,7 +60,7 @@ public class CaveSpheroid extends Spheroid {
                             chunk.setBlockState(currBlockPos, this.shellBlock, false);
                         }
                     } else if(isAboveCaveFloorBlock(d, x2, y2, z2, shellRadius)) {
-                        chunk.setBlockState(currBlockPos.down(), Blocks.PINK_STAINED_GLASS.getDefaultState(), false);
+                        chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock, false);
                         addDecorationBlockPosition(currBlockPos.down());
                         if(hasChest && x2-x == 0 && z2-z == 0) {
                             placeCenterChestWithLootTable(chunk, currBlockPos, chestLootTable, random, false);

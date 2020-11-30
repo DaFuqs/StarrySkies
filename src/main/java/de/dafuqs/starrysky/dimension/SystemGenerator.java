@@ -1,6 +1,7 @@
 package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.lists.SpheroidListVanilla;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
@@ -118,34 +119,21 @@ public class SystemGenerator {
             Spheroid currentSpheroid = getRandomSpheroid(systemRandom);
             TempPosition tempPosition = new TempPosition();
 
-            // set position, check bounds with system edges
-            tempPosition.xPos = -1;
-            while (tempPosition.xPos == -1) {
-                int curTry = systemRandom.nextInt(StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16);
-                if (curTry + currentSpheroid.getRadius() < StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 && curTry - currentSpheroid.getRadius() >= 0) {
-                    tempPosition.xPos = curTry;
-                }
-            }
+            // set position, check bounds with system edges on x and z
+            tempPosition.xPos = Support.getRandomBetween(systemRandom, currentSpheroid.getRadius(), StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 - currentSpheroid.getRadius());
             tempPosition.xPos += StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 * systemPointX;
-
-            tempPosition.yPos = systemRandom.nextInt(worldHeight - currentSpheroid.getRadius() * 2 - StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight) + currentSpheroid.getRadius() + StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight;
-
-            tempPosition.zPos = -1;
-            while (tempPosition.zPos == -1) {
-                int curTry = systemRandom.nextInt(StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16);
-                if (curTry + currentSpheroid.getRadius() < StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 && curTry - currentSpheroid.getRadius() >= 0) {
-                    tempPosition.zPos = curTry;
-                }
-            }
+            tempPosition.zPos = Support.getRandomBetween(systemRandom, currentSpheroid.getRadius(), StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 - currentSpheroid.getRadius());
             tempPosition.zPos += StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 * systemPointZ;
+            tempPosition.yPos = systemRandom.nextInt(worldHeight - currentSpheroid.getRadius() * 2 - StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight) + currentSpheroid.getRadius() + StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight;
 
             // check for collisions with existing spheroids
             // if any collision, discard it
             boolean discard = false;
-            for (Spheroid pl : spheroids) {
+            for (Spheroid spheroid : spheroids) {
                 //each spheroid has to be at least pl1.radius + pl2.radius + min distance apart
-                int distMin = pl.getRadius() + currentSpheroid.getRadius() + StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheres;
-                if (tempPosition.distanceSquared(pl) < distMin * distMin) {
+                int distMin = spheroid.getRadius() + currentSpheroid.getRadius() + StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheres;
+                int distSquared = tempPosition.distanceSquared(spheroid);
+                if (distSquared < distMin * distMin) {
                     discard = true;
                     break;
                 }
@@ -164,7 +152,7 @@ public class SystemGenerator {
 
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
         SpheroidType spheroidType = spheroidLoader.getWeightedRandomSpheroid(systemRandom);
-        StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Created a new sphere of type " + spheroidType);
+        StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Created a new sphere of type " + spheroidType + ". Next random: " + systemRandom.nextInt());
         return spheroidType.getRandomSpheroid(systemRandom);
     }
 

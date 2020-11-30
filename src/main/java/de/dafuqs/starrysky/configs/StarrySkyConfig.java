@@ -68,8 +68,8 @@ public class StarrySkyConfig implements ConfigData {
     @ConfigEntry.Category("SYSTEM GENERATION")
     @Comment(value = "\nHow much empty blocks should be enforced between individual spheres.\n"
             + "If the distance is too low generation of that one sphere will be cancelled.\n"
-            + "Default: 8\n")
-    public int minDistanceBetweenSpheres = 8;
+            + "Default: 10\n")
+    public int minDistanceBetweenSpheres = 10;
 
     @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Category("WORLD FLOOR GENERATION")
