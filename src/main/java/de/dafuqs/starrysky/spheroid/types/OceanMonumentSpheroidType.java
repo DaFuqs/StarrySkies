@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.types;
 
+import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
@@ -28,10 +29,11 @@ public class OceanMonumentSpheroidType extends SpheroidType {
         return "OceanMonumentSpheroid";
     }
 
-    public OceanMonumentSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public OceanMonumentSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
-        int treasureRadius = chunkRandom.nextInt(this.maxTreasureRadius - this.minTreasureRadius + 1) + this.minTreasureRadius;
-        int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
+        int treasureRadius = Support.getRandomBetween(chunkRandom, this.minTreasureRadius, this.maxTreasureRadius);
+        int shellRadius = Support.getRandomBetween(chunkRandom, this.minShellRadius, this.maxShellRadius);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
 

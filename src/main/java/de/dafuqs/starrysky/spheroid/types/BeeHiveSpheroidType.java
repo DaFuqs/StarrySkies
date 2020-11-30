@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.types;
 
+import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
@@ -33,13 +34,15 @@ public class BeeHiveSpheroidType extends SpheroidType {
         return "BeeHiveSpheroid";
     }
 
-    public BeeHiveSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public BeeHiveSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+        int shellRadius = Support.getRandomBetween(chunkRandom, minShellRadius, maxShellRadius);
+        int flowerRingRadius = Support.getRandomBetween(chunkRandom, minFlowerRingRadius, maxFlowerRingRadius);
+        int flowerRingSpacing = Support.getRandomBetween(chunkRandom, minFlowerRingSpacing, maxFlowerRingSpacing);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
-        int shellRadius = chunkRandom.nextInt(maxShellRadius - minShellRadius  + 1) + minShellRadius;
-        int flowerRingRadius = chunkRandom.nextInt(maxFlowerRingRadius - minFlowerRingRadius  + 1) + minFlowerRingRadius;
-        int flowerRingSpacing = chunkRandom.nextInt(maxFlowerRingSpacing - minFlowerRingSpacing  + 1) + minFlowerRingSpacing;
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
+
         return new BeeHiveSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, shellRadius, flowerRingRadius, flowerRingSpacing);
     }
 

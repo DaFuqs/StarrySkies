@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.types;
 
+import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
@@ -43,11 +44,13 @@ public class MushroomSpheroidType extends SpheroidType {
         return "MushroomSpheroid";
     }
 
-    public MushroomSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public MushroomSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+        int shellRadius = Support.getRandomBetween(chunkRandom, this.minShellRadius, this.maxShellRadius);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
-        int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + minShellRadius;
+
         return new MushroomSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, coreBlock, shellBlock, shellRadius);
     }
 

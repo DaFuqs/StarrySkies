@@ -29,10 +29,12 @@ public class StripesSpheroidType extends SpheroidType {
         return "StripesSpheroid";
     }
 
-    public StripesSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public StripesSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
+
         return new StripesSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, stripesBlockStates);
     }
 

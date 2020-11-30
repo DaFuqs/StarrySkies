@@ -7,10 +7,10 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Random;
 
 import static de.dafuqs.starrysky.dimension.StarrySkyChunkGenerator.systemGenerator;
 
@@ -18,11 +18,11 @@ public class Support {
 
     public static class SpheroidDistance {
         public Spheroid spheroid;
-        public double distance;
+        public double squaredDistance;
 
-        public SpheroidDistance(Spheroid spheroid, double distance) {
+        public SpheroidDistance(Spheroid spheroid, double squaredDistance) {
             this.spheroid = spheroid;
-            this.distance = distance;
+            this.squaredDistance = squaredDistance;
         }
     }
 
@@ -44,7 +44,7 @@ public class Support {
         return new SpheroidDistance(closestSpheroid, currentMinDistance);
     }
 
-    public static <E> E getWeightedRandom(LinkedHashMap<E, Float> weights, ChunkRandom random) {
+    public static <E> E getWeightedRandom(LinkedHashMap<E, Float> weights, Random random) {
         E result = null;
         double bestValue = Double.MAX_VALUE;
 
@@ -59,12 +59,22 @@ public class Support {
         return result;
     }
 
-    public static double distance(double x1, double y1, double z1, double x2, double y2, double z2) {
+    /**
+     * The bounds values lowest and highest are part of the result set
+     * @param lowest
+     * @param highest
+     * @return
+     */
+    public static int getRandomBetween(Random random, int lowest, int highest) {
+        return random.nextInt(highest - lowest + 1) + lowest;
+    }
+
+    public static double squaredDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
         return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2));
     }
 
-    public static double distance(BlockPos blockPos1, BlockPos blockpos2) {
-        return distance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockpos2.getX(), blockpos2.getY(), blockpos2.getZ());
+    public static double squaredDistance(BlockPos blockPos1, BlockPos blockpos2) {
+        return squaredDistance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockpos2.getX(), blockpos2.getY(), blockpos2.getZ());
     }
 
     public static boolean isBlockPosInChunkPos(ChunkPos chunkPos, BlockPos blockPos) {

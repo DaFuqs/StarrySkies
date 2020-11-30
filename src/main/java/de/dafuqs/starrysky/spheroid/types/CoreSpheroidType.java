@@ -45,12 +45,13 @@ public class CoreSpheroidType extends SpheroidType {
         return "CoreSpheroid";
     }
 
-    public CoreSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public CoreSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+        int coreRadius = Support.getRandomBetween(chunkRandom, this.minCoreRadius, this.maxCoreRadius);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
         BlockState shellBlockState = Support.getWeightedRandom(shellBlockStates, chunkRandom);
-        int coreRadius = chunkRandom.nextInt(this.maxCoreRadius - this.minCoreRadius + 1) + this.minCoreRadius;
 
         return new CoreSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, coreBlock, shellBlockState, coreRadius);
     }

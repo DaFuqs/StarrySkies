@@ -55,7 +55,7 @@ public abstract class SpheroidType {
         return spheroidAdvancementIdentifier;
     }
 
-    public abstract Spheroid getRandomSphere(ChunkRandom chunkRandom);
+    public abstract Spheroid getRandomSpheroid(ChunkRandom chunkRandom);
 
     protected ArrayList<SpheroidEntitySpawnDefinition> getRandomEntityTypesToSpawn(ChunkRandom chunkRandom) {
         ArrayList<SpheroidEntitySpawnDefinition> entityTypes = new ArrayList<>();

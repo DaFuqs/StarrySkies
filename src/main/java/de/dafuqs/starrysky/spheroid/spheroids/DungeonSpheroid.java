@@ -46,7 +46,7 @@ public class DungeonSpheroid extends Spheroid {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
-                    long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
+                    long d = Math.round(Support.squaredDistance(x, y, z, x2, y2, z2));
                     if(d == 0) {
                         chunk.setBlockState(currBlockPos, Blocks.SPAWNER.getDefaultState(), false);
                         chunk.setBlockEntity(currBlockPos, new MobSpawnerBlockEntity());
@@ -55,7 +55,7 @@ public class DungeonSpheroid extends Spheroid {
                             ((MobSpawnerBlockEntity) blockEntity_1).getLogic().setEntityId(this.entityType);
                         }
                     } else if (d == (this.radius - this.shellRadius -1) &&
-                            Math.round(Support.distance(x, y, z, x2, y2-1, z2)) == (this.radius - this.shellRadius) &&
+                            Math.round(Support.squaredDistance(x, y, z, x2, y2-1, z2)) == (this.radius - this.shellRadius) &&
                             random.nextInt(radius * 8) == 0) {
                         chunk.setBlockState(currBlockPos, Blocks.CHEST.getDefaultState(), false);
                         chunk.setBlockEntity(currBlockPos, new ChestBlockEntity());

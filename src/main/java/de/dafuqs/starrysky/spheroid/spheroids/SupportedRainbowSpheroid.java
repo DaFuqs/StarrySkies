@@ -49,7 +49,7 @@ public class SupportedRainbowSpheroid extends Spheroid {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
-                    long d = Math.round(Support.distance(x, y, z, x2, y2, z2));
+                    long d = Math.round(Support.squaredDistance(x, y, z, x2, y2, z2));
                     if (d == this.radius && isBottomBlock(d, x2, y2, z2)) {
                         chunk.setBlockState(currBlockPos, this.floorBlock, false);
                     } else if (d <= this.radius) {

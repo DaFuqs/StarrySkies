@@ -62,16 +62,16 @@ public class LiquidSpheroidType extends SpheroidType {
         return this;
     }
 
-    public LiquidSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public LiquidSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+        int coreRadius = Support.getRandomBetween(chunkRandom, this.minCoreRadius, this.maxCoreRadius);
+        int shellRadius = Support.getRandomBetween(chunkRandom, this.minShellRadius, this.maxShellRadius);
+        int fillPercent = Support.getRandomBetween(chunkRandom, this.minFillPercent, this.maxFillPercent);
+        boolean holeInBottom = chunkRandom.nextInt(100) < this.holeInBottomPercent;
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
-
         BlockState shellBlock = Support.getWeightedRandom(validShellBlocks, chunkRandom);
-        int shellRadius = chunkRandom.nextInt(maxShellRadius - minShellRadius  + 1) + minShellRadius;
-        int fillPercent = chunkRandom.nextInt(maxFillPercent - minFillPercent  + 1) + minFillPercent;
-        boolean holeInBottom = chunkRandom.nextInt(100) < this.holeInBottomPercent;
-        int coreRadius = chunkRandom.nextInt(maxCoreRadius - minCoreRadius  + 1) + minCoreRadius;
 
         return new LiquidSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, liquid, shellBlock, shellRadius, fillPercent, holeInBottom, coreBlock, coreRadius);
     }

@@ -1,6 +1,7 @@
 {
   "precipitation": "rain",
   "category": "none",
+  "player_spawn_friendly": true,
   "depth": 0,
   "scale": 0,
   "temperature": 1,
@@ -135,7 +136,6 @@
     "water_ambient": [],
     "misc": []
   },
-  "player_spawn_friendly": true,
   "creature_spawn_probability": 0.5,
   "spawn_costs": { }
 }

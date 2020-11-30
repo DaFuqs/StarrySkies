@@ -1,5 +1,5 @@
 {
-  "type": "starry_sky:starry_sky",
+  "type": "starry_sky:starry_sky_type",
   "generator": {
     "biome_source": {
       "type": "starry_sky:biome_source",

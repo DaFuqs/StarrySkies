@@ -64,11 +64,11 @@ public class ModularSpheroidType extends SpheroidType {
         return this;
     }
 
-    public ModularSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public ModularSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
-
         BlockState topBlock = getTopBlock();
         BlockState bottomBlock = getBottomBlock();
 

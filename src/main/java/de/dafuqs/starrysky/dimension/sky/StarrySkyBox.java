@@ -53,7 +53,7 @@ public class StarrySkyBox {
         float distance = 16F * (float) Option.RENDER_DISTANCE.get(options) - 8F;
 
         //float rotation = (world.getTimeOfDay() / 12000f) * 360; // don't rotate at all
-        int color = (int) Math.abs(((Math.abs(world.getTimeOfDay()-6000)-12000)/47)); // 47 = 12000 (half day)  /255 (max hue)
+        int color = (int) Math.abs(((Math.abs(world.getTime()-6000)-12000)/47)); // 47 = 12000 (half day)  /255 (max hue)
         int rawLight = (int) ((world.getTimeOfDay() / 12000) % 15); // a day is 24000; max lightlevel = 15
         int vertexLight = 0x00f000f0 >> 2 | rawLight >> 3 | rawLight;
 

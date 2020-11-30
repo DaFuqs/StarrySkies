@@ -16,7 +16,8 @@ The Starry Sky dimension consists out of never ending floating spheres floating 
 
 Build a **portal out of packed ice** and light it with flint & steel. [can be configured in the config].
 
-Close to 0, 0 will always be a wooden sphere, so if you want to start in the Starry Sky go ahead!
+If you want to start in the Starry Sky go ahead! The mod "GlobalSpawn" can be used to set "starry_sky:starry_sky" as your spawn dimension.
+At x:16 y:90 z:16 will always be a wooden sphere, so that will be a great starting point for your adventure.
 
 **WARNING:** Due to how custom dimensions are currently implemented by Mojang custom dimensions are only loaded after the second server start!
 

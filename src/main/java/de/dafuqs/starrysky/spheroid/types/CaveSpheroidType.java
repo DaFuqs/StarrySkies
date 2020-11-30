@@ -1,9 +1,10 @@
 package de.dafuqs.starrysky.spheroid.types;
 
-import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.spheroid.spheroids.CaveSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -68,13 +69,15 @@ public class CaveSpheroidType extends SpheroidType {
         return "CaveSpheroid";
     }
 
-    public CaveSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public CaveSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+        int shellRadius = Support.getRandomBetween(chunkRandom, this.minShellRadius, this.maxShellRadius);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
         BlockState topBlock = getTopBlock();
         BlockState bottomBlock = getBottomBlock();
-        int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
+
         Identifier lootTable = null;
         if( chunkRandom.nextFloat() < lootTableChance) {
             lootTable = this.lootTable;

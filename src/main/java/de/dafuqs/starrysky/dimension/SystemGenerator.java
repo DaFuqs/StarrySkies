@@ -78,7 +78,7 @@ public class SystemGenerator {
 
         if (curSystem == null) {
             //doesn't exist. Generate new system and cache it
-            curSystem = generatePlanetsAtSystemPosition(systemPos);
+            curSystem = generateSpheroidsAtSystemPoint(systemPos);
             cache.put(systemPos, curSystem);
         }
 
@@ -96,7 +96,7 @@ public class SystemGenerator {
     }
 
 
-    private List<Spheroid> generatePlanetsAtSystemPosition(Point systemPoint) {
+    private List<Spheroid> generateSpheroidsAtSystemPoint(Point systemPoint) {
         int systemPointX = systemPoint.x;
         int systemPointZ = systemPoint.y;
 
@@ -105,8 +105,8 @@ public class SystemGenerator {
 
         //If systemPointX and Z are zero, generate a log/leaf planet at 16, 16
         if (systemPointX == 0 && systemPointZ == 0) {
-            Spheroid homeSpheroid = SpheroidListVanilla.OAK_WOOD.getRandomSphere(systemRandom);
-            homeSpheroid.setPositionAndCalculateGenerationChunks(new BlockPos(16, 70, 16));
+            Spheroid homeSpheroid = SpheroidListVanilla.OAK_WOOD.getRandomSpheroid(systemRandom);
+            homeSpheroid.setPositionAndCalculateChunks(new BlockPos(16, 70, 16));
             spheroids.add(homeSpheroid);
         }
 
@@ -152,7 +152,7 @@ public class SystemGenerator {
             }
             if (!discard) {
                 BlockPos finalSpheroidBlockPos = tempPosition.toBlockPos();
-                currentSpheroid.setPositionAndCalculateGenerationChunks(finalSpheroidBlockPos);
+                currentSpheroid.setPositionAndCalculateChunks(finalSpheroidBlockPos);
 
                 // add it to the list
                 spheroids.add(currentSpheroid);
@@ -165,7 +165,7 @@ public class SystemGenerator {
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
         SpheroidType spheroidType = spheroidLoader.getWeightedRandomSpheroid(systemRandom);
         StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Created a new sphere of type " + spheroidType);
-        return spheroidType.getRandomSphere(systemRandom);
+        return spheroidType.getRandomSpheroid(systemRandom);
     }
 
 

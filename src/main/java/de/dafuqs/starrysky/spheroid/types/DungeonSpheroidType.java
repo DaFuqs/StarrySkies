@@ -38,13 +38,14 @@ public class DungeonSpheroidType extends SpheroidType {
         return "DungeonSpheroid";
     }
 
-    public DungeonSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public DungeonSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
-        BlockState shellBlock = Support.getWeightedRandom(validShellBlocks, chunkRandom);
-        int shellRadius = chunkRandom.nextInt(maxShellRadius - minShellRadius  + 1) + minShellRadius;
+        int shellRadius = Support.getRandomBetween(chunkRandom, this.minShellRadius, this.maxShellRadius);
 
+        BlockState shellBlock = Support.getWeightedRandom(validShellBlocks, chunkRandom);
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
+
         return new DungeonSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, entityType, shellBlock, shellRadius);
     }
 

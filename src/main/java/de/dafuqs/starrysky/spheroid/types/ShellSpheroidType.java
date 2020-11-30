@@ -55,12 +55,13 @@ public class ShellSpheroidType extends SpheroidType {
         return "ShellSpheroid";
     }
 
-    public ShellSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public ShellSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+        int shellRadius = Support.getRandomBetween(chunkRandom, this.minShellRadius, this.maxShellRadius);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
         BlockState shellBlock = getRandomShellBlock(chunkRandom);
-        int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
 
         return new ShellSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, coreBlock, shellBlock, shellRadius, shellSpeckleBlockStates);
     }

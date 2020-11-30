@@ -31,10 +31,12 @@ public class SupportedRainbowSpheroidType extends SpheroidType {
         return "SupportedRainbowSpheroid";
     }
 
-    public SupportedRainbowSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public SupportedRainbowSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
+
         return new SupportedRainbowSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, rainbowBlocks, floorBlock);
     }
 }

@@ -35,16 +35,22 @@ public class CoralSpheroidType extends SpheroidType {
         this.maxShellRadius = maxShellRadius;
     }
 
+    public CoralSpheroidType addChestWithLootTable(Identifier lootTable, float chance) {
+        this.lootTable = lootTable;
+        this.lootTableChance = chance;
+        return this;
+    }
+
     public String getDescription() {
         return "CoralSpheroid";
     }
 
-    public CoralSpheroid getRandomSphere(ChunkRandom chunkRandom) {
+    public CoralSpheroid getRandomSpheroid(ChunkRandom chunkRandom) {
         int radius = getRandomRadius(chunkRandom);
+        int shellRadius = Support.getRandomBetween(chunkRandom, this.minShellRadius, this.maxShellRadius);
+
         ArrayList<SpheroidDecorator> spheroidDecorators = getSpheroidDecoratorsWithChance(chunkRandom);
         ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn = getRandomEntityTypesToSpawn(chunkRandom);
-
-        int shellRadius = chunkRandom.nextInt(this.maxShellRadius - this.minShellRadius + 1) + this.minShellRadius;
         BlockState shellBlockState = Support.getWeightedRandom(validShellBlocks, chunkRandom);
 
         Identifier lootTable = null;
@@ -53,12 +59,6 @@ public class CoralSpheroidType extends SpheroidType {
         }
 
         return new CoralSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, shellBlockState, shellRadius, lootTable);
-    }
-
-    public CoralSpheroidType addChestWithLootTable(Identifier lootTable, float chance) {
-        this.lootTable = lootTable;
-        this.lootTableChance = chance;
-        return this;
     }
 
 }

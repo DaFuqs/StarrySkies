@@ -62,7 +62,7 @@ public abstract class Spheroid implements Serializable {
         return position;
     }
 
-    public void setPositionAndCalculateGenerationChunks(BlockPos blockPos) {
+    public void setPositionAndCalculateChunks(BlockPos blockPos) {
         this.position = blockPos;
 
         for (int currXPos = blockPos.getX() - Math.round(radius); currXPos <= blockPos.getX() + Math.round(radius); currXPos++) {
@@ -113,7 +113,7 @@ public abstract class Spheroid implements Serializable {
 
     protected boolean isTopBlock(long d, double x, double y, double z) {
         if (d == this.radius) {
-            long dist2 = Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y + 1, z));
+            long dist2 = Math.round(Support.squaredDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y + 1, z));
             return dist2 > this.radius;
         } else {
             return false;
@@ -122,7 +122,7 @@ public abstract class Spheroid implements Serializable {
 
     protected boolean isBottomBlock(long d, double x, double y, double z) {
         if (d == this.radius) {
-            long dist2 = Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
+            long dist2 = Math.round(Support.squaredDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
             return dist2 > this.radius;
         } else {
             return false;
@@ -130,7 +130,7 @@ public abstract class Spheroid implements Serializable {
     }
 
     protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z, int shellRadius) {
-        int distance1 = (int) Math.round(Support.distance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
+        int distance1 = (int) Math.round(Support.squaredDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
         return d == (this.radius - shellRadius) && distance1 > (this.radius - shellRadius);
     }
 
@@ -164,7 +164,7 @@ public abstract class Spheroid implements Serializable {
                 ChunkRandom sharedseedrandom = new ChunkRandom();
                 sharedseedrandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
 
-                int randomAmount = random.nextInt(entityTypeToSpawn.maxAmount - entityTypeToSpawn.minAmount + 1) + entityTypeToSpawn.minAmount;
+                int randomAmount = Support.getRandomBetween(random, entityTypeToSpawn.minAmount, entityTypeToSpawn.maxAmount);
                 for (int i = 0; i < randomAmount; i++) {
                     int startingX = this.getPosition().getX(); //xCord + sharedseedrandom.nextInt(4);
                     int startingY = this.getPosition().getY() + this.getRadius();
