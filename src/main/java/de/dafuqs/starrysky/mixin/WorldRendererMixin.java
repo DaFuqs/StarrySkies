@@ -1,6 +1,7 @@
 package de.dafuqs.starrysky.mixin;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.StarrySkyDimension;
 import de.dafuqs.starrysky.dimension.sky.StarrySkyBox;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -32,8 +33,7 @@ public abstract class WorldRendererMixin {
 
     @Inject(at = @At("HEAD"), method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;F)V", cancellable = true)
     void renderSky(MatrixStack matrices, float tickDelta, CallbackInfo callbackInformation) {
-
-        if (this.client.world.getRegistryKey().equals(StarrySkyCommon.starryWorld.getRegistryKey())) {
+        if (client.world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
 
             if(StarrySkyCommon.STARRY_SKY_CONFIG == null || !StarrySkyCommon.STARRY_SKY_CONFIG.rainbowSkybox) {
                 starrySkyBox.render(matrices, tickDelta);

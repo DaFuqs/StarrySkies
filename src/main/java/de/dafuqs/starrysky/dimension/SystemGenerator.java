@@ -91,7 +91,7 @@ public class SystemGenerator {
         int firstChunkPosZ = systemPoint.y * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
         ChunkRandom systemRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
         systemRandom.setTerrainSeed(firstChunkPosX, firstChunkPosZ); // and the seed from the first chunk+
-        StarrySkyCommon.LOGGER.log(Level.DEBUG, "Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
+        StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
         return systemRandom;
     }
 
@@ -158,13 +158,13 @@ public class SystemGenerator {
                 spheroids.add(currentSpheroid);
             }
         }
-        StarrySkyCommon.LOGGER.log(Level.INFO, "Created a new system with " + spheroids.size() + " spheroids at system position " + systemPointX + "," + systemPointZ);
+        StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Created a new system with " + spheroids.size() + " spheroids at system position " + systemPointX + "," + systemPointZ);
         return spheroids;
     }
 
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
         SpheroidType spheroidType = spheroidLoader.getWeightedRandomSpheroid(systemRandom);
-        StarrySkyCommon.LOGGER.log(Level.DEBUG, "Created a new sphere of type " + spheroidType);
+        StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Created a new sphere of type " + spheroidType);
         return spheroidType.getRandomSphere(systemRandom);
     }
 

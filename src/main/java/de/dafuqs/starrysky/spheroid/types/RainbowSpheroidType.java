@@ -1,6 +1,6 @@
 package de.dafuqs.starrysky.spheroid.types;
 
-import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
+import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;

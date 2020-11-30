@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky;
+package de.dafuqs.starrysky.spheroid;
 
 import net.minecraft.entity.EntityType;
 

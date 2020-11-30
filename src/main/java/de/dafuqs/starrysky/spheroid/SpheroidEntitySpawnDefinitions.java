@@ -1,6 +1,5 @@
-package de.dafuqs.starrysky.spheroid.lists;
+package de.dafuqs.starrysky.spheroid;
 
-import de.dafuqs.starrysky.SpheroidEntitySpawnDefinition;
 import net.minecraft.entity.EntityType;
 
 public class SpheroidEntitySpawnDefinitions {

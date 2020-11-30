@@ -13,13 +13,6 @@ public class StarrySkyConfig implements ConfigData {
 
     // wiki:
     // https://gitlab.com/sargunv-mc-mods/auto-config/-/wikis/home
-
-    /*@ConfigEntry.Gui.Tooltip()
-    @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nIf set to true all new players will spawn in the planetoids dimension initially."
-                   + "\nDoesn't work yet")
-    public boolean spawnInDimension = false;*/
-
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
     @Comment(value = "\nThe block the portal to the Starry Sky dimension needs to be built with."
@@ -68,15 +61,15 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nHow many spheres a system can contain max.\n"
             + "Some will fail because of distance restrictions\n"
             + "so it's not an exact value\n"
-            + "Default: 1500")
-    public int sphereDensity = 1500;
+            + "Default: 2000")
+    public int sphereDensity = 2000;
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("SYSTEM GENERATION")
     @Comment(value = "\nHow much empty blocks should be enforced between individual spheres.\n"
             + "If the distance is too low generation of that one sphere will be cancelled.\n"
-            + "Default: 10\n")
-    public int minDistanceBetweenSpheres = 10;
+            + "Default: 8\n")
+    public int minDistanceBetweenSpheres = 8;
 
     @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Category("WORLD FLOOR GENERATION")

@@ -28,17 +28,17 @@ public class ProximityAchivementCheckEvent implements ServerTickEvents.EndTick {
         tickCounter++;
         if(tickCounter % advancementsEveryXTicks == 0) {
             tickCounter = 0;
-            StarrySkyCommon.LOGGER.debug("Advancement check start. Players: " + minecraftServer.getPlayerManager().getCurrentPlayerCount());
+            StarrySkyCommon.LOGGER.debug("[StarrySky] Advancement check start. Players: " + minecraftServer.getPlayerManager().getCurrentPlayerCount());
             for (ServerPlayerEntity serverPlayerEntity : minecraftServer.getPlayerManager().getPlayerList()) {
-                StarrySkyCommon.LOGGER.debug("checking player " +serverPlayerEntity.getEntityName());
+                StarrySkyCommon.LOGGER.debug("[StarrySky] checking player " +serverPlayerEntity.getEntityName());
                 if(serverPlayerEntity.getEntityWorld().equals(starryWorld)) {
-                    StarrySkyCommon.LOGGER.debug( "In starry world");
+                    StarrySkyCommon.LOGGER.debug( "[StarrySky] In starry world");
                     Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroidToPlayer(serverPlayerEntity);
                     if(spheroidDistance.spheroid != null && (Math.sqrt(spheroidDistance.distance)) < spheroidDistance.spheroid.getRadius() + 2) {
                         SpheroidAdvancementIdentifier spheroidAdvancementIdentifier = spheroidDistance.spheroid.getSpheroidAdvancementIdentifier();
 
                         if(spheroidAdvancementIdentifier != null) {
-                            StarrySkyCommon.LOGGER.debug("AdvancementIdentifier: " + spheroidAdvancementIdentifier.name());
+                            StarrySkyCommon.LOGGER.debug("[StarrySky] AdvancementIdentifier: " + spheroidAdvancementIdentifier.name());
                             SpheroidAdvancementGroup spheroidAdvancementGroup = spheroidAdvancementIdentifierGroups.spheroidAdvancementIdentifierGroups.get(spheroidAdvancementIdentifier);
 
                             String groupAdvancementString = "sphere_group_" + spheroidAdvancementGroup.name().toLowerCase();
@@ -61,7 +61,7 @@ public class ProximityAchivementCheckEvent implements ServerTickEvents.EndTick {
                                 tracker.grantCriterion(advancement, "seen");
                             }
                         } else {
-                            StarrySkyCommon.LOGGER.debug("No advancementIdentifier :(...");
+                            StarrySkyCommon.LOGGER.debug("[StarrySky] No advancementIdentifier :(...");
                         }
                     }
                 }

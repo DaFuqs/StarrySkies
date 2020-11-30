@@ -9,8 +9,9 @@ public class StarrySkyCommands {
     public static void initialize() {
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             dispatcher.register(CommandManager.literal("sphere")
+                    .requires((source)->source.hasPermissionLevel(StarrySkyCommon.STARRY_SKY_CONFIG.sphereCommandRequiredPermissionLevel))
                     .executes(new ClosestSpheroidCommand())
-                    .requires((source)->source.hasPermissionLevel(StarrySkyCommon.STARRY_SKY_CONFIG.sphereCommandRequiredPermissionLevel)));
+            );
         });
     }
 

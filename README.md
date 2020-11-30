@@ -18,7 +18,7 @@ Build a **portal out of packed ice** and light it with flint & steel. [can be co
 
 Close to 0, 0 will always be a wooden sphere, so if you want to start in the Starry Sky go ahead!
 
-
+**WARNING:** Due to how custom dimensions are currently implemented by Mojang custom dimensions are only loaded after the second server start!
 
 ## Screenshots
 
