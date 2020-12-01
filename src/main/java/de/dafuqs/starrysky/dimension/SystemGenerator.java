@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SystemGenerator {
 
-    public class TempPosition {
+    public static class TempPosition {
         int xPos;
         int yPos;
         int zPos;
@@ -66,7 +66,7 @@ public class SystemGenerator {
     }
 
     /**
-     * Returns the system at the goven chunk coordinates
+     * Returns the system at the given chunk coordinates
      * If a system does not exist yet it will be generated
      * @param chunkX chunk chunkX location
      * @param chunkZ chunk chunkZ location
@@ -138,6 +138,7 @@ public class SystemGenerator {
                     break;
                 }
             }
+
             if (!discard) {
                 BlockPos finalSpheroidBlockPos = tempPosition.toBlockPos();
                 currentSpheroid.setPositionAndCalculateChunks(finalSpheroidBlockPos);
@@ -146,13 +147,12 @@ public class SystemGenerator {
                 spheroids.add(currentSpheroid);
             }
         }
-        StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Created a new system with " + spheroids.size() + " spheroids at system position " + systemPointX + "," + systemPointZ);
         return spheroids;
     }
 
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
         SpheroidType spheroidType = spheroidLoader.getWeightedRandomSpheroid(systemRandom);
-        StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Created a new sphere of type " + spheroidType + ". Next random: " + systemRandom.nextInt());
+        StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Created a new sphere of type " + spheroidType + " Next random: " + systemRandom.nextInt());
         return spheroidType.getRandomSpheroid(systemRandom);
     }
 
