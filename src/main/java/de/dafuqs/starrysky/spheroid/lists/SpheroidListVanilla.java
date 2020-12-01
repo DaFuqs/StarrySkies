@@ -147,7 +147,7 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final CoreSpheroidType DIAMOND  = new CoreSpheroidType(SpheroidAdvancementIdentifier.diamond, 3, 7, Blocks.DIAMOND_ORE.getDefaultState(), MAP_STONES, 1, 3);
     public static final CoreSpheroidType REDSTONE = new CoreSpheroidType(SpheroidAdvancementIdentifier.redstone, 5, 15, Blocks.REDSTONE_ORE.getDefaultState(), MAP_STONES, 4, 8);
     public static final CoreSpheroidType LAPIS    = new CoreSpheroidType(SpheroidAdvancementIdentifier.lapis, 5, 8, Blocks.LAPIS_ORE.getDefaultState(), MAP_STONES, 2, 4);
-    public static final CoreSpheroidType EMERALD  = new CoreSpheroidType(SpheroidAdvancementIdentifier.emerald, 5, 6, Blocks.EMERALD_ORE.getDefaultState(), MAP_STONES, 1, 3);
+    public static final CoreSpheroidType EMERALD  = new CoreSpheroidType(SpheroidAdvancementIdentifier.emerald, 5, 6, Blocks.EMERALD_ORE.getDefaultState(), MAP_MOUNTAIN_STONES, 1, 3);
 
     // "ORES"
     public static final CoreSpheroidType BONE       = new CoreSpheroidType(SpheroidAdvancementIdentifier.bone, 4, 8, Blocks.BONE_BLOCK.getDefaultState(), MAP_STONES, 2, 4);

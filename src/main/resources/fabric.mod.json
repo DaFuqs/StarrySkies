@@ -12,10 +12,8 @@
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/DaFuqs/StarrySky"
   },
-
   "license": "MIT",
   "icon": "assets/starry_sky/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [

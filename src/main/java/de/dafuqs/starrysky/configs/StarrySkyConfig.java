@@ -145,6 +145,10 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nEnable Blockus Integration")
     public boolean generateBlockusSpheroids = true;
 
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Mythic Metals Integration")
+    public boolean generateMythicMetalsSpheroids = true;
+
     @Override
     public void validatePostLoad() {
 

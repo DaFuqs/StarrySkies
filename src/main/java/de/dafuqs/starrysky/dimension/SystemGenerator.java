@@ -102,7 +102,7 @@ public class SystemGenerator {
         int systemPointZ = systemPoint.y;
 
         ChunkRandom systemRandom = getSystemRandom(systemPoint);
-        List<Spheroid> spheroids = new ArrayList<Spheroid>();
+        ArrayList<Spheroid> spheroids = new ArrayList<>();
 
         //If systemPointX and Z are zero, generate a log/leaf planet at 16, 16
         if (systemPointX == 0 && systemPointZ == 0) {

@@ -53,6 +53,19 @@ public abstract class SpheroidList {
         put(Blocks.YELLOW_STAINED_GLASS.getDefaultState(), 1.0F);
     }};
 
+    public static final LinkedHashMap<BlockState, Float> MAP_MOUNTAIN_STONES  = new LinkedHashMap<BlockState, Float>() {{
+        put(Blocks.STONE.getDefaultState(), 1.0F);
+        put(Blocks.INFESTED_STONE.getDefaultState(), 1.0F);
+    }};
+    public static final LinkedHashMap<BlockState, Float> MAP_OCEAN_STONES  = new LinkedHashMap<BlockState, Float>() {{
+        put(Blocks.CLAY.getDefaultState(), 1.0F);
+        put(Blocks.PRISMARINE.getDefaultState(), 1.0F);
+    }};
+    public static final LinkedHashMap<BlockState, Float> MAP_JUNGLE_STONES  = new LinkedHashMap<BlockState, Float>() {{
+        put(Blocks.COARSE_DIRT.getDefaultState(), 1.0F);
+    }};
+
+
     // RAINBOW STUFF
     public static final ArrayList<BlockState> LIST_WOOL = new ArrayList<BlockState>() {{
         add(Blocks.WHITE_WOOL.getDefaultState());

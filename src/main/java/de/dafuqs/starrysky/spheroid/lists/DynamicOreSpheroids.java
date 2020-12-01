@@ -48,6 +48,32 @@ public class DynamicOreSpheroids {
         put("sapphire",     new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 5, 7, 3, 4, 0.8F));
         put("silver",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 10, 3, 6, 2.0F));
         put("tin",          new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 10, 5, 7, 4.0F));
+
+        // Mythic metals
+        put("unobtainium",  new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 3, 4, 1, 1, 0.05F));
+        put("adamantite",   new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 4, 6, 1, 2, 0.2F));
+        put("mythril",      new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 4, 6, 1, 2, 0.2F));
+        put("orichalcum",   new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 4, 6, 1, 2, 0.2F));
+        put("aetherium",    new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 4, 7, 2, 3, 0.4F));
+        put("platinum",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 8, 3, 5, 0.4F));
+        put("kyber",        new OreSpheroidDefinition(SpheroidList.MAP_STONES, 12, 15, 7, 10, 0.4F));
+        put("lutetium",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 9, 3, 5, 0.7F));
+        put("banglum",      new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 9, 3, 6, 0.7F));
+        put("carmot",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 7, 2, 4, 0.9F));
+        put("manganese",    new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 10, 4, 6, 0.9F));
+        put("quadrillum",   new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 12, 4, 7, 0.9F));
+        put("zinc",         new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 11, 5, 6, 1.5F));
+        put("osmium",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 9, 13, 5, 8, 1.5F));
+        put("vermiculite",  new OreSpheroidDefinition(SpheroidList.MAP_STONES, 7, 13, 4, 7, 2.0F));
+        put("tantalite",    new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 13, 4, 8, 0.9F));
+        put("runite",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 8, 2, 5, 1.4F));
+        put("starrite",     new OreSpheroidDefinition(SpheroidList.MAP_MOUNTAIN_STONES, 5, 7, 2, 5, 0.4F));
+        put("aquarium",     new OreSpheroidDefinition(SpheroidList.MAP_OCEAN_STONES, 6, 12, 4, 7, 0.4F));
+        put("prometheum",   new OreSpheroidDefinition(SpheroidList.MAP_JUNGLE_STONES, 6, 9, 4, 4, 0.4F));
+        //put("midas_gold",   new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 6, 13, 4, 7, 1.8F));
+        //put("truesilver",   new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 7, 9, 3, 5, 1.5F));
+        //put("stormyx",      new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 7, 10, 4, 7, 0.4F));
+        //put("ur",           new OreSpheroidDefinition(SpheroidList.MAP_RARE_NETHER_STONES, 3, 4, 1, 1, 0.05F));
     }};
 
     /**

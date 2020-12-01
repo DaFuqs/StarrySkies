@@ -58,6 +58,7 @@ public class SpheroidLoader {
         if(SpheroidListTraverse.shouldGenerate())                { SpheroidListTraverse.setup(this); }
         if(SpheroidListUnearthed.shouldGenerate())               { SpheroidListUnearthed.setup(this); }
         if(SpheroidListSandwichable.shouldGenerate())            { SpheroidListSandwichable.setup(this); }
+        if(SpheroidListMythicMetals.shouldGenerate())            { SpheroidListMythicMetals.setup(this); }
 
         // dynamically generate ore spheroids
         // this way we got only 1 "copper" spheroids even though lots of mods add a copper ore block

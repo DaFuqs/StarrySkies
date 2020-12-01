@@ -41,6 +41,7 @@
   "text.autoconfig.StarrySky.option.generateBYGSpheroids": "Enable Biomes You Go Integration",
   "text.autoconfig.StarrySky.option.generateUnearthedSpheroids": "Enable Unearthed Integration",
   "text.autoconfig.StarrySky.option.generateBlockusSpheroids": "Enable Blockus Integration",
+  "text.autoconfig.StarrySky.option.generateMythicMetalsSpheroids": "Enable Mythic Metals Integration",
 
   "text.autoconfig.StarrySky.option.floorHeight.@PrefixText": "If (or how high) there should be a world floor. When set to 1 there will the specified BottomBlock at y=1 and the floor block up to the floor height. When set to >1 there will the specified BottomBlock at y=1. When set to 0 there will be no ground, only void",
   "text.autoconfig.StarrySky.option.floorHeight": "Floor Height",
