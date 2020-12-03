@@ -10,6 +10,8 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+
 public class SpheroidListTechReborn extends SpheroidList {
 
     private static final String MOD_ID = "techreborn";
@@ -47,17 +49,17 @@ public class SpheroidListTechReborn extends SpheroidList {
         //BlockState techreborn_sodalite_ore = Registry.BLOCK.get(new Identifier("techreborn","sodalite_ore")).getDefaultState();
         //BlockState techreborn_tungsten_ore = Registry.BLOCK.get(new Identifier("techreborn","tungsten_ore")).getDefaultState();
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.WOOD, 2.5F, new ShellSpheroidType(null, 8, 14, techreborn_rubber_log, techreborn_rubber_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 2.5F, new ShellSpheroidType(null, 8, 14, techreborn_rubber_log, techreborn_rubber_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
 
-        spheroidLoader.registerDynamicOre("bauxite", techreborn_bauxite_ore);
-        spheroidLoader.registerDynamicOre("copper", techreborn_copper_ore);
-        spheroidLoader.registerDynamicOre("galena", techreborn_galena_ore);
-        spheroidLoader.registerDynamicOre("iridium", techreborn_iridium_ore);
-        spheroidLoader.registerDynamicOre("lead", techreborn_lead_ore);
-        spheroidLoader.registerDynamicOre("ruby", techreborn_ruby_ore);
-        spheroidLoader.registerDynamicOre("sapphire", techreborn_sapphire_ore);
-        spheroidLoader.registerDynamicOre("silver", techreborn_silver_ore);
-        spheroidLoader.registerDynamicOre("tin", techreborn_tin_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "bauxite", techreborn_bauxite_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "copper", techreborn_copper_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "galena", techreborn_galena_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "iridium", techreborn_iridium_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "lead", techreborn_lead_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "ruby", techreborn_ruby_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "sapphire", techreborn_sapphire_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "silver", techreborn_silver_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "tin", techreborn_tin_ore);
     }
 
 }

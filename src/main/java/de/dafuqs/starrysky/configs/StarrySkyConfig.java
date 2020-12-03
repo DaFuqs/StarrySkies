@@ -20,11 +20,33 @@ public class StarrySkyConfig implements ConfigData {
                    + "\nDefault: PACKED_ICE")
     public String portalFrameBlock = "PACKED_ICE";
 
+    @ConfigEntry.Category("GENERAL")
+    @Comment(value = "\nThe block the portal to the Starry Nether dimension needs to be built with."
+            + "\nBuild it like a nether portal & has to be activated with flint & steel"
+            + "\nDefault: MAGMA_BLOCK")
+    public String portalFrameBlockNether = "MAGMA_BLOCK";
+
+    @ConfigEntry.Category("GENERAL")
+    @Comment(value = "\nThe block the portal to the Starry End dimension needs to be built with."
+            + "\nBuild it like a nether portal & has to be activated with flint & steel"
+            + "\nDefault: PURPLE_GLAZED_TERRACOTTA")
+    public String portalFrameBlockEnd = "PURPLE_GLAZED_TERRACOTTA";
+
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nThe color of the Starry Sky's portal."
+    @Comment(value = "\nThe color of Starry Sky's portal."
                      + "\nDefault: 11983869 (light, greyish blue)")
     public int portalColor = 11983869;
+
+    @ConfigEntry.Category("GENERAL")
+    @Comment(value = "\nThe color of Starry Nethers's portal."
+            + "\nDefault: 2821132 (dark red)")
+    public int portalColorNether = 2821132;
+
+    @ConfigEntry.Category("GENERAL")
+    @Comment(value = "\nThe color of Starry End's portal."
+            + "\nDefault: 1251609 (very grey dark cyan)")
+    public int portalColorEnd = 1251609;
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
@@ -183,6 +205,28 @@ public class StarrySkyConfig implements ConfigData {
             }
         } catch (Exception e) {
             portalFrameBlock = "PACKED_ICE";
+        }
+
+        // validate portalFrameBlockNether
+        try {
+            Identifier identifier = new Identifier(portalFrameBlockNether.toLowerCase());
+            BlockState bs = Registry.BLOCK.get(identifier).getDefaultState();
+            if(bs == null) {
+                portalFrameBlockNether = "MAGMA_BLOCK";
+            }
+        } catch (Exception e) {
+            portalFrameBlockNether = "MAGMA_BLOCK";
+        }
+
+        // validate portalFrameBlockEnd
+        try {
+            Identifier identifier = new Identifier(portalFrameBlockEnd.toLowerCase());
+            BlockState bs = Registry.BLOCK.get(identifier).getDefaultState();
+            if(bs == null) {
+                portalFrameBlockEnd = "PURPLE_GLAZED_TERRACOTTA";
+            }
+        } catch (Exception e) {
+            portalFrameBlockEnd = "PURPLE_GLAZED_TERRACOTTA";
         }
     }
 

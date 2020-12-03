@@ -1,6 +1,7 @@
 package de.dafuqs.starrysky.dimension;
 
 import com.mojang.serialization.Codec;
+import de.dafuqs.starrysky.dimension.ChunkGenerator.StarrySkyChunkGenerator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
@@ -22,8 +23,7 @@ public class SpheroidDecoratorFeature extends Feature {
     @Override
     public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, FeatureConfig config) {
         if(chunkGenerator instanceof StarrySkyChunkGenerator) {
-            StarrySkyChunkGenerator starrySkyChunkGenerator = (StarrySkyChunkGenerator) chunkGenerator;
-            SystemGenerator systemGenerator = starrySkyChunkGenerator.systemGenerator;
+            SystemGenerator systemGenerator = SystemGenerator.getSystemGeneratorOfWorld(world.toServerWorld().getRegistryKey());
             List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(blockPos.getX() / 16, blockPos.getZ() / 16);
             for(Spheroid spheroid : localSystem) {
                 if(spheroid.shouldDecorate(blockPos)) {

@@ -198,4 +198,38 @@ public abstract class SpheroidList {
         add(Blocks.LARGE_FERN.getDefaultState());
     }};
 
+    //// NETHER
+    public static final LinkedHashMap<BlockState, Float> MAP_NETHER_STONES = new LinkedHashMap<BlockState, Float>() {{
+        put(Blocks.NETHERRACK.getDefaultState(), 5.0F);
+        put(Blocks.BASALT.getDefaultState(), 1.0F);
+        put(Blocks.MAGMA_BLOCK.getDefaultState(), 1.0F);
+    }};
+
+    public static final LinkedHashMap<BlockState, Float> MAP_NETHER_DUNGEON_STONES = new LinkedHashMap<BlockState, Float>() {{
+        put(Blocks.NETHER_BRICKS.getDefaultState(), 5.0F);
+        put(Blocks.BLACKSTONE.getDefaultState(), 1.0F);
+        put(Blocks.NETHERRACK.getDefaultState(), 0.5F);
+        put(Blocks.MAGMA_BLOCK.getDefaultState(), 0.2F);
+        put(Blocks.OBSIDIAN.getDefaultState(), 0.2F);
+    }};
+
+    public static final LinkedHashMap<BlockState, Float> MAP_NETHER_GLASS = new LinkedHashMap<BlockState, Float>() {{
+        put(Blocks.BLACK_STAINED_GLASS.getDefaultState(), 1.0F);
+        put(Blocks.ORANGE_STAINED_GLASS.getDefaultState(), 1.0F);
+        put(Blocks.RED_STAINED_GLASS.getDefaultState(), 1.0F);
+        put(Blocks.YELLOW_STAINED_GLASS.getDefaultState(), 1.0F);
+    }};
+
+
+    //// END
+    public static final LinkedHashMap<BlockState, Float> MAP_END_STONES = new LinkedHashMap<BlockState, Float>() {{
+        put(Blocks.END_STONE.getDefaultState(), 10.0F);
+    }};
+
+    public static final LinkedHashMap<BlockState, Float> MAP_END_DUNGEON_STONES = new LinkedHashMap<BlockState, Float>() {{
+        put(Blocks.END_STONE_BRICKS.getDefaultState(), 10.0F);
+        put(Blocks.PURPUR_BLOCK.getDefaultState(), 5.0F);
+        put(Blocks.END_STONE.getDefaultState(), 1.0F);
+    }};
+
 }

@@ -1,0 +1,20 @@
+﻿{
+  "display": {
+    "icon": {
+        "item": "minecraft:end_portal_frame"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_end_gateway.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_end_gateway.description"
+    },
+    "hidden": false
+  },
+  "parent": "starry_sky:starry_sky_end",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

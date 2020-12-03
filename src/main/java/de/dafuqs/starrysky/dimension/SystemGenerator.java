@@ -3,9 +3,13 @@ package de.dafuqs.starrysky.dimension;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.lists.SpheroidListVanilla;
+import de.dafuqs.starrysky.spheroid.lists.SpheroidListVanillaEnd;
+import de.dafuqs.starrysky.spheroid.lists.SpheroidListVanillaNether;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkRandom;
 import org.apache.logging.log4j.Level;
 
@@ -15,6 +19,24 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SystemGenerator {
+
+    public static HashMap<SpheroidLoader.SpheroidDimensionType, SystemGenerator> systemGeneratorMap = new HashMap<>();
+
+    // spawning probabilities
+    private final SpheroidLoader.SpheroidDimensionType spheroidDimensionType;
+    private final HashMap<Point, List<Spheroid>> cache = new HashMap<>();
+    public static SpheroidLoader spheroidLoader;
+
+    public static SystemGenerator getSystemGeneratorOfWorld(RegistryKey<World> worldRegistryKey) {
+        if(worldRegistryKey.equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
+            return systemGeneratorMap.get(SpheroidLoader.SpheroidDimensionType.OVERWORLD);
+        } else if(worldRegistryKey.equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {
+            return systemGeneratorMap.get(SpheroidLoader.SpheroidDimensionType.NETHER);
+        } else {
+            return systemGeneratorMap.get(SpheroidLoader.SpheroidDimensionType.END);
+        }
+
+    }
 
     public static class TempPosition {
         int xPos;
@@ -34,12 +56,10 @@ public class SystemGenerator {
         }
     }
 
-    // spawning probabilities
-    private final HashMap<Point, List<Spheroid>> cache = new HashMap<>();
-    public static SpheroidLoader spheroidLoader;
-
-    public SystemGenerator() {
+    public SystemGenerator(SpheroidLoader.SpheroidDimensionType spheroidDimensionType) {
+        this.spheroidDimensionType = spheroidDimensionType;
         spheroidLoader = new SpheroidLoader();
+        systemGeneratorMap.put(spheroidDimensionType, this);
     }
 
     /**
@@ -106,7 +126,7 @@ public class SystemGenerator {
 
         //If systemPointX and Z are zero, generate a log/leaf planet at 16, 16
         if (systemPointX == 0 && systemPointZ == 0) {
-            Spheroid homeSpheroid = SpheroidListVanilla.OAK_WOOD.getRandomSpheroid(systemRandom);
+            Spheroid homeSpheroid = getSpawnSpheroid(systemRandom);
             homeSpheroid.setPositionAndCalculateChunks(new BlockPos(16, 70, 16));
             spheroids.add(homeSpheroid);
         }
@@ -147,11 +167,29 @@ public class SystemGenerator {
                 spheroids.add(currentSpheroid);
             }
         }
+
+        StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Created a new system with " + spheroids.size() + " spheroids at system position " + systemPointX + "," + systemPointZ);
+
         return spheroids;
     }
 
+    private Spheroid getSpawnSpheroid(ChunkRandom random) {
+        switch (this.spheroidDimensionType) {
+            case NETHER:
+                return SpheroidListVanillaNether.NETHERRACK.getRandomSpheroid(random);
+            case END:
+                return SpheroidListVanillaEnd.END_PORTAL.getRandomSpheroid(random);
+            default:
+                return SpheroidListVanilla.OAK_WOOD.getRandomSpheroid(random);
+        }
+    }
+
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
-        SpheroidType spheroidType = spheroidLoader.getWeightedRandomSpheroid(systemRandom);
+        SpheroidType spheroidType;
+        do {
+            spheroidType = SpheroidLoader.getWeightedRandomSpheroid(spheroidDimensionType, systemRandom);
+        } while(spheroidType == null);
+
         StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Created a new sphere of type " + spheroidType + " Next random: " + systemRandom.nextInt());
         return spheroidType.getRandomSpheroid(systemRandom);
     }

@@ -1,6 +1,6 @@
 package de.dafuqs.starrysky;
 
-import de.dafuqs.starrysky.advancements.ProximityAchivementCheckEvent;
+import de.dafuqs.starrysky.advancements.ProximityAdvancementCheckEvent;
 import de.dafuqs.starrysky.commands.StarrySkyCommands;
 import de.dafuqs.starrysky.configs.StarrySkyConfig;
 import de.dafuqs.starrysky.dimension.DecoratorFeatures;
@@ -10,11 +10,8 @@ import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.DefaultBiomeCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,6 +23,8 @@ public class StarrySkyCommon implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public static ServerWorld starryWorld;
+    public static ServerWorld starryWorldNether;
+    public static ServerWorld starryWorldEnd;
 
     @Override
     public void onInitialize() {
@@ -39,7 +38,7 @@ public class StarrySkyCommon implements ModInitializer {
 
         // Register all the stuff
         StarrySkyDimension.setupDimension();
-        StarrySkyDimension.setupPortal();
+        StarrySkyDimension.setupPortals();
         StarrySkyCommands.initialize();
         DecoratorFeatures.initialize();
 
@@ -48,17 +47,20 @@ public class StarrySkyCommon implements ModInitializer {
         ServerWorldEvents.LOAD.register((server, world) -> {
             if(world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
                 StarrySkyCommon.starryWorld = world;
+            } else if(world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {
+                StarrySkyCommon.starryWorldNether = world;
+            } else if(world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_END_WORLD_KEY)) {
+                StarrySkyCommon.starryWorldEnd = world;
             }
         });
 
-        ServerTickEvents.END_SERVER_TICK.register(new ProximityAchivementCheckEvent());
+        ServerTickEvents.END_SERVER_TICK.register(new ProximityAdvancementCheckEvent());
 
         LOGGER.info("[StarrySky] Finished loading.");
     }
 
-    public static void reserveBiomeIDs() {
-        //Reserve the biome IDs for the json version to replace
-        Registry.register(BuiltinRegistries.BIOME, new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_biome"), DefaultBiomeCreator.createTheVoid());
+    public static boolean inStarryWorld(ServerPlayerEntity serverPlayerEntity) {
+        return serverPlayerEntity.getEntityWorld().equals(StarrySkyCommon.starryWorld) || serverPlayerEntity.getEntityWorld().equals(starryWorldNether) || serverPlayerEntity.getEntityWorld().equals(starryWorldEnd);
     }
 
 }

@@ -10,16 +10,14 @@ import net.minecraft.server.ServerAdvancementLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
-import static de.dafuqs.starrysky.StarrySkyCommon.starryWorld;
-
-public class ProximityAchivementCheckEvent implements ServerTickEvents.EndTick {
+public class ProximityAdvancementCheckEvent implements ServerTickEvents.EndTick {
 
     // Advancements
     private int tickCounter;
     private final int advancementsEveryXTicks = 100;
     private final SpheroidAdvancementIdentifierGroups spheroidAdvancementIdentifierGroups;
 
-    public ProximityAchivementCheckEvent() {
+    public ProximityAdvancementCheckEvent() {
         this.spheroidAdvancementIdentifierGroups = new SpheroidAdvancementIdentifierGroups();
     }
 
@@ -31,7 +29,7 @@ public class ProximityAchivementCheckEvent implements ServerTickEvents.EndTick {
             StarrySkyCommon.LOGGER.debug("[StarrySky] Advancement check start. Players: " + minecraftServer.getPlayerManager().getCurrentPlayerCount());
             for (ServerPlayerEntity serverPlayerEntity : minecraftServer.getPlayerManager().getPlayerList()) {
                 StarrySkyCommon.LOGGER.debug("[StarrySky] checking player " +serverPlayerEntity.getEntityName());
-                if(serverPlayerEntity.getEntityWorld().equals(starryWorld)) {
+                if(StarrySkyCommon.inStarryWorld(serverPlayerEntity)) {
                     StarrySkyCommon.LOGGER.debug( "[StarrySky] In starry world");
                     Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroidToPlayer(serverPlayerEntity);
                     if(spheroidDistance.spheroid != null && (Math.sqrt(spheroidDistance.squaredDistance)) < spheroidDistance.spheroid.getRadius() + 2) {

@@ -1,8 +1,10 @@
-package de.dafuqs.starrysky.dimension;
+package de.dafuqs.starrysky.dimension.ChunkGenerator;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.dimension.SystemGenerator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -25,20 +27,16 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 
 
 public class StarrySkyChunkGenerator extends ChunkGenerator {
 
-    public static StarrySkyChunkGenerator STARRY_SKY_CHUNK_GENERATOR;
-
     private final long seed;
     protected final ChunkGeneratorSettings settings;
-    public static SystemGenerator systemGenerator;
+    private SpheroidLoader.SpheroidDimensionType spheroidDimensionType;
+    private SystemGenerator systemGenerator;
 
     // from the config
     private final int FLOOR_HEIGHT;
@@ -61,14 +59,21 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         this.seed = seed;
         this.settings = chunkGeneratorType;
 
-        systemGenerator = new SystemGenerator();
+        // Is it overworld, nether or end?
+        // There doesn't seem to be a better way to distinguish these currently?
+        if (Blocks.NETHERRACK.getDefaultState().equals(chunkGeneratorType.getDefaultBlock())) {
+            spheroidDimensionType = SpheroidLoader.SpheroidDimensionType.NETHER;
+        } else if (Blocks.END_STONE.getDefaultState().equals(chunkGeneratorType.getDefaultBlock())) {
+            spheroidDimensionType = SpheroidLoader.SpheroidDimensionType.END;
+        } else {
+            spheroidDimensionType = SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+        }
+        systemGenerator = new SystemGenerator(spheroidDimensionType);
 
         // config values
         this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight;
         this.FLOOR_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.floorBlock.toLowerCase())).getDefaultState();
         this.BOTTOM_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.bottomBlock.toLowerCase())).getDefaultState();
-
-        STARRY_SKY_CHUNK_GENERATOR = this;
     }
 
     @Override
@@ -79,9 +84,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     @Override
     @Environment(EnvType.CLIENT)
     public ChunkGenerator withSeed(long seed) {
-        StarrySkyChunkGenerator starrySkyChunkGenerator = new StarrySkyChunkGenerator(this.biomeSource.withSeed(seed), seed, () -> this.settings);
-        STARRY_SKY_CHUNK_GENERATOR = starrySkyChunkGenerator;
-        return starrySkyChunkGenerator;
+        return new StarrySkyChunkGenerator(this.biomeSource.withSeed(seed), seed, () -> this.settings);
     }
 
     @Override
@@ -125,7 +128,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     @Override
     public void populateNoise(WorldAccess world, StructureAccessor accessor, Chunk chunk) {
         // generate spheres
-        placeSpheroids(world, chunk);
+        placeSpheroids(chunk);
     }
 
     private BlockState getSeaBlock(int heightY) {
@@ -170,7 +173,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         return FLOOR_HEIGHT;
     }
 
-    public void placeSpheroids(WorldAccess world, Chunk chunk) {
+    public void placeSpheroids(Chunk chunk) {
         ChunkRandom chunkRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
         chunkRandom.setTerrainSeed(chunk.getPos().getRegionX(), chunk.getPos().getRegionZ());
 

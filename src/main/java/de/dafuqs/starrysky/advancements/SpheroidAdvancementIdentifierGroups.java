@@ -65,6 +65,25 @@ public class SpheroidAdvancementIdentifierGroups {
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.the_sun,      SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.tnt,          SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.water,        SpheroidAdvancementGroup.COMMON);
+
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.ancient_debris,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.crying_obsidian,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.nether_dungeon,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.nether_gold_ore,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.nether_quartz,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.netherrack,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.soul_sand,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.crimson_nylium,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.warped_nylium,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.soul_soil,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.basalt,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.blackstone,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.crimson_wood,  SpheroidAdvancementGroup.NETHER);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.warped_wood,  SpheroidAdvancementGroup.NETHER);
+
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.end_dungeon,  SpheroidAdvancementGroup.END);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.end_gateway,  SpheroidAdvancementGroup.END);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.end_stone,  SpheroidAdvancementGroup.END);
     }
 
 }

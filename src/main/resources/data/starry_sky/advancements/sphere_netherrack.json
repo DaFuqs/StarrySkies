@@ -1,0 +1,20 @@
+﻿{
+  "display": {
+    "icon": {
+        "item": "minecraft:netherrack"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_netherrack.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_netherrack.description"
+    },
+    "hidden": false
+  },
+  "parent": "starry_sky:starry_sky_nether",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

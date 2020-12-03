@@ -1,0 +1,20 @@
+﻿{
+  "display": {
+    "icon": {
+        "item": "minecraft:nether_gold_ore"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_nether_gold_ore.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_nether_gold_ore.description"
+    },
+    "hidden": false
+  },
+  "parent": "starry_sky:starry_sky_nether",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

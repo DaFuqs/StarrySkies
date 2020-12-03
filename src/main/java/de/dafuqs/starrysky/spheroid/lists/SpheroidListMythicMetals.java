@@ -7,6 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+
 public class SpheroidListMythicMetals extends SpheroidList {
 
     private static final String MOD_ID = "mythicmetals";
@@ -47,31 +49,31 @@ public class SpheroidListMythicMetals extends SpheroidList {
 		// BlockState mythicmetals_midas_gold_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"midas_gold_ore")).getDefaultState();
 
 		// OVERWORLD
-		spheroidLoader.registerDynamicOre("adamantite", mythicmetals_adamantite_ore);
-		spheroidLoader.registerDynamicOre("aetherium", mythicmetals_aetherium_ore);
-		spheroidLoader.registerDynamicOre("aquarium", mythicmetals_aquarium_ore); // BiomeKeys.COLD_OCEAN, BiomeKeys.DEEP_COLD_OCEAN, BiomeKeys.DEEP_FROZEN_OCEAN, BiomeKeys.DEEP_LUKEWARM_OCEAN, BiomeKeys.DEEP_OCEAN, BiomeKeys.FROZEN_OCEAN, 
-		spheroidLoader.registerDynamicOre("banglum", mythicmetals_banglum_ore);
-		spheroidLoader.registerDynamicOre("carmot", mythicmetals_carmot_ore);
-		spheroidLoader.registerDynamicOre("copper", mythicmetals_copper_ore);
-		spheroidLoader.registerDynamicOre("kyber", mythicmetals_kyber_ore);
-		spheroidLoader.registerDynamicOre("lutetium", mythicmetals_lutetium_ore);
-		spheroidLoader.registerDynamicOre("manganese", mythicmetals_manganese_ore);
-		spheroidLoader.registerDynamicOre("mythril", mythicmetals_mythril_ore);
-		spheroidLoader.registerDynamicOre("orichalcum", mythicmetals_orichalcum_ore);
-		spheroidLoader.registerDynamicOre("osmium", mythicmetals_osmium_ore);
-		spheroidLoader.registerDynamicOre("platinum", mythicmetals_platinum_ore);
-		spheroidLoader.registerDynamicOre("prometheum", mythicmetals_prometheum_ore); // BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.BAMBOO_JUNGLE_HILLS, BiomeKeys.JUNGLE, BiomeKeys.JUNGLE_EDGE, BiomeKeys.JUNGLE_HILLS, BiomeKeys.MODIFIED_JUNGLE, BiomeKeys.MODIFIED_JUNGLE_EDGE
-		spheroidLoader.registerDynamicOre("quadrillum", mythicmetals_quadrillum_ore);
-		spheroidLoader.registerDynamicOre("runite", mythicmetals_runite_ore);
-		spheroidLoader.registerDynamicOre("silver", mythicmetals_silver_ore);
-		spheroidLoader.registerDynamicOre("starrite", mythicmetals_starrite_ore); // BiomeKeys.GRAVELLY_MOUNTAINS, BiomeKeys.MODIFIED_GRAVELLY_MOUNTAINS, BiomeKeys.MOUNTAINS, BiomeKeys.MOUNTAIN_EDGE, BiomeKeys.SHATTERED_SAVANNA, BiomeKeys.SHATTERED_SAVANNA_PLATEAU, BiomeKeys.SNOWY_MOUNTAINS, BiomeKeys.SNOWY_TAIGA_MOUNTAINS, BiomeKeys.TAIGA_MOUNTAINS
+		spheroidLoader.registerDynamicOre(OVERWORLD, "adamantite", mythicmetals_adamantite_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "aetherium", mythicmetals_aetherium_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "aquarium", mythicmetals_aquarium_ore); // BiomeKeys.COLD_OCEAN, BiomeKeys.DEEP_COLD_OCEAN, BiomeKeys.DEEP_FROZEN_OCEAN, BiomeKeys.DEEP_LUKEWARM_OCEAN, BiomeKeys.DEEP_OCEAN, BiomeKeys.FROZEN_OCEAN,
+		spheroidLoader.registerDynamicOre(OVERWORLD, "banglum", mythicmetals_banglum_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "carmot", mythicmetals_carmot_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "copper", mythicmetals_copper_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "kyber", mythicmetals_kyber_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "lutetium", mythicmetals_lutetium_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "manganese", mythicmetals_manganese_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "mythril", mythicmetals_mythril_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "orichalcum", mythicmetals_orichalcum_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "osmium", mythicmetals_osmium_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "platinum", mythicmetals_platinum_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "prometheum", mythicmetals_prometheum_ore); // BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.BAMBOO_JUNGLE_HILLS, BiomeKeys.JUNGLE, BiomeKeys.JUNGLE_EDGE, BiomeKeys.JUNGLE_HILLS, BiomeKeys.MODIFIED_JUNGLE, BiomeKeys.MODIFIED_JUNGLE_EDGE
+		spheroidLoader.registerDynamicOre(OVERWORLD, "quadrillum", mythicmetals_quadrillum_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "runite", mythicmetals_runite_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "silver", mythicmetals_silver_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "starrite", mythicmetals_starrite_ore); // BiomeKeys.GRAVELLY_MOUNTAINS, BiomeKeys.MODIFIED_GRAVELLY_MOUNTAINS, BiomeKeys.MOUNTAINS, BiomeKeys.MOUNTAIN_EDGE, BiomeKeys.SHATTERED_SAVANNA, BiomeKeys.SHATTERED_SAVANNA_PLATEAU, BiomeKeys.SNOWY_MOUNTAINS, BiomeKeys.SNOWY_TAIGA_MOUNTAINS, BiomeKeys.TAIGA_MOUNTAINS
 
-		spheroidLoader.registerDynamicOre("tantalite", mythicmetals_tantalite_ore);
-		spheroidLoader.registerDynamicOre("tin", mythicmetals_tin_ore);
-		spheroidLoader.registerDynamicOre("unobtainium", mythicmetals_unobtainium_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "tantalite", mythicmetals_tantalite_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "tin", mythicmetals_tin_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "unobtainium", mythicmetals_unobtainium_ore);
 
-		spheroidLoader.registerDynamicOre("vermiculite", mythicmetals_vermiculite_ore);
-		spheroidLoader.registerDynamicOre("zinc", mythicmetals_zinc_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "vermiculite", mythicmetals_vermiculite_ore);
+		spheroidLoader.registerDynamicOre(OVERWORLD, "zinc", mythicmetals_zinc_ore);
 		
 		// NETHER
 		// spheroidLoader.registerDynamicOre("midas_gold", mythicmetals_midas_gold_ore);

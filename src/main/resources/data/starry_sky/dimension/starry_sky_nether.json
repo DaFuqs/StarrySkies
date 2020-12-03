@@ -1,0 +1,12 @@
+{
+  "type": "starry_sky:starry_sky_nether_type",
+  "generator": {
+    "biome_source": {
+      "type": "starry_sky:nether_biome_source",
+      "seed": 0
+    },
+    "type": "starry_sky:starry_sky_chunk_generator",
+    "settings": "minecraft:nether",
+    "seed": 0
+  }
+}

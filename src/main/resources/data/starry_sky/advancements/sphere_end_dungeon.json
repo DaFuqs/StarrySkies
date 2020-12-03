@@ -1,0 +1,20 @@
+﻿{
+  "display": {
+    "icon": {
+        "item": "minecraft:purpur_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_end_dungeon.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_end_dungeon.description"
+    },
+    "hidden": false
+  },
+  "parent": "starry_sky:starry_sky_end",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

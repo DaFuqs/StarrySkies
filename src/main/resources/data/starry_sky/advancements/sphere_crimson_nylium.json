@@ -1,0 +1,20 @@
+﻿{
+  "display": {
+    "icon": {
+        "item": "minecraft:crimson_nylium"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_crimson_nylium.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_crimson_nylium.description"
+    },
+    "hidden": false
+  },
+  "parent": "starry_sky:starry_sky_nether",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

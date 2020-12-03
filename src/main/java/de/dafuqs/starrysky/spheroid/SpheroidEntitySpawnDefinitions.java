@@ -33,4 +33,11 @@ public class SpheroidEntitySpawnDefinitions {
 
     // flying
     //public static SpheroidEntitySpawnDefinition BAT = new SpheroidEntitySpawnDefinition(EntityType.BAT, 2, 5);
+
+    // NETHER
+    public static SpheroidEntitySpawnDefinition HOGLIN = new SpheroidEntitySpawnDefinition(EntityType.HOGLIN, 4, 6);
+    public static SpheroidEntitySpawnDefinition SKELETON_HORSE = new SpheroidEntitySpawnDefinition(EntityType.SKELETON_HORSE, 1, 2);
+    public static SpheroidEntitySpawnDefinition ZOMBIE_HORSE = new SpheroidEntitySpawnDefinition(EntityType.ZOMBIE_HORSE, 1, 2);
+
+    // END
 }

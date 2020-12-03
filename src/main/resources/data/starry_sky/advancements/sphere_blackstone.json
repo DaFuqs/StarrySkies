@@ -1,0 +1,20 @@
+﻿{
+  "display": {
+    "icon": {
+        "item": "minecraft:blackstone"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_blackstone.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_blackstone.description"
+    },
+    "hidden": false
+  },
+  "parent": "starry_sky:starry_sky_nether",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

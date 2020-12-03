@@ -18,9 +18,13 @@ import java.util.List;
 public class StarrySkyBiomeProvider extends BiomeSource {
 
     public static final Identifier STARRY_SKY_BIOME_IDENTIFIER = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_biome");
+    public static final Identifier STARRY_SKY_NETHER_BIOME_IDENTIFIER = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_nether_biome");
+    public static final Identifier STARRY_SKY_END_BIOME_IDENTIFIER = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_end_biome");
 
     public static void registerBiomeProvider() {
         Registry.register(Registry.BIOME_SOURCE, new Identifier(StarrySkyCommon.MOD_ID, "biome_source"), StarrySkyBiomeProvider.CODEC);
+        Registry.register(Registry.BIOME_SOURCE, new Identifier(StarrySkyCommon.MOD_ID, "nether_biome_source"), StarrySkyNetherBiomeProvider.CODEC);
+        Registry.register(Registry.BIOME_SOURCE, new Identifier(StarrySkyCommon.MOD_ID, "end_biome_source"), StarrySkyEndBiomeProvider.CODEC);
     }
 
     public static final Codec<StarrySkyBiomeProvider> CODEC =

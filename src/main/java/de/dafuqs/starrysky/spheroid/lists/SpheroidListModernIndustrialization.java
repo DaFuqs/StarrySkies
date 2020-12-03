@@ -7,6 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+
 public class SpheroidListModernIndustrialization extends SpheroidList {
 
     private static final String MOD_ID = "modern_industrialization";
@@ -28,15 +30,15 @@ public class SpheroidListModernIndustrialization extends SpheroidList {
         BlockState modern_industrialization_antimony_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"antimony_ore")).getDefaultState();
         BlockState modern_industrialization_bauxite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"bauxite_ore")).getDefaultState();
 
-        spheroidLoader.registerDynamicOre("copper", modern_industrialization_copper_ore);
-        spheroidLoader.registerDynamicOre("tin", modern_industrialization_tin_ore);
-        spheroidLoader.registerDynamicOre("lignite_coal", modern_industrialization_lignite_coal_ore);
-        spheroidLoader.registerDynamicOre("nickel", modern_industrialization_nickel_ore);
-        spheroidLoader.registerDynamicOre("salt", modern_industrialization_salt_ore);
-        spheroidLoader.registerDynamicOre("silver", modern_industrialization_silver_ore);
-        spheroidLoader.registerDynamicOre("lead", modern_industrialization_lead_ore);
-        spheroidLoader.registerDynamicOre("antimony", modern_industrialization_antimony_ore);
-        spheroidLoader.registerDynamicOre("bauxite", modern_industrialization_bauxite_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "copper", modern_industrialization_copper_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "tin", modern_industrialization_tin_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "lignite_coal", modern_industrialization_lignite_coal_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "nickel", modern_industrialization_nickel_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "salt", modern_industrialization_salt_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "silver", modern_industrialization_silver_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "lead", modern_industrialization_lead_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "antimony", modern_industrialization_antimony_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "bauxite", modern_industrialization_bauxite_ore);
     }
 
 }

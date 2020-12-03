@@ -10,6 +10,8 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+
 public class SpheroidListBlockus extends SpheroidList {
 
     private static final String MOD_ID = "blockus";
@@ -28,7 +30,7 @@ public class SpheroidListBlockus extends SpheroidList {
         BlockState blockus_white_oak_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"white_oak_leaves")).getDefaultState();
         BlockState blockus_white_oak_log = Registry.BLOCK.get(new Identifier(MOD_ID,"white_oak_log")).getDefaultState();
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.3F, new ShellSpheroidType(null, 7, 14, blockus_white_oak_log, blockus_white_oak_leaves.with(Properties.DISTANCE_1_7, 1),2, 4));
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.3F, new ShellSpheroidType(null, 7, 14, blockus_white_oak_log, blockus_white_oak_leaves.with(Properties.DISTANCE_1_7, 1),2, 4));
 
         // Add blocks to default lists
         SpheroidList.MAP_STONES.put(blockus_limestone, 0.5F);

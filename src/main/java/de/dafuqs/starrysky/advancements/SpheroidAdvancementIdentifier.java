@@ -1,6 +1,23 @@
 package de.dafuqs.starrysky.advancements;
 
 public enum SpheroidAdvancementIdentifier {
+    ancient_debris,
+    crying_obsidian,
+    end_dungeon,
+    end_gateway,
+    end_stone,
+    nether_dungeon,
+    nether_gold_ore,
+    nether_quartz,
+    netherrack,
+    soul_sand,
+    soul_soil,
+    crimson_nylium,
+    warped_nylium,
+    basalt,
+    blackstone,
+    crimson_wood,
+    warped_wood,
     acacia_wood,
     andesite,
     bedrock,

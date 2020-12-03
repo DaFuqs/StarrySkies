@@ -6,5 +6,7 @@ public enum SpheroidAdvancementGroup {
     COMMON,
     UNCOMMON,
     RARE,
-    RAINBOW
+    RAINBOW,
+    NETHER,
+    END
 }

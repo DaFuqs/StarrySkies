@@ -6,13 +6,29 @@ import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class SpheroidLoader {
 
-    private static LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeight = new LinkedHashMap<>();
-    private static final LinkedHashMap<String, ArrayList<BlockState>> dynamicOres = new LinkedHashMap<>();
+    public enum SpheroidDimensionType {
+        OVERWORLD,
+        NETHER,
+        END
+    }
+
     private static boolean initialized = false;
+
+    private static final LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeight = new LinkedHashMap<>();
+    private static final LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeightNether = new LinkedHashMap<>();
+    private static final LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeightEnd = new LinkedHashMap<>();
+
+    private static final HashMap<SpheroidDimensionType, LinkedHashMap<String, ArrayList<BlockState>>> dynamicOresByDimensionType = new LinkedHashMap() {{
+        put(SpheroidDimensionType.OVERWORLD, new LinkedHashMap<String, ArrayList<BlockState>>());
+        put(SpheroidDimensionType.NETHER, new LinkedHashMap<String, ArrayList<BlockState>>());
+        put(SpheroidDimensionType.END, new LinkedHashMap<String, ArrayList<BlockState>>());
+    }};
 
     private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeights = new LinkedHashMap<SpheroidDistributionType, Float>() {{
         put(SpheroidDistributionType.ESSENTIAL,  10.0F);
@@ -24,11 +40,42 @@ public class SpheroidLoader {
         put(SpheroidDistributionType.DUNGEON,     0.1F);
     }};
 
-    public void registerSpheroidType(SpheroidDistributionType spheroidDistributionType, Float weight, SpheroidType spheroidType) {
-        availableSpheroidTypesByDistributionTypeWithWeight.get(spheroidDistributionType).put(spheroidType, weight);
+    private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeightsNether = new LinkedHashMap<SpheroidDistributionType, Float>() {{
+        put(SpheroidDistributionType.ESSENTIAL,  10.0F);
+        put(SpheroidDistributionType.DECORATIVE, 10.0F);
+        put(SpheroidDistributionType.ORE,        10.0F);
+        put(SpheroidDistributionType.FLUID,       6.0F);
+        put(SpheroidDistributionType.WOOD,        4.0F);
+        put(SpheroidDistributionType.TREASURE,    1.0F);
+        put(SpheroidDistributionType.DUNGEON,     0.1F);
+    }};
+
+    private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeightsEnd = new LinkedHashMap<SpheroidDistributionType, Float>() {{
+        put(SpheroidDistributionType.ESSENTIAL,  50.0F);
+        put(SpheroidDistributionType.DECORATIVE, 10.0F);
+        put(SpheroidDistributionType.ORE,        10.0F);
+        put(SpheroidDistributionType.FLUID,       6.0F);
+        put(SpheroidDistributionType.WOOD,        4.0F);
+        put(SpheroidDistributionType.TREASURE,    1.0F);
+        put(SpheroidDistributionType.DUNGEON,     0.1F);
+    }};
+
+    public void registerSpheroidType(SpheroidDimensionType spheroidDimensionType, SpheroidDistributionType spheroidDistributionType, Float weight, SpheroidType spheroidType) {
+        switch (spheroidDimensionType) {
+            case OVERWORLD:
+                availableSpheroidTypesByDistributionTypeWithWeight.get(spheroidDistributionType).put(spheroidType, weight);
+                return;
+            case NETHER:
+                availableSpheroidTypesByDistributionTypeWithWeightNether.get(spheroidDistributionType).put(spheroidType, weight);
+                return;
+            case END:
+                availableSpheroidTypesByDistributionTypeWithWeightEnd.get(spheroidDistributionType).put(spheroidType, weight);
+        }
     }
 
-    public void registerDynamicOre(String oreName, BlockState oreBlockState) {
+    public void registerDynamicOre(SpheroidDimensionType spheroidDimensionType, String oreName, BlockState oreBlockState) {
+        LinkedHashMap<String, ArrayList<BlockState>> dynamicOres = dynamicOresByDimensionType.get(spheroidDimensionType);
+
         if (dynamicOres.containsKey(oreName)) {
             dynamicOres.get(oreName).add(oreBlockState);
         } else {
@@ -39,44 +86,97 @@ public class SpheroidLoader {
     }
 
     public SpheroidLoader() {
-        if(!initialized) {
+        if (!initialized) {
 
             // initialize spheroid types list with empty LinkedHashMaps
             for (SpheroidDistributionType spheroidDistributionType : SpheroidDistributionType.values()) {
                 availableSpheroidTypesByDistributionTypeWithWeight.put(spheroidDistributionType, new LinkedHashMap<>());
             }
+            for (SpheroidDistributionType spheroidDistributionType : SpheroidDistributionType.values()) {
+                availableSpheroidTypesByDistributionTypeWithWeightNether.put(spheroidDistributionType, new LinkedHashMap<>());
+            }
+            for (SpheroidDistributionType spheroidDistributionType : SpheroidDistributionType.values()) {
+                availableSpheroidTypesByDistributionTypeWithWeightEnd.put(spheroidDistributionType, new LinkedHashMap<>());
+            }
 
             // initialize all existing lists
-            if (SpheroidListVanilla.shouldGenerate()) {                 SpheroidListVanilla.setup(this); }
-            if (SpheroidListLGBT.shouldGenerate()) {                    SpheroidListLGBT.setup(this); }
-            if (SpheroidListTechReborn.shouldGenerate()) {              SpheroidListTechReborn.setup(this); }
-            if (SpheroidListAstromine.shouldGenerate()) {               SpheroidListAstromine.setup(this); }
-            if (SpheroidListAppliedEnergistics2.shouldGenerate()) {     SpheroidListAppliedEnergistics2.setup(this); }
-            if (SpheroidListModernIndustrialization.shouldGenerate()) { SpheroidListModernIndustrialization.setup(this); }
-            if (SpheroidListIndustrialRevolution.shouldGenerate()) {    SpheroidListIndustrialRevolution.setup(this); }
-            if (SpheroidListSakuraRosea.shouldGenerate()) {             SpheroidListSakuraRosea.setup(this); }
-            if (SpheroidListBlockus.shouldGenerate()) {                 SpheroidListBlockus.setup(this); }
-            if (SpheroidListBYG.shouldGenerate()) {                     SpheroidListBYG.setup(this); }
-            if (SpheroidListTerrestria.shouldGenerate()) {              SpheroidListTerrestria.setup(this); }
-            if (SpheroidListTraverse.shouldGenerate()) {                SpheroidListTraverse.setup(this); }
-            if (SpheroidListUnearthed.shouldGenerate()) {               SpheroidListUnearthed.setup(this); }
-            if (SpheroidListSandwichable.shouldGenerate()) {            SpheroidListSandwichable.setup(this); }
-            if (SpheroidListMythicMetals.shouldGenerate()) {            SpheroidListMythicMetals.setup(this); }
+            SpheroidListVanilla.setup(this);
+            SpheroidListVanillaNether.setup(this);
+            SpheroidListVanillaEnd.setup(this);
+
+            if (SpheroidListLGBT.shouldGenerate()) {
+                SpheroidListLGBT.setup(this);
+            }
+            if (SpheroidListTechReborn.shouldGenerate()) {
+                SpheroidListTechReborn.setup(this);
+            }
+            if (SpheroidListAstromine.shouldGenerate()) {
+                SpheroidListAstromine.setup(this);
+            }
+            if (SpheroidListAppliedEnergistics2.shouldGenerate()) {
+                SpheroidListAppliedEnergistics2.setup(this);
+            }
+            if (SpheroidListModernIndustrialization.shouldGenerate()) {
+                SpheroidListModernIndustrialization.setup(this);
+            }
+            if (SpheroidListIndustrialRevolution.shouldGenerate()) {
+                SpheroidListIndustrialRevolution.setup(this);
+            }
+            if (SpheroidListSakuraRosea.shouldGenerate()) {
+                SpheroidListSakuraRosea.setup(this);
+            }
+            if (SpheroidListBlockus.shouldGenerate()) {
+                SpheroidListBlockus.setup(this);
+            }
+            if (SpheroidListBYG.shouldGenerate()) {
+                SpheroidListBYG.setup(this);
+            }
+            if (SpheroidListTerrestria.shouldGenerate()) {
+                SpheroidListTerrestria.setup(this);
+            }
+            if (SpheroidListTraverse.shouldGenerate()) {
+                SpheroidListTraverse.setup(this);
+            }
+            if (SpheroidListUnearthed.shouldGenerate()) {
+                SpheroidListUnearthed.setup(this);
+            }
+            if (SpheroidListSandwichable.shouldGenerate()) {
+                SpheroidListSandwichable.setup(this);
+            }
+            if (SpheroidListMythicMetals.shouldGenerate()) {
+                SpheroidListMythicMetals.setup(this);
+            }
 
             // dynamically generate ore spheroids
             // this way we got only 1 "copper" spheroids even though lots of mods add a copper ore block
-            LinkedHashMap<SpheroidType, Float> dynamicOreSpheroids = DynamicOreSpheroids.getOreSpheroidTypesBasedOnDict(dynamicOres);
+            // Overworld
+            LinkedHashMap<SpheroidType, Float> dynamicOreSpheroids = DynamicOreSpheroids.getOreSpheroidTypesBasedOnDict(dynamicOresByDimensionType.get(SpheroidDimensionType.OVERWORLD));
             availableSpheroidTypesByDistributionTypeWithWeight.get(SpheroidDistributionType.ORE).putAll(dynamicOreSpheroids);
+
+            // Nether
+            dynamicOreSpheroids = DynamicOreSpheroids.getOreSpheroidTypesBasedOnDict(dynamicOresByDimensionType.get(SpheroidDimensionType.NETHER));
+            availableSpheroidTypesByDistributionTypeWithWeightNether.get(SpheroidDistributionType.ORE).putAll(dynamicOreSpheroids);
+
+            // End
+            dynamicOreSpheroids = DynamicOreSpheroids.getOreSpheroidTypesBasedOnDict(dynamicOresByDimensionType.get(SpheroidDimensionType.END));
+            availableSpheroidTypesByDistributionTypeWithWeightEnd.get(SpheroidDistributionType.ORE).putAll(dynamicOreSpheroids);
 
             initialized = true;
         }
-
     }
 
-
-    public SpheroidType getWeightedRandomSpheroid(ChunkRandom systemRandom) {
-        SpheroidDistributionType chosenDistributionType = Support.getWeightedRandom(spheroidDistributionTypeWeights, systemRandom);
-        return Support.getWeightedRandom(this.availableSpheroidTypesByDistributionTypeWithWeight.get(chosenDistributionType), systemRandom);
+    public static SpheroidType getWeightedRandomSpheroid(SpheroidDimensionType spheroidDimensionType, ChunkRandom systemRandom) {
+        SpheroidDistributionType chosenDistributionType;
+        switch (spheroidDimensionType) {
+            case OVERWORLD:
+                chosenDistributionType = Support.getWeightedRandom(spheroidDistributionTypeWeights, systemRandom);
+                return Support.getWeightedRandom(availableSpheroidTypesByDistributionTypeWithWeight.get(chosenDistributionType), systemRandom);
+            case NETHER:
+                chosenDistributionType = Support.getWeightedRandom(spheroidDistributionTypeWeightsNether, systemRandom);
+                return Support.getWeightedRandom(availableSpheroidTypesByDistributionTypeWithWeightNether.get(chosenDistributionType), systemRandom);
+            default:
+                chosenDistributionType = Support.getWeightedRandom(spheroidDistributionTypeWeightsEnd, systemRandom);
+                return Support.getWeightedRandom(availableSpheroidTypesByDistributionTypeWithWeightEnd.get(chosenDistributionType), systemRandom);
+        }
     }
-
 }

@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky;
 
+import de.dafuqs.starrysky.dimension.SystemGenerator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -11,8 +12,6 @@ import net.minecraft.world.WorldAccess;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
-
-import static de.dafuqs.starrysky.dimension.StarrySkyChunkGenerator.systemGenerator;
 
 public class Support {
 
@@ -29,7 +28,7 @@ public class Support {
     public static SpheroidDistance getClosestSpheroidToPlayer(PlayerEntity serverPlayerEntity) {
         Vec3d playerPos = serverPlayerEntity.getPos();
         BlockPos playerPosBlock = new BlockPos((int) playerPos.x, (int) playerPos.y, (int) playerPos.z);
-        List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos( playerPosBlock.getX() / 16, playerPosBlock.getZ() / 16);
+        List<Spheroid> localSystem = SystemGenerator.getSystemGeneratorOfWorld(serverPlayerEntity.getEntityWorld().getRegistryKey()).getSystemAtChunkPos(playerPosBlock.getX() / 16, playerPosBlock.getZ() / 16);
 
         Spheroid closestSpheroid = null;
         double currentMinDistance = Double.MAX_VALUE;
@@ -95,6 +94,19 @@ public class Support {
             blockpos$Mutable.move(Direction.DOWN);
         }
         return blockpos$Mutable.getY();
+    }
+
+    public static int getUpperGroundBlock(WorldAccess world, BlockPos position, int minHeight) {
+        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
+
+        //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
+        while (blockpos$Mutable.getY() > minHeight) {
+            if (!world.isAir(blockpos$Mutable)) {
+                return blockpos$Mutable.getY();
+            }
+            blockpos$Mutable.move(Direction.UP);
+        }
+        return -1;
     }
 
 }

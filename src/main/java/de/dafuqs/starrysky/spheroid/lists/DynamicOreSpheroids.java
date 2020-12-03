@@ -84,26 +84,28 @@ public class DynamicOreSpheroids {
     public static LinkedHashMap<SpheroidType, Float> getOreSpheroidTypesBasedOnDict(LinkedHashMap<String, ArrayList<BlockState>> dynamicOres) {
         LinkedHashMap<SpheroidType, Float> dynamicSpheroidTypes = new LinkedHashMap<>();
 
-        for(Map.Entry<String, ArrayList<BlockState>> dynamicOre : dynamicOres.entrySet()) {
-            BlockState firstEntry = dynamicOre.getValue().get(0); // get first entry for "copper"
-            OreSpheroidDefinition entrySpheroidDefinition = dynamicOreSpheroidDefinitions.get(dynamicOre.getKey());
+        if(dynamicOres.size() > 0) {
+            for (Map.Entry<String, ArrayList<BlockState>> dynamicOre : dynamicOres.entrySet()) {
+                BlockState firstEntry = dynamicOre.getValue().get(0); // get first entry for "copper"
+                OreSpheroidDefinition entrySpheroidDefinition = dynamicOreSpheroidDefinitions.get(dynamicOre.getKey());
 
-            if(entrySpheroidDefinition == null) {
-                StarrySkyCommon.LOGGER.log(Level.ERROR, "The rarity of ore '" + dynamicOre.getKey() + "' is not defined. Blame the Starry Sky author!");
-                continue;
+                if (entrySpheroidDefinition == null) {
+                    StarrySkyCommon.LOGGER.log(Level.ERROR, "The rarity of ore '" + dynamicOre.getKey() + "' is not defined. Blame the Starry Sky author!");
+                    continue;
+                }
+
+                // add a single "copper" spheroid type, even though a list of mods may add copper ore blocks
+                dynamicSpheroidTypes.put(
+                        new CoreSpheroidType(
+                                null,
+                                entrySpheroidDefinition.minRadius,
+                                entrySpheroidDefinition.maxRadius,
+                                firstEntry,
+                                entrySpheroidDefinition.shellBlockStates,
+                                entrySpheroidDefinition.minCoreRadius,
+                                entrySpheroidDefinition.maxCoreRadius),
+                        entrySpheroidDefinition.generationWeight);
             }
-
-            // add a single "copper" spheroid type, even though a list of mods may add copper ore blocks
-            dynamicSpheroidTypes.put(
-                    new CoreSpheroidType(
-                        null,
-                        entrySpheroidDefinition.minRadius,
-                        entrySpheroidDefinition.maxRadius,
-                        firstEntry,
-                        entrySpheroidDefinition.shellBlockStates,
-                        entrySpheroidDefinition.minCoreRadius,
-                        entrySpheroidDefinition.maxCoreRadius),
-                    entrySpheroidDefinition.generationWeight);
         }
 
         return dynamicSpheroidTypes;

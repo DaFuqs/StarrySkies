@@ -10,6 +10,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+
 public class SpheroidListAstromine extends SpheroidList {
 
     private static final String MOD_ID = "astromine";
@@ -33,14 +35,14 @@ public class SpheroidListAstromine extends SpheroidList {
         LiquidSpheroidType ASTROMINE_CRUDE_OIL_STONE = new LiquidSpheroidType(null, 8, 15, astromine_crude_oil, MAP_STONES, 5, 8, 50, 100, 30);
         LiquidSpheroidType ASTROMINE_CRUDE_OIL_GLASS = new LiquidSpheroidType(null, 7, 12, astromine_crude_oil, MAP_GLASS, 2, 3, 50, 80, 50);
 
-        spheroidLoader.registerDynamicOre("lead", astromine_lead_ore);
-        spheroidLoader.registerDynamicOre("silver", astromine_silver_ore);
-        spheroidLoader.registerDynamicOre("tin", astromine_tin_ore);
-        spheroidLoader.registerDynamicOre("copper", astromine_copper_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "lead", astromine_lead_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "silver", astromine_silver_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "tin", astromine_tin_ore);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "copper", astromine_copper_ore);
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.ORE, 0.5F, ASTROMINE_METEORITE);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 1.0F, ASTROMINE_CRUDE_OIL_STONE);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.FLUID, 1.0F, ASTROMINE_CRUDE_OIL_GLASS);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.5F, ASTROMINE_METEORITE);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.FLUID, 1.0F, ASTROMINE_CRUDE_OIL_STONE);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.FLUID, 1.0F, ASTROMINE_CRUDE_OIL_GLASS);
     }
 
 }

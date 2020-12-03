@@ -7,6 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+
 public class SpheroidListIndustrialRevolution extends SpheroidList {
 
     private static final String MOD_ID = "indrev";
@@ -23,9 +25,9 @@ public class SpheroidListIndustrialRevolution extends SpheroidList {
         BlockState industrialrevolution_copper = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
         BlockState industrialrevolution_tin = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
 
-        spheroidLoader.registerDynamicOre("nikolite", industrialrevolution_nikolite);
-        spheroidLoader.registerDynamicOre("copper", industrialrevolution_copper);
-        spheroidLoader.registerDynamicOre("tin", industrialrevolution_tin);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "nikolite", industrialrevolution_nikolite);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "copper", industrialrevolution_copper);
+        spheroidLoader.registerDynamicOre(OVERWORLD, "tin", industrialrevolution_tin);
     }
 
 }

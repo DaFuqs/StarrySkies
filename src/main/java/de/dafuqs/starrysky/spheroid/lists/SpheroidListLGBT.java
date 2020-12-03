@@ -9,6 +9,8 @@ import net.minecraft.block.Blocks;
 
 import java.util.ArrayList;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+
 public class SpheroidListLGBT extends SpheroidList {
 
     private static final ArrayList<BlockState> LIST_GAY = new ArrayList<BlockState>() {{
@@ -75,13 +77,13 @@ public class SpheroidListLGBT extends SpheroidList {
         StripesSpheroidType PRIDE_TRANSGENDER = new StripesSpheroidType(null, 6, 12, LIST_TRANSGENDER);
         StripesSpheroidType PRIDE_NONBINARY = new StripesSpheroidType(null, 6, 12, LIST_NONBINARY);
 
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_GAY);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_BI);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_PAN);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_ASEXUAL);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_GENDERQUEER);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_TRANSGENDER);
-        spheroidLoader.registerSpheroidType(SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_NONBINARY);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_GAY);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_BI);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_PAN);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_ASEXUAL);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_GENDERQUEER);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_TRANSGENDER);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.5F, PRIDE_NONBINARY);
     }
 
 }
