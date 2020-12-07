@@ -43,7 +43,7 @@ public class ProximityAdvancementCheckEvent implements ServerTickEvents.EndTick 
                             String identifierAdvancementString = "sphere_" + spheroidAdvancementIdentifier.name().toLowerCase();
 
                             ServerAdvancementLoader sal = minecraftServer.getAdvancementLoader();
-                            PlayerAdvancementTracker tracker = serverPlayerEntity .getAdvancementTracker();
+                            PlayerAdvancementTracker tracker = serverPlayerEntity.getAdvancementTracker();
 
                             // grant group advancement
                             Identifier advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, groupAdvancementString);

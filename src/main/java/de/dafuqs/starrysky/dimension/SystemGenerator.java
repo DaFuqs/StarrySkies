@@ -27,6 +27,11 @@ public class SystemGenerator {
     private final HashMap<Point, List<Spheroid>> cache = new HashMap<>();
     public static SpheroidLoader spheroidLoader;
 
+    private final int SYSTEM_SIZE_CHUNKS;
+    private final int MIN_DISTANCE_BETWEEN_SPHERES;
+    private final int SPHERE_DENSITY;
+    private final int FLOOR_HEIGHT;
+
     public static SystemGenerator getSystemGeneratorOfWorld(RegistryKey<World> worldRegistryKey) {
         if(worldRegistryKey.equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
             return systemGeneratorMap.get(SpheroidLoader.SpheroidDimensionType.OVERWORLD);
@@ -60,6 +65,25 @@ public class SystemGenerator {
         this.spheroidDimensionType = spheroidDimensionType;
         spheroidLoader = new SpheroidLoader();
         systemGeneratorMap.put(spheroidDimensionType, this);
+
+        this.SYSTEM_SIZE_CHUNKS = StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
+        switch (spheroidDimensionType) {
+            case OVERWORLD:
+                this.MIN_DISTANCE_BETWEEN_SPHERES = StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheresOverworld;
+                this.SPHERE_DENSITY = StarrySkyCommon.STARRY_SKY_CONFIG.sphereDensityOverworld;
+                this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeightOverworld;
+                break;
+            case NETHER:
+                this.MIN_DISTANCE_BETWEEN_SPHERES = StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheresNether;
+                this.SPHERE_DENSITY = StarrySkyCommon.STARRY_SKY_CONFIG.sphereDensityNether;
+                this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeightNether;
+                break;
+            default:
+                this.MIN_DISTANCE_BETWEEN_SPHERES = StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheresEnd;
+                this.SPHERE_DENSITY = StarrySkyCommon.STARRY_SKY_CONFIG.sphereDensityEnd;
+                this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeightEnd;
+                break;
+        }
     }
 
     /**
@@ -71,16 +95,16 @@ public class SystemGenerator {
     private Point getSystemCoordinateFromChunkCoordinate(int chunkX, int chunkZ) {
         int sysX;
         if (chunkX >= 0) {
-            sysX = chunkX / StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
+            sysX = chunkX / SYSTEM_SIZE_CHUNKS;
         } else {
-            sysX = (int) Math.floor(chunkX / (float) StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks);
+            sysX = (int) Math.floor(chunkX / (float) SYSTEM_SIZE_CHUNKS);
         }
 
         int sysZ;
         if (chunkZ >= 0) {
-            sysZ = chunkZ / StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
+            sysZ = chunkZ / SYSTEM_SIZE_CHUNKS;
         } else {
-            sysZ = (int) Math.floor(chunkZ / (float) StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks);
+            sysZ = (int) Math.floor(chunkZ / (float) SYSTEM_SIZE_CHUNKS);
         }
         return new Point(sysX, sysZ);
     }
@@ -108,8 +132,8 @@ public class SystemGenerator {
 
 
     private ChunkRandom getSystemRandom(Point systemPoint) {
-        int firstChunkPosX = systemPoint.x * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
-        int firstChunkPosZ = systemPoint.y * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
+        int firstChunkPosX = systemPoint.x * SYSTEM_SIZE_CHUNKS;
+        int firstChunkPosZ = systemPoint.y * SYSTEM_SIZE_CHUNKS;
         ChunkRandom systemRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
         systemRandom.setTerrainSeed(firstChunkPosX, firstChunkPosZ); // and the seed from the first chunk+
         StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
@@ -133,25 +157,25 @@ public class SystemGenerator {
 
         // try to create DENSITY planets in system
         int worldHeight = StarrySkyCommon.starryWorld.getHeight();
-        for (int currentDensity = 0; currentDensity < StarrySkyCommon.STARRY_SKY_CONFIG.sphereDensity; currentDensity++) {
+        for (int currentDensity = 0; currentDensity < SPHERE_DENSITY; currentDensity++) {
 
             // create new planets
             Spheroid currentSpheroid = getRandomSpheroid(systemRandom);
             TempPosition tempPosition = new TempPosition();
 
             // set position, check bounds with system edges on x and z
-            tempPosition.xPos = Support.getRandomBetween(systemRandom, currentSpheroid.getRadius(), StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 - currentSpheroid.getRadius());
-            tempPosition.xPos += StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 * systemPointX;
-            tempPosition.zPos = Support.getRandomBetween(systemRandom, currentSpheroid.getRadius(), StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 - currentSpheroid.getRadius());
-            tempPosition.zPos += StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 * systemPointZ;
-            tempPosition.yPos = systemRandom.nextInt(worldHeight - currentSpheroid.getRadius() * 2 - StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight) + currentSpheroid.getRadius() + StarrySkyCommon.STARRY_SKY_CONFIG.floorHeight;
+            tempPosition.xPos = Support.getRandomBetween(systemRandom, currentSpheroid.getRadius(), SYSTEM_SIZE_CHUNKS * 16 - currentSpheroid.getRadius());
+            tempPosition.xPos += SYSTEM_SIZE_CHUNKS * 16 * systemPointX;
+            tempPosition.zPos = Support.getRandomBetween(systemRandom, currentSpheroid.getRadius(), SYSTEM_SIZE_CHUNKS * 16 - currentSpheroid.getRadius());
+            tempPosition.zPos += SYSTEM_SIZE_CHUNKS * 16 * systemPointZ;
+            tempPosition.yPos = systemRandom.nextInt(worldHeight - currentSpheroid.getRadius() * 2 - FLOOR_HEIGHT) + currentSpheroid.getRadius() + FLOOR_HEIGHT;
 
             // check for collisions with existing spheroids
             // if any collision, discard it
             boolean discard = false;
             for (Spheroid spheroid : spheroids) {
                 //each spheroid has to be at least pl1.radius + pl2.radius + min distance apart
-                int distMin = spheroid.getRadius() + currentSpheroid.getRadius() + StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheres;
+                int distMin = spheroid.getRadius() + currentSpheroid.getRadius() + MIN_DISTANCE_BETWEEN_SPHERES;
                 int distSquared = tempPosition.distanceSquared(spheroid);
                 if (distSquared < distMin * distMin) {
                     discard = true;
