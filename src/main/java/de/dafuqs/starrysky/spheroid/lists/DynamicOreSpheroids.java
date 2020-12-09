@@ -70,11 +70,25 @@ public class DynamicOreSpheroids {
         put("starrite",     new OreSpheroidDefinition(SpheroidList.MAP_MOUNTAIN_STONES, 5, 7, 2, 5, 0.4F));
         put("aquarium",     new OreSpheroidDefinition(SpheroidList.MAP_OCEAN_STONES, 6, 12, 4, 7, 0.4F));
         put("prometheum",   new OreSpheroidDefinition(SpheroidList.MAP_JUNGLE_STONES, 6, 9, 4, 4, 0.4F));
-        //put("midas_gold",   new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 6, 13, 4, 7, 1.8F));
-        //put("truesilver",   new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 7, 9, 3, 5, 1.5F));
-        //put("stormyx",      new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 7, 10, 4, 7, 0.4F));
-        //put("ur",           new OreSpheroidDefinition(SpheroidList.MAP_RARE_NETHER_STONES, 3, 4, 1, 1, 0.05F));
+
+        put("midas_gold",   new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 6, 13, 4, 7, 1.8F));
+        put("truesilver",   new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 7, 9, 3, 5, 1.5F));
+        put("stormyx",      new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 7, 10, 4, 7, 0.4F));
+        put("ur",           new OreSpheroidDefinition(SpheroidList.MAP_NETHER_DUNGEON_STONES, 3, 4, 1, 1, 0.05F));
+
+        // NETHER
+        put("cinnabar",   new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 6, 13, 3, 5, 1.0F));
+        put("pyrite",     new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 6, 13, 3, 5, 1.0F));
+        put("sphalerite", new OreSpheroidDefinition(SpheroidList.MAP_NETHER_STONES, 6, 13, 3, 5, 1.0F));
+
+        // END
+        put("peridot",   new OreSpheroidDefinition(SpheroidList.MAP_END_STONES, 6, 13, 3, 5, 1.0F));
+        put("sheldonite",     new OreSpheroidDefinition(SpheroidList.MAP_END_STONES, 6, 13, 3, 5, 1.0F));
+        put("sodalite", new OreSpheroidDefinition(SpheroidList.MAP_END_STONES, 6, 13, 3, 5, 1.0F));
+        put("tungsten",   new OreSpheroidDefinition(SpheroidList.MAP_END_STONES, 6, 13, 3, 5, 1.0F));
     }};
+
+
 
     /**
      * Returns a core spheroid for each dynamic entry that exists here

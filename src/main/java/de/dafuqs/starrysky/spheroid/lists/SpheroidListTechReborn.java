@@ -10,7 +10,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.*;
 
 public class SpheroidListTechReborn extends SpheroidList {
 
@@ -39,15 +39,15 @@ public class SpheroidListTechReborn extends SpheroidList {
         BlockState techreborn_tin_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
 
         // Nether
-        //BlockState techreborn_cinnabar_ore = Registry.BLOCK.get(new Identifier("techreborn","cinnabar_ore")).getDefaultState();
-        //BlockState techreborn_pyrite_ore = Registry.BLOCK.get(new Identifier("techreborn","pyrite_ore")).getDefaultState();
-        //BlockState techreborn_sphalerite_ore = Registry.BLOCK.get(new Identifier("techreborn","sphalerite_ore")).getDefaultState();
+        BlockState techreborn_cinnabar_ore = Registry.BLOCK.get(new Identifier("techreborn","cinnabar_ore")).getDefaultState();
+        BlockState techreborn_pyrite_ore = Registry.BLOCK.get(new Identifier("techreborn","pyrite_ore")).getDefaultState();
+        BlockState techreborn_sphalerite_ore = Registry.BLOCK.get(new Identifier("techreborn","sphalerite_ore")).getDefaultState();
 
         // End
-        //BlockState techreborn_peridot_ore = Registry.BLOCK.get(new Identifier("techreborn","peridot_ore")).getDefaultState();
-        //BlockState techreborn_sheldonite_ore = Registry.BLOCK.get(new Identifier("techreborn","sheldonite_ore")).getDefaultState();
-        //BlockState techreborn_sodalite_ore = Registry.BLOCK.get(new Identifier("techreborn","sodalite_ore")).getDefaultState();
-        //BlockState techreborn_tungsten_ore = Registry.BLOCK.get(new Identifier("techreborn","tungsten_ore")).getDefaultState();
+        BlockState techreborn_peridot_ore = Registry.BLOCK.get(new Identifier("techreborn","peridot_ore")).getDefaultState();
+        BlockState techreborn_sheldonite_ore = Registry.BLOCK.get(new Identifier("techreborn","sheldonite_ore")).getDefaultState();
+        BlockState techreborn_sodalite_ore = Registry.BLOCK.get(new Identifier("techreborn","sodalite_ore")).getDefaultState();
+        BlockState techreborn_tungsten_ore = Registry.BLOCK.get(new Identifier("techreborn","tungsten_ore")).getDefaultState();
 
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 2.5F, new ShellSpheroidType(null, 8, 14, techreborn_rubber_log, techreborn_rubber_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
 
@@ -60,6 +60,15 @@ public class SpheroidListTechReborn extends SpheroidList {
         spheroidLoader.registerDynamicOre(OVERWORLD, "sapphire", techreborn_sapphire_ore);
         spheroidLoader.registerDynamicOre(OVERWORLD, "silver", techreborn_silver_ore);
         spheroidLoader.registerDynamicOre(OVERWORLD, "tin", techreborn_tin_ore);
+
+        spheroidLoader.registerDynamicOre(NETHER, "cinnabar", techreborn_cinnabar_ore);
+        spheroidLoader.registerDynamicOre(NETHER, "pyrite", techreborn_pyrite_ore);
+        spheroidLoader.registerDynamicOre(NETHER, "sphalerite", techreborn_sphalerite_ore);
+
+        spheroidLoader.registerDynamicOre(END, "peridot", techreborn_peridot_ore);
+        spheroidLoader.registerDynamicOre(END, "sheldonite", techreborn_sheldonite_ore);
+        spheroidLoader.registerDynamicOre(END, "sodalite", techreborn_sodalite_ore);
+        spheroidLoader.registerDynamicOre(END, "tungsten", techreborn_tungsten_ore);
     }
 
 }

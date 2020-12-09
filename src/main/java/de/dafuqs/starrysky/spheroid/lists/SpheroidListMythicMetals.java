@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.NETHER;
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 
 public class SpheroidListMythicMetals extends SpheroidList {
@@ -43,10 +44,12 @@ public class SpheroidListMythicMetals extends SpheroidList {
 		BlockState mythicmetals_unobtainium_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"unobtainium_ore")).getDefaultState();
 		BlockState mythicmetals_vermiculite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"vermiculite_ore")).getDefaultState();
 		BlockState mythicmetals_zinc_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"zinc_ore")).getDefaultState();
-		// BlockState mythicmetals_stormyx_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"stormyx_ore")).getDefaultState();
-		// BlockState mythicmetals_truesilver_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"truesilver_ore")).getDefaultState();
-		// BlockState mythicmetals_ur_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"ur_ore")).getDefaultState();
-		// BlockState mythicmetals_midas_gold_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"midas_gold_ore")).getDefaultState();
+
+		// Nether
+		BlockState mythicmetals_stormyx_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"stormyx_ore")).getDefaultState();
+		BlockState mythicmetals_truesilver_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"truesilver_ore")).getDefaultState();
+		BlockState mythicmetals_ur_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"ur_ore")).getDefaultState();
+		BlockState mythicmetals_midas_gold_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"midas_gold_ore")).getDefaultState();
 
 		// OVERWORLD
 		spheroidLoader.registerDynamicOre(OVERWORLD, "adamantite", mythicmetals_adamantite_ore);
@@ -76,9 +79,9 @@ public class SpheroidListMythicMetals extends SpheroidList {
 		spheroidLoader.registerDynamicOre(OVERWORLD, "zinc", mythicmetals_zinc_ore);
 		
 		// NETHER
-		// spheroidLoader.registerDynamicOre("midas_gold", mythicmetals_midas_gold_ore);
-		// spheroidLoader.registerDynamicOre("stormyx", mythicmetals_stormyx_ore);
-		// spheroidLoader.registerDynamicOre("truesilver", mythicmetals_truesilver_ore);
-		// spheroidLoader.registerDynamicOre("ur", mythicmetals_ur_ore);
+		spheroidLoader.registerDynamicOre(NETHER,"midas_gold", mythicmetals_midas_gold_ore);
+		spheroidLoader.registerDynamicOre(NETHER,"stormyx", mythicmetals_stormyx_ore);
+		spheroidLoader.registerDynamicOre(NETHER,"truesilver", mythicmetals_truesilver_ore);
+		spheroidLoader.registerDynamicOre(NETHER,"ur", mythicmetals_ur_ore);
 	}
 }
