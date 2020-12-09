@@ -5,16 +5,15 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.dimension.decorators.*;
+import de.dafuqs.starrysky.dimension.decorators.end.EndCrystalDecorator;
+import de.dafuqs.starrysky.dimension.decorators.end.EndPortalDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinitions;
 import de.dafuqs.starrysky.spheroid.types.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
-import net.minecraft.state.property.Properties;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.END;
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 
 public class SpheroidListVanillaEnd extends SpheroidList {
 
@@ -25,7 +24,10 @@ public class SpheroidListVanillaEnd extends SpheroidList {
 
     // DRAGON FIGHT
     // Not in list but only generated directly
-    public static final SpheroidType END_PORTAL = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 50, 60,  Blocks.END_STONE.getDefaultState())
+    public static final SpheroidType END_SPAWN_WITH_PORTAL_AND_DRAGON = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 34, 34,  Blocks.END_STONE.getDefaultState())
+            .addDecorator(SpheroidDecorators.END_PORTAL, 1.0F)
+            .addSpawn(SpheroidEntitySpawnDefinitions.ENDER_DRAGON, 1.0F);
+    public static final SpheroidType END_SPAWN_WITH_PORTAL = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 34, 34,  Blocks.END_STONE.getDefaultState())
             .addDecorator(SpheroidDecorators.END_PORTAL, 1.0F);
     public static final SpheroidType END_CRYSTAL = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 7, 14,  Blocks.END_STONE.getDefaultState())
             .addDecorator(SpheroidDecorators.END_CRYSTAL, 1.0F);

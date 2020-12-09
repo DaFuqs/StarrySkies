@@ -27,7 +27,6 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
         BlockState appliedenergistics_quartz          = Registry.BLOCK.get(new Identifier(MOD_ID,"quartz_ore")).getDefaultState();
         BlockState appliedenergistics_charged_quartz  = Registry.BLOCK.get(new Identifier(MOD_ID,"charged_quartz_ore")).getDefaultState();
         BlockState appliedenergistics_sky_stone       = Registry.BLOCK.get(new Identifier(MOD_ID,"sky_stone_block")).getDefaultState();
-        // BlockState appliedenergistics_sky_stone_chest = Registry.BLOCK.get(new Identifier(MOD_ID, "sky_stone_chest")).getDefaultState(); // TODO: no good way to get the BlockEntity?
 
         Identifier  appliedenergistics_sky_stone_chest_loot_table = new Identifier(StarrySkyCommon.MOD_ID, "appliedenergistics2_meteor_chest");
 

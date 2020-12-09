@@ -3,6 +3,12 @@
   "package": "de.dafuqs.starrysky.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "DimensionTypeMixin",
+    "EndPortalBlockMixin",
+    "EntityMixin",
+    "EntityAccessor",
+    "ServerPlayerEntityAccessor",
+    "AbstractFireBlockMixin"
   ],
   "client": [
     "WorldRendererMixin",

@@ -148,12 +148,9 @@ public class SystemGenerator {
         ChunkRandom systemRandom = getSystemRandom(systemPoint);
         ArrayList<Spheroid> spheroids = new ArrayList<>();
 
-        //If systemPointX and Z are zero, generate a log/leaf planet at 16, 16
-        if (systemPointX == 0 && systemPointZ == 0) {
-            Spheroid homeSpheroid = getSpawnSpheroid(systemRandom);
-            homeSpheroid.setPositionAndCalculateChunks(new BlockPos(16, 70, 16));
-            spheroids.add(homeSpheroid);
-        }
+        // Playes a log/leaf planet at 16, 16 in the overworld etc.
+        ArrayList<Spheroid> defaultSpheroids = getDefaultSpheroids(systemPointX, systemPointZ, systemRandom);
+        spheroids.addAll(defaultSpheroids);
 
         // try to create DENSITY planets in system
         int worldHeight = StarrySkyCommon.starryWorld.getHeight();
@@ -197,15 +194,38 @@ public class SystemGenerator {
         return spheroids;
     }
 
-    private Spheroid getSpawnSpheroid(ChunkRandom random) {
+    private ArrayList<Spheroid> getDefaultSpheroids(int systemPointX, int systemPointZ, ChunkRandom random) {
+        ArrayList<Spheroid> defaultSpheroids = new ArrayList<>();
+        Spheroid spheroid;
         switch (this.spheroidDimensionType) {
             case NETHER:
-                return SpheroidListVanillaNether.NETHERRACK.getRandomSpheroid(random);
+                if (systemPointX == 0 && systemPointZ == 0) {
+                    spheroid = SpheroidListVanillaNether.NETHERRACK.getRandomSpheroid(random);
+                    spheroid.setPositionAndCalculateChunks(new BlockPos(16, 70, 16));
+                    defaultSpheroids.add(spheroid);
+                }
+                break;
             case END:
-                return SpheroidListVanillaEnd.END_PORTAL.getRandomSpheroid(random);
+                if (systemPointX ==  0 && systemPointZ ==  0) {
+                    spheroid = SpheroidListVanillaEnd.END_SPAWN_WITH_PORTAL_AND_DRAGON.getRandomSpheroid(random);
+                    spheroid.setPositionAndCalculateChunks(new BlockPos(0, 30, 0));
+                    defaultSpheroids.add(spheroid);
+                } else if ((systemPointX == -1 && systemPointZ ==  0)
+                        || (systemPointX ==  0 && systemPointZ == -1)
+                        || (systemPointX == -1 && systemPointZ == -1)) {
+                    spheroid = SpheroidListVanillaEnd.END_SPAWN_WITH_PORTAL.getRandomSpheroid(random);
+                    spheroid.setPositionAndCalculateChunks(new BlockPos(0, 30, 0));
+                    defaultSpheroids.add(spheroid);
+                }
+                break;
             default:
-                return SpheroidListVanilla.OAK_WOOD.getRandomSpheroid(random);
+                if (systemPointX == 0 && systemPointZ == 0) {
+                    spheroid = SpheroidListVanilla.OAK_WOOD.getRandomSpheroid(random);
+                    spheroid.setPositionAndCalculateChunks(new BlockPos(16, 70, 16));
+                    defaultSpheroids.add(spheroid);
+                }
         }
+        return defaultSpheroids;
     }
 
     private Spheroid getRandomSpheroid(ChunkRandom systemRandom) {

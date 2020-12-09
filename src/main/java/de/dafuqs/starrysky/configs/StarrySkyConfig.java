@@ -63,7 +63,7 @@ public class StarrySkyConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
     @Comment(value = "\nThe '/sphere' command lists all the data of the clostest sphere (position, blocks, ...)\n"
-                   + "\nDefault: 0 (OP)")
+                   + "\nDefault: 0")
     public int sphereCommandRequiredPermissionLevel = 0;
 
     @ConfigEntry.Gui.PrefixText

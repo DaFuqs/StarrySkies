@@ -33,6 +33,7 @@ public class SpheroidListVanillaNether extends SpheroidList {
     // SPHEROID TYPES
     // BASIC
     public static final SpheroidType NETHERRACK = new ModularSpheroidType(SpheroidAdvancementIdentifier.netherrack, 7, 16,  Blocks.NETHERRACK.getDefaultState())
+			.addDecorator(SpheroidListVanilla.SpheroidDecorators.RUINED_PORTAL_DECORATOR, 0.03F)
 			.addDecorator(SpheroidDecorators.FIRE, 0.3F)
 			.addDecorator(SpheroidListVanilla.SpheroidDecorators.MUSHROOMS, 0.3F)
 			.addSpawn(SpheroidEntitySpawnDefinitions.SKELETON_HORSE, 0.01F)

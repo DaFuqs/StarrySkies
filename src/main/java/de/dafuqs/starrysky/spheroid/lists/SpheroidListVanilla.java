@@ -32,6 +32,7 @@ public class SpheroidListVanilla extends SpheroidList {
         public static SpheroidDecorator SWEET_BERRIES = new PlantDecorator(Blocks.SWEET_BERRY_BUSH.getDefaultState(), 0.03F);
         public static PlantDecorator FERNS_DECORATOR = new PlantDecorator(Blocks.FERN.getDefaultState(), 0.1F);
         public static DoublePlantDecorator LARGE_FERNS_DECORATOR = new DoublePlantDecorator(Blocks.LARGE_FERN.getDefaultState(), 0.1F);
+        public static RuinedPortalDecorator RUINED_PORTAL_DECORATOR = new RuinedPortalDecorator(LootTables.RUINED_PORTAL_CHEST);
         public static XMarksTheSpotDecorator X_SPOT_DESERT_PYRAMID = new XMarksTheSpotDecorator(LootTables.DESERT_PYRAMID_CHEST, Blocks.ORANGE_TERRACOTTA.getDefaultState());
         public static XMarksTheSpotDecorator X_SPOT_JUNGLE_TEMPLE = new XMarksTheSpotDecorator(LootTables.JUNGLE_TEMPLE_CHEST, Blocks.MOSSY_COBBLESTONE.getDefaultState());
         public static XMarksTheSpotDecorator X_SPOT_WOODLAND_MANSION = new XMarksTheSpotDecorator(LootTables.WOODLAND_MANSION_CHEST, Blocks.STRIPPED_BIRCH_WOOD.getDefaultState());
@@ -44,6 +45,7 @@ public class SpheroidListVanilla extends SpheroidList {
     // BASIC
     public static final SpheroidType GRASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.grass, 5, 20,  Blocks.DIRT.getDefaultState())
             .setTopBlockState(Blocks.GRASS_BLOCK.getDefaultState())
+            .addDecorator(SpheroidDecorators.RUINED_PORTAL_DECORATOR, 0.03F)
             .addDecorator(SpheroidDecorators.SUGAR_CANE_POND, 0.15F)
             .addSpawn(SpheroidEntitySpawnDefinitions.COW, 0.25F)
             .addSpawn(SpheroidEntitySpawnDefinitions.SHEEP, 0.25F)

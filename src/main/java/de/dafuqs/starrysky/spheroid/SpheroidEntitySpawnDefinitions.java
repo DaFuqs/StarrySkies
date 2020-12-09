@@ -40,4 +40,5 @@ public class SpheroidEntitySpawnDefinitions {
     public static SpheroidEntitySpawnDefinition ZOMBIE_HORSE = new SpheroidEntitySpawnDefinition(EntityType.ZOMBIE_HORSE, 1, 2);
 
     // END
+    public static final SpheroidEntitySpawnDefinition ENDER_DRAGON = new SpheroidEntitySpawnDefinition(EntityType.ENDER_DRAGON, 1, 1);
 }
