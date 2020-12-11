@@ -30,8 +30,8 @@ public class EndCitySpheroid extends Spheroid {
     private final BlockState PURPUR_PILLAR = Blocks.PURPUR_PILLAR.getDefaultState();
     private final BlockState MAGENTA_STAINED_GLASS = Blocks.MAGENTA_STAINED_GLASS.getDefaultState();
     private final BlockState END_STONE_BRICKS = Blocks.END_STONE_BRICKS.getDefaultState();
-    private final BlockState END_ROD = Blocks.END_ROD.getDefaultState();
-    private final BlockState DRAGON_HEAD = Blocks.DRAGON_HEAD.getDefaultState();
+    private final BlockState END_ROD = Blocks.END_ROD.getDefaultState(); // TODO
+    private final BlockState DRAGON_HEAD = Blocks.DRAGON_HEAD.getDefaultState(); // TODO
 
     private final Identifier END_CITY_TREASURE_CHEST = LootTables.END_CITY_TREASURE_CHEST;
 
@@ -60,8 +60,6 @@ public class EndCitySpheroid extends Spheroid {
         int x = this.getPosition().getX();
         int y = this.getPosition().getY();
         int z = this.getPosition().getZ();
-
-        int shellDistance = this.radius - this.shellRadius;
 
         random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
         for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {

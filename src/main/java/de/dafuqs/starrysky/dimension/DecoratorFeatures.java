@@ -1,13 +1,9 @@
 package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.dimension.biome.StarrySkyBiomeProvider;
-import me.shedaniel.cloth.api.dynamic.registry.v1.BiomesRegistry;
-import me.shedaniel.cloth.api.dynamic.registry.v1.DynamicRegistryCallback;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -28,11 +24,11 @@ public class DecoratorFeatures {
      * to the starry_sky_biome
      */
     public static void initialize() {
-        DynamicRegistryCallback.callback(Registry.BIOME_KEY).register((manager, key, biome) -> {
+        /*DynamicRegistryCallback.callback(Registry.BIOME_KEY).register((manager, key, biome) -> {
             if(key.getValue().equals(StarrySkyBiomeProvider.STARRY_SKY_BIOME_IDENTIFIER)) {
                 BiomesRegistry.registerFeature(manager, biome, GenerationStep.Feature.LAKES, SPHEROID_DECORATOR_KEY);
             }
-        });
+        });*/
     }
 
 }
