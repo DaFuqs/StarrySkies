@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:stone_bricks"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_stronghold.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_stronghold.description"
+    },
+    "hidden": true
+  },
+  "rewards": {
+    "experience": 50
+  },
+  "parent": "starry_sky:sphere_group_rare",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

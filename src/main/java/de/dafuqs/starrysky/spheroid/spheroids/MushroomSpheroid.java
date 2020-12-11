@@ -51,7 +51,7 @@ public class MushroomSpheroid extends Spheroid {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
-                    double d = Support.squaredDistance(x, y, z, x2, y2, z2);
+                    double d = Support.getDistance(x, y, z, x2, y2, z2);
                     long rounded = Math.round(d);
                     if (rounded <= (this.radius - this.shellRadius)) {
                         chunk.setBlockState(currBlockPos, this.coreBlock, false);

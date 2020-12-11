@@ -7,9 +7,12 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
+import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
@@ -18,6 +21,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 
@@ -113,7 +117,7 @@ public abstract class Spheroid implements Serializable {
 
     protected boolean isTopBlock(long d, double x, double y, double z) {
         if (d == this.radius) {
-            long dist2 = Math.round(Support.squaredDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y + 1, z));
+            long dist2 = Math.round(Support.getDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y + 1, z));
             return dist2 > this.radius;
         } else {
             return false;
@@ -122,7 +126,7 @@ public abstract class Spheroid implements Serializable {
 
     protected boolean isBottomBlock(long d, double x, double y, double z) {
         if (d == this.radius) {
-            long dist2 = Math.round(Support.squaredDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
+            long dist2 = Math.round(Support.getDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
             return dist2 > this.radius;
         } else {
             return false;
@@ -130,7 +134,7 @@ public abstract class Spheroid implements Serializable {
     }
 
     protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z, int shellRadius) {
-        int distance1 = (int) Math.round(Support.squaredDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
+        int distance1 = (int) Math.round(Support.getDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
         return d == (this.radius - shellRadius) && distance1 > (this.radius - shellRadius);
     }
 
@@ -205,6 +209,14 @@ public abstract class Spheroid implements Serializable {
     public boolean shouldDecorate(BlockPos blockPos) {
         // blockPos and center of spheroid in same chunk
         return (!isDecorated && (blockPos.getX() / 16 == this.getPosition().getX() / 16) && (blockPos.getZ() / 16 == this.getPosition().getZ() / 16));
+    }
+
+    protected void placeSpawner(WorldAccess worldAccess, BlockPos blockPos, EntityType entityType) {
+        worldAccess.setBlockState(blockPos.down(), Blocks.SPAWNER.getDefaultState(), 3);
+        BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos.down());
+        if (blockEntity instanceof MobSpawnerBlockEntity) {
+            ((MobSpawnerBlockEntity) blockEntity).getLogic().setEntityId(entityType);
+        }
     }
 
 }

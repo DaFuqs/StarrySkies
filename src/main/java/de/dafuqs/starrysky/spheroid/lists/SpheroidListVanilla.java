@@ -8,6 +8,9 @@ import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.*;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinitions;
 import de.dafuqs.starrysky.spheroid.types.*;
+import de.dafuqs.starrysky.spheroid.types.unique.BeeHiveSpheroidType;
+import de.dafuqs.starrysky.spheroid.types.unique.OceanMonumentSpheroidType;
+import de.dafuqs.starrysky.spheroid.types.unique.StrongholdSpheroidType;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
@@ -142,7 +145,6 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final SpheroidType BEDROCK = new ModularSpheroidType(SpheroidAdvancementIdentifier.bedrock, 3, 5,  Blocks.BEDROCK.getDefaultState());
     public static final SpheroidType STONE_HOLLOW = (ShellSpheroidType) new ShellSpheroidType(SpheroidAdvancementIdentifier.cave, 5, 20, Blocks.CAVE_AIR.getDefaultState(), MAP_STONES, 3, 8)
             .addDecorator(SpheroidDecorators.MUSHROOMS, 0.3F);
-    public static final SpheroidType OCEAN_MONUMENT = new OceanMonumentSpheroidType(SpheroidAdvancementIdentifier.ocean_monument, 25, 35, 3, 5, 2, 3);
 
     // ORES
     public static final SpheroidType COAL     = new CoreSpheroidType(SpheroidAdvancementIdentifier.coal, 5, 15, Blocks.COAL_ORE.getDefaultState(), MAP_STONES, 4, 8);
@@ -240,8 +242,11 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final SpheroidType DUNGEON_SILVERFISH = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, 6, 12,  EntityType.SILVERFISH,  MAP_DUNGEON_STONES, 2,  4);
     public static final SpheroidType DUNGEON_ENDERMAN = new DungeonSpheroidType(SpheroidAdvancementIdentifier.dungeon, 6, 12,  EntityType.ENDERMAN,  MAP_DUNGEON_STONES, 2,  4);
 
-    // BEES
+    // UNIQUE
     public static final SpheroidType BEE_HIVE = new BeeHiveSpheroidType(SpheroidAdvancementIdentifier.bee_hive,10, 16, 2, 4, 1, 2, 2, 3);
+    public static final SpheroidType OCEAN_MONUMENT = new OceanMonumentSpheroidType(SpheroidAdvancementIdentifier.ocean_monument, 25, 35, 3, 5, 2, 3);
+    public static final SpheroidType STRONGHOLD = new StrongholdSpheroidType(SpheroidAdvancementIdentifier.stronghold,25, 30);
+
 
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("Loading Vanilla Spheroids...");
@@ -297,7 +302,6 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.02F, WHITE_STAINED_GLASS);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.02F, YELLOW_STAINED_GLASS);
 
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 4.0F, BEE_HIVE);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 1.0F, CORALS_GLASS);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 1.0F, CORALS_STONE);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 1.0F, BROWN_MUSHROOM);
@@ -306,7 +310,6 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 1.0F, MYCELIUM);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 0.1F, BEDROCK);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 0.05F, THE_SUN);
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 0.5F, OCEAN_MONUMENT);
 
         //RAINBOW
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 1.0F, RAINBOW_WOOL);
@@ -365,5 +368,10 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DUNGEON,  0.1F, DUNGEON_STRAY);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DUNGEON,  0.1F, DUNGEON_SILVERFISH);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DUNGEON,  0.05F, DUNGEON_ENDERMAN);
+
+        // UNIQUE
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 4.0F, BEE_HIVE);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 0.5F, OCEAN_MONUMENT);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 1.0F, STRONGHOLD);
     }
 }

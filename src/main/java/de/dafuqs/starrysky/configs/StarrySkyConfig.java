@@ -106,7 +106,7 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nHow much empty blocks should be enforced between individual spheres.\n"
             + "If the distance is too low generation of that one sphere will be cancelled.\n"
             + "Default: 10\n")
-    public int minDistanceBetweenSpheresNether = 10;
+    public int minDistanceBetweenSpheresNether = 7;
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("SYSTEM GENERATION")
@@ -121,7 +121,7 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nHow much empty blocks should be enforced between individual spheres.\n"
             + "If the distance is too low generation of that one sphere will be cancelled.\n"
             + "Default: 10\n")
-    public int minDistanceBetweenSpheresEnd = 10;
+    public int minDistanceBetweenSpheresEnd = 8;
 
     @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Category("WORLD FLOOR GENERATION")

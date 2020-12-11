@@ -1,10 +1,11 @@
-package de.dafuqs.starrysky.spheroid.spheroids;
+package de.dafuqs.starrysky.spheroid.spheroids.unique;
 
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -63,7 +64,7 @@ public class OceanMonumentSpheroid extends Spheroid {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
-                    long d = Math.round(Support.squaredDistance(x, y, z, x2, y2, z2));
+                    long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
                     if (d <= this.treasureRadius) {
                         chunk.setBlockState(currBlockPos, this.treasure, false);
                     } else if (d < treasureRadius + 3) {

@@ -73,5 +73,10 @@ public enum SpheroidAdvancementIdentifier {
     stone_hollow,
     the_sun,
     tnt,
-    ocean_monument, beach, water
+    ocean_monument,
+    beach,
+    stronghold,
+    end_city,
+    nether_fortress,
+    water
 }

@@ -1,8 +1,9 @@
-package de.dafuqs.starrysky.spheroid.spheroids;
+package de.dafuqs.starrysky.spheroid.spheroids.unique;
 
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
+import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 

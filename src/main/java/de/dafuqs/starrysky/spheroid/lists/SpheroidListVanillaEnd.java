@@ -5,10 +5,11 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.dimension.decorators.end.EndCrystalDecorator;
 import de.dafuqs.starrysky.dimension.decorators.end.EndPortalDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinitions;
 import de.dafuqs.starrysky.spheroid.types.*;
+import de.dafuqs.starrysky.spheroid.types.unique.EndCitySpheroidType;
+import de.dafuqs.starrysky.spheroid.types.unique.EndGatewaySpheroidType;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
@@ -18,7 +19,6 @@ import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType
 public class SpheroidListVanillaEnd extends SpheroidList {
 
     public static class SpheroidDecorators {
-        public static SpheroidDecorator END_CRYSTAL = new EndCrystalDecorator();
         public static SpheroidDecorator END_PORTAL = new EndPortalDecorator();
     }
 
@@ -29,8 +29,6 @@ public class SpheroidListVanillaEnd extends SpheroidList {
             .addSpawn(SpheroidEntitySpawnDefinitions.ENDER_DRAGON, 1.0F);
     public static final SpheroidType END_SPAWN_WITH_PORTAL = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 34, 34,  Blocks.END_STONE.getDefaultState())
             .addDecorator(SpheroidDecorators.END_PORTAL, 1.0F);
-    public static final SpheroidType END_CRYSTAL = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 7, 14,  Blocks.END_STONE.getDefaultState())
-            .addDecorator(SpheroidDecorators.END_CRYSTAL, 1.0F);
 
     // SIMPLE
     public static final SpheroidType END_STONE_SMALL = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 4, 7,  Blocks.END_STONE.getDefaultState());
@@ -50,6 +48,9 @@ public class SpheroidListVanillaEnd extends SpheroidList {
     public static final SpheroidType DUNGEON_SHULKER = new DungeonSpheroidType(SpheroidAdvancementIdentifier.end_dungeon, 6, 12,  EntityType.SHULKER,  MAP_END_DUNGEON_STONES, 2,  4);
     public static final SpheroidType DUNGEON_PHANTOM = new DungeonSpheroidType(SpheroidAdvancementIdentifier.end_dungeon, 6, 12,  EntityType.PHANTOM,  MAP_END_DUNGEON_STONES, 2,  4);
 
+    // UNIQUE
+    public static final SpheroidType END_CITY = new EndCitySpheroidType(SpheroidAdvancementIdentifier.end_city, 20, 40);
+
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("Loading Vanilla End Spheroids...");
 
@@ -61,6 +62,7 @@ public class SpheroidListVanillaEnd extends SpheroidList {
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.TREASURE, 8.0F, MONSTER_CAVE);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.TREASURE, 1.0F, HUGE_MONSTER_CAVE);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.TREASURE, 1.0F, END_GATEWAY);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.TREASURE, 3.0F, END_CITY);
 
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DUNGEON, 10.0F, DUNGEON_ENDERMAN);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DUNGEON, 1.0F, DUNGEON_ENDERMITE);

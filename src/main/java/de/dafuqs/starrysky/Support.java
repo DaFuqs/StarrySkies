@@ -68,12 +68,12 @@ public class Support {
         return random.nextInt(highest - lowest + 1) + lowest;
     }
 
-    public static double squaredDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
+    public static double getDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
         return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2));
     }
 
-    public static double squaredDistance(BlockPos blockPos1, BlockPos blockpos2) {
-        return squaredDistance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockpos2.getX(), blockpos2.getY(), blockpos2.getZ());
+    public static double getDistance(BlockPos blockPos1, BlockPos blockpos2) {
+        return getDistance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockpos2.getX(), blockpos2.getY(), blockpos2.getZ());
     }
 
     public static boolean isBlockPosInChunkPos(ChunkPos chunkPos, BlockPos blockPos) {

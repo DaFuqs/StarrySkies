@@ -72,7 +72,7 @@ public class CenterPondDecorator extends SpheroidDecorator {
                         if (currentBlockPos.getY() > waterLevelY) {
                             blockState = Blocks.AIR.getDefaultState();
                         } else {
-                            double distance = Support.squaredDistance(currentBlockPos, spheroidTop);
+                            double distance = Support.getDistance(currentBlockPos, spheroidTop);
                             double pondDistance = distance / pondRadius;
                             if (pondDistance < 1.1) {
                                 if(hasLootChest && x == 0 && z == 0 && lootChestPosition == null) {

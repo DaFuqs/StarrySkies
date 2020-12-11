@@ -9,6 +9,7 @@ import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
 import de.dafuqs.starrysky.dimension.decorators.UnderPlantDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinitions;
 import de.dafuqs.starrysky.spheroid.types.*;
+import de.dafuqs.starrysky.spheroid.types.unique.NetherFortressSpheroidType;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
@@ -119,7 +120,11 @@ public class SpheroidListVanillaNether extends SpheroidList {
 	public static final SpheroidType DUNGEON_ENDERMAN = new DungeonSpheroidType(SpheroidAdvancementIdentifier.nether_dungeon, 6, 12, EntityType.STRIDER, MAP_NETHER_DUNGEON_STONES, 2, 4);
 	public static final SpheroidType DUNGEON_HOGLIN = new DungeonSpheroidType(SpheroidAdvancementIdentifier.nether_dungeon, 6, 12, EntityType.HOGLIN, MAP_NETHER_DUNGEON_STONES, 2, 4);
 
-    public static void setup(SpheroidLoader spheroidLoader) {
+	// UNIQUE
+	public static final SpheroidType NETHER_FORTRESS = new NetherFortressSpheroidType(SpheroidAdvancementIdentifier.nether_fortress, 25, 35);
+
+
+	public static void setup(SpheroidLoader spheroidLoader) {
 		StarrySkyCommon.LOGGER.info("Loading Vanilla Nether Spheroids...");
 
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 10.0F, NETHERRACK);
@@ -159,6 +164,7 @@ public class SpheroidListVanillaNether extends SpheroidList {
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.TREASURE, 5.0F, MONSTER_CAVE);
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.TREASURE, 1.0F, HUGE_MONSTER_CAVE);
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.TREASURE, 1.0F, BEDROCK);
+		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.TREASURE, 5.0F, NETHER_FORTRESS);
 
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DUNGEON, 10.0F, DUNGEON_BLAZE);
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DUNGEON, 5.0F, DUNGEON_WITHER_SKELETON);

@@ -45,7 +45,7 @@ public class CoralSpheroid extends Spheroid {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
-                    long d = Math.round(Support.squaredDistance(x, y, z, x2, y2, z2));
+                    long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
                     if(d == 0 && hasChest) {
                         placeCenterChestWithLootTable(chunk, currBlockPos, this.centerChestLootTable, random, true);
                     } else if (d <= (this.radius - this.shellRadius - 1)) {

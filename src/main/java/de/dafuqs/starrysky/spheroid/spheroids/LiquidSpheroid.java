@@ -79,7 +79,7 @@ public class LiquidSpheroid extends Spheroid {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
-                    long d = Math.round(Support.squaredDistance(x, y, z, x2, y2, z2));
+                    long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
                     if(this.holeInBottom && (x-x2) == 0 && (z-z2) == 0 && (y-y2+1) >= liquidRadius) {
                         chunk.setBlockState(new BlockPos(currBlockPos), this.liquid, false);
                         chunk.markBlockForPostProcessing(currBlockPos); //for making it drop down after generation
