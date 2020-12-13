@@ -1,29 +1,2 @@
 {
-  "pools": [{
-    "rolls": {
-      "min": 1,
-      "max": 3
-    },
-    "bonus_rolls": {
-      "min": 1,
-      "max": 2
-    },
-    "entries": [{
-      "type": "item",
-      "name": "appliedenergistics2:calculation_processor_press",
-      "weight": 1
-    }, {
-      "type": "item",
-      "name": "appliedenergistics2:engineering_processor_press",
-      "weight": 1
-    }, {
-      "type": "item",
-      "name": "appliedenergistics2:logic_processor_press",
-      "weight": 1
-    }, {
-      "type": "item",
-      "name": "appliedenergistics2:silicon_press",
-      "weight": 1
-    }]
-  }]
 }

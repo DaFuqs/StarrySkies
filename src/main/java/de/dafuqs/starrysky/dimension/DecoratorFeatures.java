@@ -19,16 +19,6 @@ public class DecoratorFeatures {
         return Registry.register(Registry.FEATURE, id, feature);
     }
 
-    /**
-     * Apply starry_sky_spheroid decorator
-     * to the starry_sky_biome
-     */
     public static void initialize() {
-        /*DynamicRegistryCallback.callback(Registry.BIOME_KEY).register((manager, key, biome) -> {
-            if(key.getValue().equals(StarrySkyBiomeProvider.STARRY_SKY_BIOME_IDENTIFIER)) {
-                BiomesRegistry.registerFeature(manager, biome, GenerationStep.Feature.LAKES, SPHEROID_DECORATOR_KEY);
-            }
-        });*/
     }
-
 }

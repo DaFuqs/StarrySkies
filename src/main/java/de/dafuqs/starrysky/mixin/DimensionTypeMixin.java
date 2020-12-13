@@ -1,6 +1,5 @@
 package de.dafuqs.starrysky.mixin;
 
-import net.minecraft.util.Identifier;
 import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,8 +25,7 @@ public abstract class DimensionTypeMixin {
                     && !dimensionType.isNatural()
                     && dimensionType.getCoordinateScale() == 1.0
                     && !dimensionType.isBedWorking()
-                    && !dimensionType.isRespawnAnchorWorking()
-                    && dimensionType.getSkyProperties().equals(new Identifier("the_end"))) {
+                    && !dimensionType.isRespawnAnchorWorking()) {
                 // as good as it gets. The Starry End has sky light, the default end doesn't
                 if(dimensionType.hasSkyLight()) {
                     return true;

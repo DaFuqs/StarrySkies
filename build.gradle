@@ -29,20 +29,6 @@ repositories {
 	maven {
 		url "https://dl.bintray.com/kyrptonaught/customportalapi"
 	}
-	/*
-		maven {
-		name = "Cloth"
-		url = "https://dl.bintray.com/shedaniel/cloth"
-		content {
-			includeGroup "me.shedaniel.cloth.api"
-		}
-	}
-	 */
-	/*maven {
-		name "immersiveportals"
-		url 'https://jitpack.io'
-	}*/
-
 }
 
 dependencies {
