@@ -1,6 +1,6 @@
 package de.dafuqs.starrysky.mixin;
 
-import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.StarrySkyDimensionTravelHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.TeleportTarget;
@@ -16,30 +16,21 @@ public abstract class EntityMixin {
 
     @Inject(at = @At("HEAD"), method = "getTeleportTarget", cancellable = true)
     void getTeleportTarget(ServerWorld destination, CallbackInfoReturnable<TeleportTarget> callbackInfo) {
-        TeleportTarget newTeleportTarget = handleGetTeleportTarget((Entity) (Object) this, destination);
+        Entity thisEntity = (Entity) (Object) this;
+        TeleportTarget newTeleportTarget = StarrySkyDimensionTravelHandler.handleGetTeleportTarget(thisEntity, destination);
         if (newTeleportTarget != null) {
+            if(newTeleportTarget.position == null) {
+                // starry dimensions, but no teleport target found
+                // cancel vanilla, but without destination
+                callbackInfo.setReturnValue(null);
+            }
             callbackInfo.setReturnValue(newTeleportTarget);
         }
     }
 
-    /**
-     * Returns the new position for the entity on dimension change
-     *
-     * @param entity      The teleporting entity
-     * @param destination The destination dimension
-     * @return The position in the new dimension
-     */
-    private static TeleportTarget handleGetTeleportTarget(Entity entity, ServerWorld destination) {
-        //return new TeleportTarget(new Vec3d(0.5D, 100, 0.5D), new Vec3d(0, 0, 0), 0, 0);
-        Entity thisEntity = (Entity) (Object) entity;
-        return StarrySkyCommon.handleGetTeleportTarget(thisEntity, destination);
-    }
-
-
     @ModifyVariable(method = "tickNetherPortal", at = @At("STORE"), ordinal = 1)
     private ServerWorld injected(ServerWorld x) {
-        return StarrySkyCommon.doinjected((Entity) (Object) this, x);
+        return StarrySkyDimensionTravelHandler.modifyNetherPortalDestination((Entity) (Object) this, x);
     }
-
 
 }

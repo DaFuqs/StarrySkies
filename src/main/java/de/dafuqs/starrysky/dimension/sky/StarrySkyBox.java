@@ -15,6 +15,8 @@ import net.minecraft.world.World;
 
 import java.util.LinkedHashMap;
 
+import static org.apache.logging.log4j.Level.WARN;
+
 /**
  * Renderer for the custom skybox
  */
@@ -28,6 +30,8 @@ public class StarrySkyBox {
     public static final Identifier SOUTH = new Identifier("skybox", "south");
 
     public LinkedHashMap<Identifier, Identifier> textures = new LinkedHashMap<>();
+
+    long lastTime = 0;
 
     public StarrySkyBox(String up, String down, String west, String east, String north, String south) {
         this.textures.put(UP, new Identifier(StarrySkyCommon.MOD_ID, up));
@@ -89,6 +93,11 @@ public class StarrySkyBox {
                     matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
                     break;
                 }
+            }
+
+            if(lastTime != world.getTime()) {
+                StarrySkyCommon.LOGGER.log(WARN, "Time: " + world.getTime() + " TimeOfDay: " + world.getTimeOfDay() + " Color: " + color + " Vertex: " + vertexLight);
+                lastTime = world.getTime();
             }
 
             buffer.begin(7, VertexFormats.POSITION_COLOR_TEXTURE_LIGHT);

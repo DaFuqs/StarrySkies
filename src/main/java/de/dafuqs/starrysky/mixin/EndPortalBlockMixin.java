@@ -1,6 +1,6 @@
 package de.dafuqs.starrysky.mixin;
 
-import de.dafuqs.starrysky.dimension.StarrySkyPortalHandler;
+import de.dafuqs.starrysky.StarrySkyDimensionTravelHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.EndPortalBlock;
 import net.minecraft.entity.Entity;
@@ -17,7 +17,7 @@ public abstract class EndPortalBlockMixin {
 
     @Inject(at = @At("HEAD"), method = "onEntityCollision", cancellable = true)
     void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo callbackInfo) {
-        boolean handled = StarrySkyPortalHandler.handleEndPortalCollision(state, world, pos, entity);
+        boolean handled = StarrySkyDimensionTravelHandler.handleEndPortalCollision(state, world, pos, entity);
         if(handled) {
             callbackInfo.cancel();
         }

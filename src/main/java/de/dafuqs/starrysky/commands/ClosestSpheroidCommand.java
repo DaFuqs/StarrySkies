@@ -17,10 +17,10 @@ public class ClosestSpheroidCommand implements Command<ServerCommandSource> {
         Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroidToPlayer(caller);
 
         if(spheroidDistance.spheroid != null) {
-            context.getSource().sendFeedback(new LiteralText("Closest Sphere:"), true);
-            context.getSource().sendFeedback(new LiteralText(spheroidDistance.spheroid.getDescription()), true);
+            context.getSource().sendFeedback(new LiteralText("Closest Sphere:"), false);
+            context.getSource().sendFeedback(new LiteralText(spheroidDistance.spheroid.getDescription()), false);
         } else {
-            context.getSource().sendFeedback(new LiteralText("Could not determine closest sphere. Ouch :("), true);
+            context.getSource().sendFeedback(new LiteralText("Could not determine closest sphere. :("), false);
         }
 
         return 1;

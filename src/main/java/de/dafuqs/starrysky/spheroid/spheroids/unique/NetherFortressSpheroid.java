@@ -92,8 +92,7 @@ public class NetherFortressSpheroid extends Spheroid {
                 case 0:
                     placeBlazeSpawnerRoom(world, interiorDecoratorPosition);
                     break;
-                case 1:
-                    placeWitherSkeletonRoom(world, interiorDecoratorPosition);
+                case 1: placeWitherSkeletonRoom(world, interiorDecoratorPosition);
                     break;
                 case 2:
                     placeNetherWartRoom(world, interiorDecoratorPosition);
