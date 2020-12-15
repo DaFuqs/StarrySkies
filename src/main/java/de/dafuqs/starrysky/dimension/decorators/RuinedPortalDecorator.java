@@ -21,6 +21,7 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
     private final BlockState MAGMA_BLOCK = Blocks.MAGMA_BLOCK.getDefaultState();
     private final BlockState LAVA = Blocks.LAVA.getDefaultState();
     private final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
+    private final static float OBSIDIAN_CHANCE = 0.9F;
 
     public RuinedPortalDecorator(Identifier lootTable) {
         this.lootTable = lootTable;
@@ -61,28 +62,28 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
         int centerTopBlockY = Support.getLowerGroundBlock(world, new BlockPos(spheroidPosition.getX(), spheroidPosition.getY() + spheroid.getRadius() + 1, spheroidPosition.getZ()), spheroidPosition.getY());
         BlockPos currentBlockPos = new BlockPos(spheroidPosition.getX(), centerTopBlockY, spheroidPosition.getZ());
 
-        world.setBlockState(currentBlockPos, OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.SOUTH, 1), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.NORTH, 1), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.SOUTH, 2), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.NORTH, 2), OBSIDIAN, 3);
+        placePortalBlock(world, currentBlockPos, random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 1), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 1), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2), random);
 
-        world.setBlockState(currentBlockPos.offset(Direction.SOUTH, 2).up(), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.NORTH, 2).up(), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.SOUTH, 2).up(1), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.NORTH, 2).up(1), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.SOUTH, 2).up(2), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.NORTH, 2).up(2), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.SOUTH, 2).up(3), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.NORTH, 2).up(3), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.SOUTH, 2).up(4), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.NORTH, 2).up(4), OBSIDIAN, 3);
+        placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(1), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(1), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(2), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(2), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(3), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(3), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(4), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(4), random);
 
-        world.setBlockState(currentBlockPos.up(5), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.SOUTH, 1).up(5), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.NORTH, 1).up(5), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.SOUTH, 2).up(5), OBSIDIAN, 3);
-        world.setBlockState(currentBlockPos.offset(Direction.NORTH, 2).up(5), OBSIDIAN, 3);
+        placePortalBlock(world, currentBlockPos.up(5), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 1).up(5), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 1).up(5), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(5), random);
+        placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(5), random);
 
         // place loot chest
         int randomX = Support.getRandomBetween(random, spheroidPosition.getX() - spheroid.getRadius() / 2, spheroidPosition.getX() + spheroid.getRadius() / 2);
@@ -94,4 +95,11 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
             placeLootChestAtPosition(world, lootChestPosition, lootTable, random);
         }
     }
+    
+    private void placePortalBlock(StructureWorldAccess world, BlockPos blockPos, Random random) {
+        if(random.nextFloat() < OBSIDIAN_CHANCE) {
+            world.setBlockState(blockPos, OBSIDIAN, 3);
+        }
+    }
+    
 }
