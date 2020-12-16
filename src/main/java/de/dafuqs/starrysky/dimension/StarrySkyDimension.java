@@ -29,14 +29,8 @@ public class StarrySkyDimension {
 
     public static void setupPortals() {
         StarrySkyCommon.LOGGER.info("[StarrySky] Setting up portals...");
-        Block portalFrameBlock = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.portalFrameBlockOverworld.toLowerCase()));
-        CustomPortalApiRegistry.addPortal(portalFrameBlock, STARRY_SKY_DIMENSION_ID, StarrySkyCommon.STARRY_SKY_CONFIG.portalColorOverworld);
-
-        Block portalFrameBlockNether = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.portalFrameBlockNether.toLowerCase()));
-        CustomPortalApiRegistry.addPortal(portalFrameBlockNether, STARRY_SKY_NETHER_DIMENSION_ID, StarrySkyCommon.STARRY_SKY_CONFIG.portalColorNether);
-
-        Block portalFrameBlockEnd = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.portalFrameBlockEnd.toLowerCase()));
-        CustomPortalApiRegistry.addPortal(portalFrameBlockEnd, STARRY_SKY_END_DIMENSION_ID, StarrySkyCommon.STARRY_SKY_CONFIG.portalColorEnd);
+        Block portalFrameBlock = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.starrySkyPortalFrameBlock.toLowerCase()));
+        CustomPortalApiRegistry.addPortal(portalFrameBlock, STARRY_SKY_DIMENSION_ID, 11983869); // light, greyish blue
     }
 
 }

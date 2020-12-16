@@ -18,35 +18,7 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nThe block the portal to the Starry Sky dimension needs to be built with."
                    + "\nBuild it like a nether portal & has to be activated with flint & steel"
                    + "\nDefault: PACKED_ICE")
-    public String portalFrameBlockOverworld = "PACKED_ICE";
-
-    @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nThe block the portal to the Starry Nether dimension needs to be built with."
-            + "\nBuild it like a nether portal & has to be activated with flint & steel"
-            + "\nDefault: MAGMA_BLOCK")
-    public String portalFrameBlockNether = "MAGMA_BLOCK";
-
-    @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nThe block the portal to the Starry End dimension needs to be built with."
-            + "\nBuild it like a nether portal & has to be activated with flint & steel"
-            + "\nDefault: PURPLE_GLAZED_TERRACOTTA")
-    public String portalFrameBlockEnd = "PURPLE_GLAZED_TERRACOTTA";
-
-    @ConfigEntry.Gui.Tooltip()
-    @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nThe color of Starry Sky's portal."
-                     + "\nDefault: 11983869 (light, greyish blue)")
-    public int portalColorOverworld = 11983869;
-
-    @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nThe color of Starry Nethers's portal."
-            + "\nDefault: 2821132 (dark red)")
-    public int portalColorNether = 2821132;
-
-    @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nThe color of Starry End's portal."
-            + "\nDefault: 1251609 (very grey dark cyan)")
-    public int portalColorEnd = 1251609;
+    public String starrySkyPortalFrameBlock = "PACKED_ICE";
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
@@ -283,14 +255,8 @@ public class StarrySkyConfig implements ConfigData {
         }
 
         // portal frame blocks
-        if(!isValidBlock(portalFrameBlockOverworld)) {
-            portalFrameBlockOverworld = "PACKED_ICE";
-        }
-        if(!isValidBlock(portalFrameBlockNether)) {
-            portalFrameBlockNether = "MAGMA_BLOCK";
-        }
-        if(!isValidBlock(portalFrameBlockEnd)) {
-            portalFrameBlockEnd = "PURPLE_GLAZED_TERRACOTTA";
+        if(!isValidBlock(starrySkyPortalFrameBlock)) {
+            starrySkyPortalFrameBlock = "PACKED_ICE";
         }
 
     }
