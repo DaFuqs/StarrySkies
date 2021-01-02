@@ -1,5 +1,6 @@
 package de.dafuqs.starrysky.spheroid.spheroids.unique;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
@@ -18,6 +19,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
+import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -125,7 +127,11 @@ public class StrongholdSpheroid extends Spheroid {
      */
     @Override
     public void decorate(StructureWorldAccess world, Random random) {
-        placeEndPortal(world, portalPosition.up());
+        if(portalPosition != null) {
+            placeEndPortal(world, portalPosition.up());
+        } else {
+            StarrySkyCommon.LOGGER.log(Level.WARN,  "[StarrySky] Generating a Stronghold Spheroid at " + position.getX() + " " + position.getY() + " " + position.getZ() + " without an end portal?");
+        }
 
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
             int randomStructure = random.nextInt(5);
@@ -225,16 +231,16 @@ public class StrongholdSpheroid extends Spheroid {
     }
 
     private void placePrison(WorldAccess worldAccess, BlockPos blockPos) {
-        for (int x2 = - 4; x2 < 5; x2++) {
+            for (int x2 = - 4; x2 < 5; x2++) {
             for (int y2 = 0; y2 < 9; y2++) {
                 BlockPos destinationBlockPos = blockPos.add(x2, y2, 0);
-                worldAccess.setBlockState(destinationBlockPos, IRON_BARS.with(PaneBlock.NORTH, true).with(PaneBlock.SOUTH, true), 3);
+                worldAccess.setBlockState(destinationBlockPos, IRON_BARS.with(PaneBlock.EAST, true).with(PaneBlock.WEST, true), 3);
             }
         }
         for (int y2 = 0; y2 < 9; y2++) {
             for (int z2 = -4; z2 < 5; z2++) {
                 BlockPos destinationBlockPos = blockPos.add(0, y2, z2);
-                worldAccess.setBlockState(destinationBlockPos, IRON_BARS.with(PaneBlock.EAST, true).with(PaneBlock.WEST, true), 3);
+                worldAccess.setBlockState(destinationBlockPos, IRON_BARS.with(PaneBlock.NORTH, true).with(PaneBlock.SOUTH, true), 3);
             }
         }
 

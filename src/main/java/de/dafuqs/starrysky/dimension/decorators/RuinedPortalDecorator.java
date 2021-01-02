@@ -48,6 +48,7 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
                                 break;
                             case 1:
                                 world.setBlockState(currentBlockPos, LAVA, 3);
+                                world.getChunk(currentBlockPos).markBlockForPostProcessing(currentBlockPos);
                                 break;
                             default:
                                 world.setBlockState(currentBlockPos, NETHERRACK, 3);
