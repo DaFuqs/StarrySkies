@@ -5,11 +5,12 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.dimension.decorators.end.ChorusFruitDecorator;
+import de.dafuqs.starrysky.dimension.decorators.end.EndGatewayDecorator;
 import de.dafuqs.starrysky.dimension.decorators.end.EndPortalDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinitions;
 import de.dafuqs.starrysky.spheroid.types.*;
 import de.dafuqs.starrysky.spheroid.types.unique.EndCitySpheroidType;
-import de.dafuqs.starrysky.spheroid.types.unique.EndGatewaySpheroidType;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
@@ -20,6 +21,8 @@ public class SpheroidListVanillaEnd extends SpheroidList {
 
     public static class SpheroidDecorators {
         public static SpheroidDecorator END_PORTAL = new EndPortalDecorator();
+        public static SpheroidDecorator CHORUS_FRUIT = new ChorusFruitDecorator();
+        public static SpheroidDecorator END_GATEWAY = new EndGatewayDecorator();
     }
 
     // DRAGON FIGHT
@@ -32,11 +35,14 @@ public class SpheroidListVanillaEnd extends SpheroidList {
 
     // SIMPLE
     public static final SpheroidType END_STONE_SMALL = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 4, 7,  Blocks.END_STONE.getDefaultState());
-    public static final SpheroidType END_STONE_LARGE = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 10, 20,  Blocks.END_STONE.getDefaultState());
+    public static final SpheroidType END_STONE_LARGE = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 10, 20,  Blocks.END_STONE.getDefaultState())
+            .addDecorator(SpheroidDecorators.CHORUS_FRUIT, 0.2F);
     public static final SpheroidType PURPLE_STAINED_GLASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.stained_glass, 5, 8, Blocks.PURPLE_STAINED_GLASS.getDefaultState());
 
+
     // TREASURE
-    public static final SpheroidType END_GATEWAY = new EndGatewaySpheroidType(SpheroidAdvancementIdentifier.end_gateway, 7, 10);
+    public static final SpheroidType END_GATEWAY = new ShellSpheroidType(SpheroidAdvancementIdentifier.end_gateway, 7, 9, Blocks.AIR.getDefaultState(), Blocks.PURPLE_STAINED_GLASS.getDefaultState(), 1, 2)
+            .addDecorator(SpheroidDecorators.END_GATEWAY, 1.0F);
     public static final SpheroidType HUGE_MONSTER_CAVE = new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, 20, 30, Blocks.END_STONE.getDefaultState(), Blocks.END_STONE_BRICKS.getDefaultState(), 2, 5)
             .addChestWithLootTable(LootTables.END_CITY_TREASURE_CHEST, 0.3F);
     public static final SpheroidType MONSTER_CAVE = new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, 10, 15, Blocks.END_STONE.getDefaultState(), Blocks.END_STONE_BRICKS.getDefaultState(), 1, 3)

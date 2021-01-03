@@ -26,8 +26,8 @@ import java.util.Optional;
 
 public class StarrySkyDimensionTravelHandler {
 
-    private static final BlockPos END_SPAWN_BLOCK_POS = new BlockPos(10, 64, 0);
-    private static final BlockPos OVERWORLD_SPAWN_BLOCK_POS = new BlockPos(16, 85, 16);
+    public static final BlockPos END_SPAWN_BLOCK_POS = new BlockPos(10, 64, 0);
+    public static final BlockPos OVERWORLD_SPAWN_BLOCK_POS = new BlockPos(16, 85, 16);
 
     public static ServerWorld modifyNetherPortalDestination(Entity thisEntity, ServerWorld serverWorld) {
         if(thisEntity.getEntityWorld().getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
