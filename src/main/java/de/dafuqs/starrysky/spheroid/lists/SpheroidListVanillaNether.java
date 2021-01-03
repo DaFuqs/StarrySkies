@@ -94,7 +94,7 @@ public class SpheroidListVanillaNether extends SpheroidList {
     // ORES
     public static final SpheroidType NETHER_QUARTZ = new CoreSpheroidType(SpheroidAdvancementIdentifier.nether_quartz, 5, 15, Blocks.NETHER_QUARTZ_ORE.getDefaultState(), MAP_NETHER_STONES, 4, 8);
     public static final SpheroidType NETHER_GOLD_ORE = new CoreSpheroidType(SpheroidAdvancementIdentifier.nether_gold_ore, 5, 15, Blocks.NETHER_GOLD_ORE.getDefaultState(), MAP_NETHER_STONES, 2, 5);
-    public static final SpheroidType ANCIENT_DEBRIS = new CoreSpheroidType(SpheroidAdvancementIdentifier.ancient_debris, 5, 15, Blocks.ANCIENT_DEBRIS.getDefaultState(), MAP_NETHER_STONES, 2, 5);
+    public static final SpheroidType ANCIENT_DEBRIS = new CoreSpheroidType(SpheroidAdvancementIdentifier.ancient_debris, 5, 15, Blocks.ANCIENT_DEBRIS.getDefaultState(), MAP_NETHER_STONES, 1, 2);
 
     // LAVA
     public static final SpheroidType LAVA_GLASS = new LiquidSpheroidType(SpheroidAdvancementIdentifier.lava, 5, 14, Blocks.LAVA.getDefaultState(), MAP_NETHER_GLASS, 1, 3, 25, 90,  50);
