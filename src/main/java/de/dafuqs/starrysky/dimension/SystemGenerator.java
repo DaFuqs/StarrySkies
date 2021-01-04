@@ -189,7 +189,7 @@ public class SystemGenerator {
             }
         }
 
-        StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Created a new system with " + spheroids.size() + " spheroids at system position " + systemPointX + "," + systemPointZ);
+        StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Created a new system with " + spheroids.size() + " spheroids at system position " + systemPointX + "," + systemPointZ);
 
         return spheroids;
     }
