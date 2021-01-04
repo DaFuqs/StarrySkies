@@ -18,20 +18,16 @@ public abstract class DimensionTypeMixin {
     }
 
     private boolean checkEnderDragonFight(DimensionType dimensionType) {
-        if(true) { // if(StarrySkyCommon.STARRY_SKY_CONFIG.fightEnderDragonInStarryEndInstead) {
-            // search for the end
-            if(    !dimensionType.hasCeiling()
-                    && !dimensionType.isUltrawarm()
-                    && !dimensionType.isNatural()
-                    && dimensionType.getCoordinateScale() == 1.0
-                    && !dimensionType.isBedWorking()
-                    && !dimensionType.isRespawnAnchorWorking()) {
-                // as good as it gets. The Starry End has sky light, the default end doesn't
-                if(dimensionType.hasSkyLight()) {
-                    return true;
-                } else {
-                    return false;
-                }
+        // search for the end
+        if(    !dimensionType.hasCeiling()
+                && !dimensionType.isUltrawarm()
+                && !dimensionType.isNatural()
+                && dimensionType.getCoordinateScale() == 1.0
+                && !dimensionType.isBedWorking()
+                && !dimensionType.isRespawnAnchorWorking()) {
+            // as good as it gets. The Starry End has sky light, the default end doesn't
+            if(dimensionType.hasSkyLight()) {
+                return true;
             } else {
                 return false;
             }

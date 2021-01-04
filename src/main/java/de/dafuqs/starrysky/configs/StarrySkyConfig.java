@@ -32,10 +32,20 @@ public class StarrySkyConfig implements ConfigData {
                      + "\nDefault: true")
     public boolean rainbowSkybox = true;
 
+    @ConfigEntry.Category("GENERAL")
+    @Comment(value = "\nIf true nether portals in Starry Sky lead to Scary Sky, if false portals do not form."
+            + "\nDefault: true")
+    public boolean enableNetherPortalsToStarryNether = true;
+
+    @ConfigEntry.Category("GENERAL")
+    @Comment(value = "\nIf true end portals in Starry Sky lead to Scarcy Sky, if false to the vanilla end."
+            + "\nDefault: true")
+    public boolean enableEndPortalsToStarryEnd = true;
+
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
     @Comment(value = "\nThe '/sphere' command lists all the data of the clostest sphere (position, blocks, ...)\n"
-                   + "\nDefault: 0")
+            + "\nDefault: 0")
     public int sphereCommandRequiredPermissionLevel = 0;
 
     @ConfigEntry.Gui.PrefixText

@@ -27,6 +27,8 @@
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel": "Required Permission Level for /sphere Command",
   "text.autoconfig.StarrySky.option.cloudHeight": "Cloud Height",
   "text.autoconfig.StarrySky.option.rainbowSkybox": "Use a fancy rainbow skybox instead of the default one",
+  "text.autoconfig.StarrySky.option.enableNetherPortalsToStarryNether": "If true nether portals in Starry Sky lead to Scary Sky, if false portals do not form",
+  "text.autoconfig.StarrySky.option.enableEndPortalsToStarryEnd": "If true end portals in Starry Sky lead to Scarcy Sky, if false to the vanilla end",
 
   "text.autoconfig.StarrySky.option.systemSizeChunks.@PrefixText": "Spheroids are generated in systems. Each system consists out of x spheroids over y chunks. How big each system should be in chunks². Higher values make the very slight 'gaps' at the border between systems less common, but since systems are generating all at once high values can result in small lag spikes every time a new system is generated. (but less spikes in total)",
   "text.autoconfig.StarrySky.option.systemSizeChunks.@Tooltip": "How many big each system should be in chunks²",
