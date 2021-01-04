@@ -1,9 +1,9 @@
 package de.dafuqs.starrysky.spheroid.spheroids.unique;
 
-import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.spheroid.lists.SpheroidList;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BeehiveBlock;
@@ -163,11 +163,12 @@ public class BeeHiveSpheroid extends Spheroid {
             }
 
             for (BeehiveBlockEntity beehiveBlockEntity : this.outerBeehiveBlockEntities) {
-                // 2 bees
-                BeeEntity bee1 = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
-                beehiveBlockEntity.tryEnterHive(bee1, false);
-                BeeEntity bee2 = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
-                beehiveBlockEntity.tryEnterHive(bee2, false);
+                // add 2-3 bees to each hive
+                int j = 2 + random.nextInt(2);
+                for(int k = 0; k < j; ++k) {
+                    BeeEntity beeEntity = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
+                    beehiveBlockEntity.tryEnterHive(beeEntity, false, random.nextInt(599));
+                }
             }
         }
     }
