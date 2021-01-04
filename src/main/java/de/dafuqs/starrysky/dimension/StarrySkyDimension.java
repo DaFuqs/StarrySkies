@@ -1,7 +1,6 @@
 package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.dimension.ChunkGenerator.StarrySkyChunkGenerator;
 import de.dafuqs.starrysky.dimension.biome.StarrySkyBiomeProvider;
 import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
 import net.minecraft.block.Block;

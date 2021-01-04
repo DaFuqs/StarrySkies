@@ -1,10 +1,8 @@
-package de.dafuqs.starrysky.dimension.ChunkGenerator;
+package de.dafuqs.starrysky.dimension;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.dimension.SystemGenerator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -35,8 +33,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 
     private final long seed;
     protected final ChunkGeneratorSettings settings;
-    private SpheroidLoader.SpheroidDimensionType spheroidDimensionType;
-    private SystemGenerator systemGenerator;
+    private final SystemGenerator systemGenerator;
 
     // from the config
     private final int FLOOR_HEIGHT;
@@ -61,6 +58,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 
         // Is it overworld, nether or end?
         // There doesn't seem to be a better way to distinguish these currently?
+        SpheroidLoader.SpheroidDimensionType spheroidDimensionType;
         if (Blocks.NETHERRACK.getDefaultState().equals(chunkGeneratorType.getDefaultBlock())) {
             spheroidDimensionType = SpheroidLoader.SpheroidDimensionType.NETHER;
 
@@ -113,13 +111,6 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     public void buildSurface(ChunkRegion region, Chunk chunk) {
         ChunkPos chunkPos = chunk.getPos();
 
-        /*
-        int i = chunkPos.x;
-        int j = chunkPos.z;
-        ChunkRandom chunkRandom = new ChunkRandom();
-        chunkRandom.setTerrainSeed(i, j);
-        */
-
         int chunkPosStartX = chunkPos.getStartX();
         int chunkPosStartZ = chunkPos.getStartZ();
 
@@ -154,7 +145,6 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         return StarrySkyCommon.starryWorld.getHeight();
     }
 
-
     /**
      * For spawning specific mobs in certain places like structures.
      */
@@ -169,12 +159,12 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         int zChunk = chunkRegion.getCenterChunkZ();
 
         List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(xChunk, zChunk);
-        ChunkRandom sharedseedrandom = new ChunkRandom();
-        sharedseedrandom.setPopulationSeed(chunkRegion.getSeed(), xChunk, zChunk);
+        ChunkRandom chunkRandom = new ChunkRandom();
+        chunkRandom.setPopulationSeed(chunkRegion.getSeed(), xChunk, zChunk);
 
         ChunkPos chunkPos = new ChunkPos(xChunk, zChunk);
         for(Spheroid spheroid : localSystem) {
-            spheroid.populateEntities(chunkPos, chunkRegion, sharedseedrandom);
+            spheroid.populateEntities(chunkPos, chunkRegion, chunkRandom);
         }
     }
 
@@ -188,7 +178,6 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         chunkRandom.setTerrainSeed(chunk.getPos().getRegionX(), chunk.getPos().getRegionZ());
 
         List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(chunk.getPos().x, chunk.getPos().z);
-
         for(Spheroid spheroid : localSystem) {
             if (spheroid.isInChunk(chunk.getPos())) {
                 spheroid.generate(chunk);

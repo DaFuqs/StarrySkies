@@ -1,7 +1,6 @@
 package de.dafuqs.starrysky.dimension;
 
 import com.mojang.serialization.Codec;
-import de.dafuqs.starrysky.dimension.ChunkGenerator.StarrySkyChunkGenerator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
