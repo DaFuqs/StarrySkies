@@ -221,6 +221,18 @@ public class StarrySkyConfig implements ConfigData {
     @Comment(value = "\nEnable Mythic Metals Integration")
     public boolean generateMythicMetalsSpheroids = true;
 
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable BetterNether Integration")
+    public boolean generateBetterNetherSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable BetterEnd Integration")
+    public boolean generateBetterEndSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Cinderscapes Integration")
+    public boolean generateCinderscapesSpheroids = true;
+
 
     private boolean isValidBlock(String blockName) {
         // validate floorBlock
