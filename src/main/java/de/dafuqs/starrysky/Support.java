@@ -1,14 +1,18 @@
 package de.dafuqs.starrysky;
 
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SystemGenerator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.WorldAccess;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
@@ -24,6 +28,18 @@ public class Support {
             this.squaredDistance = squaredDistance;
         }
     }
+
+    private static final List<Point> aroundPoints = new ArrayList<Point>() {{
+       add(new Point(0, 0));
+       add(new Point(1, -1));
+       add(new Point(1, 0));
+       add(new Point(1, 1));
+       add(new Point(0, -1));
+       add(new Point(0, 1));
+       add(new Point(-1, -1));
+       add(new Point(-1, 0));
+       add(new Point(-1, 1));
+    }};
 
     public static SpheroidDistance getClosestSpheroidToPlayer(PlayerEntity serverPlayerEntity) {
         Vec3d playerPos = serverPlayerEntity.getPos();
@@ -43,6 +59,33 @@ public class Support {
         return new SpheroidDistance(closestSpheroid, currentMinDistance);
     }
 
+    public static SpheroidDistance getClosestSpheroid3x3(ServerWorld serverWorld, BlockPos position, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier) {
+        SystemGenerator spheroidGenerator = SystemGenerator.getSystemGeneratorOfWorld(serverWorld.getRegistryKey());
+
+        Spheroid closestSpheroid = null;
+        double currentMinDistance = Double.MAX_VALUE;
+        for(Point currentPoint : aroundPoints) {
+            Point systemPos = getSystemCoordinateFromChunkCoordinate(position.getX() / 16, position.getZ() / 16);
+
+            List<Spheroid> currentSystem = spheroidGenerator.getSystemAtPoint(new Point(systemPos.x + currentPoint.x, systemPos.y + currentPoint.y));
+            for (Spheroid p : currentSystem) {
+                if (p.getSpheroidAdvancementIdentifier().equals(spheroidAdvancementIdentifier)) {
+                    double currDist = position.getSquaredDistance(p.getPosition());
+                    if (currDist < currentMinDistance) {
+                        currentMinDistance = currDist;
+                        closestSpheroid = p;
+                    }
+                }
+            }
+
+            if(closestSpheroid != null) {
+                return new SpheroidDistance(closestSpheroid, currentMinDistance);
+            }
+        }
+
+        return null;
+    }
+
     public static <E> E getWeightedRandom(LinkedHashMap<E, Float> weights, Random random) {
         E result = null;
         double bestValue = Double.MAX_VALUE;
@@ -56,6 +99,29 @@ public class Support {
             }
         }
         return result;
+    }
+
+    /**
+     * System size of 50 results in system 0,0 at 0>+800, -1,0 at -800>0
+     * @param chunkX X coordinate of chunk
+     * @param chunkZ Z coordinate of chunk
+     * @return the system point
+     */
+    public static Point getSystemCoordinateFromChunkCoordinate(int chunkX, int chunkZ) {
+        int sysX;
+        if (chunkX >= 0) {
+            sysX = chunkX / StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
+        } else {
+            sysX = (int) Math.floor(chunkX / (float) StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks);
+        }
+
+        int sysZ;
+        if (chunkZ >= 0) {
+            sysZ = chunkZ / StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
+        } else {
+            sysZ = (int) Math.floor(chunkZ / (float) StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks);
+        }
+        return new Point(sysX, sysZ);
     }
 
     /**

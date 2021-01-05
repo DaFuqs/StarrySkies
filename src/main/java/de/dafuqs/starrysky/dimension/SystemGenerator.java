@@ -87,29 +87,6 @@ public class SystemGenerator {
     }
 
     /**
-     * System size of 50 results in system 0,0 at 0>+800, -1,0 at -800>0
-     * @param chunkX X coordinate of chunk
-     * @param chunkZ Z coordinate of chunk
-     * @return the system point
-     */
-    private Point getSystemCoordinateFromChunkCoordinate(int chunkX, int chunkZ) {
-        int sysX;
-        if (chunkX >= 0) {
-            sysX = chunkX / SYSTEM_SIZE_CHUNKS;
-        } else {
-            sysX = (int) Math.floor(chunkX / (float) SYSTEM_SIZE_CHUNKS);
-        }
-
-        int sysZ;
-        if (chunkZ >= 0) {
-            sysZ = chunkZ / SYSTEM_SIZE_CHUNKS;
-        } else {
-            sysZ = (int) Math.floor(chunkZ / (float) SYSTEM_SIZE_CHUNKS);
-        }
-        return new Point(sysX, sysZ);
-    }
-
-    /**
      * Returns the system at the given chunk coordinates
      * If a system does not exist yet it will be generated
      * @param chunkX chunk chunkX location
@@ -117,8 +94,11 @@ public class SystemGenerator {
      * @return List of planetoids representing the system this chunk is in
      */
     public List<Spheroid> getSystemAtChunkPos(int chunkX, int chunkZ) {
-        //check if the system of this chunk is cached
-        Point systemPos = getSystemCoordinateFromChunkCoordinate(chunkX, chunkZ);
+        Point systemPos = Support.getSystemCoordinateFromChunkCoordinate(chunkX, chunkZ);
+        return getSystemAtPoint(systemPos);
+    }
+
+    public List<Spheroid> getSystemAtPoint(Point systemPos) {
         List<Spheroid> curSystem = cache.get(systemPos);
 
         if (curSystem == null) {
@@ -140,6 +120,26 @@ public class SystemGenerator {
         return systemRandom;
     }
 
+    private BlockPos getBlockPosInSystem(Point systemPoint, int radius, BlockPos originalBlockPos) {
+        int newX = originalBlockPos.getX();
+        int newZ = originalBlockPos.getZ();
+
+        if(originalBlockPos.getX() - radius < systemPoint.x * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16) {
+            newX = systemPoint.x * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 + radius;
+        }
+        if(originalBlockPos.getX() + radius > (systemPoint.x+1) * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 -1) {
+            newX = (systemPoint.x+1) * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 - radius;
+        }
+        if(originalBlockPos.getZ() - radius < systemPoint.y * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16) {
+            newX = systemPoint.y * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 + radius;
+        }
+        if(originalBlockPos.getZ() + radius > (systemPoint.y+1) * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 -1) {
+            newX = (systemPoint.y+1) * StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks * 16 - radius;
+        }
+
+        return new BlockPos(newX, originalBlockPos.getY(), newZ);
+    }
+
 
     private List<Spheroid> generateSpheroidsAtSystemPoint(Point systemPoint) {
         int systemPointX = systemPoint.x;
@@ -148,7 +148,7 @@ public class SystemGenerator {
         ChunkRandom systemRandom = getSystemRandom(systemPoint);
         ArrayList<Spheroid> spheroids = new ArrayList<>();
 
-        // Playes a log/leaf planet at 16, 16 in the overworld etc.
+        // Places a log/leaf planet at 16, 16 in the overworld etc.
         ArrayList<Spheroid> defaultSpheroids = getDefaultSpheroids(systemPointX, systemPointZ, systemRandom);
         spheroids.addAll(defaultSpheroids);
 

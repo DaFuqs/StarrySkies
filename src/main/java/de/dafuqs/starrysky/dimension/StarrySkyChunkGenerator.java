@@ -3,11 +3,14 @@ package de.dafuqs.starrysky.dimension;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.Support;
+import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -24,8 +27,12 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
+import net.minecraft.world.gen.feature.StructureFeature;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 
@@ -82,6 +89,26 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
             this.BOTTOM_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.bottomBlockOverworld.toLowerCase())).getDefaultState();
         }
         systemGenerator = new SystemGenerator(spheroidDimensionType);
+    }
+
+    private static BlockPos returnClosestStrongholdSphere(BlockPos blockPos, ServerWorld world, int radius) {
+        ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
+        if(chunkGenerator instanceof StarrySkyChunkGenerator) {
+            Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroid3x3(world, blockPos, SpheroidAdvancementIdentifier.stronghold);
+
+            if(Math.sqrt(spheroidDistance.squaredDistance) <= radius * 16) {
+                return spheroidDistance.spheroid.getPosition();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public BlockPos locateStructure(ServerWorld world, StructureFeature<?> feature, BlockPos center, int radius, boolean skipExistingChunks) {
+        if(feature.getName().equals("stronghold")) {
+            return returnClosestStrongholdSphere(center, world, radius);
+        }
+        return super.locateStructure(world, feature, center, radius, skipExistingChunks);
     }
 
     @Override
@@ -174,6 +201,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
 
     public void placeSpheroids(Chunk chunk) {
+
         ChunkRandom chunkRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
         chunkRandom.setTerrainSeed(chunk.getPos().getRegionX(), chunk.getPos().getRegionZ());
 
