@@ -8,6 +8,7 @@ import de.dafuqs.starrysky.dimension.decorators.DoublePlantDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
 import de.dafuqs.starrysky.spheroid.types.*;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
@@ -17,6 +18,7 @@ import net.minecraft.util.registry.Registry;
 import java.util.ArrayList;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static de.dafuqs.starrysky.dimension.SystemGenerator.spheroidLoader;
 
 public class SpheroidListBYG extends SpheroidList {
 
@@ -29,6 +31,12 @@ public class SpheroidListBYG extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("Loading BYG integration...");
 
+        setupOverworld();
+        setupNether();
+        setupEnd();
+    }
+
+    private static void setupOverworld() {
         // VERY RARE ORES
         BlockState byg_ametrine_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"ametrine_ore")).getDefaultState();
         BlockState byg_pendorite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"pendorite_ore")).getDefaultState();
@@ -421,4 +429,46 @@ public class SpheroidListBYG extends SpheroidList {
         // beach sand spheroid
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.4F, new ModularSpheroidType(null, 5, 12, Blocks.SAND.getDefaultState()).setBottomBlockState(Blocks.SANDSTONE.getDefaultState()).addDecorator(byg_beach_grass_decorator, 1.0F).addDecorator(byg_small_beach_grass_decorator, 1.0F));
     }
+
+    private static void setupNether() {
+        // WOOD
+        BlockState aspen_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_leaves")).getDefaultState().with(Properties.DISTANCE_1_7, 1);
+        BlockState aspen_log = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_log")).getDefaultState();
+
+        BlockState lament_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_leaves")).getDefaultState().with(Properties.DISTANCE_1_7, 1); // has shroomlights
+        BlockState lament_log = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_log")).getDefaultState();
+
+        BlockState lament_vine_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_vine_plant")).getDefaultState(); // hanging from netherrack
+
+
+        BlockState subzero_ash_block = Registry.BLOCK.get(new Identifier(MOD_ID,"subzero_ash_block")).getDefaultState();
+        BlockState frost_magma = Registry.BLOCK.get(new Identifier(MOD_ID,"frost_magma")).getDefaultState();
+        // soapstone is nether only?
+
+        BlockState magmatic_stone = Registry.BLOCK.get(new Identifier(MOD_ID,"magmatic_stone")).getDefaultState();
+        BlockState scorched_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_bush")).getDefaultState(); // on magmatic stone
+
+        BlockState overgrown_netherrack = Registry.BLOCK.get(new Identifier(MOD_ID,"overgrown_netherrack")).getDefaultState();
+        BlockState whaling_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"whaling_grass")).getDefaultState(); // on overgrown netherrack
+
+        BlockState mushroom_stem = Blocks.MUSHROOM_STEM.getDefaultState();
+        BlockState weeping_milkcap_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"weeping_milkcap_mushroom_block")).getDefaultState();
+        BlockState green_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"green_mushroom_block")).getDefaultState();
+
+        BlockState brown_mushroom_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"brown_mushroom_stem")).getDefaultState();
+        BlockState black_puff_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"black_puff_mushroom_block")).getDefaultState();
+
+
+        BlockState weeping_roots_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"weeping_roots_plant")).getDefaultState(); // growing downwards
+
+        BlockState overgrown_crimson_blackstone = Registry.BLOCK.get(new Identifier(MOD_ID,"overgrown_crimson_blackstone")).getDefaultState(); // growing downwards
+
+
+    }
+
+    private static void setupEnd() {
+
+    }
+
+
 }
