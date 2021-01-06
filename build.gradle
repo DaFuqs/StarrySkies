@@ -66,11 +66,6 @@ dependencies {
 	// terrestria, traverse
 	modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:$project.terraform_wood_api_version"
 	modImplementation "com.terraformersmc.terraform-api:terraform-tree-api-v1:$project.terraform_tree_api_version"
-
-	// cloth api
-	modApi("me.shedaniel.cloth.api:cloth-api:${project.cloth_api_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
 }
 
 processResources {

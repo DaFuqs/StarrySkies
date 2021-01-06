@@ -7,14 +7,11 @@ import de.dafuqs.starrysky.dimension.DecoratorFeatures;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
-import me.shedaniel.cloth.api.common.events.v1.PlayerChangeWorldCallback;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -58,13 +55,6 @@ public class StarrySkyCommon implements ModInitializer {
         });
 
         ServerTickEvents.END_SERVER_TICK.register(new ProximityAdvancementCheckEvent());
-
-        PlayerChangeWorldCallback.EVENT.register(new PlayerChangeWorldCallback() {
-            @Override
-            public void onChangeWorld(ServerPlayerEntity serverPlayerEntity, RegistryKey<World> registryKey, RegistryKey<World> registryKey1) {
-
-            }
-        });
 
         LOGGER.info("[StarrySky] Finished loading.");
     }

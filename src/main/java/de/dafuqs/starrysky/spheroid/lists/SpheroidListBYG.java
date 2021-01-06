@@ -8,7 +8,6 @@ import de.dafuqs.starrysky.dimension.decorators.DoublePlantDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
 import de.dafuqs.starrysky.spheroid.types.*;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
@@ -457,7 +456,6 @@ public class SpheroidListBYG extends SpheroidList {
 
         BlockState brown_mushroom_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"brown_mushroom_stem")).getDefaultState();
         BlockState black_puff_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"black_puff_mushroom_block")).getDefaultState();
-
 
         BlockState weeping_roots_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"weeping_roots_plant")).getDefaultState(); // growing downwards
 
