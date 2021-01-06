@@ -82,11 +82,7 @@ public class StrongholdSpheroid extends Spheroid {
                             if ((y2-y) % 6 == 0 && ((x2-x) % 4 == 2 || (z2-z) % 4 == 0)) {
                                 chunk.setBlockState(currBlockPos, MOSSY_STONE_BRICKS, false);
                             } else {
-                                if(d % 3 == 0) {
-                                    chunk.setBlockState(currBlockPos, STONE_BRICKS, false);
-                                } else {
-                                    chunk.setBlockState(currBlockPos, INFESTED_STONE_BRICKS, false);
-                                }
+                                chunk.setBlockState(currBlockPos, STONE_BRICKS, false);
                             }
                         } else {
                             // AIR
