@@ -22,6 +22,7 @@ import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType
 public class SpheroidListAppliedEnergistics2 extends SpheroidList {
 
     private static final String MOD_ID = "appliedenergistics2";
+    private static final Identifier APPLIED_ENERGISTICS_METEOR_CHEST_LOOT_TABLE = new Identifier("starry_sky", "appliedenergistics2_meteor_chest");
 
     public static boolean shouldGenerate() {
         return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkyCommon.STARRY_SKY_CONFIG.generateAppliedEnergistics2Spheroids;
@@ -48,7 +49,6 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
         // Only fill AE2 loot table with items when AE2 is loaded.
         // Otherwise the items don't even exist and vanilla throws
         // an error even though the loot table is not used
-        Identifier APPLIED_ENERGISTICS_METEOR_CHEST_LOOT_TABLE = new Identifier("starry_sky", "appliedenergistics2_meteor_chest");
         LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, supplier, setter) -> {
             if (APPLIED_ENERGISTICS_METEOR_CHEST_LOOT_TABLE.equals(id)) {
                 StarrySkyCommon.LOGGER.log(Level.ERROR, "[StarrySky] Creating AE2 loot table...");
@@ -58,19 +58,13 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
                 Item LOGIC_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "logic_processor_press"));
                 Item SILICON_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "silicon_press"));
 
-                if(CALCULATION_PRESS != null & ENGINEERING_PRESS != null & LOGIC_PRESS != null & SILICON_PRESS != null) {
-                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-                            .rolls(UniformLootTableRange.between(1, 3))
-                            .withEntry(ItemEntry.builder(CALCULATION_PRESS).build())
-                            .withEntry(ItemEntry.builder(ENGINEERING_PRESS).build())
-                            .withEntry(ItemEntry.builder(LOGIC_PRESS).build())
-                            .withEntry(ItemEntry.builder(SILICON_PRESS).build());
-                    supplier.withPool(poolBuilder.build());
-
-                    StarrySkyCommon.LOGGER.log(Level.ERROR, "[StarrySky] Done!");
-                } else {
-                    StarrySkyCommon.LOGGER.log(Level.ERROR, "[StarrySky] The press items could not be queried?");
-                }
+                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                        .rolls(UniformLootTableRange.between(1, 3))
+                        .withEntry(ItemEntry.builder(CALCULATION_PRESS).build())
+                        .withEntry(ItemEntry.builder(ENGINEERING_PRESS).build())
+                        .withEntry(ItemEntry.builder(LOGIC_PRESS).build())
+                        .withEntry(ItemEntry.builder(SILICON_PRESS).build());
+                supplier.withPool(poolBuilder.build());
             }
         });
     }

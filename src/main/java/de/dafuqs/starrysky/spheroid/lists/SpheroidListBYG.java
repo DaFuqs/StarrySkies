@@ -17,7 +17,6 @@ import net.minecraft.util.registry.Registry;
 import java.util.ArrayList;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
-import static de.dafuqs.starrysky.dimension.SystemGenerator.spheroidLoader;
 
 public class SpheroidListBYG extends SpheroidList {
 
@@ -30,12 +29,12 @@ public class SpheroidListBYG extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading BYG integration...");
 
-        setupOverworld();
-        setupNether();
-        setupEnd();
+        setupOverworld(spheroidLoader);
+        setupNether(spheroidLoader);
+        setupEnd(spheroidLoader);
     }
 
-    private static void setupOverworld() {
+    private static void setupOverworld(SpheroidLoader spheroidLoader) {
         // VERY RARE ORES
         BlockState byg_ametrine_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"ametrine_ore")).getDefaultState();
         BlockState byg_pendorite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"pendorite_ore")).getDefaultState();
@@ -429,7 +428,7 @@ public class SpheroidListBYG extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.4F, new ModularSpheroidType(null, 5, 12, Blocks.SAND.getDefaultState()).setBottomBlockState(Blocks.SANDSTONE.getDefaultState()).addDecorator(byg_beach_grass_decorator, 1.0F).addDecorator(byg_small_beach_grass_decorator, 1.0F));
     }
 
-    private static void setupNether() {
+    private static void setupNether(SpheroidLoader spheroidLoader) {
         // WOOD
         BlockState aspen_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_leaves")).getDefaultState().with(Properties.DISTANCE_1_7, 1);
         BlockState aspen_log = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_log")).getDefaultState();
@@ -464,7 +463,7 @@ public class SpheroidListBYG extends SpheroidList {
 
     }
 
-    private static void setupEnd() {
+    private static void setupEnd(SpheroidLoader spheroidLoader) {
 
     }
 
