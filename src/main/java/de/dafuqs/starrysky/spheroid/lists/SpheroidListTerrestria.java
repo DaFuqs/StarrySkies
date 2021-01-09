@@ -28,7 +28,7 @@ public class SpheroidListTerrestria extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading Terrestria integration...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Terrestria integration...");
 
         // TREES
         BlockState terrestria_redwood_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"redwood_leaves")).getDefaultState().with(ExtendedLeavesBlock.DISTANCE, 1);

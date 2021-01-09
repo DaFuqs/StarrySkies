@@ -249,7 +249,7 @@ public class SpheroidListVanilla extends SpheroidList {
 
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading Vanilla Spheroids...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Vanilla Spheroids...");
 
         // COMMON
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ESSENTIAL, 10.0F, GRASS);

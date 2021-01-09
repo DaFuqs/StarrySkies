@@ -21,7 +21,7 @@ public class SpheroidListSakuraRosea extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading Sakura Rosea integration...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Sakura Rosea integration...");
 
         BlockState sakurarosea_sakura_log          = Registry.BLOCK.get(new Identifier(MOD_ID,"sakura_log")).getDefaultState();
         BlockState sakurarosea_sakura_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"sakura_leaves")).getDefaultState();

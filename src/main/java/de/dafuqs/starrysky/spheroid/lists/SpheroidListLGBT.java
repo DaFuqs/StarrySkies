@@ -67,7 +67,7 @@ public class SpheroidListLGBT extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading LGBT pack...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading LGBT pack...");
 
         StripesSpheroidType PRIDE_GAY = new StripesSpheroidType(null,  6, 12, LIST_GAY);
         StripesSpheroidType PRIDE_BI = new StripesSpheroidType(null, 6, 12, LIST_BI);

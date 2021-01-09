@@ -22,7 +22,7 @@ public class SpheroidListTraverse extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading Traverse integration...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Traverse integration...");
 
         BlockState traverse_fir_leaves = Registry.BLOCK.get(new Identifier(MOD_ID, "fir_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
         BlockState traverse_fir_log = Registry.BLOCK.get(new Identifier(MOD_ID, "fir_log")).getDefaultState();

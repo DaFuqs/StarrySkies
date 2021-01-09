@@ -19,7 +19,7 @@ public class SpheroidListIndustrialRevolution extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading Industrial Revolution integration...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Industrial Revolution integration...");
 
         BlockState industrialrevolution_nikolite = Registry.BLOCK.get(new Identifier(MOD_ID,"nikolite_ore")).getDefaultState();
         BlockState industrialrevolution_copper = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();

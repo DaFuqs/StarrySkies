@@ -125,7 +125,7 @@ public class SpheroidListVanillaNether extends SpheroidList {
 
 
 	public static void setup(SpheroidLoader spheroidLoader) {
-		StarrySkyCommon.LOGGER.info("Loading Vanilla Nether Spheroids...");
+		StarrySkyCommon.LOGGER.info("[StarrySky] Loading Vanilla Nether Spheroids...");
 
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 10.0F, NETHERRACK);
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 4.0F, SOUL_SAND);

@@ -23,7 +23,7 @@ public class SpheroidListUnearthed extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading Unearthed integration...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Unearthed integration...");
 
         ArrayList<String> stones = new ArrayList<String>() {{
             add("gray_basalt");

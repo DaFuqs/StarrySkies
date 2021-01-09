@@ -1,19 +1,11 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.spheroid.types.RainbowSpheroidType;
-import de.dafuqs.starrysky.spheroid.types.ShellSpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import java.util.ArrayList;
-
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 
 public class SpheroidListBetterNether extends SpheroidList {
 
@@ -25,7 +17,7 @@ public class SpheroidListBetterNether extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading Better Nether integration...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Better Nether integration...");
 
         BlockState cincinnasite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"cincinnasite_ore")).getDefaultState();
         BlockState netherrack_stalactite = Registry.BLOCK.get(new Identifier(MOD_ID,"netherrack_stalactite")).getDefaultState(); // size: 0, 1, ...

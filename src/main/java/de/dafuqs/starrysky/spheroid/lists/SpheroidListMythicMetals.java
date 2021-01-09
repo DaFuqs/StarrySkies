@@ -19,7 +19,7 @@ public class SpheroidListMythicMetals extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading Mythic Metals integration...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Mythic Metals integration...");
 		
 		BlockState mythicmetals_adamantite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"adamantite_ore")).getDefaultState();
 		BlockState mythicmetals_aetherium_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"aetherium_ore")).getDefaultState();

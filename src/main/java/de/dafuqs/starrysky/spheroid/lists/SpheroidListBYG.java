@@ -28,7 +28,7 @@ public class SpheroidListBYG extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading BYG integration...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading BYG integration...");
 
         setupOverworld();
         setupNether();

@@ -15,6 +15,7 @@ import net.minecraft.loot.UniformLootTableRange;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.apache.logging.log4j.Level;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 
@@ -27,7 +28,7 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("Loading Applied Energistics 2 integration...");
+        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Applied Energistics 2 integration...");
 
         BlockState appliedenergistics_quartz          = Registry.BLOCK.get(new Identifier(MOD_ID,"quartz_ore")).getDefaultState();
         BlockState appliedenergistics_charged_quartz  = Registry.BLOCK.get(new Identifier(MOD_ID,"charged_quartz_ore")).getDefaultState();
@@ -50,18 +51,26 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
         Identifier APPLIED_ENERGISTICS_METEOR_CHEST_LOOT_TABLE = new Identifier("starry_sky", "appliedenergistics2_meteor_chest");
         LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, supplier, setter) -> {
             if (APPLIED_ENERGISTICS_METEOR_CHEST_LOOT_TABLE.equals(id)) {
+                StarrySkyCommon.LOGGER.log(Level.ERROR, "[StarrySky] Creating AE2 loot table...");
+
                 Item CALCULATION_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "calculation_processor_press"));
                 Item ENGINEERING_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "engineering_processor_press"));
                 Item LOGIC_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "logic_processor_press"));
                 Item SILICON_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "silicon_press"));
 
-                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-                        .rolls(UniformLootTableRange.between(1, 3))
-                        .withEntry(ItemEntry.builder(CALCULATION_PRESS).build())
-                        .withEntry(ItemEntry.builder(ENGINEERING_PRESS).build())
-                        .withEntry(ItemEntry.builder(LOGIC_PRESS).build())
-                        .withEntry(ItemEntry.builder(SILICON_PRESS).build());
-                supplier.withPool(poolBuilder.build());
+                if(CALCULATION_PRESS != null & ENGINEERING_PRESS != null & LOGIC_PRESS != null & SILICON_PRESS != null) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .rolls(UniformLootTableRange.between(1, 3))
+                            .withEntry(ItemEntry.builder(CALCULATION_PRESS).build())
+                            .withEntry(ItemEntry.builder(ENGINEERING_PRESS).build())
+                            .withEntry(ItemEntry.builder(LOGIC_PRESS).build())
+                            .withEntry(ItemEntry.builder(SILICON_PRESS).build());
+                    supplier.withPool(poolBuilder.build());
+
+                    StarrySkyCommon.LOGGER.log(Level.ERROR, "[StarrySky] Done!");
+                } else {
+                    StarrySkyCommon.LOGGER.log(Level.ERROR, "[StarrySky] The press items could not be queried?");
+                }
             }
         });
     }
