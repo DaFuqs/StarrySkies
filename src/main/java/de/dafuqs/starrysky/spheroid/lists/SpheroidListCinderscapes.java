@@ -26,11 +26,11 @@ public class SpheroidListCinderscapes extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Cinderscapes integration...");
 
-        // quartz blocks; as single and rainbow
+        // crystalline quartz blocks; as single and rainbow
         BlockState crystalline_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"crystalline_quartz")).getDefaultState();
-        BlockState sulfur_quartz_block = Registry.BLOCK.get(new Identifier(MOD_ID,"sulfur_quartz_block")).getDefaultState();
-        BlockState rose_quartz_block = Registry.BLOCK.get(new Identifier(MOD_ID,"rose_quartz_block")).getDefaultState();
-        BlockState smoky_quartz_block = Registry.BLOCK.get(new Identifier(MOD_ID,"smoky_quartz_block")).getDefaultState();
+        BlockState crystalline_sulfur_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"crystalline_sulfur_quartz")).getDefaultState();
+        BlockState crystalline_rose_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"crystalline_rose_quartz")).getDefaultState();
+        BlockState crystalline_smoky_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"crystalline_smoky_quartz")).getDefaultState();
 
         // quartz shards
         /*BlockState polypite_nether_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"polypite_nether_quartz")).getDefaultState();
@@ -49,7 +49,7 @@ public class SpheroidListCinderscapes extends SpheroidList {
 
         // Luminous grove
         // from vanilla: nether sprouts, warped fungus, crimson fungus, crimson roots, warped roots,
-        BlockState umbral_nylium = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_hyphae")).getDefaultState(); // overgrown netherrack
+        BlockState umbral_nylium = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_nylium")).getDefaultState(); // overgrown netherrack
         BlockState twilight_fescues = Registry.BLOCK.get(new Identifier(MOD_ID,"twilight_fescues")).getDefaultState();
         BlockState tall_fotofern = Registry.BLOCK.get(new Identifier(MOD_ID,"tall_fotofern")).getDefaultState(); // upper, lower
         BlockState fotofern = Registry.BLOCK.get(new Identifier(MOD_ID,"fotofern")).getDefaultState();
@@ -64,7 +64,7 @@ public class SpheroidListCinderscapes extends SpheroidList {
         BlockState umbral_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_stem")).getDefaultState(); // "log";
         BlockState umbral_flesh_block = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_flesh_block")).getDefaultState(); // "branches"
         BlockState umbral_wart_block = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_wart_block")).getDefaultState(); // "leaves"
-        // BlockState umbral_hyphae = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_hyphae")).getDefaultState() // where does this generate?
+        // BlockState umbral_hyphae = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_hyphae")).getDefaultState() // where does this generate?
 
         // ash
         BlockState ash_block = Registry.BLOCK.get(new Identifier(MOD_ID,"ash_block")).getDefaultState();
@@ -79,25 +79,26 @@ public class SpheroidListCinderscapes extends SpheroidList {
 
 
         SpheroidType CRYSTALLINE_QUARTZ = new ModularSpheroidType(null, 5, 10,  crystalline_quartz);
-        SpheroidType SULFUR_QUARTZ = new ModularSpheroidType(null, 5, 10,  sulfur_quartz_block);
-        SpheroidType ROSE_QUARTZ = new ModularSpheroidType(null, 5, 10,  rose_quartz_block);
-        SpheroidType SMOKY_QUARTZ = new ModularSpheroidType(null, 5, 10,  smoky_quartz_block);
+        SpheroidType SULFUR_QUARTZ = new ModularSpheroidType(null, 5, 10,  crystalline_sulfur_quartz);
+        SpheroidType ROSE_QUARTZ = new ModularSpheroidType(null, 5, 10,  crystalline_rose_quartz);
+        SpheroidType SMOKY_QUARTZ = new ModularSpheroidType(null, 5, 10,  crystalline_smoky_quartz);
 
         ArrayList QUARTZS = new ArrayList<BlockState>() {{
             add(crystalline_quartz);
-            add(sulfur_quartz_block);
-            add(rose_quartz_block);
-            add(smoky_quartz_block);
+            add(crystalline_sulfur_quartz);
+            add(crystalline_rose_quartz);
+            add(crystalline_smoky_quartz);
         }};
         SpheroidType RAINBOW_QUARTZ = new RainbowSpheroidType(null, 5, 10, QUARTZS);
 
-        PlantDecorator CRYSTINIUM_DECORATOR = new PlantDecorator(crystinium, 0.08F);
+        PlantDecorator CRYSTINIUM_DECORATOR = new PlantDecorator(crystinium, 0.03F);
         ArrayList QUARTZ_ORES = new ArrayList<BlockState>() {{
             add(Blocks.NETHER_QUARTZ_ORE.getDefaultState());
             add(sulfur_quartz_ore);
             add(rose_quartz_ore);
             add(smoky_quartz_ore);
         }};
+        SpheroidListVanillaNether.NETHER_QUARTZ.addDecorator(CRYSTINIUM_DECORATOR, 0.25F);
         SpheroidType SULFUR_QUARTZ_ORE = new CoreSpheroidType(null, 5, 15, Blocks.NETHER_QUARTZ_ORE.getDefaultState(), MAP_NETHER_STONES, 4, 8)
                 .addDecorator(CRYSTINIUM_DECORATOR, 0.25F);
         SpheroidType ROSE_QUARTZ_ORE = new CoreSpheroidType(null, 5, 15, Blocks.NETHER_QUARTZ_ORE.getDefaultState(), MAP_NETHER_STONES, 4, 8)
@@ -123,22 +124,23 @@ public class SpheroidListCinderscapes extends SpheroidList {
                 .addDecorator(LUMINOUS_POD_DECORATOR, 0.8F);
 
         UnderPlantDecorator GHASTLY_ECTOPLASM_DECORATOR = new UnderPlantDecorator(ghastly_ectoplasm, 0.1F);
-        SpheroidType TWILIGHT_VINES = new ModularSpheroidType(null, 10, 20,  twilight_vine_block)
+        SpheroidType TWILIGHT_VINES = new ModularSpheroidType(null, 5, 8,  twilight_vine_block)
                 .addDecorator(GHASTLY_ECTOPLASM_DECORATOR, 0.9F);
 
         SpheroidType UMBRAL_MUSHROOM = new DoubleCoreSpheroidType(null, 5, 12, umbral_stem, umbral_flesh_block, umbral_wart_block, 2, 4, 2, 4);
 
-        PlantDecorator SCORCHED_SHRUB_DECORATOR = new PlantDecorator(scorched_shrub, 0.1F);
-        PlantDecorator SCORCHED_TENDRILS_DECORATOR = new PlantDecorator(scorched_tendrils, 0.1F);
-        PlantDecorator SCORCHED_SPROUTS_DECORATOR = new PlantDecorator(scorched_sprouts, 0.1F);
-        PlantDecorator PYRACINTH_DECORATOR = new PlantDecorator(pyracinth, 0.1F);
-        PlantDecorator BRAMBLE_BERRY_BUSH_DECORATOR = new PlantDecorator(bramble_berry_bush, 0.1F);
+        PlantDecorator SCORCHED_SHRUB_DECORATOR = new PlantDecorator(scorched_shrub, 0.08F);
+        PlantDecorator SCORCHED_TENDRILS_DECORATOR = new PlantDecorator(scorched_tendrils, 0.12F);
+        PlantDecorator SCORCHED_SPROUTS_DECORATOR = new PlantDecorator(scorched_sprouts, 0.15F);
+        PlantDecorator PYRACINTH_DECORATOR = new PlantDecorator(pyracinth, 0.03F);
+        PlantDecorator BRAMBLE_BERRY_BUSH_DECORATOR = new PlantDecorator(bramble_berry_bush, 0.25F);
         SpheroidType ASH = new ModularSpheroidType(null, 10, 20,  ash_block)
                 .addDecorator(SCORCHED_SHRUB_DECORATOR, 0.8F)
                 .addDecorator(SCORCHED_TENDRILS_DECORATOR, 0.8F)
                 .addDecorator(SCORCHED_SPROUTS_DECORATOR, 0.8F)
                 .addDecorator(PYRACINTH_DECORATOR, 0.8F)
                 .addDecorator(BRAMBLE_BERRY_BUSH_DECORATOR, 0.8F);
+
 
         // REGISTERING SPHEROID TYPES
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, CRYSTALLINE_QUARTZ);
@@ -158,11 +160,6 @@ public class SpheroidListCinderscapes extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, TWILIGHT_VINES);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, UMBRAL);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, ASH);
-
-
-
-
-
     }
 
 }
