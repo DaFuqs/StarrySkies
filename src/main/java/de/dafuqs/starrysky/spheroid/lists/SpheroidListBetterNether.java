@@ -19,7 +19,12 @@ public class SpheroidListBetterNether extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Better Nether integration...");
 
+        // ores
         BlockState cincinnasite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"cincinnasite_ore")).getDefaultState();
+        BlockState nether_lapis_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"nether_lapis_ore")).getDefaultState();
+        BlockState nether_ruby_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"nether_ruby_ore")).getDefaultState();
+
+        // stalactites
         BlockState netherrack_stalactite = Registry.BLOCK.get(new Identifier(MOD_ID,"netherrack_stalactite")).getDefaultState(); // size: 0, 1, ...
         BlockState glowstone_stalactite = Registry.BLOCK.get(new Identifier(MOD_ID,"glowstone_stalactite")).getDefaultState(); // size: 0, 1, ...
 

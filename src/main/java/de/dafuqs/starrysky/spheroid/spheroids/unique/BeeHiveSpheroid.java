@@ -190,7 +190,7 @@ public class BeeHiveSpheroid extends Spheroid {
         if(StarrySkyCommon.STARRY_SKY_CONFIG.queenBeesAreGlowing) {
             beeEntity.setGlowing(true);
         }
-        
+
         beeEntity.setAngerTime(Integer.MAX_VALUE);
     }
 
