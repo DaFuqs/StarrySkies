@@ -44,9 +44,15 @@ public class StarrySkyConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nThe '/sphere' command lists all the data of the clostest sphere (position, blocks, ...)\n"
+    @Comment(value = "\nThe '/sphere' command lists all the data of the closest sphere (position, blocks, ...)\n"
             + "\nDefault: 0")
     public int sphereCommandRequiredPermissionLevel = 0;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category("GENERAL")
+    @Comment(value = "\nIf true the bee hive spheres have a center bee with bonus stats and blowing effect\n"
+            + "\nDefault: true")
+    public boolean queenBeesAreGlowing = false;
 
     @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Gui.Tooltip()
