@@ -7,6 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.ArrayList;
+
 public class SpheroidListBetterNether extends SpheroidList {
 
     private static final String MOD_ID = "betternether";
@@ -25,9 +27,8 @@ public class SpheroidListBetterNether extends SpheroidList {
         BlockState nether_ruby_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"nether_ruby_ore")).getDefaultState();
 
         // stalactites
-        // Generate by themselves
-        //BlockState netherrack_stalactite = Registry.BLOCK.get(new Identifier(MOD_ID,"netherrack_stalactite")).getDefaultState(); // size: 0, 1, ...
-        //BlockState glowstone_stalactite = Registry.BLOCK.get(new Identifier(MOD_ID,"glowstone_stalactite")).getDefaultState(); // size: 0, 1, ...
+        BlockState netherrack_stalactite = Registry.BLOCK.get(new Identifier(MOD_ID,"netherrack_stalactite")).getDefaultState(); // size: 0, 1, ...
+        BlockState glowstone_stalactite = Registry.BLOCK.get(new Identifier(MOD_ID,"glowstone_stalactite")).getDefaultState(); // size: 0, 1, ...
 
         // JUNGLE:
         BlockState jungle_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"jungle_grass")).getDefaultState();
@@ -43,6 +44,7 @@ public class SpheroidListBetterNether extends SpheroidList {
         BlockState eyeball = Registry.BLOCK.get(new Identifier(MOD_ID,"eyeball")).getDefaultState();
 
         BlockState stalagnate = Registry.BLOCK.get(new Identifier(MOD_ID,"stalagnate")).getDefaultState(); // shape: bottom, middle, top
+        BlockState nether_reed = Registry.BLOCK.get(new Identifier(MOD_ID,"nether_reed")).getDefaultState(); // shape: bottom, middle, top
 
         BlockState golden_vine = Registry.BLOCK.get(new Identifier(MOD_ID,"golden_vine")).getDefaultState(); // bottom: true/false
         BlockState black_vine = Registry.BLOCK.get(new Identifier(MOD_ID,"black_vine")).getDefaultState(); // bottom: true/false
@@ -58,7 +60,6 @@ public class SpheroidListBetterNether extends SpheroidList {
         BlockState rubeus_bark = Registry.BLOCK.get(new Identifier(MOD_ID,"rubeus_leaves")).getDefaultState();
         BlockState rubeus_log = Registry.BLOCK.get(new Identifier(MOD_ID,"rubeus_log")).getDefaultState(); // shape: middle, bottom
         BlockState rubeus_cone = Registry.BLOCK.get(new Identifier(MOD_ID,"rubeus_cone")).getDefaultState(); // hanging from leaves
-
 
         BlockState magma_flower = Registry.BLOCK.get(new Identifier(MOD_ID,"magma_flower")).getDefaultState(); // on magma. Age 1+
         BlockState geyser = Registry.BLOCK.get(new Identifier(MOD_ID,"geyser")).getDefaultState(); // on netherrack, close to magma
@@ -78,6 +79,46 @@ public class SpheroidListBetterNether extends SpheroidList {
         BlockState red_mold = Registry.BLOCK.get(new Identifier(MOD_ID,"red_mold")).getDefaultState(); // on nether mycelium
 
         BlockState netherrack_moss = Registry.BLOCK.get(new Identifier(MOD_ID,"netherrack_moss")).getDefaultState(); // on netherrack
+
+        // SPHERES
+        ArrayList<BlockState> QUARTZ_GLASSES = new ArrayList<BlockState>() {{
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_white")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_light_gray")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_gray")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_black")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_brown")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_red")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_orange")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_yellow")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_lime")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_green")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_cyan")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_light_blue")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_blue")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_purple")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_magenta")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_pink")).getDefaultState());
+        }};
+        ArrayList<BlockState> FRAMED_QUARTZ_GLASSES = new ArrayList<BlockState>() {{
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_white")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_light_gray")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_gray")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_black")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_brown")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_red")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_orange")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_yellow")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_lime")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_green")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_cyan")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_light_blue")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_blue")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_purple")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_magenta")).getDefaultState());
+            add(Registry.BLOCK.get(new Identifier(MOD_ID, "quartz_glass_framed_pink")).getDefaultState());
+        }};
+
+
 
     }
 

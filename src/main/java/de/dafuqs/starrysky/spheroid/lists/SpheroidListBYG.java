@@ -464,6 +464,7 @@ public class SpheroidListBYG extends SpheroidList {
     }
 
     private static void setupEnd(SpheroidLoader spheroidLoader) {
+        BlockState purpur_stone = Registry.BLOCK.get(new Identifier(MOD_ID,"purpur_stone")).getDefaultState();
 
     }
 
