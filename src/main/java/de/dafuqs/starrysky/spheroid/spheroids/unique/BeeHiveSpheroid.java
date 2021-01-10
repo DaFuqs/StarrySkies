@@ -1,6 +1,5 @@
 package de.dafuqs.starrysky.spheroid.spheroids.unique;
 
-import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
@@ -186,11 +185,7 @@ public class BeeHiveSpheroid extends Spheroid {
         beeEntity.addStatusEffect(statusEffectInstance1);
         beeEntity.addStatusEffect(statusEffectInstance2);
         beeEntity.addStatusEffect(statusEffectInstance3);
-
-        if(StarrySkyCommon.STARRY_SKY_CONFIG.queenBeesAreGlowing) {
-            beeEntity.setGlowing(true);
-        }
-
+        
         beeEntity.setAngerTime(Integer.MAX_VALUE);
     }
 

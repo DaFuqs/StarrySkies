@@ -48,12 +48,6 @@ public class StarrySkyConfig implements ConfigData {
             + "\nDefault: 0")
     public int sphereCommandRequiredPermissionLevel = 0;
 
-    @ConfigEntry.Gui.Tooltip()
-    @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nIf true the bee hive spheres have a center bee with bonus stats and blowing effect\n"
-            + "\nDefault: true")
-    public boolean queenBeesAreGlowing = false;
-
     @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("SYSTEM GENERATION")

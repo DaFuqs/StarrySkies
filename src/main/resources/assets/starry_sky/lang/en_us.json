@@ -26,7 +26,6 @@
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel.@Tooltip": "The '/sphere' command lists all the data of the closest sphere (position, blocks, ...)",
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel": "Required Permission Level for /sphere Command",
   "text.autoconfig.StarrySky.option.cloudHeight": "Cloud Height",
-  "text.autoconfig.StarrySky.option.queenBeesAreGlowing": "If true the bee hive spheres have a center bee with bonus stats and blowing effect",
   "text.autoconfig.StarrySky.option.rainbowSkybox": "Use a fancy rainbow skybox instead of the default one",
   "text.autoconfig.StarrySky.option.enableNetherPortalsToStarryNether": "If true nether portals in Starry Sky lead to Scary Sky, if false portals do not form",
   "text.autoconfig.StarrySky.option.enableEndPortalsToStarryEnd": "If true end portals in Starry Sky lead to Scarcy Sky, if false to the vanilla end",
