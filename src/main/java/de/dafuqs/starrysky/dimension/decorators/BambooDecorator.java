@@ -16,9 +16,13 @@ import java.util.Random;
 public class BambooDecorator extends SpheroidDecorator {
 
     private static final Block bambooBlock = Blocks.BAMBOO;
-    private static final BlockState bambooBlockState = Blocks.BAMBOO.getDefaultState().with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0);
+    private static BlockState bambooBlockState;
     private static final BlockState bambooSaplingBlockState = Blocks.BAMBOO_SAPLING.getDefaultState();
     private static final int BAMBOO_CHANCE = 11;
+
+    public BambooDecorator(BlockState placementBlockState) {
+        this.bambooBlockState = placementBlockState;
+    }
 
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {

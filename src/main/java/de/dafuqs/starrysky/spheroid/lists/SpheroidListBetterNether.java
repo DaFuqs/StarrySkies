@@ -79,6 +79,7 @@ public class SpheroidListBetterNether extends SpheroidList {
         BlockState red_mold = Registry.BLOCK.get(new Identifier(MOD_ID,"red_mold")).getDefaultState(); // on nether mycelium
 
         BlockState netherrack_moss = Registry.BLOCK.get(new Identifier(MOD_ID,"netherrack_moss")).getDefaultState(); // on netherrack
+        BlockState lumabus_vine = Registry.BLOCK.get(new Identifier(MOD_ID,"lumabus_vine")).getDefaultState(); // top, middle, bottom
 
         // SPHERES
         ArrayList<BlockState> QUARTZ_GLASSES = new ArrayList<BlockState>() {{

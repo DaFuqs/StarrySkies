@@ -11,6 +11,7 @@ import de.dafuqs.starrysky.spheroid.types.*;
 import de.dafuqs.starrysky.spheroid.types.unique.BeeHiveSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.unique.OceanMonumentSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.unique.StrongholdSpheroidType;
+import net.minecraft.block.BambooBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
@@ -25,7 +26,7 @@ public class SpheroidListVanilla extends SpheroidList {
         public static SpheroidDecorator CACTUS = new CactusDecorator(Blocks.CACTUS.getDefaultState());
         public static SpheroidDecorator SEA_GREENS = new SeaGreensDecorator();
         public static SpheroidDecorator COCOA = new CocoaDecorator();
-        public static SpheroidDecorator BAMBOO = new BambooDecorator();
+        public static SpheroidDecorator BAMBOO = new BambooDecorator(Blocks.BAMBOO.getDefaultState().with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0));
         public static SpheroidDecorator SUGAR_CANE_POND = new SugarCanePondDecorator();
         public static SpheroidDecorator CENTER_POND_UNDERWATER_RUIN_SMALL_CHEST = new CenterPondDecorator(LootTables.UNDERWATER_RUIN_SMALL_CHEST, 0.5F);
         public static SpheroidDecorator CENTER_POND_UNDERWATER_RUIN_BIG_CHEST = new CenterPondDecorator(LootTables.UNDERWATER_RUIN_BIG_CHEST, 0.5F);

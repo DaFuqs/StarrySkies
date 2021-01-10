@@ -4,12 +4,10 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.dimension.decorators.CactusDecorator;
-import de.dafuqs.starrysky.dimension.decorators.DoublePlantDecorator;
-import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
-import de.dafuqs.starrysky.dimension.decorators.UnderPlantDecorator;
+import de.dafuqs.starrysky.dimension.decorators.*;
 import de.dafuqs.starrysky.spheroid.types.*;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.BambooBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
@@ -19,8 +17,7 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.END;
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.*;
 
 public class SpheroidListBYG extends SpheroidList {
 
@@ -433,6 +430,117 @@ public class SpheroidListBYG extends SpheroidList {
     }
 
     private static void setupNether(SpheroidLoader spheroidLoader) {
+
+        // BRIMSTONE CAVERNS
+        BlockState brimstone = Registry.BLOCK.get(new Identifier(MOD_ID,"brimstone")).getDefaultState();
+        BlockState anthracite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"anthracite_ore")).getDefaultState(); // like coal
+        BlockState boric_fire = Registry.BLOCK.get(new Identifier(MOD_ID,"boric_fire")).getDefaultState(); // like coal
+        PlantDecorator BORIC_FIRE_DECORATOR = new PlantDecorator(boric_fire, 0.05F);
+
+        SpheroidType BRIMSTONE = new ModularSpheroidType(null, 5, 12, brimstone)
+                .addDecorator(BORIC_FIRE_DECORATOR, 0.75F);
+
+        SpheroidType ANTRACITE_ORE = new CoreSpheroidType(null, 7, 12, anthracite_ore, brimstone, 3, 6)
+                .addDecorator(BORIC_FIRE_DECORATOR, 0.5F);
+
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, BRIMSTONE);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 0.5F, ANTRACITE_ORE);
+
+        // CRIMSON GARDENS
+        BlockState overgrown_crimson_blackstone = Registry.BLOCK.get(new Identifier(MOD_ID,"overgrown_crimson_blackstone")).getDefaultState();
+        BlockState tall_embur_roots = Registry.BLOCK.get(new Identifier(MOD_ID,"tall_embur_roots")).getDefaultState();
+        DoublePlantDecorator TALL_EMBUR_ROOTS_DECORATOR = new DoublePlantDecorator(tall_embur_roots, 0.05F);
+        SpheroidType CRIMSON_GARDENS = new ModularSpheroidType(null, 7, 12, Blocks.BLACKSTONE.getDefaultState())
+                .setTopBlockState(overgrown_crimson_blackstone)
+                .addDecorator(SpheroidListVanillaNether.SpheroidDecorators.CRIMSON_ROOTS, 0.5F)
+                .addDecorator(SpheroidListVanilla.SpheroidDecorators.MUSHROOMS, 0.5F)
+                .addDecorator(SpheroidListVanillaNether.SpheroidDecorators.CRIMSON_ROOTS, 0.5F)
+                .addDecorator(TALL_EMBUR_ROOTS_DECORATOR, 0.5F)
+                .addDecorator(SpheroidListVanillaNether.SpheroidDecorators.WEEPING_VINES, 0.5F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, CRIMSON_GARDENS);
+
+        // EMBUR BOG
+        BlockState blue_netherrack = Registry.BLOCK.get(new Identifier(MOD_ID,"blue_netherrack")).getDefaultState();
+        SpheroidType BLUE_NETHERRACK = new ModularSpheroidType(null, 5, 15, blue_netherrack);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, BLUE_NETHERRACK);
+
+        // GLOWSTONE GARDENS
+        BlockState weeping_roots_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"weeping_roots_plant")).getDefaultState();
+        UnderPlantDecorator WEEPING_ROOTS_PLANT_DECORATOR = new UnderPlantDecorator(weeping_roots_plant, 0.09F);
+        SpheroidListVanillaNether.GLOWSTONE.addDecorator(WEEPING_ROOTS_PLANT_DECORATOR, 0.2F);
+
+        // QUARTZ DESERT
+        BlockState quartzite_sand = Registry.BLOCK.get(new Identifier(MOD_ID,"quartzite_sand")).getDefaultState();
+        BlockState raw_quartz_block = Registry.BLOCK.get(new Identifier(MOD_ID,"raw_quartz_block")).getDefaultState();
+
+        BlockState quartz_crystal = Registry.BLOCK.get(new Identifier(MOD_ID,"quartz_crystal")).getDefaultState();
+        PlantDecorator QUARTZ_CRYSTAL_DECORATOR = new PlantDecorator(quartz_crystal, 0.1F);
+
+        BlockState hanging_bones = Registry.BLOCK.get(new Identifier(MOD_ID,"hanging_bones")).getDefaultState();
+        UnderPlantDecorator HANGING_BONES_DECORATOR = new UnderPlantDecorator(hanging_bones, 0.05F);
+
+        SpheroidType QUARTZ_DESERT = new ShellSpheroidType(null, 10, 16, raw_quartz_block, quartzite_sand, 2, 4)
+                .addShellSpeckles(quartzite_sand, 0.2F)
+                .addDecorator(QUARTZ_CRYSTAL_DECORATOR, 0.95F)
+                .addDecorator(HANGING_BONES_DECORATOR, 0.8F)
+                .addDecorator(SpheroidListVanilla.SpheroidDecorators.MUSHROOMS, 0.25F)
+                .addDecorator(SpheroidListVanillaNether.SpheroidDecorators.FIRE, 0.3F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, QUARTZ_DESERT);
+
+        // SUBZERO HYPOGEAL
+        BlockState subzero_ash_block = Registry.BLOCK.get(new Identifier(MOD_ID,"subzero_ash_block")).getDefaultState();
+        BlockState frost_magma = Registry.BLOCK.get(new Identifier(MOD_ID,"frost_magma")).getDefaultState();
+        BlockState soul_fire = Registry.BLOCK.get(new Identifier(MOD_ID,"soul_fire")).getDefaultState(); // on top of frost magma
+        PlantDecorator SOUL_FIRE_DECORATOR = new PlantDecorator(soul_fire, 0.15F);
+
+        SpheroidType SUBZERO_ASH = new ShellSpheroidType(null, 10, 16, subzero_ash_block, subzero_ash_block, 2, 4)
+                .addShellSpeckles(frost_magma, 0.2F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SUBZERO_ASH);
+
+        SpheroidType FROST_MAGMA = new ModularSpheroidType(null, 10, 16, frost_magma)
+                .addDecorator(SOUL_FIRE_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, FROST_MAGMA);
+
+        // SYTHIAN TORRIDS
+        BlockState mossy_netherrack = Registry.BLOCK.get(new Identifier(MOD_ID,"mossy_netherrack")).getDefaultState();
+        SpheroidType MOSSY_NETHERRACK = new ModularSpheroidType(null, 10, 16, mossy_netherrack);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, MOSSY_NETHERRACK);
+
+        BlockState sythian_hyphae = Registry.BLOCK.get(new Identifier(MOD_ID,"sythian_hyphae")).getDefaultState();
+        BlockState hanging_sythian_roots_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"hanging_sythian_roots_plant")).getDefaultState();
+        UnderPlantDecorator HANGING_SYTHIAN_ROOTS_DECORATOR = new UnderPlantDecorator(hanging_sythian_roots_plant, 0.1F);
+        SpheroidType SYTHIAN_HYPHAE = new ModularSpheroidType(null, 10, 16, sythian_hyphae)
+                .addDecorator(HANGING_SYTHIAN_ROOTS_DECORATOR, 1.0F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SYTHIAN_HYPHAE);
+
+        BlockState sythian_nylium = Registry.BLOCK.get(new Identifier(MOD_ID,"sythian_nylium")).getDefaultState(); // on top of netherrack
+        BlockState sythian_sprout = Registry.BLOCK.get(new Identifier(MOD_ID,"sythian_nylium")).getDefaultState(); // plant
+        PlantDecorator SYTHIAN_SPROUT_DECORATOR = new PlantDecorator(sythian_sprout, 0.1F);
+        BlockState sythian_stalk_block = Registry.BLOCK.get(new Identifier(MOD_ID,"sythian_stalk_block")).getDefaultState(); // like bamboo
+        BambooDecorator SYTHIAN_STALK_DECORATOR = new BambooDecorator(sythian_stalk_block.with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0));
+        SpheroidType SYTHIAN_NYLIUM = new ModularSpheroidType(null, 10, 16, Blocks.NETHERRACK.getDefaultState())
+                .setTopBlockState(sythian_nylium)
+                .addDecorator(SYTHIAN_SPROUT_DECORATOR, 0.8F)
+                .addDecorator(SYTHIAN_STALK_DECORATOR, 0.8F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SYTHIAN_NYLIUM);
+
+
+        BlockState sythian_wart_block = Registry.BLOCK.get(new Identifier(MOD_ID,"sythian_wart_block")).getDefaultState();
+        BlockState sythian_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"sythian_stem")).getDefaultState();
+        SpheroidType SYTHIAN_WART = new ShellSpheroidType(null, 10, 16, sythian_stem, sythian_wart_block, 1, 2)
+                .addShellSpeckles(Blocks.SHROOMLIGHT.getDefaultState(), 0.05F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 0.5F, SYTHIAN_WART);
+
+
+
+
+        //#############
+
+
+        BlockState death_cap = Registry.BLOCK.get(new Identifier(MOD_ID,"death_cap")).getDefaultState(); // mushroom
+        PlantDecorator DEATH_CAP_DECORATOR = new PlantDecorator(death_cap, 0.09F);
+
+
         // WOOD
         BlockState aspen_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_leaves")).getDefaultState().with(Properties.DISTANCE_1_7, 1);
         BlockState aspen_log = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_log")).getDefaultState();
@@ -441,10 +549,6 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState lament_log = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_log")).getDefaultState();
 
         BlockState lament_vine_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_vine_plant")).getDefaultState(); // hanging from netherrack
-
-
-        BlockState subzero_ash_block = Registry.BLOCK.get(new Identifier(MOD_ID,"subzero_ash_block")).getDefaultState();
-        BlockState frost_magma = Registry.BLOCK.get(new Identifier(MOD_ID,"frost_magma")).getDefaultState();
         // soapstone is nether only?
 
         BlockState magmatic_stone = Registry.BLOCK.get(new Identifier(MOD_ID,"magmatic_stone")).getDefaultState();
@@ -460,10 +564,6 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState brown_mushroom_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"brown_mushroom_stem")).getDefaultState();
         BlockState black_puff_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"black_puff_mushroom_block")).getDefaultState();
 
-        BlockState weeping_roots_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"weeping_roots_plant")).getDefaultState(); // growing downwards
-
-        BlockState overgrown_crimson_blackstone = Registry.BLOCK.get(new Identifier(MOD_ID,"overgrown_crimson_blackstone")).getDefaultState(); // growing downwards
-
 
     }
 
@@ -476,6 +576,10 @@ public class SpheroidListBYG extends SpheroidList {
 
         SpheroidType PURPUR_STONE_BIG = new ModularSpheroidType(null, 9, 17, purpur_stone);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ESSENTIAL, 0.5F, PURPUR_STONE_BIG);
+
+        SpheroidType SPECKLED_END_STONE = new ShellSpheroidType(null, 5, 12, purpur_stone, end_stone, 3, 4)
+                .addShellSpeckles(purpur_stone, 0.2F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ESSENTIAL, 0.5F, SPECKLED_END_STONE);
 
         // SHATTERED DESERT
         BlockState white_sand = Registry.BLOCK.get(new Identifier(MOD_ID,"white_sand")).getDefaultState();
