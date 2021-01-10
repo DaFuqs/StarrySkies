@@ -185,7 +185,7 @@ public class BeeHiveSpheroid extends Spheroid {
         beeEntity.addStatusEffect(statusEffectInstance1);
         beeEntity.addStatusEffect(statusEffectInstance2);
         beeEntity.addStatusEffect(statusEffectInstance3);
-        
+
         beeEntity.setAngerTime(Integer.MAX_VALUE);
     }
 

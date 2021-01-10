@@ -53,9 +53,9 @@ public class SpheroidLoader {
     private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeightsEnd = new LinkedHashMap<SpheroidDistributionType, Float>() {{
         put(SpheroidDistributionType.ESSENTIAL,  50.0F);
         put(SpheroidDistributionType.DECORATIVE, 10.0F);
-        put(SpheroidDistributionType.ORE,        10.0F);
-        put(SpheroidDistributionType.FLUID,       6.0F);
-        put(SpheroidDistributionType.WOOD,        4.0F);
+        put(SpheroidDistributionType.ORE,         6.0F);
+        put(SpheroidDistributionType.FLUID,       3.0F);
+        put(SpheroidDistributionType.WOOD,        3.0F);
         put(SpheroidDistributionType.TREASURE,    1.0F);
         put(SpheroidDistributionType.DUNGEON,     0.1F);
     }};

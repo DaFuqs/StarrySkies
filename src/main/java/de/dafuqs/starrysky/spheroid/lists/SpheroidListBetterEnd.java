@@ -5,12 +5,10 @@ import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.DoublePlantDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
-import de.dafuqs.starrysky.spheroid.types.DoubleCoreSpheroidType;
-import de.dafuqs.starrysky.spheroid.types.ModularSpheroidType;
-import de.dafuqs.starrysky.spheroid.types.ShellSpheroidType;
-import de.dafuqs.starrysky.spheroid.types.SpheroidType;
+import de.dafuqs.starrysky.spheroid.types.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -88,13 +86,13 @@ public class SpheroidListBetterEnd extends SpheroidList {
         BlockState mossy_glowshroom_cap = Registry.BLOCK.get(new Identifier(MOD_ID,"mossy_glowshroom_cap")).getDefaultState();
         BlockState mossy_glowshroom_hymenophore = Registry.BLOCK.get(new Identifier(MOD_ID,"mossy_glowshroom_hymenophore")).getDefaultState();
         SpheroidType MOSSY_GLOWSHROOM = new DoubleCoreSpheroidType(null, 5, 12, mossy_glowshroom_log, mossy_glowshroom_hymenophore, mossy_glowshroom_cap, 2, 4, 2, 4);
-        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.4F, MOSSY_GLOWSHROOM);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, MOSSY_GLOWSHROOM);
 
         // MEGA LAKE TODO
         BlockState lacugrove_log = Registry.BLOCK.get(new Identifier(MOD_ID,"lacugrove_log")).getDefaultState();
-        BlockState lacugrove_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"lacugrove_leaves")).getDefaultState();
+        BlockState lacugrove_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"lacugrove_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);;
         SpheroidType LACUGROVE_WOOD = new ShellSpheroidType(null, 10, 15, lacugrove_log, lacugrove_leaves, 3, 4);
-        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.4F, LACUGROVE_WOOD);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, LACUGROVE_WOOD);
 
         BlockState end_lotus_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"end_lotus_stem")).getDefaultState(); // bottom, middle, top, waterloggable
         BlockState end_lotus_flower = Registry.BLOCK.get(new Identifier(MOD_ID,"end_lotus_flower")).getDefaultState(); // on top of end lotos stem
@@ -120,11 +118,10 @@ public class SpheroidListBetterEnd extends SpheroidList {
 
         // SHADOW FOREST
         BlockState dragon_tree_log = Registry.BLOCK.get(new Identifier(MOD_ID,"dragon_tree_log")).getDefaultState();
-        BlockState dragon_tree_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"dragon_tree_leaves")).getDefaultState();
+        BlockState dragon_tree_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"dragon_tree_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);;
         //BlockState purple_polyphore = Registry.BLOCK.get(new Identifier(MOD_ID,"purple_polyphore")).getDefaultState(); // on side of dragon tree log
-
         SpheroidType DRAGON_TREE = new ShellSpheroidType(null, 10, 17, dragon_tree_log, dragon_tree_leaves, 2, 4);
-        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.3F, DRAGON_TREE);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.3F, DRAGON_TREE);
 
         BlockState shadow_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"shadow_grass")).getDefaultState();
         BlockState shadow_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"shadow_plant")).getDefaultState();
@@ -141,11 +138,30 @@ public class SpheroidListBetterEnd extends SpheroidList {
                 .addDecorator(SHADOW_BERRY_DECORATOR, 0.3F);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.4F, SHADOW_GRASS);
 
+        // ENDER ORE
+        BlockState ender_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"ender_ore")).getDefaultState();
+        SpheroidType ENDER_ORE = new CoreSpheroidType(null, 6, 14, ender_ore, end_stone, 2, 4);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ORE, 0.5F, ENDER_ORE);
 
         // ?? TODO
-        BlockState ender_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"ender_ore")).getDefaultState();
         BlockState cave_moss = Registry.BLOCK.get(new Identifier(MOD_ID,"cave_moss")).getDefaultState();
+        BlockState cave_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"cave_grass")).getDefaultState();
+        BlockState cave_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"cave_bush")).getDefaultState();
+        PlantDecorator CAVE_GRASS_DECORATOR = new PlantDecorator(cave_grass, 0.1F);
+        PlantDecorator CAVE_BUSH_DECORATOR = new PlantDecorator(cave_bush, 0.3F);
+        SpheroidType CAVE_MOSS = new CaveSpheroidType(null, 8, 14, end_stone, cave_moss, 2, 4)
+                .addDecorator(CAVE_BUSH_DECORATOR, 0.9F)
+                .addDecorator(CAVE_GRASS_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.4F, CAVE_MOSS);
+
         // PYTADENDRON
+        BlockState pythadendron_log = Registry.BLOCK.get(new Identifier(MOD_ID,"pythadendron_log")).getDefaultState();
+        BlockState pythadendron_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"pythadendron_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
+        SpheroidType PYTHADENDRON_WOOD = new ShellSpheroidType(null, 10, 17, pythadendron_log, pythadendron_leaves, 2, 4);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.3F, PYTHADENDRON_WOOD);
+
+
+
 
     }
 
