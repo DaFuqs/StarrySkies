@@ -4,6 +4,7 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.dimension.decorators.CactusDecorator;
 import de.dafuqs.starrysky.dimension.decorators.DoublePlantDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
 import de.dafuqs.starrysky.spheroid.types.*;
@@ -16,6 +17,7 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.END;
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 
 public class SpheroidListBYG extends SpheroidList {
@@ -464,7 +466,23 @@ public class SpheroidListBYG extends SpheroidList {
     }
 
     private static void setupEnd(SpheroidLoader spheroidLoader) {
+        BlockState end_stone = Blocks.END_STONE.getDefaultState();
         BlockState purpur_stone = Registry.BLOCK.get(new Identifier(MOD_ID,"purpur_stone")).getDefaultState();
+
+        // SHATTERED DESERT
+        BlockState white_sand = Registry.BLOCK.get(new Identifier(MOD_ID,"white_sand")).getDefaultState();
+        BlockState oddity_cactus = Registry.BLOCK.get(new Identifier(MOD_ID,"oddity_cactus")).getDefaultState(); // stacked like cactus
+        CactusDecorator ODDITY_CACTUS_DECORATOR = new CactusDecorator(oddity_cactus);
+        BlockState oddity_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"oddity_bush")).getDefaultState(); // plant
+        PlantDecorator ODDITY_BUSH_DECORATOR = new PlantDecorator(oddity_bush, 0.02F);
+
+        SpheroidType SHATTERED_DESERT = new ModularSpheroidType(null, 8, 13, white_sand)
+            .setBottomBlockState(end_stone)
+            .addDecorator(ODDITY_BUSH_DECORATOR, 0.9F)
+            .addDecorator(ODDITY_CACTUS_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, SHATTERED_DESERT);
+
+
 
     }
 

@@ -126,15 +126,18 @@ public class SpheroidListBetterEnd extends SpheroidList {
         BlockState shadow_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"shadow_grass")).getDefaultState();
         BlockState shadow_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"shadow_plant")).getDefaultState();
         BlockState needlegrass = Registry.BLOCK.get(new Identifier(MOD_ID,"needlegrass")).getDefaultState();
+        BlockState murkweed = Registry.BLOCK.get(new Identifier(MOD_ID,"murkweed")).getDefaultState();
         BlockState shadow_berry = Registry.BLOCK.get(new Identifier(MOD_ID,"shadow_berry")).getDefaultState();
 
         PlantDecorator SHADOW_PLANT_DECORATOR = new PlantDecorator(shadow_plant, 0.2F);
         PlantDecorator NEEDLEGRASS_DECORATOR = new PlantDecorator(needlegrass, 0.1F);
         PlantDecorator SHADOW_BERRY_DECORATOR = new PlantDecorator(shadow_berry, 0.05F);
+        PlantDecorator MURKWEED_DECORATOR = new PlantDecorator(murkweed, 0.05F);
         SpheroidType SHADOW_GRASS = new ModularSpheroidType(null, 6, 14, end_stone)
                 .setTopBlockState(shadow_grass)
                 .addDecorator(SHADOW_PLANT_DECORATOR, 0.9F)
                 .addDecorator(NEEDLEGRASS_DECORATOR, 0.7F)
+                .addDecorator(MURKWEED_DECORATOR, 0.5F)
                 .addDecorator(SHADOW_BERRY_DECORATOR, 0.3F);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.4F, SHADOW_GRASS);
 

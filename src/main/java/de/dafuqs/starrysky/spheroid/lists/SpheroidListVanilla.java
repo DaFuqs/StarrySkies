@@ -22,7 +22,7 @@ public class SpheroidListVanilla extends SpheroidList {
 
     // DECORATORS
     public static class SpheroidDecorators {
-        public static SpheroidDecorator CACTUS = new CactusDecorator();
+        public static SpheroidDecorator CACTUS = new CactusDecorator(Blocks.CACTUS.getDefaultState());
         public static SpheroidDecorator SEA_GREENS = new SeaGreensDecorator();
         public static SpheroidDecorator COCOA = new CocoaDecorator();
         public static SpheroidDecorator BAMBOO = new BambooDecorator();

@@ -15,8 +15,12 @@ import java.util.Random;
 public class CactusDecorator extends SpheroidDecorator {
 
     private static final Block cactusBlock = Blocks.CACTUS;
-    private static final BlockState cactusBlockState = Blocks.CACTUS.getDefaultState();
+    private BlockState placementBlockState;
     private static final int CACTUS_CHANCE = 40; // random. 0 = cactus with 1 height, 2 = 3 height
+
+    public CactusDecorator(BlockState placementBlockState) {
+        this.placementBlockState = placementBlockState;
+    }
 
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
@@ -25,8 +29,8 @@ public class CactusDecorator extends SpheroidDecorator {
 
             if(r < 4) {
                 for(int i = 1; i < r; i++) {
-                    if(cactusBlock.canPlaceAt(cactusBlockState, world, bp.up(i))) {
-                        world.setBlockState(bp.up(i), cactusBlockState, 3);
+                    if(cactusBlock.canPlaceAt(placementBlockState, world, bp.up(i))) {
+                        world.setBlockState(bp.up(i), placementBlockState, 3);
                     }
                 }
             }
