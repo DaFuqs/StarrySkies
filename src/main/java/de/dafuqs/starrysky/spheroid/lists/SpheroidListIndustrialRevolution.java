@@ -1,11 +1,9 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
-import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 
@@ -21,9 +19,9 @@ public class SpheroidListIndustrialRevolution extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Industrial Revolution integration...");
 
-        BlockState industrialrevolution_nikolite = Registry.BLOCK.get(new Identifier(MOD_ID,"nikolite_ore")).getDefaultState();
-        BlockState industrialrevolution_copper = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
-        BlockState industrialrevolution_tin = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
+        BlockState industrialrevolution_nikolite = getDefaultBlockState(MOD_ID,"nikolite_ore");
+        BlockState industrialrevolution_copper = getDefaultBlockState(MOD_ID,"tin_ore");
+        BlockState industrialrevolution_tin = getDefaultBlockState(MOD_ID,"copper_ore");
 
         spheroidLoader.registerDynamicOre(OVERWORLD, "nikolite", industrialrevolution_nikolite);
         spheroidLoader.registerDynamicOre(OVERWORLD, "copper", industrialrevolution_copper);

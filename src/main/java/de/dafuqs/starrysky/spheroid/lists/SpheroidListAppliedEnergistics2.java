@@ -31,9 +31,9 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Applied Energistics 2 integration...");
 
-        BlockState appliedenergistics_quartz          = Registry.BLOCK.get(new Identifier(MOD_ID,"quartz_ore")).getDefaultState();
-        BlockState appliedenergistics_charged_quartz  = Registry.BLOCK.get(new Identifier(MOD_ID,"charged_quartz_ore")).getDefaultState();
-        BlockState appliedenergistics_sky_stone       = Registry.BLOCK.get(new Identifier(MOD_ID,"sky_stone_block")).getDefaultState();
+        BlockState appliedenergistics_quartz          = getDefaultBlockState(MOD_ID, "quartz_ore");
+        BlockState appliedenergistics_charged_quartz  = getDefaultBlockState(MOD_ID,"charged_quartz_ore");
+        BlockState appliedenergistics_sky_stone       = getDefaultBlockState(MOD_ID,"sky_stone_block");
 
         Identifier  appliedenergistics_sky_stone_chest_loot_table = new Identifier(StarrySkyCommon.MOD_ID, "appliedenergistics2_meteor_chest");
 

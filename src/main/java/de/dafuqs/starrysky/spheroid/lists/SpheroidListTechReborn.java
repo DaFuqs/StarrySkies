@@ -1,14 +1,12 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroid.types.ShellSpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.*;
 
@@ -24,30 +22,30 @@ public class SpheroidListTechReborn extends SpheroidList {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Tech Reborn integration...");
 
         // Rubber
-        BlockState techreborn_rubber_log = Registry.BLOCK.get(new Identifier(MOD_ID,"rubber_log")).getDefaultState();
-        BlockState techreborn_rubber_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"rubber_leaves")).getDefaultState();
+        BlockState techreborn_rubber_log = getDefaultBlockState(MOD_ID,"rubber_log");
+        BlockState techreborn_rubber_leaves = getDefaultBlockState(MOD_ID,"rubber_leaves");
 
         // Overworld
-        BlockState techreborn_bauxite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"bauxite_ore")).getDefaultState();
-        BlockState techreborn_copper_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
-        BlockState techreborn_galena_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"galena_ore")).getDefaultState();
-        BlockState techreborn_iridium_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"iridium_ore")).getDefaultState();
-        BlockState techreborn_lead_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"lead_ore")).getDefaultState();
-        BlockState techreborn_ruby_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"ruby_ore")).getDefaultState();
-        BlockState techreborn_sapphire_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"sapphire_ore")).getDefaultState();
-        BlockState techreborn_silver_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"silver_ore")).getDefaultState();
-        BlockState techreborn_tin_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
+        BlockState techreborn_bauxite_ore = getDefaultBlockState(MOD_ID,"bauxite_ore");
+        BlockState techreborn_copper_ore = getDefaultBlockState(MOD_ID,"copper_ore");
+        BlockState techreborn_galena_ore = getDefaultBlockState(MOD_ID,"galena_ore");
+        BlockState techreborn_iridium_ore = getDefaultBlockState(MOD_ID,"iridium_ore");
+        BlockState techreborn_lead_ore = getDefaultBlockState(MOD_ID,"lead_ore");
+        BlockState techreborn_ruby_ore = getDefaultBlockState(MOD_ID,"ruby_ore");
+        BlockState techreborn_sapphire_ore = getDefaultBlockState(MOD_ID,"sapphire_ore");
+        BlockState techreborn_silver_ore = getDefaultBlockState(MOD_ID,"silver_ore");
+        BlockState techreborn_tin_ore = getDefaultBlockState(MOD_ID,"tin_ore");
 
         // Nether
-        BlockState techreborn_cinnabar_ore = Registry.BLOCK.get(new Identifier("techreborn","cinnabar_ore")).getDefaultState();
-        BlockState techreborn_pyrite_ore = Registry.BLOCK.get(new Identifier("techreborn","pyrite_ore")).getDefaultState();
-        BlockState techreborn_sphalerite_ore = Registry.BLOCK.get(new Identifier("techreborn","sphalerite_ore")).getDefaultState();
+        BlockState techreborn_cinnabar_ore = getDefaultBlockState("techreborn","cinnabar_ore");
+        BlockState techreborn_pyrite_ore = getDefaultBlockState("techreborn","pyrite_ore");
+        BlockState techreborn_sphalerite_ore = getDefaultBlockState("techreborn","sphalerite_ore");
 
         // End
-        BlockState techreborn_peridot_ore = Registry.BLOCK.get(new Identifier("techreborn","peridot_ore")).getDefaultState();
-        BlockState techreborn_sheldonite_ore = Registry.BLOCK.get(new Identifier("techreborn","sheldonite_ore")).getDefaultState();
-        BlockState techreborn_sodalite_ore = Registry.BLOCK.get(new Identifier("techreborn","sodalite_ore")).getDefaultState();
-        BlockState techreborn_tungsten_ore = Registry.BLOCK.get(new Identifier("techreborn","tungsten_ore")).getDefaultState();
+        BlockState techreborn_peridot_ore = getDefaultBlockState("techreborn","peridot_ore");
+        BlockState techreborn_sheldonite_ore = getDefaultBlockState("techreborn","sheldonite_ore");
+        BlockState techreborn_sodalite_ore = getDefaultBlockState("techreborn","sodalite_ore");
+        BlockState techreborn_tungsten_ore = getDefaultBlockState("techreborn","tungsten_ore");
 
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 2.5F, new ShellSpheroidType(null, 8, 14, techreborn_rubber_log, techreborn_rubber_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
 

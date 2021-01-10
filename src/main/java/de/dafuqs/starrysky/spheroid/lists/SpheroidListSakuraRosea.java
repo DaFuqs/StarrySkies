@@ -1,14 +1,12 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroid.types.ShellSpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 
@@ -23,10 +21,10 @@ public class SpheroidListSakuraRosea extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Sakura Rosea integration...");
 
-        BlockState sakurarosea_sakura_log          = Registry.BLOCK.get(new Identifier(MOD_ID,"sakura_log")).getDefaultState();
-        BlockState sakurarosea_sakura_leaves       = Registry.BLOCK.get(new Identifier(MOD_ID,"sakura_leaves")).getDefaultState();
-        BlockState sakurarosea_alt_sakura_leaves   = Registry.BLOCK.get(new Identifier(MOD_ID,"alt_sakura_leaves")).getDefaultState();
-        BlockState sakurarosea_white_sakura_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"white_sakura_leaves")).getDefaultState();
+        BlockState sakurarosea_sakura_log          = getDefaultBlockState(MOD_ID,"sakura_log");
+        BlockState sakurarosea_sakura_leaves       = getDefaultBlockState(MOD_ID,"sakura_leaves");
+        BlockState sakurarosea_alt_sakura_leaves   = getDefaultBlockState(MOD_ID,"alt_sakura_leaves");
+        BlockState sakurarosea_white_sakura_leaves = getDefaultBlockState(MOD_ID,"white_sakura_leaves");
 
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 7, 14, sakurarosea_sakura_log, sakurarosea_sakura_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 7, 14, sakurarosea_sakura_log, sakurarosea_alt_sakura_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));

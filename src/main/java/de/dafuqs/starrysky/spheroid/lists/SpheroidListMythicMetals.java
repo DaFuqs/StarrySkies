@@ -4,8 +4,6 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.NETHER;
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
@@ -21,35 +19,35 @@ public class SpheroidListMythicMetals extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Mythic Metals integration...");
 		
-		BlockState mythicmetals_adamantite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"adamantite_ore")).getDefaultState();
-		BlockState mythicmetals_aetherium_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"aetherium_ore")).getDefaultState();
-		BlockState mythicmetals_aquarium_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"aquarium_ore")).getDefaultState();
-		BlockState mythicmetals_banglum_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"banglum_ore")).getDefaultState();
-		BlockState mythicmetals_carmot_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"carmot_ore")).getDefaultState();
-		BlockState mythicmetals_copper_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
-		BlockState mythicmetals_kyber_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"kyber_ore")).getDefaultState();
-		BlockState mythicmetals_lutetium_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"lutetium_ore")).getDefaultState();
-		BlockState mythicmetals_manganese_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"manganese_ore")).getDefaultState();
-		BlockState mythicmetals_mythril_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"mythril_ore")).getDefaultState();
-		BlockState mythicmetals_orichalcum_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"orichalcum_ore")).getDefaultState();
-		BlockState mythicmetals_osmium_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"osmium_ore")).getDefaultState();
-		BlockState mythicmetals_platinum_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"platinum_ore")).getDefaultState();
-		BlockState mythicmetals_prometheum_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"prometheum_ore")).getDefaultState();
-		BlockState mythicmetals_quadrillum_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"quadrillum_ore")).getDefaultState();
-		BlockState mythicmetals_runite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"runite_ore")).getDefaultState();
-		BlockState mythicmetals_silver_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"silver_ore")).getDefaultState();
-		BlockState mythicmetals_starrite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"starrite_ore")).getDefaultState();
-		BlockState mythicmetals_tantalite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"tantalite_ore")).getDefaultState();
-		BlockState mythicmetals_tin_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
-		BlockState mythicmetals_unobtainium_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"unobtainium_ore")).getDefaultState();
-		BlockState mythicmetals_vermiculite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"vermiculite_ore")).getDefaultState();
-		BlockState mythicmetals_zinc_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"zinc_ore")).getDefaultState();
+		BlockState mythicmetals_adamantite_ore = getDefaultBlockState(MOD_ID,"adamantite_ore");
+		BlockState mythicmetals_aetherium_ore = getDefaultBlockState(MOD_ID,"aetherium_ore");
+		BlockState mythicmetals_aquarium_ore = getDefaultBlockState(MOD_ID,"aquarium_ore");
+		BlockState mythicmetals_banglum_ore = getDefaultBlockState(MOD_ID,"banglum_ore");
+		BlockState mythicmetals_carmot_ore = getDefaultBlockState(MOD_ID,"carmot_ore");
+		BlockState mythicmetals_copper_ore = getDefaultBlockState(MOD_ID,"copper_ore");
+		BlockState mythicmetals_kyber_ore = getDefaultBlockState(MOD_ID,"kyber_ore");
+		BlockState mythicmetals_lutetium_ore = getDefaultBlockState(MOD_ID,"lutetium_ore");
+		BlockState mythicmetals_manganese_ore = getDefaultBlockState(MOD_ID,"manganese_ore");
+		BlockState mythicmetals_mythril_ore = getDefaultBlockState(MOD_ID,"mythril_ore");
+		BlockState mythicmetals_orichalcum_ore = getDefaultBlockState(MOD_ID,"orichalcum_ore");
+		BlockState mythicmetals_osmium_ore = getDefaultBlockState(MOD_ID,"osmium_ore");
+		BlockState mythicmetals_platinum_ore = getDefaultBlockState(MOD_ID,"platinum_ore");
+		BlockState mythicmetals_prometheum_ore = getDefaultBlockState(MOD_ID,"prometheum_ore");
+		BlockState mythicmetals_quadrillum_ore = getDefaultBlockState(MOD_ID,"quadrillum_ore");
+		BlockState mythicmetals_runite_ore = getDefaultBlockState(MOD_ID,"runite_ore");
+		BlockState mythicmetals_silver_ore = getDefaultBlockState(MOD_ID,"silver_ore");
+		BlockState mythicmetals_starrite_ore = getDefaultBlockState(MOD_ID,"starrite_ore");
+		BlockState mythicmetals_tantalite_ore = getDefaultBlockState(MOD_ID,"tantalite_ore");
+		BlockState mythicmetals_tin_ore = getDefaultBlockState(MOD_ID,"tin_ore");
+		BlockState mythicmetals_unobtainium_ore = getDefaultBlockState(MOD_ID,"unobtainium_ore");
+		BlockState mythicmetals_vermiculite_ore = getDefaultBlockState(MOD_ID,"vermiculite_ore");
+		BlockState mythicmetals_zinc_ore = getDefaultBlockState(MOD_ID,"zinc_ore");
 
 		// Nether
-		BlockState mythicmetals_stormyx_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"stormyx_ore")).getDefaultState();
-		BlockState mythicmetals_truesilver_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"truesilver_ore")).getDefaultState();
-		BlockState mythicmetals_ur_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"ur_ore")).getDefaultState();
-		BlockState mythicmetals_midas_gold_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"midas_gold_ore")).getDefaultState();
+		BlockState mythicmetals_stormyx_ore = getDefaultBlockState(MOD_ID,"stormyx_ore");
+		BlockState mythicmetals_truesilver_ore = getDefaultBlockState(MOD_ID,"truesilver_ore");
+		BlockState mythicmetals_ur_ore = getDefaultBlockState(MOD_ID,"ur_ore");
+		BlockState mythicmetals_midas_gold_ore = getDefaultBlockState(MOD_ID,"midas_gold_ore");
 
 		// OVERWORLD
 		spheroidLoader.registerDynamicOre(OVERWORLD, "adamantite", mythicmetals_adamantite_ore);

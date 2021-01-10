@@ -10,8 +10,6 @@ import de.dafuqs.starrysky.spheroid.types.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 
@@ -27,55 +25,55 @@ public class SpheroidListCinderscapes extends SpheroidList {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Cinderscapes integration...");
 
         // crystalline quartz blocks; as single and rainbow
-        BlockState crystalline_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"crystalline_quartz")).getDefaultState();
-        BlockState crystalline_sulfur_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"crystalline_sulfur_quartz")).getDefaultState();
-        BlockState crystalline_rose_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"crystalline_rose_quartz")).getDefaultState();
-        BlockState crystalline_smoky_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"crystalline_smoky_quartz")).getDefaultState();
+        BlockState crystalline_quartz = getDefaultBlockState(MOD_ID,"crystalline_quartz");
+        BlockState crystalline_sulfur_quartz = getDefaultBlockState(MOD_ID,"crystalline_sulfur_quartz");
+        BlockState crystalline_rose_quartz = getDefaultBlockState(MOD_ID,"crystalline_rose_quartz");
+        BlockState crystalline_smoky_quartz = getDefaultBlockState(MOD_ID,"crystalline_smoky_quartz");
 
         // quartz shards
-        /*BlockState polypite_nether_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"polypite_nether_quartz")).getDefaultState();
-        BlockState polypite_rose_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"polypite_rose_quartz")).getDefaultState();
-        BlockState polypite_smoky_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"polypite_smoky_quartz")).getDefaultState();
-        BlockState polypite_sulfur_quartz = Registry.BLOCK.get(new Identifier(MOD_ID,"polypite_sulfur_quartz")).getDefaultState();*/
+        /*BlockState polypite_nether_quartz = getDefaultBlockState(MOD_ID,"polypite_nether_quartz");
+        BlockState polypite_rose_quartz = getDefaultBlockState(MOD_ID,"polypite_rose_quartz");
+        BlockState polypite_smoky_quartz = getDefaultBlockState(MOD_ID,"polypite_smoky_quartz");
+        BlockState polypite_sulfur_quartz = getDefaultBlockState(MOD_ID,"polypite_sulfur_quartz");*/
 
         // quartz ore
-        BlockState sulfur_quartz_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"sulfur_quartz_ore")).getDefaultState();
-        BlockState rose_quartz_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"rose_quartz_ore")).getDefaultState();
-        BlockState smoky_quartz_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"smoky_quartz_ore")).getDefaultState();
+        BlockState sulfur_quartz_ore = getDefaultBlockState(MOD_ID,"sulfur_quartz_ore");
+        BlockState rose_quartz_ore = getDefaultBlockState(MOD_ID,"rose_quartz_ore");
+        BlockState smoky_quartz_ore = getDefaultBlockState(MOD_ID,"smoky_quartz_ore");
 
         // scorched wood
-        BlockState scorched_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_stem")).getDefaultState();
-        BlockState scorched_hyphae = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_hyphae")).getDefaultState();
+        BlockState scorched_stem = getDefaultBlockState(MOD_ID,"scorched_stem");
+        BlockState scorched_hyphae = getDefaultBlockState(MOD_ID,"scorched_hyphae");
 
         // Luminous grove
         // from vanilla: nether sprouts, warped fungus, crimson fungus, crimson roots, warped roots,
-        BlockState umbral_nylium = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_nylium")).getDefaultState(); // overgrown netherrack
-        BlockState twilight_fescues = Registry.BLOCK.get(new Identifier(MOD_ID,"twilight_fescues")).getDefaultState();
-        BlockState tall_fotofern = Registry.BLOCK.get(new Identifier(MOD_ID,"tall_fotofern")).getDefaultState(); // upper, lower
-        BlockState fotofern = Registry.BLOCK.get(new Identifier(MOD_ID,"fotofern")).getDefaultState();
-        BlockState twilight_tendrils = Registry.BLOCK.get(new Identifier(MOD_ID,"twilight_tendrils")).getDefaultState();
-        BlockState luminous_pod = Registry.BLOCK.get(new Identifier(MOD_ID,"luminous_pod")).getDefaultState(); // upper, lower
+        BlockState umbral_nylium = getDefaultBlockState(MOD_ID,"umbral_nylium"); // overgrown netherrack
+        BlockState twilight_fescues = getDefaultBlockState(MOD_ID,"twilight_fescues");
+        BlockState tall_fotofern = getDefaultBlockState(MOD_ID,"tall_fotofern"); // upper, lower
+        BlockState fotofern = getDefaultBlockState(MOD_ID,"fotofern");
+        BlockState twilight_tendrils = getDefaultBlockState(MOD_ID,"twilight_tendrils");
+        BlockState luminous_pod = getDefaultBlockState(MOD_ID,"luminous_pod"); // upper, lower
 
         // Twilight vines
-        BlockState twilight_vine_block = Registry.BLOCK.get(new Identifier(MOD_ID,"twilight_vine_block")).getDefaultState();
-        BlockState ghastly_ectoplasm = Registry.BLOCK.get(new Identifier(MOD_ID,"ghastly_ectoplasm")).getDefaultState(); // top, middle, bottom
+        BlockState twilight_vine_block = getDefaultBlockState(MOD_ID,"twilight_vine_block");
+        BlockState ghastly_ectoplasm = getDefaultBlockState(MOD_ID,"ghastly_ectoplasm"); // top, middle, bottom
 
         // Umbral mushroom with shroomlight speckles
-        BlockState umbral_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_stem")).getDefaultState(); // "log";
-        BlockState umbral_flesh_block = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_flesh_block")).getDefaultState(); // "branches"
-        BlockState umbral_wart_block = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_wart_block")).getDefaultState(); // "leaves"
-        // BlockState umbral_hyphae = Registry.BLOCK.get(new Identifier(MOD_ID,"umbral_hyphae")).getDefaultState() // where does this generate?
+        BlockState umbral_stem = getDefaultBlockState(MOD_ID,"umbral_stem"); // "log";
+        BlockState umbral_flesh_block = getDefaultBlockState(MOD_ID,"umbral_flesh_block"); // "branches"
+        BlockState umbral_wart_block = getDefaultBlockState(MOD_ID,"umbral_wart_block"); // "leaves"
+        // BlockState umbral_hyphae = getDefaultBlockState(MOD_ID,"umbral_hyphae")).getDefaultState() // where does this generate?
 
         // ash
-        BlockState ash_block = Registry.BLOCK.get(new Identifier(MOD_ID,"ash_block")).getDefaultState();
-        BlockState scorched_shrub = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_shrub")).getDefaultState();
-        BlockState scorched_tendrils = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_tendrils")).getDefaultState();
-        BlockState scorched_sprouts = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_sprouts")).getDefaultState();
-        BlockState pyracinth = Registry.BLOCK.get(new Identifier(MOD_ID,"pyracinth")).getDefaultState();
-        BlockState bramble_berry_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"bramble_berry_bush")).getDefaultState();
+        BlockState ash_block = getDefaultBlockState(MOD_ID,"ash_block");
+        BlockState scorched_shrub = getDefaultBlockState(MOD_ID,"scorched_shrub");
+        BlockState scorched_tendrils = getDefaultBlockState(MOD_ID,"scorched_tendrils");
+        BlockState scorched_sprouts = getDefaultBlockState(MOD_ID,"scorched_sprouts");
+        BlockState pyracinth = getDefaultBlockState(MOD_ID,"pyracinth");
+        BlockState bramble_berry_bush = getDefaultBlockState(MOD_ID,"bramble_berry_bush");
 
         // Where does it generate?
-        BlockState crystinium = Registry.BLOCK.get(new Identifier(MOD_ID,"crystinium")).getDefaultState();
+        BlockState crystinium = getDefaultBlockState(MOD_ID,"crystinium");
 
 
         SpheroidType CRYSTALLINE_QUARTZ = new ModularSpheroidType(null, 5, 10,  crystalline_quartz);

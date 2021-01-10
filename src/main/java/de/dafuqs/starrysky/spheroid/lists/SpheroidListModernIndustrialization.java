@@ -1,11 +1,9 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
-import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 
@@ -20,15 +18,15 @@ public class SpheroidListModernIndustrialization extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Modern Industrialization integration...");
 
-        BlockState modern_industrialization_copper_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"copper_ore")).getDefaultState();
-        BlockState modern_industrialization_tin_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"tin_ore")).getDefaultState();
-        BlockState modern_industrialization_lead_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"lead_ore")).getDefaultState();
-        BlockState modern_industrialization_lignite_coal_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"lignite_coal_ore")).getDefaultState();
-        BlockState modern_industrialization_nickel_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"nickel_ore")).getDefaultState();
-        BlockState modern_industrialization_salt_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"salt_ore")).getDefaultState();
-        BlockState modern_industrialization_silver_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"silver_ore")).getDefaultState();
-        BlockState modern_industrialization_antimony_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"antimony_ore")).getDefaultState();
-        BlockState modern_industrialization_bauxite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"bauxite_ore")).getDefaultState();
+        BlockState modern_industrialization_copper_ore = getDefaultBlockState(MOD_ID,"copper_ore");
+        BlockState modern_industrialization_tin_ore = getDefaultBlockState(MOD_ID,"tin_ore");
+        BlockState modern_industrialization_lead_ore = getDefaultBlockState(MOD_ID,"lead_ore");
+        BlockState modern_industrialization_lignite_coal_ore = getDefaultBlockState(MOD_ID,"lignite_coal_ore");
+        BlockState modern_industrialization_nickel_ore = getDefaultBlockState(MOD_ID,"nickel_ore");
+        BlockState modern_industrialization_salt_ore = getDefaultBlockState(MOD_ID,"salt_ore");
+        BlockState modern_industrialization_silver_ore = getDefaultBlockState(MOD_ID,"silver_ore");
+        BlockState modern_industrialization_antimony_ore = getDefaultBlockState(MOD_ID,"antimony_ore");
+        BlockState modern_industrialization_bauxite_ore = getDefaultBlockState(MOD_ID,"bauxite_ore");
 
         spheroidLoader.registerDynamicOre(OVERWORLD, "copper", modern_industrialization_copper_ore);
         spheroidLoader.registerDynamicOre(OVERWORLD, "tin", modern_industrialization_tin_ore);

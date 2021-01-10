@@ -13,8 +13,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 import static de.dafuqs.starrysky.spheroid.lists.SpheroidListVanilla.SpheroidDecorators.FERNS_DECORATOR;
@@ -31,46 +29,46 @@ public class SpheroidListTerrestria extends SpheroidList {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Terrestria integration...");
 
         // TREES
-        BlockState terrestria_redwood_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"redwood_leaves")).getDefaultState().with(ExtendedLeavesBlock.DISTANCE, 1);
-        BlockState terrestria_redwood_log = Registry.BLOCK.get(new Identifier(MOD_ID,"redwood_log")).getDefaultState();
-        BlockState terrestria_hemlock_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"hemlock_leaves")).getDefaultState().with(ExtendedLeavesBlock.DISTANCE, 1);
-        BlockState terrestria_hemlock_log = Registry.BLOCK.get(new Identifier(MOD_ID,"hemlock_log")).getDefaultState();
-        BlockState terrestria_rubber_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"rubber_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        BlockState terrestria_rubber_log = Registry.BLOCK.get(new Identifier(MOD_ID,"rubber_log")).getDefaultState();
-        BlockState terrestria_cypress_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"cypress_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        BlockState terrestria_cypress_log = Registry.BLOCK.get(new Identifier(MOD_ID,"cypress_log")).getDefaultState();
-        BlockState terrestria_willow_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"willow_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        BlockState terrestria_willow_log = Registry.BLOCK.get(new Identifier(MOD_ID,"willow_log")).getDefaultState();
-        BlockState terrestria_dark_japanese_maple_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"dark_japanese_maple_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        BlockState terrestria_japanese_maple_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"japanese_maple_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        BlockState terrestria_japanese_maple_shrub_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"japanese_maple_shrub_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        BlockState terrestria_japanese_maple_log = Registry.BLOCK.get(new Identifier(MOD_ID,"japanese_maple_log")).getDefaultState();
-        BlockState terrestria_rainbow_eucalyptus_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"rainbow_eucalyptus_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        BlockState terrestria_rainbow_eucalyptus_log = Registry.BLOCK.get(new Identifier(MOD_ID,"rainbow_eucalyptus_log")).getDefaultState();
-        BlockState terrestria_sakura_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"sakura_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        BlockState terrestria_sakura_log = Registry.BLOCK.get(new Identifier(MOD_ID,"sakura_log")).getDefaultState().with(SmallLogBlock.HAS_LEAVES, true).with(SmallLogBlock.DOWN, true).with(SmallLogBlock.UP, true).with(SmallLogBlock.SOUTH, true).with(SmallLogBlock.WEST, true).with(SmallLogBlock.EAST, true).with(SmallLogBlock.NORTH, true);
-        BlockState terrestria_yucca_palm_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"yucca_palm_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        BlockState terrestria_yucca_palm_log = Registry.BLOCK.get(new Identifier(MOD_ID,"yucca_palm_log")).getDefaultState().with(SmallLogBlock.HAS_LEAVES, true).with(SmallLogBlock.DOWN, true).with(SmallLogBlock.UP, true).with(SmallLogBlock.SOUTH, true).with(SmallLogBlock.WEST, true).with(SmallLogBlock.EAST, true).with(SmallLogBlock.NORTH, true);
-        BlockState terrestria_jungle_palm_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"jungle_palm_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_redwood_leaves = getDefaultBlockState(MOD_ID,"redwood_leaves").with(ExtendedLeavesBlock.DISTANCE, 1);
+        BlockState terrestria_redwood_log = getDefaultBlockState(MOD_ID,"redwood_log");
+        BlockState terrestria_hemlock_leaves = getDefaultBlockState(MOD_ID,"hemlock_leaves").with(ExtendedLeavesBlock.DISTANCE, 1);
+        BlockState terrestria_hemlock_log = getDefaultBlockState(MOD_ID,"hemlock_log");
+        BlockState terrestria_rubber_leaves = getDefaultBlockState(MOD_ID,"rubber_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_rubber_log = getDefaultBlockState(MOD_ID,"rubber_log");
+        BlockState terrestria_cypress_leaves = getDefaultBlockState(MOD_ID,"cypress_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_cypress_log = getDefaultBlockState(MOD_ID,"cypress_log");
+        BlockState terrestria_willow_leaves = getDefaultBlockState(MOD_ID,"willow_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_willow_log = getDefaultBlockState(MOD_ID,"willow_log");
+        BlockState terrestria_dark_japanese_maple_leaves = getDefaultBlockState(MOD_ID,"dark_japanese_maple_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_japanese_maple_leaves = getDefaultBlockState(MOD_ID,"japanese_maple_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_japanese_maple_shrub_leaves = getDefaultBlockState(MOD_ID,"japanese_maple_shrub_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_japanese_maple_log = getDefaultBlockState(MOD_ID,"japanese_maple_log");
+        BlockState terrestria_rainbow_eucalyptus_leaves = getDefaultBlockState(MOD_ID,"rainbow_eucalyptus_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_rainbow_eucalyptus_log = getDefaultBlockState(MOD_ID,"rainbow_eucalyptus_log");
+        BlockState terrestria_sakura_leaves = getDefaultBlockState(MOD_ID,"sakura_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_sakura_log = getDefaultBlockState(MOD_ID,"sakura_log").with(SmallLogBlock.HAS_LEAVES, true).with(SmallLogBlock.DOWN, true).with(SmallLogBlock.UP, true).with(SmallLogBlock.SOUTH, true).with(SmallLogBlock.WEST, true).with(SmallLogBlock.EAST, true).with(SmallLogBlock.NORTH, true);
+        BlockState terrestria_yucca_palm_leaves = getDefaultBlockState(MOD_ID,"yucca_palm_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState terrestria_yucca_palm_log = getDefaultBlockState(MOD_ID,"yucca_palm_log").with(SmallLogBlock.HAS_LEAVES, true).with(SmallLogBlock.DOWN, true).with(SmallLogBlock.UP, true).with(SmallLogBlock.SOUTH, true).with(SmallLogBlock.WEST, true).with(SmallLogBlock.EAST, true).with(SmallLogBlock.NORTH, true);
+        BlockState terrestria_jungle_palm_leaves = getDefaultBlockState(MOD_ID,"jungle_palm_leaves").with(LeavesBlock.DISTANCE, 1);
 
         // VOLCANIC STONES
-        BlockState terrestria_basalt = Registry.BLOCK.get(new Identifier(MOD_ID,"basalt")).getDefaultState();
-        BlockState terrestria_basalt_cobblestone = Registry.BLOCK.get(new Identifier(MOD_ID,"basalt_cobblestone")).getDefaultState();
-        BlockState terrestria_mossy_basalt_cobblestone = Registry.BLOCK.get(new Identifier(MOD_ID,"mossy_basalt_cobblestone")).getDefaultState();
-        BlockState terrestria_basalt_sand = Registry.BLOCK.get(new Identifier(MOD_ID,"basalt_sand")).getDefaultState(); // "black sand"
-        BlockState terrestria_basalt_dirt = Registry.BLOCK.get(new Identifier(MOD_ID,"basalt_dirt")).getDefaultState(); // "andisoil"
-        BlockState terrestria_basalt_grass_block = Registry.BLOCK.get(new Identifier(MOD_ID,"basalt_grass_block")).getDefaultState(); // on top of basalt dirt
-        BlockState terrestria_basalt_podzol = Registry.BLOCK.get(new Identifier(MOD_ID,"basalt_podzol")).getDefaultState(); // on top of basalt dirt
+        BlockState terrestria_basalt = getDefaultBlockState(MOD_ID,"basalt");
+        BlockState terrestria_basalt_cobblestone = getDefaultBlockState(MOD_ID,"basalt_cobblestone");
+        BlockState terrestria_mossy_basalt_cobblestone = getDefaultBlockState(MOD_ID,"mossy_basalt_cobblestone");
+        BlockState terrestria_basalt_sand = getDefaultBlockState(MOD_ID,"basalt_sand"); // "black sand"
+        BlockState terrestria_basalt_dirt = getDefaultBlockState(MOD_ID,"basalt_dirt"); // "andisoil"
+        BlockState terrestria_basalt_grass_block = getDefaultBlockState(MOD_ID,"basalt_grass_block"); // on top of basalt dirt
+        BlockState terrestria_basalt_podzol = getDefaultBlockState(MOD_ID,"basalt_podzol"); // on top of basalt dirt
 
         // SHRUBS - purely decorative
-        BlockState terrestria_saguaro_cactus = Registry.BLOCK.get(new Identifier(MOD_ID,"saguaro_cactus")).getDefaultState(); // very dynamic cactus
-        BlockState terrestria_cattail = Registry.BLOCK.get(new Identifier(MOD_ID,"cattail")).getDefaultState(); // in water
-        BlockState terrestria_indian_paintbrush = Registry.BLOCK.get(new Identifier(MOD_ID,"indian_paintbrush")).getDefaultState(); // on basalt_grass
-        BlockState terrestria_monsteras = Registry.BLOCK.get(new Identifier(MOD_ID,"monsteras")).getDefaultState();
-        BlockState terrestria_tiny_cactus = Registry.BLOCK.get(new Identifier(MOD_ID,"tiny_cactus")).getDefaultState();
-        BlockState terrestria_agave = Registry.BLOCK.get(new Identifier(MOD_ID,"agave")).getDefaultState();
-        BlockState terrestria_aloe_vera = Registry.BLOCK.get(new Identifier(MOD_ID,"aloe_vera")).getDefaultState();
-        BlockState terrestria_dead_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"dead_grass")).getDefaultState();
+        BlockState terrestria_saguaro_cactus = getDefaultBlockState(MOD_ID,"saguaro_cactus"); // very dynamic cactus
+        BlockState terrestria_cattail = getDefaultBlockState(MOD_ID,"cattail"); // in water
+        BlockState terrestria_indian_paintbrush = getDefaultBlockState(MOD_ID,"indian_paintbrush"); // on basalt_grass
+        BlockState terrestria_monsteras = getDefaultBlockState(MOD_ID,"monsteras");
+        BlockState terrestria_tiny_cactus = getDefaultBlockState(MOD_ID,"tiny_cactus");
+        BlockState terrestria_agave = getDefaultBlockState(MOD_ID,"agave");
+        BlockState terrestria_aloe_vera = getDefaultBlockState(MOD_ID,"aloe_vera");
+        BlockState terrestria_dead_grass = getDefaultBlockState(MOD_ID,"dead_grass");
 
         PlantDecorator terrestria_saguaro_cactus_decorator = new PlantDecorator(terrestria_saguaro_cactus, 0.1F); // TODO on top of sand
         PlantDecorator terrestria_cattail_decorator = new PlantDecorator(terrestria_cattail, 0.1F); // TODO single block, in water

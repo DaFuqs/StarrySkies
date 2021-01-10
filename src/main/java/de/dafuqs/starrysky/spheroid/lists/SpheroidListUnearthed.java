@@ -1,14 +1,12 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
-import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
-import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
+import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
+import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.spheroid.types.CoreSpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 
@@ -43,16 +41,16 @@ public class SpheroidListUnearthed extends SpheroidList {
         }};
 
         for(String stone : stones) {
-            BlockState stoneBlockState = Registry.BLOCK.get(new Identifier(MOD_ID, stone)).getDefaultState();
+            BlockState stoneBlockState = getDefaultBlockState(MOD_ID, stone);
 
             // Probabilities are 1/10th of the vanilla counterparts
-            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.9F,  new CoreSpheroidType(SpheroidAdvancementIdentifier.coal, 5, 15, Registry.BLOCK.get(new Identifier(MOD_ID,stone + "_coal_ore")).getDefaultState(), stoneBlockState, 4, 8)); // works?
-            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.5F,  new CoreSpheroidType(SpheroidAdvancementIdentifier.iron, 5, 12, Registry.BLOCK.get(new Identifier(MOD_ID,stone + "_iron_ore")).getDefaultState(), stoneBlockState, 3, 5));
-            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.1F,  new CoreSpheroidType(SpheroidAdvancementIdentifier.gold, 5, 10, Registry.BLOCK.get(new Identifier(MOD_ID,stone + "_gold_ore")).getDefaultState(), stoneBlockState, 2, 4));
-            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.08F, new CoreSpheroidType(SpheroidAdvancementIdentifier.lapis, 5, 8, Registry.BLOCK.get(new Identifier(MOD_ID,stone + "_lapis_ore")).getDefaultState(), stoneBlockState, 2, 4));
-            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.4F,  new CoreSpheroidType(SpheroidAdvancementIdentifier.redstone, 5, 15, Registry.BLOCK.get(new Identifier(MOD_ID,stone + "_redstone_ore")).getDefaultState(), stoneBlockState, 4, 8)); // broken?
-            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.05F, new CoreSpheroidType(SpheroidAdvancementIdentifier.diamond, 3, 7, Registry.BLOCK.get(new Identifier(MOD_ID,stone + "_diamond_ore")).getDefaultState(), stoneBlockState, 1, 3));
-            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.01F, new CoreSpheroidType(SpheroidAdvancementIdentifier.emerald, 5, 6, Registry.BLOCK.get(new Identifier(MOD_ID,stone + "_emerald_ore")).getDefaultState(), stoneBlockState, 1, 3));
+            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.9F,  new CoreSpheroidType(SpheroidAdvancementIdentifier.coal, 5, 15, getDefaultBlockState(MOD_ID,stone + "_coal_ore"), stoneBlockState, 4, 8)); // works?
+            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.5F,  new CoreSpheroidType(SpheroidAdvancementIdentifier.iron, 5, 12, getDefaultBlockState(MOD_ID,stone + "_iron_ore"), stoneBlockState, 3, 5));
+            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.1F,  new CoreSpheroidType(SpheroidAdvancementIdentifier.gold, 5, 10, getDefaultBlockState(MOD_ID,stone + "_gold_ore"), stoneBlockState, 2, 4));
+            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.08F, new CoreSpheroidType(SpheroidAdvancementIdentifier.lapis, 5, 8, getDefaultBlockState(MOD_ID,stone + "_lapis_ore"), stoneBlockState, 2, 4));
+            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.4F,  new CoreSpheroidType(SpheroidAdvancementIdentifier.redstone, 5, 15, getDefaultBlockState(MOD_ID,stone + "_redstone_ore"), stoneBlockState, 4, 8)); // broken?
+            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.05F, new CoreSpheroidType(SpheroidAdvancementIdentifier.diamond, 3, 7, getDefaultBlockState(MOD_ID,stone + "_diamond_ore"), stoneBlockState, 1, 3));
+            spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.01F, new CoreSpheroidType(SpheroidAdvancementIdentifier.emerald, 5, 6, getDefaultBlockState(MOD_ID,stone + "_emerald_ore"), stoneBlockState, 1, 3));
 
         }
 

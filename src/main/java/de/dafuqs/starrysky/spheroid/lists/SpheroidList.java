@@ -1,14 +1,30 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CoralParentBlock;
 import net.minecraft.block.SeaPickleBlock;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public abstract class SpheroidList {
+
+    protected static BlockState getDefaultBlockState(String modId, String string) {
+        BlockState blockState = Registry.BLOCK.get(new Identifier(modId, string)).getDefaultState();
+
+        // So mod compat problems can be easily debugged
+        if(blockState.getBlock() == Blocks.AIR && !string.equals("air")) {
+            StarrySkyCommon.LOGGER.log(Level.ERROR, "[StarrySky] Block " + modId + ":" + string + " does not exist! It will be treated as air");
+        }
+
+        return blockState;
+    }
+
 
     //COMMONLY USED LISTS
     public static final LinkedHashMap<BlockState, Float> MAP_STONES = new LinkedHashMap<BlockState, Float>() {{
