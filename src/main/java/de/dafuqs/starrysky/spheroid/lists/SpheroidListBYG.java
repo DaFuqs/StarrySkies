@@ -531,40 +531,103 @@ public class SpheroidListBYG extends SpheroidList {
                 .addShellSpeckles(Blocks.SHROOMLIGHT.getDefaultState(), 0.05F);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 0.5F, SYTHIAN_WART);
 
+        // WARPED DESERT
+        BlockState soul_shroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"soul_shroom_block")).getDefaultState();
+        BlockState soul_shroom_spore = Registry.BLOCK.get(new Identifier(MOD_ID,"soul_shroom_spore")).getDefaultState(); // TODO: has soul_shroom_spore_end at bottom
+        UnderPlantDecorator SOUL_SHROOM_SPORE_DECORATOR = new UnderPlantDecorator(soul_shroom_spore, 0.1F);
 
+        BlockState nylium_soul_sand = Registry.BLOCK.get(new Identifier(MOD_ID,"nylium_soul_sand")).getDefaultState();
+        BlockState warped_cactus = Registry.BLOCK.get(new Identifier(MOD_ID,"warped_cactus")).getDefaultState();
+        CactusDecorator WARPED_CACTUS_DECORATOR = new CactusDecorator(warped_cactus);
+        BlockState warped_coral = Registry.BLOCK.get(new Identifier(MOD_ID,"warped_coral")).getDefaultState();
+        PlantDecorator WARPED_CORAL_DECORATOR = new PlantDecorator(warped_coral, 0.05F);
+        BlockState warped_coral_fan = Registry.BLOCK.get(new Identifier(MOD_ID,"warped_coral_fan")).getDefaultState();
+        PlantDecorator WARPED_CORAL_FAN_DECORATOR = new PlantDecorator(warped_coral_fan, 0.02F);
+        SpheroidType NYLIUM_SOUL_SAND = new ShellSpheroidType(null, 10, 16, nylium_soul_sand, nylium_soul_sand, 1, 1)
+                .addShellSpeckles(soul_shroom_block, 0.05F)
+                .addDecorator(WARPED_CACTUS_DECORATOR, 0.9F)
+                .addDecorator(WARPED_CORAL_DECORATOR, 0.8F)
+                .addDecorator(WARPED_CORAL_FAN_DECORATOR, 0.7F)
+                .addDecorator(SOUL_SHROOM_SPORE_DECORATOR, 0.6F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, NYLIUM_SOUL_SAND);
 
+        BlockState nylium_soul_soil = Registry.BLOCK.get(new Identifier(MOD_ID,"nylium_soul_soil")).getDefaultState();
+        SpheroidType NYLIUM_SOUL_SOIL = new ShellSpheroidType(null, 10, 16, nylium_soul_soil, nylium_soul_soil, 1, 1)
+                .addShellSpeckles(soul_shroom_block, 0.05F)
+                .addDecorator(SpheroidListVanillaNether.SpheroidDecorators.SOUL_FIRE, 0.9F)
+                .addDecorator(WARPED_CACTUS_DECORATOR, 0.8F)
+                .addDecorator(WARPED_CORAL_DECORATOR, 0.7F)
+                .addDecorator(WARPED_CORAL_FAN_DECORATOR, 0.6F)
+                .addDecorator(SOUL_SHROOM_SPORE_DECORATOR, 0.5F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, NYLIUM_SOUL_SOIL);
 
-        //#############
+        BlockState warped_coral_block = Registry.BLOCK.get(new Identifier(MOD_ID,"warped_coral_block")).getDefaultState();
+        SpheroidType WARPED_CORAL_BLOCK = new ModularSpheroidType(null, 5, 7, warped_coral_block);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.4F, WARPED_CORAL_BLOCK);
 
-
-        BlockState death_cap = Registry.BLOCK.get(new Identifier(MOD_ID,"death_cap")).getDefaultState(); // mushroom
-        PlantDecorator DEATH_CAP_DECORATOR = new PlantDecorator(death_cap, 0.09F);
-
-
-        // WOOD
-        BlockState aspen_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_leaves")).getDefaultState().with(Properties.DISTANCE_1_7, 1);
-        BlockState aspen_log = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_log")).getDefaultState();
-
-        BlockState lament_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_leaves")).getDefaultState().with(Properties.DISTANCE_1_7, 1); // has shroomlights
-        BlockState lament_log = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_log")).getDefaultState();
-
-        BlockState lament_vine_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_vine_plant")).getDefaultState(); // hanging from netherrack
-        // soapstone is nether only?
-
-        BlockState magmatic_stone = Registry.BLOCK.get(new Identifier(MOD_ID,"magmatic_stone")).getDefaultState();
-        BlockState scorched_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_bush")).getDefaultState(); // on magmatic stone
-
+        // WAILING GARTH
         BlockState overgrown_netherrack = Registry.BLOCK.get(new Identifier(MOD_ID,"overgrown_netherrack")).getDefaultState();
         BlockState whaling_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"whaling_grass")).getDefaultState(); // on overgrown netherrack
+        PlantDecorator WHALING_GRASS_DECORATOR = new PlantDecorator(whaling_grass, 0.1F);
+        BlockState scorched_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_bush")).getDefaultState();
+        PlantDecorator SCORCHED_BUSH_DECORATOR = new PlantDecorator(scorched_bush, 0.05F);
+        BlockState scorched_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_grass")).getDefaultState();
+        PlantDecorator SCORCHED_GRASS_DECORATOR = new PlantDecorator(scorched_grass, 0.1F);
+
+        SpheroidType WAILING_GARTH = new ModularSpheroidType(null, 7, 14, Blocks.NETHERRACK.getDefaultState())
+                .setTopBlockState(overgrown_netherrack)
+                .addDecorator(WHALING_GRASS_DECORATOR, 0.9F)
+                .addDecorator(SpheroidListVanillaNether.SpheroidDecorators.NETHER_SPROUTS, 0.7F)
+                .addDecorator(SCORCHED_BUSH_DECORATOR, 0.5F)
+                .addDecorator(SCORCHED_GRASS_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.4F, WAILING_GARTH);
+
+        BlockState black_puff_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"black_puff_mushroom_block")).getDefaultState();
+        BlockState brown_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"brown_mushroom_block")).getDefaultState();
+        SpheroidType BROWN_MUSHROOM = new MushroomSpheroidType (null, 6, 14, black_puff_mushroom_block, brown_mushroom_block, 2, 2);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 0.3F, BROWN_MUSHROOM);
+
+        BlockState white_mushroom_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"white_mushroom_stem")).getDefaultState();
+        BlockState green_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"green_mushroom_block")).getDefaultState();
+        SpheroidType GREEN_MUSHROOM = new MushroomSpheroidType (null, 6, 14, white_mushroom_stem, green_mushroom_block, 2, 2);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 0.3F, GREEN_MUSHROOM);
 
         BlockState mushroom_stem = Blocks.MUSHROOM_STEM.getDefaultState();
         BlockState weeping_milkcap_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"weeping_milkcap_mushroom_block")).getDefaultState();
-        BlockState green_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"green_mushroom_block")).getDefaultState();
+        SpheroidType WEEPING_MILKCAP = new MushroomSpheroidType (null, 6, 14, mushroom_stem, weeping_milkcap_mushroom_block, 2, 2);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 0.3F, WEEPING_MILKCAP);
 
         BlockState brown_mushroom_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"brown_mushroom_stem")).getDefaultState();
-        BlockState black_puff_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"black_puff_mushroom_block")).getDefaultState();
+        BlockState wood_blewit_mushroom_block = Registry.BLOCK.get(new Identifier(MOD_ID,"wood_blewit_mushroom_block")).getDefaultState();
+        SpheroidType BLEWIT_MUSHROOM = new MushroomSpheroidType (null, 6, 14, brown_mushroom_stem, wood_blewit_mushroom_block, 2, 2);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 0.3F, BLEWIT_MUSHROOM);
 
+        // WITHERING WOODS
+        BlockState withering_oak_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_leaves")).getDefaultState().with(Properties.DISTANCE_1_7, 1);
+        BlockState withering_oak_log = Registry.BLOCK.get(new Identifier(MOD_ID,"withering_oak_log")).getDefaultState();
+        SpheroidType WITHERING_WOOD = new ShellSpheroidType(null, 7, 13, withering_oak_log, withering_oak_leaves, 2, 3);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 0.4F, WITHERING_WOOD);
 
+        BlockState magmatic_stone = Registry.BLOCK.get(new Identifier(MOD_ID,"magmatic_stone")).getDefaultState();
+        SpheroidType MAGMATIC_STONE = new ModularSpheroidType(null, 7, 13, magmatic_stone);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.6F, MAGMATIC_STONE);
+
+        // WEEPING MIRE
+        BlockState lament_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_leaves")).getDefaultState().with(Properties.DISTANCE_1_7, 1);
+        BlockState lament_log = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_log")).getDefaultState();
+        SpheroidType LAMENT_WOOD = new ShellSpheroidType(null, 7, 10, lament_log, lament_leaves, 2, 3)
+                .addShellSpeckles(Blocks.SHROOMLIGHT.getDefaultState(), 0.05F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, LAMENT_WOOD);
+
+        BlockState lament_vine_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_vine_plant")).getDefaultState(); // hanging from netherrack
+        // BlockState lament_vine = Registry.BLOCK.get(new Identifier(MOD_ID,"lament_vine_plant")).getDefaultState(); // on bottom ov lament vine
+        UnderPlantDecorator LAMENT_VINE_DECORATOR = new UnderPlantDecorator(lament_vine_plant, 0.1F);
+        WAILING_GARTH.addDecorator(LAMENT_VINE_DECORATOR, 0.15F);
+
+        // ADDING TO VANILLA
+        BlockState death_cap = Registry.BLOCK.get(new Identifier(MOD_ID,"death_cap")).getDefaultState(); // mushroom
+        PlantDecorator DEATH_CAP_DECORATOR = new PlantDecorator(death_cap, 0.09F);
+        SpheroidListVanillaNether.NETHERRACK.addDecorator(DEATH_CAP_DECORATOR, 0.1F);
     }
 
     private static void setupEnd(SpheroidLoader spheroidLoader) {
