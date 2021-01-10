@@ -292,7 +292,7 @@ public class SpheroidListBetterNether extends SpheroidList {
         SpheroidType BLUE_OBSIDIAN_GLASS = new ShellSpheroidType(null, 8, 20, blue_obsidian, blue_obsidian_glass, 2, 4)
                 .addShellSpeckles(blue_obsidian, 0.1F);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, BLUE_OBSIDIAN_GLASS);
-        
+
         // TODO
         BlockState nether_reed = Registry.BLOCK.get(new Identifier(MOD_ID,"nether_reed")).getDefaultState(); // top: true / false; next to lava
         BlockState moss_cover = Registry.BLOCK.get(new Identifier(MOD_ID,"moss_cover")).getDefaultState(); // on anchor tree tops
