@@ -7,10 +7,12 @@ import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.CactusDecorator;
 import de.dafuqs.starrysky.dimension.decorators.DoublePlantDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
+import de.dafuqs.starrysky.dimension.decorators.UnderPlantDecorator;
 import de.dafuqs.starrysky.spheroid.types.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -467,7 +469,13 @@ public class SpheroidListBYG extends SpheroidList {
 
     private static void setupEnd(SpheroidLoader spheroidLoader) {
         BlockState end_stone = Blocks.END_STONE.getDefaultState();
+
         BlockState purpur_stone = Registry.BLOCK.get(new Identifier(MOD_ID,"purpur_stone")).getDefaultState();
+        SpheroidType PURPUR_STONE_SMALL = new ModularSpheroidType(null, 4, 8, purpur_stone);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ESSENTIAL, 0.5F, PURPUR_STONE_SMALL);
+
+        SpheroidType PURPUR_STONE_BIG = new ModularSpheroidType(null, 9, 17, purpur_stone);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ESSENTIAL, 0.5F, PURPUR_STONE_BIG);
 
         // SHATTERED DESERT
         BlockState white_sand = Registry.BLOCK.get(new Identifier(MOD_ID,"white_sand")).getDefaultState();
@@ -482,6 +490,128 @@ public class SpheroidListBYG extends SpheroidList {
             .addDecorator(ODDITY_CACTUS_DECORATOR, 0.9F);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, SHATTERED_DESERT);
 
+        BlockState black_sand = Registry.BLOCK.get(new Identifier(MOD_ID,"black_sand")).getDefaultState();
+        BlockState black_sandstone = Registry.BLOCK.get(new Identifier(MOD_ID,"black_sandstone")).getDefaultState();
+        SpheroidType BLACK_SAND = new ModularSpheroidType(null, 8, 13, black_sand)
+                .setBottomBlockState(black_sandstone);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.4F, BLACK_SAND);
+
+        // NIGHTSHADE FOREST
+        BlockState nightshade_phylium = Registry.BLOCK.get(new Identifier(MOD_ID,"nightshade_phylium")).getDefaultState();
+        BlockState shade_sprouts = Registry.BLOCK.get(new Identifier(MOD_ID,"shade_sprouts")).getDefaultState(); // plant
+        PlantDecorator SHADE_SPROUTS_DECORATOR = new PlantDecorator(shade_sprouts, 0.2F);
+        BlockState nightshade_roots = Registry.BLOCK.get(new Identifier(MOD_ID,"nightshade_roots")).getDefaultState(); // double plant
+        DoublePlantDecorator NIGHTSHADE_ROOTS_DECORATOR = new DoublePlantDecorator(nightshade_roots, 0.1F);
+        SpheroidType NIGHTSHADE_FOREST = new ModularSpheroidType(null, 8, 13, end_stone)
+                .setTopBlockState(nightshade_phylium)
+                .addDecorator(SHADE_SPROUTS_DECORATOR, 0.9F)
+                .addDecorator(NIGHTSHADE_ROOTS_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, NIGHTSHADE_FOREST);
+
+        BlockState nightshade_log = Registry.BLOCK.get(new Identifier(MOD_ID,"nightshade_log")).getDefaultState();
+        BlockState nightshade_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"nightshade_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
+        SpheroidType NIGHTSHADE_WOOD = new ShellSpheroidType(null, 6, 9, nightshade_log, nightshade_leaves, 2, 4);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.3F, NIGHTSHADE_WOOD);
+
+        // IVIS FIELDS + ETHEREAL ISLANDS
+        BlockState ivis_phylium = Registry.BLOCK.get(new Identifier(MOD_ID,"ivis_phylium")).getDefaultState();
+        BlockState ivis_roots = Registry.BLOCK.get(new Identifier(MOD_ID,"ivis_roots")).getDefaultState();
+        PlantDecorator IVIS_ROOTS_DECORATOR = new PlantDecorator(ivis_roots, 0.15F);
+        BlockState ether_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"ether_bush")).getDefaultState();
+        PlantDecorator ETHER_BUSH_DECORATOR = new PlantDecorator(ether_bush, 0.04F);
+
+        SpheroidType IVIS_FIELDS = new ModularSpheroidType(null, 6, 14, end_stone)
+                .setTopBlockState(ivis_phylium)
+                .addDecorator(IVIS_ROOTS_DECORATOR, 0.9F)
+                .addDecorator(ETHER_BUSH_DECORATOR, 0.4F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, IVIS_FIELDS);
+
+        BlockState bulbis_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"bulbis_stem")).getDefaultState();
+        BlockState bulbis_shell = Registry.BLOCK.get(new Identifier(MOD_ID,"bulbis_shell")).getDefaultState();
+        SpheroidType BULBIS = new MushroomSpheroidType (null, 6, 14, bulbis_stem, bulbis_shell, 2, 2);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.3F, BULBIS);
+
+        BlockState purple_bulbis_shell = Registry.BLOCK.get(new Identifier(MOD_ID,"purple_bulbis_shell")).getDefaultState();
+        SpheroidType PURPLE_BULBIS = new MushroomSpheroidType (null, 6, 14, bulbis_stem, purple_bulbis_shell, 2, 2);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.3F, PURPLE_BULBIS);
+
+        // CRYPTIC WASTES
+        BlockState cryptic_stone = Registry.BLOCK.get(new Identifier(MOD_ID,"cryptic_stone")).getDefaultState();
+        BlockState cryptic_magma_block = Registry.BLOCK.get(new Identifier(MOD_ID,"cryptic_magma_block")).getDefaultState();
+        BlockState cryptic_fire = Registry.BLOCK.get(new Identifier(MOD_ID,"cryptic_fire")).getDefaultState();
+        PlantDecorator CRYPTIC_FIRE_DECORATOR = new PlantDecorator(cryptic_fire, 0.15F);
+        BlockState scorched_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_bush")).getDefaultState();
+        PlantDecorator SCORCHED_BUSH_DECORATOR = new PlantDecorator(scorched_bush, 0.1F);
+        BlockState scorched_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"scorched_grass")).getDefaultState();
+        PlantDecorator SCORCHED_GRASS_DECORATOR = new PlantDecorator(scorched_grass, 0.05F);
+
+        SpheroidType CRYPTIC_WASTES = new ShellSpheroidType(null, 8, 15, cryptic_stone, cryptic_stone, 1, 1)
+                .addShellSpeckles(cryptic_magma_block, 0.2F)
+                .addDecorator(CRYPTIC_FIRE_DECORATOR, 0.9F)
+                .addDecorator(SCORCHED_BUSH_DECORATOR, 0.9F)
+                .addDecorator(SCORCHED_GRASS_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, CRYPTIC_WASTES);
+
+        // ETHEREAL ISLANDS
+        BlockState ether_stone = Registry.BLOCK.get(new Identifier(MOD_ID,"ether_stone")).getDefaultState();
+        BlockState lignite_ore = Registry.BLOCK.get(new Identifier(MOD_ID,"lignite_ore")).getDefaultState();
+        SpheroidType LIGNITE_ORE = new CoreSpheroidType(null, 8, 15, lignite_ore, ether_stone, 4, 6);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ORE, 0.5F, LIGNITE_ORE);
+        SpheroidType ETHER_STONE = new CoreSpheroidType(null, 8, 15, ether_stone, ether_stone, 1, 1);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, ETHER_STONE);
+
+        BlockState ether_soil = Registry.BLOCK.get(new Identifier(MOD_ID,"ether_soil")).getDefaultState();
+        BlockState ether_phylium = Registry.BLOCK.get(new Identifier(MOD_ID,"ether_phylium")).getDefaultState();
+        BlockState thereal_bellflower = Registry.BLOCK.get(new Identifier(MOD_ID,"thereal_bellflower")).getDefaultState();
+        PlantDecorator THEREAL_BELLFOWER_DECORATOR = new PlantDecorator(thereal_bellflower, 0.03F);
+        BlockState ether_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"ether_grass")).getDefaultState();
+        PlantDecorator ETHER_GRASS_DECORATOR = new PlantDecorator(ether_grass, 0.15F);
+
+        SpheroidType ETHER_SOIL = new ModularSpheroidType(null, 6, 10, ether_soil)
+                .setTopBlockState(ether_phylium)
+                .addDecorator(THEREAL_BELLFOWER_DECORATOR, 0.9F)
+                .addDecorator(ETHER_GRASS_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, ETHER_SOIL);
+
+        BlockState ether_log = Registry.BLOCK.get(new Identifier(MOD_ID,"ether_log")).getDefaultState();
+        BlockState ether_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"ether_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
+        SpheroidType ETHER_WOOD = new ShellSpheroidType(null, 6, 8, ether_log, ether_leaves, 3, 4);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, ETHER_WOOD);
+
+        // VISCAL ISLES
+        SpheroidType ETHER_WOOD_WITHOUT_LEAVES = new ModularSpheroidType(null, 6, 8, ether_log);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, ETHER_WOOD_WITHOUT_LEAVES);
+        BlockState vermilion_sculk = Registry.BLOCK.get(new Identifier(MOD_ID,"vermilion_sculk")).getDefaultState();
+        BlockState vermilion_sculk_growth = Registry.BLOCK.get(new Identifier(MOD_ID,"vermilion_sculk_growth")).getDefaultState();
+        PlantDecorator VERMILION_SCOLK_GROWTH_DECORATOR = new PlantDecorator(vermilion_sculk_growth, 0.15F);
+        BlockState therium_crystal = Registry.BLOCK.get(new Identifier(MOD_ID,"therium_crystal")).getDefaultState();
+        PlantDecorator THERIUM_CRYSTAL_DECORATOR = new PlantDecorator(therium_crystal, 0.1F);
+
+        SpheroidType VISCAL_ISLES = new ModularSpheroidType(null, 6, 10, ether_stone)
+                .setTopBlockState(vermilion_sculk)
+                .addDecorator(VERMILION_SCOLK_GROWTH_DECORATOR, 0.9F)
+                .addDecorator(THERIUM_CRYSTAL_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, VISCAL_ISLES);
+
+        // SHULKREN FOREST
+        BlockState shulkren_phylium = Registry.BLOCK.get(new Identifier(MOD_ID,"shulkren_phylium")).getDefaultState();
+        BlockState shulkren_fungus = Registry.BLOCK.get(new Identifier(MOD_ID,"shulkren_fungus")).getDefaultState();
+        PlantDecorator SHULKREN_FUNGUS_DECORATOR = new PlantDecorator(shulkren_fungus, 0.15F);
+        SpheroidType SHULKREN_FOREST = new ModularSpheroidType(null, 6, 10, end_stone)
+                .setTopBlockState(shulkren_phylium)
+                .addDecorator(SHULKREN_FUNGUS_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, SHULKREN_FOREST);
+
+        BlockState white_mushroom_stem = Registry.BLOCK.get(new Identifier(MOD_ID,"white_mushroom_stem")).getDefaultState();
+        BlockState shulkren_wart_block = Registry.BLOCK.get(new Identifier(MOD_ID,"shulkren_wart_block")).getDefaultState();
+        BlockState purple_shroomlight = Registry.BLOCK.get(new Identifier(MOD_ID,"purple_shroomlight")).getDefaultState();
+        BlockState shulkren_vine_plant = Registry.BLOCK.get(new Identifier(MOD_ID,"shulkren_vine_plant")).getDefaultState();
+        UnderPlantDecorator SHULKREN_VINE_DECORATOR = new UnderPlantDecorator(shulkren_vine_plant, 0.1F);
+
+        SpheroidType SHULKREN_WART = new ShellSpheroidType(null, 7, 10, white_mushroom_stem, shulkren_wart_block, 1, 3)
+                .addShellSpeckles(purple_shroomlight, 0.1F)
+                .addDecorator(SHULKREN_VINE_DECORATOR, 0.9F);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, SHULKREN_WART);
 
 
     }

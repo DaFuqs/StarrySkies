@@ -146,7 +146,7 @@ public class SpheroidListBetterEnd extends SpheroidList {
         SpheroidType ENDER_ORE = new CoreSpheroidType(null, 6, 14, ender_ore, end_stone, 2, 4);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ORE, 0.5F, ENDER_ORE);
 
-        // ?? TODO
+        // CAVE
         BlockState cave_moss = Registry.BLOCK.get(new Identifier(MOD_ID,"cave_moss")).getDefaultState();
         BlockState cave_grass = Registry.BLOCK.get(new Identifier(MOD_ID,"cave_grass")).getDefaultState();
         BlockState cave_bush = Registry.BLOCK.get(new Identifier(MOD_ID,"cave_bush")).getDefaultState();
@@ -160,9 +160,11 @@ public class SpheroidListBetterEnd extends SpheroidList {
         // PYTADENDRON
         BlockState pythadendron_log = Registry.BLOCK.get(new Identifier(MOD_ID,"pythadendron_log")).getDefaultState();
         BlockState pythadendron_leaves = Registry.BLOCK.get(new Identifier(MOD_ID,"pythadendron_leaves")).getDefaultState().with(LeavesBlock.DISTANCE, 1);
-        SpheroidType PYTHADENDRON_WOOD = new ShellSpheroidType(null, 10, 17, pythadendron_log, pythadendron_leaves, 2, 4);
-        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.3F, PYTHADENDRON_WOOD);
+        SpheroidType PYTHADENDRON_BUSH = new ShellSpheroidType(null, 4, 6, pythadendron_log, pythadendron_leaves, 3, 3);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 1.0F, PYTHADENDRON_BUSH);
 
+        SpheroidType PYTHADENDRON_WOOD = new ShellSpheroidType(null, 8, 13, pythadendron_log, pythadendron_leaves, 2, 4);
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 1.0F, PYTHADENDRON_WOOD);
 
 
 
