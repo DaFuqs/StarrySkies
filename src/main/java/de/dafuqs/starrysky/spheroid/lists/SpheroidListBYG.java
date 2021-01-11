@@ -165,7 +165,7 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState byg_prairie_grass = getDefaultBlockState(MOD_ID,"prairie_grass");
         BlockState byg_tall_prairie_grass = getDefaultBlockState(MOD_ID,"tall_prairie_grass");
         BlockState byg_beach_grass = getDefaultBlockState(MOD_ID,"beach_grass");
-        BlockState byg_small_beach_grass = getDefaultBlockState(MOD_ID,"small_beach_grass");
+        BlockState byg_short_beach_grass = getDefaultBlockState(MOD_ID,"short_beach_grass");
         BlockState byg_winter_succulent = getDefaultBlockState(MOD_ID,"winter_succulent");
         BlockState byg_winter_grass = getDefaultBlockState(MOD_ID,"winter_grass");
 
@@ -183,12 +183,12 @@ public class SpheroidListBYG extends SpheroidList {
 
         PlantDecorator byg_prairie_grass_decorator = new PlantDecorator(byg_prairie_grass, 0.2F);
         PlantDecorator byg_beach_grass_decorator = new PlantDecorator(byg_beach_grass, 0.1F);
-        PlantDecorator byg_small_beach_grass_decorator = new PlantDecorator(byg_small_beach_grass, 0.1F);
+        PlantDecorator byg_small_beach_grass_decorator = new PlantDecorator(byg_short_beach_grass, 0.1F);
         DoublePlantDecorator byg_tall_prairie_grass_decorator = new DoublePlantDecorator(byg_tall_prairie_grass, 0.2F);
 
         // FLOWERS
         BlockState byg_allium_flower_bush = getDefaultBlockState(MOD_ID,"allium_flower_bush");
-        BlockState byg_alpine_bellfower = getDefaultBlockState(MOD_ID,"alpine_bellfower");
+        BlockState byg_alpine_bellflower = getDefaultBlockState(MOD_ID,"alpine_bellflower");
         BlockState byg_amaranth = getDefaultBlockState(MOD_ID,"amaranth");
         BlockState byg_angelica = getDefaultBlockState(MOD_ID,"angelica");
         BlockState byg_begonia = getDefaultBlockState(MOD_ID,"begonia");
@@ -203,7 +203,7 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState byg_daffodil = getDefaultBlockState(MOD_ID,"daffodil");
         BlockState byg_delphinium = getDefaultBlockState(MOD_ID,"delphinium");
         BlockState byg_fairy_slipper = getDefaultBlockState(MOD_ID,"fairy_slipper");
-        BlockState byg_firecrasker_flower_bush = getDefaultBlockState(MOD_ID,"firecrasker_flower_bush");
+        BlockState byg_firecracker_flower_bush = getDefaultBlockState(MOD_ID,"firecracker_flower_bush");
         BlockState byg_foxglove = getDefaultBlockState(MOD_ID,"foxglove");
         BlockState byg_green_tulip = getDefaultBlockState(MOD_ID,"green_tulip");
         BlockState byg_guzmania = getDefaultBlockState(MOD_ID,"guzmania");
@@ -340,7 +340,7 @@ public class SpheroidListBYG extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.1F, new CoreSpheroidType(null, 7, 13, byg_packed_black_ice, byg_black_ice, 3, 5));
         // FLOWERS
         SpheroidList.LIST_FLOWERS.add(byg_allium_flower_bush);
-        SpheroidList.LIST_FLOWERS.add(byg_alpine_bellfower);
+        SpheroidList.LIST_FLOWERS.add(byg_alpine_bellflower);
         SpheroidList.LIST_FLOWERS.add(byg_amaranth);
         SpheroidList.LIST_FLOWERS.add(byg_angelica);
         SpheroidList.LIST_FLOWERS.add(byg_begonia);
@@ -355,7 +355,7 @@ public class SpheroidListBYG extends SpheroidList {
         SpheroidList.LIST_FLOWERS.add(byg_daffodil);
         SpheroidList.LIST_FLOWERS.add(byg_delphinium);
         SpheroidList.LIST_FLOWERS.add(byg_fairy_slipper);
-        SpheroidList.LIST_FLOWERS.add(byg_firecrasker_flower_bush);
+        SpheroidList.LIST_FLOWERS.add(byg_firecracker_flower_bush);
         SpheroidList.LIST_FLOWERS.add(byg_foxglove);
         SpheroidList.LIST_FLOWERS.add(byg_green_tulip);
         SpheroidList.LIST_FLOWERS.add(byg_guzmania);
@@ -488,15 +488,13 @@ public class SpheroidListBYG extends SpheroidList {
         // SUBZERO HYPOGEAL
         BlockState subzero_ash_block = getDefaultBlockState(MOD_ID,"subzero_ash_block");
         BlockState frost_magma = getDefaultBlockState(MOD_ID,"frost_magma");
-        BlockState soul_fire = getDefaultBlockState(MOD_ID,"soul_fire"); // on top of frost magma
-        PlantDecorator SOUL_FIRE_DECORATOR = new PlantDecorator(soul_fire, 0.15F);
 
         SpheroidType SUBZERO_ASH = new ShellSpheroidType(null, 10, 16, subzero_ash_block, subzero_ash_block, 2, 4)
                 .addShellSpeckles(frost_magma, 0.2F);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SUBZERO_ASH);
 
         SpheroidType FROST_MAGMA = new ModularSpheroidType(null, 10, 16, frost_magma)
-                .addDecorator(SOUL_FIRE_DECORATOR, 0.9F);
+                .addDecorator(SpheroidListVanillaNether.SpheroidDecorators.SOUL_FIRE, 0.9F);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, FROST_MAGMA);
 
         // SYTHIAN TORRIDS
@@ -662,13 +660,13 @@ public class SpheroidListBYG extends SpheroidList {
 
         // NIGHTSHADE FOREST
         BlockState nightshade_phylium = getDefaultBlockState(MOD_ID,"nightshade_phylium");
-        BlockState shade_sprouts = getDefaultBlockState(MOD_ID,"shade_sprouts"); // plant
-        PlantDecorator SHADE_SPROUTS_DECORATOR = new PlantDecorator(shade_sprouts, 0.2F);
+        BlockState nightshade_sprouts = getDefaultBlockState(MOD_ID,"nightshade_sprouts"); // plant
+        PlantDecorator NIGHTSHADE_SPROUTS_DECORATOR = new PlantDecorator(nightshade_sprouts, 0.2F);
         BlockState nightshade_roots = getDefaultBlockState(MOD_ID,"nightshade_roots"); // double plant
         DoublePlantDecorator NIGHTSHADE_ROOTS_DECORATOR = new DoublePlantDecorator(nightshade_roots, 0.1F);
         SpheroidType NIGHTSHADE_FOREST = new ModularSpheroidType(null, 8, 13, end_stone)
                 .setTopBlockState(nightshade_phylium)
-                .addDecorator(SHADE_SPROUTS_DECORATOR, 0.9F)
+                .addDecorator(NIGHTSHADE_SPROUTS_DECORATOR, 0.9F)
                 .addDecorator(NIGHTSHADE_ROOTS_DECORATOR, 0.9F);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, NIGHTSHADE_FOREST);
 

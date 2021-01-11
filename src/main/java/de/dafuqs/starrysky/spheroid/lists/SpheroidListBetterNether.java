@@ -266,15 +266,15 @@ public class SpheroidListBetterNether extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 0.6F, ANCHOR_TREE);
 
         // WILLOW TREE
-        BlockState willow_tree_log = getDefaultBlockState(MOD_ID,"willow_tree_log");
-        BlockState willow_tree_leaves = getDefaultBlockState(MOD_ID,"willow_tree_leaves");
-        SpheroidType WILLOW_TREE = new ShellSpheroidType(null, 8, 14, willow_tree_log, willow_tree_leaves, 2, 3);
+        BlockState willow_log = getDefaultBlockState(MOD_ID,"willow_log");
+        BlockState willow_leaves = getDefaultBlockState(MOD_ID,"willow_leaves");
+        SpheroidType WILLOW_TREE = new ShellSpheroidType(null, 8, 14, willow_log, willow_leaves, 2, 3);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 1.0F, WILLOW_TREE);
 
         // NETHER SAKURA TREE
-        BlockState nether_sakura_tree_log = getDefaultBlockState(MOD_ID,"nether_sakura_tree_log");
-        BlockState nether_sakura_tree_leaves = getDefaultBlockState(MOD_ID,"nether_sakura_tree_leaves");
-        SpheroidType NETHER_SAKURA_TREE = new ShellSpheroidType(null, 7, 12, nether_sakura_tree_log, nether_sakura_tree_leaves, 2, 3);
+        BlockState nether_sakura_log = getDefaultBlockState(MOD_ID,"nether_sakura_log");
+        BlockState nether_sakura_leaves = getDefaultBlockState(MOD_ID,"nether_sakura_leaves");
+        SpheroidType NETHER_SAKURA_TREE = new ShellSpheroidType(null, 7, 12, nether_sakura_log, nether_sakura_leaves, 2, 3);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 1.0F, NETHER_SAKURA_TREE);
 
 

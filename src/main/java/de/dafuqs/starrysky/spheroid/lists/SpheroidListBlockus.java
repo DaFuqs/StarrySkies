@@ -51,7 +51,7 @@ public class SpheroidListBlockus extends SpheroidList {
         }};
 
         ArrayList<BlockState> rainbowAsphalt = new ArrayList<BlockState>() {{
-            add(getDefaultBlockState(MOD_ID,"black_asphalt"));
+            add(getDefaultBlockState(MOD_ID,"asphalt"));
             add(getDefaultBlockState(MOD_ID,"blue_asphalt"));
             add(getDefaultBlockState(MOD_ID,"brown_asphalt"));
             add(getDefaultBlockState(MOD_ID,"cyan_asphalt"));

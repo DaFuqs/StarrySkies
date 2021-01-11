@@ -49,8 +49,8 @@ public class SpheroidListCinderscapes extends SpheroidList {
         // from vanilla: nether sprouts, warped fungus, crimson fungus, crimson roots, warped roots,
         BlockState umbral_nylium = getDefaultBlockState(MOD_ID,"umbral_nylium"); // overgrown netherrack
         BlockState twilight_fescues = getDefaultBlockState(MOD_ID,"twilight_fescues");
-        BlockState tall_fotofern = getDefaultBlockState(MOD_ID,"tall_fotofern"); // upper, lower
-        BlockState fotofern = getDefaultBlockState(MOD_ID,"fotofern");
+        BlockState tall_photofern = getDefaultBlockState(MOD_ID,"tall_photofern"); // upper, lower
+        BlockState photofern = getDefaultBlockState(MOD_ID,"photofern");
         BlockState twilight_tendrils = getDefaultBlockState(MOD_ID,"twilight_tendrils");
         BlockState luminous_pod = getDefaultBlockState(MOD_ID,"luminous_pod"); // upper, lower
 
@@ -109,9 +109,9 @@ public class SpheroidListCinderscapes extends SpheroidList {
         SpheroidType SCORCHED_WOOD      = new ShellSpheroidType(null, 6, 12, scorched_stem, scorched_hyphae, 2, 3);
 
         PlantDecorator TWILIGHT_FESCUES_DECORATOR = new PlantDecorator(twilight_fescues, 0.1F);
-        PlantDecorator FOTOFERN_DECORATOR = new PlantDecorator(fotofern, 0.1F);
+        PlantDecorator FOTOFERN_DECORATOR = new PlantDecorator(photofern, 0.1F);
         PlantDecorator TWILIGHT_TENDRILS_DECORATOR = new PlantDecorator(twilight_tendrils, 0.1F);
-        DoublePlantDecorator TALL_FOTOFERN_DECORATOR = new DoublePlantDecorator(tall_fotofern, 0.1F);
+        DoublePlantDecorator TALL_FOTOFERN_DECORATOR = new DoublePlantDecorator(tall_photofern, 0.1F);
         DoublePlantDecorator LUMINOUS_POD_DECORATOR = new DoublePlantDecorator(luminous_pod, 0.1F);
         SpheroidType UMBRAL = new ModularSpheroidType(null, 10, 20,  Blocks.NETHERRACK.getDefaultState())
                 .setTopBlockState(umbral_nylium)

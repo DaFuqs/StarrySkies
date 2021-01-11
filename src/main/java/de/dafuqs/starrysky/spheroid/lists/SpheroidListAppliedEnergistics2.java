@@ -51,7 +51,7 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
         // an error even though the loot table is not used
         LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, supplier, setter) -> {
             if (APPLIED_ENERGISTICS_METEOR_CHEST_LOOT_TABLE.equals(id)) {
-                StarrySkyCommon.LOGGER.log(Level.ERROR, "[StarrySky] Creating AE2 loot table...");
+                StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Creating AE2 loot table...");
 
                 Item CALCULATION_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "calculation_processor_press"));
                 Item ENGINEERING_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "engineering_processor_press"));
