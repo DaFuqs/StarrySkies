@@ -57,7 +57,6 @@ public class DynamicOreSpheroids {
         put("aetherium",    new OreSpheroidDefinition(SpheroidList.MAP_DUNGEON_STONES, 4, 7, 2, 3, 0.4F));
         put("platinum",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 8, 3, 5, 0.4F));
         put("kyber",        new OreSpheroidDefinition(SpheroidList.MAP_STONES, 12, 15, 7, 10, 0.4F));
-        put("lutetium",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 9, 3, 5, 0.7F));
         put("banglum",      new OreSpheroidDefinition(SpheroidList.MAP_STONES, 6, 9, 3, 6, 0.7F));
         put("carmot",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 7, 2, 4, 0.9F));
         put("manganese",    new OreSpheroidDefinition(SpheroidList.MAP_STONES, 8, 10, 4, 6, 0.9F));

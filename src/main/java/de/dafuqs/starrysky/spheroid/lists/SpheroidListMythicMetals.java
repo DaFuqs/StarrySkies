@@ -26,7 +26,6 @@ public class SpheroidListMythicMetals extends SpheroidList {
 		BlockState mythicmetals_carmot_ore = getDefaultBlockState(MOD_ID,"carmot_ore");
 		BlockState mythicmetals_copper_ore = getDefaultBlockState(MOD_ID,"copper_ore");
 		BlockState mythicmetals_kyber_ore = getDefaultBlockState(MOD_ID,"kyber_ore");
-		BlockState mythicmetals_lutetium_ore = getDefaultBlockState(MOD_ID,"lutetium_ore");
 		BlockState mythicmetals_manganese_ore = getDefaultBlockState(MOD_ID,"manganese_ore");
 		BlockState mythicmetals_mythril_ore = getDefaultBlockState(MOD_ID,"mythril_ore");
 		BlockState mythicmetals_orichalcum_ore = getDefaultBlockState(MOD_ID,"orichalcum_ore");
@@ -57,7 +56,6 @@ public class SpheroidListMythicMetals extends SpheroidList {
 		spheroidLoader.registerDynamicOre(OVERWORLD, "carmot", mythicmetals_carmot_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "copper", mythicmetals_copper_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "kyber", mythicmetals_kyber_ore);
-		spheroidLoader.registerDynamicOre(OVERWORLD, "lutetium", mythicmetals_lutetium_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "manganese", mythicmetals_manganese_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "mythril", mythicmetals_mythril_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "orichalcum", mythicmetals_orichalcum_ore);
@@ -72,7 +70,6 @@ public class SpheroidListMythicMetals extends SpheroidList {
 		spheroidLoader.registerDynamicOre(OVERWORLD, "tantalite", mythicmetals_tantalite_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "tin", mythicmetals_tin_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "unobtainium", mythicmetals_unobtainium_ore);
-
 		spheroidLoader.registerDynamicOre(OVERWORLD, "vermiculite", mythicmetals_vermiculite_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "zinc", mythicmetals_zinc_ore);
 		
