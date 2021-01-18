@@ -155,6 +155,11 @@ public class SpheroidLoader {
             if (SpheroidListCinderscapes.shouldGenerate()) {
                 SpheroidListCinderscapes.setup(this);
             }
+            if (SpheroidListMythicMetalsStandardFantasyEdition.shouldGenerate()) {
+                SpheroidListMythicMetalsStandardFantasyEdition.setup(this);
+            }
+            
+            
 
             // dynamically generate ore spheroids
             // this way we got only 1 "copper" spheroids even though lots of mods add a copper ore block
