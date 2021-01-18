@@ -234,7 +234,7 @@ public class StarrySkyConfig implements ConfigData {
     public boolean generateCinderscapesSpheroids = true;
     
     @ConfigEntry.Category("SPHEROIDS")
-    @Comment(value = "\nEnable Mythic Metals Integration with generation for the Standard Fantasy Modpack")
+    @Comment(value = "\nEnable Mythic Metals Integration for the Default Fantasy Modpack (turn off the default Mythic Metals integration)")
     public boolean generateMythicMetalsSpheroidsStandardFantasyEdition = false;
     
 
