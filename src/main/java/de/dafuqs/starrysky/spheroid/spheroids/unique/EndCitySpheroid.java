@@ -7,6 +7,8 @@ import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.EndRodBlock;
+import net.minecraft.block.WallSkullBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.EntityType;
@@ -15,6 +17,7 @@ import net.minecraft.item.Items;
 import net.minecraft.loot.LootTables;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
@@ -30,8 +33,8 @@ public class EndCitySpheroid extends Spheroid {
     private final BlockState PURPUR_PILLAR = Blocks.PURPUR_PILLAR.getDefaultState();
     private final BlockState MAGENTA_STAINED_GLASS = Blocks.MAGENTA_STAINED_GLASS.getDefaultState();
     private final BlockState END_STONE_BRICKS = Blocks.END_STONE_BRICKS.getDefaultState();
-    private final BlockState END_ROD = Blocks.END_ROD.getDefaultState(); // TODO
-    private final BlockState DRAGON_HEAD = Blocks.DRAGON_HEAD.getDefaultState(); // TODO
+    private final BlockState END_ROD = Blocks.END_ROD.getDefaultState();
+    private final BlockState DRAGON_WALL_HEAD = Blocks.DRAGON_WALL_HEAD.getDefaultState();
 
     private final Identifier END_CITY_TREASURE_CHEST = LootTables.END_CITY_TREASURE_CHEST;
 
@@ -96,10 +99,10 @@ public class EndCitySpheroid extends Spheroid {
     @Override
     public void decorate(StructureWorldAccess world, Random random) {
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
-            int randomStructure = random.nextInt(7);
+            int randomStructure = random.nextInt(8);
             switch (randomStructure) {
                 case 0:
-                    placeSolid(world, interiorDecoratorPosition);
+                    placeShulkerSpawner(world, interiorDecoratorPosition);
                     break;
                 case 1:
                     placeEmpty(world, interiorDecoratorPosition);
@@ -113,8 +116,11 @@ public class EndCitySpheroid extends Spheroid {
                 case 4:
                     placeBrewingStand(world, interiorDecoratorPosition);
                     break;
+                case 5:
+                    placeDragonHead(world, interiorDecoratorPosition);
+                    break;
                 default: // double chance
-                    placeShulkerSpawner(world, interiorDecoratorPosition);
+                    placeSolid(world, interiorDecoratorPosition);
                     break;
             }
         }
@@ -232,6 +238,42 @@ public class EndCitySpheroid extends Spheroid {
         if(blockEntity instanceof ChestBlockEntity) {
             ChestBlockEntity chestBlockEntity = (ChestBlockEntity) blockEntity;
             chestBlockEntity.setStack(0, elytraItemStack);
+        }
+    }
+
+    private void placeDragonHead(WorldAccess worldAccess, BlockPos blockPos) {
+        for (int x2 = - 4; x2 < 5; x2++) {
+            for (int y2 = 0; y2 < 9; y2++) {
+                for (int z2 = -4; z2 < 5; z2++) {
+                    BlockPos destinationBlockPos = blockPos.add(x2, y2, z2);
+                    worldAccess.setBlockState(destinationBlockPos, AIR, 3);
+                }
+            }
+        }
+
+        worldAccess.setBlockState(blockPos, PURPUR_PILLAR, 3);
+        worldAccess.setBlockState(blockPos.up(), PURPUR_PILLAR, 3);
+        worldAccess.setBlockState(blockPos.up(2), Blocks.END_ROD.getDefaultState().with(EndRodBlock.FACING, Direction.UP), 3);
+
+        int randomPosition = random.nextInt(4);
+        BlockState dragonHeadBlockState;
+        switch (randomPosition) {
+            case 0:
+                dragonHeadBlockState = DRAGON_WALL_HEAD.with(WallSkullBlock.FACING, Direction.NORTH);
+                worldAccess.setBlockState(blockPos.up().north(), dragonHeadBlockState, 3);
+            break;
+            case 1:
+                dragonHeadBlockState = DRAGON_WALL_HEAD.with(WallSkullBlock.FACING, Direction.EAST);
+                worldAccess.setBlockState(blockPos.up().east(), dragonHeadBlockState, 3);
+            break;
+            case 2:
+                dragonHeadBlockState = DRAGON_WALL_HEAD.with(WallSkullBlock.FACING, Direction.SOUTH);
+                worldAccess.setBlockState(blockPos.up().south(), dragonHeadBlockState, 3);
+            break;
+            default:
+                dragonHeadBlockState = DRAGON_WALL_HEAD.with(WallSkullBlock.FACING, Direction.WEST);
+                worldAccess.setBlockState(blockPos.up().west(), dragonHeadBlockState, 3);
+            break;
         }
     }
 
