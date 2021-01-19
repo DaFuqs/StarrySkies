@@ -174,7 +174,7 @@ public class EndCitySpheroid extends Spheroid {
         worldAccess.setBlockState(spawnerPos.up(2), PURPUR_PILLAR, 3);
         worldAccess.setBlockState(spawnerPos.up(3), PURPUR_PILLAR, 3);
 
-        // determine the shulkers color
+        // determine the shulker color
         byte shulkerColor = 16; // the default purple
         int randomColor = random.nextInt(100);
         if(randomColor < 15) {

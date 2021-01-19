@@ -3,7 +3,7 @@
   "id": "starry_sky",
   "version": "${version}",
 
-  "name": "Starry Sky",
+  "name": "Starry Skies",
   "description": "An implementation of the planetoids world gen for fabric",
   "authors": [
     "DaFuqs"

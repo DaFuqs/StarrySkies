@@ -24,22 +24,30 @@ public class SpheroidListCinderscapes extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Cinderscapes integration...");
 
+        // sulfur
+        BlockState sulfur_ore = getDefaultBlockState(MOD_ID,"sulfur_ore");
+
+
         // crystalline quartz blocks; as single and rainbow
         BlockState crystalline_quartz = getDefaultBlockState(MOD_ID,"crystalline_quartz");
         BlockState crystalline_sulfur_quartz = getDefaultBlockState(MOD_ID,"crystalline_sulfur_quartz");
         BlockState crystalline_rose_quartz = getDefaultBlockState(MOD_ID,"crystalline_rose_quartz");
         BlockState crystalline_smoky_quartz = getDefaultBlockState(MOD_ID,"crystalline_smoky_quartz");
 
-        // quartz shards
-        /*BlockState polypite_nether_quartz = getDefaultBlockState(MOD_ID,"polypite_nether_quartz");
-        BlockState polypite_rose_quartz = getDefaultBlockState(MOD_ID,"polypite_rose_quartz");
-        BlockState polypite_smoky_quartz = getDefaultBlockState(MOD_ID,"polypite_smoky_quartz");
-        BlockState polypite_sulfur_quartz = getDefaultBlockState(MOD_ID,"polypite_sulfur_quartz");*/
-
         // quartz ore
         BlockState sulfur_quartz_ore = getDefaultBlockState(MOD_ID,"sulfur_quartz_ore");
         BlockState rose_quartz_ore = getDefaultBlockState(MOD_ID,"rose_quartz_ore");
         BlockState smoky_quartz_ore = getDefaultBlockState(MOD_ID,"smoky_quartz_ore");
+
+        // quartz shards
+        BlockState polypite_nether_quartz = getDefaultBlockState(MOD_ID,"polypite_nether_quartz");
+        BlockState polypite_rose_quartz = getDefaultBlockState(MOD_ID,"polypite_rose_quartz");
+        BlockState polypite_smoky_quartz = getDefaultBlockState(MOD_ID,"polypite_smoky_quartz");
+        BlockState polypite_sulfur_quartz = getDefaultBlockState(MOD_ID,"polypite_sulfur_quartz");
+        PlantDecorator POLYPITE_NETHER_QUARTZ_DECORATOR = new PlantDecorator(polypite_nether_quartz, 0.1F);
+        PlantDecorator POLYPITE_ROSE_QUARTZ_DECORATOR = new PlantDecorator(polypite_rose_quartz, 0.1F);
+        PlantDecorator POLYPITE_SMOKY_QUARTZ_DECORATOR = new PlantDecorator(polypite_smoky_quartz, 0.1F);
+        PlantDecorator POLYPITE_SULFUR_QUARTZ_DECORATOR = new PlantDecorator(polypite_sulfur_quartz, 0.1F);
 
         // scorched wood
         BlockState scorched_stem = getDefaultBlockState(MOD_ID,"scorched_stem");
@@ -62,7 +70,6 @@ public class SpheroidListCinderscapes extends SpheroidList {
         BlockState umbral_stem = getDefaultBlockState(MOD_ID,"umbral_stem"); // "log";
         BlockState umbral_flesh_block = getDefaultBlockState(MOD_ID,"umbral_flesh_block"); // "branches"
         BlockState umbral_wart_block = getDefaultBlockState(MOD_ID,"umbral_wart_block"); // "leaves"
-        // BlockState umbral_hyphae = getDefaultBlockState(MOD_ID,"umbral_hyphae")).getDefaultState() // where does this generate?
 
         // ash
         BlockState ash_block = getDefaultBlockState(MOD_ID,"ash_block");
@@ -72,7 +79,6 @@ public class SpheroidListCinderscapes extends SpheroidList {
         BlockState pyracinth = getDefaultBlockState(MOD_ID,"pyracinth");
         BlockState bramble_berry_bush = getDefaultBlockState(MOD_ID,"bramble_berry_bush");
 
-        // Where does it generate?
         BlockState crystinium = getDefaultBlockState(MOD_ID,"crystinium");
 
 
@@ -96,15 +102,23 @@ public class SpheroidListCinderscapes extends SpheroidList {
             add(rose_quartz_ore);
             add(smoky_quartz_ore);
         }};
+
+        // ORES
         SpheroidListVanillaNether.NETHER_QUARTZ.addDecorator(CRYSTINIUM_DECORATOR, 0.25F);
-        SpheroidType SULFUR_QUARTZ_ORE = new CoreSpheroidType(null, 5, 15, Blocks.NETHER_QUARTZ_ORE.getDefaultState(), MAP_NETHER_STONES, 4, 8)
-                .addDecorator(CRYSTINIUM_DECORATOR, 0.25F);
-        SpheroidType ROSE_QUARTZ_ORE = new CoreSpheroidType(null, 5, 15, Blocks.NETHER_QUARTZ_ORE.getDefaultState(), MAP_NETHER_STONES, 4, 8)
-                .addDecorator(CRYSTINIUM_DECORATOR, 0.25F);
-        SpheroidType SMOKY_QUARTZ_ORE = new CoreSpheroidType(null, 5, 15, Blocks.NETHER_QUARTZ_ORE.getDefaultState(), MAP_NETHER_STONES, 4, 8)
-                .addDecorator(CRYSTINIUM_DECORATOR, 0.25F);
-        SpheroidType RAINBOW_QUARTZ_ORE = new RainbowSpheroidType(null, 5, 15, QUARTZ_ORES)
-                .addDecorator(CRYSTINIUM_DECORATOR, 0.25F);
+        SpheroidListVanillaNether.NETHER_QUARTZ.addDecorator(POLYPITE_NETHER_QUARTZ_DECORATOR, 0.1F);
+
+        SpheroidType SULFUR_ORE = new CoreSpheroidType(null, 5, 10, sulfur_ore, MAP_NETHER_STONES, 3, 5);
+
+        SpheroidType SULFUR_QUARTZ_ORE = new CoreSpheroidType(null, 5, 15, sulfur_quartz_ore, MAP_NETHER_STONES, 4, 8)
+                .addDecorator(CRYSTINIUM_DECORATOR, 0.25F)
+                .addDecorator(POLYPITE_SULFUR_QUARTZ_DECORATOR, 0.5F);
+        SpheroidType ROSE_QUARTZ_ORE = new CoreSpheroidType(null, 5, 15, rose_quartz_ore, MAP_NETHER_STONES, 4, 8)
+                .addDecorator(CRYSTINIUM_DECORATOR, 0.25F)
+                .addDecorator(POLYPITE_ROSE_QUARTZ_DECORATOR, 0.5F);
+        SpheroidType SMOKY_QUARTZ_ORE = new CoreSpheroidType(null, 5, 15, smoky_quartz_ore, MAP_NETHER_STONES, 4, 8)
+                .addDecorator(CRYSTINIUM_DECORATOR, 0.25F)
+                .addDecorator(POLYPITE_SMOKY_QUARTZ_DECORATOR, 0.5F);
+        SpheroidType RAINBOW_QUARTZ_ORE = new RainbowSpheroidType(null, 5, 15, QUARTZ_ORES);
 
         SpheroidType SCORCHED_WOOD      = new ShellSpheroidType(null, 6, 12, scorched_stem, scorched_hyphae, 2, 3);
 
@@ -141,12 +155,14 @@ public class SpheroidListCinderscapes extends SpheroidList {
 
 
         // REGISTERING SPHEROID TYPES
+
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, CRYSTALLINE_QUARTZ);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SULFUR_QUARTZ);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, ROSE_QUARTZ);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SMOKY_QUARTZ);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.2F, RAINBOW_QUARTZ);
 
+        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.5F, SULFUR_ORE);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.2F, SULFUR_QUARTZ_ORE);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.2F, ROSE_QUARTZ_ORE);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.2F, SMOKY_QUARTZ_ORE);
