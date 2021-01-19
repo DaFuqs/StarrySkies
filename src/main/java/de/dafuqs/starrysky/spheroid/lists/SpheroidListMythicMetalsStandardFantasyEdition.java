@@ -33,7 +33,7 @@ public class SpheroidListMythicMetalsStandardFantasyEdition extends SpheroidList
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.2F, MYTHRIL_SPHEROID_TYPE);
 
         // Nether
-        CoreSpheroidType CARMOT_SPHEROID_TYPE = new CoreSpheroidType(null, 5, 7, carmot_ore, SpheroidList.MAP_STONES, 2, 4);
+        CoreSpheroidType CARMOT_SPHEROID_TYPE = new CoreSpheroidType(null, 5, 7, carmot_ore, SpheroidList.MAP_NETHER_STONES, 2, 4);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 0.9F, CARMOT_SPHEROID_TYPE);
     }
 }
