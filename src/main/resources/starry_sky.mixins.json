@@ -7,7 +7,6 @@
     "EndPortalBlockMixin",
     "EntityMixin",
     "EntityAccessor",
-    "ServerPlayerEntityAccessor",
     "AbstractFireBlockMixin"
   ],
   "client": [

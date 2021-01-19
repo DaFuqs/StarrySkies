@@ -12,6 +12,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -60,7 +62,14 @@ public class StarrySkyCommon implements ModInitializer {
     }
 
     public static boolean inStarryWorld(ServerPlayerEntity serverPlayerEntity) {
-        return serverPlayerEntity.getEntityWorld().equals(StarrySkyCommon.starryWorld) || serverPlayerEntity.getEntityWorld().equals(starryWorldNether) || serverPlayerEntity.getEntityWorld().equals(starryWorldEnd);
+        RegistryKey<World> worldRegistryKey = serverPlayerEntity.getEntityWorld().getRegistryKey();
+        return isStarryWorld(worldRegistryKey);
+    }
+
+    public static boolean isStarryWorld(RegistryKey<World> worldRegistryKey) {
+        return worldRegistryKey.equals(StarrySkyCommon.starryWorld.getRegistryKey())
+                || worldRegistryKey.equals(starryWorldNether.getRegistryKey())
+                || worldRegistryKey.equals(starryWorldEnd.getRegistryKey());
     }
 
 }
