@@ -438,11 +438,11 @@ public class SpheroidListBYG extends SpheroidList {
         SpheroidType BRIMSTONE = new ModularSpheroidType(null, 5, 12, brimstone)
                 .addDecorator(BORIC_FIRE_DECORATOR, 0.75F);
 
-        SpheroidType ANTRACITE_ORE = new CoreSpheroidType(null, 7, 12, anthracite_ore, brimstone, 3, 6)
+        SpheroidType ANTHRACITE_ORE = new CoreSpheroidType(null, 7, 12, anthracite_ore, brimstone, 3, 6)
                 .addDecorator(BORIC_FIRE_DECORATOR, 0.5F);
 
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, BRIMSTONE);
-        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 0.5F, ANTRACITE_ORE);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 0.5F, ANTHRACITE_ORE);
 
         // CRIMSON GARDENS
         BlockState overgrown_crimson_blackstone = getDefaultBlockState(MOD_ID,"overgrown_crimson_blackstone");
