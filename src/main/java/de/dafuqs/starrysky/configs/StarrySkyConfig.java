@@ -232,7 +232,11 @@ public class StarrySkyConfig implements ConfigData {
     @ConfigEntry.Category("SPHEROIDS")
     @Comment(value = "\nEnable Cinderscapes Integration")
     public boolean generateCinderscapesSpheroids = true;
-
+    
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Mythic Metals Integration for the Default Fantasy Modpack (turn off the default Mythic Metals integration)")
+    public boolean generateMythicMetalsSpheroidsStandardFantasyEdition = false;
+    
 
     private boolean isValidBlock(String blockName) {
         // validate floorBlock
