@@ -15,7 +15,7 @@ public class SpheroidListMythicMetalsStandardFantasyEdition extends SpheroidList
     private static final String MOD_ID = "mythicmetals";
 
     public static boolean shouldGenerate() {
-        return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkyCommon.STARRY_SKY_CONFIG.generateMythicMetalsSpheroidsStandardFantasyEdition;
+        return FabricLoader.getInstance().isModLoaded(MOD_ID) && !StarrySkyCommon.STARRY_SKY_CONFIG.generateMythicMetalsSpheroids && StarrySkyCommon.STARRY_SKY_CONFIG.generateMythicMetalsSpheroidsStandardFantasyEdition;
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
