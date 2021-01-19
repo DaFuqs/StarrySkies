@@ -1,7 +1,9 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.spheroid.types.CoreSpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 
@@ -18,15 +20,20 @@ public class SpheroidListMythicMetalsStandardFantasyEdition extends SpheroidList
 
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.LOGGER.info("[StarrySky] Loading Mythic Metals Standard Fantasy Edition integration...");
-		
-        // Overworld ores
-        BlockState mythicmetals_mythril_ore = getDefaultBlockState(MOD_ID,"mythril_ore");
-        BlockState mythicmetals_zinc_ore = getDefaultBlockState(MOD_ID,"zinc_ore");
-        spheroidLoader.registerDynamicOre(OVERWORLD, "mythril", mythicmetals_mythril_ore);
-        spheroidLoader.registerDynamicOre(OVERWORLD, "zinc", mythicmetals_zinc_ore);
 
-        // Nether ores
-        BlockState mythicmetals_carmot_ore = getDefaultBlockState(MOD_ID,"carmot_ore");
-        spheroidLoader.registerDynamicOre(NETHER, "carmot", mythicmetals_carmot_ore);
+        BlockState mythril_ore = getDefaultBlockState(MOD_ID,"mythril_ore");
+        BlockState zinc_ore = getDefaultBlockState(MOD_ID,"zinc_ore");
+        BlockState carmot_ore = getDefaultBlockState(MOD_ID,"carmot_ore");
+
+        // Overworld
+        CoreSpheroidType ZINC_SPHEROID_TYPE = new CoreSpheroidType(null, 8, 11, zinc_ore, SpheroidList.MAP_STONES, 5, 6);
+        CoreSpheroidType MYTHRIL_SPHEROID_TYPE = new CoreSpheroidType(null, 4, 6, mythril_ore, SpheroidList.MAP_DUNGEON_STONES, 1, 2);
+
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 1.5F, ZINC_SPHEROID_TYPE);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ORE, 0.2F, MYTHRIL_SPHEROID_TYPE);
+
+        // Nether
+        CoreSpheroidType CARMOT_SPHEROID_TYPE = new CoreSpheroidType(null, 5, 7, carmot_ore, SpheroidList.MAP_STONES, 2, 4);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 0.9F, CARMOT_SPHEROID_TYPE);
     }
 }
