@@ -39,6 +39,8 @@ public class SpheroidListVanillaNether extends SpheroidList {
 			.addDecorator(SpheroidListVanilla.SpheroidDecorators.MUSHROOMS, 0.3F)
 			.addSpawn(SpheroidEntitySpawnDefinitions.SKELETON_HORSE, 0.01F)
 			.addSpawn(SpheroidEntitySpawnDefinitions.ZOMBIE_HORSE, 0.01F);
+    public static final SpheroidType MAGMA_SPRINKLED_NETHERRACK = new ShellSpheroidType(SpheroidAdvancementIdentifier.netherrack, 7, 12,  Blocks.NETHERRACK.getDefaultState(), Blocks.MAGMA_BLOCK.getDefaultState(), 2, 4)
+			.addShellSpeckles(Blocks.MAGMA_BLOCK.getDefaultState(), 0.15F);
     public static final SpheroidType SOUL_SAND = new ModularSpheroidType(SpheroidAdvancementIdentifier.soul_sand, 6, 12,  Blocks.SOUL_SAND.getDefaultState())
 			.addDecorator(SpheroidDecorators.SOUL_FIRE, 0.25F)
 			.addDecorator(SpheroidDecorators.NETHER_WART, 0.1F);
@@ -128,6 +130,7 @@ public class SpheroidListVanillaNether extends SpheroidList {
 		StarrySkyCommon.LOGGER.info("[StarrySky] Loading Vanilla Nether Spheroids...");
 
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 10.0F, NETHERRACK);
+		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 1.0F, MAGMA_SPRINKLED_NETHERRACK);
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 4.0F, SOUL_SAND);
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 3.0F, SOUL_SOIL);
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 2.0F, MAGMA_BLOCK);
