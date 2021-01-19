@@ -5,8 +5,9 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.dimension.decorators.HugePlantDecorator;
+import de.dafuqs.starrysky.dimension.decorators.HugeUnderPlantDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
-import de.dafuqs.starrysky.dimension.decorators.UnderPlantDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinitions;
 import de.dafuqs.starrysky.spheroid.types.*;
 import de.dafuqs.starrysky.spheroid.types.unique.NetherFortressSpheroidType;
@@ -27,8 +28,8 @@ public class SpheroidListVanillaNether extends SpheroidList {
         public static SpheroidDecorator NETHER_SPROUTS = new PlantDecorator(Blocks.NETHER_SPROUTS.getDefaultState(), 0.1F);
         public static SpheroidDecorator CRIMSON_FUNGUS = new PlantDecorator(Blocks.CRIMSON_FUNGUS.getDefaultState(), 0.05F);
         public static SpheroidDecorator WARPED_FUNGUS = new PlantDecorator(Blocks.WARPED_FUNGUS.getDefaultState(), 0.05F);
-        public static SpheroidDecorator TWISTING_VINES = new PlantDecorator(Blocks.TWISTING_VINES.getDefaultState(), 0.05F); // warped, grow upward
-        public static SpheroidDecorator WEEPING_VINES = new UnderPlantDecorator(Blocks.WEEPING_VINES.getDefaultState(), 0.1F); // crimson, growing downwards
+        public static SpheroidDecorator TWISTING_VINES = new HugePlantDecorator(Blocks.TWISTING_VINES.getDefaultState(), 0.05F, 1, 6); // warped, grow upward
+        public static SpheroidDecorator WEEPING_VINES = new HugeUnderPlantDecorator(Blocks.WEEPING_VINES.getDefaultState(), 0.1F, 1, 6); // crimson, growing downwards
 	}
 	
     // SPHEROID TYPES
