@@ -10,14 +10,16 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.EndRodBlock;
 import net.minecraft.block.WallSkullBlock;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootTables;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.MobSpawnerEntry;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
@@ -102,7 +104,7 @@ public class EndCitySpheroid extends Spheroid {
             int randomStructure = random.nextInt(8);
             switch (randomStructure) {
                 case 0:
-                    placeShulkerSpawner(world, interiorDecoratorPosition);
+                    placeSolid(world, interiorDecoratorPosition);
                     break;
                 case 1:
                     placeEmpty(world, interiorDecoratorPosition);
@@ -120,7 +122,7 @@ public class EndCitySpheroid extends Spheroid {
                     placeDragonHead(world, interiorDecoratorPosition);
                     break;
                 default: // double chance
-                    placeSolid(world, interiorDecoratorPosition);
+                    placeShulkerSpawner(world, interiorDecoratorPosition);
                     break;
             }
         }
@@ -158,7 +160,7 @@ public class EndCitySpheroid extends Spheroid {
             }
         }
 
-        BlockPos spawnerPos = blockPos.up(4);
+        BlockPos spawnerPos = blockPos.up(5);
         for (int x2 = -1; x2 < 2; x2++) {
             for (int y2 = -1; y2 < 2; y2++) {
                 for (int z2 = -1; z2 < 2; z2++) {
@@ -168,10 +170,16 @@ public class EndCitySpheroid extends Spheroid {
             }
         }
 
+        worldAccess.setBlockState(spawnerPos.up(1), PURPUR_PILLAR, 3);
         worldAccess.setBlockState(spawnerPos.up(2), PURPUR_PILLAR, 3);
         worldAccess.setBlockState(spawnerPos.up(3), PURPUR_PILLAR, 3);
-        worldAccess.setBlockState(spawnerPos.up(4), PURPUR_PILLAR, 3);
-        placeSpawner(worldAccess, spawnerPos.up(), EntityType.SHULKER);
+
+
+        CompoundTag compoundTag = new CompoundTag();
+        compoundTag.putString("Entity", new Identifier("shulker").toString());
+        compoundTag.putByte("Color", (byte) 16);
+
+        placeSpawner(worldAccess, spawnerPos, new MobSpawnerEntry(compoundTag));
     }
 
     private void placeBrewingStand(WorldAccess worldAccess, BlockPos blockPos) {
@@ -187,19 +195,18 @@ public class EndCitySpheroid extends Spheroid {
         worldAccess.setBlockState(blockPos, PURPUR_PILLAR, 3);
         worldAccess.setBlockState(blockPos.up(), Blocks.BREWING_STAND.getDefaultState(), 3);
 
-        // TODO: Which slot is it?
-        /*BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos.down());
+        BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos.up());
 
         ItemStack healingPotionStack = new ItemStack(Items.POTION, 1);
         CompoundTag potionTag = new CompoundTag();
-        potionTag.putString("Potion", "minecraft:strong_healing");
+        potionTag.putString("Potion", new Identifier("strong_healing").toString());
         healingPotionStack.setTag(potionTag);
 
         if (blockEntity instanceof BrewingStandBlockEntity) {
-            ((BrewingStandBlockEntity) blockEntity).setStack(6, healingPotionStack);
-            ((BrewingStandBlockEntity) blockEntity).setStack(7, healingPotionStack);
-            ((BrewingStandBlockEntity) blockEntity).setStack(8, healingPotionStack);
-        }*/
+            ((BrewingStandBlockEntity) blockEntity).setStack(0, healingPotionStack.copy());
+            ((BrewingStandBlockEntity) blockEntity).setStack(1, healingPotionStack.copy());
+            ((BrewingStandBlockEntity) blockEntity).setStack(2, healingPotionStack.copy());
+        }
     }
 
     private void placeTreasure(WorldAccess worldAccess, BlockPos blockPos) {

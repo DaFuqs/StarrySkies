@@ -191,7 +191,7 @@ public class StrongholdSpheroid extends Spheroid {
                     worldAccess.setBlockState(destinationBlockPos.up(2), AIR, 3);
                     worldAccess.setBlockState(destinationBlockPos.up(3), AIR, 3);
                 } else {
-                    placeSpawner(worldAccess, destinationBlockPos.down(), EntityType.SILVERFISH);
+                    placeSpawner(worldAccess, destinationBlockPos.down(2), EntityType.SILVERFISH);
                 }
             }
         }

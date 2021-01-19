@@ -183,7 +183,7 @@ public class NetherFortressSpheroid extends Spheroid {
         worldAccess.setBlockState(spawnerPos.up(3), NETHER_BRICK_FENCE, 3);
         worldAccess.setBlockState(spawnerPos.up(4), NETHER_BRICK_FENCE, 3);
 
-        placeSpawner(worldAccess, spawnerPos.up(), EntityType.BLAZE);
+        placeSpawner(worldAccess, spawnerPos, EntityType.BLAZE);
     }
 
     private void placeWitherSkeletonRoom(WorldAccess worldAccess, BlockPos blockPos) {
@@ -210,7 +210,7 @@ public class NetherFortressSpheroid extends Spheroid {
         worldAccess.setBlockState(spawnerPos.up(3), NETHER_BRICK_FENCE, 3);
         worldAccess.setBlockState(spawnerPos.up(4), NETHER_BRICK_FENCE, 3);
 
-        placeSpawner(worldAccess, spawnerPos.up(), EntityType.WITHER_SKELETON);
+        placeSpawner(worldAccess, spawnerPos, EntityType.WITHER_SKELETON);
     }
 
     private void placeNetherWartRoom(WorldAccess worldAccess, BlockPos blockPos) {

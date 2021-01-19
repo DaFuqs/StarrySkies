@@ -1,10 +1,10 @@
 package de.dafuqs.starrysky.spheroid.spheroids;
 
-import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.MobSpawnerEntry;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
@@ -212,10 +213,17 @@ public abstract class Spheroid implements Serializable {
     }
 
     protected void placeSpawner(WorldAccess worldAccess, BlockPos blockPos, EntityType entityType) {
-        worldAccess.setBlockState(blockPos.down(), Blocks.SPAWNER.getDefaultState(), 3);
-        BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos.down());
+        worldAccess.setBlockState(blockPos, Blocks.SPAWNER.getDefaultState(), 3);
+        BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos);
         if (blockEntity instanceof MobSpawnerBlockEntity) {
             ((MobSpawnerBlockEntity) blockEntity).getLogic().setEntityId(entityType);
+        }
+    }
+    protected void placeSpawner(WorldAccess worldAccess, BlockPos blockPos, MobSpawnerEntry mobSpawnerEntry) {
+        worldAccess.setBlockState(blockPos, Blocks.SPAWNER.getDefaultState(), 3);
+        BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos);
+        if (blockEntity instanceof MobSpawnerBlockEntity) {
+            ((MobSpawnerBlockEntity) blockEntity).getLogic().setSpawnEntry(mobSpawnerEntry);
         }
     }
 
