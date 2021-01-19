@@ -174,10 +174,18 @@ public class EndCitySpheroid extends Spheroid {
         worldAccess.setBlockState(spawnerPos.up(2), PURPUR_PILLAR, 3);
         worldAccess.setBlockState(spawnerPos.up(3), PURPUR_PILLAR, 3);
 
+        // determine the shulkers color
+        byte shulkerColor = 16; // the default purple
+        int randomColor = random.nextInt(100);
+        if(randomColor < 15) {
+            shulkerColor = (byte) randomColor; // very rarely other colors as purple
+        }
 
         CompoundTag compoundTag = new CompoundTag();
-        compoundTag.putString("Entity", new Identifier("shulker").toString());
-        compoundTag.putByte("Color", (byte) 16);
+        CompoundTag compoundTag2 = new CompoundTag();
+        compoundTag2.putString("id", new Identifier("shulker").toString());
+        compoundTag2.putByte("Color", shulkerColor);
+        compoundTag.put("Entity", compoundTag2);
 
         placeSpawner(worldAccess, spawnerPos, new MobSpawnerEntry(compoundTag));
     }
