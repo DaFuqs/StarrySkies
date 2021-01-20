@@ -745,8 +745,6 @@ public class SpheroidListBYG extends SpheroidList {
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, ETHER_WOOD);
 
         // VISCAL ISLES
-        SpheroidType ETHER_WOOD_WITHOUT_LEAVES = new ModularSpheroidType(null, 6, 8, ether_log);
-        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, ETHER_WOOD_WITHOUT_LEAVES);
         BlockState vermilion_sculk = getDefaultBlockState(MOD_ID,"vermilion_sculk");
         BlockState vermilion_sculk_growth = getDefaultBlockState(MOD_ID,"vermilion_sculk_growth");
         PlantDecorator VERMILION_SCULK_GROWTH_DECORATOR = new PlantDecorator(vermilion_sculk_growth, 0.15F);

@@ -17,7 +17,7 @@ import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListBetterEnd extends SpheroidList {
 
-    private static final String MOD_ID = "betherend";
+    private static final String MOD_ID = "betterend";
 
 
     public static boolean shouldGenerate() {
@@ -73,13 +73,13 @@ public class SpheroidListBetterEnd extends SpheroidList {
         //BlockState dense_vine = getDefaultBlockState(MOD_ID,"dense_vine"); // growing downwards on glowshrooms, Bottom, middle, top TODO
 
         SpheroidType END_MOSS = new ModularSpheroidType(null, 8, 14, end_stone)
-                .setBottomBlockState(end_moss)
+                .setTopBlockState(end_moss)
                 .addDecorator(CREEPING_MOSS_DECORATOR, 0.8F)
                 .addDecorator(UMBRELLA_MOSS_DECORATOR, 0.8F)
                 .addDecorator(UMBRELLA_MOSS_TALL_DECORATOR, 0.8F);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.4F, END_MOSS);
         SpheroidType UMBRELLA_MOSS = new ModularSpheroidType(null, 8, 14, end_stone)
-                .setBottomBlockState(end_mycelium)
+                .setTopBlockState(end_mycelium)
                 .addDecorator(CREEPING_MOSS_DECORATOR, 0.8F)
                 .addDecorator(UMBRELLA_MOSS_DECORATOR, 0.8F)
                 .addDecorator(UMBRELLA_MOSS_TALL_DECORATOR, 0.8F)
@@ -208,11 +208,11 @@ public class SpheroidListBetterEnd extends SpheroidList {
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.3F, AMBER_MOSS);
 
         BlockState amber_ore = getDefaultBlockState(MOD_ID,"amber_ore");
-        SpheroidType AMBER_ORE = new ShellSpheroidType(null, 6, 13, end_stone, amber_ore, 2, 4);
+        SpheroidType AMBER_ORE = new ShellSpheroidType(null, 6, 13, amber_ore, end_stone, 2, 4);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ORE, 0.4F, AMBER_ORE);
 
         BlockState helix_tree_log = getDefaultBlockState(MOD_ID,"helix_tree_log");
-        BlockState helix_tree_leaves = getDefaultBlockState(MOD_ID,"helix_tree_leaves").with(LeavesBlock.DISTANCE, 1);
+        BlockState helix_tree_leaves = getDefaultBlockState(MOD_ID,"helix_tree_leaves");
 
         SpheroidType HELIX_TREE_WOOD = new ShellSpheroidType(null, 6, 11, helix_tree_log, helix_tree_leaves, 2, 3);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 1.0F, HELIX_TREE_WOOD);
@@ -284,7 +284,7 @@ public class SpheroidListBetterEnd extends SpheroidList {
         PlantDecorator charnia_cyan_decorator = new PlantDecorator(charnia_cyan, 0.2F);
         PlantDecorator charnia_green_decorator = new PlantDecorator(charnia_green, 0.2F);
 
-        BlockState brimstome = getDefaultBlockState(MOD_ID,"brimstome");
+        BlockState brimstone = getDefaultBlockState(MOD_ID,"brimstone");
         BlockState sulphuric_rock = getDefaultBlockState(MOD_ID,"sulphuric_rock");
 
         /* TODO
@@ -293,21 +293,21 @@ public class SpheroidListBetterEnd extends SpheroidList {
         BlockState hydrothermal_vent = getDefaultBlockState(MOD_ID,"sulphur_crystal");
          */
 
-        SpheroidType WATER_BRIMSTONE = new LiquidSpheroidType(null, 6, 9, brimstome, Blocks.WATER.getDefaultState(), 2, 3, 20, 80, 50)
+        SpheroidType WATER_BRIMSTONE = new LiquidSpheroidType(null, 6, 9, Blocks.WATER.getDefaultState(), brimstone, 2, 3, 20, 80, 50)
                 .addDecorator(charnia_red_decorator, 0.2F)
                 .addDecorator(charnia_purple_decorator, 0.2F)
                 .addDecorator(charnia_orange_decorator, 0.2F)
                 .addDecorator(charnia_light_blue_decorator, 0.2F)
                 .addDecorator(charnia_cyan_decorator, 0.2F)
                 .addDecorator(charnia_green_decorator, 0.2F);
-        SpheroidType WATER_SULPHURIC_ROCK = new LiquidSpheroidType(null, 6, 11, brimstome, Blocks.WATER.getDefaultState(), 2, 3, 10, 100, 50)
+        SpheroidType WATER_SULPHURIC_ROCK = new LiquidSpheroidType(null, 6, 11, Blocks.WATER.getDefaultState(), brimstone, 2, 3, 10, 100, 50)
                 .addDecorator(charnia_red_decorator, 0.2F)
                 .addDecorator(charnia_purple_decorator, 0.2F)
                 .addDecorator(charnia_orange_decorator, 0.2F)
                 .addDecorator(charnia_light_blue_decorator, 0.2F)
                 .addDecorator(charnia_cyan_decorator, 0.2F)
                 .addDecorator(charnia_green_decorator, 0.2F);
-        SpheroidType BRIMSTONE_SULPHURIC_ROCK = new ShellSpheroidType(null, 6, 12, brimstome, sulphuric_rock, 2, 3);
+        SpheroidType BRIMSTONE_SULPHURIC_ROCK = new ShellSpheroidType(null, 6, 12, sulphuric_rock, brimstone, 2, 3);
 
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.FLUID, 0.2F, WATER_BRIMSTONE);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.FLUID, 0.2F, WATER_SULPHURIC_ROCK);

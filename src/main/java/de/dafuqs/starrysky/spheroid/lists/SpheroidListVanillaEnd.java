@@ -35,7 +35,7 @@ public class SpheroidListVanillaEnd extends SpheroidList {
             .addDecorator(SpheroidDecorators.END_PORTAL, 1.0F);
 
     // SIMPLE
-    public static final SpheroidType END_STONE_SMALL = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 4, 7,  Blocks.END_STONE.getDefaultState());
+    public static final SpheroidType END_STONE_SMALL = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 3, 7,  Blocks.END_STONE.getDefaultState());
     public static final SpheroidType END_STONE_LARGE = new ModularSpheroidType(SpheroidAdvancementIdentifier.end_stone, 10, 20,  Blocks.END_STONE.getDefaultState())
             .addDecorator(SpheroidDecorators.CHORUS_FRUIT, 0.2F);
     public static final SpheroidType PURPLE_STAINED_GLASS = new ModularSpheroidType(SpheroidAdvancementIdentifier.stained_glass, 5, 8, Blocks.PURPLE_STAINED_GLASS.getDefaultState());
