@@ -169,15 +169,10 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState byg_winter_succulent = getDefaultBlockState(MOD_ID,"winter_succulent");
         BlockState byg_winter_grass = getDefaultBlockState(MOD_ID,"winter_grass");
 
-
         PlantDecorator byg_blueberry_bush_decorator = new PlantDecorator(byg_blueberry_bush, 0.05F); // MEADOW_GRASSBLOCK, OVERGROWN_DACITE, OVERGROWN_STONE, GRASS_BLOCK
         PlantDecorator byg_mini_cactus_decorator = new PlantDecorator(byg_mini_cactus, 0.03F);
-        PlantDecorator byg_cattail_decorator = new PlantDecorator(byg_cattail, 0.1F); // DoublePlant, in swamp water    // TODO
-        PlantDecorator byg_golden_spined_cactus_decorator = new PlantDecorator(byg_golden_spined_cactus, 0.1F);    // TODO
-        PlantDecorator byg_horseweed_decorator = new PlantDecorator(byg_horseweed, 0.1F);    // TODO
-        PlantDecorator byg_poison_ivy_decorator = new PlantDecorator(byg_poison_ivy, 0.1F); // Vines    // TODO
+        PlantDecorator byg_golden_spined_cactus_decorator = new PlantDecorator(byg_golden_spined_cactus, 0.1F);
         PlantDecorator byg_prickly_pear_cactus_decorator = new PlantDecorator(byg_prickly_pear_cactus, 0.05F);
-        PlantDecorator byg_reeds_decorator = new PlantDecorator(byg_reeds, 0.1F); // DoublePlant, in swamp water    // TODO
         PlantDecorator byg_winter_succulent_decorator = new PlantDecorator(byg_winter_succulent, 0.07F);
         PlantDecorator byg_winter_grass_decorator = new PlantDecorator(byg_winter_grass, 0.05F);
 
@@ -185,6 +180,11 @@ public class SpheroidListBYG extends SpheroidList {
         PlantDecorator byg_beach_grass_decorator = new PlantDecorator(byg_beach_grass, 0.1F);
         PlantDecorator byg_small_beach_grass_decorator = new PlantDecorator(byg_short_beach_grass, 0.1F);
         DoublePlantDecorator byg_tall_prairie_grass_decorator = new DoublePlantDecorator(byg_tall_prairie_grass, 0.2F);
+
+        //PlantDecorator byg_cattail_decorator = new PlantDecorator(byg_cattail, 0.1F); // DoublePlant, in swamp water    // TODO
+        //PlantDecorator byg_horseweed_decorator = new PlantDecorator(byg_horseweed, 0.1F);    // TODO
+        //PlantDecorator byg_poison_ivy_decorator = new PlantDecorator(byg_poison_ivy, 0.1F); // Vines    // TODO
+        //PlantDecorator byg_reeds_decorator = new PlantDecorator(byg_reeds, 0.1F); // DoublePlant, in swamp water    // TODO
 
         // FLOWERS
         BlockState byg_allium_flower_bush = getDefaultBlockState(MOD_ID,"allium_flower_bush");
@@ -411,7 +411,8 @@ public class SpheroidListBYG extends SpheroidList {
         SpheroidList.MAP_DUNGEON_STONES.put(byg_mossy_stone, 1.0F);
 
         // Decorators for vanilla spheroids
-        SpheroidListVanilla.SAND.addDecorator(byg_mini_cactus_decorator, 0.2F);
+        SpheroidListVanilla.SAND.addDecorator(byg_mini_cactus_decorator, 0.15F);
+        SpheroidListVanilla.SAND.addDecorator(byg_golden_spined_cactus_decorator, 0.15F);
         SpheroidListVanilla.SNOW_ICE.addDecorator(byg_winter_succulent_decorator, 0.2F);
         SpheroidListVanilla.SNOW_PACKED_ICE.addDecorator(byg_winter_succulent_decorator, 0.2F);
         SpheroidListVanilla.SNOW_BLUE_ICE.addDecorator(byg_winter_succulent_decorator, 0.2F);
@@ -464,7 +465,7 @@ public class SpheroidListBYG extends SpheroidList {
 
         // GLOWSTONE GARDENS
         BlockState weeping_roots_plant = getDefaultBlockState(MOD_ID,"weeping_roots_plant");
-        UnderPlantDecorator WEEPING_ROOTS_PLANT_DECORATOR = new UnderPlantDecorator(weeping_roots_plant, 0.09F);
+        HugeUnderPlantDecorator WEEPING_ROOTS_PLANT_DECORATOR = new HugeUnderPlantDecorator(weeping_roots_plant, 0.09F, 1, 7);
         SpheroidListVanillaNether.GLOWSTONE.addDecorator(WEEPING_ROOTS_PLANT_DECORATOR, 0.2F);
 
         // QUARTZ DESERT
@@ -475,7 +476,7 @@ public class SpheroidListBYG extends SpheroidList {
         PlantDecorator QUARTZ_CRYSTAL_DECORATOR = new PlantDecorator(quartz_crystal, 0.1F);
 
         BlockState hanging_bones = getDefaultBlockState(MOD_ID,"hanging_bones");
-        UnderPlantDecorator HANGING_BONES_DECORATOR = new UnderPlantDecorator(hanging_bones, 0.05F);
+        HugeUnderPlantDecorator HANGING_BONES_DECORATOR = new HugeUnderPlantDecorator(hanging_bones, 0.05F, 2, 5);
 
         SpheroidType QUARTZ_DESERT = new ShellSpheroidType(null, 10, 16, raw_quartz_block, quartzite_sand, 2, 4)
                 .addShellSpeckles(quartzite_sand, 0.2F)
@@ -504,7 +505,7 @@ public class SpheroidListBYG extends SpheroidList {
 
         BlockState sythian_hyphae = getDefaultBlockState(MOD_ID,"sythian_hyphae");
         BlockState hanging_sythian_roots_plant = getDefaultBlockState(MOD_ID,"hanging_sythian_roots_plant");
-        UnderPlantDecorator HANGING_SYTHIAN_ROOTS_DECORATOR = new UnderPlantDecorator(hanging_sythian_roots_plant, 0.1F);
+        HugeUnderPlantDecorator HANGING_SYTHIAN_ROOTS_DECORATOR = new HugeUnderPlantDecorator(hanging_sythian_roots_plant, 0.1F, 2, 6);
         SpheroidType SYTHIAN_HYPHAE = new ModularSpheroidType(null, 10, 16, sythian_hyphae)
                 .addDecorator(HANGING_SYTHIAN_ROOTS_DECORATOR, 1.0F);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SYTHIAN_HYPHAE);
@@ -529,8 +530,9 @@ public class SpheroidListBYG extends SpheroidList {
 
         // WARPED DESERT
         BlockState soul_shroom_block = getDefaultBlockState(MOD_ID,"soul_shroom_block");
-        BlockState soul_shroom_spore = getDefaultBlockState(MOD_ID,"soul_shroom_spore"); // TODO: has soul_shroom_spore_end at bottom
-        UnderPlantDecorator SOUL_SHROOM_SPORE_DECORATOR = new UnderPlantDecorator(soul_shroom_spore, 0.1F);
+        BlockState soul_shroom_spore = getDefaultBlockState(MOD_ID,"soul_shroom_spore");
+        BlockState soul_shroom_spore_end = getDefaultBlockState(MOD_ID,"soul_shroom_spore_end");
+        HugeUnderPlantDecorator SOUL_SHROOM_SPORE_DECORATOR = new HugeUnderPlantDecorator(soul_shroom_spore, 0.1F, 2, 5).setLastBlockState(soul_shroom_spore_end);
 
         BlockState nylium_soul_sand = getDefaultBlockState(MOD_ID,"nylium_soul_sand");
         BlockState warped_cactus = getDefaultBlockState(MOD_ID,"warped_cactus");
@@ -614,9 +616,9 @@ public class SpheroidListBYG extends SpheroidList {
                 .addShellSpeckles(Blocks.SHROOMLIGHT.getDefaultState(), 0.05F);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, LAMENT_WOOD);
 
-        BlockState lament_vine_plant = getDefaultBlockState(MOD_ID,"lament_vine_plant"); // hanging from netherrack
-        // BlockState lament_vine = getDefaultBlockState(MOD_ID,"lament_vine_plant"); // on bottom ov lament vine
-        UnderPlantDecorator LAMENT_VINE_DECORATOR = new UnderPlantDecorator(lament_vine_plant, 0.1F);
+        BlockState lament_vine_plant = getDefaultBlockState(MOD_ID,"lament_vine_plant");
+        BlockState lament_vine = getDefaultBlockState(MOD_ID,"lament_vine");
+        HugeUnderPlantDecorator LAMENT_VINE_DECORATOR = new HugeUnderPlantDecorator(lament_vine_plant, 0.1F, 2, 5).setLastBlockState(lament_vine);
         WAILING_GARTH.addDecorator(LAMENT_VINE_DECORATOR, 0.15F);
 
         // ADDING TO VANILLA
@@ -745,13 +747,13 @@ public class SpheroidListBYG extends SpheroidList {
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, ETHER_WOOD_WITHOUT_LEAVES);
         BlockState vermilion_sculk = getDefaultBlockState(MOD_ID,"vermilion_sculk");
         BlockState vermilion_sculk_growth = getDefaultBlockState(MOD_ID,"vermilion_sculk_growth");
-        PlantDecorator VERMILION_SCOLK_GROWTH_DECORATOR = new PlantDecorator(vermilion_sculk_growth, 0.15F);
+        PlantDecorator VERMILION_SCULK_GROWTH_DECORATOR = new PlantDecorator(vermilion_sculk_growth, 0.15F);
         BlockState therium_crystal = getDefaultBlockState(MOD_ID,"therium_crystal");
         PlantDecorator THERIUM_CRYSTAL_DECORATOR = new PlantDecorator(therium_crystal, 0.1F);
 
         SpheroidType VISCAL_ISLES = new ModularSpheroidType(null, 6, 10, ether_stone)
                 .setTopBlockState(vermilion_sculk)
-                .addDecorator(VERMILION_SCOLK_GROWTH_DECORATOR, 0.9F)
+                .addDecorator(VERMILION_SCULK_GROWTH_DECORATOR, 0.9F)
                 .addDecorator(THERIUM_CRYSTAL_DECORATOR, 0.9F);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.5F, VISCAL_ISLES);
 
@@ -767,9 +769,10 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState white_mushroom_stem = getDefaultBlockState(MOD_ID,"white_mushroom_stem");
         BlockState shulkren_wart_block = getDefaultBlockState(MOD_ID,"shulkren_wart_block");
         BlockState purple_shroomlight = getDefaultBlockState(MOD_ID,"purple_shroomlight");
-        //BlockState shulkren_vine_plant = getDefaultBlockState(MOD_ID,"shulkren_vine_plant");
+
+        BlockState shulkren_vine_plant = getDefaultBlockState(MOD_ID,"shulkren_vine_plant");
         BlockState shulkren_vine = getDefaultBlockState(MOD_ID,"shulkren_vine");
-        UnderPlantDecorator SHULKREN_VINE_DECORATOR = new UnderPlantDecorator(shulkren_vine, 0.1F);
+        HugeUnderPlantDecorator SHULKREN_VINE_DECORATOR = new HugeUnderPlantDecorator(shulkren_vine_plant, 0.1F, 2, 6).setLastBlockState(shulkren_vine);
 
         SpheroidType SHULKREN_WART = new ShellSpheroidType(null, 7, 10, white_mushroom_stem, shulkren_wart_block, 1, 3)
                 .addShellSpeckles(purple_shroomlight, 0.1F)
