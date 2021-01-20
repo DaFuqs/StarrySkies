@@ -779,8 +779,6 @@ public class SpheroidListBYG extends SpheroidList {
                 .addShellSpeckles(purple_shroomlight, 0.1F)
                 .addDecorator(SHULKREN_VINE_DECORATOR, 0.9F);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, SHULKREN_WART);
-
-
     }
 
 
