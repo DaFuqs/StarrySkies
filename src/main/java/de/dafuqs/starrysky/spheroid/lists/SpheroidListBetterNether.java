@@ -3,6 +3,7 @@ package de.dafuqs.starrysky.spheroid.lists;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.dimension.decorators.HugeUnderPlantDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
 import de.dafuqs.starrysky.dimension.decorators.UnderPlantDecorator;
 import de.dafuqs.starrysky.spheroid.types.*;
@@ -38,15 +39,14 @@ public class SpheroidListBetterNether extends SpheroidList {
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.8F, NETHER_LAPIS_ORE);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.4F, NETHER_RUBY_ORE);
 
-
         // STALACTITES
-        BlockState netherrack_stalactite = getDefaultBlockState(MOD_ID,"netherrack_stalactite"); // size: 0, 1, ...
+        /*BlockState netherrack_stalactite = getDefaultBlockState(MOD_ID,"netherrack_stalactite"); // size: 0, 1, ...
         BlockState glowstone_stalactite = getDefaultBlockState(MOD_ID,"glowstone_stalactite"); // size: 0, 1, ...
         BlockState basalt_stalactite = getDefaultBlockState(MOD_ID,"basalt_stalactite"); // size: 0, 1, ...
 
-        PlantDecorator NETHERRACK_STALACTITE_DECORATOR = new PlantDecorator(netherrack_stalactite, 0.1F);
-        PlantDecorator GLOWSTONE_STALACTITE_DECORATOR = new PlantDecorator(glowstone_stalactite, 0.1F);
-        UnderPlantDecorator BASALT_STALACTITE_DECORATOR = new UnderPlantDecorator(basalt_stalactite, 0.1F);
+        PlantDecorator NETHERRACK_STALACTITE_DECORATOR = new PlantDecorator(netherrack_stalactite, 0.1F); // TODO
+        PlantDecorator GLOWSTONE_STALACTITE_DECORATOR = new PlantDecorator(glowstone_stalactite, 0.1F); // TODO
+        UnderPlantDecorator BASALT_STALACTITE_DECORATOR = new UnderPlantDecorator(basalt_stalactite, 0.1F); // TODO
 
         SpheroidListVanillaNether.NETHERRACK.addDecorator(NETHERRACK_STALACTITE_DECORATOR, 0.2F);
         SpheroidListVanillaNether.NETHERRACK.addDecorator(GLOWSTONE_STALACTITE_DECORATOR, 0.2F);
@@ -57,7 +57,7 @@ public class SpheroidListBetterNether extends SpheroidList {
         SpheroidListVanillaNether.NETHER_QUARTZ.addDecorator(GLOWSTONE_STALACTITE_DECORATOR, 0.2F);
         SpheroidListVanillaNether.NETHER_GOLD_ORE.addDecorator(NETHERRACK_STALACTITE_DECORATOR, 0.2F);
         SpheroidListVanillaNether.NETHER_GOLD_ORE.addDecorator(GLOWSTONE_STALACTITE_DECORATOR, 0.2F);
-        SpheroidListVanillaNether.BASALT.addDecorator(BASALT_STALACTITE_DECORATOR, 0.2F);
+        SpheroidListVanillaNether.BASALT.addDecorator(BASALT_STALACTITE_DECORATOR, 0.2F);*/
 
         // GEYSER
         BlockState geyser = getDefaultBlockState(MOD_ID,"geyser"); // on netherrack, close to magma
@@ -122,14 +122,17 @@ public class SpheroidListBetterNether extends SpheroidList {
         PlantDecorator JELLYFISH_MUSHROOM_DECORATOR = new PlantDecorator(jellyfish_mushroom, 0.03F);
 
 
-        BlockState lumabus_vine = getDefaultBlockState(MOD_ID,"lumabus_vine"); // top, middle, bottom
-        UnderPlantDecorator LUMABUS_VINE_DECORATOR = new UnderPlantDecorator(lumabus_vine, 0.1F);
+        BlockState golden_lumabus_seed = getDefaultBlockState(MOD_ID,"lumabus_vine"); // top, middle, bottom
+        BlockState lumabus_seed = getDefaultBlockState(MOD_ID,"lumabus_vine"); // top, middle, bottom
+        UnderPlantDecorator LUMABUS_SEED_DECORATOR = new UnderPlantDecorator(lumabus_seed, 0.1F);
+        UnderPlantDecorator GOLDEN_LUMABUS_SEED_DECORATOR = new UnderPlantDecorator(golden_lumabus_seed, 0.1F);
 
         SpheroidType BONE_REEF = new ModularSpheroidType(null, 8, 14, netherrack)
                 .setTopBlockState(mushroom_grass)
                 .addDecorator(BONE_GRASS_DECORATOR, 0.9F)
                 .addDecorator(FEATHER_FERN_DECORATOR, 0.5F)
-                .addDecorator(LUMABUS_VINE_DECORATOR, 0.5F)
+                .addDecorator(LUMABUS_SEED_DECORATOR, 0.5F)
+                .addDecorator(GOLDEN_LUMABUS_SEED_DECORATOR, 0.5F)
                 .addDecorator(JELLYFISH_MUSHROOM_DECORATOR, 0.5F);
         spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.8F, BONE_REEF);
 
@@ -156,7 +159,7 @@ public class SpheroidListBetterNether extends SpheroidList {
         PlantDecorator BARREL_CACTUS_DECORATOR = new PlantDecorator(barrel_cactus, 0.03F);
         SpheroidListVanillaNether.GRAVEL.addDecorator(BARREL_CACTUS_DECORATOR, 0.15F);
 
-        BlockState nether_cactus = getDefaultBlockState(MOD_ID,"nether_cactus"); // TODO: top: true / false
+        BlockState nether_cactus = getDefaultBlockState(MOD_ID,"nether_cactus");
         PlantDecorator NETHER_CACTUS_DECORATOR = new PlantDecorator(nether_cactus, 0.03F);
         SpheroidListVanillaNether.GRAVEL.addDecorator(NETHER_CACTUS_DECORATOR, 0.15F);
 
@@ -209,9 +212,8 @@ public class SpheroidListBetterNether extends SpheroidList {
         UnderPlantDecorator BLOOMING_VINE_DECORATOR = new UnderPlantDecorator(blooming_vine, 0.2F);
 
         BlockState eye_vine = getDefaultBlockState(MOD_ID,"eye_vine");
-        BlockState eyeball_small = getDefaultBlockState(MOD_ID,"eye_vine");
         BlockState eyeball = getDefaultBlockState(MOD_ID,"eyeball");
-        UnderPlantDecorator EYEBALL_DECORATOR = new UnderPlantDecorator(eyeball, 0.1F); // That's not nice to look at, but as least there are drops
+        HugeUnderPlantDecorator EYEBALL_DECORATOR = new HugeUnderPlantDecorator(eye_vine, 0.1F, 4, 8).setLastBlockState(eyeball); // That's not nice to look at, but as least there are drops
 
         SpheroidType NETHER_JUNGLE = new ModularSpheroidType(null, 8, 20, netherrack)
                 .setTopBlockState(jungle_grass)

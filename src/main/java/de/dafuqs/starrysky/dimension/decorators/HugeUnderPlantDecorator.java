@@ -62,6 +62,9 @@ public class HugeUnderPlantDecorator extends SpheroidDecorator {
 
                         world.setBlockState(flippedBlockPos.down(i), placementBlockState, 3);
                     } else {
+                        if(i > 1 && LAST_BLOCKSTATE != null) {
+                            world.setBlockState(flippedBlockPos.down(i-1), LAST_BLOCKSTATE, 3);
+                        }
                         break;
                     }
                 }
