@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.NETHER;
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListMythicMetals extends SpheroidList {
 
@@ -17,7 +18,7 @@ public class SpheroidListMythicMetals extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Mythic Metals integration...");
+		StarrySkyCommon.log(INFO, "Loading Mythic Metals integration...");
 		
 		BlockState mythicmetals_adamantite_ore = getDefaultBlockState(MOD_ID,"adamantite_ore");
 		BlockState mythicmetals_aetherium_ore = getDefaultBlockState(MOD_ID,"aetherium_ore");

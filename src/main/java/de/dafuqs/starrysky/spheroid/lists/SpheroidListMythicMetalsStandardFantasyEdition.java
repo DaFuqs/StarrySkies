@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.NETHER;
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListMythicMetalsStandardFantasyEdition extends SpheroidList {
 
@@ -19,7 +20,7 @@ public class SpheroidListMythicMetalsStandardFantasyEdition extends SpheroidList
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Mythic Metals Standard Fantasy Edition integration...");
+        StarrySkyCommon.log(INFO, "Loading Mythic Metals Standard Fantasy Edition integration...");
 
         BlockState mythril_ore = getDefaultBlockState(MOD_ID,"mythril_ore");
         BlockState zinc_ore = getDefaultBlockState(MOD_ID,"zinc_ore");

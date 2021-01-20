@@ -4,11 +4,12 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroid.types.CoreSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.block.BlockState;
-import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static org.apache.logging.log4j.Level.ERROR;
 
 public class DynamicOreSpheroids {
 
@@ -103,7 +104,7 @@ public class DynamicOreSpheroids {
                 OreSpheroidDefinition entrySpheroidDefinition = dynamicOreSpheroidDefinitions.get(dynamicOre.getKey());
 
                 if (entrySpheroidDefinition == null) {
-                    StarrySkyCommon.LOGGER.log(Level.ERROR, "The rarity of ore '" + dynamicOre.getKey() + "' is not defined. Blame the Starry Sky author!");
+                    StarrySkyCommon.log(ERROR, "The rarity of ore '" + dynamicOre.getKey() + "' is not defined. Blame the Starry Sky author!");
                     continue;
                 }
 

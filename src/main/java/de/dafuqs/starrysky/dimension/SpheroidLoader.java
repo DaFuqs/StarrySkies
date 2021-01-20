@@ -6,11 +6,12 @@ import de.dafuqs.starrysky.spheroid.lists.*;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
-import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidLoader {
 
@@ -90,7 +91,7 @@ public class SpheroidLoader {
     public SpheroidLoader() {
         if (!initialized) {
 
-            StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Loading Integration Packs...");
+            StarrySkyCommon.log(INFO, "Loading Integration Packs...");
 
             // initialize spheroid types list with empty LinkedHashMaps
             for (SpheroidDistributionType spheroidDistributionType : SpheroidDistributionType.values()) {
@@ -180,7 +181,7 @@ public class SpheroidLoader {
             availableSpheroidTypesByDistributionTypeWithWeightEnd.get(SpheroidDistributionType.ORE).putAll(dynamicOreSpheroids);
 
             initialized = true;
-            StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Initializing complete!");
+            StarrySkyCommon.log(INFO, "Initializing complete!");
         }
     }
 

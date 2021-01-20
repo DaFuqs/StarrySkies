@@ -16,6 +16,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.END;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListVanillaEnd extends SpheroidList {
 
@@ -58,7 +59,7 @@ public class SpheroidListVanillaEnd extends SpheroidList {
     public static final SpheroidType END_CITY = new EndCitySpheroidType(SpheroidAdvancementIdentifier.end_city, 20, 40);
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Vanilla End Spheroids...");
+        StarrySkyCommon.log(INFO, "Loading Vanilla End Spheroids...");
 
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ESSENTIAL, 10.0F, END_STONE_SMALL);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ESSENTIAL, 10.0F, END_STONE_LARGE);

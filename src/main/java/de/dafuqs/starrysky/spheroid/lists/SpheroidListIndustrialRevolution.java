@@ -6,6 +6,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListIndustrialRevolution extends SpheroidList {
 
@@ -17,7 +18,7 @@ public class SpheroidListIndustrialRevolution extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Industrial Revolution integration...");
+        StarrySkyCommon.log(INFO, "Loading Industrial Revolution integration...");
 
         BlockState industrialrevolution_nikolite = getDefaultBlockState(MOD_ID,"nikolite_ore");
         BlockState industrialrevolution_copper = getDefaultBlockState(MOD_ID,"tin_ore");

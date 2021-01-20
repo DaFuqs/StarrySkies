@@ -11,6 +11,7 @@ import net.minecraft.block.BlockState;
 import java.util.ArrayList;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListUnearthed extends SpheroidList {
 
@@ -21,7 +22,7 @@ public class SpheroidListUnearthed extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Unearthed integration...");
+        StarrySkyCommon.log(INFO, "Loading Unearthed integration...");
 
         ArrayList<String> stones = new ArrayList<String>() {{
             add("gray_basalt");

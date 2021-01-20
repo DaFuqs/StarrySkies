@@ -10,6 +10,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListTraverse extends SpheroidList {
 
@@ -20,7 +21,7 @@ public class SpheroidListTraverse extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Traverse integration...");
+        StarrySkyCommon.log(INFO, "Loading Traverse integration...");
 
         BlockState traverse_fir_leaves = getDefaultBlockState(MOD_ID, "fir_leaves").with(LeavesBlock.DISTANCE, 1);
         BlockState traverse_fir_log = getDefaultBlockState(MOD_ID, "fir_log");

@@ -10,6 +10,8 @@ import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 public class SupportedRainbowSpheroidType extends SpheroidType {
 
     private final ArrayList<BlockState> rainbowBlocks;
@@ -19,7 +21,7 @@ public class SupportedRainbowSpheroidType extends SpheroidType {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(rainbowBlocks == null || rainbowBlocks.size() == 0) {
-            StarrySkyCommon.LOGGER.error("SupportedRainbowSpheroidType: Registered a SpheroidType with empty rainbowBlocks!");
+            StarrySkyCommon.log(ERROR, "SupportedRainbowSpheroidType: Registered a SpheroidType with empty rainbowBlocks!");
         }
 
         this.rainbowBlocks = rainbowBlocks;

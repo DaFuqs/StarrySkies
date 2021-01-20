@@ -13,6 +13,8 @@ import net.minecraft.world.gen.ChunkRandom;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 public class DoubleCoreSpheroidType extends SpheroidType {
 
     private final BlockState innerCoreBlock;
@@ -31,13 +33,13 @@ public class DoubleCoreSpheroidType extends SpheroidType {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(innerCoreBlock == Blocks.AIR.getDefaultState()) {
-            StarrySkyCommon.LOGGER.error("DoubleCoreSpheroidType: Registered a SpheroidType with null innerCoreBlock!");
+            StarrySkyCommon.log(ERROR, "DoubleCoreSpheroidType: Registered a SpheroidType with null innerCoreBlock!");
         }
         if(outerCoreBlock == Blocks.AIR.getDefaultState()) {
-            StarrySkyCommon.LOGGER.error("DoubleCoreSpheroidType: Registered a SpheroidType with null outerCoreBlock!");
+            StarrySkyCommon.log(ERROR, "DoubleCoreSpheroidType: Registered a SpheroidType with null outerCoreBlock!");
         }
         if(validShellBlocks == null || validShellBlocks.size() == 0) {
-            StarrySkyCommon.LOGGER.error("DoubleCoreSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
+            StarrySkyCommon.log(ERROR, "DoubleCoreSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
         }
 
         this.innerCoreBlock = innerCoreBlock;

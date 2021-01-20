@@ -10,6 +10,7 @@ import net.minecraft.block.Blocks;
 import java.util.ArrayList;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListLGBT extends SpheroidList {
 
@@ -67,7 +68,7 @@ public class SpheroidListLGBT extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading LGBT pack...");
+        StarrySkyCommon.log(INFO, "Loading LGBT pack...");
 
         StripesSpheroidType PRIDE_GAY = new StripesSpheroidType(null,  6, 12, LIST_GAY);
         StripesSpheroidType PRIDE_BI = new StripesSpheroidType(null, 6, 12, LIST_BI);

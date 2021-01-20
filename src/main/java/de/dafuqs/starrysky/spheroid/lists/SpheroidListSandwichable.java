@@ -7,6 +7,8 @@ import de.dafuqs.starrysky.dimension.decorators.GroundDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
 import net.fabricmc.loader.api.FabricLoader;
 
+import static org.apache.logging.log4j.Level.INFO;
+
 public class SpheroidListSandwichable extends SpheroidList {
 
     private static final String MOD_ID = "sandwichable";
@@ -16,7 +18,7 @@ public class SpheroidListSandwichable extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Sandwichable integration...");
+        StarrySkyCommon.log(INFO, "Loading Sandwichable integration...");
 
         SpheroidDecorator SANDWICHABLE_SALTY_SAND_DECORATOR = new GroundDecorator(getDefaultBlockState(MOD_ID, "salty_sand"), 0.08F);
         SpheroidDecorator SANDWICHABLE_SHRUB_DECORATOR = new PlantDecorator(getDefaultBlockState(MOD_ID, "shrub"), 0.04F);

@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
+import static org.apache.logging.log4j.Level.WARN;
+
 public abstract class Spheroid implements Serializable {
 
     protected SpheroidAdvancementIdentifier spheroidAdvancementIdentifier;
@@ -198,7 +200,7 @@ public abstract class Spheroid implements Serializable {
                                     }
                                 }
                             } catch (Exception exception) {
-                                StarrySkyCommon.LOGGER.warn("Failed to spawn mob on sphere" + this.getDescription() + "\nException: " + exception);
+                                StarrySkyCommon.log(WARN, "Failed to spawn mob on sphere" + this.getDescription() + "\nException: " + exception);
                             }
                         }
                     }

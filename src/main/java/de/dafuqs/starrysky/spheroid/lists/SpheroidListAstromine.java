@@ -9,6 +9,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListAstromine extends SpheroidList {
 
@@ -19,7 +20,7 @@ public class SpheroidListAstromine extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Astromine integration...");
+        StarrySkyCommon.log(INFO, "Loading Astromine integration...");
 
         BlockState astromine_crude_oil         = getDefaultBlockState(MOD_ID,"crude_oil");
         BlockState astromine_copper_ore        = getDefaultBlockState(MOD_ID,"copper_ore");

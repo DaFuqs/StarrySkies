@@ -6,6 +6,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListModernIndustrialization extends SpheroidList {
 
@@ -16,7 +17,7 @@ public class SpheroidListModernIndustrialization extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Modern Industrialization integration...");
+        StarrySkyCommon.log(INFO, "Loading Modern Industrialization integration...");
 
         BlockState modern_industrialization_copper_ore = getDefaultBlockState(MOD_ID,"copper_ore");
         BlockState modern_industrialization_tin_ore = getDefaultBlockState(MOD_ID,"tin_ore");

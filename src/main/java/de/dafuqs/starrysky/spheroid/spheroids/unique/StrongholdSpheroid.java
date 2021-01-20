@@ -19,10 +19,11 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
-import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import static org.apache.logging.log4j.Level.WARN;
 
 public class StrongholdSpheroid extends Spheroid {
 
@@ -126,7 +127,7 @@ public class StrongholdSpheroid extends Spheroid {
         if(portalPosition != null) {
             placeEndPortal(world, portalPosition.up());
         } else {
-            StarrySkyCommon.LOGGER.log(Level.WARN,  "[StarrySky] Generating a Stronghold Spheroid at " + position.getX() + " " + position.getY() + " " + position.getZ() + " without an end portal?");
+            StarrySkyCommon.log(WARN, "Generating a Stronghold Spheroid at " + position.getX() + " " + position.getY() + " " + position.getZ() + " without an end portal?");
         }
 
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {

@@ -12,6 +12,8 @@ import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 public class ModularSpheroidType extends SpheroidType {
 
     private final BlockState mainBlock;
@@ -23,7 +25,7 @@ public class ModularSpheroidType extends SpheroidType {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(mainBlock == Blocks.AIR.getDefaultState()) {
-            StarrySkyCommon.LOGGER.error("ModularSpheroidType: Registered a SpheroidType with null mainBlock!");
+            StarrySkyCommon.log(ERROR, "ModularSpheroidType: Registered a SpheroidType with null mainBlock!");
         }
 
         this.mainBlock = mainBlock;
@@ -43,7 +45,7 @@ public class ModularSpheroidType extends SpheroidType {
 
     public ModularSpheroidType setTopBlockState(BlockState state) {
         if(mainBlock == null) {
-            StarrySkyCommon.LOGGER.error("ModularSpheroidType: Registered a SpheroidType with null mainBlock!");
+            StarrySkyCommon.log(ERROR, "ModularSpheroidType: Registered a SpheroidType with null topBlock!");
         } else {
             topBlock = state;
         }
@@ -52,7 +54,7 @@ public class ModularSpheroidType extends SpheroidType {
 
     public ModularSpheroidType setBottomBlockState(BlockState state) {
         if(mainBlock == null) {
-            StarrySkyCommon.LOGGER.error("ModularSpheroidType: Registered a SpheroidType with null mainBlock!");
+            StarrySkyCommon.log(ERROR, "ModularSpheroidType: Registered a SpheroidType with null bottomBlock!");
         } else {
             bottomBlock = state;
         }

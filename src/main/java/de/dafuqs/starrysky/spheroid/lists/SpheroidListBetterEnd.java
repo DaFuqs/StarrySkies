@@ -13,6 +13,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.END;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListBetterEnd extends SpheroidList {
 
@@ -24,7 +25,7 @@ public class SpheroidListBetterEnd extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Better End integration...");
+        StarrySkyCommon.log(INFO, "Loading Better End integration...");
 
         BlockState end_stone = Blocks.END_STONE.getDefaultState();
 
@@ -91,19 +92,20 @@ public class SpheroidListBetterEnd extends SpheroidList {
         SpheroidType MOSSY_GLOWSHROOM = new DoubleCoreSpheroidType(null, 5, 12, mossy_glowshroom_log, mossy_glowshroom_hymenophore, mossy_glowshroom_cap, 2, 4, 2, 4);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, MOSSY_GLOWSHROOM);
 
-        // MEGA LAKE TODO
+        // MEGA LAKE
         BlockState lacugrove_log = getDefaultBlockState(MOD_ID,"lacugrove_log");
         BlockState lacugrove_leaves = getDefaultBlockState(MOD_ID,"lacugrove_leaves").with(LeavesBlock.DISTANCE, 1);;
         SpheroidType LACUGROVE_WOOD = new ShellSpheroidType(null, 10, 15, lacugrove_log, lacugrove_leaves, 3, 4);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, LACUGROVE_WOOD);
 
+        /* TODO
         BlockState end_lotus_stem = getDefaultBlockState(MOD_ID,"end_lotus_stem"); // bottom, middle, top, waterloggable
-        BlockState end_lotus_flower = getDefaultBlockState(MOD_ID,"end_lotus_flower"); // on top of end lotos stem
+        BlockState end_lotus_flower = getDefaultBlockState(MOD_ID,"end_lotus_flower"); // on top of end lotus stem
 
         BlockState lotus_leaf = getDefaultBlockState(MOD_ID,"lotus_leaf"); // facing + shape; top of water
         BlockState end_lily = getDefaultBlockState(MOD_ID,"end_lily"); // bottom, middle, top (top of water), waterloggable
         BlockState bubble_coral = getDefaultBlockState(MOD_ID,"bubble_coral"); // bottom of water
-
+        */
 
         // PAINTED MOUNTAINS
         BlockState flavolite = getDefaultBlockState(MOD_ID,"flavolite");

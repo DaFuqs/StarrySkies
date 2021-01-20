@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.*;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListTechReborn extends SpheroidList {
 
@@ -19,7 +20,7 @@ public class SpheroidListTechReborn extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Tech Reborn integration...");
+        StarrySkyCommon.log(INFO, "Loading Tech Reborn integration...");
 
         // Rubber
         BlockState techreborn_rubber_log = getDefaultBlockState(MOD_ID,"rubber_log");

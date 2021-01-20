@@ -12,6 +12,7 @@ import net.minecraft.state.property.Properties;
 import java.util.ArrayList;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListBlockus extends SpheroidList {
 
@@ -23,7 +24,7 @@ public class SpheroidListBlockus extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Blockus integration...");
+        StarrySkyCommon.log(INFO, "Loading Blockus integration...");
 
         BlockState blockus_limestone = getDefaultBlockState(MOD_ID,"limestone");
         BlockState blockus_marble = getDefaultBlockState(MOD_ID,"marble");

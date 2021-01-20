@@ -1,10 +1,9 @@
 package de.dafuqs.starrysky.spheroid.spheroids;
 
-import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
-import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
@@ -36,9 +35,6 @@ public class StripesSpheroid extends Spheroid {
             int currentSpheroidHeight = y - y2 + this.radius;
             int currentBlockStateIndex = (currentSpheroidHeight * stripesBlockStates.size()-1) / (this.radius * 2);
 
-            if(currentBlockStateIndex >= stripesBlockStates.size()) {
-                StarrySkyCommon.LOGGER.error(":(");
-            }
             BlockState currentBlockState = this.stripesBlockStates.get(currentBlockStateIndex);
 
             for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {

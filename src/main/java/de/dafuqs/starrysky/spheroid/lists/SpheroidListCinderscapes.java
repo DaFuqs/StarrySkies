@@ -13,6 +13,8 @@ import net.minecraft.block.Blocks;
 
 import java.util.ArrayList;
 
+import static org.apache.logging.log4j.Level.INFO;
+
 public class SpheroidListCinderscapes extends SpheroidList {
 
     private static final String MOD_ID = "cinderscapes";
@@ -22,7 +24,7 @@ public class SpheroidListCinderscapes extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Cinderscapes integration...");
+        StarrySkyCommon.log(INFO, "Loading Cinderscapes integration...");
 
         // sulfur
         BlockState sulfur_ore = getDefaultBlockState(MOD_ID,"sulfur_ore");

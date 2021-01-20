@@ -18,6 +18,7 @@ import net.minecraft.loot.LootTables;
 import net.minecraft.state.property.Properties;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListVanilla extends SpheroidList {
 
@@ -250,7 +251,7 @@ public class SpheroidListVanilla extends SpheroidList {
 
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Vanilla Spheroids...");
+        StarrySkyCommon.log(INFO, "Loading Vanilla Spheroids...");
 
         // COMMON
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.ESSENTIAL, 10.0F, GRASS);

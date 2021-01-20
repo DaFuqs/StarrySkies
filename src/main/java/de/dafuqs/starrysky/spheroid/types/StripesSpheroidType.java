@@ -10,6 +10,8 @@ import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 public class StripesSpheroidType extends SpheroidType {
 
     private final ArrayList<BlockState> stripesBlockStates;
@@ -18,7 +20,7 @@ public class StripesSpheroidType extends SpheroidType {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(stripesBlockStates == null || stripesBlockStates.size() == 0) {
-            StarrySkyCommon.LOGGER.error("ShellSpheroidType: Registered a SpheroidType with empty stripesBlockStates!");
+            StarrySkyCommon.log(ERROR, "ShellSpheroidType: Registered a SpheroidType with empty stripesBlockStates!");
         }
 
         this.stripesBlockStates = stripesBlockStates;

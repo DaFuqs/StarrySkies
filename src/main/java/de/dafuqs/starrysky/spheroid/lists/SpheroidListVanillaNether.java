@@ -16,6 +16,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.NETHER;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListVanillaNether extends SpheroidList {
 	
@@ -128,7 +129,7 @@ public class SpheroidListVanillaNether extends SpheroidList {
 
 
 	public static void setup(SpheroidLoader spheroidLoader) {
-		StarrySkyCommon.LOGGER.info("[StarrySky] Loading Vanilla Nether Spheroids...");
+		StarrySkyCommon.log(INFO, "Loading Vanilla Nether Spheroids...");
 
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 10.0F, NETHERRACK);
 		spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ESSENTIAL, 1.0F, MAGMA_SPRINKLED_NETHERRACK);

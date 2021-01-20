@@ -12,6 +12,8 @@ import net.minecraft.world.gen.ChunkRandom;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 
 public class ShellSpheroidType extends SpheroidType {
 
@@ -29,7 +31,7 @@ public class ShellSpheroidType extends SpheroidType {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(validShellBlocks == null || validShellBlocks.size() == 0) {
-            StarrySkyCommon.LOGGER.error("ShellSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
+            StarrySkyCommon.log(ERROR, "ShellSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
         }
 
         this.coreBlock = coreBlock;

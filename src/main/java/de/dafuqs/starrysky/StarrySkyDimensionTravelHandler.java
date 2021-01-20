@@ -24,6 +24,8 @@ import net.minecraft.world.dimension.DimensionType;
 
 import java.util.Optional;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 public class StarrySkyDimensionTravelHandler {
 
     public static final BlockPos END_SPAWN_BLOCK_POS = new BlockPos(10, 64, 0);
@@ -123,7 +125,7 @@ public class StarrySkyDimensionTravelHandler {
                     Direction.Axis axis = thisEntity.world.getBlockState(((EntityAccessor) thisEntity).getLastNetherPortalPosition()).method_28500(NetherPortalBlock.AXIS).orElse(Direction.Axis.X);
                     Optional<class_5459.class_5460> optional2 = destination.getPortalForcer().method_30482(blockPos3, axis);
                     if (!optional2.isPresent()) {
-                        StarrySkyCommon.LOGGER.error("[StarrySky] Unable to create a portal, likely target out of worldborder");
+                        StarrySkyCommon.log(ERROR, "Unable to create a portal, likely target out of worldborder");
                     } else {
                         BlockPos targetPos = optional2.get().field_25936;
                         return new TeleportTarget(new Vec3d(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D), thisEntity.getVelocity(), thisEntity.yaw, thisEntity.pitch);

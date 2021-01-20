@@ -16,6 +16,7 @@ import net.minecraft.state.property.Properties;
 import java.util.ArrayList;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.*;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListBYG extends SpheroidList {
 
@@ -26,7 +27,7 @@ public class SpheroidListBYG extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading BYG integration...");
+        StarrySkyCommon.log(INFO, "Loading BYG integration...");
 
         setupOverworld(spheroidLoader);
         setupNether(spheroidLoader);

@@ -16,6 +16,7 @@ import net.minecraft.block.LeavesBlock;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 import static de.dafuqs.starrysky.spheroid.lists.SpheroidListVanilla.SpheroidDecorators.FERNS_DECORATOR;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListTerrestria extends SpheroidList {
 
@@ -26,7 +27,7 @@ public class SpheroidListTerrestria extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Terrestria integration...");
+        StarrySkyCommon.log(INFO, "Loading Terrestria integration...");
 
         // TREES
         BlockState terrestria_redwood_leaves = getDefaultBlockState(MOD_ID,"redwood_leaves").with(ExtendedLeavesBlock.DISTANCE, 1);

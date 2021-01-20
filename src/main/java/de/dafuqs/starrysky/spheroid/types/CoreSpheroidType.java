@@ -13,6 +13,8 @@ import net.minecraft.world.gen.ChunkRandom;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 
 public class CoreSpheroidType extends SpheroidType {
 
@@ -29,10 +31,10 @@ public class CoreSpheroidType extends SpheroidType {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(coreBlock == Blocks.AIR.getDefaultState()) {
-            StarrySkyCommon.LOGGER.error("CoreSpheroidType: Registered a SpheroidType with null coreBlock!");
+            StarrySkyCommon.log(ERROR, "CoreSpheroidType: Registered a SpheroidType with null coreBlock!");
         }
         if(shellBlockStates == null || shellBlockStates.size() == 0) {
-            StarrySkyCommon.LOGGER.error("CoreSpheroidType: Registered a SpheroidType with empty shellBlockStates!");
+            StarrySkyCommon.log(ERROR, "CoreSpheroidType: Registered a SpheroidType with empty shellBlockStates!");
         }
 
         this.coreBlock = coreBlock;

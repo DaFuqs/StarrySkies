@@ -12,6 +12,8 @@ import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 
 /**
  * Very similar to ShellSpheroid
@@ -33,10 +35,10 @@ public class MushroomSpheroidType extends SpheroidType {
         this.maxShellRadius = maxShellRadius;
 
         if(coreBlock == Blocks.AIR.getDefaultState()) {
-            StarrySkyCommon.LOGGER.error("MushroomSpheroidType: Registered a SpheroidType with null coreBlock!");
+            StarrySkyCommon.log(ERROR, "MushroomSpheroidType: Registered a SpheroidType with null coreBlock!");
         }
         if(shellBlock == Blocks.AIR.getDefaultState()) {
-            StarrySkyCommon.LOGGER.error("MushroomSpheroidType: Registered a SpheroidType with null shellBlock!");
+            StarrySkyCommon.log(ERROR, "MushroomSpheroidType: Registered a SpheroidType with null shellBlock!");
         }
     }
 

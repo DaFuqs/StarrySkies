@@ -11,12 +11,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkRandom;
-import org.apache.logging.log4j.Level;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static org.apache.logging.log4j.Level.DEBUG;
 
 public class SystemGenerator {
 
@@ -116,7 +117,7 @@ public class SystemGenerator {
         int firstChunkPosZ = systemPoint.y * SYSTEM_SIZE_CHUNKS;
         ChunkRandom systemRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
         systemRandom.setTerrainSeed(firstChunkPosX, firstChunkPosZ); // and the seed from the first chunk+
-        StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
+        StarrySkyCommon.log(DEBUG, "Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
         return systemRandom;
     }
 
@@ -189,7 +190,7 @@ public class SystemGenerator {
             }
         }
 
-        StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Created a new system with " + spheroids.size() + " spheroids at system position " + systemPointX + "," + systemPointZ);
+        StarrySkyCommon.log(DEBUG, "Created a new system with " + spheroids.size() + " spheroids at system position " + systemPointX + "," + systemPointZ);
 
         return spheroids;
     }
@@ -234,7 +235,7 @@ public class SystemGenerator {
             spheroidType = SpheroidLoader.getWeightedRandomSpheroid(spheroidDimensionType, systemRandom);
         } while(spheroidType == null);
 
-        StarrySkyCommon.LOGGER.log(Level.DEBUG, "[StarrySky] Created a new sphere of type " + spheroidType + " Next random: " + systemRandom.nextInt());
+        StarrySkyCommon.log(DEBUG, "Created a new sphere of type " + spheroidType + " Next random: " + systemRandom.nextInt());
         return spheroidType.getRandomSpheroid(systemRandom);
     }
 

@@ -9,6 +9,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
+import static org.apache.logging.log4j.Level.INFO;
+
 public class StarrySkyDimension {
 
     public static final Identifier STARRY_SKY_DIMENSION_ID = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky");
@@ -21,13 +23,13 @@ public class StarrySkyDimension {
     public static final RegistryKey<World> STARRY_SKY_END_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, STARRY_SKY_END_DIMENSION_ID);
 
     public static void setupDimension(){
-        StarrySkyCommon.LOGGER.info("[StarrySky] Registering chunk generator...");
+        StarrySkyCommon.log(INFO, "Registering chunk generator...");
         Registry.register(Registry.CHUNK_GENERATOR, new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_chunk_generator"), StarrySkyChunkGenerator.CODEC);
         StarrySkyBiomeProvider.registerBiomeProvider();
     }
 
     public static void setupPortals() {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Setting up portals...");
+        StarrySkyCommon.log(INFO, "Setting up portals...");
         Block portalFrameBlock = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.starrySkyPortalFrameBlock.toLowerCase()));
         CustomPortalApiRegistry.addPortal(portalFrameBlock, STARRY_SKY_DIMENSION_ID, 11983869); // light, greyish blue
     }

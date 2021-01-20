@@ -16,13 +16,16 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Level;
+
+import static org.apache.logging.log4j.Level.INFO;
 
 public class StarrySkyCommon implements ModInitializer {
 
     public static final String MOD_ID = "starry_sky";
 
     public static StarrySkyConfig STARRY_SKY_CONFIG;
-    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+    private static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public static ServerWorld starryWorld;
     public static ServerWorld starryWorldNether;
@@ -34,7 +37,7 @@ public class StarrySkyCommon implements ModInitializer {
         // However, some things (like resources) may still be uninitialized.
 
         //Set up config
-        LOGGER.info("[StarrySky] Starting up...");
+        log(INFO, "Starting up...");
         AutoConfig.register(StarrySkyConfig.class, JanksonConfigSerializer::new);
         STARRY_SKY_CONFIG = AutoConfig.getConfigHolder(StarrySkyConfig.class).getConfig();
 
@@ -58,7 +61,11 @@ public class StarrySkyCommon implements ModInitializer {
 
         ServerTickEvents.END_SERVER_TICK.register(new ProximityAdvancementCheckEvent());
 
-        LOGGER.info("[StarrySky] Finished loading.");
+        log(INFO, "Finished loading.");
+    }
+
+    public static void log(Level logLevel, String message) {
+        LOGGER.log(logLevel, "[StarrySkies] " + message);
     }
 
     public static boolean inStarryWorld(ServerPlayerEntity serverPlayerEntity) {

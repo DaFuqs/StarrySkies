@@ -7,10 +7,11 @@ import net.minecraft.block.CoralParentBlock;
 import net.minecraft.block.SeaPickleBlock;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+import static org.apache.logging.log4j.Level.ERROR;
 
 public abstract class SpheroidList {
 
@@ -19,7 +20,7 @@ public abstract class SpheroidList {
 
         // So mod compat problems can be easily debugged
         if(blockState.getBlock() == Blocks.AIR && !string.equals("air")) {
-            StarrySkyCommon.LOGGER.log(Level.ERROR, "[StarrySky] Block " + modId + ":" + string + " does not exist! It will be treated as air");
+            StarrySkyCommon.log(ERROR, "Block " + modId + ":" + string + " does not exist! It will be treated as air");
         }
 
         return blockState;

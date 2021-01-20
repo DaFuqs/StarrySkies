@@ -13,6 +13,8 @@ import net.minecraft.world.gen.ChunkRandom;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 public class LiquidSpheroidType extends SpheroidType {
 
     private final BlockState liquid;
@@ -36,10 +38,10 @@ public class LiquidSpheroidType extends SpheroidType {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(liquid == Blocks.AIR.getDefaultState()) {
-            StarrySkyCommon.LOGGER.error("LiquidSpheroidType: Registered a SpheroidType with null liquid!");
+            StarrySkyCommon.log(ERROR, "LiquidSpheroidType: Registered a SpheroidType with null liquid!");
         }
         if(validShellBlocks == null || validShellBlocks.size() == 0) {
-            StarrySkyCommon.LOGGER.error("LiquidSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
+            StarrySkyCommon.log(ERROR, "LiquidSpheroidType: Registered a SpheroidType with empty validShellBlocks!");
         }
 
         this.liquid = liquid;

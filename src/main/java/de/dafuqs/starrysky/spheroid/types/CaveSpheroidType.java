@@ -13,6 +13,8 @@ import net.minecraft.world.gen.ChunkRandom;
 
 import java.util.ArrayList;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 
 public class CaveSpheroidType extends SpheroidType {
 
@@ -29,10 +31,10 @@ public class CaveSpheroidType extends SpheroidType {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(shellBlock == Blocks.AIR.getDefaultState()) {
-            StarrySkyCommon.LOGGER.error("CaveSpheroidType: Registered a SpheroidType with null shellBlock!");
+            StarrySkyCommon.log(ERROR, "CaveSpheroidType: Registered a SpheroidType with null shellBlock!");
         }
         if(caveFloorBlock == Blocks.AIR.getDefaultState()) {
-            StarrySkyCommon.LOGGER.error("CaveSpheroidType: Registered a SpheroidType with null caveFloorBlock!");
+            StarrySkyCommon.log(ERROR, "CaveSpheroidType: Registered a SpheroidType with null caveFloorBlock!");
         }
 
         this.caveFloorBlock = caveFloorBlock;

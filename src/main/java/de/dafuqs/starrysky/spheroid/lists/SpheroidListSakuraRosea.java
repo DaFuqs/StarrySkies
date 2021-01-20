@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListSakuraRosea extends SpheroidList {
 
@@ -19,7 +20,7 @@ public class SpheroidListSakuraRosea extends SpheroidList {
     }
 
     public static void setup(SpheroidLoader spheroidLoader) {
-        StarrySkyCommon.LOGGER.info("[StarrySky] Loading Sakura Rosea integration...");
+        StarrySkyCommon.log(INFO, "Loading Sakura Rosea integration...");
 
         BlockState sakurarosea_sakura_log          = getDefaultBlockState(MOD_ID,"sakura_log");
         BlockState sakurarosea_sakura_leaves       = getDefaultBlockState(MOD_ID,"sakura_leaves");

@@ -13,6 +13,8 @@ import net.minecraft.world.gen.ChunkRandom;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import static org.apache.logging.log4j.Level.ERROR;
+
 public class DungeonSpheroidType extends SpheroidType {
 
     private final EntityType entityType;
@@ -24,7 +26,7 @@ public class DungeonSpheroidType extends SpheroidType {
         super(spheroidAdvancementIdentifier, minRadius, maxRadius);
 
         if(entityType == null) {
-            StarrySkyCommon.LOGGER.error("DungeonSpheroidType: Registered a SpheroidType with null entity!");
+            StarrySkyCommon.log(ERROR, "DungeonSpheroidType: Registered a SpheroidType with null entity!");
         }
 
         this.entityType = entityType;
