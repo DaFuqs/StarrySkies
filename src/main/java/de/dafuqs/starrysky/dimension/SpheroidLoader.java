@@ -1,10 +1,12 @@
 package de.dafuqs.starrysky.dimension;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.lists.*;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.ChunkRandom;
+import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,6 +89,8 @@ public class SpheroidLoader {
 
     public SpheroidLoader() {
         if (!initialized) {
+
+            StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Loading Integration Packs...");
 
             // initialize spheroid types list with empty LinkedHashMaps
             for (SpheroidDistributionType spheroidDistributionType : SpheroidDistributionType.values()) {
@@ -176,6 +180,7 @@ public class SpheroidLoader {
             availableSpheroidTypesByDistributionTypeWithWeightEnd.get(SpheroidDistributionType.ORE).putAll(dynamicOreSpheroids);
 
             initialized = true;
+            StarrySkyCommon.LOGGER.log(Level.INFO, "[StarrySky] Initializing complete!");
         }
     }
 

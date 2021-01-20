@@ -13,6 +13,8 @@ import net.minecraft.block.Blocks;
 
 import java.util.ArrayList;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.NETHER;
+
 public class SpheroidListBetterNether extends SpheroidList {
 
     private static final String MOD_ID = "betternether";
@@ -35,9 +37,9 @@ public class SpheroidListBetterNether extends SpheroidList {
         SpheroidType CINCINNASITE_ORE = new CoreSpheroidType(null, 6, 12, cincinnasite_ore, netherrack, 3, 5);
         SpheroidType NETHER_LAPIS_ORE = new CoreSpheroidType(null, 6, 10, nether_lapis_ore, netherrack, 3, 5);
         SpheroidType NETHER_RUBY_ORE = new CoreSpheroidType(null, 5, 8, nether_ruby_ore, netherrack, 2, 4);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 1.5F, CINCINNASITE_ORE);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.8F, NETHER_LAPIS_ORE);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.4F, NETHER_RUBY_ORE);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 1.5F, CINCINNASITE_ORE);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 0.8F, NETHER_LAPIS_ORE);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 0.4F, NETHER_RUBY_ORE);
 
         // STALACTITES
         /*BlockState netherrack_stalactite = getDefaultBlockState(MOD_ID,"netherrack_stalactite"); // size: 0, 1, ...
@@ -89,7 +91,7 @@ public class SpheroidListBetterNether extends SpheroidList {
             add(getDefaultBlockState(MOD_ID, "quartz_glass_pink"));
         }};
         SpheroidType RAINBOW_QUARTZ_GLASS = new RainbowSpheroidType(null, 6, 10, QUARTZ_GLASSES);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.05F, RAINBOW_QUARTZ_GLASS);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.05F, RAINBOW_QUARTZ_GLASS);
 
         ArrayList<BlockState> FRAMED_QUARTZ_GLASSES = new ArrayList<BlockState>() {{
             add(getDefaultBlockState(MOD_ID, "quartz_glass_framed_white"));
@@ -110,7 +112,7 @@ public class SpheroidListBetterNether extends SpheroidList {
             add(getDefaultBlockState(MOD_ID, "quartz_glass_framed_pink"));
         }};
         SpheroidType RAINBOW_FRAMED_QUARTZ_GLASS = new RainbowSpheroidType(null, 6, 10, FRAMED_QUARTZ_GLASSES);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.05F, RAINBOW_FRAMED_QUARTZ_GLASS);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.05F, RAINBOW_FRAMED_QUARTZ_GLASS);
 
         // BONE REEF
         BlockState mushroom_grass = getDefaultBlockState(MOD_ID,"mushroom_grass");
@@ -134,16 +136,14 @@ public class SpheroidListBetterNether extends SpheroidList {
                 .addDecorator(LUMABUS_SEED_DECORATOR, 0.5F)
                 .addDecorator(GOLDEN_LUMABUS_SEED_DECORATOR, 0.5F)
                 .addDecorator(JELLYFISH_MUSHROOM_DECORATOR, 0.5F);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.8F, BONE_REEF);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.8F, BONE_REEF);
 
         BlockState bone_block = getDefaultBlockState(MOD_ID,"bone_block");
         BlockState bone_mushroom = getDefaultBlockState(MOD_ID,"bone_mushroom");
         PlantDecorator BONE_MUSHROOM_DECORATOR = new PlantDecorator(bone_mushroom, 0.2F);
         SpheroidType BONE_BLOCK = new ModularSpheroidType(null, 8, 14, bone_block)
-                .setTopBlockState(mushroom_grass)
                 .addDecorator(BONE_MUSHROOM_DECORATOR, 1.0F);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.4F, BONE_BLOCK);
-
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.4F, BONE_BLOCK);
 
         // CRIMSON GLOWING WOODS
         BlockState golden_vine = getDefaultBlockState(MOD_ID,"golden_vine");
@@ -182,7 +182,7 @@ public class SpheroidListBetterNether extends SpheroidList {
 
         SpheroidType NETHER_WART = new ModularSpheroidType(null, 8, 14, Blocks.NETHER_WART_BLOCK.getDefaultState())
                 .addDecorator(WART_SEED_DECORATOR, 1.0F);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.4F, NETHER_WART);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.4F, NETHER_WART);
 
         BlockState netherrack_moss = getDefaultBlockState(MOD_ID,"netherrack_moss");
         SpheroidType NETHER_GRASSLANDS = new ModularSpheroidType(null, 8, 15, netherrack)
@@ -192,7 +192,7 @@ public class SpheroidListBetterNether extends SpheroidList {
                 .addDecorator(NETHER_GRASS_DECORATOR, 0.8F)
                 .addDecorator(SMOKER_DECORATOR, 0.8F)
                 .addDecorator(BLACK_APPLE_DECORATOR, 0.5F);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.6F, NETHER_GRASSLANDS);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.6F, NETHER_GRASSLANDS);
 
         // NETHER JUNGLE
         BlockState jungle_grass = getDefaultBlockState(MOD_ID,"jungle_grass");
@@ -225,7 +225,7 @@ public class SpheroidListBetterNether extends SpheroidList {
                 .addDecorator(EYEBALL_DECORATOR, 0.5F)
                 .addDecorator(EGG_PLANT_DECORATOR, 0.8F)
                 .addDecorator(STALAGNATE_DECORATOR, 0.8F);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 1.3F, NETHER_JUNGLE);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 1.3F, NETHER_JUNGLE);
 
         // NETHER MUSHROOM FOREST
         BlockState nether_mycelium = getDefaultBlockState(MOD_ID,"nether_mycelium");
@@ -249,7 +249,7 @@ public class SpheroidListBetterNether extends SpheroidList {
                 .addDecorator(ORANGE_MUSHROOM_DECORATOR, 0.9F)
                 .addDecorator(MUSHROOM_FIR_SAPLING_DECORATOR, 0.9F)
                 .addDecorator(GIANT_MOLD_SAPLING_DECORATOR, 0.9F);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 1.0F, NETHER_MYCELIUM);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 1.0F, NETHER_MYCELIUM);
 
         // RUBEUS TREE
         BlockState rubeus_leaves = getDefaultBlockState(MOD_ID,"rubeus_leaves");
@@ -259,25 +259,25 @@ public class SpheroidListBetterNether extends SpheroidList {
 
         SpheroidType RUBEUS_WOOD = new ShellSpheroidType(null, 8, 20, rubeus_log, rubeus_leaves, 2, 3)
                 .addDecorator(RUBEUS_CONE_DECORATOR, 1.0F);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 1.0F, RUBEUS_WOOD);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 1.0F, RUBEUS_WOOD);
 
         // ANCHOR TREE
         BlockState anchor_tree_log = getDefaultBlockState(MOD_ID,"anchor_tree_log");
         BlockState anchor_tree_leaves = getDefaultBlockState(MOD_ID,"anchor_tree_leaves");
         SpheroidType ANCHOR_TREE = new ShellSpheroidType(null, 10, 20, anchor_tree_log, anchor_tree_leaves, 2, 3);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 0.6F, ANCHOR_TREE);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 0.6F, ANCHOR_TREE);
 
         // WILLOW TREE
         BlockState willow_log = getDefaultBlockState(MOD_ID,"willow_log");
         BlockState willow_leaves = getDefaultBlockState(MOD_ID,"willow_leaves");
         SpheroidType WILLOW_TREE = new ShellSpheroidType(null, 8, 14, willow_log, willow_leaves, 2, 3);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 1.0F, WILLOW_TREE);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 1.0F, WILLOW_TREE);
 
         // NETHER SAKURA TREE
         BlockState nether_sakura_log = getDefaultBlockState(MOD_ID,"nether_sakura_log");
         BlockState nether_sakura_leaves = getDefaultBlockState(MOD_ID,"nether_sakura_leaves");
         SpheroidType NETHER_SAKURA_TREE = new ShellSpheroidType(null, 7, 12, nether_sakura_log, nether_sakura_leaves, 2, 3);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 1.0F, NETHER_SAKURA_TREE);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.WOOD, 1.0F, NETHER_SAKURA_TREE);
 
 
         // OBSIDIAN GLASS
@@ -288,14 +288,32 @@ public class SpheroidListBetterNether extends SpheroidList {
 
         SpheroidType OBSIDIAN_GLASS = new ShellSpheroidType(null, 8, 20, obsidian, obsidian_glass, 2, 4)
             .addShellSpeckles(obsidian, 0.1F);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, OBSIDIAN_GLASS);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, OBSIDIAN_GLASS);
         SpheroidType BLUE_OBSIDIAN_GLASS = new ShellSpheroidType(null, 8, 20, blue_obsidian, blue_obsidian_glass, 2, 4)
                 .addShellSpeckles(blue_obsidian, 0.1F);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, BLUE_OBSIDIAN_GLASS);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, BLUE_OBSIDIAN_GLASS);
+
+        // UPSIDE DOWN FOREST
+        BlockState ceiling_mushrooms = getDefaultBlockState(MOD_ID, "ceiling_mushrooms"); // on bottom of netherrack
+        BlockState neon_equisetum = getDefaultBlockState(MOD_ID, "neon_equisetum");
+        UnderPlantDecorator neon_equisetum_decorator = new UnderPlantDecorator(neon_equisetum, 0.1F);
+
+        BlockState hook_mushroom = getDefaultBlockState(MOD_ID, "hook_mushroom");
+        UnderPlantDecorator hook_mushroom_decorator = new UnderPlantDecorator(hook_mushroom, 0.1F);
+
+        SpheroidType UPSIDE_DOWN_FOREST = new ModularSpheroidType(null, 8, 13, netherrack)
+                .setBottomBlockState(ceiling_mushrooms)
+                .addDecorator(neon_equisetum_decorator, 0.75F)
+                .addDecorator(hook_mushroom_decorator, 0.75F);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE,0.5F, UPSIDE_DOWN_FOREST);
+
+        BlockState giant_lucis = getDefaultBlockState(MOD_ID,"giant_lucis");
+        SpheroidType GIANT_LUCIS = new MushroomSpheroidType(null, 5, 9, giant_lucis, giant_lucis, 5, 9);
+        spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE,1F, GIANT_LUCIS);
 
         // TODO
-        BlockState nether_reed = getDefaultBlockState(MOD_ID,"nether_reed"); // top: true / false; next to lava
-        BlockState moss_cover = getDefaultBlockState(MOD_ID,"moss_cover"); // on anchor tree tops
+        //BlockState nether_reed = getDefaultBlockState(MOD_ID,"nether_reed"); // top: true / false; next to lava
+        //BlockState moss_cover = getDefaultBlockState(MOD_ID,"moss_cover"); // on anchor tree tops
 
         // WALLS (jungle)
         BlockState lucis_mushroom = getDefaultBlockState(MOD_ID,"lucis_mushroom"); // several

@@ -505,7 +505,8 @@ public class SpheroidListBYG extends SpheroidList {
 
         BlockState sythian_hyphae = getDefaultBlockState(MOD_ID,"sythian_hyphae");
         BlockState hanging_sythian_roots_plant = getDefaultBlockState(MOD_ID,"hanging_sythian_roots_plant");
-        HugeUnderPlantDecorator HANGING_SYTHIAN_ROOTS_DECORATOR = new HugeUnderPlantDecorator(hanging_sythian_roots_plant, 0.1F, 2, 6);
+        BlockState hanging_sythian_roots = getDefaultBlockState(MOD_ID,"hanging_sythian_roots");
+        HugeUnderPlantDecorator HANGING_SYTHIAN_ROOTS_DECORATOR = new HugeUnderPlantDecorator(hanging_sythian_roots_plant, 0.1F, 2, 6).setLastBlockState(hanging_sythian_roots);
         SpheroidType SYTHIAN_HYPHAE = new ModularSpheroidType(null, 10, 16, sythian_hyphae)
                 .addDecorator(HANGING_SYTHIAN_ROOTS_DECORATOR, 1.0F);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SYTHIAN_HYPHAE);

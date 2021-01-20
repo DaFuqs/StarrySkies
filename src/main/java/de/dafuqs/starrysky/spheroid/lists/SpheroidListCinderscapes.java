@@ -40,11 +40,11 @@ public class SpheroidListCinderscapes extends SpheroidList {
         BlockState smoky_quartz_ore = getDefaultBlockState(MOD_ID,"smoky_quartz_ore");
 
         // quartz shards
-        BlockState polypite_nether_quartz = getDefaultBlockState(MOD_ID,"polypite_nether_quartz");
+        BlockState polypite_quartz = getDefaultBlockState(MOD_ID,"polypite_quartz");
         BlockState polypite_rose_quartz = getDefaultBlockState(MOD_ID,"polypite_rose_quartz");
         BlockState polypite_smoky_quartz = getDefaultBlockState(MOD_ID,"polypite_smoky_quartz");
         BlockState polypite_sulfur_quartz = getDefaultBlockState(MOD_ID,"polypite_sulfur_quartz");
-        PlantDecorator POLYPITE_NETHER_QUARTZ_DECORATOR = new PlantDecorator(polypite_nether_quartz, 0.1F);
+        PlantDecorator POLYPITE_QUARTZ_DECORATOR = new PlantDecorator(polypite_quartz, 0.1F);
         PlantDecorator POLYPITE_ROSE_QUARTZ_DECORATOR = new PlantDecorator(polypite_rose_quartz, 0.1F);
         PlantDecorator POLYPITE_SMOKY_QUARTZ_DECORATOR = new PlantDecorator(polypite_smoky_quartz, 0.1F);
         PlantDecorator POLYPITE_SULFUR_QUARTZ_DECORATOR = new PlantDecorator(polypite_sulfur_quartz, 0.1F);
@@ -105,7 +105,7 @@ public class SpheroidListCinderscapes extends SpheroidList {
 
         // ORES
         SpheroidListVanillaNether.NETHER_QUARTZ.addDecorator(CRYSTINIUM_DECORATOR, 0.25F);
-        SpheroidListVanillaNether.NETHER_QUARTZ.addDecorator(POLYPITE_NETHER_QUARTZ_DECORATOR, 0.1F);
+        SpheroidListVanillaNether.NETHER_QUARTZ.addDecorator(POLYPITE_QUARTZ_DECORATOR, 0.1F);
 
         SpheroidType SULFUR_ORE = new CoreSpheroidType(null, 5, 10, sulfur_ore, MAP_NETHER_STONES, 3, 5);
 

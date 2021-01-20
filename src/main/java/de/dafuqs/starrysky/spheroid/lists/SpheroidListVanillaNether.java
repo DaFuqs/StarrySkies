@@ -28,8 +28,8 @@ public class SpheroidListVanillaNether extends SpheroidList {
         public static SpheroidDecorator NETHER_SPROUTS = new PlantDecorator(Blocks.NETHER_SPROUTS.getDefaultState(), 0.1F);
         public static SpheroidDecorator CRIMSON_FUNGUS = new PlantDecorator(Blocks.CRIMSON_FUNGUS.getDefaultState(), 0.05F);
         public static SpheroidDecorator WARPED_FUNGUS = new PlantDecorator(Blocks.WARPED_FUNGUS.getDefaultState(), 0.05F);
-        public static SpheroidDecorator TWISTING_VINES = new HugePlantDecorator(Blocks.TWISTING_VINES.getDefaultState(), 0.05F, 1, 6); // warped, grow upward
-        public static SpheroidDecorator WEEPING_VINES = new HugeUnderPlantDecorator(Blocks.WEEPING_VINES.getDefaultState(), 0.1F, 1, 6); // crimson, growing downwards
+        public static SpheroidDecorator TWISTING_VINES = new HugePlantDecorator(Blocks.TWISTING_VINES_PLANT.getDefaultState(), 0.05F, 1, 6).setLastBlockState(Blocks.TWISTING_VINES.getDefaultState()); // warped, grow upward
+        public static SpheroidDecorator WEEPING_VINES = new HugeUnderPlantDecorator(Blocks.WEEPING_VINES_PLANT.getDefaultState(), 0.1F, 1, 6).setLastBlockState(Blocks.WEEPING_VINES.getDefaultState()); // crimson, growing downwards
 	}
 	
     // SPHEROID TYPES
