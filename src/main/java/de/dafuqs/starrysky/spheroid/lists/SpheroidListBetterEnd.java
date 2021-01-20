@@ -63,6 +63,8 @@ public class SpheroidListBetterEnd extends SpheroidList {
         BlockState creeping_moss = getDefaultBlockState(MOD_ID,"creeping_moss");
         BlockState umbrella_moss = getDefaultBlockState(MOD_ID,"umbrella_moss");
         BlockState umbrella_moss_tall = getDefaultBlockState(MOD_ID,"umbrella_moss_tall");
+        BlockState blue_vine_seed = getDefaultBlockState(MOD_ID,"blue_vine_seed"); // single
+        PlantDecorator BLUE_VINE_SEED_DECORATOR = new PlantDecorator(blue_vine_seed, 0.1F);
         PlantDecorator CREEPING_MOSS_DECORATOR = new PlantDecorator(creeping_moss, 0.1F);
         PlantDecorator UMBRELLA_MOSS_DECORATOR = new PlantDecorator(umbrella_moss, 0.1F);
         DoublePlantDecorator UMBRELLA_MOSS_TALL_DECORATOR = new DoublePlantDecorator(umbrella_moss_tall, 0.05F);
@@ -78,7 +80,8 @@ public class SpheroidListBetterEnd extends SpheroidList {
                 .setBottomBlockState(end_mycelium)
                 .addDecorator(CREEPING_MOSS_DECORATOR, 0.8F)
                 .addDecorator(UMBRELLA_MOSS_DECORATOR, 0.8F)
-                .addDecorator(UMBRELLA_MOSS_TALL_DECORATOR, 0.8F);
+                .addDecorator(UMBRELLA_MOSS_TALL_DECORATOR, 0.8F)
+                .addDecorator(BLUE_VINE_SEED_DECORATOR, 0.3F);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.4F, UMBRELLA_MOSS);
 
         BlockState mossy_glowshroom_log = getDefaultBlockState(MOD_ID,"mossy_glowshroom_log");
@@ -100,9 +103,6 @@ public class SpheroidListBetterEnd extends SpheroidList {
         BlockState end_lily = getDefaultBlockState(MOD_ID,"end_lily"); // bottom, middle, top (top of water), waterloggable
         BlockState bubble_coral = getDefaultBlockState(MOD_ID,"bubble_coral"); // bottom of water
 
-        BlockState blue_vine = getDefaultBlockState(MOD_ID,"creeping_moss"); // Bottom, middle, top
-        BlockState blue_vine_fur = getDefaultBlockState(MOD_ID,"blue_vine_fur"); // on top of blue vine top
-
 
         // PAINTED MOUNTAINS
         BlockState flavolite = getDefaultBlockState(MOD_ID,"flavolite");
@@ -117,7 +117,7 @@ public class SpheroidListBetterEnd extends SpheroidList {
 
         // SHADOW FOREST
         BlockState dragon_tree_log = getDefaultBlockState(MOD_ID,"dragon_tree_log");
-        BlockState dragon_tree_leaves = getDefaultBlockState(MOD_ID,"dragon_tree_leaves").with(LeavesBlock.DISTANCE, 1);;
+        BlockState dragon_tree_leaves = getDefaultBlockState(MOD_ID,"dragon_tree_leaves").with(LeavesBlock.DISTANCE, 1);
         //BlockState purple_polyphore = getDefaultBlockState(MOD_ID,"purple_polyphore"); // on side of dragon tree log
         SpheroidType DRAGON_TREE = new ShellSpheroidType(null, 10, 17, dragon_tree_log, dragon_tree_leaves, 2, 4);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.3F, DRAGON_TREE);
