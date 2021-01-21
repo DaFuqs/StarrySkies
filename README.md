@@ -1,4 +1,4 @@
-## About Starry Sky
+## About Starry Skies
 
 Starry Skies is a Minecraft mod for the fabric mod loader that adds 3 dimensions with that name. It can be seen as a modern revamp of the "planetoids" world generator by Seibai for Minecraft 1.2.5 back in 2012 - although a lot more extensive and with mod support.
 
@@ -8,10 +8,10 @@ Starry Skies is a Minecraft mod for the fabric mod loader that adds 3 dimensions
 
 The mod adds 3 new dimensions: The Starry Sky (Overworld equivalent), Scary Sky (Nether) and Scarcy Sky (End).
 
-The Starry Sky dimensions consist out of never ending floating spheres floating in the sky. They can be filled with precious ores or dungeons. But watch out! If you're careless you could very well burn in lava.
+The Starry Skies dimensions consist out of never ending floating spheres floating in the sky. They can be filled with precious ores or dungeons. But watch out! If you're careless you could very well burn in lava.
 
 
-## Entering the Starry Sky dimension
+## Entering the Starry Skies dimension
 
 Build a **portal out of packed ice** and light it with flint & steel. [can be configured in the config].
 The other dimensions are accessed like their vanilla counterparts: Via nether and end portals, respectively.
