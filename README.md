@@ -33,7 +33,7 @@ At x:16 y:90 z:16 will always be a wooden sphere, so that will be a great starti
 
 You're able to configure how many spheres generate and how much room should be mandatory between each sphere. Also the ground: Fall safely into water, burn the inventory in lava, or fall into the void? Your choice.
 
-Each sphere pack (besides vanilla) can be enabled / disabled. There is a optional Pride pack, that can be enabled, for example if you like it.
+Each sphere pack (besides vanilla) can be enabled / disabled. There is also an optional Pride pack if you like it.
 
 
 
