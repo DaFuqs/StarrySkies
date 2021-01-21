@@ -1,6 +1,6 @@
 ## About Starry Sky
 
-Starry Sky is a Minecraft mod for the fabric mod loader that adds 3 dimensions with that name. It can be seen as a modern revamp of the "planetoids" world generator by Seibai for Minecraft 1.2.5 back in 2012 - although a lot more extensive and with mod support.
+Starry Skies is a Minecraft mod for the fabric mod loader that adds 3 dimensions with that name. It can be seen as a modern revamp of the "planetoids" world generator by Seibai for Minecraft 1.2.5 back in 2012 - although a lot more extensive and with mod support.
 
 
 
@@ -39,14 +39,18 @@ Each sphere pack (besides vanilla) can be enabled / disabled. There is a optiona
 
 ## Mod Integration
 
-Vanilla spheres are not enough for you? Starry Sky adds loads of new spheres through mod integration. All mods listed here are fully playable without requiring access to the vanilla Overworld (excluding Nether and The End).
+Vanilla spheres are not enough for you? Starry Skies adds loads of new spheres through mod integration. All mods listed here are fully playable without requiring access to the vanilla Overworld (excluding Nether and The End).
 
-- AppliedEnergistics 2
+- Applied Energistics 2
 - Astromine
+- Better End 
+- Better Nether
 - Blockus
 - Biomes You Go
+- Cinderscapes
 - Industrial Revolution
 - Modern Industrialization
+- Mythic Metals
 - Sakura Rosea
 - Sandwichable
 - Tech Reborn

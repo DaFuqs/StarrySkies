@@ -467,7 +467,7 @@ public class SpheroidListBYG extends SpheroidList {
         // GLOWSTONE GARDENS
         BlockState weeping_roots_plant = getDefaultBlockState(MOD_ID,"weeping_roots_plant");
         HugeUnderPlantDecorator WEEPING_ROOTS_PLANT_DECORATOR = new HugeUnderPlantDecorator(weeping_roots_plant, 0.09F, 1, 7);
-        SpheroidListVanillaNether.GLOWSTONE.addDecorator(WEEPING_ROOTS_PLANT_DECORATOR, 0.2F);
+        SpheroidListVanillaNether.GLOWSTONE.addDecorator(WEEPING_ROOTS_PLANT_DECORATOR, 0.05F);
 
         // QUARTZ DESERT
         BlockState quartzite_sand = getDefaultBlockState(MOD_ID,"quartzite_sand");

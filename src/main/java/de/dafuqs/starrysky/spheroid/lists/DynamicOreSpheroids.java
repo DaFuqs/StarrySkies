@@ -104,7 +104,7 @@ public class DynamicOreSpheroids {
                 OreSpheroidDefinition entrySpheroidDefinition = dynamicOreSpheroidDefinitions.get(dynamicOre.getKey());
 
                 if (entrySpheroidDefinition == null) {
-                    StarrySkyCommon.log(ERROR, "The rarity of ore '" + dynamicOre.getKey() + "' is not defined. Blame the Starry Sky author!");
+                    StarrySkyCommon.log(ERROR, "The rarity of ore '" + dynamicOre.getKey() + "' is not defined. Blame the Starry Skies author!");
                     continue;
                 }
 
