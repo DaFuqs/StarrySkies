@@ -28,7 +28,7 @@ public class DoublePlantDecorator extends SpheroidDecorator {
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
         for(BlockPos bp : decorationBlockPositions) {
-            if (world.getBlockState(bp.up()).isAir() && world.getBlockState(bp.up(2)).isAir()) {
+            if (!world.getBlockState(bp).isAir() && world.getBlockState(bp.up()).isAir() && world.getBlockState(bp.up(2)).isAir()) {
                 if (random.nextFloat() < PLANT_CHANCE) {
                     world.setBlockState(bp.up(), PLANT_BLOCKSTATE.with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER), 3);
                     world.setBlockState(bp.up(2), PLANT_BLOCKSTATE.with(TallFlowerBlock.HALF, DoubleBlockHalf.UPPER), 3);

@@ -63,7 +63,7 @@ public class SpheroidListEcotones extends SpheroidList {
         SpheroidListVanilla.GRASS.addDecorator(short_grass_decorator, 0.2F);
         SpheroidListVanilla.SPRUCE_WOOD.addDecorator(pine_cone_decorator, 0.25F);
 
-        PlantDecorator reeds_decorator = new PlantDecorator(reeds, 0.1F);
+        PlantDecorator reeds_decorator = new PlantDecorator(reeds, 0.02F);
         SpheroidListVanilla.GRASS.addDecorator(reeds_decorator, 0.05F);
 
         SpheroidListVanilla.SAND.addDecorator(small_shrub_decorator, 0.05F);
@@ -87,16 +87,14 @@ public class SpheroidListEcotones extends SpheroidList {
         SpheroidListVanilla.REDSTONE.addDecorator(surface_rock_decorator, 0.1F);
         SpheroidListVanilla.LAPIS.addDecorator(surface_rock_decorator, 0.1F);
 
-
-
         // flowers
-        BlockState clover = getDefaultBlockState(MOD_ID,"peat");
-        BlockState wildflowers = getDefaultBlockState(MOD_ID,"peat");
-        BlockState bluebell = getDefaultBlockState(MOD_ID,"peat");
-        BlockState wide_fern = getDefaultBlockState(MOD_ID,"peat");
-        BlockState small_lilac = getDefaultBlockState(MOD_ID,"peat");
-        BlockState moss = getDefaultBlockState(MOD_ID,"peat");
-        BlockState cyan_rose = getDefaultBlockState(MOD_ID,"peat");
+        BlockState clover = getDefaultBlockState(MOD_ID,"clover");
+        BlockState wildflowers = getDefaultBlockState(MOD_ID,"wildflowers");
+        BlockState bluebell = getDefaultBlockState(MOD_ID,"bluebell");
+        BlockState wide_fern = getDefaultBlockState(MOD_ID,"wide_fern");
+        BlockState small_lilac = getDefaultBlockState(MOD_ID,"small_lilac");
+        BlockState moss = getDefaultBlockState(MOD_ID,"moss");
+        BlockState cyan_rose = getDefaultBlockState(MOD_ID,"cyan_rose");
 
         // Add blocks to default lists
         LIST_FLOWERS.add(clover);

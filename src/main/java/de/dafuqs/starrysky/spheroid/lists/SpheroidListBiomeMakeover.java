@@ -5,6 +5,7 @@ import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.*;
+import de.dafuqs.starrysky.spheroid.types.ModularSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.MushroomSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.ShellSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
@@ -55,10 +56,10 @@ public class SpheroidListBiomeMakeover extends SpheroidList {
         BlockState tall_brown_mushroom = getDefaultBlockState(MOD_ID,"tall_brown_mushroom");
         BlockState tall_red_mushroom = getDefaultBlockState(MOD_ID,"tall_red_mushroom");
 
-        PlantDecorator mycelium_sprouts_decorator = new PlantDecorator(mycelium_sprouts, 0.05F);
-        PlantDecorator mycelium_roots_decorator = new PlantDecorator(mycelium_roots, 0.05F);
-        DoublePlantDecorator tall_brown_mushroom_decorator = new DoublePlantDecorator(tall_brown_mushroom, 0.05F);
-        DoublePlantDecorator tall_red_mushroom_decorator = new DoublePlantDecorator(tall_red_mushroom, 0.05F);
+        PlantDecorator mycelium_sprouts_decorator = new PlantDecorator(mycelium_sprouts, 0.03F);
+        PlantDecorator mycelium_roots_decorator = new PlantDecorator(mycelium_roots, 0.03F);
+        DoublePlantDecorator tall_brown_mushroom_decorator = new DoublePlantDecorator(tall_brown_mushroom, 0.03F);
+        DoublePlantDecorator tall_red_mushroom_decorator = new DoublePlantDecorator(tall_red_mushroom, 0.03F);
 
         SpheroidListVanilla.MYCELIUM.addDecorator(mycelium_sprouts_decorator, 0.8F);
         SpheroidListVanilla.MYCELIUM.addDecorator(mycelium_roots_decorator, 0.8F);
@@ -74,10 +75,10 @@ public class SpheroidListBiomeMakeover extends SpheroidList {
         BlockState mossy_peat = getDefaultBlockState(MOD_ID,"mossy_peat");
 
         SpheroidDecorator peat_pond_decorator = new CenterPondDecorator(mossy_peat, Blocks.WATER.getDefaultState(), LootTables.UNDERWATER_RUIN_SMALL_CHEST, 0.25F);
-        SpheroidType peat_sphere = new ShellSpheroidType(null, 6, 9, peat, Blocks.DIRT.getDefaultState(), 3, 4)
-                .addShellSpeckles(peat, 0.05F)
+        SpheroidType peat_sphere = new ModularSpheroidType(null, 6, 12, peat)
+                .setTopBlockState(mossy_peat)
                 .addDecorator(peat_pond_decorator, 0.5F);
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.5F, peat_sphere);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.2F, peat_sphere);
 
 
         // DESERT
