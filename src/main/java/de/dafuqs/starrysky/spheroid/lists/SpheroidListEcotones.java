@@ -5,6 +5,7 @@ import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.GroundDecorator;
 import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
+import de.dafuqs.starrysky.dimension.decorators.UnderPlantDecorator;
 import de.dafuqs.starrysky.spheroid.types.LiquidSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.ModularSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.ShellSpheroidType;
@@ -37,14 +38,15 @@ public class SpheroidListEcotones extends SpheroidList {
         BlockState sandy_grass = getDefaultBlockState(MOD_ID,"sandy_grass");
         BlockState surface_rock = getDefaultBlockState(MOD_ID,"surface_rock");
         BlockState dried_dirt = getDefaultBlockState(MOD_ID,"dried_dirt"); // wasteland
-        BlockState lichen = getDefaultBlockState(MOD_ID,"lichen"); // on side of blocks
         BlockState pinecone = getDefaultBlockState(MOD_ID,"pinecone");
+        //BlockState lichen = getDefaultBlockState(MOD_ID,"lichen"); // on side of blocks
 
         PlantDecorator small_shrub_decorator = new PlantDecorator(small_shrub, 0.1F);
         PlantDecorator sandy_grass_decorator = new PlantDecorator(sandy_grass, 0.1F);
         PlantDecorator short_grass_decorator = new PlantDecorator(short_grass, 0.1F);
         GroundDecorator geyser_decorator = new GroundDecorator(geyser, 0.1F);
         GroundDecorator surface_rock_decorator = new GroundDecorator(surface_rock, 0.1F);
+        UnderPlantDecorator pine_cone_decorator = new UnderPlantDecorator(pinecone, 0.25F);
 
         SpheroidType PEAT = new LiquidSpheroidType(null, 5, 9, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 65, 100, 60)
                 .setCoreBlock(peat, 3, 6)
@@ -59,6 +61,7 @@ public class SpheroidListEcotones extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.7F, WASTELAND);
 
         SpheroidListVanilla.GRASS.addDecorator(short_grass_decorator, 0.2F);
+        SpheroidListVanilla.SPRUCE_WOOD.addDecorator(pine_cone_decorator, 0.25F);
 
         PlantDecorator reeds_decorator = new PlantDecorator(reeds, 0.1F);
         SpheroidListVanilla.GRASS.addDecorator(reeds_decorator, 0.05F);
