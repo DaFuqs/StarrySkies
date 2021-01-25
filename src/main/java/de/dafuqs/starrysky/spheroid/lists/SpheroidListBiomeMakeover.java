@@ -1,15 +1,17 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.spheroid.types.RainbowSpheroidType;
+import de.dafuqs.starrysky.dimension.decorators.*;
+import de.dafuqs.starrysky.spheroid.types.MushroomSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.ShellSpheroidType;
+import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
-import net.minecraft.state.property.Properties;
-
-import java.util.ArrayList;
+import net.minecraft.block.Blocks;
+import net.minecraft.loot.LootTables;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 import static org.apache.logging.log4j.Level.INFO;
@@ -26,78 +28,94 @@ public class SpheroidListBiomeMakeover extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.log(INFO, "Loading Biome Makeover integration...");
 
-        BlockState blockus_limestone = getDefaultBlockState(MOD_ID,"limestone");
-        BlockState blockus_marble = getDefaultBlockState(MOD_ID,"marble");
-        BlockState blockus_bluestone = getDefaultBlockState(MOD_ID,"bluestone");
-        BlockState blockus_white_oak_leaves = getDefaultBlockState(MOD_ID,"white_oak_leaves");
-        BlockState blockus_white_oak_log = getDefaultBlockState(MOD_ID,"white_oak_log");
+        // WOOD
+        BlockState blighted_balsa_leaves = getDefaultBlockState(MOD_ID,"blighted_balsa_leaves");
+        BlockState blighted_balsa_log = getDefaultBlockState(MOD_ID,"blighted_balsa_log");
+        BlockState willow_leaves = getDefaultBlockState(MOD_ID,"willow_leaves");
+        BlockState willow_log = getDefaultBlockState(MOD_ID,"willow_log");
+        BlockState swamp_cypress_leaves = getDefaultBlockState(MOD_ID,"swamp_cypress_leaves");
+        BlockState swamp_cypress_log = getDefaultBlockState(MOD_ID,"swamp_cypress_log");
 
-        ArrayList<BlockState> rainbowBeveled = new ArrayList<BlockState>() {{
-            add(getDefaultBlockState(MOD_ID,"black_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"blue_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"brown_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"cyan_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"gray_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"green_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"light_blue_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"light_gray_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"lime_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"magenta_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"orange_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"pink_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"purple_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"red_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"white_beveled_glass"));
-            add(getDefaultBlockState(MOD_ID,"yellow_beveled_glass"));
-        }};
+        BlockState willowing_branches = getDefaultBlockState(MOD_ID,"willowing_branches");
+        HugeUnderPlantDecorator willowing_branches_decorator = new HugeUnderPlantDecorator(willowing_branches, 0.25F, 1, 4);
 
-        ArrayList<BlockState> rainbowAsphalt = new ArrayList<BlockState>() {{
-            add(getDefaultBlockState(MOD_ID,"asphalt"));
-            add(getDefaultBlockState(MOD_ID,"blue_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"brown_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"cyan_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"gray_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"green_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"light_blue_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"light_gray_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"lime_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"magenta_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"orange_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"pink_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"purple_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"red_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"white_asphalt"));
-            add(getDefaultBlockState(MOD_ID,"yellow_asphalt"));
-        }};
+        SpheroidType blighted_balsa_wood = new ShellSpheroidType(null, 6, 9, blighted_balsa_log, blighted_balsa_leaves, 1, 3);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 0.5F, blighted_balsa_wood);
 
-        ArrayList<BlockState> rainbowFuturneo = new ArrayList<BlockState>() {{
-            add(getDefaultBlockState(MOD_ID,"black_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"blue_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"brown_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"cyan_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"gray_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"green_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"light_blue_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"light_gray_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"lime_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"magenta_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"orange_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"pink_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"purple_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"red_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"white_futurneo_block"));
-            add(getDefaultBlockState(MOD_ID,"yellow_futurneo_block"));
-        }};
+        SpheroidType willow_wood = new ShellSpheroidType(null, 7, 10, willow_log, willow_leaves, 2, 4)
+                .addDecorator(willowing_branches_decorator, 0.9F);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 0.8F, willow_wood);
 
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.1F, new RainbowSpheroidType(null, 7, 12, rainbowFuturneo));
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.1F, new RainbowSpheroidType(null, 7, 12, rainbowBeveled));
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.1F, new RainbowSpheroidType(null, 7, 12, rainbowAsphalt));
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.3F, new ShellSpheroidType(null, 7, 14, blockus_white_oak_log, blockus_white_oak_leaves.with(Properties.DISTANCE_1_7, 1),2, 4));
+        SpheroidType swamp_cypress_wood = new ShellSpheroidType(null, 4, 7, swamp_cypress_log, swamp_cypress_leaves, 1, 2);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 0.7F, swamp_cypress_wood); // should have vines
 
-        // Add blocks to default lists
-        SpheroidList.MAP_STONES.put(blockus_limestone, 0.5F);
-        SpheroidList.MAP_STONES.put(blockus_marble, 0.5F);
-        SpheroidList.MAP_STONES.put(blockus_bluestone, 0.5F);
+        // MUSHROOM FIELDS
+        BlockState mycelium_sprouts = getDefaultBlockState(MOD_ID,"mycelium_sprouts");
+        BlockState mycelium_roots = getDefaultBlockState(MOD_ID,"mycelium_roots");
+        BlockState tall_brown_mushroom = getDefaultBlockState(MOD_ID,"tall_brown_mushroom");
+        BlockState tall_red_mushroom = getDefaultBlockState(MOD_ID,"tall_red_mushroom");
+
+        PlantDecorator mycelium_sprouts_decorator = new PlantDecorator(mycelium_sprouts, 0.05F);
+        PlantDecorator mycelium_roots_decorator = new PlantDecorator(mycelium_roots, 0.05F);
+        DoublePlantDecorator tall_brown_mushroom_decorator = new DoublePlantDecorator(tall_brown_mushroom, 0.05F);
+        DoublePlantDecorator tall_red_mushroom_decorator = new DoublePlantDecorator(tall_red_mushroom, 0.05F);
+
+        SpheroidListVanilla.MYCELIUM.addDecorator(mycelium_sprouts_decorator, 0.8F);
+        SpheroidListVanilla.MYCELIUM.addDecorator(mycelium_roots_decorator, 0.8F);
+        SpheroidListVanilla.MYCELIUM.addDecorator(tall_brown_mushroom_decorator, 0.8F);
+        SpheroidListVanilla.MYCELIUM.addDecorator(tall_red_mushroom_decorator, 0.8F);
+
+        // SWAMP TODO
+        // BlockState cattail = getDefaultBlockState(MOD_ID,"cattail"); // double plant. Bottom is waterlogged
+        // BlockState reeds = getDefaultBlockState(MOD_ID,"reeds"); // double plant. Bottom is waterlogged
+        // BlockState small_lily_pad = getDefaultBlockState(MOD_ID,"small_lily_pad"); // like lily pad
+        // BlockState water_lily = getDefaultBlockState(MOD_ID,"water_lily"); // like lily pad
+        BlockState peat = getDefaultBlockState(MOD_ID,"peat");
+        BlockState mossy_peat = getDefaultBlockState(MOD_ID,"mossy_peat");
+
+        SpheroidDecorator peat_pond_decorator = new CenterPondDecorator(mossy_peat, Blocks.WATER.getDefaultState(), LootTables.UNDERWATER_RUIN_SMALL_CHEST, 0.25F);
+        SpheroidType peat_sphere = new ShellSpheroidType(null, 6, 9, peat, Blocks.DIRT.getDefaultState(), 3, 4)
+                .addShellSpeckles(peat, 0.05F)
+                .addDecorator(peat_pond_decorator, 0.5F);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.5F, peat_sphere);
+
+
+        // DESERT
+        BlockState barrel_cactus = getDefaultBlockState(MOD_ID,"barrel_cactus");
+        BlockState barrel_cactus_flowered = getDefaultBlockState(MOD_ID,"barrel_cactus_flowered");
+        BlockState saguaro_cactus = getDefaultBlockState(MOD_ID,"saguaro_cactus");
+
+        CactusDecorator saguaro_cactus_decorator = new CactusDecorator(saguaro_cactus);
+        PlantDecorator barrel_cactus_decorator = new PlantDecorator(barrel_cactus, 0.03F);
+        PlantDecorator barrel_cactus_flowered_decorator = new PlantDecorator(barrel_cactus_flowered, 0.02F);
+
+        SpheroidListVanilla.SAND.addDecorator(saguaro_cactus_decorator, 0.3F);
+        SpheroidListVanilla.SAND.addDecorator(barrel_cactus_decorator, 0.2F);
+        SpheroidListVanilla.SAND.addDecorator(barrel_cactus_flowered_decorator, 0.2F);
+        SpheroidListVanilla.RED_SAND.addDecorator(saguaro_cactus_decorator, 0.1F);
+        SpheroidListVanilla.RED_SAND.addDecorator(barrel_cactus_decorator, 0.1F);
+        SpheroidListVanilla.RED_SAND.addDecorator(barrel_cactus_flowered_decorator, 0.1F);
+
+        // GLOWSHROOMS (underground of mushroom fields)
+        BlockState green_glowshroom_block = getDefaultBlockState(MOD_ID,"green_glowshroom_block");
+        BlockState purple_glowshroom_block = getDefaultBlockState(MOD_ID,"purple_glowshroom_block");
+        BlockState orange_glowshroom_block = getDefaultBlockState(MOD_ID,"orange_glowshroom_block");
+        BlockState glowshroom_stem = getDefaultBlockState(MOD_ID,"glowshroom_stem");
+
+        SpheroidType green_glowshroom = new MushroomSpheroidType(null, 4, 7, glowshroom_stem, green_glowshroom_block, 2, 3);
+        SpheroidType purple_glowshroom = new MushroomSpheroidType(null, 4, 7, glowshroom_stem, purple_glowshroom_block, 2, 3);
+        SpheroidType orange_glowshroom = new MushroomSpheroidType(null, 4, 7, glowshroom_stem, orange_glowshroom_block, 2, 3);
+
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 0.2F, green_glowshroom);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 0.2F, purple_glowshroom);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 0.2F, orange_glowshroom);
+
+        // PLANTS
+        BlockState swamp_azalea = getDefaultBlockState(MOD_ID,"swamp_azalea");
+        BlockState marigold = getDefaultBlockState(MOD_ID,"marigold");
+        LIST_TALL_FLOWERS.add(swamp_azalea);
+        LIST_TALL_FLOWERS.add(marigold);
+
     }
 
 }
