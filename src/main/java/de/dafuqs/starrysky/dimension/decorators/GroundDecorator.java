@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class GroundDecorator extends SpheroidDecorator {
 
-    private final BlockState GROUND_BLOCKSTATE;
+    private final BlockState GROUND_BLOCK_STATE;
     private final float GROUND_CHANCE;
 
     /**
@@ -20,7 +20,7 @@ public class GroundDecorator extends SpheroidDecorator {
      * A chance of 0 = 0%, 100 = 100%
      */
     public GroundDecorator(BlockState ground_blockstate, float ground_chance) {
-        GROUND_BLOCKSTATE = ground_blockstate;
+        GROUND_BLOCK_STATE = ground_blockstate;
         GROUND_CHANCE = ground_chance;
     }
 
@@ -28,7 +28,7 @@ public class GroundDecorator extends SpheroidDecorator {
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
         for(BlockPos bp : decorationBlockPositions) {
             if(random.nextFloat() < GROUND_CHANCE) {
-                world.setBlockState(bp, GROUND_BLOCKSTATE, 3);
+                world.setBlockState(bp, GROUND_BLOCK_STATE, 3);
             }
         }
     }

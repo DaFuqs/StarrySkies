@@ -29,9 +29,10 @@ public class SpheroidListVanilla extends SpheroidList {
         public static SpheroidDecorator COCOA = new CocoaDecorator();
         public static SpheroidDecorator BAMBOO = new BambooDecorator(Blocks.BAMBOO.getDefaultState().with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0));
         public static SpheroidDecorator SUGAR_CANE_POND = new SugarCanePondDecorator();
-        public static SpheroidDecorator CENTER_POND_UNDERWATER_RUIN_SMALL_CHEST = new CenterPondDecorator(LootTables.UNDERWATER_RUIN_SMALL_CHEST, 0.5F);
-        public static SpheroidDecorator CENTER_POND_UNDERWATER_RUIN_BIG_CHEST = new CenterPondDecorator(LootTables.UNDERWATER_RUIN_BIG_CHEST, 0.5F);
-        public static SpheroidDecorator CENTER_POND_SHIPWRECK_CHEST = new CenterPondDecorator(LootTables.SHIPWRECK_TREASURE_CHEST, 0.5F);
+        public static SpheroidDecorator CENTER_POND_UNDERWATER_RUIN_SMALL_CHEST = new CenterPondDecorator(Blocks.SAND.getDefaultState(), Blocks.WATER.getDefaultState(), LootTables.UNDERWATER_RUIN_SMALL_CHEST, 0.5F);
+        public static SpheroidDecorator CENTER_POND_UNDERWATER_RUIN_BIG_CHEST = new CenterPondDecorator(Blocks.GRAVEL.getDefaultState(), Blocks.WATER.getDefaultState(), LootTables.UNDERWATER_RUIN_BIG_CHEST, 0.5F);
+        public static SpheroidDecorator CENTER_POND_SHIPWRECK_CHEST = new CenterPondDecorator(Blocks.SAND.getDefaultState(), Blocks.WATER.getDefaultState(), LootTables.SHIPWRECK_TREASURE_CHEST, 0.5F);
+        public static SpheroidDecorator CENTER_POND_LAVA = new CenterPondDecorator(Blocks.OBSIDIAN.getDefaultState(), Blocks.LAVA.getDefaultState(), LootTables.RUINED_PORTAL_CHEST, 0.25F);
         public static SpheroidDecorator MUSHROOMS = new MushroomDecorator();
         public static SpheroidDecorator DEAD_GRASS = new PlantDecorator(Blocks.DEAD_BUSH.getDefaultState(), 0.05F);
         public static SpheroidDecorator SWEET_BERRIES = new PlantDecorator(Blocks.SWEET_BERRY_BUSH.getDefaultState(), 0.03F);
@@ -88,6 +89,7 @@ public class SpheroidListVanilla extends SpheroidList {
             .addDecorator(SpheroidDecorators.BAMBOO, 0.5F)
             .addSpawn(SpheroidEntitySpawnDefinitions.PARROT, 0.4F);
     public static final SpheroidType STONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.stone, 5, 13,  Blocks.STONE.getDefaultState())
+            .addDecorator(SpheroidDecorators.CENTER_POND_LAVA, 0.2F)
             .addSpawn(SpheroidEntitySpawnDefinitions.LLAMA, 0.08F);
     public static final SpheroidType GRANITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.granite, 6, 11,  Blocks.GRANITE.getDefaultState());
     public static final SpheroidType DIORITE = new ModularSpheroidType(SpheroidAdvancementIdentifier.diorite, 6, 11,  Blocks.DIORITE.getDefaultState());

@@ -17,9 +17,12 @@ public class CenterPondDecorator extends SpheroidDecorator {
 
     private final Identifier lootTable;
     private final float lootTableChance;
+    private final BlockState beach_block_state;
+    private final BlockState liquid_block_state;
 
-
-    public CenterPondDecorator(Identifier lootTable, float lootTableChance) {
+    public CenterPondDecorator(BlockState beach_block_state, BlockState liquid_block_state, Identifier lootTable, float lootTableChance) {
+        this.beach_block_state = beach_block_state;
+        this.liquid_block_state = liquid_block_state;
         this.lootTable = lootTable;
         this.lootTableChance = lootTableChance;
     }
@@ -78,9 +81,9 @@ public class CenterPondDecorator extends SpheroidDecorator {
                                 if(hasLootChest && x == 0 && z == 0 && lootChestPosition == null) {
                                     lootChestPosition = currentBlockPos;
                                 }
-                                blockState = Blocks.WATER.getDefaultState();
+                                blockState = liquid_block_state;
                             } else if (pondDistance < 1.70) {
-                                blockState = Blocks.SAND.getDefaultState();
+                                blockState = beach_block_state;
                             }
                         }
 
