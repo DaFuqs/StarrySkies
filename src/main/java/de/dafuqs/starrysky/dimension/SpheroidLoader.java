@@ -160,6 +160,16 @@ public class SpheroidLoader {
             if (SpheroidListCinderscapes.shouldGenerate()) {
                 SpheroidListCinderscapes.setup(this);
             }
+            if (SpheroidListEcotones.shouldGenerate()) {
+                SpheroidListEcotones.setup(this);
+            }
+            if (SpheroidListWoodsAndMires.shouldGenerate()) {
+                SpheroidListWoodsAndMires.setup(this);
+            }
+            if (SpheroidListBiomeMakeover.shouldGenerate()) {
+                SpheroidListBiomeMakeover.setup(this);
+            }
+
             if (SpheroidListMythicMetalsStandardFantasyEdition.shouldGenerate()) {
                 SpheroidListMythicMetalsStandardFantasyEdition.setup(this);
             }

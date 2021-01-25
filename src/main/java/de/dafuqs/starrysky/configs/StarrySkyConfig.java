@@ -232,6 +232,18 @@ public class StarrySkyConfig implements ConfigData {
     @ConfigEntry.Category("SPHEROIDS")
     @Comment(value = "\nEnable Cinderscapes Integration")
     public boolean generateCinderscapesSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Ecotones Integration")
+    public boolean generateEcotonesSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Woods And Mires Integration")
+    public boolean generateWoodsAndMiresSpheroids = true;
+
+    @ConfigEntry.Category("SPHEROIDS")
+    @Comment(value = "\nEnable Biome Makeover Integration")
+    public boolean generateBiomeMakeoverSpheroids = true;
     
     @ConfigEntry.Category("SPHEROIDS")
     @Comment(value = "\nEnable Mythic Metals Integration for the Default Fantasy Modpack (turn off the default Mythic Metals integration)")
