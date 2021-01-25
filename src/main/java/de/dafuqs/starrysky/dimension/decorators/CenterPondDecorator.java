@@ -56,9 +56,9 @@ public class CenterPondDecorator extends SpheroidDecorator {
                 }
             }
 
-            // if there is not enouth room for water: just cancel
+            // if there is not enough room for water: just cancel
             // not nice, but eh
-            if(spheroid.getPosition().getY() - waterLevelY > pondRadius) {
+            if(waterLevelY - spheroid.getPosition().getY() < pondRadius * 1.5) {
                 return;
             }
 
