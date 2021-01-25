@@ -27,7 +27,7 @@ public class SpheroidListVanilla extends SpheroidList {
         public static SpheroidDecorator CACTUS = new CactusDecorator(Blocks.CACTUS.getDefaultState());
         public static SpheroidDecorator SEA_GREENS = new SeaGreensDecorator();
         public static SpheroidDecorator COCOA = new CocoaDecorator();
-        public static SpheroidDecorator BAMBOO = new BambooDecorator(Blocks.BAMBOO.getDefaultState().with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0));
+        public static SpheroidDecorator BAMBOO = new BambooDecorator(Blocks.BAMBOO.getDefaultState().with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0), Blocks.BAMBOO_SAPLING.getDefaultState());
         public static SpheroidDecorator SUGAR_CANE_POND = new SugarCanePondDecorator();
         public static SpheroidDecorator CENTER_POND_UNDERWATER_RUIN_SMALL_CHEST = new CenterPondDecorator(Blocks.SAND.getDefaultState(), Blocks.WATER.getDefaultState(), LootTables.UNDERWATER_RUIN_SMALL_CHEST, 0.5F);
         public static SpheroidDecorator CENTER_POND_UNDERWATER_RUIN_BIG_CHEST = new CenterPondDecorator(Blocks.GRAVEL.getDefaultState(), Blocks.WATER.getDefaultState(), LootTables.UNDERWATER_RUIN_BIG_CHEST, 0.5F);

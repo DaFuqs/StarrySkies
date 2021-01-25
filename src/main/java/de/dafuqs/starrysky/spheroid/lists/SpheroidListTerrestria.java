@@ -75,9 +75,9 @@ public class SpheroidListTerrestria extends SpheroidList {
         PlantDecorator terrestria_cattail_decorator = new PlantDecorator(terrestria_cattail, 0.1F); // TODO single block, in water
         PlantDecorator terrestria_indian_paintbrush_decorator = new PlantDecorator(terrestria_indian_paintbrush, 0.1F);
         PlantDecorator terrestria_monsteras_decorator = new PlantDecorator(terrestria_monsteras, 0.1F);
-        PlantDecorator terrestria_tiny_cactus_decorator = new PlantDecorator(terrestria_tiny_cactus, 0.05F);
-        PlantDecorator terrestria_agave_decorator = new PlantDecorator(terrestria_agave, 0.05F);
-        PlantDecorator terrestria_aloe_vera_decorator = new PlantDecorator(terrestria_aloe_vera, 0.05F);
+        PlantDecorator terrestria_tiny_cactus_decorator = new PlantDecorator(terrestria_tiny_cactus, 0.04F);
+        PlantDecorator terrestria_agave_decorator = new PlantDecorator(terrestria_agave, 0.03F);
+        PlantDecorator terrestria_aloe_vera_decorator = new PlantDecorator(terrestria_aloe_vera, 0.02F);
         PlantDecorator terrestria_dead_grass_decorator = new PlantDecorator(terrestria_dead_grass, 0.1F);
 
         // WOOD
@@ -107,7 +107,7 @@ public class SpheroidListTerrestria extends SpheroidList {
         SpheroidListVanilla.RED_SAND.addDecorator(terrestria_dead_grass_decorator, 0.7F);
         SpheroidListVanilla.SAND.addDecorator(terrestria_tiny_cactus_decorator, 0.2F);
         SpheroidListVanilla.GRASS.addDecorator(terrestria_aloe_vera_decorator, 0.1F);
-        SpheroidListVanilla.GRASS.addDecorator(terrestria_agave_decorator, 0.1F);
+        SpheroidListVanilla.SAND.addDecorator(terrestria_agave_decorator, 0.1F);
 
                 // Add common blocks to maps
         SpheroidList.MAP_STONES.put(terrestria_basalt, 0.4F);

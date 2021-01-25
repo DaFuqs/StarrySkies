@@ -516,7 +516,7 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState sythian_sprout = getDefaultBlockState(MOD_ID,"sythian_nylium"); // plant
         PlantDecorator SYTHIAN_SPROUT_DECORATOR = new PlantDecorator(sythian_sprout, 0.1F);
         BlockState sythian_stalk_block = getDefaultBlockState(MOD_ID,"sythian_stalk_block"); // like bamboo
-        BambooDecorator SYTHIAN_STALK_DECORATOR = new BambooDecorator(sythian_stalk_block.with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0));
+        BambooDecorator SYTHIAN_STALK_DECORATOR = new BambooDecorator(sythian_stalk_block.with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0), sythian_stalk_block.with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0));
         SpheroidType SYTHIAN_NYLIUM = new ModularSpheroidType(null, 10, 16, Blocks.NETHERRACK.getDefaultState())
                 .setTopBlockState(sythian_nylium)
                 .addDecorator(SYTHIAN_SPROUT_DECORATOR, 0.8F)

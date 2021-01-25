@@ -45,7 +45,7 @@ public class SpheroidListEcotones extends SpheroidList {
         PlantDecorator sandy_grass_decorator = new PlantDecorator(sandy_grass, 0.1F);
         PlantDecorator short_grass_decorator = new PlantDecorator(short_grass, 0.1F);
         GroundDecorator geyser_decorator = new GroundDecorator(geyser, 0.1F);
-        GroundDecorator surface_rock_decorator = new GroundDecorator(surface_rock, 0.1F);
+        PlantDecorator surface_rock_decorator = new PlantDecorator(surface_rock, 0.07F);
         UnderPlantDecorator pine_cone_decorator = new UnderPlantDecorator(pinecone, 0.25F);
 
         SpheroidType PEAT = new LiquidSpheroidType(null, 5, 9, Blocks.WATER.getDefaultState(), MAP_GLASS, 1, 2, 65, 100, 60)
