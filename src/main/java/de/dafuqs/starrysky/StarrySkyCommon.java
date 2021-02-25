@@ -18,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Level;
 
+import static org.apache.logging.log4j.Level.ERROR;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class StarrySkyCommon implements ModInitializer {
@@ -74,9 +75,15 @@ public class StarrySkyCommon implements ModInitializer {
     }
 
     public static boolean isStarryWorld(RegistryKey<World> worldRegistryKey) {
-        return worldRegistryKey.equals(StarrySkyCommon.starryWorld.getRegistryKey())
-                || worldRegistryKey.equals(starryWorldNether.getRegistryKey())
-                || worldRegistryKey.equals(starryWorldEnd.getRegistryKey());
+        if(StarrySkyCommon.starryWorld == null && StarrySkyCommon.starryWorldNether == null && StarrySkyCommon.starryWorldEnd == null) {
+            log(ERROR, "The Starry Dimensions could not be loaded. If this is your first launch this is probably related to a known vanilla bug where custom dimensions are not loaded when first generating the world. Restarting / quitting and reloading will fix this issue.");
+            return false;
+        } else {
+            return worldRegistryKey.equals(StarrySkyCommon.starryWorld.getRegistryKey())
+                    || worldRegistryKey.equals(starryWorldNether.getRegistryKey())
+                    || worldRegistryKey.equals(starryWorldEnd.getRegistryKey());
+
+        }
     }
 
 }

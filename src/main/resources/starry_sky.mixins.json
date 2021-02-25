@@ -3,15 +3,15 @@
   "package": "de.dafuqs.starrysky.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractFireBlockMixin",
     "DimensionTypeMixin",
     "EndPortalBlockMixin",
-    "EntityMixin",
     "EntityAccessor",
-    "AbstractFireBlockMixin"
+    "EntityMixin"
   ],
   "client": [
-    "WorldRendererMixin",
-    "SkyPropertiesMixin"
+    "SkyPropertiesMixin",
+    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
