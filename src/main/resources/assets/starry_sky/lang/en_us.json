@@ -5,6 +5,8 @@
 
   "bee.queen": "Queen",
 
+  "block.customportals.customportalblock": "Portal",
+
   "text.autoconfig.StarrySky.title": "Starry Skies Config",
   "text.autoconfig.StarrySky.category.GENERAL": "General",
   "text.autoconfig.StarrySky.category.SYSTEM GENERATION": "System Generation",
