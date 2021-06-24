@@ -41,19 +41,21 @@ Each sphere pack (besides vanilla) can be enabled / disabled. There is also an o
 
 Vanilla spheres are not enough for you? Starry Skies adds loads of new spheres through mod integration. All mods listed here are fully playable without requiring access to the vanilla Overworld (excluding Nether and The End).
 
-- Applied Energistics 2
-- Astromine
-- Better End 
-- Better Nether
-- Blockus
-- Biomes You Go
-- Cinderscapes
-- Industrial Revolution
-- Modern Industrialization
-- Mythic Metals
-- Sakura Rosea
-- Sandwichable
-- Tech Reborn
-- Terrestria
-- Traverse
-- Unearthed
+- [Applied Energistics 2](https://github.com/AppliedEnergistics/Applied-Energistics-2/tree/fabric/master) integration last updated in 1.16.5
+- [Astromine](https://github.com/Mixinors/Astromine) integration last updated in 1.16.5
+- [Better End ](https://github.com/paulevsGitch/BetterEnd) integration last updated in 1.16.5
+- [Better Nether](https://github.com/paulevsGitch/BetterNether) integration last updated in 1.16.5
+- [Blockus](https://github.com/Brandcraf06/Blockus) integration last updated in 1.16.5
+- [Biomes You Go](https://github.com/CorgiTaco/BYG/tree/Fabric-1.17.X) integration last updated in 1.16.5
+- [Cinderscapes](https://github.com/TerraformersMC/Cinderscapes) integration last updated in 1.16.5
+- [Industrial Revolution](https://github.com/GabrielOlvH/Industrial-Revolution) integration last updated in 1.16.5
+- [Modern Industrialization](https://github.com/AztechMC/Modern-Industrialization) integration last updated in 1.16.5
+- [Mythic Metals](https://github.com/Noaaan/MythicMetals) integration last updated in 1.16.5
+- [Sakura Rosea](https://github.com/FaeCraft/SakuraRosea) integration last updated in 1.16.5
+- [Sandwichable](https://github.com/FoundationGames/Sandwichable) integration last updated in 1.16.5
+- [Tech Reborn](https://github.com/TechReborn/TechReborn) integration last updated in 1.16.5
+- [Terrestria](https://github.com/TerraformersMC/Terrestria) integration last updated in 1.16.5
+- [Traverse](https://github.com/TerraformersMC/Traverse) integration last updated in 1.16.5
+- [Unearthed](https://github.com/CorgiTaco/Unearthed) integration last updated in 1.16.5
+
+Starry's integration pack system is very modular. Just because an integration pack was not updated lately it does not mean it won't work anymore. Just that newly introduced blocks may not be available in Starry Skies dimensions.
