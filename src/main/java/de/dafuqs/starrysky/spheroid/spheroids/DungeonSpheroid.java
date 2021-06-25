@@ -41,6 +41,8 @@ public class DungeonSpheroid extends Spheroid {
         int y = this.getPosition().getY();
         int z = this.getPosition().getZ();
 
+        BlockState chestBlockState = Blocks.CHEST.getDefaultState();
+
         random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
         for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
@@ -49,7 +51,7 @@ public class DungeonSpheroid extends Spheroid {
                     long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
                     if(d == 0) {
                         chunk.setBlockState(currBlockPos, Blocks.SPAWNER.getDefaultState(), false);
-                        chunk.setBlockEntity(currBlockPos, new MobSpawnerBlockEntity());
+                        chunk.setBlockEntity(new MobSpawnerBlockEntity(currBlockPos, Blocks.SPAWNER.getDefaultState()));
                         BlockEntity blockEntity_1 = chunk.getBlockEntity(currBlockPos);
                         if (blockEntity_1 instanceof MobSpawnerBlockEntity) {
                             ((MobSpawnerBlockEntity) blockEntity_1).getLogic().setEntityId(this.entityType);
@@ -57,9 +59,9 @@ public class DungeonSpheroid extends Spheroid {
                     } else if (d == (this.radius - this.shellRadius -1) &&
                             Math.round(Support.getDistance(x, y, z, x2, y2-1, z2)) == (this.radius - this.shellRadius) &&
                             random.nextInt(radius * 8) == 0) {
-                        chunk.setBlockState(currBlockPos, Blocks.CHEST.getDefaultState(), false);
-                        chunk.setBlockEntity(currBlockPos, new ChestBlockEntity());
-                        BlockEntity chestBlockEntity = chunk.getBlockEntity(currBlockPos);
+                            chunk.setBlockState(currBlockPos, chestBlockState, false);
+                            chunk.setBlockEntity(new ChestBlockEntity(currBlockPos, chestBlockState));
+                            BlockEntity chestBlockEntity = chunk.getBlockEntity(currBlockPos);
                         if (chestBlockEntity instanceof ChestBlockEntity) {
                             ((ChestBlockEntity)chestBlockEntity).setLootTable(LootTables.SIMPLE_DUNGEON_CHEST, random.nextLong());
                         }

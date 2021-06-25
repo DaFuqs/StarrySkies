@@ -15,10 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.*;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
@@ -28,11 +25,14 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.feature.StructureFeature;
+import org.apache.logging.log4j.Level;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
 
@@ -123,18 +123,6 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    public int getHeight(int x, int z, Heightmap.Type heightmapType) {
-        return FLOOR_HEIGHT;
-    }
-
-    @Override
-    public BlockView getColumnSample(int x, int z) {
-        BlockState[] states = new BlockState[256];
-        Arrays.fill(states, Blocks.AIR.getDefaultState());
-        return new VerticalBlockSample(states);
-    }
-
-    @Override
     public void buildSurface(ChunkRegion region, Chunk chunk) {
         ChunkPos chunkPos = chunk.getPos();
 
@@ -153,12 +141,6 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         }
     }
 
-    @Override
-    public void populateNoise(WorldAccess world, StructureAccessor accessor, Chunk chunk) {
-        // generate spheres
-        placeSpheroids(chunk);
-    }
-
     private BlockState getSeaBlock(int heightY) {
         if (heightY == 0) {
             return BOTTOM_BLOCK_STATE;
@@ -172,24 +154,23 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         return StarrySkyCommon.starryWorld.getHeight();
     }
 
-    /**
-     * For spawning specific mobs in certain places like structures.
-     */
-    /*@Override
-    public List<SpawnSettings.SpawnEntry> getEntitySpawnList(Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
-        return super.getEntitySpawnList(biome, accessor, group, pos);
-    }*/
+    @Override
+    public CompletableFuture<Chunk> populateNoise(Executor executor, StructureAccessor accessor, Chunk chunk) {
+        // generate spheres
+
+        placeSpheroids(chunk);
+
+        return CompletableFuture.completedFuture(chunk);
+    }
 
     @Override
     public void populateEntities(ChunkRegion chunkRegion) {
-        int xChunk = chunkRegion.getCenterChunkX();
-        int zChunk = chunkRegion.getCenterChunkZ();
+        ChunkPos chunkPos = chunkRegion.getCenterPos();
 
-        List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(xChunk, zChunk);
+        List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(chunkPos.x, chunkPos.z);
         ChunkRandom chunkRandom = new ChunkRandom();
-        chunkRandom.setPopulationSeed(chunkRegion.getSeed(), xChunk, zChunk);
+        chunkRandom.setPopulationSeed(chunkRegion.getSeed(), chunkPos.x, chunkPos.z);
 
-        ChunkPos chunkPos = new ChunkPos(xChunk, zChunk);
         for(Spheroid spheroid : localSystem) {
             spheroid.populateEntities(chunkPos, chunkRegion, chunkRandom);
         }
@@ -200,15 +181,30 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         return FLOOR_HEIGHT;
     }
 
+    @Override
+    public int getHeight(int x, int z, Heightmap.Type heightmap, HeightLimitView world) {
+        return FLOOR_HEIGHT;
+    }
+
+    @Override
+    public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world) {
+        BlockState[] states = new BlockState[world.getHeight()];
+        Arrays.fill(states, Blocks.AIR.getDefaultState());
+        return new VerticalBlockSample(world.getBottomY(), states);
+    }
+
     public void placeSpheroids(Chunk chunk) {
 
         ChunkRandom chunkRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
         chunkRandom.setTerrainSeed(chunk.getPos().getRegionX(), chunk.getPos().getRegionZ());
 
         List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(chunk.getPos().x, chunk.getPos().z);
+
         for(Spheroid spheroid : localSystem) {
             if (spheroid.isInChunk(chunk.getPos())) {
+                StarrySkyCommon.log(Level.INFO, "Generating spheroid in chunk x:" + chunk.getPos().x + " z:" + chunk.getPos().z + " (StartX:" + chunk.getPos().getStartX() + " StartZ:" + chunk.getPos().getStartZ() + ") " + spheroid.getDescription());
                 spheroid.generate(chunk);
+                StarrySkyCommon.log(Level.INFO, "Finished.");
             }
         }
     }

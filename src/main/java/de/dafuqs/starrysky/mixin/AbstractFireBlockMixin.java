@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AbstractFireBlock.class)
 public abstract class AbstractFireBlockMixin {
 
-    @Inject(method = {"method_30366"}, at = {@At("HEAD")}, cancellable = true)
-    private static void method_30366(World world, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+    @Inject(method = {"isOverworldOrNether"}, at = {@At("HEAD")}, cancellable = true)
+    private static void isOverworldOrNether(World world, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         if(StarrySkyCommon.STARRY_SKY_CONFIG.enableNetherPortalsToStarryNether) {
             if (world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY) || world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {
                 callbackInfoReturnable.setReturnValue(true);

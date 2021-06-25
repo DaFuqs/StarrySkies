@@ -15,7 +15,7 @@ import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootTables;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -181,8 +181,8 @@ public class EndCitySpheroid extends Spheroid {
             shulkerColor = (byte) randomColor; // very rarely other colors as purple
         }
 
-        CompoundTag compoundTag = new CompoundTag();
-        CompoundTag compoundTag2 = new CompoundTag();
+        NbtCompound compoundTag = new NbtCompound();
+        NbtCompound compoundTag2 = new NbtCompound();
         compoundTag2.putString("id", new Identifier("shulker").toString());
         compoundTag2.putByte("Color", shulkerColor);
         compoundTag.put("Entity", compoundTag2);
@@ -206,7 +206,7 @@ public class EndCitySpheroid extends Spheroid {
         BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos.up());
 
         ItemStack healingPotionStack = new ItemStack(Items.POTION, 1);
-        CompoundTag potionTag = new CompoundTag();
+        NbtCompound potionTag = new NbtCompound();
         potionTag.putString("Potion", new Identifier("strong_healing").toString());
         healingPotionStack.setTag(potionTag);
 
@@ -273,22 +273,22 @@ public class EndCitySpheroid extends Spheroid {
         int randomPosition = random.nextInt(4);
         BlockState dragonHeadBlockState;
         switch (randomPosition) {
-            case 0:
+            case 0 -> {
                 dragonHeadBlockState = DRAGON_WALL_HEAD.with(WallSkullBlock.FACING, Direction.NORTH);
                 worldAccess.setBlockState(blockPos.up().north(), dragonHeadBlockState, 3);
-            break;
-            case 1:
+            }
+            case 1 -> {
                 dragonHeadBlockState = DRAGON_WALL_HEAD.with(WallSkullBlock.FACING, Direction.EAST);
                 worldAccess.setBlockState(blockPos.up().east(), dragonHeadBlockState, 3);
-            break;
-            case 2:
+            }
+            case 2 -> {
                 dragonHeadBlockState = DRAGON_WALL_HEAD.with(WallSkullBlock.FACING, Direction.SOUTH);
                 worldAccess.setBlockState(blockPos.up().south(), dragonHeadBlockState, 3);
-            break;
-            default:
+            }
+            default -> {
                 dragonHeadBlockState = DRAGON_WALL_HEAD.with(WallSkullBlock.FACING, Direction.WEST);
                 worldAccess.setBlockState(blockPos.up().west(), dragonHeadBlockState, 3);
-            break;
+            }
         }
     }
 

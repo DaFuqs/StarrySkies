@@ -7,6 +7,7 @@ import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -19,12 +20,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.MobSpawnerEntry;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.*;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
+import org.apache.logging.log4j.Level;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public abstract class Spheroid implements Serializable {
     protected BlockPos position;
     protected int radius;
     protected ChunkRandom random;
-    private boolean isDecorated = false;
+    private boolean isDecorated = false; // TODO: this should not be needed / could be problematic?
 
     /**
      * Chunks this spheroid should be still generated in
@@ -108,6 +107,7 @@ public abstract class Spheroid implements Serializable {
     public void decorate(StructureWorldAccess world, Random random) {
         if (!isDecorated) {
             for (SpheroidDecorator decorator : this.spheroidDecorators) {
+                StarrySkyCommon.log(Level.INFO, "Decorator: " + decorator.getClass());
                 try {
                     decorator.decorateSpheroid(world, this, this.decorationBlockPositions, random);
                 } catch (RuntimeException e) {
@@ -144,12 +144,12 @@ public abstract class Spheroid implements Serializable {
     protected void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos, Identifier lootTable, Random random, boolean waterLogged) {
         BlockState chestBlockState;
         if (waterLogged) {
-            chestBlockState = Blocks.CHEST.getDefaultState();
+            chestBlockState = Blocks.CHEST.getDefaultState().with(ChestBlock.WATERLOGGED, true);
         } else {
             chestBlockState = Blocks.CHEST.getDefaultState();
         }
         chunk.setBlockState(blockPos, chestBlockState, false);
-        chunk.setBlockEntity(blockPos, new ChestBlockEntity());
+        chunk.setBlockEntity(new ChestBlockEntity(blockPos, chestBlockState));
         LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, lootTable);
     }
 
@@ -162,23 +162,22 @@ public abstract class Spheroid implements Serializable {
 
     public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
         if (shouldPopulateEntities(chunkPos)) {
+            StarrySkyCommon.log(Level.INFO, "Populating entities for spheroid in chunk x:" + chunkPos.x + " z:" + chunkPos.z + " (StartX:" + chunkPos.getStartX() + " StartZ:" + chunkPos.getStartZ() + ") " + this.getDescription());
             for (SpheroidEntitySpawnDefinition entityTypeToSpawn : entityTypesToSpawn) {
-                int xChunk = chunkRegion.getCenterChunkX();
-                int zChunk = chunkRegion.getCenterChunkZ();
-                int xCord = xChunk << 4;
-                int zCord = zChunk << 4;
+                int xCord = chunkPos.getStartX();
+                int zCord = chunkPos.getStartZ();
 
-                ChunkRandom sharedseedrandom = new ChunkRandom();
-                sharedseedrandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
+                ChunkRandom sharedSeedRandom = new ChunkRandom();
+                sharedSeedRandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
 
                 int randomAmount = Support.getRandomBetween(random, entityTypeToSpawn.minAmount, entityTypeToSpawn.maxAmount);
                 for (int i = 0; i < randomAmount; i++) {
-                    int startingX = this.getPosition().getX(); //xCord + sharedseedrandom.nextInt(4);
+                    int startingX = this.getPosition().getX(); //xCord + sharedSeedRandom.nextInt(4);
                     int startingY = this.getPosition().getY() + this.getRadius();
-                    int startingZ = this.getPosition().getZ(); //zCord + sharedseedrandom.nextInt(4);
+                    int startingZ = this.getPosition().getZ(); //zCord + sharedSeedRandom.nextInt(4);
                     int minHeight = this.getPosition().getY() - this.getRadius();
-                    BlockPos.Mutable blockpos = new BlockPos.Mutable(startingX, startingY, startingZ);
-                    int height = Support.getLowerGroundBlock(chunkRegion, blockpos, minHeight) + 1;
+                    BlockPos.Mutable blockPos = new BlockPos.Mutable(startingX, startingY, startingZ);
+                    int height = Support.getLowerGroundBlock(chunkRegion, blockPos, minHeight) + 1;
 
                     if (height != 0) {
                         Entity entity = entityTypeToSpawn.entityType.create(chunkRegion.toServerWorld());
@@ -188,7 +187,7 @@ public abstract class Spheroid implements Serializable {
                             double zLength = MathHelper.clamp(startingZ, (double) zCord + (double) width, (double) zCord + 16.0D - (double) width);
 
                             try {
-                                entity.refreshPositionAndAngles(xLength, height, zLength, sharedseedrandom.nextFloat() * 360.0F, 0.0F);
+                                entity.refreshPositionAndAngles(xLength, height, zLength, sharedSeedRandom.nextFloat() * 360.0F, 0.0F);
                                 if (entity instanceof MobEntity) {
                                     MobEntity mobentity = (MobEntity) entity;
                                     if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
@@ -206,6 +205,7 @@ public abstract class Spheroid implements Serializable {
                     }
                 }
             }
+            StarrySkyCommon.log(Level.INFO, "Finished populating");
         }
     }
 
@@ -225,7 +225,7 @@ public abstract class Spheroid implements Serializable {
         worldAccess.setBlockState(blockPos, Blocks.SPAWNER.getDefaultState(), 3);
         BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos);
         if (blockEntity instanceof MobSpawnerBlockEntity) {
-            ((MobSpawnerBlockEntity) blockEntity).getLogic().setSpawnEntry(mobSpawnerEntry);
+            ((MobSpawnerBlockEntity) blockEntity).getLogic().setSpawnEntry((World) worldAccess, blockPos, mobSpawnerEntry);
         }
     }
 

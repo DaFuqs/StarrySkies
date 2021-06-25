@@ -11,13 +11,14 @@ import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
-import net.minecraft.loot.UniformLootTableRange;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
-import static org.apache.logging.log4j.Level.*;
+import static org.apache.logging.log4j.Level.DEBUG;
+import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListAppliedEnergistics2 extends SpheroidList {
 
@@ -59,7 +60,7 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
                 Item SILICON_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "silicon_press"));
 
                 FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-                        .rolls(UniformLootTableRange.between(1, 3))
+                        .rolls(UniformLootNumberProvider.create(1, 3))
                         .withEntry(ItemEntry.builder(CALCULATION_PRESS).build())
                         .withEntry(ItemEntry.builder(ENGINEERING_PRESS).build())
                         .withEntry(ItemEntry.builder(LOGIC_PRESS).build())

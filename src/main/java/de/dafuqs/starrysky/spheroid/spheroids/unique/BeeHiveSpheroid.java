@@ -59,6 +59,7 @@ public class BeeHiveSpheroid extends Spheroid {
         int coreDistance = shellDistance - shellRadius;
 
         random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
+        BlockState beeHiveBlockState = Blocks.BEE_NEST.getDefaultState();
         for (int x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
             for (int y2 = y - this.radius; y2 <= y + this.radius; y2++) {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
@@ -66,9 +67,10 @@ public class BeeHiveSpheroid extends Spheroid {
                     float d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
                     if(d == 0) {
                         // bee hive in center
-                        chunk.setBlockState(currBlockPos, Blocks.BEE_NEST.getDefaultState(), false);
-                        this.queenBeehiveBlockEntity = new BeehiveBlockEntity();
-                        chunk.setBlockEntity(currBlockPos, queenBeehiveBlockEntity);
+
+                        chunk.setBlockState(currBlockPos, beeHiveBlockState, false);
+                        this.queenBeehiveBlockEntity = new BeehiveBlockEntity(currBlockPos, beeHiveBlockState);
+                        chunk.setBlockEntity(queenBeehiveBlockEntity);
                     } else if (d == shellDistance && y2 - y == 0 && random.nextInt(10) == 0) {
                         // middle outer shell: random hives
                         Direction direction;
@@ -100,8 +102,8 @@ public class BeeHiveSpheroid extends Spheroid {
                         chunk.setBlockState(currBlockPos, blockState, false);
 
                         // set and save the blockentity
-                        BeehiveBlockEntity outerBeehiveBlockEntity = new BeehiveBlockEntity();
-                        chunk.setBlockEntity(currBlockPos, outerBeehiveBlockEntity);
+                        BeehiveBlockEntity outerBeehiveBlockEntity = new BeehiveBlockEntity(currBlockPos, blockState);
+                        chunk.setBlockEntity(outerBeehiveBlockEntity);
                         this.outerBeehiveBlockEntities.add(outerBeehiveBlockEntity);
                     } else if (d <= coreDistance) {
                         // core

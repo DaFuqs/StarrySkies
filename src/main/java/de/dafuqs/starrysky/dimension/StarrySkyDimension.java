@@ -14,13 +14,13 @@ import static org.apache.logging.log4j.Level.INFO;
 public class StarrySkyDimension {
 
     public static final Identifier STARRY_SKY_DIMENSION_ID = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky");
-    public static final RegistryKey<World> STARRY_SKY_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, STARRY_SKY_DIMENSION_ID);
+    public static final RegistryKey<World> STARRY_SKY_WORLD_KEY = RegistryKey.of(Registry.WORLD_KEY, STARRY_SKY_DIMENSION_ID);
 
     public static final Identifier STARRY_SKY_NETHER_DIMENSION_ID = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_nether");
-    public static final RegistryKey<World> STARRY_SKY_NETHER_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, STARRY_SKY_NETHER_DIMENSION_ID);
+    public static final RegistryKey<World> STARRY_SKY_NETHER_WORLD_KEY = RegistryKey.of(Registry.WORLD_KEY, STARRY_SKY_NETHER_DIMENSION_ID);
 
     public static final Identifier STARRY_SKY_END_DIMENSION_ID = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_end");
-    public static final RegistryKey<World> STARRY_SKY_END_WORLD_KEY = RegistryKey.of(Registry.DIMENSION, STARRY_SKY_END_DIMENSION_ID);
+    public static final RegistryKey<World> STARRY_SKY_END_WORLD_KEY = RegistryKey.of(Registry.WORLD_KEY, STARRY_SKY_END_DIMENSION_ID);
 
     public static void setupDimension(){
         StarrySkyCommon.log(INFO, "Registering chunk generator...");

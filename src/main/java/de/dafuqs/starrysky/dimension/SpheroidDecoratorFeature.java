@@ -1,16 +1,14 @@
 package de.dafuqs.starrysky.dimension;
 
 import com.mojang.serialization.Codec;
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.util.FeatureContext;
+import org.apache.logging.log4j.Level;
 
 import java.util.List;
-import java.util.Random;
 
 public class SpheroidDecoratorFeature extends Feature {
 
@@ -18,18 +16,21 @@ public class SpheroidDecoratorFeature extends Feature {
         super(DefaultFeatureConfig.CODEC);
     }
 
-    // the vanilla method
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, FeatureConfig config) {
-        if(chunkGenerator instanceof StarrySkyChunkGenerator) {
-            SystemGenerator systemGenerator = SystemGenerator.getSystemGeneratorOfWorld(world.toServerWorld().getRegistryKey());
-            List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(blockPos.getX() / 16, blockPos.getZ() / 16);
+    public boolean generate(FeatureContext featureContext) {
+        if(featureContext.getGenerator() instanceof StarrySkyChunkGenerator) {
+            SystemGenerator systemGenerator = SystemGenerator.getSystemGeneratorOfWorld(featureContext.getWorld().toServerWorld().getRegistryKey());
+            List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(featureContext.getOrigin().getX() / 16, featureContext.getOrigin().getZ() / 16);
             for(Spheroid spheroid : localSystem) {
-                if(spheroid.shouldDecorate(blockPos)) {
-                    spheroid.decorate(world, random);
+                if(spheroid.shouldDecorate(featureContext.getOrigin())) {
+
+                    StarrySkyCommon.log(Level.INFO, "Decorating spheroid at x:" + featureContext.getOrigin().getX() + " z:" + featureContext.getOrigin().getZ() + spheroid.getDescription());
+                    spheroid.decorate(featureContext.getWorld(), featureContext.getRandom());
+                    StarrySkyCommon.log(Level.INFO, "Finished decorating.");
                 }
             }
         }
         return false;
     }
+
 }

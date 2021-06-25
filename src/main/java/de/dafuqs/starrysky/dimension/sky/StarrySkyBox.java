@@ -2,15 +2,16 @@ package de.dafuqs.starrysky.dimension.sky;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.options.GameOptions;
-import net.minecraft.client.options.Option;
+import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.option.Option;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 
 import java.util.LinkedHashMap;
@@ -62,38 +63,32 @@ public class StarrySkyBox {
         for (int i = 0; i < 6; ++i) {
             matrices.push();
             switch (i) {
-                case 0: {
+                case 0 -> {
                     textureManager.bindTexture(this.textures.get(DOWN));
-                    break;
                 }
-                case 1: {
+                case 1 -> {
                     textureManager.bindTexture(this.textures.get(WEST));
-                    matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(90.0F));
-                    break;
+                    matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
                 }
-                case 2: {
+                case 2 -> {
                     textureManager.bindTexture(this.textures.get(EAST));
-                    matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
-                    break;
+                    matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
                 }
-                case 3: {
+                case 3 -> {
                     textureManager.bindTexture(this.textures.get(UP));
-                    matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(180.0F));
-                    break;
+                    matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
                 }
-                case 4: {
+                case 4 -> {
                     textureManager.bindTexture(this.textures.get(NORTH));
-                    matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
-                    break;
+                    matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
                 }
-                case 5: {
+                case 5 -> {
                     textureManager.bindTexture(this.textures.get(SOUTH));
-                    matrices.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
-                    break;
+                    matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
                 }
             }
 
-            buffer.begin(7, VertexFormats.POSITION_COLOR_TEXTURE_LIGHT);
+            buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE_LIGHT);
             buffer.vertex(matrices.peek().getModel(), -distance, -distance, -distance).color(color, color, color, color).texture(0.0F, 0.0F).light(vertexLight).next();
             buffer.vertex(matrices.peek().getModel(), -distance, -distance, distance).color(color, color, color, color).texture(0.0F, 1.0F).light(vertexLight).next();
             buffer.vertex(matrices.peek().getModel(), distance, -distance, distance).color(color, color, color, color).texture(1.0F, 1.0F).light(vertexLight).next();

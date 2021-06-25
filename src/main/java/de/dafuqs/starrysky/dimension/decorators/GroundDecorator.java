@@ -19,8 +19,8 @@ public class GroundDecorator extends SpheroidDecorator {
      * Replaces the block in the ground
      * A chance of 0 = 0%, 100 = 100%
      */
-    public GroundDecorator(BlockState ground_blockstate, float ground_chance) {
-        GROUND_BLOCK_STATE = ground_blockstate;
+    public GroundDecorator(BlockState groundBlockState, float ground_chance) {
+        GROUND_BLOCK_STATE = groundBlockState;
         GROUND_CHANCE = ground_chance;
     }
 

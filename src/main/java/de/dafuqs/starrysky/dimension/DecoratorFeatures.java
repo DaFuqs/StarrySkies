@@ -13,7 +13,7 @@ public class DecoratorFeatures {
 
     public static final Identifier SPHEROID_DECORATOR_ID = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_spheroid_decorator");
     public static final Feature<DefaultFeatureConfig> SPHEROID_DECORATOR = register(new SpheroidDecoratorFeature(DefaultFeatureConfig.CODEC), SPHEROID_DECORATOR_ID);
-    public static final RegistryKey<ConfiguredFeature<?, ?>> SPHEROID_DECORATOR_KEY = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN, SPHEROID_DECORATOR_ID);
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SPHEROID_DECORATOR_KEY = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, SPHEROID_DECORATOR_ID);
 
     public static <T extends FeatureConfig> Feature<T> register(Feature<T> feature, Identifier id) {
         return Registry.register(Registry.FEATURE, id, feature);
