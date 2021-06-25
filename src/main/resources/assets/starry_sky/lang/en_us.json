@@ -62,7 +62,6 @@
   "text.autoconfig.StarrySky.option.generateEcotonesSpheroids": "Enable Ecotones Integration",
   "text.autoconfig.StarrySky.option.generateWoodsAndMiresSpheroids": "Enable Woods And Mires Integration",
   "text.autoconfig.StarrySky.option.generateBiomeMakeoverSpheroids": "Enable Biome Makeover Integration",
-  "text.autoconfig.StarrySky.option.generateMythicMetalsSpheroidsStandardFantasyEdition": "Enable Mythic Metals Integration for the Default Fantasy Modpack (default Mythic Metals Integration has to be disabled)",
 
   "text.autoconfig.StarrySky.option.floorHeightOverworld.@PrefixText": "If (or how high) there should be a world floor. When set to 1 there will the specified BottomBlock at y=1 and the floor block up to the floor height. When set to >1 there will the specified BottomBlock at y=1. When set to 0 there will be no ground, only void",
   "text.autoconfig.StarrySky.option.floorHeightOverworld": "Starry Sky Floor Height",

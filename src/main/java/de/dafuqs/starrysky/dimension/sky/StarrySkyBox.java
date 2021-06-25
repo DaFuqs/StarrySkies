@@ -1,16 +1,14 @@
 package de.dafuqs.starrysky.dimension.sky;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.Option;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormat;
-import net.minecraft.client.render.VertexFormats;
-import net.minecraft.client.texture.TextureManager;
+import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 
@@ -28,9 +26,6 @@ public class StarrySkyBox {
     public static final Identifier NORTH = new Identifier("skybox", "north");
     public static final Identifier SOUTH = new Identifier("skybox", "south");
 
-    public long lastTime;
-    static public int lastColor;
-
     public LinkedHashMap<Identifier, Identifier> textures = new LinkedHashMap<>();
 
     public StarrySkyBox(String up, String down, String west, String east, String north, String south) {
@@ -44,9 +39,6 @@ public class StarrySkyBox {
 
     public void render(MatrixStack matrices, float tickDelta) {
         MinecraftClient client = MinecraftClient.getInstance();
-        TextureManager textureManager = client.getTextureManager();
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder buffer = tessellator.getBuffer();
         World world = client.world;
 
         if (world == null) {
@@ -56,47 +48,56 @@ public class StarrySkyBox {
         GameOptions options = MinecraftClient.getInstance().options;
         float distance = 16F * (float) Option.RENDER_DISTANCE.get(options) - 8F;
         int color = (int) Math.abs(((Math.abs((world.getTimeOfDay()-6000) % 24000)-12000)/47)); // 47 = 12000 (half day)  /255 (max hue)
-        lastColor = color;
         int rawLight = (int) ((world.getTimeOfDay() / 12000) % 15); // a day is 24000; max light level = 15
         int vertexLight = 0x00f000f0 >> 2 | rawLight >> 3 | rawLight;
 
-        for (int i = 0; i < 6; ++i) {
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.depthMask(false);
+        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+
+        for(int i = 0; i < 6; ++i) {
             matrices.push();
-            switch (i) {
-                case 0 -> {
-                    textureManager.bindTexture(this.textures.get(DOWN));
-                }
-                case 1 -> {
-                    textureManager.bindTexture(this.textures.get(WEST));
-                    matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
-                }
-                case 2 -> {
-                    textureManager.bindTexture(this.textures.get(EAST));
-                    matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
-                }
-                case 3 -> {
-                    textureManager.bindTexture(this.textures.get(UP));
-                    matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
-                }
-                case 4 -> {
-                    textureManager.bindTexture(this.textures.get(NORTH));
-                    matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
-                }
-                case 5 -> {
-                    textureManager.bindTexture(this.textures.get(SOUTH));
-                    matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
-                }
+            if(i == 0) {
+                RenderSystem.setShaderTexture(0, this.textures.get(DOWN));
+            }
+            if (i == 1) {
+                RenderSystem.setShaderTexture(0, this.textures.get(WEST));
+                matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
+            }
+            if (i == 2) {
+                RenderSystem.setShaderTexture(0, this.textures.get(EAST));
+                matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
+            }
+            if (i == 3) {
+                RenderSystem.setShaderTexture(0, this.textures.get(UP));
+                matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
+            }
+            if (i == 4) {
+                RenderSystem.setShaderTexture(0, this.textures.get(NORTH));
+                matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
+            }
+            if (i == 5) {
+                RenderSystem.setShaderTexture(0, this.textures.get(SOUTH));
+                matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
             }
 
-            buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE_LIGHT);
-            buffer.vertex(matrices.peek().getModel(), -distance, -distance, -distance).color(color, color, color, color).texture(0.0F, 0.0F).light(vertexLight).next();
-            buffer.vertex(matrices.peek().getModel(), -distance, -distance, distance).color(color, color, color, color).texture(0.0F, 1.0F).light(vertexLight).next();
-            buffer.vertex(matrices.peek().getModel(), distance, -distance, distance).color(color, color, color, color).texture(1.0F, 1.0F).light(vertexLight).next();
-            buffer.vertex(matrices.peek().getModel(), distance, -distance, -distance).color(color, color, color, color).texture(1.0F, 0.0F).light(vertexLight).next();
+            Tessellator tessellator = Tessellator.getInstance();
+            BufferBuilder buffer = tessellator.getBuffer();
 
+            Matrix4f matrix4f = matrices.peek().getModel();
+            buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR_LIGHT);
+            buffer.vertex(matrix4f, -distance, -distance, -distance).texture(0.0F, 0.0F).color(color, color, color, color).light(vertexLight).next();
+            buffer.vertex(matrix4f, -distance, -distance, distance).texture(0.0F, 1.0F).color(color, color, color, color).light(vertexLight).next();
+            buffer.vertex(matrix4f, distance, -distance, distance).texture(1.0F, 1.0F).color(color, color, color, color).light(vertexLight).next();
+            buffer.vertex(matrix4f, distance, -distance, -distance).texture(1.0F, 0.0F).color(color, color, color, color).light(vertexLight).next();
             tessellator.draw();
             matrices.pop();
         }
+
+        RenderSystem.depthMask(true);
+        RenderSystem.enableTexture();
+        RenderSystem.disableBlend();
 
     }
 

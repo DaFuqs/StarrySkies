@@ -5,7 +5,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.SkyProperties;
 import net.minecraft.util.math.Vec3d;
-import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class StarrySkyProperties extends SkyProperties {
@@ -15,7 +14,6 @@ public class StarrySkyProperties extends SkyProperties {
     }
 
     /**
-     *
      * @param color
      * @param sunHeight Cos 0-1
      * @return
@@ -32,7 +30,6 @@ public class StarrySkyProperties extends SkyProperties {
 
     // NO sunrise / sunset
     @Override
-    @Nullable
     public float[] getFogColorOverride(float skyAngle, float tickDelta) {
         return null;
     }

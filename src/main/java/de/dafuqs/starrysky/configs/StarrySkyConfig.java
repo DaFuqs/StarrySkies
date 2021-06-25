@@ -20,7 +20,6 @@ public class StarrySkyConfig implements ConfigData {
                    + "\nDefault: PACKED_ICE")
     public String starrySkyPortalFrameBlock = "PACKED_ICE";
 
-    @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category("GENERAL")
     @Comment(value = "\nThe height of clouds in the Starry Sky dimension."
                      + "\nDefault: 270")
@@ -243,11 +242,6 @@ public class StarrySkyConfig implements ConfigData {
     @ConfigEntry.Category("SPHEROIDS")
     @Comment(value = "\nEnable Biome Makeover Integration")
     public boolean generateBiomeMakeoverSpheroids = true;
-    
-    @ConfigEntry.Category("SPHEROIDS")
-    @Comment(value = "\nEnable Mythic Metals Integration for the Default Fantasy Modpack (turn off the default Mythic Metals integration)")
-    public boolean generateMythicMetalsSpheroidsStandardFantasyEdition = false;
-    
 
     private boolean isValidBlock(String blockName) {
         // validate floorBlock

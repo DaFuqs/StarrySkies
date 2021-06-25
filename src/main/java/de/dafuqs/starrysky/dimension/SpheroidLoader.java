@@ -170,12 +170,6 @@ public class SpheroidLoader {
                 SpheroidListBiomeMakeover.setup(this);
             }
 
-            if (SpheroidListMythicMetalsStandardFantasyEdition.shouldGenerate()) {
-                SpheroidListMythicMetalsStandardFantasyEdition.setup(this);
-            }
-            
-            
-
             // dynamically generate ore spheroids
             // this way we got only 1 "copper" spheroids even though lots of mods add a copper ore block
             // Overworld
@@ -198,15 +192,18 @@ public class SpheroidLoader {
     public static SpheroidType getWeightedRandomSpheroid(SpheroidDimensionType spheroidDimensionType, ChunkRandom systemRandom) {
         SpheroidDistributionType chosenDistributionType;
         switch (spheroidDimensionType) {
-            case OVERWORLD:
+            case OVERWORLD -> {
                 chosenDistributionType = Support.getWeightedRandom(spheroidDistributionTypeWeights, systemRandom);
                 return Support.getWeightedRandom(availableSpheroidTypesByDistributionTypeWithWeight.get(chosenDistributionType), systemRandom);
-            case NETHER:
+            }
+            case NETHER -> {
                 chosenDistributionType = Support.getWeightedRandom(spheroidDistributionTypeWeightsNether, systemRandom);
                 return Support.getWeightedRandom(availableSpheroidTypesByDistributionTypeWithWeightNether.get(chosenDistributionType), systemRandom);
-            default:
+            }
+            default -> {
                 chosenDistributionType = Support.getWeightedRandom(spheroidDistributionTypeWeightsEnd, systemRandom);
                 return Support.getWeightedRandom(availableSpheroidTypesByDistributionTypeWithWeightEnd.get(chosenDistributionType), systemRandom);
+            }
         }
     }
 }
