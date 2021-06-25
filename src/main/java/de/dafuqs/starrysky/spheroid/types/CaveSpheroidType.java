@@ -81,7 +81,7 @@ public class CaveSpheroidType extends SpheroidType {
         BlockState bottomBlock = getBottomBlock();
 
         Identifier lootTable = null;
-        if( chunkRandom.nextFloat() < lootTableChance) {
+        if(chunkRandom.nextFloat() < lootTableChance) {
             lootTable = this.lootTable;
         }
 

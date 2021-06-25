@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:tuff"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_tuff.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_sky.sphere_tuff.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_sky:sphere_group_uncommon",
+  "criteria": {
+    "seen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

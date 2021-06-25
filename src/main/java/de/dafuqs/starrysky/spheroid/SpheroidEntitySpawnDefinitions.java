@@ -22,6 +22,7 @@ public class SpheroidEntitySpawnDefinitions {
     public static SpheroidEntitySpawnDefinition PANDA = new SpheroidEntitySpawnDefinition(EntityType.PANDA, 1, 3);
     public static SpheroidEntitySpawnDefinition POLAR_BEAR = new SpheroidEntitySpawnDefinition(EntityType.POLAR_BEAR, 1, 2);
     public static SpheroidEntitySpawnDefinition WOLF = new SpheroidEntitySpawnDefinition(EntityType.WOLF, 3, 5);
+    public static SpheroidEntitySpawnDefinition GOAT = new SpheroidEntitySpawnDefinition(EntityType.GOAT, 1, 3);
 
     // aquatic
     // TODO: spawn them
@@ -30,9 +31,12 @@ public class SpheroidEntitySpawnDefinitions {
     public static SpheroidEntitySpawnDefinition COD = new SpheroidEntitySpawnDefinition(EntityType.COD, 2, 5);
     public static SpheroidEntitySpawnDefinition TROPICAL_FISH = new SpheroidEntitySpawnDefinition(EntityType.TROPICAL_FISH, 2, 5);
     public static SpheroidEntitySpawnDefinition PUFFERFISH = new SpheroidEntitySpawnDefinition(EntityType.PUFFERFISH, 2, 5);
+    public static SpheroidEntitySpawnDefinition GLOW_SQUID = new SpheroidEntitySpawnDefinition(EntityType.GLOW_SQUID, 2, 4);
+    public static SpheroidEntitySpawnDefinition AXOLOTL = new SpheroidEntitySpawnDefinition(EntityType.AXOLOTL, 2, 3);
 
     // flying
-    //public static SpheroidEntitySpawnDefinition BAT = new SpheroidEntitySpawnDefinition(EntityType.BAT, 2, 5);
+    // TODO: spawn them
+    public static SpheroidEntitySpawnDefinition BAT = new SpheroidEntitySpawnDefinition(EntityType.BAT, 2, 5);
 
     // NETHER
     public static SpheroidEntitySpawnDefinition HOGLIN = new SpheroidEntitySpawnDefinition(EntityType.HOGLIN, 4, 6);

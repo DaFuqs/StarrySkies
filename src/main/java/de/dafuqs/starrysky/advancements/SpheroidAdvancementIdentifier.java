@@ -78,5 +78,15 @@ public enum SpheroidAdvancementIdentifier {
     stronghold,
     end_city,
     nether_fortress,
-    water
+    water,
+    dripstone,
+    powder_snow,
+    amethyst,
+    rooted_dirt,
+    copper,
+    cobbled_deepslate,
+    deepslate,
+    tuff,
+    azalea_wood,
+    tinted_glass
 }

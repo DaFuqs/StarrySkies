@@ -88,6 +88,17 @@ public class SpheroidAdvancementIdentifierGroups {
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.stronghold, SpheroidAdvancementGroup.RARE);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.nether_fortress, SpheroidAdvancementGroup.NETHER);
         spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.end_city, SpheroidAdvancementGroup.END);
+
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.dripstone, SpheroidAdvancementGroup.UNCOMMON);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.powder_snow, SpheroidAdvancementGroup.UNCOMMON);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.amethyst, SpheroidAdvancementGroup.RARE);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.rooted_dirt, SpheroidAdvancementGroup.UNCOMMON);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.copper, SpheroidAdvancementGroup.ORES);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.cobbled_deepslate, SpheroidAdvancementGroup.COMMON);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.deepslate, SpheroidAdvancementGroup.COMMON);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.tuff, SpheroidAdvancementGroup.UNCOMMON);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.azalea_wood, SpheroidAdvancementGroup.WOOD);
+        spheroidAdvancementIdentifierGroups.put(SpheroidAdvancementIdentifier.tinted_glass, SpheroidAdvancementGroup.RARE);
     }
 
 }

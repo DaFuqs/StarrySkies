@@ -28,7 +28,7 @@ public abstract class SpheroidList {
 
 
     //COMMONLY USED LISTS
-    public static final LinkedHashMap<BlockState, Float> MAP_STONES = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_STONES = new LinkedHashMap<>() {{
         put(Blocks.STONE.getDefaultState(), 5.0F);
         put(Blocks.GRANITE.getDefaultState(), 1.0F);
         put(Blocks.DIORITE.getDefaultState(), 1.0F);
@@ -39,18 +39,27 @@ public abstract class SpheroidList {
         put(Blocks.INFESTED_COBBLESTONE.getDefaultState(), 0.002F);
     }};
 
-    public static final LinkedHashMap<BlockState, Float> MAP_DUNGEON_STONES = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_DUNGEON_STONES = new LinkedHashMap<>() {{
         put(Blocks.MOSSY_COBBLESTONE.getDefaultState(), 5.0F);
         put(Blocks.INFESTED_COBBLESTONE.getDefaultState(), 0.5F);
         put(Blocks.STONE.getDefaultState(), 1.0F);
+        put(Blocks.DEEPSLATE.getDefaultState(), 1.0F);
         put(Blocks.GRANITE.getDefaultState(), 0.2F);
         put(Blocks.DIORITE.getDefaultState(), 0.2F);
         put(Blocks.ANDESITE.getDefaultState(), 0.2F);
         put(Blocks.COBBLESTONE.getDefaultState(), 0.1F);
+        put(Blocks.COBBLED_DEEPSLATE.getDefaultState(), 0.1F);
         put(Blocks.INFESTED_STONE.getDefaultState(), 0.1F);
+        put(Blocks.INFESTED_DEEPSLATE.getDefaultState(), 0.1F);
     }};
 
-    public static final LinkedHashMap<BlockState, Float> MAP_GLASS = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_DEEPSLATE = new LinkedHashMap<>() {{
+        put(Blocks.DEEPSLATE.getDefaultState(), 5.0F);
+        put(Blocks.INFESTED_DEEPSLATE.getDefaultState(), 0.5F);
+        put(Blocks.COBBLED_DEEPSLATE.getDefaultState(), 1.0F);
+    }};
+
+    public static final LinkedHashMap<BlockState, Float> MAP_GLASS = new LinkedHashMap<>() {{
         put(Blocks.GLASS.getDefaultState(), 100F);
         put(Blocks.BLACK_STAINED_GLASS.getDefaultState(), 1.0F);
         put(Blocks.BLUE_STAINED_GLASS.getDefaultState(), 1.0F);
@@ -68,23 +77,24 @@ public abstract class SpheroidList {
         put(Blocks.RED_STAINED_GLASS.getDefaultState(), 1.0F);
         put(Blocks.WHITE_STAINED_GLASS.getDefaultState(), 1.0F);
         put(Blocks.YELLOW_STAINED_GLASS.getDefaultState(), 1.0F);
+        put(Blocks.TINTED_GLASS.getDefaultState(), 1.0F);
     }};
 
-    public static final LinkedHashMap<BlockState, Float> MAP_MOUNTAIN_STONES  = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_MOUNTAIN_STONES  = new LinkedHashMap<>() {{
         put(Blocks.STONE.getDefaultState(), 1.0F);
         put(Blocks.INFESTED_STONE.getDefaultState(), 1.0F);
     }};
-    public static final LinkedHashMap<BlockState, Float> MAP_OCEAN_STONES  = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_OCEAN_STONES  = new LinkedHashMap<>() {{
         put(Blocks.CLAY.getDefaultState(), 1.0F);
         put(Blocks.PRISMARINE.getDefaultState(), 1.0F);
     }};
-    public static final LinkedHashMap<BlockState, Float> MAP_JUNGLE_STONES  = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_JUNGLE_STONES  = new LinkedHashMap<>() {{
         put(Blocks.COARSE_DIRT.getDefaultState(), 1.0F);
     }};
 
 
     // RAINBOW STUFF
-    public static final ArrayList<BlockState> LIST_WOOL = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_WOOL = new ArrayList<>() {{
         add(Blocks.WHITE_WOOL.getDefaultState());
         add(Blocks.LIGHT_GRAY_WOOL.getDefaultState());
         add(Blocks.GRAY_WOOL.getDefaultState());
@@ -103,7 +113,7 @@ public abstract class SpheroidList {
         add(Blocks.PINK_WOOL.getDefaultState());
     }};
 
-    public static final ArrayList<BlockState> LIST_STAINED_GLASS = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_STAINED_GLASS = new ArrayList<>() {{
         add(Blocks.WHITE_STAINED_GLASS.getDefaultState());
         add(Blocks.LIGHT_GRAY_STAINED_GLASS.getDefaultState());
         add(Blocks.GRAY_STAINED_GLASS.getDefaultState());
@@ -122,7 +132,7 @@ public abstract class SpheroidList {
         add(Blocks.PINK_STAINED_GLASS.getDefaultState());
     }};
 
-    public static final ArrayList<BlockState> LIST_CONCRETE = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_CONCRETE = new ArrayList<>() {{
         add(Blocks.WHITE_CONCRETE.getDefaultState());
         add(Blocks.LIGHT_GRAY_CONCRETE.getDefaultState());
         add(Blocks.GRAY_CONCRETE.getDefaultState());
@@ -141,7 +151,7 @@ public abstract class SpheroidList {
         add(Blocks.PINK_CONCRETE.getDefaultState());
     }};
 
-    public static final ArrayList<BlockState> LIST_TERRACOTTA = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_TERRACOTTA = new ArrayList<>() {{
         add(Blocks.WHITE_TERRACOTTA.getDefaultState());
         add(Blocks.LIGHT_GRAY_TERRACOTTA.getDefaultState());
         add(Blocks.GRAY_TERRACOTTA.getDefaultState());
@@ -160,7 +170,7 @@ public abstract class SpheroidList {
         add(Blocks.PINK_TERRACOTTA.getDefaultState());
     }};
 
-    public static final ArrayList<BlockState> LIST_FULL_CORAL_BLOCKS = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_FULL_CORAL_BLOCKS = new ArrayList<>() {{
         add(Blocks.BRAIN_CORAL_BLOCK.getDefaultState());
         add(Blocks.TUBE_CORAL_BLOCK.getDefaultState());
         add(Blocks.BUBBLE_CORAL_BLOCK.getDefaultState());
@@ -168,7 +178,7 @@ public abstract class SpheroidList {
         add(Blocks.HORN_CORAL_BLOCK.getDefaultState());
     }};
 
-    public static final ArrayList<BlockState> LIST_WATERLOGGABLE_CORAL_BLOCKS = new ArrayList<BlockState>() {{
+    public static final ArrayList<BlockState> LIST_WATERLOGGABLE_CORAL_BLOCKS = new ArrayList<>() {{
         add(Blocks.BRAIN_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
         add(Blocks.TUBE_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
         add(Blocks.BUBBLE_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
@@ -187,7 +197,7 @@ public abstract class SpheroidList {
         add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 4));
     }};
 
-    public static ArrayList<BlockState> LIST_FLOWERS = new ArrayList<BlockState>() {{
+    public static ArrayList<BlockState> LIST_FLOWERS = new ArrayList<>() {{
         add(Blocks.DANDELION.getDefaultState());
         add(Blocks.POPPY.getDefaultState());
         add(Blocks.BLUE_ORCHID.getDefaultState());
@@ -204,9 +214,11 @@ public abstract class SpheroidList {
         add(Blocks.LILAC.getDefaultState());
         add(Blocks.ROSE_BUSH.getDefaultState());
         add(Blocks.PEONY.getDefaultState());
+        add(Blocks.AZALEA.getDefaultState());
+        add(Blocks.FLOWERING_AZALEA.getDefaultState());
     }};
 
-    public static ArrayList<BlockState> LIST_TALL_FLOWERS = new ArrayList<BlockState>() {{
+    public static ArrayList<BlockState> LIST_TALL_FLOWERS = new ArrayList<>() {{
         add(Blocks.SUNFLOWER.getDefaultState());
         add(Blocks.LILAC.getDefaultState());
         add(Blocks.ROSE_BUSH.getDefaultState());
@@ -216,13 +228,13 @@ public abstract class SpheroidList {
     }};
 
     //// NETHER
-    public static final LinkedHashMap<BlockState, Float> MAP_NETHER_STONES = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_NETHER_STONES = new LinkedHashMap<>() {{
         put(Blocks.NETHERRACK.getDefaultState(), 5.0F);
         put(Blocks.BASALT.getDefaultState(), 1.0F);
         put(Blocks.MAGMA_BLOCK.getDefaultState(), 1.0F);
     }};
 
-    public static final LinkedHashMap<BlockState, Float> MAP_NETHER_DUNGEON_STONES = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_NETHER_DUNGEON_STONES = new LinkedHashMap<>() {{
         put(Blocks.NETHER_BRICKS.getDefaultState(), 5.0F);
         put(Blocks.BLACKSTONE.getDefaultState(), 1.0F);
         put(Blocks.NETHERRACK.getDefaultState(), 0.5F);
@@ -230,7 +242,7 @@ public abstract class SpheroidList {
         put(Blocks.OBSIDIAN.getDefaultState(), 0.2F);
     }};
 
-    public static final LinkedHashMap<BlockState, Float> MAP_NETHER_GLASS = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_NETHER_GLASS = new LinkedHashMap<>() {{
         put(Blocks.BLACK_STAINED_GLASS.getDefaultState(), 1.0F);
         put(Blocks.ORANGE_STAINED_GLASS.getDefaultState(), 1.0F);
         put(Blocks.RED_STAINED_GLASS.getDefaultState(), 1.0F);
@@ -239,11 +251,11 @@ public abstract class SpheroidList {
 
 
     //// END
-    public static final LinkedHashMap<BlockState, Float> MAP_END_STONES = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_END_STONES = new LinkedHashMap<>() {{
         put(Blocks.END_STONE.getDefaultState(), 10.0F);
     }};
 
-    public static final LinkedHashMap<BlockState, Float> MAP_END_DUNGEON_STONES = new LinkedHashMap<BlockState, Float>() {{
+    public static final LinkedHashMap<BlockState, Float> MAP_END_DUNGEON_STONES = new LinkedHashMap<>() {{
         put(Blocks.END_STONE_BRICKS.getDefaultState(), 10.0F);
         put(Blocks.PURPUR_BLOCK.getDefaultState(), 5.0F);
         put(Blocks.END_STONE.getDefaultState(), 1.0F);

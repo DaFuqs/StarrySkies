@@ -16,7 +16,7 @@ import java.util.Random;
 public class BambooDecorator extends SpheroidDecorator {
 
     private static final Block bambooBlock = Blocks.BAMBOO;
-    private static final int BAMBOO_CHANCE = 11;
+    private static final int BAMBOO_CHANCE = 13;
     private static BlockState bambooBlockState;
     private static BlockState bambooSaplingBlockState;
 
