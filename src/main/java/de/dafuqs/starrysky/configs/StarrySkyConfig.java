@@ -11,12 +11,15 @@ import net.minecraft.util.registry.Registry;
 @Config(name = "StarrySky")
 public class StarrySkyConfig implements ConfigData {
 
-    // wiki:
-    // https://gitlab.com/sargunv-mc-mods/auto-config/-/wikis/home
     @ConfigEntry.Gui.PrefixText()
     @ConfigEntry.Category("GENERAL")
-    @Comment(value = "\nThe block the portal to the Starry Sky dimension needs to be built with."
-                   + "\nBuild it like a nether portal & has to be activated with flint & steel"
+    @Comment(value = "Should there be a portal between overworld and Starry Sky?"
+            + "\nBuild it like a nether portal & has to be activated with flint & steel"
+            + "\nOnce in Starry Sky you can access Scary Sky and Scarcy Sky like their vanilla counterparts."
+            + "\nDefault: true")
+    public boolean portalToStarrySky = true;
+
+    @Comment(value = "\nThe block for building the portal to Starry Sky"
                    + "\nDefault: PACKED_ICE")
     public String starrySkyPortalFrameBlock = "PACKED_ICE";
 

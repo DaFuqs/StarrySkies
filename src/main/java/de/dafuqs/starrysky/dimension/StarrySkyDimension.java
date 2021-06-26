@@ -28,10 +28,14 @@ public class StarrySkyDimension {
         StarrySkyBiomeProvider.registerBiomeProvider();
     }
 
-    public static void setupPortals() {
-        StarrySkyCommon.log(INFO, "Setting up portals...");
-        Block portalFrameBlock = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.starrySkyPortalFrameBlock.toLowerCase()));
-        CustomPortalApiRegistry.addPortal(portalFrameBlock, STARRY_SKY_DIMENSION_ID, 11983869); // light, greyish blue
+    public static void setupOverworldPortal() {
+        if(StarrySkyCommon.STARRY_SKY_CONFIG.portalToStarrySky) {
+            StarrySkyCommon.log(INFO, "Registering portal between the Overworld and Starry Sky...");
+            Block portalFrameBlock = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.starrySkyPortalFrameBlock.toLowerCase()));
+            CustomPortalApiRegistry.addPortal(portalFrameBlock, STARRY_SKY_DIMENSION_ID, 11983869); // light, greyish blue
+        } else {
+            StarrySkyCommon.log(INFO, "Portal between Overworld and Starry Sky is disabled in the config. Will not be registered.");
+        }
     }
 
 }

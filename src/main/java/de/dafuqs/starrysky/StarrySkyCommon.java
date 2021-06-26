@@ -44,7 +44,7 @@ public class StarrySkyCommon implements ModInitializer {
 
         // Register all the stuff
         StarrySkyDimension.setupDimension();
-        StarrySkyDimension.setupPortals();
+        StarrySkyDimension.setupOverworldPortal();
         StarrySkyCommands.initialize();
         DecoratorFeatures.initialize();
 
