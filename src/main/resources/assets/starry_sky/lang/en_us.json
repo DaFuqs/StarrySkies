@@ -251,6 +251,27 @@
   "advancements.dafuqs.starry_sky.sphere_end_gateway.title": "The way home",
   "advancements.dafuqs.starry_sky.sphere_end_gateway.description": "Find your first end gateway sphere",
   "advancements.dafuqs.starry_sky.sphere_end_stone.title": "Sphere: End Stone",
-  "advancements.dafuqs.starry_sky.sphere_end_stone.description": "Find your first end stone sphere"
+  "advancements.dafuqs.starry_sky.sphere_end_stone.description": "Find your first end stone sphere",
+
+  "advancements.dafuqs.starry_sky.sphere_dripstone.title": "Sphere: Dripstone",
+  "advancements.dafuqs.starry_sky.sphere_dripstone.description": "Find your first dripstone sphere",
+  "advancements.dafuqs.starry_sky.sphere_powder_snow.title": "Sphere: Powder Snow",
+  "advancements.dafuqs.starry_sky.sphere_powder_snow.description": "Find your first powder snow sphere",
+  "advancements.dafuqs.starry_sky.sphere_amethyst.title": "Sphere: Amethyst Geode",
+  "advancements.dafuqs.starry_sky.sphere_amethyst.description": "Find your first amethyst geode sphere",
+  "advancements.dafuqs.starry_sky.sphere_rooted_dirt.title": "Sphere: Rooted Dirt",
+  "advancements.dafuqs.starry_sky.sphere_rooted_dirt.description": "Find your first rooted dirt sphere",
+  "advancements.dafuqs.starry_sky.sphere_copper.title": "Sphere: Copper",
+  "advancements.dafuqs.starry_sky.sphere_copper.description": "Find your first copper sphere",
+  "advancements.dafuqs.starry_sky.sphere_cobbled_deepslate.title": "Sphere: Cobbled Deepslate",
+  "advancements.dafuqs.starry_sky.sphere_cobbled_deepslate.description": "Find your first cobbled deepslate sphere",
+  "advancements.dafuqs.starry_sky.sphere_deepslate.title": "Sphere: Deepslate",
+  "advancements.dafuqs.starry_sky.sphere_deepslate.description": "Find your first deepslate sphere",
+  "advancements.dafuqs.starry_sky.sphere_tuff.title": "Sphere: Tuff",
+  "advancements.dafuqs.starry_sky.sphere_tuff.description": "Find your first tuff sphere",
+  "advancements.dafuqs.starry_sky.sphere_azalea_wood.title": "Sphere: Azalea Wood",
+  "advancements.dafuqs.starry_sky.sphere_azalea_wood.description": "Find your first azalea wood sphere",
+  "advancements.dafuqs.starry_sky.sphere_tinted_glass.title": "Sphere: Tinted Glass",
+  "advancements.dafuqs.starry_sky.sphere_tinted_glass.description": "Find your first tinted glass sphere"
 
 }

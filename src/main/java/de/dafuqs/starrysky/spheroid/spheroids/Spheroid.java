@@ -137,8 +137,11 @@ public abstract class Spheroid implements Serializable {
     }
 
     protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z, int shellRadius) {
-        int distance1 = (int) Math.round(Support.getDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
-        return d == (this.radius - shellRadius) && distance1 > (this.radius - shellRadius);
+        if(d == (this.radius - shellRadius)) {
+            int distance1 = (int) Math.round(Support.getDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
+            return distance1 > (this.radius - shellRadius);
+        }
+        return false;
     }
 
     protected void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos, Identifier lootTable, Random random, boolean waterLogged) {

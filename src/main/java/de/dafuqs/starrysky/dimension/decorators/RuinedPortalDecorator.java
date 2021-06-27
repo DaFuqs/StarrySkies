@@ -43,16 +43,12 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
                     if(Math.abs(x*z) * 1.5 < randomI * randomI) {
                         BlockPos currentBlockPos = new BlockPos(spheroidPosition.getX() + x, upperY, spheroidPosition.getZ() + z);
                         switch (random.nextInt(6)) {
-                            case 0:
-                                world.setBlockState(currentBlockPos, MAGMA_BLOCK, 3);
-                                break;
-                            case 1:
+                            case 0 -> world.setBlockState(currentBlockPos, MAGMA_BLOCK, 3);
+                            case 1 -> {
                                 world.setBlockState(currentBlockPos, LAVA, 3);
                                 world.getChunk(currentBlockPos).markBlockForPostProcessing(currentBlockPos);
-                                break;
-                            default:
-                                world.setBlockState(currentBlockPos, NETHERRACK, 3);
-                                break;
+                            }
+                            default -> world.setBlockState(currentBlockPos, NETHERRACK, 3);
                         }
                     }
                 }

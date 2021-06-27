@@ -31,7 +31,6 @@ public class DungeonSpheroid extends Spheroid {
         this.shellRadius = shellRadius;
     }
 
-
     @Override
     public void generate(Chunk chunk) {
         int chunkX = chunk.getPos().x;
@@ -56,9 +55,7 @@ public class DungeonSpheroid extends Spheroid {
                         if (blockEntity_1 instanceof MobSpawnerBlockEntity) {
                             ((MobSpawnerBlockEntity) blockEntity_1).getLogic().setEntityId(this.entityType);
                         }
-                    } else if (d == (this.radius - this.shellRadius -1) &&
-                            Math.round(Support.getDistance(x, y, z, x2, y2-1, z2)) == (this.radius - this.shellRadius) &&
-                            random.nextInt(radius * 8) == 0) {
+                    } else if (isAboveCaveFloorBlock(d, x2, y2, z2, shellRadius) && random.nextInt(radius * 9) == 0) {
                             chunk.setBlockState(currBlockPos, chestBlockState, false);
                             chunk.setBlockEntity(new ChestBlockEntity(currBlockPos, chestBlockState));
                             BlockEntity chestBlockEntity = chunk.getBlockEntity(currBlockPos);

@@ -45,18 +45,18 @@ public class GeodeSpheroid extends Spheroid {
                 for (int z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
                     BlockPos currBlockPos = new BlockPos(x2, y2, z2);
                     float d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
-                    if(d < radius -4) {
-                        // nothing
-                    } else if (d < radius -3) {
-                        if(random.nextFloat() < speckleChance) {
-                            chunk.setBlockState(currBlockPos, innerSpecklesBlockState, false);
-                        } else {
-                            chunk.setBlockState(currBlockPos, innerBlockState, false);
+                    if (!(d < radius - 4)) {
+                        if (d < radius -3) {
+                            if(random.nextFloat() < speckleChance) {
+                                chunk.setBlockState(currBlockPos, innerSpecklesBlockState, false);
+                            } else {
+                                chunk.setBlockState(currBlockPos, innerBlockState, false);
+                            }
+                        } else if (d < radius -2) {
+                            chunk.setBlockState(currBlockPos, middleBlockSate, false);
+                        } else if (d < radius -1) {
+                            chunk.setBlockState(currBlockPos, outerBlockState, false);
                         }
-                    } else if (d < radius -2) {
-                        chunk.setBlockState(currBlockPos, middleBlockSate, false);
-                    } else if (d < radius -1) {
-                        chunk.setBlockState(currBlockPos, outerBlockState, false);
                     }
                 }
             }

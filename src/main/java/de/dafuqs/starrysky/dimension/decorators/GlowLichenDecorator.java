@@ -18,7 +18,6 @@ import java.util.Random;
 
 public class GlowLichenDecorator extends SpheroidDecorator {
 
-    // TODO: TEST
     private final List<BlockState> placeableOn = ImmutableList.of(Blocks.STONE.getDefaultState(), Blocks.ANDESITE.getDefaultState(), Blocks.DIORITE.getDefaultState(), Blocks.GRANITE.getDefaultState(), Blocks.DRIPSTONE_BLOCK.getDefaultState(), Blocks.CALCITE.getDefaultState(), Blocks.TUFF.getDefaultState(), Blocks.DEEPSLATE.getDefaultState());
     private final GlowLichenFeatureConfig glowLichenFeatureConfig = new GlowLichenFeatureConfig(5, true, true, true, 0.5F, placeableOn);
     private final float chance;
@@ -30,8 +29,8 @@ public class GlowLichenDecorator extends SpheroidDecorator {
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
         for(BlockPos bp : decorationBlockPositions) {
-            if(random.nextFloat() < chance) {
-                GlowLichenFeature.generate(world, bp, world.getBlockState(bp), glowLichenFeatureConfig, random, Arrays.asList(Direction.values()));
+            if(world.isAir(bp) && random.nextFloat() < chance) {
+                GlowLichenFeature.generate(world, bp.up(), world.getBlockState(bp), glowLichenFeatureConfig, random, Arrays.asList(Direction.values()));
             }
         }
     }
