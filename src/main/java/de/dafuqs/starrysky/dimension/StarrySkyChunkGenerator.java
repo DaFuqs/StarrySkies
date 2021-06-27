@@ -202,9 +202,9 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 
         for(Spheroid spheroid : localSystem) {
             if (spheroid.isInChunk(chunk.getPos())) {
-                StarrySkyCommon.log(Level.INFO, "Generating spheroid in chunk x:" + chunk.getPos().x + " z:" + chunk.getPos().z + " (StartX:" + chunk.getPos().getStartX() + " StartZ:" + chunk.getPos().getStartZ() + ") " + spheroid.getDescription());
+                StarrySkyCommon.log(Level.DEBUG, "Generating spheroid in chunk x:" + chunk.getPos().x + " z:" + chunk.getPos().z + " (StartX:" + chunk.getPos().getStartX() + " StartZ:" + chunk.getPos().getStartZ() + ") " + spheroid.getDescription());
                 spheroid.generate(chunk);
-                StarrySkyCommon.log(Level.INFO, "Finished.");
+                StarrySkyCommon.log(Level.DEBUG, "Finished.");
             }
         }
     }

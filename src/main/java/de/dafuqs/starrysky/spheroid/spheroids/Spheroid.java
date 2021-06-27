@@ -38,7 +38,6 @@ public abstract class Spheroid implements Serializable {
     protected BlockPos position;
     protected int radius;
     protected ChunkRandom random;
-    private boolean isDecorated = false; // TODO: this should not be needed / could be problematic?
 
     /**
      * Chunks this spheroid should be still generated in
@@ -104,16 +103,13 @@ public abstract class Spheroid implements Serializable {
     }
 
     public void decorate(StructureWorldAccess world, Random random) {
-        if (!isDecorated) {
-            for (SpheroidDecorator decorator : this.spheroidDecorators) {
-                StarrySkyCommon.log(Level.INFO, "Decorator: " + decorator.getClass());
-                try {
-                    decorator.decorateSpheroid(world, this, this.decorationBlockPositions, random);
-                } catch (RuntimeException e) {
-                    // We are asking a region for a chunk out of bound ಠ_ಠ
-                }
+        for (SpheroidDecorator decorator : this.spheroidDecorators) {
+            StarrySkyCommon.log(Level.DEBUG, "Decorator: " + decorator.getClass());
+            try {
+                decorator.decorateSpheroid(world, this, this.decorationBlockPositions, random);
+            } catch (RuntimeException e) {
+                // We are asking a region for a chunk out of bound ಠ_ಠ
             }
-            isDecorated = true;
         }
     }
 
@@ -168,7 +164,7 @@ public abstract class Spheroid implements Serializable {
 
     public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
         if (shouldPopulateEntities(chunkPos)) {
-            StarrySkyCommon.log(Level.INFO, "Populating entities for spheroid in chunk x:" + chunkPos.x + " z:" + chunkPos.z + " (StartX:" + chunkPos.getStartX() + " StartZ:" + chunkPos.getStartZ() + ") " + this.getDescription());
+            StarrySkyCommon.log(Level.DEBUG, "Populating entities for spheroid in chunk x:" + chunkPos.x + " z:" + chunkPos.z + " (StartX:" + chunkPos.getStartX() + " StartZ:" + chunkPos.getStartZ() + ") " + this.getDescription());
             for (SpheroidEntitySpawnDefinition entityTypeToSpawn : entityTypesToSpawn) {
                 int xCord = chunkPos.getStartX();
                 int zCord = chunkPos.getStartZ();
@@ -204,13 +200,13 @@ public abstract class Spheroid implements Serializable {
                     }
                 }
             }
-            StarrySkyCommon.log(Level.INFO, "Finished populating");
+            StarrySkyCommon.log(Level.DEBUG, "Finished populating");
         }
     }
 
     public boolean shouldDecorate(BlockPos blockPos) {
         // blockPos and center of spheroid in same chunk
-        return (!isDecorated && (blockPos.getX() / 16 == this.getPosition().getX() / 16) && (blockPos.getZ() / 16 == this.getPosition().getZ() / 16));
+        return (blockPos.getX() / 16 == this.getPosition().getX() / 16) && (blockPos.getZ() / 16 == this.getPosition().getZ() / 16);
     }
 
     protected void placeSpawner(WorldAccess worldAccess, BlockPos blockPos, EntityType entityType) {
