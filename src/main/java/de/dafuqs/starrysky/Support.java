@@ -149,6 +149,10 @@ public class Support {
                 && blockPos.getZ() < chunkPos.getStartZ() + 16);
     }
 
+    public static boolean inSameChunk(BlockPos blockPos1, BlockPos blockPos2) {
+        return (blockPos1.getX() / 16 == blockPos2.getX() / 16) && (blockPos1.getZ() / 16 == blockPos2.getZ() / 16);
+    }
+
     /***
      * Move down as long as no air is found. We are now on the surface of a piece of land
      * @param world the world to search

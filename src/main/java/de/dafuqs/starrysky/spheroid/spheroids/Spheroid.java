@@ -69,8 +69,8 @@ public abstract class Spheroid implements Serializable {
     public void setPositionAndCalculateChunks(BlockPos blockPos) {
         this.position = blockPos;
 
-        for (int currXPos = blockPos.getX() - Math.round(radius); currXPos <= blockPos.getX() + Math.round(radius); currXPos++) {
-            for (int currZPos = blockPos.getZ() - Math.round(radius); currZPos <= blockPos.getZ() + Math.round(radius); currZPos++) {
+        for (int currXPos = blockPos.getX() - radius; currXPos <= blockPos.getX() + radius; currXPos++) {
+            for (int currZPos = blockPos.getZ() - radius; currZPos <= blockPos.getZ() + radius; currZPos++) {
                 int cx = (int) Math.floor(currXPos / 16.0D);
                 int cz = (int) Math.floor(currZPos / 16.0D);
                 this.chunksOfSpheroid.add(new ChunkPos(cx, cz));
@@ -205,8 +205,7 @@ public abstract class Spheroid implements Serializable {
     }
 
     public boolean shouldDecorate(BlockPos blockPos) {
-        // blockPos and center of spheroid in same chunk
-        return (blockPos.getX() / 16 == this.getPosition().getX() / 16) && (blockPos.getZ() / 16 == this.getPosition().getZ() / 16);
+        return Support.inSameChunk(this.position, blockPos);
     }
 
     protected void placeSpawner(WorldAccess worldAccess, BlockPos blockPos, EntityType entityType) {

@@ -41,7 +41,7 @@ public class StarrySkyDimensionTravelHandler {
     }
 
     public static boolean handleEndPortalCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (world instanceof ServerWorld
+        if(world instanceof ServerWorld
                 && !entity.hasVehicle()
                 && !entity.hasPassengers()
                 && entity.canUsePortals()
@@ -66,13 +66,12 @@ public class StarrySkyDimensionTravelHandler {
             }
 
             entity.moveToWorld(destinationServerWorld);
-            return true;
         } else {
             // collision box doesn't collide enough
             // since that's what vanilla would check, too we can
             // cancel it to save on calculation time and prevent errors
-            return true;
         }
+        return true;
     }
 
     // Handler for Entity.getTeleportTarget
@@ -147,7 +146,6 @@ public class StarrySkyDimensionTravelHandler {
                 blockPos2 = END_SPAWN_BLOCK_POS;
             } else {
                 // vanilla code: (but only the overworld has a spawn point so the vanilla way won't work and we need a hard coded point)
-                //blockPos2 = destination.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, destination.getSpawnPos());
                 blockPos2 = OVERWORLD_SPAWN_BLOCK_POS;
             }
             return new TeleportTarget(new Vec3d((double) blockPos2.getX() + 0.5D, blockPos2.getY(), (double) blockPos2.getZ() + 0.5D), thisEntity.getVelocity(), thisEntity.getYaw(), thisEntity.getPitch());
