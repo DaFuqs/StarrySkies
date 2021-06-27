@@ -16,7 +16,7 @@ public class EndPortalDecorator extends SpheroidDecorator {
 
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
-        this.generate(world, new BlockPos(0, 64, 0), false);
+        this.generate(world, new BlockPos(0, 63, 0), false);
     }
 
     public boolean generate(StructureWorldAccess structureWorldAccess, BlockPos blockPos, boolean open) {

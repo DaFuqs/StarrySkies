@@ -207,15 +207,15 @@ public class SystemGenerator {
                 }
                 break;
             case END:
-                if (systemPointX ==  0 && systemPointZ ==  0) {
+                if (systemPointX == 0 && systemPointZ == 0) {
                     spheroid = SpheroidListVanillaEnd.END_SPAWN_WITH_PORTAL_AND_DRAGON.getRandomSpheroid(random);
-                    spheroid.setPositionAndCalculateChunks(new BlockPos(0, 30, 0));
+                    spheroid.setPositionAndCalculateChunks(new BlockPos(0, 29, 0));
                     defaultSpheroids.add(spheroid);
                 } else if ((systemPointX == -1 && systemPointZ ==  0)
                         || (systemPointX ==  0 && systemPointZ == -1)
                         || (systemPointX == -1 && systemPointZ == -1)) {
                     spheroid = SpheroidListVanillaEnd.END_SPAWN_WITH_PORTAL.getRandomSpheroid(random);
-                    spheroid.setPositionAndCalculateChunks(new BlockPos(0, 30, 0));
+                    spheroid.setPositionAndCalculateChunks(new BlockPos(0, 29, 0));
                     defaultSpheroids.add(spheroid);
                 }
                 break;

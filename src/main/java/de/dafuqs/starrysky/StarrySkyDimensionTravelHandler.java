@@ -28,7 +28,7 @@ import static org.apache.logging.log4j.Level.ERROR;
 
 public class StarrySkyDimensionTravelHandler {
 
-    public static final BlockPos END_SPAWN_BLOCK_POS = new BlockPos(10, 64, 0);
+    public static final BlockPos END_SPAWN_BLOCK_POS = new BlockPos(10, 65, 0);
     public static final BlockPos OVERWORLD_SPAWN_BLOCK_POS = new BlockPos(16, 85, 16);
 
     public static ServerWorld modifyNetherPortalDestination(Entity thisEntity, ServerWorld serverWorld) {

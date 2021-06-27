@@ -138,8 +138,8 @@ public class Support {
         return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2));
     }
 
-    public static double getDistance(BlockPos blockPos1, BlockPos blockpos2) {
-        return getDistance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockpos2.getX(), blockpos2.getY(), blockpos2.getZ());
+    public static double getDistance(BlockPos blockPos1, BlockPos blockPos2) {
+        return getDistance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockPos2.getX(), blockPos2.getY(), blockPos2.getZ());
     }
 
     public static boolean isBlockPosInChunkPos(ChunkPos chunkPos, BlockPos blockPos) {
@@ -149,30 +149,40 @@ public class Support {
                 && blockPos.getZ() < chunkPos.getStartZ() + 16);
     }
 
+    /***
+     * Move down as long as no air is found. We are now on the surface of a piece of land
+     * @param world the world to search
+     * @param position the position to start searching from downwards
+     * @param minHeight the minimum height. If that value is reached search will be ended and minHeight returned
+     * @return The air block above ground
+     */
     public static int getLowerGroundBlock(WorldAccess world, BlockPos position, int minHeight) {
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
-
-        //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
-        while (blockpos$Mutable.getY() > minHeight) {
-            if (!world.isAir(blockpos$Mutable)) {
+        BlockPos.Mutable blockPosMutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
+        while (blockPosMutable.getY() > minHeight) {
+            if (!world.isAir(blockPosMutable)) {
                 break;
             }
-            blockpos$Mutable.move(Direction.DOWN);
+            blockPosMutable.move(Direction.DOWN);
         }
-        return blockpos$Mutable.getY();
+        return blockPosMutable.getY();
     }
 
-    public static int getUpperGroundBlock(WorldAccess world, BlockPos position, int minHeight) {
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
-
-        //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
-        while (blockpos$Mutable.getY() > minHeight) {
-            if (!world.isAir(blockpos$Mutable)) {
-                return blockpos$Mutable.getY();
+    /**
+     * Move up as long as no air is found. We are now on the surface of a piece of land
+     * @param world the world to search
+     * @param position the position to start searching from upwards
+     * @param maxHeight the maximum height. If that value is reached search will be ended and maxHeight returned
+     * @return The air block above ground
+     */
+    public static int getUpperGroundBlock(WorldAccess world, BlockPos position, int maxHeight) {
+        BlockPos.Mutable blockPosMutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
+        while (blockPosMutable.getY() < maxHeight) {
+            if (!world.isAir(blockPosMutable)) {
+                break;
             }
-            blockpos$Mutable.move(Direction.UP);
+            blockPosMutable.move(Direction.UP);
         }
-        return -1;
+        return blockPosMutable.getY();
     }
 
 }

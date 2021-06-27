@@ -19,7 +19,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.*;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
@@ -157,6 +156,10 @@ public abstract class Spheroid implements Serializable {
     }
 
     public boolean shouldPopulateEntities(ChunkPos chunkPos) {
+        return isCenterInChunk(chunkPos);
+    }
+
+    public boolean isCenterInChunk(ChunkPos chunkPos) {
         return (this.getPosition().getX() >= chunkPos.getStartX()
                 && this.getPosition().getX() <= chunkPos.getStartX() + 15
                 && this.getPosition().getZ() >= chunkPos.getStartZ()
@@ -175,35 +178,28 @@ public abstract class Spheroid implements Serializable {
 
                 int randomAmount = Support.getRandomBetween(random, entityTypeToSpawn.minAmount, entityTypeToSpawn.maxAmount);
                 for (int i = 0; i < randomAmount; i++) {
-                    int startingX = this.getPosition().getX(); //xCord + sharedSeedRandom.nextInt(4);
-                    int startingY = this.getPosition().getY() + this.getRadius();
-                    int startingZ = this.getPosition().getZ(); //zCord + sharedSeedRandom.nextInt(4);
-                    int minHeight = this.getPosition().getY() - this.getRadius();
-                    BlockPos.Mutable blockPos = new BlockPos.Mutable(startingX, startingY, startingZ);
-                    int height = Support.getLowerGroundBlock(chunkRegion, blockPos, minHeight) + 1;
 
-                    if (height != 0) {
-                        Entity entity = entityTypeToSpawn.entityType.create(chunkRegion.toServerWorld());
-                        if (entity != null) {
-                            float width = entity.getWidth();
-                            double xLength = MathHelper.clamp(startingX, (double) xCord + (double) width, (double) xCord + 16.0D - (double) width);
-                            double zLength = MathHelper.clamp(startingZ, (double) zCord + (double) width, (double) zCord + 16.0D - (double) width);
+                    int height;
+                    BlockPos spheroidTopPosition = this.getPosition().up(this.getRadius() + 1);
+                    if(chunkRegion.isAir(spheroidTopPosition)) {
+                        height = Support.getLowerGroundBlock(chunkRegion, spheroidTopPosition,chunkRegion.getLogicalHeight());
+                    } else {
+                        height = Support.getUpperGroundBlock(chunkRegion, spheroidTopPosition,chunkRegion.getLogicalHeight());
+                    }
 
-                            try {
-                                entity.refreshPositionAndAngles(xLength, height, zLength, sharedSeedRandom.nextFloat() * 360.0F, 0.0F);
-                                if (entity instanceof MobEntity) {
-                                    MobEntity mobentity = (MobEntity) entity;
-                                    if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
-                                        mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);
-                                        boolean success = chunkRegion.spawnEntity(mobentity);
-                                        if (!success) {
-                                            return;
-                                        }
-                                    }
+                    Entity entity = entityTypeToSpawn.entityType.create(chunkRegion.toServerWorld());
+                    if (entity != null) {
+                        try {
+                            entity.refreshPositionAndAngles(spheroidTopPosition.getX() + 0.5, height, spheroidTopPosition.getZ() + 0.5, sharedSeedRandom.nextFloat() * 360.0F, 0.0F);
+                            if (entity instanceof MobEntity) {
+                                MobEntity mobentity = (MobEntity) entity;
+                                if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION)) {
+                                    mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);
+                                    chunkRegion.spawnEntity(mobentity);
                                 }
-                            } catch (Exception exception) {
-                                StarrySkyCommon.log(WARN, "Failed to spawn mob on sphere" + this.getDescription() + "\nException: " + exception);
                             }
+                        } catch (Exception exception) {
+                            StarrySkyCommon.log(WARN, "Failed to spawn mob on sphere" + this.getDescription() + "\nException: " + exception.getMessage());
                         }
                     }
                 }

@@ -115,14 +115,14 @@ public class OceanMonumentSpheroid extends Spheroid {
 
     @Override
     public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-        if (shouldPopulateEntities(chunkPos)) {
-            for (BlockPos guardianposition : guardianPositions) {
-                if (Support.isBlockPosInChunkPos(chunkPos, guardianposition)) {
+        if (isCenterInChunk(chunkPos)) {
+            for (BlockPos guardianPosition : guardianPositions) {
+                if (Support.isBlockPosInChunkPos(chunkPos, guardianPosition)) {
                     int xCord = chunkPos.x;
                     int zCord = chunkPos.z;
 
-                    ChunkRandom sharedseedrandom = new ChunkRandom();
-                    sharedseedrandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
+                    ChunkRandom sharedSeedRandom = new ChunkRandom();
+                    sharedSeedRandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
 
                     MobEntity mobentity;
                     if (random.nextFloat() < 0.08) {
@@ -133,11 +133,11 @@ public class OceanMonumentSpheroid extends Spheroid {
 
                     if (mobentity != null) {
                         float width = mobentity.getWidth();
-                        double xLength = MathHelper.clamp(guardianposition.getX(), (double) chunkPos.getStartX() + (double) width, (double) chunkPos.getStartX() + 16.0D - (double) width);
-                        double zLength = MathHelper.clamp(guardianposition.getZ(), (double) chunkPos.getStartZ() + (double) width, (double) chunkPos.getStartZ() + 16.0D - (double) width);
+                        double xLength = MathHelper.clamp(guardianPosition.getX(), (double) chunkPos.getStartX() + (double) width, (double) chunkPos.getStartX() + 16.0D - (double) width);
+                        double zLength = MathHelper.clamp(guardianPosition.getZ(), (double) chunkPos.getStartZ() + (double) width, (double) chunkPos.getStartZ() + 16.0D - (double) width);
 
                         try {
-                            mobentity.refreshPositionAndAngles(xLength, guardianposition.getY(), zLength, sharedseedrandom.nextFloat() * 360.0F, 0.0F);
+                            mobentity.refreshPositionAndAngles(xLength, guardianPosition.getY(), zLength, sharedSeedRandom.nextFloat() * 360.0F, 0.0F);
                             mobentity.setPersistent();
                             if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
                                 mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);
