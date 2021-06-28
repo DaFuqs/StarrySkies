@@ -54,7 +54,7 @@ public class SpheroidListVanillaNether extends SpheroidList {
 			.addDecorator(SpheroidDecorators.NETHER_WART, 0.1F);
     public static final SpheroidType MAGMA_BLOCK = new ModularSpheroidType(SpheroidAdvancementIdentifier.magma, 5, 8,  Blocks.MAGMA_BLOCK.getDefaultState())
 			.addDecorator(SpheroidDecorators.FIRE, 0.5F)
-			.addDecorator(SpheroidListVanilla.SpheroidDecorators.CENTER_POND_LAVA, 0.25F);
+			.addDecorator(SpheroidListVanilla.SpheroidDecorators.CENTER_POND_LAVA, 0.15F);
 	public static final SpheroidType GRAVEL = new ModularSpheroidType(SpheroidAdvancementIdentifier.gravel, 5, 7,  Blocks.GRAVEL.getDefaultState())
             .setBottomBlockState(Blocks.COBBLESTONE.getDefaultState());
 	public static final SpheroidType CRIMSON_NYLIUM = new ModularSpheroidType(SpheroidAdvancementIdentifier.crimson_nylium, 9, 15,  Blocks.NETHERRACK.getDefaultState())
@@ -69,7 +69,7 @@ public class SpheroidListVanillaNether extends SpheroidList {
 			.addDecorator(SpheroidDecorators.NETHER_SPROUTS, 0.8F)
 			.addDecorator(SpheroidDecorators.WARPED_FUNGUS, 0.3F);
 	public static final SpheroidType BASALT = new ModularSpheroidType(SpheroidAdvancementIdentifier.basalt, 10, 25,  Blocks.BASALT.getDefaultState())
-			.addDecorator(SpheroidListVanilla.SpheroidDecorators.CENTER_POND_LAVA, 0.1F);
+			.addDecorator(SpheroidListVanilla.SpheroidDecorators.CENTER_POND_LAVA, 0.08F);
 	public static final SpheroidType BLACKSTONE = new ShellSpheroidType(SpheroidAdvancementIdentifier.blackstone, 5, 10,  Blocks.GILDED_BLACKSTONE.getDefaultState(), Blocks.BLACKSTONE.getDefaultState(), 10, 10)
 			.addShellSpeckles(Blocks.GILDED_BLACKSTONE.getDefaultState(), 0.2F);
 
