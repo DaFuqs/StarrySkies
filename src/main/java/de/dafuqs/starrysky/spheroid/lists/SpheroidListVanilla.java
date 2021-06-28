@@ -6,6 +6,7 @@ import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.*;
+import de.dafuqs.starrysky.dimension.decorators.overworld.*;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinitions;
 import de.dafuqs.starrysky.spheroid.types.*;
 import de.dafuqs.starrysky.spheroid.types.unique.BeeHiveSpheroidType;

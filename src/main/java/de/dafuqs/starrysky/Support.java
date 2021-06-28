@@ -29,7 +29,7 @@ public class Support {
         }
     }
 
-    private static final List<Point> aroundPoints = new ArrayList<Point>() {{
+    private static final List<Point> aroundPoints = new ArrayList<>() {{
        add(new Point(0, 0));
        add(new Point(1, -1));
        add(new Point(1, 0));

@@ -5,6 +5,7 @@ import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.*;
+import de.dafuqs.starrysky.dimension.decorators.overworld.CactusDecorator;
 import de.dafuqs.starrysky.spheroid.types.ModularSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.MushroomSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.ShellSpheroidType;

@@ -5,6 +5,8 @@ import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.dimension.decorators.*;
+import de.dafuqs.starrysky.dimension.decorators.overworld.BambooDecorator;
+import de.dafuqs.starrysky.dimension.decorators.overworld.CactusDecorator;
 import de.dafuqs.starrysky.spheroid.types.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BambooBlock;

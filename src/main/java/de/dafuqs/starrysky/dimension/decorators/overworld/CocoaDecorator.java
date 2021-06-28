@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.dimension.decorators;
+package de.dafuqs.starrysky.dimension.decorators.overworld;
 
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;

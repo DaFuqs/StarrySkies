@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.dimension.decorators;
+package de.dafuqs.starrysky.dimension.decorators.overworld;
 
 import com.google.common.collect.ImmutableList;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
