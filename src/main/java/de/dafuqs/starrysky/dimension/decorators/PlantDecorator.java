@@ -24,7 +24,7 @@ public class PlantDecorator extends SpheroidDecorator {
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         for(BlockPos bp : decorationBlockPositions) {
             if (!world.getBlockState(bp).isAir() && world.getBlockState(bp.up()).isAir()) {
                 if(random.nextFloat() < PLANT_CHANCE) {

@@ -13,35 +13,35 @@ import java.util.Random;
 
 public class HugePlantDecorator extends SpheroidDecorator {
 
-    private final BlockState PLANT_BLOCKSTATE;
-    private BlockState FIRST_BLOCKSTATE;
-    private BlockState LAST_BLOCKSTATE;
+    private final BlockState PLANT_BLOCK_STATE;
+    private BlockState FIRST_BLOCK_STATE;
+    private BlockState LAST_BLOCK_STATE;
     private final float PLANT_CHANCE;
-    private int MIN_HEIGHT;
-    private int MAX_HEIGHT;
+    private final int MIN_HEIGHT;
+    private final int MAX_HEIGHT;
 
     /**
      * A chance of 0 = 0%, 100 = 100%
      */
-    public HugePlantDecorator(BlockState plant_blockState, float plant_chance, int minHeight, int maxHeight) {
-        PLANT_BLOCKSTATE = plant_blockState;
-        PLANT_CHANCE = plant_chance;
+    public HugePlantDecorator(BlockState plantBlockState, float plantChance, int minHeight, int maxHeight) {
+        PLANT_BLOCK_STATE = plantBlockState;
+        PLANT_CHANCE = plantChance;
         MIN_HEIGHT = minHeight;
         MAX_HEIGHT = maxHeight;
     }
 
     public HugePlantDecorator setFirstBlockState(BlockState blockState) {
-        this.FIRST_BLOCKSTATE = blockState;
+        this.FIRST_BLOCK_STATE = blockState;
         return this;
     }
 
     public HugePlantDecorator setLastBlockState(BlockState blockState) {
-        this.LAST_BLOCKSTATE = blockState;
+        this.LAST_BLOCK_STATE = blockState;
         return this;
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         for(BlockPos bp : decorationBlockPositions) {
 
             if (random.nextFloat() < PLANT_CHANCE) {
@@ -49,11 +49,11 @@ public class HugePlantDecorator extends SpheroidDecorator {
                 for (int i = 1; i < thisHeight + 1; i++) {
                     if (world.getBlockState(bp.up(i)).isAir()) {
 
-                        BlockState placementBlockState = PLANT_BLOCKSTATE;
-                        if(i == 1 && FIRST_BLOCKSTATE != null) {
-                            placementBlockState = FIRST_BLOCKSTATE;
-                        } else if(i == thisHeight && LAST_BLOCKSTATE != null) {
-                            placementBlockState = LAST_BLOCKSTATE;
+                        BlockState placementBlockState = PLANT_BLOCK_STATE;
+                        if(i == 1 && FIRST_BLOCK_STATE != null) {
+                            placementBlockState = FIRST_BLOCK_STATE;
+                        } else if(i == thisHeight && LAST_BLOCK_STATE != null) {
+                            placementBlockState = LAST_BLOCK_STATE;
                         }
 
                         world.setBlockState(bp.up(), placementBlockState, 3);

@@ -12,27 +12,26 @@ import java.util.Random;
 
 public class UnderPlantDecorator extends SpheroidDecorator {
 
-    private final BlockState PLANT_BLOCKSTATE;
+    private final BlockState PLANT_BLOCK_STATE;
     private final float PLANT_CHANCE;
 
     /**
      * A chance of 0 = 0%, 100 = 100%
      */
-    public UnderPlantDecorator(BlockState plant_blockState, float plant_chance) {
-        PLANT_BLOCKSTATE = plant_blockState;
+    public UnderPlantDecorator(BlockState plantBlockState, float plant_chance) {
+        PLANT_BLOCK_STATE = plantBlockState;
         PLANT_CHANCE = plant_chance;
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
-
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         int spheroidY = spheroid.getPosition().getY();
         for(BlockPos bp : decorationBlockPositions) {
              BlockPos flippedBlockPos = bp.down((bp.getY() - spheroidY) * 2);
 
             if (world.getBlockState(flippedBlockPos.down()).isAir()) {
                 if(random.nextFloat() < PLANT_CHANCE) {
-                    world.setBlockState(flippedBlockPos.down(), PLANT_BLOCKSTATE, 3);
+                    world.setBlockState(flippedBlockPos.down(), PLANT_BLOCK_STATE, 3);
                 }
             }
         }

@@ -9,7 +9,6 @@ import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -18,12 +17,12 @@ public class SeaGreensDecorator extends SpheroidDecorator {
     // those are all always "waterlogged"
     private static final BlockState KELP = Blocks.KELP.getDefaultState(); // the top
     private static final BlockState KELP_PLANT = Blocks.KELP_PLANT.getDefaultState(); // the middle
-    private static final BlockState SEAGRASS = Blocks.SEAGRASS.getDefaultState();
+    private static final BlockState SEAGRASS_BLOCK_STATE = Blocks.SEAGRASS.getDefaultState();
     private static final BlockState TALL_SEAGRASS_UPPER = Blocks.TALL_SEAGRASS.getDefaultState().with(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
     private static final BlockState TALL_SEAGRASS_LOWER = Blocks.TALL_SEAGRASS.getDefaultState().with(TallSeagrassBlock.HALF, DoubleBlockHalf.LOWER);
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         for(BlockPos bp : decorationBlockPositions) {
             int r = random.nextInt(4);
 
@@ -39,7 +38,7 @@ public class SeaGreensDecorator extends SpheroidDecorator {
                     }
                 }
             } else if (r == 1) {
-                world.setBlockState(bp.up(), SEAGRASS, 3);
+                world.setBlockState(bp.up(), SEAGRASS_BLOCK_STATE, 3);
             } else if (r == 2) {
                 if (world.getBlockState(bp.up(2)).getBlock() == Blocks.WATER) {
                     world.setBlockState(bp.up(2), TALL_SEAGRASS_UPPER, 3);

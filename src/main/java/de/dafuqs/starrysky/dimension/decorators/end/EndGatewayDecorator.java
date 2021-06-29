@@ -9,47 +9,42 @@ import net.minecraft.block.entity.EndGatewayBlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class EndGatewayDecorator extends SpheroidDecorator {
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
 
         BlockPos exitBlockPos = StarrySkyDimensionTravelHandler.END_SPAWN_BLOCK_POS;
         BlockPos portalBlockPos = spheroid.getPosition();
 
-        Iterator var6 = BlockPos.iterate(portalBlockPos.add(-1, -2, -1), portalBlockPos.add(1, 2, 1)).iterator();
-
-        while(var6.hasNext()) {
-            BlockPos blockPos2 = (BlockPos)var6.next();
-            boolean bl = blockPos2.getX() == portalBlockPos.getX();
-            boolean bl2 = blockPos2.getY() == portalBlockPos.getY();
-            boolean bl3 = blockPos2.getZ() == portalBlockPos.getZ();
-            boolean bl4 = Math.abs(blockPos2.getY() - portalBlockPos.getY()) == 2;
+        for (BlockPos blockPos : BlockPos.iterate(portalBlockPos.add(-1, -2, -1), portalBlockPos.add(1, 2, 1))) {
+            boolean bl = blockPos.getX() == portalBlockPos.getX();
+            boolean bl2 = blockPos.getY() == portalBlockPos.getY();
+            boolean bl3 = blockPos.getZ() == portalBlockPos.getZ();
+            boolean bl4 = Math.abs(blockPos.getY() - portalBlockPos.getY()) == 2;
             if (bl && bl2 && bl3) {
-                BlockPos blockPos3 = blockPos2.toImmutable();
+                BlockPos blockPos3 = blockPos.toImmutable();
 
                 world.setBlockState(blockPos3, Blocks.END_GATEWAY.getDefaultState(), 3);
 
                 // set exit position
                 BlockEntity blockEntity = world.getBlockEntity(blockPos3);
                 if (blockEntity instanceof EndGatewayBlockEntity) {
-                    EndGatewayBlockEntity endGatewayBlockEntity = (EndGatewayBlockEntity)blockEntity;
+                    EndGatewayBlockEntity endGatewayBlockEntity = (EndGatewayBlockEntity) blockEntity;
                     endGatewayBlockEntity.setExitPortalPos(exitBlockPos, false);
                     blockEntity.markDirty();
                 }
 
             } else if (bl2) {
-                world.setBlockState(blockPos2, Blocks.AIR.getDefaultState(), 3);
+                world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
             } else if (bl4 && bl && bl3) {
-                world.setBlockState(blockPos2, Blocks.BEDROCK.getDefaultState(), 3);
+                world.setBlockState(blockPos, Blocks.BEDROCK.getDefaultState(), 3);
             } else if ((bl || bl3) && !bl4) {
-                world.setBlockState(blockPos2, Blocks.BEDROCK.getDefaultState(), 3);
+                world.setBlockState(blockPos, Blocks.BEDROCK.getDefaultState(), 3);
             } else {
-                world.setBlockState(blockPos2, Blocks.AIR.getDefaultState(), 3);
+                world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
             }
         }
 

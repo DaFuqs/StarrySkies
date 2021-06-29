@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -34,7 +33,7 @@ public class XMarksTheSpotDecorator extends SpheroidDecorator {
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         placeLootChestAtPosition(world, spheroid.getPosition(), lootTable, random);
 
         // paint 1-3 "X"es on the sphere in random directions
@@ -57,36 +56,36 @@ public class XMarksTheSpotDecorator extends SpheroidDecorator {
         BlockPos spheroidPos = spheroid.getPosition();
         int radius = spheroid.getRadius();
         switch (direction) {
-            case UP:
+            case UP -> {
                 startX = spheroidPos.getX() - 2;
                 startY = spheroidPos.getY() - radius;
                 startZ = spheroidPos.getZ() - 2;
-                break;
-            case DOWN:
+            }
+            case DOWN -> {
                 startX = spheroidPos.getX() - 2;
                 startY = spheroidPos.getY() + radius;
                 startZ = spheroidPos.getZ() - 2;
-                break;
-            case EAST:
+            }
+            case EAST -> {
                 startX = spheroidPos.getX() - radius;
                 startY = spheroidPos.getY() - 2;
                 startZ = spheroidPos.getZ() - 2;
-                break;
-            case WEST:
+            }
+            case WEST -> {
                 startX = spheroidPos.getX() + radius;
                 startY = spheroidPos.getY() - 2;
                 startZ = spheroidPos.getZ() - 2;
-                break;
-            case NORTH:
+            }
+            case NORTH -> {
                 startX = spheroidPos.getX() - 2;
                 startY = spheroidPos.getY() - 2;
                 startZ = spheroidPos.getZ() + spheroid.getRadius();
-                break;
-            default:
+            }
+            default -> {
                 startX = spheroidPos.getX() - 2;
                 startY = spheroidPos.getY() - 2;
                 startZ = spheroidPos.getZ() - spheroid.getRadius();
-                break;
+            }
         }
 
         for(int i = -0; i < 5; i++) {
@@ -94,19 +93,14 @@ public class XMarksTheSpotDecorator extends SpheroidDecorator {
                 if(theX[i*5+j]) {
                     BlockPos startBlockPos;
                     switch (direction) {
-                        case UP:
-                        case DOWN: {
+                        case UP, DOWN -> {
                             startBlockPos = new BlockPos(startX + i, startY, startZ + j);
-                            break;
                         }
-                        case EAST:
-                        case WEST: {
+                        case EAST, WEST -> {
                             startBlockPos = new BlockPos(startX, startY + i, startZ + j);
-                            break;
                         }
-                        default: {
+                        default -> {
                             startBlockPos = new BlockPos(startX + i, startY + j, startZ);
-                            break;
                         }
                     }
                     BlockPos currentBlockPos = findNextNonAirBlockInDirection(world, startBlockPos, direction, spheroid.getRadius());

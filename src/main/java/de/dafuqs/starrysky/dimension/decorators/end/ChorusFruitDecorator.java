@@ -11,18 +11,15 @@ import java.util.Random;
 
 public class ChorusFruitDecorator extends SpheroidDecorator {
 
-    private static final int chorusChance = 30;
+    private static final float chorusChance = 0.033F;
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         for(BlockPos bp : decorationBlockPositions) {
-            int r = random.nextInt(chorusChance);
-
-            if(r == 0) {
+            if(random.nextFloat() < chorusChance) {
                 ChorusFlowerBlock.generate(world, bp.up(), random, 8);
             }
         }
     }
-
 
 }

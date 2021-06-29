@@ -10,18 +10,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
 public class CocoaDecorator extends SpheroidDecorator {
 
 
-    private static final BlockState GROWN_COCOA_BLOCKSTATE = Blocks.COCOA.getDefaultState().with(CocoaBlock.AGE, 2); // 2 = fully grown
-    private static final BlockState AIR_BLOCKSTATE = Blocks.CAVE_AIR.getDefaultState();
+    private static final BlockState GROWN_COCOA_BLOCK_STATE = Blocks.COCOA.getDefaultState().with(CocoaBlock.AGE, 2); // 2 = fully grown
+    private static final BlockState AIR_BLOCK_STATE = Blocks.CAVE_AIR.getDefaultState();
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         for(int x = -2; x < 3; x++) {
             for (int y = -2; y < 3; y++) {
                 for (int z = -2; z < 3; z++) {
@@ -42,10 +41,10 @@ public class CocoaDecorator extends SpheroidDecorator {
                                 direction = Direction.NORTH;
                             }
                         }
-                        world.setBlockState(bp, GROWN_COCOA_BLOCKSTATE.with(HorizontalFacingBlock.FACING, direction), 3);
+                        world.setBlockState(bp, GROWN_COCOA_BLOCK_STATE.with(HorizontalFacingBlock.FACING, direction), 3);
                     } else {
                         if (Math.abs(y) != 2 || (Math.abs(x) != 2 && Math.abs(z) != 2)) {
-                            world.setBlockState(bp, AIR_BLOCKSTATE, 3);
+                            world.setBlockState(bp, AIR_BLOCK_STATE, 3);
                         }
                     }
                 }

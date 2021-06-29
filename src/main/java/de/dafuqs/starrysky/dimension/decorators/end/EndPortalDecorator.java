@@ -8,14 +8,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
 public class EndPortalDecorator extends SpheroidDecorator {
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         this.generate(world, new BlockPos(0, 63, 0), false);
     }
 
@@ -32,10 +31,8 @@ public class EndPortalDecorator extends SpheroidDecorator {
                     }
 
                     BlockPos blockPos3 = blockPos.up(2);
-                    Iterator var11 = Direction.Type.HORIZONTAL.iterator();
 
-                    while(var11.hasNext()) {
-                        Direction direction = (Direction)var11.next();
+                    for (Direction direction : Direction.Type.HORIZONTAL) {
                         structureWorldAccess.setBlockState(blockPos3.offset(direction), Blocks.WALL_TORCH.getDefaultState().with(WallTorchBlock.FACING, direction), 3);
                     }
 

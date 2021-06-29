@@ -47,10 +47,6 @@ public abstract class Spheroid implements Serializable {
      * The decorators that should be ran after generation
      **/
     private final ArrayList<SpheroidDecorator> spheroidDecorators;
-    /**
-     * The tracker for blocks to be decorated. Filled in generate()
-     **/
-    private final ArrayList<BlockPos> decorationBlockPositions = new ArrayList<>();
 
     public Spheroid(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, ChunkRandom random, ArrayList<SpheroidDecorator> spheroidDecorators, int radius, ArrayList<SpheroidEntitySpawnDefinition> entityTypesToSpawn) {
         this.spheroidAdvancementIdentifier = spheroidAdvancementIdentifier;
@@ -96,17 +92,11 @@ public abstract class Spheroid implements Serializable {
         return this.spheroidDecorators.size() > 0;
     }
 
-    public void addDecorationBlockPosition(BlockPos blockPos) {
-        if (hasDecorators()) {
-            this.decorationBlockPositions.add(blockPos);
-        }
-    }
-
     public void decorate(StructureWorldAccess world, Random random) {
         for (SpheroidDecorator decorator : this.spheroidDecorators) {
             StarrySkyCommon.log(Level.DEBUG, "Decorator: " + decorator.getClass());
             try {
-                decorator.decorateSpheroid(world, this, this.decorationBlockPositions, random);
+                decorator.decorateSpheroid(world, this, random);
             } catch (RuntimeException e) {
                 // We are asking a region for a chunk out of bound ಠ_ಠ
             }

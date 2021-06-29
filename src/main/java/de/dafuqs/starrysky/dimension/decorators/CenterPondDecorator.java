@@ -9,7 +9,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -17,18 +16,18 @@ public class CenterPondDecorator extends SpheroidDecorator {
 
     private final Identifier lootTable;
     private final float lootTableChance;
-    private final BlockState beach_block_state;
-    private final BlockState liquid_block_state;
+    private final BlockState beachBlockState;
+    private final BlockState liquidBlockState;
 
-    public CenterPondDecorator(BlockState beach_block_state, BlockState liquid_block_state, Identifier lootTable, float lootTableChance) {
-        this.beach_block_state = beach_block_state;
-        this.liquid_block_state = liquid_block_state;
+    public CenterPondDecorator(BlockState beachBlockState, BlockState liquidBlockState, Identifier lootTable, float lootTableChance) {
+        this.beachBlockState = beachBlockState;
+        this.liquidBlockState = liquidBlockState;
         this.lootTable = lootTable;
         this.lootTableChance = lootTableChance;
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         // doesn't make sense on small spheroids
         if(spheroid.getRadius() > 9) {
             int pondRadius = (int) (spheroid.getRadius() / 2.5);
@@ -81,9 +80,9 @@ public class CenterPondDecorator extends SpheroidDecorator {
                                 if(hasLootChest && x == 0 && z == 0 && lootChestPosition == null) {
                                     lootChestPosition = currentBlockPos;
                                 }
-                                blockState = liquid_block_state;
+                                blockState = liquidBlockState;
                             } else if (pondDistance < 1.70) {
-                                blockState = beach_block_state;
+                                blockState = beachBlockState;
                             }
                         }
 

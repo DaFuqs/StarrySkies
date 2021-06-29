@@ -26,7 +26,7 @@ public class BambooDecorator extends SpheroidDecorator {
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         for(BlockPos bp : decorationBlockPositions) {
             int r = random.nextInt(BAMBOO_CHANCE);
 

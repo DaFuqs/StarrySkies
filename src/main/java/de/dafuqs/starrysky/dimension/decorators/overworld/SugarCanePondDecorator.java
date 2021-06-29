@@ -17,12 +17,12 @@ import java.util.Random;
 public class SugarCanePondDecorator extends SpheroidDecorator {
 
     private static final Block SUGAR_CANE_BLOCK = Blocks.SUGAR_CANE;
-    private static final BlockState SUGAR_CANE_BLOCKSTATE = Blocks.SUGAR_CANE.getDefaultState();
+    private static final BlockState SUGAR_CANE_BLOCK_STATE = Blocks.SUGAR_CANE.getDefaultState();
     private static final int WATER_POND_TRIES  = 3;
     private static final int SUGAR_CANE_CHANCE = 2;
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
         if(decorationBlockPositions.size() > 0) {
             int currentTries = 0;
             boolean canGenerate;
@@ -52,8 +52,8 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
                             BlockPos sugarCaneBlockPos = randomBlockPos.up().offset(currentDirection);
                             int sugarCaneHeight = random.nextInt(3);
                             for (int i = 0; i <= sugarCaneHeight; i++) {
-                                if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCKSTATE, world, sugarCaneBlockPos.up(i))) {
-                                    world.setBlockState(sugarCaneBlockPos.up(i), SUGAR_CANE_BLOCKSTATE, 3);
+                                if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCK_STATE, world, sugarCaneBlockPos.up(i))) {
+                                    world.setBlockState(sugarCaneBlockPos.up(i), SUGAR_CANE_BLOCK_STATE, 3);
                                 }
                             }
                         }
