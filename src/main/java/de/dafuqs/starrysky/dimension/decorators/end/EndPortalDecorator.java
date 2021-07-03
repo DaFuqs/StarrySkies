@@ -41,7 +41,7 @@ public class EndPortalDecorator extends SpheroidDecorator {
                     return true;
                 }
 
-                blockPos2 = (BlockPos)var6.next();
+                blockPos2 = var6.next();
                 bl = blockPos2.isWithinDistance(blockPos, 2.5D);
             } while(!bl && !blockPos2.isWithinDistance(blockPos, 3.5D));
 
