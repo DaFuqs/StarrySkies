@@ -1,7 +1,7 @@
 package de.dafuqs.starrysky.dimension.decorators;
 
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -33,7 +33,11 @@ public class XMarksTheSpotDecorator extends SpheroidDecorator {
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, BlockPos origin, Random random) {
+        if(!spheroid.isCenterInChunkBlockPos(origin)) {
+            return;
+        }
+
         placeLootChestAtPosition(world, spheroid.getPosition(), lootTable, random);
 
         // paint 1-3 "X"es on the sphere in random directions

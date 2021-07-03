@@ -1,7 +1,8 @@
 package de.dafuqs.starrysky.dimension.decorators;
 
+import de.dafuqs.starrysky.dimension.DecorationMode;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
@@ -24,11 +25,10 @@ public class GroundDecorator extends SpheroidDecorator {
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
-        for(BlockPos bp : decorationBlockPositions) {
-            if(random.nextFloat() < CHANCE) {
-                world.setBlockState(bp, BLOCK_STATE, 3);
-            }
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, BlockPos origin, Random random) {
+        for(BlockPos bp : getDecorationPositionsInChunk(spheroid, world, origin, random, CHANCE, DecorationMode.TOP)) {
+            world.setBlockState(bp.down(), BLOCK_STATE, 3);
         }
     }
+
 }

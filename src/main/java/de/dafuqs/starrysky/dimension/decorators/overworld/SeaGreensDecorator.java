@@ -1,7 +1,8 @@
 package de.dafuqs.starrysky.dimension.decorators.overworld;
 
+import de.dafuqs.starrysky.dimension.DecorationMode;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.TallSeagrassBlock;
@@ -22,27 +23,33 @@ public class SeaGreensDecorator extends SpheroidDecorator {
     private static final BlockState TALL_SEAGRASS_LOWER = Blocks.TALL_SEAGRASS.getDefaultState().with(TallSeagrassBlock.HALF, DoubleBlockHalf.LOWER);
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
-        for(BlockPos bp : decorationBlockPositions) {
-            int r = random.nextInt(4);
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, BlockPos origin, Random random) {
+        for(BlockPos bp : getDecorationPositionsInChunk(spheroid, world, origin, random, 0.75F, DecorationMode.CAVE_BOTTOM)) {
+            int r = random.nextInt(3);
 
             if (r == 0) {
                 int kelpHeight = random.nextInt(8);
                 for(int i = 0; i < kelpHeight; i++) {
-                    if (world.getBlockState(bp.up(i+1)).getBlock() == Blocks.WATER) {
-                        if (world.getBlockState(bp.up(i+2)).getBlock() == Blocks.WATER && i < kelpHeight - 1) {
-                            world.setBlockState(bp.up(i+1), KELP_PLANT, 3); // middle parts
+                    if (world.getBlockState(bp.up(i)).getBlock() == Blocks.WATER) {
+                        if (world.getBlockState(bp.up(i+1)).getBlock() == Blocks.WATER && i < kelpHeight - 1) {
+                            world.setBlockState(bp.up(i), KELP_PLANT, 3); // middle parts
                         } else {
-                            world.setBlockState(bp.up(i+1), KELP, 3); // the top
+                            world.setBlockState(bp.up(i), KELP, 3); // the top
                         }
                     }
                 }
             } else if (r == 1) {
-                world.setBlockState(bp.up(), SEAGRASS_BLOCK_STATE, 3);
-            } else if (r == 2) {
-                if (world.getBlockState(bp.up(2)).getBlock() == Blocks.WATER) {
-                    world.setBlockState(bp.up(2), TALL_SEAGRASS_UPPER, 3);
-                    world.setBlockState(bp.up(), TALL_SEAGRASS_LOWER, 3);
+                if (world.getBlockState(bp).getBlock() == Blocks.WATER) {
+                    world.setBlockState(bp, SEAGRASS_BLOCK_STATE, 3);
+                }
+            } else {
+                if (world.getBlockState(bp.up()).getBlock() == Blocks.WATER) {
+                    world.setBlockState(bp.up(), TALL_SEAGRASS_UPPER, 3);
+                    world.setBlockState(bp, TALL_SEAGRASS_LOWER, 3);
+                } else {
+                    if (world.getBlockState(bp).getBlock() == Blocks.WATER) {
+                        world.setBlockState(bp, SEAGRASS_BLOCK_STATE, 3);
+                    }
                 }
             }
         }

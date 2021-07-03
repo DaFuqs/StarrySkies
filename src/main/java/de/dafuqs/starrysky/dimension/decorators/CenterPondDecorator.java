@@ -2,7 +2,7 @@ package de.dafuqs.starrysky.dimension.decorators;
 
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
@@ -27,7 +27,11 @@ public class CenterPondDecorator extends SpheroidDecorator {
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, BlockPos origin, Random random) {
+        if(!spheroid.isCenterInChunkBlockPos(origin)) {
+            return;
+        }
+
         // doesn't make sense on small spheroids
         if(spheroid.getRadius() > 9) {
             int pondRadius = (int) (spheroid.getRadius() / 2.5);

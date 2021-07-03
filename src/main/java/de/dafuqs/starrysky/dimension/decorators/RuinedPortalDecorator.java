@@ -2,7 +2,7 @@ package de.dafuqs.starrysky.dimension.decorators;
 
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
@@ -27,7 +27,11 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, BlockPos origin, Random random) {
+        if(!spheroid.isCenterInChunkBlockPos(origin)) {
+            return;
+        }
+
         BlockPos spheroidPosition = spheroid.getPosition();
 
         // place floor
@@ -35,7 +39,7 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
             for (int z = -spheroid.getRadius(); z <= spheroid.getRadius(); z++) {
 
                 int startY = spheroidPosition.getY() + spheroid.getRadius() + 1;
-                int upperY = Support.getLowerGroundBlock(world, new BlockPos(spheroidPosition.getX() + x, startY, spheroidPosition.getZ() + z), spheroidPosition.getY());
+                int upperY = Support.getLowerGroundBlock(world, new BlockPos(spheroidPosition.getX() + x, startY, spheroidPosition.getZ() + z), spheroidPosition.getY()) - 1;
 
                 if(upperY > spheroidPosition.getY()) {
                     int randomI = random.nextInt(spheroid.getRadius() + 1);
@@ -55,7 +59,7 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
         }
 
         // place portal
-        int centerTopBlockY = Support.getLowerGroundBlock(world, new BlockPos(spheroidPosition.getX(), spheroidPosition.getY() + spheroid.getRadius() + 1, spheroidPosition.getZ()), spheroidPosition.getY());
+        int centerTopBlockY = Support.getLowerGroundBlock(world, new BlockPos(spheroidPosition.getX(), spheroidPosition.getY() + spheroid.getRadius() + 1, spheroidPosition.getZ()), spheroidPosition.getY()) - 1;
         BlockPos currentBlockPos = new BlockPos(spheroidPosition.getX(), centerTopBlockY, spheroidPosition.getZ());
 
         placePortalBlock(world, currentBlockPos, random);
@@ -87,7 +91,7 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
         centerTopBlockY = Support.getLowerGroundBlock(world, new BlockPos(randomX, spheroidPosition.getY() + spheroid.getRadius() + 2, randomZ), spheroidPosition.getY());
 
         if(centerTopBlockY != spheroidPosition.getY()) {
-            BlockPos lootChestPosition = new BlockPos(randomX, centerTopBlockY, randomZ).up();
+            BlockPos lootChestPosition = new BlockPos(randomX, centerTopBlockY, randomZ);
             placeLootChestAtPosition(world, lootChestPosition, lootTable, random);
         }
     }

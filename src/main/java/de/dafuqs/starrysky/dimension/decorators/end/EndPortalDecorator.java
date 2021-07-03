@@ -1,7 +1,7 @@
 package de.dafuqs.starrysky.dimension.decorators.end;
 
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WallTorchBlock;
 import net.minecraft.util.math.BlockPos;
@@ -14,12 +14,14 @@ import java.util.Random;
 public class EndPortalDecorator extends SpheroidDecorator {
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
-        this.generate(world, new BlockPos(0, 63, 0), false);
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, BlockPos origin, Random random) {
+        if(spheroid.isCenterInChunkBlockPos(origin)) {
+            this.generate(world, new BlockPos(0, 63, 0), false);
+        }
     }
 
     public boolean generate(StructureWorldAccess structureWorldAccess, BlockPos blockPos, boolean open) {
-        Iterator var6 = BlockPos.iterate(new BlockPos(blockPos.getX() - 4, blockPos.getY() - 1, blockPos.getZ() - 4), new BlockPos(blockPos.getX() + 4, blockPos.getY() + 32, blockPos.getZ() + 4)).iterator();
+        Iterator<BlockPos> var6 = BlockPos.iterate(new BlockPos(blockPos.getX() - 4, blockPos.getY() - 1, blockPos.getZ() - 4), new BlockPos(blockPos.getX() + 4, blockPos.getY() + 32, blockPos.getZ() + 4)).iterator();
 
         while(true) {
             BlockPos blockPos2;

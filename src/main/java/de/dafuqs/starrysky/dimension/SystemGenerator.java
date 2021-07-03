@@ -2,11 +2,11 @@ package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.spheroid.lists.SpheroidListVanilla;
-import de.dafuqs.starrysky.spheroid.lists.SpheroidListVanillaEnd;
-import de.dafuqs.starrysky.spheroid.lists.SpheroidListVanillaNether;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
-import de.dafuqs.starrysky.spheroid.types.SpheroidType;
+import de.dafuqs.starrysky.dimension.spheroid.lists.SpheroidListVanilla;
+import de.dafuqs.starrysky.dimension.spheroid.lists.SpheroidListVanillaEnd;
+import de.dafuqs.starrysky.dimension.spheroid.lists.SpheroidListVanillaNether;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.types.SpheroidType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;

@@ -2,7 +2,7 @@ package de.dafuqs.starrysky.dimension.decorators.end;
 
 import de.dafuqs.starrysky.StarrySkyDimensionTravelHandler;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.EndGatewayBlockEntity;
@@ -14,7 +14,10 @@ import java.util.Random;
 public class EndGatewayDecorator extends SpheroidDecorator {
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, BlockPos origin, Random random) {
+        if(!spheroid.isCenterInChunkBlockPos(origin)) {
+            return;
+        }
 
         BlockPos exitBlockPos = StarrySkyDimensionTravelHandler.END_SPAWN_BLOCK_POS;
         BlockPos portalBlockPos = spheroid.getPosition();

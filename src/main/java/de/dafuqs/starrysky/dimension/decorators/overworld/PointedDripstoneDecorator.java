@@ -1,7 +1,8 @@
 package de.dafuqs.starrysky.dimension.decorators.overworld;
 
+import de.dafuqs.starrysky.dimension.DecorationMode;
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PointedDripstoneBlock;
@@ -10,7 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Consumer;
 
@@ -31,31 +31,25 @@ public class PointedDripstoneDecorator extends SpheroidDecorator {
     }
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
-        for(BlockPos bp : decorationBlockPositions) {
-            if(random.nextFloat() < chance) {
-                int height = random.nextInt(6);
-                switch (this.mode) {
-                    case UP -> {
-                        generatePointedDripstone(world, bp.up(), Direction.UP, height, false);
-                    }
-                    case DOWN -> {
-                        generatePointedDripstone(world, bp.down(), Direction.DOWN, height, false);
-                    }
-                    case CAVE -> {
-                        if(random.nextBoolean()) {
-                            generatePointedDripstone(world, bp.up(), Direction.UP, height, false);
-                        } else {
-                            int maxY = spheroid.getPosition().getY() + spheroid.getRadius();
-                            for (int i = bp.getY(); i < maxY; ++i) {
-                                BlockPos currentBlockPos = new BlockPos(bp.getX(), i, bp.getZ());
-                                if (world.isAir(currentBlockPos) && !world.isAir(currentBlockPos.up())) {
-                                    generatePointedDripstone(world, currentBlockPos, Direction.DOWN, height, false);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, BlockPos origin, Random random) {
+        int height = random.nextInt(6);
+        switch (this.mode) {
+            case UP -> {
+                for(BlockPos bp : getDecorationPositionsInChunk(spheroid, world, origin, random, chance, DecorationMode.TOP)) {
+                    generatePointedDripstone(world, bp, Direction.UP, height, false);
+                }
+            }
+            case DOWN -> {
+                for(BlockPos bp : getDecorationPositionsInChunk(spheroid, world, origin, random, chance, DecorationMode.BOTTOM)) {
+                    generatePointedDripstone(world, bp, Direction.DOWN, height, false);
+                }
+            }
+            case CAVE -> {
+                for(BlockPos bp : getDecorationPositionsInChunk(spheroid, world, origin, random, chance, DecorationMode.CAVE_BOTTOM)) {
+                    generatePointedDripstone(world, bp, Direction.UP, height, false);
+                }
+                for(BlockPos bp : getDecorationPositionsInChunk(spheroid, world, origin, random, chance, DecorationMode.CAVE_TOP)) {
+                    generatePointedDripstone(world, bp, Direction.DOWN, height, false);
                 }
             }
         }

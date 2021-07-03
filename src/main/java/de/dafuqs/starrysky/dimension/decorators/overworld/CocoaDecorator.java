@@ -1,7 +1,7 @@
 package de.dafuqs.starrysky.dimension.decorators.overworld;
 
 import de.dafuqs.starrysky.dimension.SpheroidDecorator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CocoaBlock;
@@ -20,7 +20,11 @@ public class CocoaDecorator extends SpheroidDecorator {
     private static final BlockState AIR_BLOCK_STATE = Blocks.CAVE_AIR.getDefaultState();
 
     @Override
-    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, Random random) {
+    public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, BlockPos origin, Random random) {
+        if(!spheroid.isCenterInChunkBlockPos(origin)) {
+            return;
+        }
+
         for(int x = -2; x < 3; x++) {
             for (int y = -2; y < 3; y++) {
                 for (int z = -2; z < 3; z++) {

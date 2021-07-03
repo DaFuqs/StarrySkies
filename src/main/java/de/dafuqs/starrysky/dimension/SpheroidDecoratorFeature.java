@@ -2,7 +2,7 @@ package de.dafuqs.starrysky.dimension;
 
 import com.mojang.serialization.Codec;
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
@@ -25,7 +25,7 @@ public class SpheroidDecoratorFeature extends Feature {
                 if(spheroid.shouldDecorate(featureContext.getOrigin())) {
 
                     StarrySkyCommon.log(Level.DEBUG, "Decorating spheroid at x:" + featureContext.getOrigin().getX() + " z:" + featureContext.getOrigin().getZ() + spheroid.getDescription());
-                    spheroid.decorate(featureContext.getWorld(), featureContext.getRandom());
+                    spheroid.decorate(featureContext.getWorld(), featureContext.getRandom(), featureContext.getOrigin());
                     StarrySkyCommon.log(Level.DEBUG, "Finished decorating.");
                 }
             }

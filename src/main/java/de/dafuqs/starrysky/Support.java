@@ -2,7 +2,7 @@ package de.dafuqs.starrysky;
 
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SystemGenerator;
-import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
+import de.dafuqs.starrysky.dimension.spheroid.spheroids.Spheroid;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -138,6 +138,10 @@ public class Support {
         return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2));
     }
 
+    public static double getSquaredDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
+        return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2);
+    }
+
     public static double getDistance(BlockPos blockPos1, BlockPos blockPos2) {
         return getDistance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockPos2.getX(), blockPos2.getY(), blockPos2.getZ());
     }
@@ -154,38 +158,41 @@ public class Support {
     }
 
     /***
-     * Move down as long as no air is found. We are now on the surface of a piece of land
+     * Move down as long as air is found. We are now on the surface of a piece of land
      * @param world the world to search
      * @param position the position to start searching from downwards
      * @param minHeight the minimum height. If that value is reached search will be ended and minHeight returned
-     * @return The air block above ground
+     * @return The air block above ground if found. minHeight if not found
      */
     public static int getLowerGroundBlock(WorldAccess world, BlockPos position, int minHeight) {
         BlockPos.Mutable blockPosMutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
         while (blockPosMutable.getY() > minHeight) {
-            if (!world.isAir(blockPosMutable)) {
-                break;
+            if (world.isAir(blockPosMutable) || !world.getFluidState(blockPosMutable).isEmpty()) {
+                blockPosMutable.move(Direction.DOWN);
+            } else {
+                return blockPosMutable.getY() + 1;
             }
-            blockPosMutable.move(Direction.DOWN);
         }
         return blockPosMutable.getY();
     }
 
     /**
-     * Move up as long as no air is found. We are now on the surface of a piece of land
+     * Move up as long as air is found. We are now on the bottom surface of a piece of land
      * @param world the world to search
      * @param position the position to start searching from upwards
      * @param maxHeight the maximum height. If that value is reached search will be ended and maxHeight returned
-     * @return The air block above ground
+     * @return The air block below ground if found. maxHeight if not found
      */
     public static int getUpperGroundBlock(WorldAccess world, BlockPos position, int maxHeight) {
         BlockPos.Mutable blockPosMutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
         while (blockPosMutable.getY() < maxHeight) {
-            if (!world.isAir(blockPosMutable)) {
-                break;
+            if (world.isAir(blockPosMutable) || !world.getFluidState(blockPosMutable).isEmpty()) {
+                blockPosMutable.move(Direction.UP);
+            } else {
+                return blockPosMutable.getY() - 1;
             }
-            blockPosMutable.move(Direction.UP);
         }
+
         return blockPosMutable.getY();
     }
 
