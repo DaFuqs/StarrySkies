@@ -101,16 +101,18 @@ public class EndCitySpheroid extends Spheroid {
     @Override
     public void decorate(StructureWorldAccess world, Random random, BlockPos origin) {
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
-            int randomStructure = random.nextInt(8);
-            switch (randomStructure) {
-                case 0 -> placeSolid(world, interiorDecoratorPosition);
-                case 1 -> placeEmpty(world, interiorDecoratorPosition);
-                case 2 -> placeElytra(world, interiorDecoratorPosition);
-                case 3 -> placeTreasure(world, interiorDecoratorPosition);
-                case 4 -> placeBrewingStand(world, interiorDecoratorPosition);
-                case 5 -> placeDragonHead(world, interiorDecoratorPosition);
-                // double chance
-                default -> placeShulkerSpawner(world, interiorDecoratorPosition);
+            if(Support.inSameChunk(origin, interiorDecoratorPosition)) {
+                int randomStructure = random.nextInt(8);
+                switch (randomStructure) {
+                    case 0 -> placeSolid(world, interiorDecoratorPosition);
+                    case 1 -> placeEmpty(world, interiorDecoratorPosition);
+                    case 2 -> placeElytra(world, interiorDecoratorPosition);
+                    case 3 -> placeTreasure(world, interiorDecoratorPosition);
+                    case 4 -> placeBrewingStand(world, interiorDecoratorPosition);
+                    case 5 -> placeDragonHead(world, interiorDecoratorPosition);
+                    // double chance
+                    default -> placeShulkerSpawner(world, interiorDecoratorPosition);
+                }
             }
         }
     }
@@ -224,8 +226,7 @@ public class EndCitySpheroid extends Spheroid {
         ItemStack elytraItemStack = new ItemStack(Items.ELYTRA, 1);
 
         BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos.up());
-        if(blockEntity instanceof ChestBlockEntity) {
-            ChestBlockEntity chestBlockEntity = (ChestBlockEntity) blockEntity;
+        if(blockEntity instanceof ChestBlockEntity chestBlockEntity) {
             chestBlockEntity.setStack(0, elytraItemStack);
         }
     }

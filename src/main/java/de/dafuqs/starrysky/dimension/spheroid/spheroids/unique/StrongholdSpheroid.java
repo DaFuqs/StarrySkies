@@ -125,19 +125,23 @@ public class StrongholdSpheroid extends Spheroid {
     @Override
     public void decorate(StructureWorldAccess world, Random random, BlockPos origin) {
         if(portalPosition != null) {
-            placeEndPortal(world, portalPosition.up());
+            if(Support.inSameChunk(origin, portalPosition)) {
+                placeEndPortal(world, portalPosition.up());
+            }
         } else {
             StarrySkyCommon.log(WARN, "Generating a Stronghold Spheroid at " + position.getX() + " " + position.getY() + " " + position.getZ() + " without an end portal?");
         }
 
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
-            int randomStructure = random.nextInt(5);
-            switch (randomStructure) {
-                case 0 -> placeLibrary(world, interiorDecoratorPosition);
-                case 1 -> placeCorridor(world, interiorDecoratorPosition);
-                case 2 -> placeCrossing(world, interiorDecoratorPosition);
-                case 3 -> placePrison(world, interiorDecoratorPosition);
-                default -> placeFullCube(world, interiorDecoratorPosition);
+            if(Support.inSameChunk(origin, interiorDecoratorPosition)) {
+                int randomStructure = random.nextInt(5);
+                switch (randomStructure) {
+                    case 0 -> placeLibrary(world, interiorDecoratorPosition);
+                    case 1 -> placeCorridor(world, interiorDecoratorPosition);
+                    case 2 -> placeCrossing(world, interiorDecoratorPosition);
+                    case 3 -> placePrison(world, interiorDecoratorPosition);
+                    default -> placeFullCube(world, interiorDecoratorPosition);
+                }
             }
         }
     }
