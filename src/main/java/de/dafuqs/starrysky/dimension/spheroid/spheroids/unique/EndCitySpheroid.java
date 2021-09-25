@@ -12,6 +12,7 @@ import net.minecraft.block.WallSkullBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootTables;
@@ -19,7 +20,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.MobSpawnerEntry;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
@@ -161,20 +161,7 @@ public class EndCitySpheroid extends Spheroid {
         worldAccess.setBlockState(spawnerPos.up(2), PURPUR_PILLAR, 3);
         worldAccess.setBlockState(spawnerPos.up(3), PURPUR_PILLAR, 3);
 
-        // determine the shulker color
-        byte shulkerColor = 16; // the default purple
-        int randomColor = random.nextInt(100);
-        if(randomColor < 15) {
-            shulkerColor = (byte) randomColor; // very rarely other colors as purple
-        }
-
-        NbtCompound compoundTag = new NbtCompound();
-        NbtCompound compoundTag2 = new NbtCompound();
-        compoundTag2.putString("id", new Identifier("shulker").toString());
-        compoundTag2.putByte("Color", shulkerColor);
-        compoundTag.put("Entity", compoundTag2);
-
-        placeSpawner(worldAccess, spawnerPos, new MobSpawnerEntry(compoundTag));
+        placeSpawner(worldAccess, spawnerPos, EntityType.SHULKER);
     }
 
     private void placeBrewingStand(WorldAccess worldAccess, BlockPos blockPos) {
