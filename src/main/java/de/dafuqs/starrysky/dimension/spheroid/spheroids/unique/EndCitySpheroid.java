@@ -184,7 +184,7 @@ public class EndCitySpheroid extends Spheroid {
         ItemStack healingPotionStack = new ItemStack(Items.POTION, 1);
         NbtCompound potionTag = new NbtCompound();
         potionTag.putString("Potion", new Identifier("strong_healing").toString());
-        healingPotionStack.setTag(potionTag);
+        healingPotionStack.setNbt(potionTag);
 
         if (blockEntity instanceof BrewingStandBlockEntity) {
             ((BrewingStandBlockEntity) blockEntity).setStack(0, healingPotionStack.copy());

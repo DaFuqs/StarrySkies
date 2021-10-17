@@ -15,7 +15,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.PortalUtil;
+import net.minecraft.world.BlockLocating;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
@@ -108,7 +108,8 @@ public class StarrySkyDimensionTravelHandler {
                     Vec3d vec3d2;
                     if (blockState.contains(Properties.HORIZONTAL_AXIS)) {
                         axis2 = blockState.get(Properties.HORIZONTAL_AXIS);
-                        PortalUtil.Rectangle rectangle = PortalUtil.getLargestRectangle(lastNetherPortalPosition, axis2, 21, Direction.Axis.Y, 21, (blockPos) -> {
+                        net.minecraft.world.
+                        BlockLocating.Rectangle rectangle = BlockLocating.getLargestRectangle(lastNetherPortalPosition, axis2, 21, Direction.Axis.Y, 21, (blockPos) -> {
                             return thisEntity.getEntityWorld().getBlockState(blockPos) == blockState;
                         });
                         vec3d2 = AreaHelper.entityPosInPortal(rectangle, axis2, thisEntity.getPos(), thisEntity.getDimensions(thisEntity.getPose()));
@@ -126,7 +127,7 @@ public class StarrySkyDimensionTravelHandler {
                 // no portal exists => generate one, if player
                 } else if(thisEntity instanceof ServerPlayerEntity) {
                     Direction.Axis axis = thisEntity.world.getBlockState(((EntityAccessor) thisEntity).getLastNetherPortalPosition()).getOrEmpty(NetherPortalBlock.AXIS).orElse(Direction.Axis.X);
-                    Optional<PortalUtil.Rectangle> optional2 = destination.getPortalForcer().createPortal(blockPos3, axis);
+                    Optional<BlockLocating.Rectangle> optional2 = destination.getPortalForcer().createPortal(blockPos3, axis);
                     if (optional2.isEmpty()) {
                         StarrySkyCommon.log(ERROR, "Unable to create a portal, likely target out of world border");
                     } else {

@@ -35,6 +35,5 @@ public class SpheroidListTraverse extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 6, 12, Blocks.OAK_LOG.getDefaultState(), traverse_brown_autumnal_leaves, 2, 3));
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 6, 12, Blocks.DARK_OAK_LOG.getDefaultState(), traverse_red_autumnal_leaves, 2, 3));
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 0.7F, new ShellSpheroidType(null, 6, 12, Blocks.BIRCH_LOG.getDefaultState(), traverse_yellow_autumnal_leaves, 2, 3));
-
     }
 }

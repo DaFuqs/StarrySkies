@@ -3,6 +3,7 @@ package de.dafuqs.starrysky.dimension;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.dimension.biome.StarrySkyBiomeProvider;
 import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
+import net.kyrptonaught.customportalapi.util.PortalLink;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -32,7 +33,8 @@ public class StarrySkyDimension {
         if(StarrySkyCommon.STARRY_SKY_CONFIG.portalToStarrySky) {
             StarrySkyCommon.log(INFO, "Registering portal between the Overworld and Starry Sky...");
             Block portalFrameBlock = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.starrySkyPortalFrameBlock.toLowerCase()));
-            CustomPortalApiRegistry.addPortal(portalFrameBlock, STARRY_SKY_DIMENSION_ID, 11983869); // light, greyish blue
+            PortalLink starryPortalLink = new PortalLink(Registry.BLOCK.getId(portalFrameBlock), STARRY_SKY_DIMENSION_ID, 11983869); // light, greyish blue
+            CustomPortalApiRegistry.addPortal(portalFrameBlock, starryPortalLink);
         } else {
             StarrySkyCommon.log(INFO, "Portal between Overworld and Starry Sky is disabled in the config. Will not be registered.");
         }
