@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "de.dafuqs.starrysky.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractFireBlockMixin",
     "DimensionTypeMixin",
@@ -10,7 +10,6 @@
     "EntityMixin"
   ],
   "client": [
-    "client.DimensionEffectsMixin",
     "client.WorldRendererMixin"
   ],
   "injectors": {

@@ -219,7 +219,7 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final SpheroidType BIRCH_WOOD    = new ShellSpheroidType(SpheroidAdvancementIdentifier.birch_wood, 5, 15, Blocks.BIRCH_WOOD.getDefaultState(),    Blocks.BIRCH_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1), 2, 3);
     public static final SpheroidType ACACIA_WOOD   = new ShellSpheroidType(SpheroidAdvancementIdentifier.acacia_wood, 5, 12, Blocks.ACACIA_WOOD.getDefaultState(),   Blocks.ACACIA_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),    2, 2)
             .addDecorator(SpheroidDecorators.X_SPOT_PILLAGER_OUTPOST, 0.1F);
-    public static final SpheroidType AZALEA_WOOD = new ShellSpheroidType(SpheroidAdvancementIdentifier.azalea_wood, 4, 7,  Blocks.AZALEA_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1), Blocks.OAK_LOG.getDefaultState(), 2, 3)
+    public static final SpheroidType AZALEA_WOOD = new ShellSpheroidType(SpheroidAdvancementIdentifier.azalea_wood, 4, 7, Blocks.OAK_LOG.getDefaultState(),Blocks.AZALEA_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1), 2, 3)
             .addShellSpeckles(Blocks.FLOWERING_AZALEA_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1), 0.15F);
 
     // WATER

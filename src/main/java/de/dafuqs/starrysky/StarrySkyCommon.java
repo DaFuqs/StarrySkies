@@ -1,8 +1,11 @@
 package de.dafuqs.starrysky;
 
 import de.dafuqs.starrysky.advancements.ProximityAdvancementCheckEvent;
+import de.dafuqs.starrysky.commands.StarrySkyCommands;
 import de.dafuqs.starrysky.configs.StarrySkyConfig;
+import de.dafuqs.starrysky.dimension.StarrySkyChunkGenerator;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
+import de.dafuqs.starrysky.spheroid.DecoratorFeatures;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -10,6 +13,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
@@ -41,10 +46,11 @@ public class StarrySkyCommon implements ModInitializer {
         STARRY_SKY_CONFIG = AutoConfig.getConfigHolder(StarrySkyConfig.class).getConfig();
 
         // Register all the stuff
-        //StarrySkyDimension.setupDimension();
-        //StarrySkyDimension.setupPortals();
-        //StarrySkyCommands.initialize();
-        //DecoratorFeatures.initialize();
+        Registry.register(Registry.CHUNK_GENERATOR, new Identifier(MOD_ID, "starry_sky_chunk_generator"), StarrySkyChunkGenerator.CODEC);
+        StarrySkyDimension.setupDimension();
+        StarrySkyDimension.setupPortals();
+        StarrySkyCommands.initialize();
+        DecoratorFeatures.initialize();
 
         // triggers everytime a world is loaded
         // so for overworld, nether, ... (they all share the same seed)

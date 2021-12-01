@@ -8,17 +8,19 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 
+import java.util.Optional;
+
 public class ClosestSpheroidCommand implements Command<ServerCommandSource> {
 
     @Override
     public int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity caller = context.getSource().getPlayer();
 
-        Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroidToPlayer(caller);
+        Optional<Support.SpheroidDistance> spheroidDistance = Support.getClosestSpheroidToPlayer(caller);
 
-        if(spheroidDistance.spheroid != null) {
+        if(spheroidDistance.isPresent()) {
             context.getSource().sendFeedback(new LiteralText("Closest Sphere:"), false);
-            context.getSource().sendFeedback(new LiteralText(spheroidDistance.spheroid.getDescription()), false);
+            context.getSource().sendFeedback(new LiteralText(spheroidDistance.get().spheroid.getDescription()), false);
         } else {
             context.getSource().sendFeedback(new LiteralText("Could not determine closest sphere. :("), false);
         }

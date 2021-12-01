@@ -10,6 +10,8 @@ import net.minecraft.server.ServerAdvancementLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
+import java.util.Optional;
+
 import static org.apache.logging.log4j.Level.DEBUG;
 
 public class ProximityAdvancementCheckEvent implements ServerTickEvents.EndTick {
@@ -33,9 +35,9 @@ public class ProximityAdvancementCheckEvent implements ServerTickEvents.EndTick 
                 StarrySkyCommon.log(DEBUG, "Checking player " +serverPlayerEntity.getEntityName());
                 if(StarrySkyCommon.inStarryWorld(serverPlayerEntity)) {
                     StarrySkyCommon.log(DEBUG, "In starry world");
-                    Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroidToPlayer(serverPlayerEntity);
-                    if(spheroidDistance.spheroid != null && (Math.sqrt(spheroidDistance.squaredDistance)) < spheroidDistance.spheroid.getRadius() + 2) {
-                        SpheroidAdvancementIdentifier spheroidAdvancementIdentifier = spheroidDistance.spheroid.getSpheroidAdvancementIdentifier();
+                    Optional<Support.SpheroidDistance> spheroidDistance = Support.getClosestSpheroidToPlayer(serverPlayerEntity);
+                    if(spheroidDistance.isPresent() && (Math.sqrt(spheroidDistance.get().squaredDistance)) < spheroidDistance.get().spheroid.getRadius() + 2) {
+                        SpheroidAdvancementIdentifier spheroidAdvancementIdentifier = spheroidDistance.get().spheroid.getSpheroidAdvancementIdentifier();
 
                         if(spheroidAdvancementIdentifier != null) {
                             StarrySkyCommon.log(DEBUG, "AdvancementIdentifier: " + spheroidAdvancementIdentifier.name());

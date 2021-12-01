@@ -44,7 +44,6 @@ public class SystemGenerator {
         } else {
             return systemGeneratorMap.get(SpheroidLoader.SpheroidDimensionType.END);
         }
-
     }
 
     public static class TempPosition {

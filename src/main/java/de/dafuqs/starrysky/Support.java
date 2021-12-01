@@ -15,10 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Support {
 
@@ -45,22 +43,28 @@ public class Support {
     }};
 
     @Contract("_ -> new")
-    public static @NotNull SpheroidDistance getClosestSpheroidToPlayer(@NotNull PlayerEntity serverPlayerEntity) {
+    public static Optional<SpheroidDistance> getClosestSpheroidToPlayer(@NotNull PlayerEntity serverPlayerEntity) {
         Vec3d playerPos = serverPlayerEntity.getPos();
         BlockPos playerPosBlock = new BlockPos((int) playerPos.x, (int) playerPos.y, (int) playerPos.z);
-        List<Spheroid> localSystem = SystemGenerator.getSystemGeneratorOfWorld(serverPlayerEntity.getEntityWorld().getRegistryKey()).getSystemAtChunkPos(playerPosBlock.getX() / 16, playerPosBlock.getZ() / 16);
-
-        Spheroid closestSpheroid = null;
-        double currentMinDistance = Double.MAX_VALUE;
-        for (Spheroid p : localSystem) {
-            double currDist = playerPosBlock.getSquaredDistance(p.getPosition());
-            if(currDist < currentMinDistance) {
-                currentMinDistance = currDist;
-                closestSpheroid = p;
+        
+        SystemGenerator systemGenerator = SystemGenerator.getSystemGeneratorOfWorld(serverPlayerEntity.getEntityWorld().getRegistryKey());
+        if(systemGenerator != null) {
+            List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(playerPosBlock.getX() / 16, playerPosBlock.getZ() / 16);
+    
+            Spheroid closestSpheroid = null;
+            double currentMinDistance = Double.MAX_VALUE;
+            for (Spheroid p : localSystem) {
+                double currDist = playerPosBlock.getSquaredDistance(p.getPosition());
+                if (currDist < currentMinDistance) {
+                    currentMinDistance = currDist;
+                    closestSpheroid = p;
+                }
             }
+    
+            return Optional.of(new SpheroidDistance(closestSpheroid, currentMinDistance));
+        } else {
+            return Optional.empty();
         }
-
-        return new SpheroidDistance(closestSpheroid, currentMinDistance);
     }
 
     public static @Nullable SpheroidDistance getClosestSpheroid3x3(@NotNull ServerWorld serverWorld, BlockPos position, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier) {
