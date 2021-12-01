@@ -32,7 +32,7 @@ public class Support {
         }
     }
 
-    private static final List<Point> aroundPoints = new ArrayList<Point>() {{
+    private static final List<Point> aroundPoints = new ArrayList<>() {{
        add(new Point(0, 0));
        add(new Point(1, -1));
        add(new Point(1, 0));
@@ -130,10 +130,10 @@ public class Support {
     }
 
     /**
-     * The bounds values lowest and highest are part of the result set
-     * @param lowest
-     * @param highest
-     * @return
+     * Returns a random number between lowest and highest
+     * @param lowest The lowest number (inclusive)
+     * @param highest The highest number (inclusive)
+     * @return The random number between lowest and highest
      */
     public static int getRandomBetween(@NotNull Random random, int lowest, int highest) {
         return random.nextInt(highest - lowest + 1) + lowest;

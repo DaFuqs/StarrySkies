@@ -24,7 +24,7 @@ public class CoreSpheroidType extends SpheroidType {
     private final int maxCoreRadius;
 
     public CoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState coreBlock, BlockState shellBlock, int minCoreRadius, int maxCoreRadius) {
-        this(spheroidAdvancementIdentifier, minRadius, maxRadius, coreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minCoreRadius, maxCoreRadius);
+        this(spheroidAdvancementIdentifier, minRadius, maxRadius, coreBlock, new LinkedHashMap<>(){{put(shellBlock, 1.0F);}}, minCoreRadius, maxCoreRadius);
     }
 
     public CoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState coreBlock, LinkedHashMap<BlockState, Float> shellBlockStates, int minCoreRadius, int maxCoreRadius) {

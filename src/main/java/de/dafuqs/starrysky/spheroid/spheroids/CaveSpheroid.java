@@ -85,10 +85,10 @@ public class CaveSpheroid extends Spheroid {
                 "\nCaveFloorBlock: " + this.caveFloorBlock;
 
         if(this.topBlock != null) {
-            s += "\nTopBlock: " + this.topBlock.toString();
+            s += "\nTopBlock: " + this.topBlock;
         }
         if(this.bottomBlock != null) {
-            s += "\nBottomBlock: " + this.bottomBlock.toString();
+            s += "\nBottomBlock: " + this.bottomBlock;
         }
         return s;
     }

@@ -24,7 +24,7 @@ public class ShellSpheroidType extends SpheroidType {
     private final LinkedHashMap<BlockState, Float> shellSpeckleBlockStates = new LinkedHashMap<>();
 
     public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState coreBlock, BlockState shellBlock, int minShellRadius, int maxShellRadius) {
-        this(spheroidAdvancementIdentifier, minRadius, maxRadius, coreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minShellRadius, maxShellRadius);
+        this(spheroidAdvancementIdentifier, minRadius, maxRadius, coreBlock, new LinkedHashMap<>(){{put(shellBlock, 1.0F);}}, minShellRadius, maxShellRadius);
     }
 
     public ShellSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState coreBlock, LinkedHashMap<BlockState, Float> validShellBlocks, int minShellRadius, int maxShellRadius) {

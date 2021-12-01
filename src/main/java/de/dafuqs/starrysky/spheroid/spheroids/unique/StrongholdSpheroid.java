@@ -133,21 +133,11 @@ public class StrongholdSpheroid extends Spheroid {
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
             int randomStructure = random.nextInt(5);
             switch (randomStructure) {
-                case 0:
-                    placeLibrary(world, interiorDecoratorPosition);
-                    break;
-                case 1:
-                    placeCorridor(world, interiorDecoratorPosition);
-                    break;
-                case 2:
-                    placeCrossing(world, interiorDecoratorPosition);
-                    break;
-                case 3:
-                    placePrison(world, interiorDecoratorPosition);
-                    break;
-                default:
-                    placeFullCube(world, interiorDecoratorPosition);
-                    break;
+                case 0 -> placeLibrary(world, interiorDecoratorPosition);
+                case 1 -> placeCorridor(world, interiorDecoratorPosition);
+                case 2 -> placeCrossing(world, interiorDecoratorPosition);
+                case 3 -> placePrison(world, interiorDecoratorPosition);
+                default -> placeFullCube(world, interiorDecoratorPosition);
             }
         }
     }

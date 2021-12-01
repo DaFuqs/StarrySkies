@@ -110,9 +110,7 @@ public class StarrySkyDimensionTravelHandler {
                     Vec3d vec3d2;
                     if (blockState.contains(Properties.HORIZONTAL_AXIS)) {
                         axis2 = blockState.get(Properties.HORIZONTAL_AXIS);
-                        BlockLocating.Rectangle rectangle = BlockLocating.getLargestRectangle(lastNetherPortalPosition, axis2, 21, Direction.Axis.Y, 21, (blockPos) -> {
-                            return thisEntity.getEntityWorld().getBlockState(blockPos) == blockState;
-                        });
+                        BlockLocating.Rectangle rectangle = BlockLocating.getLargestRectangle(lastNetherPortalPosition, axis2, 21, Direction.Axis.Y, 21, (blockPos) -> thisEntity.getEntityWorld().getBlockState(blockPos) == blockState);
                         vec3d2 = AreaHelper.entityPosInPortal(rectangle, axis2, thisEntity.getPos(), thisEntity.getDimensions(thisEntity.getPose()));
                     } else {
                         axis2 = Direction.Axis.X;

@@ -26,7 +26,7 @@ public class DoubleCoreSpheroidType extends SpheroidType {
     private final int maxShellRadius;
 
     public DoubleCoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState innerCoreBlock, BlockState outerCoreBlock, BlockState shellBlock, int minInnerCoreRadius, int maxInnerCoreRadius, int minShellRadius, int maxShellRadius) {
-        this(spheroidAdvancementIdentifier, minRadius, maxRadius, innerCoreBlock, outerCoreBlock, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minInnerCoreRadius, maxInnerCoreRadius,  minShellRadius, maxShellRadius);
+        this(spheroidAdvancementIdentifier, minRadius, maxRadius, innerCoreBlock, outerCoreBlock, new LinkedHashMap<>(){{put(shellBlock, 1.0F);}}, minInnerCoreRadius, maxInnerCoreRadius,  minShellRadius, maxShellRadius);
     }
 
     public DoubleCoreSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState innerCoreBlock, BlockState outerCoreBlock, LinkedHashMap<BlockState, Float> validShellBlocks, int minInnerCoreRadius, int maxInnerCoreRadius, int minShellRadius, int maxShellRadius) {

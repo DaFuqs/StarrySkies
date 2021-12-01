@@ -41,4 +41,5 @@ public class SupportedRainbowSpheroidType extends SpheroidType {
 
         return new SupportedRainbowSpheroid(chunkRandom, spheroidAdvancementIdentifier, radius, spheroidDecorators, entityTypesToSpawn, rainbowBlocks, floorBlock);
     }
+    
 }

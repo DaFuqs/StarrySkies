@@ -89,26 +89,13 @@ public class NetherFortressSpheroid extends Spheroid {
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
             int randomStructure = random.nextInt(7);
             switch (randomStructure) {
-                case 0:
-                    placeBlazeSpawnerRoom(world, interiorDecoratorPosition);
-                    break;
-                case 1: placeWitherSkeletonRoom(world, interiorDecoratorPosition);
-                    break;
-                case 2:
-                    placeNetherWartRoom(world, interiorDecoratorPosition);
-                    break;
-                case 3:
-                    placeSolid(world, interiorDecoratorPosition);
-                    break;
-                case 4:
-                    placeEmpty(world, interiorDecoratorPosition);
-                    break;
-                case 5:
-                    placeLava(world, interiorDecoratorPosition);
-                    break;
-                default:
-                    placeChestRoom(world, interiorDecoratorPosition);
-                    break;
+                case 0 -> placeBlazeSpawnerRoom(world, interiorDecoratorPosition);
+                case 1 -> placeWitherSkeletonRoom(world, interiorDecoratorPosition);
+                case 2 -> placeNetherWartRoom(world, interiorDecoratorPosition);
+                case 3 -> placeSolid(world, interiorDecoratorPosition);
+                case 4 -> placeEmpty(world, interiorDecoratorPosition);
+                case 5 -> placeLava(world, interiorDecoratorPosition);
+                default -> placeChestRoom(world, interiorDecoratorPosition);
             }
         }
     }

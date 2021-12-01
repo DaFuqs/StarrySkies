@@ -52,7 +52,7 @@ public class LiquidSpheroid extends Spheroid {
                 "\nShell: " + this.shellBlock.toString() + "(Radius: " + this.shellRadius  + ")" +
                 "\nLiquid: " + this.liquid.toString();
         if(this.coreBlock != null) {
-            s += "\nCore: " +this.coreBlock.toString() + "(Radius: " + this.coreRadius + ")";
+            s += "\nCore: " + this.coreBlock + "(Radius: " + this.coreRadius + ")";
         } else {
             s += "\nNo Core";
         }

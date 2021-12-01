@@ -50,11 +50,7 @@ public abstract class SpheroidType {
     }
 
     public abstract String getDescription();
-
-    public SpheroidAdvancementIdentifier getSpheroidTypeIdentifier() {
-        return spheroidAdvancementIdentifier;
-    }
-
+    
     public abstract Spheroid getRandomSpheroid(ChunkRandom chunkRandom);
 
     protected ArrayList<SpheroidEntitySpawnDefinition> getRandomEntityTypesToSpawn(ChunkRandom chunkRandom) {

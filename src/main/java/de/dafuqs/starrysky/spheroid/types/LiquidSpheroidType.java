@@ -31,7 +31,7 @@ public class LiquidSpheroidType extends SpheroidType {
     private int maxCoreRadius;
 
     public LiquidSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState liquid, BlockState shellBlock, int minShellRadius, int maxShellRadius, int minFillPercent, int maxFillPercent, int holeInBottomPercent) {
-        this (spheroidAdvancementIdentifier, minRadius, maxRadius, liquid, new LinkedHashMap<BlockState, Float>(){{put(shellBlock, 1.0F);}}, minShellRadius, maxShellRadius, minFillPercent, maxFillPercent, holeInBottomPercent);
+        this (spheroidAdvancementIdentifier, minRadius, maxRadius, liquid, new LinkedHashMap<>(){{put(shellBlock, 1.0F);}}, minShellRadius, maxShellRadius, minFillPercent, maxFillPercent, holeInBottomPercent);
     }
 
     public LiquidSpheroidType(SpheroidAdvancementIdentifier spheroidAdvancementIdentifier, int minRadius, int maxRadius, BlockState liquid, LinkedHashMap<BlockState, Float> validShellBlocks, int minShellRadius, int maxShellRadius, int minFillPercent, int maxFillPercent, int holeInBottomPercent) {

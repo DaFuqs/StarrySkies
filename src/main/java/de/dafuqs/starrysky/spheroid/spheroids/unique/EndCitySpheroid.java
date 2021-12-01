@@ -36,7 +36,6 @@ public class EndCitySpheroid extends Spheroid {
     private final BlockState PURPUR_PILLAR = Blocks.PURPUR_PILLAR.getDefaultState();
     private final BlockState MAGENTA_STAINED_GLASS = Blocks.MAGENTA_STAINED_GLASS.getDefaultState();
     private final BlockState END_STONE_BRICKS = Blocks.END_STONE_BRICKS.getDefaultState();
-    private final BlockState END_ROD = Blocks.END_ROD.getDefaultState();
     private final BlockState DRAGON_WALL_HEAD = Blocks.DRAGON_WALL_HEAD.getDefaultState();
 
     private final Identifier END_CITY_TREASURE_CHEST = LootTables.END_CITY_TREASURE_CHEST;
@@ -104,27 +103,14 @@ public class EndCitySpheroid extends Spheroid {
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
             int randomStructure = random.nextInt(8);
             switch (randomStructure) {
-                case 0:
-                    placeSolid(world, interiorDecoratorPosition);
-                    break;
-                case 1:
-                    placeEmpty(world, interiorDecoratorPosition);
-                    break;
-                case 2:
-                    placeElytra(world, interiorDecoratorPosition);
-                    break;
-                case 3:
-                    placeTreasure(world, interiorDecoratorPosition);
-                    break;
-                case 4:
-                    placeBrewingStand(world, interiorDecoratorPosition);
-                    break;
-                case 5:
-                    placeDragonHead(world, interiorDecoratorPosition);
-                    break;
-                default: // double chance
-                    placeShulkerSpawner(world, interiorDecoratorPosition);
-                    break;
+                case 0 -> placeSolid(world, interiorDecoratorPosition);
+                case 1 -> placeEmpty(world, interiorDecoratorPosition);
+                case 2 -> placeElytra(world, interiorDecoratorPosition);
+                case 3 -> placeTreasure(world, interiorDecoratorPosition);
+                case 4 -> placeBrewingStand(world, interiorDecoratorPosition);
+                case 5 -> placeDragonHead(world, interiorDecoratorPosition);
+                default -> // double chance
+                        placeShulkerSpawner(world, interiorDecoratorPosition);
             }
         }
     }
@@ -251,8 +237,7 @@ public class EndCitySpheroid extends Spheroid {
         ItemStack elytraItemStack = new ItemStack(Items.ELYTRA, 1);
 
         BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos.up());
-        if(blockEntity instanceof ChestBlockEntity) {
-            ChestBlockEntity chestBlockEntity = (ChestBlockEntity) blockEntity;
+        if(blockEntity instanceof ChestBlockEntity chestBlockEntity) {
             chestBlockEntity.setStack(0, elytraItemStack);
         }
     }

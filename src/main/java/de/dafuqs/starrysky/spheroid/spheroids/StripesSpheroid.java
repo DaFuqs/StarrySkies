@@ -54,7 +54,7 @@ public class StripesSpheroid extends Spheroid {
         return "+++ StripesSpheroid +++" +
                 "\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
                 "\nRadius: " + this.radius +
-                "\nStripes Blocks ( + " + stripesBlockStates.size() + "): " + this.stripesBlockStates.toString();
+                "\nStripes Blocks ( + " + stripesBlockStates.size() + "): " + this.stripesBlockStates;
     }
 
 }
