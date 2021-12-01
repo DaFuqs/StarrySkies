@@ -14,7 +14,7 @@ import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListLGBT extends SpheroidList {
 
-    private static final ArrayList<BlockState> LIST_GAY = new ArrayList<BlockState>() {{
+    private static final ArrayList<BlockState> LIST_GAY = new ArrayList<>() {{
         add(Blocks.RED_WOOL.getDefaultState());
         add(Blocks.ORANGE_WOOL.getDefaultState());
         add(Blocks.YELLOW_WOOL.getDefaultState());
@@ -23,32 +23,32 @@ public class SpheroidListLGBT extends SpheroidList {
         add(Blocks.PURPLE_WOOL.getDefaultState());
     }};
 
-    private static final ArrayList<BlockState> LIST_BI = new ArrayList<BlockState>() {{
+    private static final ArrayList<BlockState> LIST_BI = new ArrayList<>() {{
         add(Blocks.MAGENTA_WOOL.getDefaultState());
         add(Blocks.PURPLE_WOOL.getDefaultState());
         add(Blocks.BLUE_WOOL.getDefaultState());
     }};
 
-    private static final ArrayList<BlockState> LIST_PAN = new ArrayList<BlockState>() {{
+    private static final ArrayList<BlockState> LIST_PAN = new ArrayList<>() {{
         add(Blocks.MAGENTA_WOOL.getDefaultState());
         add(Blocks.YELLOW_WOOL.getDefaultState());
         add(Blocks.LIGHT_BLUE_WOOL.getDefaultState());
     }};
 
-    private static final ArrayList<BlockState> LIST_ASEXUAL = new ArrayList<BlockState>() {{
+    private static final ArrayList<BlockState> LIST_ASEXUAL = new ArrayList<>() {{
         add(Blocks.BLACK_WOOL.getDefaultState());
         add(Blocks.GRAY_WOOL.getDefaultState());
         add(Blocks.WHITE_WOOL.getDefaultState());
         add(Blocks.PURPLE_WOOL.getDefaultState());
     }};
 
-    private static final ArrayList<BlockState> LIST_GENDERQUEER = new ArrayList<BlockState>() {{
+    private static final ArrayList<BlockState> LIST_GENDERQUEER = new ArrayList<>() {{
         add(Blocks.PURPLE_WOOL.getDefaultState());
         add(Blocks.WHITE_WOOL.getDefaultState());
         add(Blocks.GREEN_WOOL.getDefaultState());
     }};
 
-    private static final ArrayList<BlockState> LIST_TRANSGENDER = new ArrayList<BlockState>() {{
+    private static final ArrayList<BlockState> LIST_TRANSGENDER = new ArrayList<>() {{
         add(Blocks.LIGHT_BLUE_WOOL.getDefaultState());
         add(Blocks.PINK_WOOL.getDefaultState());
         add(Blocks.WHITE_WOOL.getDefaultState());
@@ -56,7 +56,7 @@ public class SpheroidListLGBT extends SpheroidList {
         add(Blocks.LIGHT_BLUE_WOOL.getDefaultState());
     }};
 
-    private static final ArrayList<BlockState> LIST_NONBINARY = new ArrayList<BlockState>() {{
+    private static final ArrayList<BlockState> LIST_NONBINARY = new ArrayList<>() {{
         add(Blocks.YELLOW_WOOL.getDefaultState());
         add(Blocks.WHITE_WOOL.getDefaultState());
         add(Blocks.PURPLE_WOOL.getDefaultState());

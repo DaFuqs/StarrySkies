@@ -251,7 +251,7 @@ public class SpheroidListBYG extends SpheroidList {
         BlockState byg_tall_pink_allium = getDefaultBlockState(MOD_ID,"tall_pink_allium");
         BlockState byg_azalea = getDefaultBlockState(MOD_ID,"azalea");
 
-        ArrayList<BlockState> coloredSand = new ArrayList<BlockState>() {{
+        ArrayList<BlockState> coloredSand = new ArrayList<>() {{
             add(byg_black_sand);
             add(byg_white_sand);
             add(byg_blue_sand);

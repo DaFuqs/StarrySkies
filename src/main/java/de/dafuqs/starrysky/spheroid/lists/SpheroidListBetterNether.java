@@ -73,7 +73,7 @@ public class SpheroidListBetterNether extends SpheroidList {
         SpheroidListVanillaNether.LAVA_STONE_MAGMA.addDecorator(GEYSER_DECORATOR, 0.25F);
 
         // RAINBOW QUARTZ GLASS
-        ArrayList<BlockState> QUARTZ_GLASSES = new ArrayList<BlockState>() {{
+        ArrayList<BlockState> QUARTZ_GLASSES = new ArrayList<>() {{
             add(getDefaultBlockState(MOD_ID, "quartz_glass_white"));
             add(getDefaultBlockState(MOD_ID, "quartz_glass_light_gray"));
             add(getDefaultBlockState(MOD_ID, "quartz_glass_gray"));
@@ -94,7 +94,7 @@ public class SpheroidListBetterNether extends SpheroidList {
         SpheroidType RAINBOW_QUARTZ_GLASS = new RainbowSpheroidType(null, 6, 10, QUARTZ_GLASSES);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.DECORATIVE, 0.05F, RAINBOW_QUARTZ_GLASS);
 
-        ArrayList<BlockState> FRAMED_QUARTZ_GLASSES = new ArrayList<BlockState>() {{
+        ArrayList<BlockState> FRAMED_QUARTZ_GLASSES = new ArrayList<>() {{
             add(getDefaultBlockState(MOD_ID, "quartz_glass_framed_white"));
             add(getDefaultBlockState(MOD_ID, "quartz_glass_framed_light_gray"));
             add(getDefaultBlockState(MOD_ID, "quartz_glass_framed_gray"));

@@ -94,7 +94,7 @@ public class SpheroidListBetterEnd extends SpheroidList {
 
         // MEGA LAKE
         BlockState lacugrove_log = getDefaultBlockState(MOD_ID,"lacugrove_log");
-        BlockState lacugrove_leaves = getDefaultBlockState(MOD_ID,"lacugrove_leaves").with(LeavesBlock.DISTANCE, 1);;
+        BlockState lacugrove_leaves = getDefaultBlockState(MOD_ID,"lacugrove_leaves").with(LeavesBlock.DISTANCE, 1);
         SpheroidType LACUGROVE_WOOD = new ShellSpheroidType(null, 10, 15, lacugrove_log, lacugrove_leaves, 3, 4);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.WOOD, 0.4F, LACUGROVE_WOOD);
 

@@ -15,7 +15,7 @@ import java.util.Random;
 public class CactusDecorator extends SpheroidDecorator {
 
     private static final Block cactusBlock = Blocks.CACTUS;
-    private BlockState placementBlockState;
+    private final BlockState placementBlockState;
     private static final int CACTUS_CHANCE = 40; // random. 0 = cactus with 1 height, 2 = 3 height
 
     public CactusDecorator(BlockState placementBlockState) {

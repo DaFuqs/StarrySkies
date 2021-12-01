@@ -17,8 +17,8 @@ public class BambooDecorator extends SpheroidDecorator {
 
     private static final Block bambooBlock = Blocks.BAMBOO;
     private static final int BAMBOO_CHANCE = 13;
-    private static BlockState bambooBlockState;
-    private static BlockState bambooSaplingBlockState;
+    private final BlockState bambooBlockState;
+    private final BlockState bambooSaplingBlockState;
 
     public BambooDecorator(BlockState placementBlockState, BlockState bambooSaplingBlockState) {
         this.bambooBlockState = placementBlockState;

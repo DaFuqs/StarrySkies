@@ -30,6 +30,8 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.random.RandomSeed;
 import net.minecraft.world.gen.random.SimpleRandom;
 import org.apache.logging.log4j.Level;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,11 +60,11 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
                     ChunkGeneratorSettings.REGISTRY_CODEC.fieldOf("settings").forGetter((surfaceChunkGenerator) -> () -> surfaceChunkGenerator.settings))
                 .apply(instance, instance.stable(StarrySkyChunkGenerator::new)));
 
-    public StarrySkyChunkGenerator(BiomeSource biomeSource, long l, Supplier<ChunkGeneratorSettings> chunkGeneratorType) {
+    public StarrySkyChunkGenerator(BiomeSource biomeSource, long l, @NotNull Supplier<ChunkGeneratorSettings> chunkGeneratorType) {
         this(biomeSource, biomeSource, l, chunkGeneratorType.get());
     }
 
-    private StarrySkyChunkGenerator(BiomeSource biomeSource, BiomeSource biomeSource2, long seed, ChunkGeneratorSettings chunkGeneratorType) {
+    private StarrySkyChunkGenerator(BiomeSource biomeSource, BiomeSource biomeSource2, long seed, @NotNull ChunkGeneratorSettings chunkGeneratorType) {
         super(biomeSource, biomeSource2, new StructuresConfig(Optional.empty(), Collections.emptyMap()), seed); // no structures
         this.seed = seed;
         this.settings = chunkGeneratorType;
@@ -95,7 +97,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         systemGenerator = new SystemGenerator(spheroidDimensionType);
     }
 
-    private static BlockPos returnClosestStrongholdSphere(BlockPos blockPos, ServerWorld world, int radius) {
+    private static @Nullable BlockPos returnClosestStrongholdSphere(BlockPos blockPos, @NotNull ServerWorld world, int radius) {
         ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
         if(chunkGenerator instanceof StarrySkyChunkGenerator) {
             Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroid3x3(world, blockPos, SpheroidAdvancementIdentifier.stronghold);
@@ -108,7 +110,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    public BlockPos locateStructure(ServerWorld world, StructureFeature<?> feature, BlockPos center, int radius, boolean skipExistingChunks) {
+    public BlockPos locateStructure(ServerWorld world, @NotNull StructureFeature<?> feature, BlockPos center, int radius, boolean skipExistingChunks) {
         if(feature.getName().equals("stronghold")) {
             return returnClosestStrongholdSphere(center, world, radius);
         }
@@ -116,7 +118,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
     
     @Override
-    public void buildSurface(ChunkRegion region, StructureAccessor structures, Chunk chunk) {
+    public void buildSurface(ChunkRegion region, StructureAccessor structures, @NotNull Chunk chunk) {
         ChunkPos chunkPos = chunk.getPos();
     
         int chunkPosStartX = chunkPos.getStartX();
@@ -175,7 +177,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
     
     @Override
-    public void populateEntities(ChunkRegion chunkRegion) {
+    public void populateEntities(@NotNull ChunkRegion chunkRegion) {
         ChunkPos chunkPos = chunkRegion.getCenterPos();
         Biome biome = chunkRegion.getBiome(chunkPos.getStartPos().withY(chunkRegion.getTopY() - 1));
         ChunkRandom chunkRandom = new ChunkRandom(new AtomicSimpleRandom(RandomSeed.getSeed()));
@@ -204,13 +206,13 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world) {
+    public VerticalBlockSample getColumnSample(int x, int z, @NotNull HeightLimitView world) {
         BlockState[] states = new BlockState[world.getHeight()];
         Arrays.fill(states, Blocks.AIR.getDefaultState());
         return new VerticalBlockSample(world.getBottomY(), states);
     }
 
-    public void placeSpheroids(Chunk chunk) {
+    public void placeSpheroids(@NotNull Chunk chunk) {
         ChunkRandom chunkRandom = new ChunkRandom(new SimpleRandom(StarrySkyCommon.starryWorld.getSeed()));
         chunkRandom.setCarverSeed(StarrySkyCommon.starryWorld.getSeed(), chunk.getPos().getRegionX(), chunk.getPos().getRegionZ());
 

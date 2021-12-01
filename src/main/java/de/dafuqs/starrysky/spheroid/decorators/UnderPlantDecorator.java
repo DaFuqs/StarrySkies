@@ -25,7 +25,6 @@ public class UnderPlantDecorator extends SpheroidDecorator {
 
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
-
         int spheroidY = spheroid.getPosition().getY();
         for(BlockPos bp : decorationBlockPositions) {
              BlockPos flippedBlockPos = bp.down((bp.getY() - spheroidY) * 2);

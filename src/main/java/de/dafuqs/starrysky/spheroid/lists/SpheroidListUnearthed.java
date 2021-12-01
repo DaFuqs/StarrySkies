@@ -24,7 +24,7 @@ public class SpheroidListUnearthed extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.log(INFO, "Loading Unearthed integration...");
 
-        ArrayList<String> stones = new ArrayList<String>() {{
+        ArrayList<String> stones = new ArrayList<>() {{
             add("gray_basalt");
             add("gabbro");
             add("pumice");

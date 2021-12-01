@@ -6,6 +6,7 @@ import de.dafuqs.starrysky.spheroid.lists.*;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.random.ChunkRandom;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,13 +28,13 @@ public class SpheroidLoader {
     private static final LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeightNether = new LinkedHashMap<>();
     private static final LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeightEnd = new LinkedHashMap<>();
 
-    private static final HashMap<SpheroidDimensionType, LinkedHashMap<String, ArrayList<BlockState>>> dynamicOresByDimensionType = new LinkedHashMap() {{
-        put(SpheroidDimensionType.OVERWORLD, new LinkedHashMap<String, ArrayList<BlockState>>());
-        put(SpheroidDimensionType.NETHER, new LinkedHashMap<String, ArrayList<BlockState>>());
-        put(SpheroidDimensionType.END, new LinkedHashMap<String, ArrayList<BlockState>>());
+    private static final HashMap<SpheroidDimensionType, LinkedHashMap<String, ArrayList<BlockState>>> dynamicOresByDimensionType = new LinkedHashMap<>() {{
+        put(SpheroidDimensionType.OVERWORLD, new LinkedHashMap<>());
+        put(SpheroidDimensionType.NETHER, new LinkedHashMap<>());
+        put(SpheroidDimensionType.END, new LinkedHashMap<>());
     }};
 
-    private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeights = new LinkedHashMap<SpheroidDistributionType, Float>() {{
+    private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeights = new LinkedHashMap<>() {{
         put(SpheroidDistributionType.ESSENTIAL,  10.0F);
         put(SpheroidDistributionType.DECORATIVE, 10.0F);
         put(SpheroidDistributionType.ORE,        10.0F);
@@ -43,7 +44,7 @@ public class SpheroidLoader {
         put(SpheroidDistributionType.DUNGEON,     0.1F);
     }};
 
-    private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeightsNether = new LinkedHashMap<SpheroidDistributionType, Float>() {{
+    private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeightsNether = new LinkedHashMap<>() {{
         put(SpheroidDistributionType.ESSENTIAL,  10.0F);
         put(SpheroidDistributionType.DECORATIVE, 10.0F);
         put(SpheroidDistributionType.ORE,        10.0F);
@@ -53,7 +54,7 @@ public class SpheroidLoader {
         put(SpheroidDistributionType.DUNGEON,     0.1F);
     }};
 
-    private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeightsEnd = new LinkedHashMap<SpheroidDistributionType, Float>() {{
+    private static final LinkedHashMap<SpheroidDistributionType, Float> spheroidDistributionTypeWeightsEnd = new LinkedHashMap<>() {{
         put(SpheroidDistributionType.ESSENTIAL,  50.0F);
         put(SpheroidDistributionType.DECORATIVE, 10.0F);
         put(SpheroidDistributionType.ORE,         6.0F);
@@ -63,16 +64,11 @@ public class SpheroidLoader {
         put(SpheroidDistributionType.DUNGEON,     0.1F);
     }};
 
-    public void registerSpheroidType(SpheroidDimensionType spheroidDimensionType, SpheroidDistributionType spheroidDistributionType, Float weight, SpheroidType spheroidType) {
+    public void registerSpheroidType(@NotNull SpheroidDimensionType spheroidDimensionType, SpheroidDistributionType spheroidDistributionType, Float weight, SpheroidType spheroidType) {
         switch (spheroidDimensionType) {
-            case OVERWORLD:
-                availableSpheroidTypesByDistributionTypeWithWeight.get(spheroidDistributionType).put(spheroidType, weight);
-                return;
-            case NETHER:
-                availableSpheroidTypesByDistributionTypeWithWeightNether.get(spheroidDistributionType).put(spheroidType, weight);
-                return;
-            case END:
-                availableSpheroidTypesByDistributionTypeWithWeightEnd.get(spheroidDistributionType).put(spheroidType, weight);
+            case OVERWORLD -> availableSpheroidTypesByDistributionTypeWithWeight.get(spheroidDistributionType).put(spheroidType, weight);
+            case NETHER -> availableSpheroidTypesByDistributionTypeWithWeightNether.get(spheroidDistributionType).put(spheroidType, weight);
+            case END -> availableSpheroidTypesByDistributionTypeWithWeightEnd.get(spheroidDistributionType).put(spheroidType, weight);
         }
     }
 

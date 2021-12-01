@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.NotNull;
 
 @Environment(EnvType.CLIENT)
 public class StarrySkyProperties extends DimensionEffects {
@@ -19,7 +20,7 @@ public class StarrySkyProperties extends DimensionEffects {
      * @return
      */
     @Override
-    public Vec3d adjustFogColor(Vec3d color, float sunHeight) {
+    public Vec3d adjustFogColor(@NotNull Vec3d color, float sunHeight) {
         return color.multiply((sunHeight), (sunHeight), (sunHeight));
     }
 

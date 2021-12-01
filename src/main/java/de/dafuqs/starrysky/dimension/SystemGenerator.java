@@ -36,7 +36,7 @@ public class SystemGenerator {
     private final int SPHERE_DENSITY;
     private final int FLOOR_HEIGHT;
 
-    public static SystemGenerator getSystemGeneratorOfWorld(RegistryKey<World> worldRegistryKey) {
+    public static SystemGenerator getSystemGeneratorOfWorld(@NotNull RegistryKey<World> worldRegistryKey) {
         if(worldRegistryKey.equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
             return systemGeneratorMap.get(SpheroidLoader.SpheroidDimensionType.OVERWORLD);
         } else if(worldRegistryKey.equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {
@@ -56,7 +56,7 @@ public class SystemGenerator {
             return new BlockPos(xPos, yPos, zPos);
         }
 
-        private int distanceSquared(Spheroid pl1) {
+        private int distanceSquared(@NotNull Spheroid pl1) {
             int xDist = xPos - pl1.getPosition().getX();
             int yDist = yPos - pl1.getPosition().getY();
             int zDist = zPos - pl1.getPosition().getZ();
@@ -72,21 +72,21 @@ public class SystemGenerator {
 
         this.SYSTEM_SIZE_CHUNKS = StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
         switch (spheroidDimensionType) {
-            case OVERWORLD:
+            case OVERWORLD -> {
                 this.MIN_DISTANCE_BETWEEN_SPHERES = StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheresOverworld;
                 this.SPHERE_DENSITY = StarrySkyCommon.STARRY_SKY_CONFIG.sphereDensityOverworld;
                 this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeightOverworld;
-                break;
-            case NETHER:
+            }
+            case NETHER -> {
                 this.MIN_DISTANCE_BETWEEN_SPHERES = StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheresNether;
                 this.SPHERE_DENSITY = StarrySkyCommon.STARRY_SKY_CONFIG.sphereDensityNether;
                 this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeightNether;
-                break;
-            default:
+            }
+            default -> {
                 this.MIN_DISTANCE_BETWEEN_SPHERES = StarrySkyCommon.STARRY_SKY_CONFIG.minDistanceBetweenSpheresEnd;
                 this.SPHERE_DENSITY = StarrySkyCommon.STARRY_SKY_CONFIG.sphereDensityEnd;
                 this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeightEnd;
-                break;
+            }
         }
     }
 
@@ -145,16 +145,15 @@ public class SystemGenerator {
     }
 
 
-    private List<Spheroid> generateSpheroidsAtSystemPoint(Point systemPoint) {
+    private @NotNull List<Spheroid> generateSpheroidsAtSystemPoint(@NotNull Point systemPoint) {
         int systemPointX = systemPoint.x;
         int systemPointZ = systemPoint.y;
 
         ChunkRandom systemRandom = getSystemRandom(systemPoint);
-        ArrayList<Spheroid> spheroids = new ArrayList<>();
-
+    
         // Places a log/leaf planet at 16, 16 in the overworld etc.
         ArrayList<Spheroid> defaultSpheroids = getDefaultSpheroids(systemPointX, systemPointZ, systemRandom);
-        spheroids.addAll(defaultSpheroids);
+        ArrayList<Spheroid> spheroids = new ArrayList<>(defaultSpheroids);
 
         // try to create DENSITY planets in system
         int worldHeight = StarrySkyCommon.starryWorld.getHeight();

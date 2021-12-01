@@ -34,17 +34,12 @@ public class PointedDripstoneDecorator extends SpheroidDecorator {
             if(random.nextFloat() < chance) {
                 int height = random.nextInt(5);
                 switch (this.mode) {
-                    case UP -> {
-                        placeDripstoneBlocks(world, bp, height, Direction.UP);
-                    }
-                    case DOWN -> {
-                        placeDripstoneBlocks(world, bp, height, Direction.DOWN);
-                    }
+                    case UP -> placeDripstoneBlocks(world, bp, height, Direction.UP);
+                    case DOWN -> placeDripstoneBlocks(world, bp, height, Direction.DOWN);
                     case CAVE -> {
                         if(random.nextBoolean()) {
                             placeDripstoneBlocks(world, bp, height, Direction.UP);
                         } else {
-                            BlockPos.Mutable mutable = bp.mutableCopy();
                             for(int i = 0; i < spheroid.getRadius(); ++i) {
                                 if (!world.isAir(bp)) {
                                     placeDripstoneBlocks(world, bp, height, Direction.UP);

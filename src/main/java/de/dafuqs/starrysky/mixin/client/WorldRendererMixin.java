@@ -34,7 +34,7 @@ public abstract class WorldRendererMixin {
 
     @Inject(at = @At("HEAD"), method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FLjava/lang/Runnable;)V", cancellable = true)
     void renderSky(MatrixStack matrices, Matrix4f matrix4f, float tickDelta, Runnable runnable, CallbackInfo callbackInformation) {
-        if (client.world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
+        if (client.world != null && client.world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
 
             if(StarrySkyCommon.STARRY_SKY_CONFIG == null || !StarrySkyCommon.STARRY_SKY_CONFIG.rainbowSkybox) {
                 starrySkyBox.render(matrices, tickDelta);

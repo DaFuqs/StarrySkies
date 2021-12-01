@@ -18,7 +18,7 @@ public abstract class SpheroidList {
     protected static BlockState getDefaultBlockState(String modId, String string) {
         BlockState blockState = Registry.BLOCK.get(new Identifier(modId, string)).getDefaultState();
 
-        // So mod compat problems can be easily debugged
+        // So mod compatibility problems can be easily debugged
         if(blockState.getBlock() == Blocks.AIR && !string.equals("air")) {
             StarrySkyCommon.log(ERROR, "Block " + modId + ":" + string + " does not exist! It will be treated as air");
         }

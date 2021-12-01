@@ -32,7 +32,7 @@ public class SpheroidListBlockus extends SpheroidList {
         BlockState blockus_white_oak_leaves = getDefaultBlockState(MOD_ID,"white_oak_leaves");
         BlockState blockus_white_oak_log = getDefaultBlockState(MOD_ID,"white_oak_log");
 
-        ArrayList<BlockState> rainbowBeveled = new ArrayList<BlockState>() {{
+        ArrayList<BlockState> rainbowBeveled = new ArrayList<>() {{
             add(getDefaultBlockState(MOD_ID,"black_beveled_glass"));
             add(getDefaultBlockState(MOD_ID,"blue_beveled_glass"));
             add(getDefaultBlockState(MOD_ID,"brown_beveled_glass"));
@@ -51,7 +51,7 @@ public class SpheroidListBlockus extends SpheroidList {
             add(getDefaultBlockState(MOD_ID,"yellow_beveled_glass"));
         }};
 
-        ArrayList<BlockState> rainbowAsphalt = new ArrayList<BlockState>() {{
+        ArrayList<BlockState> rainbowAsphalt = new ArrayList<>() {{
             add(getDefaultBlockState(MOD_ID,"asphalt"));
             add(getDefaultBlockState(MOD_ID,"blue_asphalt"));
             add(getDefaultBlockState(MOD_ID,"brown_asphalt"));
@@ -70,7 +70,7 @@ public class SpheroidListBlockus extends SpheroidList {
             add(getDefaultBlockState(MOD_ID,"yellow_asphalt"));
         }};
 
-        ArrayList<BlockState> rainbowFuturneo = new ArrayList<BlockState>() {{
+        ArrayList<BlockState> rainbowFuturneo = new ArrayList<>() {{
             add(getDefaultBlockState(MOD_ID,"black_futurneo_block"));
             add(getDefaultBlockState(MOD_ID,"blue_futurneo_block"));
             add(getDefaultBlockState(MOD_ID,"brown_futurneo_block"));

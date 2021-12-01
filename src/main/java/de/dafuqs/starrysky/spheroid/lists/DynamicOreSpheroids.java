@@ -34,7 +34,7 @@ public class DynamicOreSpheroids {
     /**
      * Builtin data on how big / with which stone the dynamic ores will generate
      */
-    private static final LinkedHashMap<String, OreSpheroidDefinition> dynamicOreSpheroidDefinitions = new LinkedHashMap<String, OreSpheroidDefinition>() {{
+    private static final LinkedHashMap<String, OreSpheroidDefinition> dynamicOreSpheroidDefinitions = new LinkedHashMap<>() {{
         put("antimony",     new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 8, 3, 4, 0.7F)); // low weight
         put("bauxite",      new OreSpheroidDefinition(SpheroidList.MAP_STONES, 5, 7, 3, 5, 1.0F));
         put("galena",       new OreSpheroidDefinition(SpheroidList.MAP_STONES, 7, 10, 4, 7, 2.5F)); // same as copper, but twice as rare

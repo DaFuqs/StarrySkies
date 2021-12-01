@@ -17,8 +17,8 @@ public class HugeUnderPlantDecorator extends SpheroidDecorator {
     private BlockState FIRST_BLOCKSTATE;
     private BlockState LAST_BLOCKSTATE;
     private final float PLANT_CHANCE;
-    private int MIN_HEIGHT;
-    private int MAX_HEIGHT;
+    private final int MIN_HEIGHT;
+    private final int MAX_HEIGHT;
 
     /**
      * A chance of 0 = 0%, 100 = 100%

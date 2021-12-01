@@ -89,7 +89,7 @@ public class SpheroidListCinderscapes extends SpheroidList {
         SpheroidType ROSE_QUARTZ = new ModularSpheroidType(null, 5, 10,  crystalline_rose_quartz);
         SpheroidType SMOKY_QUARTZ = new ModularSpheroidType(null, 5, 10,  crystalline_smoky_quartz);
 
-        ArrayList QUARTZS = new ArrayList<BlockState>() {{
+        ArrayList<BlockState> QUARTZS = new ArrayList<>() {{
             add(crystalline_quartz);
             add(crystalline_sulfur_quartz);
             add(crystalline_rose_quartz);
@@ -98,7 +98,7 @@ public class SpheroidListCinderscapes extends SpheroidList {
         SpheroidType RAINBOW_QUARTZ = new RainbowSpheroidType(null, 5, 10, QUARTZS);
 
         PlantDecorator CRYSTINIUM_DECORATOR = new PlantDecorator(crystinium, 0.03F);
-        ArrayList QUARTZ_ORES = new ArrayList<BlockState>() {{
+        ArrayList<BlockState> QUARTZ_ORES = new ArrayList<>() {{
             add(Blocks.NETHER_QUARTZ_ORE.getDefaultState());
             add(sulfur_quartz_ore);
             add(rose_quartz_ore);

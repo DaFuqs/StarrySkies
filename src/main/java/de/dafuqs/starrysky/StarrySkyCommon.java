@@ -1,9 +1,7 @@
 package de.dafuqs.starrysky;
 
 import de.dafuqs.starrysky.advancements.ProximityAdvancementCheckEvent;
-import de.dafuqs.starrysky.commands.StarrySkyCommands;
 import de.dafuqs.starrysky.configs.StarrySkyConfig;
-import de.dafuqs.starrysky.spheroid.DecoratorFeatures;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
@@ -43,10 +41,10 @@ public class StarrySkyCommon implements ModInitializer {
         STARRY_SKY_CONFIG = AutoConfig.getConfigHolder(StarrySkyConfig.class).getConfig();
 
         // Register all the stuff
-        StarrySkyDimension.setupDimension();
-        StarrySkyDimension.setupPortals();
-        StarrySkyCommands.initialize();
-        DecoratorFeatures.initialize();
+        //StarrySkyDimension.setupDimension();
+        //StarrySkyDimension.setupPortals();
+        //StarrySkyCommands.initialize();
+        //DecoratorFeatures.initialize();
 
         // triggers everytime a world is loaded
         // so for overworld, nether, ... (they all share the same seed)

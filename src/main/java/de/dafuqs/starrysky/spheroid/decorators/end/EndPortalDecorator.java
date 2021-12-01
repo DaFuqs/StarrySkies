@@ -20,7 +20,7 @@ public class EndPortalDecorator extends SpheroidDecorator {
     }
 
     public boolean generate(StructureWorldAccess structureWorldAccess, BlockPos blockPos, boolean open) {
-        Iterator var6 = BlockPos.iterate(new BlockPos(blockPos.getX() - 4, blockPos.getY() - 1, blockPos.getZ() - 4), new BlockPos(blockPos.getX() + 4, blockPos.getY() + 32, blockPos.getZ() + 4)).iterator();
+        Iterator<BlockPos> var6 = BlockPos.iterate(new BlockPos(blockPos.getX() - 4, blockPos.getY() - 1, blockPos.getZ() - 4), new BlockPos(blockPos.getX() + 4, blockPos.getY() + 32, blockPos.getZ() + 4)).iterator();
 
         while(true) {
             BlockPos blockPos2;
@@ -32,17 +32,14 @@ public class EndPortalDecorator extends SpheroidDecorator {
                     }
 
                     BlockPos blockPos3 = blockPos.up(2);
-                    Iterator var11 = Direction.Type.HORIZONTAL.iterator();
-
-                    while(var11.hasNext()) {
-                        Direction direction = (Direction)var11.next();
+                    for (Direction direction : Direction.Type.HORIZONTAL) {
                         structureWorldAccess.setBlockState(blockPos3.offset(direction), Blocks.WALL_TORCH.getDefaultState().with(WallTorchBlock.FACING, direction), 3);
                     }
 
                     return true;
                 }
 
-                blockPos2 = (BlockPos)var6.next();
+                blockPos2 = var6.next();
                 bl = blockPos2.isWithinDistance(blockPos, 2.5D);
             } while(!bl && !blockPos2.isWithinDistance(blockPos, 3.5D));
 
