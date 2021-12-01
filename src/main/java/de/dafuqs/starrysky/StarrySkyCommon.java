@@ -3,7 +3,7 @@ package de.dafuqs.starrysky;
 import de.dafuqs.starrysky.advancements.ProximityAdvancementCheckEvent;
 import de.dafuqs.starrysky.commands.StarrySkyCommands;
 import de.dafuqs.starrysky.configs.StarrySkyConfig;
-import de.dafuqs.starrysky.dimension.DecoratorFeatures;
+import de.dafuqs.starrysky.spheroid.DecoratorFeatures;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;

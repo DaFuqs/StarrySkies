@@ -1,9 +1,9 @@
-package de.dafuqs.starrysky.dimension.decorators;
+package de.dafuqs.starrysky.spheroid.decorators;
 
 import com.google.common.collect.ImmutableList;
-import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
-import net.minecraft.block.BlockState;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -17,9 +17,8 @@ import java.util.List;
 import java.util.Random;
 
 public class GlowLichenDecorator extends SpheroidDecorator {
-
-    // TODO: TEST
-    private final List<BlockState> placeableOn = ImmutableList.of(Blocks.STONE.getDefaultState(), Blocks.ANDESITE.getDefaultState(), Blocks.DIORITE.getDefaultState(), Blocks.GRANITE.getDefaultState(), Blocks.DRIPSTONE_BLOCK.getDefaultState(), Blocks.CALCITE.getDefaultState(), Blocks.TUFF.getDefaultState(), Blocks.DEEPSLATE.getDefaultState());
+    
+    private final List<Block> placeableOn = ImmutableList.of(Blocks.STONE, Blocks.ANDESITE, Blocks.DIORITE, Blocks.GRANITE, Blocks.DRIPSTONE_BLOCK, Blocks.CALCITE, Blocks.TUFF, Blocks.DEEPSLATE);
     private final GlowLichenFeatureConfig glowLichenFeatureConfig = new GlowLichenFeatureConfig(5, true, true, true, 0.5F, placeableOn);
     private final float chance;
 

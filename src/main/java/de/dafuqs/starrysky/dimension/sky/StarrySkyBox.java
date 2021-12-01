@@ -85,7 +85,7 @@ public class StarrySkyBox {
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder buffer = tessellator.getBuffer();
 
-            Matrix4f matrix4f = matrices.peek().getModel();
+            Matrix4f matrix4f = matrices.peek().getPositionMatrix();
             buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR_LIGHT);
             buffer.vertex(matrix4f, -distance, -distance, -distance).texture(0.0F, 0.0F).color(color, color, color, color).light(vertexLight).next();
             buffer.vertex(matrix4f, -distance, -distance, distance).texture(0.0F, 1.0F).color(color, color, color, color).light(vertexLight).next();

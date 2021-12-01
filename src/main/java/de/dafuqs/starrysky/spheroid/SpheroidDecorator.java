@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.dimension;
+package de.dafuqs.starrysky.spheroid;
 
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.chunk.Chunk;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,7 +27,7 @@ public abstract class SpheroidDecorator {
      */
     public abstract void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random);
 
-    protected ArrayList<BlockPos> getDecorationBlockPosInChunk(Chunk chunk, ArrayList<BlockPos> decorationBlocks) {
+    protected ArrayList<BlockPos> getDecorationBlockPosInChunk(Chunk chunk, @NotNull ArrayList<BlockPos> decorationBlocks) {
         ArrayList<BlockPos> decorationBlockPosInChunk = new ArrayList<>();
         for(BlockPos currentDecorationPos : decorationBlocks) {
             if(Support.isBlockPosInChunkPos(chunk.getPos(), currentDecorationPos)) {
@@ -36,7 +37,7 @@ public abstract class SpheroidDecorator {
         return decorationBlockPosInChunk;
     }
 
-    protected void placeLootChestAtPosition(StructureWorldAccess world, BlockPos blockPos, Identifier lootTable, Random random) {
+    protected void placeLootChestAtPosition(@NotNull StructureWorldAccess world, BlockPos blockPos, Identifier lootTable, Random random) {
         BlockState chestBlockState = Blocks.CHEST.getDefaultState();
 
         // if the chest is placed in water: waterlog it!
@@ -48,21 +49,17 @@ public abstract class SpheroidDecorator {
         int r = random.nextInt(4);
         Direction randomDirection;
         switch (r) {
-            case 0: {
+            case 0 -> {
                 randomDirection = Direction.NORTH;
-                break;
             }
-            case 1: {
+            case 1 -> {
                 randomDirection = Direction.SOUTH;
-                break;
             }
-            case 2: {
+            case 2 -> {
                 randomDirection = Direction.EAST;
-                break;
             }
-            default: {
+            default -> {
                 randomDirection = Direction.WEST;
-                break;
             }
         }
 

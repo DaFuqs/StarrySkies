@@ -1,7 +1,7 @@
-package de.dafuqs.starrysky.dimension.decorators;
+package de.dafuqs.starrysky.spheroid.decorators;
 
 import de.dafuqs.starrysky.Support;
-import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

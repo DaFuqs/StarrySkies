@@ -15,12 +15,14 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.PortalUtil;
+import net.minecraft.world.BlockLocating;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.dimension.AreaHelper;
 import net.minecraft.world.dimension.DimensionType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -31,7 +33,7 @@ public class StarrySkyDimensionTravelHandler {
     public static final BlockPos END_SPAWN_BLOCK_POS = new BlockPos(10, 64, 0);
     public static final BlockPos OVERWORLD_SPAWN_BLOCK_POS = new BlockPos(16, 85, 16);
 
-    public static ServerWorld modifyNetherPortalDestination(Entity thisEntity, ServerWorld serverWorld) {
+    public static ServerWorld modifyNetherPortalDestination(@NotNull Entity thisEntity, ServerWorld serverWorld) {
         if(thisEntity.getEntityWorld().getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
             return StarrySkyCommon.starryWorldNether;
         } else if(thisEntity.getEntityWorld().getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {
@@ -66,18 +68,17 @@ public class StarrySkyDimensionTravelHandler {
             }
 
             entity.moveToWorld(destinationServerWorld);
-            return true;
         } else {
             // collision box doesn't collide enough
             // since that's what vanilla would check, too we can
             // cancel it to save on calculation time and prevent errors
-            return true;
         }
+        return true;
     }
 
     // Handler for Entity.getTeleportTarget
     // returning null means letting vanilla handling it the default way
-    public static TeleportTarget handleGetTeleportTarget(Entity thisEntity, ServerWorld destination) {
+    public static @Nullable TeleportTarget handleGetTeleportTarget(@NotNull Entity thisEntity, ServerWorld destination) {
         boolean isTravellingToStarryEnd = thisEntity.world.getRegistryKey() == StarrySkyDimension.STARRY_SKY_WORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.STARRY_SKY_END_WORLD_KEY;
         boolean isTravellingBackFromStarryEnd = thisEntity.world.getRegistryKey() == StarrySkyDimension.STARRY_SKY_END_WORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.STARRY_SKY_WORLD_KEY;
         if (!isTravellingBackFromStarryEnd && !isTravellingToStarryEnd) {
@@ -101,7 +102,7 @@ public class StarrySkyDimensionTravelHandler {
                 // no teleport / vanilla-checks.
                 // Non-Player entities won't create new nether portals
                 // and none do already exist
-                Optional<TeleportTarget> a = destination.getPortalForcer().getPortalRect(blockPos3, isTravellingToStarryNether).map((arg) -> {
+                Optional<TeleportTarget> a = destination.getPortalForcer().getPortalRect(blockPos3, isTravellingToStarryNether, worldBorder).map((arg) -> {
                     BlockPos lastNetherPortalPosition = ((EntityAccessor) thisEntity).getLastNetherPortalPosition();
                     BlockState blockState = thisEntity.world.getBlockState(lastNetherPortalPosition);
 
@@ -109,7 +110,7 @@ public class StarrySkyDimensionTravelHandler {
                     Vec3d vec3d2;
                     if (blockState.contains(Properties.HORIZONTAL_AXIS)) {
                         axis2 = blockState.get(Properties.HORIZONTAL_AXIS);
-                        PortalUtil.Rectangle rectangle = PortalUtil.getLargestRectangle(lastNetherPortalPosition, axis2, 21, Direction.Axis.Y, 21, (blockPos) -> {
+                        BlockLocating.Rectangle rectangle = BlockLocating.getLargestRectangle(lastNetherPortalPosition, axis2, 21, Direction.Axis.Y, 21, (blockPos) -> {
                             return thisEntity.getEntityWorld().getBlockState(blockPos) == blockState;
                         });
                         vec3d2 = AreaHelper.entityPosInPortal(rectangle, axis2, thisEntity.getPos(), thisEntity.getDimensions(thisEntity.getPose()));
@@ -127,7 +128,7 @@ public class StarrySkyDimensionTravelHandler {
                 // no portal exists => generate one, if player
                 } else if(thisEntity instanceof ServerPlayerEntity) {
                     Direction.Axis axis = thisEntity.world.getBlockState(((EntityAccessor) thisEntity).getLastNetherPortalPosition()).getOrEmpty(NetherPortalBlock.AXIS).orElse(Direction.Axis.X);
-                    Optional<PortalUtil.Rectangle> optional2 = destination.getPortalForcer().createPortal(blockPos3, axis);
+                    Optional<BlockLocating.Rectangle> optional2 = destination.getPortalForcer().createPortal(blockPos3, axis);
                     if (optional2.isEmpty()) {
                         StarrySkyCommon.log(ERROR, "Unable to create a portal, likely target out of world border");
                     } else {
@@ -146,7 +147,7 @@ public class StarrySkyDimensionTravelHandler {
             if (isTravellingToStarryEnd) {
                 blockPos2 = END_SPAWN_BLOCK_POS;
             } else {
-                // vanilla code: (but only the overworld has a spawn point so the vanilla way won't work and we need a hard coded point)
+                // vanilla code: (but only the overworld has a spawn point so the vanilla way won't work, and we need a hard coded point)
                 //blockPos2 = destination.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, destination.getSpawnPos());
                 blockPos2 = OVERWORLD_SPAWN_BLOCK_POS;
             }

@@ -1,4 +1,4 @@
-package de.dafuqs.starrysky.dimension;
+package de.dafuqs.starrysky.spheroid;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import net.minecraft.util.Identifier;

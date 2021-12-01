@@ -10,7 +10,10 @@ import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.world.gen.random.SimpleRandom;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -110,18 +113,18 @@ public class SystemGenerator {
 
         return curSystem;
     }
-
-
-    private ChunkRandom getSystemRandom(Point systemPoint) {
+    
+    private @NotNull ChunkRandom getSystemRandom(@NotNull Point systemPoint) {
         int firstChunkPosX = systemPoint.x * SYSTEM_SIZE_CHUNKS;
         int firstChunkPosZ = systemPoint.y * SYSTEM_SIZE_CHUNKS;
-        ChunkRandom systemRandom = new ChunkRandom(StarrySkyCommon.starryWorld.getSeed());
-        systemRandom.setTerrainSeed(firstChunkPosX, firstChunkPosZ); // and the seed from the first chunk+
+        ChunkRandom systemRandom = new ChunkRandom(new SimpleRandom(StarrySkyCommon.starryWorld.getSeed()));
+        systemRandom.setCarverSeed(StarrySkyCommon.starryWorld.getSeed(), firstChunkPosX, firstChunkPosZ); // and the seed from the first chunk+
         StarrySkyCommon.log(DEBUG, "Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
         return systemRandom;
     }
 
-    private BlockPos getBlockPosInSystem(Point systemPoint, int radius, BlockPos originalBlockPos) {
+    @Contract("_, _, _ -> new")
+    private @NotNull BlockPos getBlockPosInSystem(@NotNull Point systemPoint, int radius, @NotNull BlockPos originalBlockPos) {
         int newX = originalBlockPos.getX();
         int newZ = originalBlockPos.getZ();
 

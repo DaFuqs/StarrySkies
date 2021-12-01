@@ -1,6 +1,6 @@
-package de.dafuqs.starrysky.dimension.decorators.end;
+package de.dafuqs.starrysky.spheroid.decorators.end;
 
-import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WallTorchBlock;

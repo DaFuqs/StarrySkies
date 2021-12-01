@@ -3,7 +3,7 @@ package de.dafuqs.starrysky.spheroid.spheroids.unique;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
@@ -16,7 +16,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.random.ChunkRandom;
 
 import java.util.ArrayList;
 
@@ -116,13 +116,12 @@ public class OceanMonumentSpheroid extends Spheroid {
     @Override
     public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
         if (shouldPopulateEntities(chunkPos)) {
-            for (BlockPos guardianposition : guardianPositions) {
-                if (Support.isBlockPosInChunkPos(chunkPos, guardianposition)) {
+            for (BlockPos guardianPosition : guardianPositions) {
+                if (Support.isBlockPosInChunkPos(chunkPos, guardianPosition)) {
                     int xCord = chunkPos.x;
                     int zCord = chunkPos.z;
-
-                    ChunkRandom sharedseedrandom = new ChunkRandom();
-                    sharedseedrandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
+    
+                    chunkRandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
 
                     MobEntity mobentity;
                     if (random.nextFloat() < 0.08) {
@@ -133,11 +132,11 @@ public class OceanMonumentSpheroid extends Spheroid {
 
                     if (mobentity != null) {
                         float width = mobentity.getWidth();
-                        double xLength = MathHelper.clamp(guardianposition.getX(), (double) chunkPos.getStartX() + (double) width, (double) chunkPos.getStartX() + 16.0D - (double) width);
-                        double zLength = MathHelper.clamp(guardianposition.getZ(), (double) chunkPos.getStartZ() + (double) width, (double) chunkPos.getStartZ() + 16.0D - (double) width);
+                        double xLength = MathHelper.clamp(guardianPosition.getX(), (double) chunkPos.getStartX() + (double) width, (double) chunkPos.getStartX() + 16.0D - (double) width);
+                        double zLength = MathHelper.clamp(guardianPosition.getZ(), (double) chunkPos.getStartZ() + (double) width, (double) chunkPos.getStartZ() + 16.0D - (double) width);
 
                         try {
-                            mobentity.refreshPositionAndAngles(xLength, guardianposition.getY(), zLength, sharedseedrandom.nextFloat() * 360.0F, 0.0F);
+                            mobentity.refreshPositionAndAngles(xLength, guardianPosition.getY(), zLength, chunkRandom.nextFloat() * 360.0F, 0.0F);
                             mobentity.setPersistent();
                             if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
                                 mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);

@@ -1,10 +1,10 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.dimension.decorators.GroundDecorator;
-import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
+import de.dafuqs.starrysky.spheroid.decorators.GroundDecorator;
+import de.dafuqs.starrysky.spheroid.decorators.PlantDecorator;
 import net.fabricmc.loader.api.FabricLoader;
 
 import static org.apache.logging.log4j.Level.INFO;

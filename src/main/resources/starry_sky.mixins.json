@@ -10,8 +10,8 @@
     "EntityMixin"
   ],
   "client": [
-    "SkyPropertiesMixin",
-    "WorldRendererMixin"
+    "client.DimensionEffectsMixin",
+    "client.WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

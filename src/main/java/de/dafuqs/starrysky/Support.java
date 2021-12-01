@@ -10,6 +10,9 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -41,7 +44,8 @@ public class Support {
        add(new Point(-1, 1));
     }};
 
-    public static SpheroidDistance getClosestSpheroidToPlayer(PlayerEntity serverPlayerEntity) {
+    @Contract("_ -> new")
+    public static @NotNull SpheroidDistance getClosestSpheroidToPlayer(@NotNull PlayerEntity serverPlayerEntity) {
         Vec3d playerPos = serverPlayerEntity.getPos();
         BlockPos playerPosBlock = new BlockPos((int) playerPos.x, (int) playerPos.y, (int) playerPos.z);
         List<Spheroid> localSystem = SystemGenerator.getSystemGeneratorOfWorld(serverPlayerEntity.getEntityWorld().getRegistryKey()).getSystemAtChunkPos(playerPosBlock.getX() / 16, playerPosBlock.getZ() / 16);
@@ -59,7 +63,7 @@ public class Support {
         return new SpheroidDistance(closestSpheroid, currentMinDistance);
     }
 
-    public static SpheroidDistance getClosestSpheroid3x3(ServerWorld serverWorld, BlockPos position, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier) {
+    public static @Nullable SpheroidDistance getClosestSpheroid3x3(@NotNull ServerWorld serverWorld, BlockPos position, SpheroidAdvancementIdentifier spheroidAdvancementIdentifier) {
         SystemGenerator spheroidGenerator = SystemGenerator.getSystemGeneratorOfWorld(serverWorld.getRegistryKey());
 
         Spheroid closestSpheroid = null;
@@ -86,7 +90,7 @@ public class Support {
         return null;
     }
 
-    public static <E> E getWeightedRandom(LinkedHashMap<E, Float> weights, Random random) {
+    public static <E> E getWeightedRandom(@NotNull LinkedHashMap<E, Float> weights, Random random) {
         E result = null;
         double bestValue = Double.MAX_VALUE;
 
@@ -107,7 +111,8 @@ public class Support {
      * @param chunkZ Z coordinate of chunk
      * @return the system point
      */
-    public static Point getSystemCoordinateFromChunkCoordinate(int chunkX, int chunkZ) {
+    @Contract("_, _ -> new")
+    public static @NotNull Point getSystemCoordinateFromChunkCoordinate(int chunkX, int chunkZ) {
         int sysX;
         if (chunkX >= 0) {
             sysX = chunkX / StarrySkyCommon.STARRY_SKY_CONFIG.systemSizeChunks;
@@ -130,7 +135,7 @@ public class Support {
      * @param highest
      * @return
      */
-    public static int getRandomBetween(Random random, int lowest, int highest) {
+    public static int getRandomBetween(@NotNull Random random, int lowest, int highest) {
         return random.nextInt(highest - lowest + 1) + lowest;
     }
 
@@ -138,39 +143,39 @@ public class Support {
         return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2));
     }
 
-    public static double getDistance(BlockPos blockPos1, BlockPos blockpos2) {
+    public static double getDistance(@NotNull BlockPos blockPos1, @NotNull BlockPos blockpos2) {
         return getDistance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockpos2.getX(), blockpos2.getY(), blockpos2.getZ());
     }
 
-    public static boolean isBlockPosInChunkPos(ChunkPos chunkPos, BlockPos blockPos) {
+    public static boolean isBlockPosInChunkPos(@NotNull ChunkPos chunkPos, @NotNull BlockPos blockPos) {
         return (blockPos.getX() >= chunkPos.getStartX()
                 && blockPos.getX() < chunkPos.getStartX() + 16
                 && blockPos.getZ() >= chunkPos.getStartZ()
                 && blockPos.getZ() < chunkPos.getStartZ() + 16);
     }
 
-    public static int getLowerGroundBlock(WorldAccess world, BlockPos position, int minHeight) {
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
+    public static int getLowerGroundBlock(WorldAccess world, @NotNull BlockPos position, int minHeight) {
+        BlockPos.Mutable blockPos$Mutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
 
         //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
-        while (blockpos$Mutable.getY() > minHeight) {
-            if (!world.isAir(blockpos$Mutable)) {
+        while (blockPos$Mutable.getY() > minHeight) {
+            if (!world.isAir(blockPos$Mutable)) {
                 break;
             }
-            blockpos$Mutable.move(Direction.DOWN);
+            blockPos$Mutable.move(Direction.DOWN);
         }
-        return blockpos$Mutable.getY();
+        return blockPos$Mutable.getY();
     }
 
-    public static int getUpperGroundBlock(WorldAccess world, BlockPos position, int minHeight) {
-        BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
+    public static int getUpperGroundBlock(WorldAccess world, @NotNull BlockPos position, int minHeight) {
+        BlockPos.Mutable blockPos$Mutable = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
 
         //if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
-        while (blockpos$Mutable.getY() > minHeight) {
-            if (!world.isAir(blockpos$Mutable)) {
-                return blockpos$Mutable.getY();
+        while (blockPos$Mutable.getY() > minHeight) {
+            if (!world.isAir(blockPos$Mutable)) {
+                return blockPos$Mutable.getY();
             }
-            blockpos$Mutable.move(Direction.UP);
+            blockPos$Mutable.move(Direction.UP);
         }
         return -1;
     }

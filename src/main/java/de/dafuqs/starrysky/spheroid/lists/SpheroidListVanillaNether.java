@@ -2,12 +2,12 @@ package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.dimension.decorators.HugePlantDecorator;
-import de.dafuqs.starrysky.dimension.decorators.HugeUnderPlantDecorator;
-import de.dafuqs.starrysky.dimension.decorators.PlantDecorator;
+import de.dafuqs.starrysky.spheroid.decorators.HugePlantDecorator;
+import de.dafuqs.starrysky.spheroid.decorators.HugeUnderPlantDecorator;
+import de.dafuqs.starrysky.spheroid.decorators.PlantDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinitions;
 import de.dafuqs.starrysky.spheroid.types.*;
 import de.dafuqs.starrysky.spheroid.types.unique.NetherFortressSpheroidType;

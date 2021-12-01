@@ -4,7 +4,7 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.dimension.decorators.*;
+import de.dafuqs.starrysky.spheroid.decorators.*;
 import de.dafuqs.starrysky.spheroid.types.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BambooBlock;

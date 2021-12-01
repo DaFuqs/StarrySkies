@@ -5,7 +5,7 @@ import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.spheroid.lists.*;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.random.ChunkRandom;
 
 import java.util.ArrayList;
 import java.util.HashMap;

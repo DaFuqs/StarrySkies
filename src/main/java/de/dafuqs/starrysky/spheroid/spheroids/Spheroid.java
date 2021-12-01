@@ -3,7 +3,7 @@ package de.dafuqs.starrysky.spheroid.spheroids;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -22,7 +22,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.*;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.random.ChunkRandom;
 import org.apache.logging.log4j.Level;
 
 import java.io.Serializable;
@@ -166,15 +166,14 @@ public abstract class Spheroid implements Serializable {
             for (SpheroidEntitySpawnDefinition entityTypeToSpawn : entityTypesToSpawn) {
                 int xCord = chunkPos.getStartX();
                 int zCord = chunkPos.getStartZ();
-
-                ChunkRandom sharedSeedRandom = new ChunkRandom();
-                sharedSeedRandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
+    
+                chunkRandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
 
                 int randomAmount = Support.getRandomBetween(random, entityTypeToSpawn.minAmount, entityTypeToSpawn.maxAmount);
                 for (int i = 0; i < randomAmount; i++) {
-                    int startingX = this.getPosition().getX(); //xCord + sharedSeedRandom.nextInt(4);
+                    int startingX = this.getPosition().getX();
                     int startingY = this.getPosition().getY() + this.getRadius();
-                    int startingZ = this.getPosition().getZ(); //zCord + sharedSeedRandom.nextInt(4);
+                    int startingZ = this.getPosition().getZ();
                     int minHeight = this.getPosition().getY() - this.getRadius();
                     BlockPos.Mutable blockPos = new BlockPos.Mutable(startingX, startingY, startingZ);
                     int height = Support.getLowerGroundBlock(chunkRegion, blockPos, minHeight) + 1;
@@ -187,9 +186,8 @@ public abstract class Spheroid implements Serializable {
                             double zLength = MathHelper.clamp(startingZ, (double) zCord + (double) width, (double) zCord + 16.0D - (double) width);
 
                             try {
-                                entity.refreshPositionAndAngles(xLength, height, zLength, sharedSeedRandom.nextFloat() * 360.0F, 0.0F);
-                                if (entity instanceof MobEntity) {
-                                    MobEntity mobentity = (MobEntity) entity;
+                                entity.refreshPositionAndAngles(xLength, height, zLength, chunkRandom.nextFloat() * 360.0F, 0.0F);
+                                if (entity instanceof MobEntity mobentity) {
                                     if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
                                         mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);
                                         boolean success = chunkRegion.spawnEntity(mobentity);

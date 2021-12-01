@@ -3,11 +3,11 @@ package de.dafuqs.starrysky.dimension.sky;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.SkyProperties;
+import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
-public class StarrySkyProperties extends SkyProperties {
+public class StarrySkyProperties extends DimensionEffects {
 
     public StarrySkyProperties() {
         super(StarrySkyCommon.STARRY_SKY_CONFIG.cloudHeight, true, SkyType.NORMAL, true, false);

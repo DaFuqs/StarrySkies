@@ -30,9 +30,10 @@
     "starry_sky.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "minecraft": ">=1.18.0",
+    "fabricloader": ">=0.12.6",
     "fabric": "*",
-    "minecraft": ">=1.17.0"
+    "cloth-config2": ">=5.0.34"
   },
   "suggests": { }
 }

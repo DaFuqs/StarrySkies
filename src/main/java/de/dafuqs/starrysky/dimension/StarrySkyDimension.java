@@ -1,8 +1,8 @@
 package de.dafuqs.starrysky.dimension;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.dimension.biome.StarrySkyBiomeProvider;
 import net.kyrptonaught.customportalapi.CustomPortalApiRegistry;
+import net.kyrptonaught.customportalapi.util.PortalLink;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -25,13 +25,16 @@ public class StarrySkyDimension {
     public static void setupDimension(){
         StarrySkyCommon.log(INFO, "Registering chunk generator...");
         Registry.register(Registry.CHUNK_GENERATOR, new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_chunk_generator"), StarrySkyChunkGenerator.CODEC);
-        StarrySkyBiomeProvider.registerBiomeProvider();
     }
 
     public static void setupPortals() {
         StarrySkyCommon.log(INFO, "Setting up portals...");
-        Block portalFrameBlock = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.starrySkyPortalFrameBlock.toLowerCase()));
-        CustomPortalApiRegistry.addPortal(portalFrameBlock, STARRY_SKY_DIMENSION_ID, 11983869); // light, greyish blue
+        
+        Identifier portalFrameBlockIdentifier = new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.starrySkyPortalFrameBlock.toLowerCase());
+        Block portalFrameBlock = Registry.BLOCK.get(portalFrameBlockIdentifier);
+        
+        PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, STARRY_SKY_DIMENSION_ID, 11983869); // light, greyish blue
+        CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);
     }
 
 }

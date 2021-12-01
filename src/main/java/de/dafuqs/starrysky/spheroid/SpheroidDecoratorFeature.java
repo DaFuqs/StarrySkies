@@ -1,12 +1,15 @@
-package de.dafuqs.starrysky.dimension;
+package de.dafuqs.starrysky.spheroid;
 
 import com.mojang.serialization.Codec;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.StarrySkyChunkGenerator;
+import de.dafuqs.starrysky.dimension.SystemGenerator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import org.apache.logging.log4j.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -17,7 +20,7 @@ public class SpheroidDecoratorFeature extends Feature {
     }
 
     @Override
-    public boolean generate(FeatureContext featureContext) {
+    public boolean generate(@NotNull FeatureContext featureContext) {
         if(featureContext.getGenerator() instanceof StarrySkyChunkGenerator) {
             SystemGenerator systemGenerator = SystemGenerator.getSystemGeneratorOfWorld(featureContext.getWorld().toServerWorld().getRegistryKey());
             List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(featureContext.getOrigin().getX() / 16, featureContext.getOrigin().getZ() / 16);

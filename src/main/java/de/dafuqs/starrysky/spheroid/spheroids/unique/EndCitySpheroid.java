@@ -2,7 +2,7 @@ package de.dafuqs.starrysky.spheroid.spheroids.unique;
 
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.dimension.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
@@ -23,9 +23,10 @@ import net.minecraft.world.MobSpawnerEntry;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.random.ChunkRandom;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Random;
 
 public class EndCitySpheroid extends Spheroid {
@@ -187,7 +188,7 @@ public class EndCitySpheroid extends Spheroid {
         compoundTag2.putByte("Color", shulkerColor);
         compoundTag.put("Entity", compoundTag2);
 
-        placeSpawner(worldAccess, spawnerPos, new MobSpawnerEntry(compoundTag));
+        placeSpawner(worldAccess, spawnerPos, new MobSpawnerEntry(compoundTag, Optional.empty()));
     }
 
     private void placeBrewingStand(WorldAccess worldAccess, BlockPos blockPos) {
@@ -208,7 +209,7 @@ public class EndCitySpheroid extends Spheroid {
         ItemStack healingPotionStack = new ItemStack(Items.POTION, 1);
         NbtCompound potionTag = new NbtCompound();
         potionTag.putString("Potion", new Identifier("strong_healing").toString());
-        healingPotionStack.setTag(potionTag);
+        healingPotionStack.setNbt(potionTag);
 
         if (blockEntity instanceof BrewingStandBlockEntity) {
             ((BrewingStandBlockEntity) blockEntity).setStack(0, healingPotionStack.copy());

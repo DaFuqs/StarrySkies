@@ -16,10 +16,11 @@
   "carvers": {},
   "features": [
     [],
-    [ "starry_sky:starry_sky_spheroid_decorator" ],
     [],
     [],
-    ["minecraft:end_spike"],
+    [],
+    [ "minecraft:end_spike" ],
+    [],
     [],
     [],
     [],

@@ -2,8 +2,21 @@
   "type": "starry_sky:starry_sky_end_type",
   "generator": {
     "biome_source": {
-      "seed": 0,
-      "type": "starry_sky:end_biome_source"
+      "biomes": [
+        {
+          "parameters": {
+            "erosion": 0.0,
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "humidity": 0.0,
+            "continentalness": 0.0
+          },
+          "biome": "starry_sky:starry_sky_end_biome"
+        }
+      ],
+      "type": "minecraft:multi_noise"
     },
     "seed": 0,
     "settings": "minecraft:end",
