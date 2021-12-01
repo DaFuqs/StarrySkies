@@ -60,36 +60,26 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
                     ChunkGeneratorSettings.REGISTRY_CODEC.fieldOf("settings").forGetter((surfaceChunkGenerator) -> () -> surfaceChunkGenerator.settings))
                 .apply(instance, instance.stable(StarrySkyChunkGenerator::new)));
 
-    public StarrySkyChunkGenerator(BiomeSource biomeSource, long l, @NotNull Supplier<ChunkGeneratorSettings> chunkGeneratorType) {
-        this(biomeSource, biomeSource, l, chunkGeneratorType.get());
-    }
-
-    private StarrySkyChunkGenerator(BiomeSource biomeSource, BiomeSource biomeSource2, long seed, @NotNull ChunkGeneratorSettings chunkGeneratorType) {
-        super(biomeSource, biomeSource2, new StructuresConfig(Optional.empty(), Collections.emptyMap()), seed); // no structures
+    public StarrySkyChunkGenerator(BiomeSource biomeSource, long seed, @NotNull Supplier<ChunkGeneratorSettings> chunkGeneratorType) {
+        super(biomeSource, biomeSource, new StructuresConfig(Optional.empty(), Collections.emptyMap()), seed); // no structures
         this.seed = seed;
-        this.settings = chunkGeneratorType;
+        this.settings = chunkGeneratorType.get();
 
         // Is it overworld, nether or end?
         // There doesn't seem to be a better way to distinguish these currently?
         SpheroidLoader.SpheroidDimensionType spheroidDimensionType;
-        if (Blocks.NETHERRACK.getDefaultState().equals(chunkGeneratorType.getDefaultBlock())) {
+        if (Blocks.NETHERRACK.getDefaultState().equals(settings.getDefaultBlock())) {
             spheroidDimensionType = SpheroidLoader.SpheroidDimensionType.NETHER;
-
-            // config values
             this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeightNether;
             this.FLOOR_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.floorBlockNether.toLowerCase())).getDefaultState();
             this.BOTTOM_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.bottomBlockNether.toLowerCase())).getDefaultState();
-        } else if (Blocks.END_STONE.getDefaultState().equals(chunkGeneratorType.getDefaultBlock())) {
+        } else if (Blocks.END_STONE.getDefaultState().equals(settings.getDefaultBlock())) {
             spheroidDimensionType = SpheroidLoader.SpheroidDimensionType.END;
-
-            // config values
             this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeightEnd;
             this.FLOOR_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.floorBlockEnd.toLowerCase())).getDefaultState();
             this.BOTTOM_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.bottomBlockEnd.toLowerCase())).getDefaultState();
         } else {
             spheroidDimensionType = SpheroidLoader.SpheroidDimensionType.OVERWORLD;
-
-            // config values
             this.FLOOR_HEIGHT = StarrySkyCommon.STARRY_SKY_CONFIG.floorHeightOverworld;
             this.FLOOR_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.floorBlockOverworld.toLowerCase())).getDefaultState();
             this.BOTTOM_BLOCK_STATE = Registry.BLOCK.get(new Identifier(StarrySkyCommon.STARRY_SKY_CONFIG.bottomBlockOverworld.toLowerCase())).getDefaultState();

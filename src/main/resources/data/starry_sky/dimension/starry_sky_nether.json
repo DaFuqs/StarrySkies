@@ -19,7 +19,7 @@
       "type": "minecraft:multi_noise"
     },
     "seed": 0,
-    "settings": "minecraft:end",
+    "settings": "minecraft:nether",
     "type": "starry_sky:starry_sky_chunk_generator"
   }
 }
