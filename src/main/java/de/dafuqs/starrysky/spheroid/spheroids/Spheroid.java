@@ -24,6 +24,7 @@ import net.minecraft.world.*;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.random.ChunkRandom;
 import org.apache.logging.log4j.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -153,7 +154,7 @@ public abstract class Spheroid implements Serializable {
         LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, lootTable);
     }
 
-    public boolean shouldPopulateEntities(ChunkPos chunkPos) {
+    public boolean shouldPopulateEntities(@NotNull ChunkPos chunkPos) {
         return (this.getPosition().getX() >= chunkPos.getStartX()
                 && this.getPosition().getX() <= chunkPos.getStartX() + 15
                 && this.getPosition().getZ() >= chunkPos.getStartZ()
@@ -162,7 +163,7 @@ public abstract class Spheroid implements Serializable {
 
     public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
         if (shouldPopulateEntities(chunkPos)) {
-            StarrySkyCommon.log(Level.INFO, "Populating entities for spheroid in chunk x:" + chunkPos.x + " z:" + chunkPos.z + " (StartX:" + chunkPos.getStartX() + " StartZ:" + chunkPos.getStartZ() + ") " + this.getDescription());
+            StarrySkyCommon.log(Level.DEBUG, "Populating entities for spheroid in chunk x:" + chunkPos.x + " z:" + chunkPos.z + " (StartX:" + chunkPos.getStartX() + " StartZ:" + chunkPos.getStartZ() + ") " + this.getDescription());
             for (SpheroidEntitySpawnDefinition entityTypeToSpawn : entityTypesToSpawn) {
                 int xCord = chunkPos.getStartX();
                 int zCord = chunkPos.getStartZ();
@@ -203,7 +204,7 @@ public abstract class Spheroid implements Serializable {
                     }
                 }
             }
-            StarrySkyCommon.log(Level.INFO, "Finished populating");
+            StarrySkyCommon.log(Level.DEBUG, "Finished populating");
         }
     }
 

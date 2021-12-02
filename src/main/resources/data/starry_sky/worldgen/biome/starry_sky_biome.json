@@ -31,7 +31,16 @@
     [],
     [],
     [],
-    [],
+    [
+      "minecraft:forest_flowers",
+      "minecraft:flower_plain",
+      "minecraft:flower_swamp",
+      "minecraft:flower_warm",
+      "minecraft:flower_default",
+      "minecraft:patch_grass_forest",
+      "minecraft:patch_pumpkin",
+      "minecraft:patch_melon"
+    ],
     []
   ],
   "starts": [],
