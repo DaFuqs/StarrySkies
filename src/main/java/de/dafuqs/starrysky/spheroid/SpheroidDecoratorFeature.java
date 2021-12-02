@@ -27,9 +27,9 @@ public class SpheroidDecoratorFeature extends Feature {
             for(Spheroid spheroid : localSystem) {
                 if(spheroid.shouldDecorate(featureContext.getOrigin())) {
 
-                    StarrySkyCommon.log(Level.INFO, "Decorating spheroid at x:" + featureContext.getOrigin().getX() + " z:" + featureContext.getOrigin().getZ() + spheroid.getDescription());
+                    StarrySkyCommon.log(Level.DEBUG, "Decorating spheroid at x:" + featureContext.getOrigin().getX() + " z:" + featureContext.getOrigin().getZ() + spheroid.getDescription());
                     spheroid.decorate(featureContext.getWorld(), featureContext.getRandom());
-                    StarrySkyCommon.log(Level.INFO, "Finished decorating.");
+                    StarrySkyCommon.log(Level.DEBUG, "Finished decorating.");
                 }
             }
         }

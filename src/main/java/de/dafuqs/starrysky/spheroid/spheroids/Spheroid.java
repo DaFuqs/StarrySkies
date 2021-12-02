@@ -108,7 +108,7 @@ public abstract class Spheroid implements Serializable {
     public void decorate(StructureWorldAccess world, Random random) {
         if (!isDecorated) {
             for (SpheroidDecorator decorator : this.spheroidDecorators) {
-                StarrySkyCommon.log(Level.INFO, "Decorator: " + decorator.getClass());
+                StarrySkyCommon.log(Level.DEBUG, "Decorator: " + decorator.getClass());
                 try {
                     decorator.decorateSpheroid(world, this, this.decorationBlockPositions, random);
                 } catch (RuntimeException e) {

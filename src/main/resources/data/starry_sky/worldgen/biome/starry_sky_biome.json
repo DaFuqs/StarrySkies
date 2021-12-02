@@ -24,7 +24,7 @@
   "features": [
     [],
     [],
-    [],
+    [ "starry_sky:starry_sky_spheroid_decorator" ],
     [],
     [],
     [],

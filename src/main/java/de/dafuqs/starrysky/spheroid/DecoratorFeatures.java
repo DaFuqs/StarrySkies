@@ -4,6 +4,7 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.decorator.BiomePlacementModifier;
 import net.minecraft.world.gen.decorator.PlacementModifier;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -15,9 +16,9 @@ import java.util.List;
 public class DecoratorFeatures {
 
     public static Identifier SPHEROID_DECORATOR_ID = new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_spheroid_decorator");
-    public static Feature<DefaultFeatureConfig> SPHEROID_DECORATOR;
-
-    public static <T extends FeatureConfig> Feature<T> register(Feature<T> feature, Identifier id) {
+    public static Feature<DefaultFeatureConfig> SPHEROID_DECORATOR_FEATURE;
+    
+    public static <T extends FeatureConfig> Feature<T> registerFeature(Feature<T> feature, Identifier id) {
         return Registry.register(Registry.FEATURE, id, feature);
     }
     
@@ -27,7 +28,11 @@ public class DecoratorFeatures {
     }
 
     public static void initialize() {
-        //SPHEROID_DECORATOR = register(new SpheroidDecoratorFeature(DefaultFeatureConfig.CODEC), SPHEROID_DECORATOR_ID);
+        SPHEROID_DECORATOR_FEATURE = registerFeature(new SpheroidDecoratorFeature(DefaultFeatureConfig.CODEC), SPHEROID_DECORATOR_ID);
+        ConfiguredFeature spheroidDecoratorFeature = SPHEROID_DECORATOR_FEATURE.configure(new DefaultFeatureConfig());
+        registerConfiguredAndPlacedFeature(SPHEROID_DECORATOR_ID, spheroidDecoratorFeature, List.of(
+                (BiomePlacementModifier.of())
+        ));
     }
     
 }
