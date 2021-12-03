@@ -43,24 +43,26 @@ public class ProximityAdvancementCheckEvent implements ServerTickEvents.EndTick 
                             StarrySkyCommon.log(DEBUG, "AdvancementIdentifier: " + spheroidAdvancementIdentifier.name());
                             SpheroidAdvancementGroup spheroidAdvancementGroup = spheroidAdvancementIdentifierGroups.spheroidAdvancementIdentifierGroups.get(spheroidAdvancementIdentifier);
 
-                            String groupAdvancementString = "sphere_group_" + spheroidAdvancementGroup.name().toLowerCase();
-                            String identifierAdvancementString = "sphere_" + spheroidAdvancementIdentifier.name().toLowerCase();
-
-                            ServerAdvancementLoader sal = minecraftServer.getAdvancementLoader();
-                            PlayerAdvancementTracker tracker = serverPlayerEntity.getAdvancementTracker();
-
-                            // grant group advancement
-                            Identifier advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, groupAdvancementString);
-                            Advancement advancement = sal.get(advancementIdentifier);
-                            if (advancement != null) {
-                                tracker.grantCriterion(advancement, "seen");
-                            }
-
-                            // grant identifier advancement
-                            advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, identifierAdvancementString);
-                            advancement = sal.get(advancementIdentifier);
-                            if (advancement != null) {
-                                tracker.grantCriterion(advancement, "seen");
+                            if(spheroidAdvancementGroup != null) {
+                                String groupAdvancementString = "sphere_group_" + spheroidAdvancementGroup.name().toLowerCase();
+                                String identifierAdvancementString = "sphere_" + spheroidAdvancementIdentifier.name().toLowerCase();
+    
+                                ServerAdvancementLoader sal = minecraftServer.getAdvancementLoader();
+                                PlayerAdvancementTracker tracker = serverPlayerEntity.getAdvancementTracker();
+    
+                                // grant group advancement
+                                Identifier advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, groupAdvancementString);
+                                Advancement advancement = sal.get(advancementIdentifier);
+                                if (advancement != null) {
+                                    tracker.grantCriterion(advancement, "seen");
+                                }
+    
+                                // grant identifier advancement
+                                advancementIdentifier = new Identifier(StarrySkyCommon.MOD_ID, identifierAdvancementString);
+                                advancement = sal.get(advancementIdentifier);
+                                if (advancement != null) {
+                                    tracker.grantCriterion(advancement, "seen");
+                                }
                             }
                         } else {
                             StarrySkyCommon.log(DEBUG, "No advancementIdentifier :(...");

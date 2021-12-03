@@ -50,6 +50,7 @@ public enum SpheroidAdvancementIdentifier {
     lapis,
     lava,
     magma,
+    moss_cave,
     mossy_cobblestone,
     mycelium,
     oak_wood,

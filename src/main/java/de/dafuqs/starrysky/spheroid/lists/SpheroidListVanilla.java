@@ -18,6 +18,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
 import net.minecraft.state.property.Properties;
+import org.jetbrains.annotations.NotNull;
 
 import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
 import static org.apache.logging.log4j.Level.INFO;
@@ -49,6 +50,8 @@ public class SpheroidListVanilla extends SpheroidList {
 
         public static SpheroidDecorator AZALEA = new PlantDecorator(Blocks.AZALEA.getDefaultState(), 0.03F);
         public static SpheroidDecorator FLOWERING_AZALEA = new PlantDecorator(Blocks.FLOWERING_AZALEA.getDefaultState(), 0.03F);
+        public static SpheroidDecorator SPORE_BLOSSOM = new HangingCaveBlockDecorator(Blocks.SPORE_BLOSSOM.getDefaultState(), 0.05F);
+        public static SpheroidDecorator DRIPLEAF = new DripleafDecorator(8);
 
         public static XMarksTheSpotDecorator X_SPOT_DESERT_PYRAMID = new XMarksTheSpotDecorator(LootTables.DESERT_PYRAMID_CHEST, Blocks.ORANGE_TERRACOTTA.getDefaultState());
         public static XMarksTheSpotDecorator X_SPOT_JUNGLE_TEMPLE = new XMarksTheSpotDecorator(LootTables.JUNGLE_TEMPLE_CHEST, Blocks.MOSSY_COBBLESTONE.getDefaultState());
@@ -195,7 +198,7 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final SpheroidType HAY        = new CoreSpheroidType(SpheroidAdvancementIdentifier.hay, 4, 8, Blocks.HAY_BLOCK.getDefaultState(), MAP_STONES, 2, 4);
     public static final SpheroidType PRISMARINE = new CoreSpheroidType(SpheroidAdvancementIdentifier.prismarine, 4, 8, Blocks.PRISMARINE.getDefaultState(), MAP_STONES, 2, 4);
     public static final SpheroidType SLIME      = new CoreSpheroidType(SpheroidAdvancementIdentifier.slime, 4, 8, Blocks.SLIME_BLOCK.getDefaultState(), MAP_STONES, 2, 4);
-    public static final SpheroidType TNT      = new CoreSpheroidType(SpheroidAdvancementIdentifier.tnt, 4, 8, Blocks.TNT.getDefaultState(), MAP_STONES, 2, 4);
+    public static final SpheroidType TNT        = new CoreSpheroidType(SpheroidAdvancementIdentifier.tnt, 4, 8, Blocks.TNT.getDefaultState(), MAP_STONES, 2, 4);
 
     // DRIPSTONE
     private static final BlockState DRIPSTONE_BLOCK_STATE = Blocks.DRIPSTONE_BLOCK.getDefaultState();
@@ -208,7 +211,15 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final SpheroidType DRIPSTONE_CAVE = new CaveSpheroidType(SpheroidAdvancementIdentifier.cave, 5, 12, DRIPSTONE_BLOCK_STATE, DRIPSTONE_BLOCK_STATE, 2, 4)
             .addDecorator(SpheroidDecorators.POINTED_DRIPSTONE_CAVE, 0.1F)
             .addDecorator(SpheroidDecorators.GLOW_LICHEN, 0.25F);
-
+    
+    public static final SpheroidType MOSS_CAVE = new CaveSpheroidType(SpheroidAdvancementIdentifier.moss_cave, 5, 8, Blocks.STONE.getDefaultState(), Blocks.MOSS_BLOCK.getDefaultState(), 2, 3)
+            .addDecorator(SpheroidDecorators.SPORE_BLOSSOM, 0.6F)
+            .addDecorator(SpheroidDecorators.DRIPLEAF, 0.9F);
+    
+    public static final SpheroidType DEEPSLATE_MOSS_CAVE = new CaveSpheroidType(SpheroidAdvancementIdentifier.moss_cave, 5, 8, Blocks.DEEPSLATE.getDefaultState(), Blocks.MOSS_BLOCK.getDefaultState(), 2, 3)
+            .addDecorator(SpheroidDecorators.SPORE_BLOSSOM, 0.8F)
+            .addDecorator(SpheroidDecorators.DRIPLEAF, 0.8F);
+    
     //WOOD
     public static final SpheroidType OAK_WOOD      = new ShellSpheroidType(SpheroidAdvancementIdentifier.oak_wood, 8, 15, Blocks.OAK_WOOD.getDefaultState(),      Blocks.OAK_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),      2, 3);
     public static final SpheroidType SPRUCE_WOOD   = new ShellSpheroidType(SpheroidAdvancementIdentifier.spruce_wood, 5, 15, Blocks.SPRUCE_WOOD.getDefaultState(),   Blocks.SPRUCE_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1),   2, 3);
@@ -306,13 +317,12 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final SpheroidType STRONGHOLD = new StrongholdSpheroidType(SpheroidAdvancementIdentifier.stronghold, 25, 30);
     public static final SpheroidType AMETHYST_GEODE = new GeodeSpheroidType(SpheroidAdvancementIdentifier.amethyst, 5, 9, Blocks.AMETHYST_BLOCK.getDefaultState(), Blocks.BUDDING_AMETHYST.getDefaultState(), 0.08F, Blocks.CALCITE.getDefaultState(), Blocks.SMOOTH_BASALT.getDefaultState());
 
-    public static final SpheroidType ROOTED_DIRT = new ModularSpheroidType(SpheroidAdvancementIdentifier.rooted_dirt, 7, 12, Blocks.ROOTED_DIRT.getDefaultState())
+    public static final SpheroidType ROOTED_DIRT = new ModularSpheroidType(SpheroidAdvancementIdentifier.rooted_dirt, 4, 6, Blocks.ROOTED_DIRT.getDefaultState())
             .addDecorator(SpheroidDecorators.AZALEA, 0.7F)
             .addDecorator(SpheroidDecorators.FLOWERING_AZALEA, 0.75F)
             .addDecorator(SpheroidDecorators.HANGING_ROOTS, 0.75F);
 
-
-    public static void setup(SpheroidLoader spheroidLoader) {
+    public static void setup(@NotNull SpheroidLoader spheroidLoader) {
         StarrySkyCommon.log(INFO, "Loading Vanilla Spheroids...");
 
         // COMMON
@@ -348,6 +358,8 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.3F, DRIPSTONE_COAL);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.2F, DRIPSTONE_IRON);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.3F, DRIPSTONE_CAVE);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 30F, MOSS_CAVE); // TODO: chance: 0.5
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 30F, DEEPSLATE_MOSS_CAVE); // TODO: chance: 0.5
 
         //COLD
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 1.3F, SNOW_ICE);
