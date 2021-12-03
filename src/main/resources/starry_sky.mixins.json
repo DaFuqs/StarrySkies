@@ -5,6 +5,8 @@
   "mixins": [
     "AbstractFireBlockMixin",
     "DimensionTypeMixin",
+    "EndGatewayBlockEntityAccessor",
+    "EndGatewayBlockEntityMixin",
     "EndPortalBlockMixin",
     "EntityAccessor",
     "EntityMixin"
