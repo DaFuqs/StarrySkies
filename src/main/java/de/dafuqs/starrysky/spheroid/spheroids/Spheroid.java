@@ -213,18 +213,11 @@ public abstract class Spheroid implements Serializable {
         return (!isDecorated && (blockPos.getX() / 16 == this.getPosition().getX() / 16) && (blockPos.getZ() / 16 == this.getPosition().getZ() / 16));
     }
 
-    protected void placeSpawner(WorldAccess worldAccess, BlockPos blockPos, EntityType entityType) {
+    protected void placeSpawner(@NotNull WorldAccess worldAccess, BlockPos blockPos, EntityType entityType) {
         worldAccess.setBlockState(blockPos, Blocks.SPAWNER.getDefaultState(), 3);
         BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos);
         if (blockEntity instanceof MobSpawnerBlockEntity) {
             ((MobSpawnerBlockEntity) blockEntity).getLogic().setEntityId(entityType);
-        }
-    }
-    protected void placeSpawner(WorldAccess worldAccess, BlockPos blockPos, MobSpawnerEntry mobSpawnerEntry) {
-        worldAccess.setBlockState(blockPos, Blocks.SPAWNER.getDefaultState(), 3);
-        BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos);
-        if (blockEntity instanceof MobSpawnerBlockEntity) {
-            ((MobSpawnerBlockEntity) blockEntity).getLogic().setSpawnEntry((World) worldAccess, blockPos, mobSpawnerEntry);
         }
     }
 

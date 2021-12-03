@@ -12,6 +12,7 @@ import net.minecraft.block.WallSkullBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootTables;
@@ -19,14 +20,12 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.MobSpawnerEntry;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.random.ChunkRandom;
 
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Random;
 
 public class EndCitySpheroid extends Spheroid {
@@ -137,12 +136,12 @@ public class EndCitySpheroid extends Spheroid {
         }
     }
 
-    private void placeShulkerSpawner(WorldAccess worldAccess, BlockPos blockPos) {
+    private void placeShulkerSpawner(StructureWorldAccess world, BlockPos blockPos) {
         for (int x2 = - 4; x2 < 5; x2++) {
             for (int y2 = 0; y2 < 9; y2++) {
                 for (int z2 = -4; z2 < 5; z2++) {
                     BlockPos destinationBlockPos = blockPos.add(x2, y2, z2);
-                    worldAccess.setBlockState(destinationBlockPos, AIR, 3);
+                    world.setBlockState(destinationBlockPos, AIR, 3);
                 }
             }
         }
@@ -152,29 +151,16 @@ public class EndCitySpheroid extends Spheroid {
             for (int y2 = -1; y2 < 2; y2++) {
                 for (int z2 = -1; z2 < 2; z2++) {
                     BlockPos destinationBlockPos = spawnerPos.add(x2, y2, z2);
-                    worldAccess.setBlockState(destinationBlockPos, MAGENTA_STAINED_GLASS, 3);
+                    world.setBlockState(destinationBlockPos, MAGENTA_STAINED_GLASS, 3);
                 }
             }
         }
 
-        worldAccess.setBlockState(spawnerPos.up(1), PURPUR_PILLAR, 3);
-        worldAccess.setBlockState(spawnerPos.up(2), PURPUR_PILLAR, 3);
-        worldAccess.setBlockState(spawnerPos.up(3), PURPUR_PILLAR, 3);
+        world.setBlockState(spawnerPos.up(1), PURPUR_PILLAR, 3);
+        world.setBlockState(spawnerPos.up(2), PURPUR_PILLAR, 3);
+        world.setBlockState(spawnerPos.up(3), PURPUR_PILLAR, 3);
 
-        // determine the shulker color
-        byte shulkerColor = 16; // the default purple
-        int randomColor = random.nextInt(100);
-        if(randomColor < 15) {
-            shulkerColor = (byte) randomColor; // very rarely other colors as purple
-        }
-
-        NbtCompound compoundTag = new NbtCompound();
-        NbtCompound compoundTag2 = new NbtCompound();
-        compoundTag2.putString("id", new Identifier("shulker").toString());
-        compoundTag2.putByte("Color", shulkerColor);
-        compoundTag.put("Entity", compoundTag2);
-
-        placeSpawner(worldAccess, spawnerPos, new MobSpawnerEntry(compoundTag, Optional.empty()));
+        placeSpawner(world, spawnerPos, EntityType.SHULKER);
     }
 
     private void placeBrewingStand(WorldAccess worldAccess, BlockPos blockPos) {
