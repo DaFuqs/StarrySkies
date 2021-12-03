@@ -358,8 +358,8 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.3F, DRIPSTONE_COAL);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.2F, DRIPSTONE_IRON);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.3F, DRIPSTONE_CAVE);
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 30F, MOSS_CAVE); // TODO: chance: 0.5
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 30F, DEEPSLATE_MOSS_CAVE); // TODO: chance: 0.5
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.4F, MOSS_CAVE);
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 0.4F, DEEPSLATE_MOSS_CAVE);
 
         //COLD
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.DECORATIVE, 1.3F, SNOW_ICE);
@@ -473,6 +473,6 @@ public class SpheroidListVanilla extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 4.0F, BEE_HIVE);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 0.5F, OCEAN_MONUMENT);
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 1.0F, STRONGHOLD);
-        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 150F, AMETHYST_GEODE); // TODO: Check and recuce weight to 1.5
+        spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.TREASURE, 1.5F, AMETHYST_GEODE);
     }
 }

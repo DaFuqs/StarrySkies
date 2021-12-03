@@ -28,9 +28,18 @@ public class GlowLichenDecorator extends SpheroidDecorator {
 
     @Override
     public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+        int spheroidY = spheroid.getPosition().getY();
         for(BlockPos bp : decorationBlockPositions) {
             if(random.nextFloat() < chance) {
-                GlowLichenFeature.generate(world, bp, world.getBlockState(bp), glowLichenFeatureConfig, random, Arrays.asList(Direction.values()));
+                BlockPos currentPos = new BlockPos(bp.getX(), spheroidY, bp.getZ());
+                for (int i = 0; i < spheroid.getRadius(); i++) {
+                    if (!world.getBlockState(currentPos.up(i)).isAir()) {
+                        if (world.getBlockState(currentPos.up(i - 1)).isAir()) {
+                            GlowLichenFeature.generate(world, currentPos, world.getBlockState(bp), glowLichenFeatureConfig, random, Arrays.asList(Direction.values()));
+                        }
+                        break;
+                    }
+                }
             }
         }
     }
