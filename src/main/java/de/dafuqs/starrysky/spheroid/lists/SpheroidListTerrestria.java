@@ -1,9 +1,21 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
+import com.terraformersmc.terraform.leaves.block.ExtendedLeavesBlock;
+import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.spheroid.decorators.PlantDecorator;
+import de.dafuqs.starrysky.spheroid.types.LiquidSpheroidType;
+import de.dafuqs.starrysky.spheroid.types.ModularSpheroidType;
+import de.dafuqs.starrysky.spheroid.types.ShellSpheroidType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 
+import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static de.dafuqs.starrysky.spheroid.lists.SpheroidListVanilla.SpheroidDecorators.FERNS_DECORATOR;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListTerrestria extends SpheroidList {
@@ -19,7 +31,7 @@ public class SpheroidListTerrestria extends SpheroidList {
         StarrySkyCommon.log(INFO, "Terrestria integration is currently disabled in 1.17...");
 
         // TREES
-        /*BlockState terrestria_redwood_leaves = getDefaultBlockState(MOD_ID,"redwood_leaves").with(ExtendedLeavesBlock.DISTANCE, 1);
+        BlockState terrestria_redwood_leaves = getDefaultBlockState(MOD_ID,"redwood_leaves").with(ExtendedLeavesBlock.DISTANCE, 1);
         BlockState terrestria_redwood_log = getDefaultBlockState(MOD_ID,"redwood_log");
         BlockState terrestria_hemlock_leaves = getDefaultBlockState(MOD_ID,"hemlock_leaves").with(ExtendedLeavesBlock.DISTANCE, 1);
         BlockState terrestria_hemlock_log = getDefaultBlockState(MOD_ID,"hemlock_log");
@@ -101,7 +113,7 @@ public class SpheroidListTerrestria extends SpheroidList {
                 // Add common blocks to maps
         SpheroidList.MAP_STONES.put(terrestria_basalt, 0.4F);
         SpheroidList.MAP_DUNGEON_STONES.put(terrestria_mossy_basalt_cobblestone, 1.0F);
-        SpheroidList.MAP_DUNGEON_STONES.put(terrestria_basalt_cobblestone, 0.5F);*/
+        SpheroidList.MAP_DUNGEON_STONES.put(terrestria_basalt_cobblestone, 0.5F);
     }
 
 }
