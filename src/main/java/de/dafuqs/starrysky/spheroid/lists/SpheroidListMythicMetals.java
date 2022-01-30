@@ -25,7 +25,6 @@ public class SpheroidListMythicMetals extends SpheroidList {
 		BlockState mythicmetals_aquarium_ore = getDefaultBlockState(MOD_ID,"aquarium_ore");
 		BlockState mythicmetals_banglum_ore = getDefaultBlockState(MOD_ID,"banglum_ore");
 		BlockState mythicmetals_carmot_ore = getDefaultBlockState(MOD_ID,"carmot_ore");
-		BlockState mythicmetals_copper_ore = getDefaultBlockState(MOD_ID,"copper_ore");
 		BlockState mythicmetals_kyber_ore = getDefaultBlockState(MOD_ID,"kyber_ore");
 		BlockState mythicmetals_manganese_ore = getDefaultBlockState(MOD_ID,"manganese_ore");
 		BlockState mythicmetals_mythril_ore = getDefaultBlockState(MOD_ID,"mythril_ore");
@@ -55,7 +54,6 @@ public class SpheroidListMythicMetals extends SpheroidList {
 		spheroidLoader.registerDynamicOre(OVERWORLD, "aquarium", mythicmetals_aquarium_ore); // BiomeKeys.COLD_OCEAN, BiomeKeys.DEEP_COLD_OCEAN, BiomeKeys.DEEP_FROZEN_OCEAN, BiomeKeys.DEEP_LUKEWARM_OCEAN, BiomeKeys.DEEP_OCEAN, BiomeKeys.FROZEN_OCEAN,
 		spheroidLoader.registerDynamicOre(OVERWORLD, "banglum", mythicmetals_banglum_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "carmot", mythicmetals_carmot_ore);
-		spheroidLoader.registerDynamicOre(OVERWORLD, "copper", mythicmetals_copper_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "kyber", mythicmetals_kyber_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "manganese", mythicmetals_manganese_ore);
 		spheroidLoader.registerDynamicOre(OVERWORLD, "mythril", mythicmetals_mythril_ore);

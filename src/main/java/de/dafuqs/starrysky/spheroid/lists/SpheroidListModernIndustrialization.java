@@ -19,7 +19,6 @@ public class SpheroidListModernIndustrialization extends SpheroidList {
     public static void setup(SpheroidLoader spheroidLoader) {
         StarrySkyCommon.log(INFO, "Loading Modern Industrialization integration...");
 
-        BlockState modern_industrialization_copper_ore = getDefaultBlockState(MOD_ID,"copper_ore");
         BlockState modern_industrialization_tin_ore = getDefaultBlockState(MOD_ID,"tin_ore");
         BlockState modern_industrialization_lead_ore = getDefaultBlockState(MOD_ID,"lead_ore");
         BlockState modern_industrialization_lignite_coal_ore = getDefaultBlockState(MOD_ID,"lignite_coal_ore");
@@ -29,7 +28,6 @@ public class SpheroidListModernIndustrialization extends SpheroidList {
         BlockState modern_industrialization_antimony_ore = getDefaultBlockState(MOD_ID,"antimony_ore");
         BlockState modern_industrialization_bauxite_ore = getDefaultBlockState(MOD_ID,"bauxite_ore");
 
-        spheroidLoader.registerDynamicOre(OVERWORLD, "copper", modern_industrialization_copper_ore);
         spheroidLoader.registerDynamicOre(OVERWORLD, "tin", modern_industrialization_tin_ore);
         spheroidLoader.registerDynamicOre(OVERWORLD, "lignite_coal", modern_industrialization_lignite_coal_ore);
         spheroidLoader.registerDynamicOre(OVERWORLD, "nickel", modern_industrialization_nickel_ore);

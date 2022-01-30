@@ -21,11 +21,9 @@ public class SpheroidListIndustrialRevolution extends SpheroidList {
         StarrySkyCommon.log(INFO, "Loading Industrial Revolution integration...");
 
         BlockState industrialrevolution_nikolite = getDefaultBlockState(MOD_ID,"nikolite_ore");
-        BlockState industrialrevolution_copper = getDefaultBlockState(MOD_ID,"tin_ore");
         BlockState industrialrevolution_tin = getDefaultBlockState(MOD_ID,"copper_ore");
 
         spheroidLoader.registerDynamicOre(OVERWORLD, "nikolite", industrialrevolution_nikolite);
-        spheroidLoader.registerDynamicOre(OVERWORLD, "copper", industrialrevolution_copper);
         spheroidLoader.registerDynamicOre(OVERWORLD, "tin", industrialrevolution_tin);
     }
 

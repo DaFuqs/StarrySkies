@@ -28,7 +28,6 @@ public class SpheroidListTechReborn extends SpheroidList {
 
         // Overworld
         BlockState techreborn_bauxite_ore = getDefaultBlockState(MOD_ID,"bauxite_ore");
-        BlockState techreborn_copper_ore = getDefaultBlockState(MOD_ID,"copper_ore");
         BlockState techreborn_galena_ore = getDefaultBlockState(MOD_ID,"galena_ore");
         BlockState techreborn_iridium_ore = getDefaultBlockState(MOD_ID,"iridium_ore");
         BlockState techreborn_lead_ore = getDefaultBlockState(MOD_ID,"lead_ore");
@@ -51,7 +50,6 @@ public class SpheroidListTechReborn extends SpheroidList {
         spheroidLoader.registerSpheroidType(OVERWORLD, SpheroidDistributionType.WOOD, 2.5F, new ShellSpheroidType(null, 8, 14, techreborn_rubber_log, techreborn_rubber_leaves.with(Properties.DISTANCE_1_7, 1), 2, 4));
 
         spheroidLoader.registerDynamicOre(OVERWORLD, "bauxite", techreborn_bauxite_ore);
-        spheroidLoader.registerDynamicOre(OVERWORLD, "copper", techreborn_copper_ore);
         spheroidLoader.registerDynamicOre(OVERWORLD, "galena", techreborn_galena_ore);
         spheroidLoader.registerDynamicOre(OVERWORLD, "iridium", techreborn_iridium_ore);
         spheroidLoader.registerDynamicOre(OVERWORLD, "lead", techreborn_lead_ore);
