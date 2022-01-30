@@ -19,6 +19,11 @@ import java.util.Random;
 
 public abstract class SpheroidDecorator {
 
+    public enum SpheroidDecorationMode {
+        ALL_CHUNKS,
+        CENTER_CHUNK
+    }
+    
     /**
      * In contrast to vanilla the spheroid decorators are queried by the spheroid
      * not ran after the chunk generation
@@ -78,6 +83,10 @@ public abstract class SpheroidDecorator {
             }
         }
         return null;
+    }
+    
+    public SpheroidDecorationMode getDecorationMode() {
+        return SpheroidDecorationMode.ALL_CHUNKS;
     }
 
 }

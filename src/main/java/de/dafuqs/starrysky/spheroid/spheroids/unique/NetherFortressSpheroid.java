@@ -85,7 +85,7 @@ public class NetherFortressSpheroid extends Spheroid {
      * @param random The decoration random
      */
     @Override
-    public void decorate(StructureWorldAccess world, Random random) {
+    public void decorate(StructureWorldAccess world, BlockPos origin, Random random) {
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
             int randomStructure = random.nextInt(7);
             switch (randomStructure) {

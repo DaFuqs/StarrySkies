@@ -101,7 +101,6 @@ public class SpheroidListVanilla extends SpheroidList {
     public static final SpheroidType JUNGLE_POND = new ModularSpheroidType(SpheroidAdvancementIdentifier.beach, 10, 15,  Blocks.DIRT.getDefaultState())
             .setTopBlockState(Blocks.PODZOL.getDefaultState())
             .addDecorator(SpheroidDecorators.CENTER_POND_SHIPWRECK_CHEST, 1.0F)
-            .addDecorator(SpheroidDecorators.BAMBOO, 0.5F)
             .addSpawn(SpheroidEntitySpawnDefinitions.PARROT, 0.4F);
     public static final SpheroidType STONE = new ModularSpheroidType(SpheroidAdvancementIdentifier.stone, 5, 13,  Blocks.STONE.getDefaultState())
             .addDecorator(SpheroidDecorators.CENTER_POND_LAVA, 0.1F)

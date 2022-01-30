@@ -99,4 +99,9 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
         }
     }
     
+    @Override
+    public SpheroidDecorationMode getDecorationMode() {
+        return SpheroidDecorationMode.CENTER_CHUNK;
+    }
+    
 }

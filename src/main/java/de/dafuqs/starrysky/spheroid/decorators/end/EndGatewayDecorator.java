@@ -47,7 +47,11 @@ public class EndGatewayDecorator extends SpheroidDecorator {
                 world.setBlockState(blockPos2, Blocks.AIR.getDefaultState(), 3);
             }
         }
-
+    }
+    
+    @Override
+    public SpheroidDecorationMode getDecorationMode() {
+        return SpheroidDecorationMode.CENTER_CHUNK;
     }
 
 }

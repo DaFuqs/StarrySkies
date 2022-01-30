@@ -31,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 import static org.apache.logging.log4j.Level.WARN;
@@ -106,20 +107,32 @@ public abstract class Spheroid implements Serializable {
         }
     }
 
-    public void decorate(StructureWorldAccess world, Random random) {
+    public void decorate(StructureWorldAccess world, BlockPos origin, Random random) {
         if(this.spheroidDecorators.size() > 0) {
-            ArrayList<BlockPos> decorationsPosInChunk = new ArrayList<>();
-            for(BlockPos blockPos : this.decorationBlockPositions) {
-                if(world.isChunkLoaded(blockPos)) {
-                    decorationsPosInChunk.add(blockPos);
-                }
-            }
+            ChunkPos originChunkPos = new ChunkPos(origin);
+            ArrayList<BlockPos> decorationsPosInChunk = null;
             for (SpheroidDecorator decorator : this.spheroidDecorators) {
-                StarrySkyCommon.log(Level.DEBUG, "Decorator: " + decorator.getClass());
-                try {
-                    decorator.decorateSpheroid(world, this, decorationsPosInChunk, random);
-                } catch (RuntimeException e) {
-                    // We are asking a region for a chunk out of bound ಠ_ಠ
+                StarrySkyCommon.log(Level.INFO, "Decorator: " + decorator.getClass());
+                if(decorator.getDecorationMode() == SpheroidDecorator.SpheroidDecorationMode.ALL_CHUNKS) {
+                    if(decorationsPosInChunk == null) {
+                        decorationsPosInChunk = new ArrayList<>();
+                        for (BlockPos blockPos : this.decorationBlockPositions) {
+                            if (Support.isBlockPosInChunkPos(originChunkPos, blockPos)) {
+                                decorationsPosInChunk.add(blockPos);
+                            }
+                        }
+                    }
+                    try {
+                        decorator.decorateSpheroid(world, this, decorationsPosInChunk, random);
+                    } catch (RuntimeException e) {
+                        // We are asking a region for a chunk out of bound ಠ_ಠ
+                    }
+                } else if(Support.isBlockPosInChunkPos(originChunkPos, this.position)) {
+                    try {
+                        decorator.decorateSpheroid(world, this, new ArrayList<>(List.of(origin)), random);
+                    } catch (RuntimeException e) {
+                        // We are asking a region for a chunk out of bound ಠ_ಠ
+                    }
                 }
             }
         }
@@ -215,8 +228,12 @@ public abstract class Spheroid implements Serializable {
     }
 
     public boolean shouldDecorate(BlockPos blockPos) {
-        // blockPos and center of spheroid in same chunk
-        return ((blockPos.getX() / 16 == this.getPosition().getX() / 16) && (blockPos.getZ() / 16 == this.getPosition().getZ() / 16));
+        for(ChunkPos chunkPos : this.chunksOfSpheroid) {
+            if(Support.isBlockPosInChunkPos(chunkPos, blockPos)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected void placeSpawner(@NotNull WorldAccess worldAccess, BlockPos blockPos, EntityType entityType) {

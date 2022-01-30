@@ -102,4 +102,9 @@ public class CenterPondDecorator extends SpheroidDecorator {
             }
         }
     }
+    
+    @Override
+    public SpheroidDecorationMode getDecorationMode() {
+        return SpheroidDecorationMode.CENTER_CHUNK;
+    }
 }
