@@ -112,7 +112,7 @@ public abstract class Spheroid implements Serializable {
             ChunkPos originChunkPos = new ChunkPos(origin);
             ArrayList<BlockPos> decorationsPosInChunk = null;
             for (SpheroidDecorator decorator : this.spheroidDecorators) {
-                StarrySkyCommon.log(Level.INFO, "Decorator: " + decorator.getClass());
+                StarrySkyCommon.log(Level.DEBUG, "Decorator: " + decorator.getClass());
                 if(decorator.getDecorationMode() == SpheroidDecorator.SpheroidDecorationMode.ALL_CHUNKS) {
                     if(decorationsPosInChunk == null) {
                         decorationsPosInChunk = new ArrayList<>();
