@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
@@ -86,16 +87,19 @@ public class NetherFortressSpheroid extends Spheroid {
      */
     @Override
     public void decorate(StructureWorldAccess world, BlockPos origin, Random random) {
+        ChunkPos originChunkPos = new ChunkPos(origin);
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
-            int randomStructure = random.nextInt(7);
-            switch (randomStructure) {
-                case 0 -> placeBlazeSpawnerRoom(world, interiorDecoratorPosition);
-                case 1 -> placeWitherSkeletonRoom(world, interiorDecoratorPosition);
-                case 2 -> placeNetherWartRoom(world, interiorDecoratorPosition);
-                case 3 -> placeSolid(world, interiorDecoratorPosition);
-                case 4 -> placeEmpty(world, interiorDecoratorPosition);
-                case 5 -> placeLava(world, interiorDecoratorPosition);
-                default -> placeChestRoom(world, interiorDecoratorPosition);
+            if (Support.isBlockPosInChunkPos(originChunkPos, interiorDecoratorPosition)) {
+                int randomStructure = random.nextInt(7);
+                switch (randomStructure) {
+                    case 0 -> placeBlazeSpawnerRoom(world, interiorDecoratorPosition);
+                    case 1 -> placeWitherSkeletonRoom(world, interiorDecoratorPosition);
+                    case 2 -> placeNetherWartRoom(world, interiorDecoratorPosition);
+                    case 3 -> placeSolid(world, interiorDecoratorPosition);
+                    case 4 -> placeEmpty(world, interiorDecoratorPosition);
+                    case 5 -> placeLava(world, interiorDecoratorPosition);
+                    default -> placeChestRoom(world, interiorDecoratorPosition);
+                }
             }
         }
     }

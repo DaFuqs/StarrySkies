@@ -30,8 +30,7 @@ public class DungeonSpheroid extends Spheroid {
         this.shellBlock = shellBlock;
         this.shellRadius = shellRadius;
     }
-
-
+    
     @Override
     public void generate(Chunk chunk) {
         int chunkX = chunk.getPos().x;

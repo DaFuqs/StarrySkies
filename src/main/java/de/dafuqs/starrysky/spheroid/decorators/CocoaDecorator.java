@@ -52,4 +52,10 @@ public class CocoaDecorator extends SpheroidDecorator {
             }
         }
     }
+    
+    @Override
+    public SpheroidDecorationMode getDecorationMode() {
+        return SpheroidDecorationMode.CENTER_CHUNK;
+    }
+    
 }

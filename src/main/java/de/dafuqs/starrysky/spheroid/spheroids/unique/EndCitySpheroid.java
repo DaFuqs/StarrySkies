@@ -19,6 +19,7 @@ import net.minecraft.loot.LootTables;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
@@ -99,17 +100,20 @@ public class EndCitySpheroid extends Spheroid {
      */
     @Override
     public void decorate(StructureWorldAccess world, BlockPos origin, Random random) {
+        ChunkPos originChunkPos = new ChunkPos(origin);
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
-            int randomStructure = random.nextInt(8);
-            switch (randomStructure) {
-                case 0 -> placeSolid(world, interiorDecoratorPosition);
-                case 1 -> placeEmpty(world, interiorDecoratorPosition);
-                case 2 -> placeElytra(world, interiorDecoratorPosition);
-                case 3 -> placeTreasure(world, interiorDecoratorPosition);
-                case 4 -> placeBrewingStand(world, interiorDecoratorPosition);
-                case 5 -> placeDragonHead(world, interiorDecoratorPosition);
-                default -> // double chance
-                        placeShulkerSpawner(world, interiorDecoratorPosition);
+            if (Support.isBlockPosInChunkPos(originChunkPos, interiorDecoratorPosition)) {
+                int randomStructure = random.nextInt(8);
+                switch (randomStructure) {
+                    case 0 -> placeSolid(world, interiorDecoratorPosition);
+                    case 1 -> placeEmpty(world, interiorDecoratorPosition);
+                    case 2 -> placeElytra(world, interiorDecoratorPosition);
+                    case 3 -> placeTreasure(world, interiorDecoratorPosition);
+                    case 4 -> placeBrewingStand(world, interiorDecoratorPosition);
+                    case 5 -> placeDragonHead(world, interiorDecoratorPosition);
+                    default -> // double chance
+                            placeShulkerSpawner(world, interiorDecoratorPosition);
+                }
             }
         }
     }

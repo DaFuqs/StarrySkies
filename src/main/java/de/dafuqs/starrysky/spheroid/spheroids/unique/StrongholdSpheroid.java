@@ -1,6 +1,5 @@
 package de.dafuqs.starrysky.spheroid.spheroids.unique;
 
-import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
@@ -14,6 +13,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
@@ -22,8 +22,6 @@ import net.minecraft.world.gen.random.ChunkRandom;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import static org.apache.logging.log4j.Level.WARN;
 
 public class StrongholdSpheroid extends Spheroid {
 
@@ -124,20 +122,23 @@ public class StrongholdSpheroid extends Spheroid {
      */
     @Override
     public void decorate(StructureWorldAccess world, BlockPos origin, Random random) {
-        if(portalPosition != null) {
+        ChunkPos thisChunkPos = new ChunkPos(this.position);
+        ChunkPos originChunkPos = new ChunkPos(origin);
+        
+        if(portalPosition != null && thisChunkPos.equals(originChunkPos)) {
             placeEndPortal(world, portalPosition.up());
-        } else {
-            StarrySkyCommon.log(WARN, "Generating a Stronghold Spheroid at " + position.getX() + " " + position.getY() + " " + position.getZ() + " without an end portal?");
         }
 
         for (BlockPos interiorDecoratorPosition : interiorDecoratorPositions) {
-            int randomStructure = random.nextInt(5);
-            switch (randomStructure) {
-                case 0 -> placeLibrary(world, interiorDecoratorPosition);
-                case 1 -> placeCorridor(world, interiorDecoratorPosition);
-                case 2 -> placeCrossing(world, interiorDecoratorPosition);
-                case 3 -> placePrison(world, interiorDecoratorPosition);
-                default -> placeFullCube(world, interiorDecoratorPosition);
+            if(Support.isBlockPosInChunkPos(originChunkPos, interiorDecoratorPosition)) {
+                int randomStructure = random.nextInt(5);
+                switch (randomStructure) {
+                    case 0 -> placeLibrary(world, interiorDecoratorPosition);
+                    case 1 -> placeCorridor(world, interiorDecoratorPosition);
+                    case 2 -> placeCrossing(world, interiorDecoratorPosition);
+                    case 3 -> placePrison(world, interiorDecoratorPosition);
+                    default -> placeFullCube(world, interiorDecoratorPosition);
+                }
             }
         }
     }
