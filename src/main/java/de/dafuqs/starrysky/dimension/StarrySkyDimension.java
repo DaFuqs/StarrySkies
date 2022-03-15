@@ -52,6 +52,8 @@ public class StarrySkyDimension {
         //Vanilla does that via json now
         //StarrySkyCommon.log(INFO, "Registering chunk generator...");
         //Registry.register(Registry.CHUNK_GENERATOR, new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_chunk_generator"), StarrySkyChunkGenerator.CODEC);
+        
+        setupPortals();
     }
 
     public static void setupPortals() {

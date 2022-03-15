@@ -16,7 +16,7 @@ public class StarrySkyBiomeKeys {
 		return RegistryKey.of(Registry.BIOME_KEY, new Identifier(StarrySkyCommon.MOD_ID, name));
 	}
 	
-	public static void call() {
+	public static void initialize() {
 	
 	}
 	

@@ -10,10 +10,8 @@ import de.dafuqs.starrysky.spheroid.DecoratorFeatures;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -33,8 +31,6 @@ public class StarrySkyCommon implements ModInitializer {
 
     public static StarrySkyConfig STARRY_SKY_CONFIG;
     private static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-
-    public static MinecraftServer minecraftServer;
     
     public static ServerWorld starryWorld;
     public static ServerWorld starryWorldNether;
@@ -52,14 +48,11 @@ public class StarrySkyCommon implements ModInitializer {
 
         // Register all the stuff
         Registry.register(Registry.CHUNK_GENERATOR, new Identifier(MOD_ID, "starry_sky_chunk_generator"), StarrySkyChunkGenerator.CODEC);
-        StarrySkyBiomeKeys.call();
+        StarrySkyBiomeKeys.initialize();
         StarrySkyDimension.setupDimension();
-        StarrySkyDimension.setupPortals();
         StarrySkyCommands.initialize();
         DecoratorFeatures.initialize();
-    
-        ServerLifecycleEvents.SERVER_STARTING.register(server -> minecraftServer = server);
-        
+
         // triggers everytime a world is loaded
         // so for overworld, nether, ... (they all share the same seed)
         ServerWorldEvents.LOAD.register((server, world) -> {
