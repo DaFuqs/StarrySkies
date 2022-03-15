@@ -54,8 +54,7 @@ public enum SpheroidDimensionType {
 		}
 	}
 	
-	public RegistryEntry<Biome> getBiome() {
-		Registry<Biome> biomeRegistry = StarrySkyCommon.minecraftServer.getRegistryManager().get(Registry.BIOME_KEY);
+	public RegistryEntry<Biome> getBiome(Registry<Biome> biomeRegistry) {
 		switch (this) {
 			case OVERWORLD -> {
 				return biomeRegistry.getOrCreateEntry(StarrySkyBiomeKeys.OVERWORLD);

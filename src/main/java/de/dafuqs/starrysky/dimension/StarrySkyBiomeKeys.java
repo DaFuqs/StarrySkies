@@ -8,12 +8,16 @@ import net.minecraft.world.biome.Biome;
 
 public class StarrySkyBiomeKeys {
 	
-	public static final RegistryKey<Biome> OVERWORLD = register("starry_sky_biome");
-	public static final RegistryKey<Biome> NETHER = register("starry_sky_nether_biome");
-	public static final RegistryKey<Biome> END = register("starry_sky_end_biome");
+	public static final RegistryKey<Biome> OVERWORLD = registerBiome("starry_sky_biome");
+	public static final RegistryKey<Biome> NETHER = registerBiome("starry_sky_nether_biome");
+	public static final RegistryKey<Biome> END = registerBiome("starry_sky_end_biome");
 	
-	private static RegistryKey<Biome> register(String name) {
+	private static RegistryKey<Biome> registerBiome(String name) {
 		return RegistryKey.of(Registry.BIOME_KEY, new Identifier(StarrySkyCommon.MOD_ID, name));
+	}
+	
+	public static void call() {
+	
 	}
 	
 }

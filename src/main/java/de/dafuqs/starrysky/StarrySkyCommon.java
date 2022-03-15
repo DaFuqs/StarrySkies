@@ -3,12 +3,14 @@ package de.dafuqs.starrysky;
 import de.dafuqs.starrysky.advancements.ProximityAdvancementCheckEvent;
 import de.dafuqs.starrysky.commands.StarrySkyCommands;
 import de.dafuqs.starrysky.configs.StarrySkyConfig;
+import de.dafuqs.starrysky.dimension.StarrySkyBiomeKeys;
 import de.dafuqs.starrysky.dimension.StarrySkyChunkGenerator;
 import de.dafuqs.starrysky.dimension.StarrySkyDimension;
 import de.dafuqs.starrysky.spheroid.DecoratorFeatures;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.server.MinecraftServer;
@@ -50,21 +52,22 @@ public class StarrySkyCommon implements ModInitializer {
 
         // Register all the stuff
         Registry.register(Registry.CHUNK_GENERATOR, new Identifier(MOD_ID, "starry_sky_chunk_generator"), StarrySkyChunkGenerator.CODEC);
+        StarrySkyBiomeKeys.call();
         StarrySkyDimension.setupDimension();
         StarrySkyDimension.setupPortals();
         StarrySkyCommands.initialize();
         DecoratorFeatures.initialize();
-
+    
+        ServerLifecycleEvents.SERVER_STARTING.register(server -> minecraftServer = server);
+        
         // triggers everytime a world is loaded
         // so for overworld, nether, ... (they all share the same seed)
         ServerWorldEvents.LOAD.register((server, world) -> {
-            minecraftServer = server;
-            
-            if(world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
+            if(world.getRegistryKey().equals(StarrySkyDimension.OVERWORLD_KEY)) {
                 StarrySkyCommon.starryWorld = world;
-            } else if(world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {
+            } else if(world.getRegistryKey().equals(StarrySkyDimension.NETHER_KEY)) {
                 StarrySkyCommon.starryWorldNether = world;
-            } else if(world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_END_WORLD_KEY)) {
+            } else if(world.getRegistryKey().equals(StarrySkyDimension.END_KEY)) {
                 StarrySkyCommon.starryWorldEnd = world;
             }
         });

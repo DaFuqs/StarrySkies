@@ -37,9 +37,9 @@ public class SystemGenerator {
     private final int FLOOR_HEIGHT;
 
     public static SystemGenerator getSystemGeneratorOfWorld(@NotNull RegistryKey<World> worldRegistryKey) {
-        if(worldRegistryKey.equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
+        if(worldRegistryKey.equals(StarrySkyDimension.OVERWORLD_KEY)) {
             return systemGeneratorMap.get(SpheroidDimensionType.OVERWORLD);
-        } else if(worldRegistryKey.equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {
+        } else if(worldRegistryKey.equals(StarrySkyDimension.NETHER_KEY)) {
             return systemGeneratorMap.get(SpheroidDimensionType.NETHER);
         } else {
             return systemGeneratorMap.get(SpheroidDimensionType.END);

@@ -34,9 +34,9 @@ public class StarrySkyDimensionTravelHandler {
     public static final BlockPos OVERWORLD_SPAWN_BLOCK_POS = new BlockPos(16, 85, 16);
 
     public static ServerWorld modifyNetherPortalDestination(@NotNull Entity thisEntity, ServerWorld serverWorld) {
-        if(thisEntity.getEntityWorld().getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
+        if(thisEntity.getEntityWorld().getRegistryKey().equals(StarrySkyDimension.OVERWORLD_KEY)) {
             return StarrySkyCommon.starryWorldNether;
-        } else if(thisEntity.getEntityWorld().getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {
+        } else if(thisEntity.getEntityWorld().getRegistryKey().equals(StarrySkyDimension.NETHER_KEY)) {
             return StarrySkyCommon.starryWorld;
         }
         return serverWorld;
@@ -51,10 +51,10 @@ public class StarrySkyDimensionTravelHandler {
 
             RegistryKey<World> sourceRegistryKey = world.getRegistryKey();
             RegistryKey<World> destinationRegistryKey;
-            if (StarrySkyDimension.STARRY_SKY_END_WORLD_KEY.equals(sourceRegistryKey)) {
-                destinationRegistryKey = StarrySkyDimension.STARRY_SKY_WORLD_KEY;
-            } else if (StarrySkyDimension.STARRY_SKY_WORLD_KEY.equals(sourceRegistryKey)) {
-                destinationRegistryKey = StarrySkyDimension.STARRY_SKY_END_WORLD_KEY;
+            if (StarrySkyDimension.END_KEY.equals(sourceRegistryKey)) {
+                destinationRegistryKey = StarrySkyDimension.OVERWORLD_KEY;
+            } else if (StarrySkyDimension.OVERWORLD_KEY.equals(sourceRegistryKey)) {
+                destinationRegistryKey = StarrySkyDimension.END_KEY;
             } else {
                 // vanilla dimension travel.
                 // handle the vanilla way
@@ -79,11 +79,11 @@ public class StarrySkyDimensionTravelHandler {
     // Handler for Entity.getTeleportTarget
     // returning null means letting vanilla handling it the default way
     public static @Nullable TeleportTarget handleGetTeleportTarget(@NotNull Entity thisEntity, ServerWorld destination) {
-        boolean isTravellingToStarryEnd = thisEntity.world.getRegistryKey() == StarrySkyDimension.STARRY_SKY_WORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.STARRY_SKY_END_WORLD_KEY;
-        boolean isTravellingBackFromStarryEnd = thisEntity.world.getRegistryKey() == StarrySkyDimension.STARRY_SKY_END_WORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.STARRY_SKY_WORLD_KEY;
+        boolean isTravellingToStarryEnd = thisEntity.world.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.END_KEY;
+        boolean isTravellingBackFromStarryEnd = thisEntity.world.getRegistryKey() == StarrySkyDimension.END_KEY && destination.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY;
         if (!isTravellingBackFromStarryEnd && !isTravellingToStarryEnd) {
-            boolean isTravellingToStarryNether = thisEntity.world.getRegistryKey() == StarrySkyDimension.STARRY_SKY_WORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY;
-            boolean isTravellingBackFromStarryNether = thisEntity.world.getRegistryKey() == StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.STARRY_SKY_WORLD_KEY;
+            boolean isTravellingToStarryNether = thisEntity.world.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.NETHER_KEY;
+            boolean isTravellingBackFromStarryNether = thisEntity.world.getRegistryKey() == StarrySkyDimension.NETHER_KEY && destination.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY;
 
             if (!isTravellingToStarryNether && !isTravellingBackFromStarryNether) {
                 // HANDLE VANILLA DIMENSIONS NORMALLY

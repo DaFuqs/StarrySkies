@@ -31,7 +31,7 @@ public abstract class WorldRendererMixin {
     void renderSky(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, Camera camera, boolean bl, Runnable runnable, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
         
-        if (client.world != null && client.world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
+        if (client.world != null && client.world.getRegistryKey().equals(StarrySkyDimension.OVERWORLD_KEY)) {
             if(StarrySkyCommon.STARRY_SKY_CONFIG == null || !StarrySkyCommon.STARRY_SKY_CONFIG.rainbowSkybox) {
                 starrySkyBox.render(matrices, client.getTickDelta());
             } else {

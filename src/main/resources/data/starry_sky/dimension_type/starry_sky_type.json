@@ -1,6 +1,6 @@
 {
   "logical_height" : 256,
-  "infiniburn": "minecraft:infiniburn_overworld",
+  "infiniburn": "#minecraft:infiniburn_overworld",
   "effects": "starry_sky:starry_sky",
   "ambient_light": 0.1,
   "bed_works" : true,

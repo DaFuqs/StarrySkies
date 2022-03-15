@@ -20,7 +20,7 @@ public abstract class EndGatewayBlockEntityMixin {
 	private static void tryTeleportingEntity(World world, BlockPos pos, BlockState state, Entity entity, EndGatewayBlockEntity blockEntity, CallbackInfo ci) {
 		BlockPos blockPos;
 		if (world instanceof ServerWorld serverWorld){
-			if (((EndGatewayBlockEntityAccessor) blockEntity).getExitPortalPos() == null && world.getRegistryKey() == StarrySkyDimension.STARRY_SKY_END_WORLD_KEY) {
+			if (((EndGatewayBlockEntityAccessor) blockEntity).getExitPortalPos() == null && world.getRegistryKey() == StarrySkyDimension.END_KEY) {
 				blockPos = EndGatewayBlockEntityAccessor.invokeSetupExitPortalLocation(serverWorld, pos);
 				blockPos = blockPos.up(10);
 				EndGatewayBlockEntityAccessor.invokeCreatePortal(serverWorld, blockPos, EndGatewayFeatureConfig.createConfig(pos, false));

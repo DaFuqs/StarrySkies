@@ -13,6 +13,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureSet;
 import net.minecraft.util.dynamic.Codecs;
+import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
@@ -50,6 +51,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     
     private final long seed;
     private final SystemGenerator systemGenerator;
+    private final Registry<Biome> biomeRegistry;
 
     // Dimension Type values
     private final SpheroidDimensionType spheroidDimensionType;
@@ -59,16 +61,15 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     
     public static final Codec<StarrySkyChunkGenerator> CODEC = RecordCodecBuilder.create((instance) -> {
         return method_41042(instance).and(instance.group(
-                Codecs.POSITIVE_INT.fieldOf("settings").forGetter((generator -> {
-                    return generator.spheroidDimensionType.ordinal();
-                })),
-                Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> {
-                    return generator.seed;
-            }))).apply(instance, instance.stable(StarrySkyChunkGenerator::new));
+                RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter((generator) -> generator.biomeRegistry),
+                Codecs.POSITIVE_INT.fieldOf("settings").forGetter((generator -> generator.spheroidDimensionType.ordinal())),
+                Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> generator.seed)
+        )).apply(instance, instance.stable(StarrySkyChunkGenerator::new));
     });
     
-    public StarrySkyChunkGenerator(Registry<StructureSet> structureSets, int spheroidDimensionTypeOrdinal, long seed) {
-        super(structureSets, Optional.empty(), new FixedBiomeSource(SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal].getBiome()), new FixedBiomeSource(SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal].getBiome()), 0L);
+    public StarrySkyChunkGenerator(Registry<StructureSet> structureSets, Registry<Biome> biomeRegistry, int spheroidDimensionTypeOrdinal, long seed) {
+        super(structureSets, Optional.empty(), new FixedBiomeSource(SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal].getBiome(biomeRegistry)), new FixedBiomeSource(SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal].getBiome(biomeRegistry)), 0L);
+        this.biomeRegistry = biomeRegistry;
         this.spheroidDimensionType = SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal];
         this.seed = seed;
         
@@ -121,7 +122,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     @Override
     @Environment(EnvType.CLIENT)
     public ChunkGenerator withSeed(long seed) {
-        return new StarrySkyChunkGenerator(this.field_37053, this.spheroidDimensionType.ordinal(), seed);
+        return new StarrySkyChunkGenerator(this.field_37053, biomeRegistry, this.spheroidDimensionType.ordinal(), seed);
     }
     
     @Override
