@@ -15,13 +15,7 @@ import java.util.LinkedHashMap;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidLoader {
-
-    public enum SpheroidDimensionType {
-        OVERWORLD,
-        NETHER,
-        END
-    }
-
+    
     private static boolean initialized = false;
 
     private static final LinkedHashMap<SpheroidDistributionType, LinkedHashMap<SpheroidType, Float>> availableSpheroidTypesByDistributionTypeWithWeight = new LinkedHashMap<>();

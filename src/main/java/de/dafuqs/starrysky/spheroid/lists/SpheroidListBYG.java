@@ -15,7 +15,7 @@ import net.minecraft.state.property.Properties;
 
 import java.util.ArrayList;
 
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.*;
+import static de.dafuqs.starrysky.dimension.SpheroidDimensionType.*;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListBYG extends SpheroidList {

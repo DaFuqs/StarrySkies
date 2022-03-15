@@ -1,6 +1,7 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
+import de.dafuqs.starrysky.dimension.SpheroidDimensionType;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.spheroid.decorators.DoublePlantDecorator;
@@ -158,24 +159,24 @@ public class SpheroidListCinderscapes extends SpheroidList {
 
         // REGISTERING SPHEROID TYPES
 
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, CRYSTALLINE_QUARTZ);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SULFUR_QUARTZ);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, ROSE_QUARTZ);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SMOKY_QUARTZ);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.2F, RAINBOW_QUARTZ);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, CRYSTALLINE_QUARTZ);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SULFUR_QUARTZ);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, ROSE_QUARTZ);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, SMOKY_QUARTZ);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.2F, RAINBOW_QUARTZ);
 
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.5F, SULFUR_ORE);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.2F, SULFUR_QUARTZ_ORE);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.2F, ROSE_QUARTZ_ORE);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.2F, SMOKY_QUARTZ_ORE);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.1F, RAINBOW_QUARTZ_ORE);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.5F, SULFUR_ORE);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.2F, SULFUR_QUARTZ_ORE);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.2F, ROSE_QUARTZ_ORE);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.2F, SMOKY_QUARTZ_ORE);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.ORE, 0.1F, RAINBOW_QUARTZ_ORE);
 
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 0.1F, SCORCHED_WOOD);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 0.1F, UMBRAL_MUSHROOM);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 0.1F, SCORCHED_WOOD);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.WOOD, 0.1F, UMBRAL_MUSHROOM);
 
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, TWILIGHT_VINES);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, UMBRAL);
-        spheroidLoader.registerSpheroidType(SpheroidLoader.SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, ASH);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, TWILIGHT_VINES);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, UMBRAL);
+        spheroidLoader.registerSpheroidType(SpheroidDimensionType.NETHER, SpheroidDistributionType.DECORATIVE, 0.5F, ASH);
     }
 
 }

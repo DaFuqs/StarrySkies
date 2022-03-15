@@ -23,7 +23,8 @@ public class StarrySkyDimension {
     public static final RegistryKey<World> STARRY_SKY_END_WORLD_KEY = RegistryKey.of(Registry.WORLD_KEY, STARRY_SKY_END_DIMENSION_ID);
 
     public static void setupDimension(){
-        StarrySkyCommon.log(INFO, "Registering chunk generator...");
+        //Vanilla does that via json now
+        //StarrySkyCommon.log(INFO, "Registering chunk generator...");
         //Registry.register(Registry.CHUNK_GENERATOR, new Identifier(StarrySkyCommon.MOD_ID, "starry_sky_chunk_generator"), StarrySkyChunkGenerator.CODEC);
     }
 

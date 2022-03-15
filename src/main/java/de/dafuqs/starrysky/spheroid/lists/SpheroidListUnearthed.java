@@ -10,7 +10,7 @@ import net.minecraft.block.BlockState;
 
 import java.util.ArrayList;
 
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static de.dafuqs.starrysky.dimension.SpheroidDimensionType.OVERWORLD;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListUnearthed extends SpheroidList {

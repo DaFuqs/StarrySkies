@@ -20,7 +20,7 @@ import net.minecraft.loot.LootTables;
 import net.minecraft.state.property.Properties;
 import org.jetbrains.annotations.NotNull;
 
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static de.dafuqs.starrysky.dimension.SpheroidDimensionType.OVERWORLD;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListVanilla extends SpheroidList {

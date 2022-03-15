@@ -12,21 +12,21 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface EndGatewayBlockEntityAccessor {
 	
 	@Accessor("teleportCooldown")
-	public void setTeleportCooldown(int teleportCooldown);
+	void setTeleportCooldown(int teleportCooldown);
 	
 	@Accessor("exitPortalPos")
-	public BlockPos getExitPortalPos();
+	BlockPos getExitPortalPos();
 	
 	@Accessor("exitPortalPos")
-	public void setExitPortalPos(BlockPos blockPos);
+	void setExitPortalPos(BlockPos blockPos);
 	
 	@Invoker("setupExitPortalLocation")
-	public static BlockPos invokeSetupExitPortalLocation(ServerWorld world, BlockPos pos) {
+	static BlockPos invokeSetupExitPortalLocation(ServerWorld world, BlockPos pos) {
 		return null;
 	}
 	
 	@Invoker("createPortal")
-	public static void invokeCreatePortal(ServerWorld world, BlockPos pos, EndGatewayFeatureConfig config) {
+	static void invokeCreatePortal(ServerWorld world, BlockPos pos, EndGatewayFeatureConfig config) {
 
 	}
 	

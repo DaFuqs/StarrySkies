@@ -10,6 +10,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface EntityAccessor {
 
   @Accessor("lastNetherPortalPosition")
-  public BlockPos getLastNetherPortalPosition();
+  BlockPos getLastNetherPortalPosition();
 
 }

@@ -12,7 +12,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.END;
+import static de.dafuqs.starrysky.dimension.SpheroidDimensionType.END;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListBetterEnd extends SpheroidList {

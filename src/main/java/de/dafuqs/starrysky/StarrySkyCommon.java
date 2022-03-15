@@ -11,6 +11,7 @@ import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -31,6 +32,8 @@ public class StarrySkyCommon implements ModInitializer {
     public static StarrySkyConfig STARRY_SKY_CONFIG;
     private static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
+    public static MinecraftServer minecraftServer;
+    
     public static ServerWorld starryWorld;
     public static ServerWorld starryWorldNether;
     public static ServerWorld starryWorldEnd;
@@ -55,6 +58,8 @@ public class StarrySkyCommon implements ModInitializer {
         // triggers everytime a world is loaded
         // so for overworld, nether, ... (they all share the same seed)
         ServerWorldEvents.LOAD.register((server, world) -> {
+            minecraftServer = server;
+            
             if(world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
                 StarrySkyCommon.starryWorld = world;
             } else if(world.getRegistryKey().equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {

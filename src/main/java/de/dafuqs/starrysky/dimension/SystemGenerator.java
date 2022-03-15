@@ -24,10 +24,10 @@ import static org.apache.logging.log4j.Level.DEBUG;
 
 public class SystemGenerator {
 
-    public static HashMap<SpheroidLoader.SpheroidDimensionType, SystemGenerator> systemGeneratorMap = new HashMap<>();
+    public static HashMap<SpheroidDimensionType, SystemGenerator> systemGeneratorMap = new HashMap<>();
 
     // spawning probabilities
-    private final SpheroidLoader.SpheroidDimensionType spheroidDimensionType;
+    private final SpheroidDimensionType spheroidDimensionType;
     private final HashMap<Point, List<Spheroid>> cache = new HashMap<>();
     public static SpheroidLoader spheroidLoader;
 
@@ -38,11 +38,11 @@ public class SystemGenerator {
 
     public static SystemGenerator getSystemGeneratorOfWorld(@NotNull RegistryKey<World> worldRegistryKey) {
         if(worldRegistryKey.equals(StarrySkyDimension.STARRY_SKY_WORLD_KEY)) {
-            return systemGeneratorMap.get(SpheroidLoader.SpheroidDimensionType.OVERWORLD);
+            return systemGeneratorMap.get(SpheroidDimensionType.OVERWORLD);
         } else if(worldRegistryKey.equals(StarrySkyDimension.STARRY_SKY_NETHER_WORLD_KEY)) {
-            return systemGeneratorMap.get(SpheroidLoader.SpheroidDimensionType.NETHER);
+            return systemGeneratorMap.get(SpheroidDimensionType.NETHER);
         } else {
-            return systemGeneratorMap.get(SpheroidLoader.SpheroidDimensionType.END);
+            return systemGeneratorMap.get(SpheroidDimensionType.END);
         }
     }
 
@@ -64,7 +64,7 @@ public class SystemGenerator {
         }
     }
 
-    public SystemGenerator(SpheroidLoader.SpheroidDimensionType spheroidDimensionType) {
+    public SystemGenerator(SpheroidDimensionType spheroidDimensionType) {
         this.spheroidDimensionType = spheroidDimensionType;
         spheroidLoader = new SpheroidLoader();
         systemGeneratorMap.put(spheroidDimensionType, this);

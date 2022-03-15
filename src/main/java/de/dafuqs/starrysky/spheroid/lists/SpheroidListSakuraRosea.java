@@ -8,7 +8,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.OVERWORLD;
+import static de.dafuqs.starrysky.dimension.SpheroidDimensionType.OVERWORLD;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListSakuraRosea extends SpheroidList {

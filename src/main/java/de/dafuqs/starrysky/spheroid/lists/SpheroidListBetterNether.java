@@ -13,7 +13,7 @@ import net.minecraft.block.Blocks;
 
 import java.util.ArrayList;
 
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.NETHER;
+import static de.dafuqs.starrysky.dimension.SpheroidDimensionType.NETHER;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListBetterNether extends SpheroidList {

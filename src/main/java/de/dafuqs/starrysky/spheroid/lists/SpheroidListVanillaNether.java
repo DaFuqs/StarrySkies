@@ -15,7 +15,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
 
-import static de.dafuqs.starrysky.dimension.SpheroidLoader.SpheroidDimensionType.NETHER;
+import static de.dafuqs.starrysky.dimension.SpheroidDimensionType.NETHER;
 import static org.apache.logging.log4j.Level.INFO;
 
 public class SpheroidListVanillaNether extends SpheroidList {
