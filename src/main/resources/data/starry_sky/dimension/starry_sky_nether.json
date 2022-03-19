@@ -2,6 +2,7 @@
   "type": "starry_sky:starry_sky_nether_type",
   "generator": {
     "type": "starry_sky:starry_sky_chunk_generator",
+    "seed": 0,
     "settings": 1
   }
 }
