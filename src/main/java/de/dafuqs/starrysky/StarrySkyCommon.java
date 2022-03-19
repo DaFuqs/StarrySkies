@@ -47,9 +47,10 @@ public class StarrySkyCommon implements ModInitializer {
         STARRY_SKY_CONFIG = AutoConfig.getConfigHolder(StarrySkyConfig.class).getConfig();
 
         // Register all the stuff
+        StarrySkyCommon.log(INFO, "Registering all the worldgen stuff...");
         Registry.register(Registry.CHUNK_GENERATOR, new Identifier(MOD_ID, "starry_sky_chunk_generator"), StarrySkyChunkGenerator.CODEC);
         StarrySkyBiomeKeys.initialize();
-        StarrySkyDimension.setupDimension();
+        StarrySkyDimension.setupPortals();
         StarrySkyCommands.initialize();
         DecoratorFeatures.initialize();
 
