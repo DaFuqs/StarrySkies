@@ -1,6 +1,10 @@
 {
   "type": "starry_sky:starry_sky_end_type",
   "generator": {
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "starry_sky:starry_sky_end_biome"
+    },
     "type": "starry_sky:starry_sky_chunk_generator",
     "seed": 0,
     "settings": 2

@@ -23,6 +23,7 @@ import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.FixedBiomeSource;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
@@ -46,7 +47,6 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-
 public class StarrySkyChunkGenerator extends ChunkGenerator {
     
     private final long seed;
@@ -59,16 +59,16 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     private final BlockState floorBlockState;
     private final BlockState bottomBlockState;
     
-    public static final Codec<StarrySkyChunkGenerator> CODEC = RecordCodecBuilder.create((instance) -> {
-        return method_41042(instance).and(instance.group(
-                RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter((generator) -> generator.biomeRegistry),
-                Codecs.POSITIVE_INT.fieldOf("settings").forGetter((generator -> generator.spheroidDimensionType.ordinal())),
-                Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> generator.seed)
-        )).apply(instance, instance.stable(StarrySkyChunkGenerator::new));
-    });
+    public static final Codec<StarrySkyChunkGenerator> CODEC = RecordCodecBuilder
+            .create(instance -> method_41042(instance)
+                    .and(instance.group(RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter(source -> source.biomeRegistry),
+                            Codecs.NONNEGATIVE_INT.fieldOf("settings").forGetter((generator -> generator.spheroidDimensionType.ordinal())),
+                            Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> generator.seed)))
+                    .apply(instance, instance.stable(StarrySkyChunkGenerator::new)));
     
     public StarrySkyChunkGenerator(Registry<StructureSet> structureSets, Registry<Biome> biomeRegistry, int spheroidDimensionTypeOrdinal, long seed) {
-        super(structureSets, Optional.empty(), new FixedBiomeSource(SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal].getBiome(biomeRegistry)), new FixedBiomeSource(SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal].getBiome(biomeRegistry)), 0L);
+        super(structureSets, Optional.empty(), createBiomeSource(biomeRegistry));
+        
         this.biomeRegistry = biomeRegistry;
         this.spheroidDimensionType = SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal];
         this.seed = seed;
@@ -77,6 +77,10 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         this.floorBlockState = spheroidDimensionType.getFloorBlockState();
         this.bottomBlockState = spheroidDimensionType.getBottomBlockState();
         this.floorHeight = spheroidDimensionType.getFloorHeight();
+    }
+    
+    private static FixedBiomeSource createBiomeSource(Registry<Biome> biomeRegistry) {
+        return new FixedBiomeSource(biomeRegistry.getOrCreateEntry(BiomeKeys.PLAINS)); // TODO
     }
     
     private static @Nullable BlockPos findClosestStrongholdSphere(BlockPos blockPos, @NotNull ServerWorld world, int radius) {
