@@ -14,5 +14,13 @@
   "has_skylight": true,
   "has_ceiling": false,
   "fixed_time": 6000,
-  "ultrawarm": false
+  "ultrawarm": false,
+  "monster_spawn_block_light_limit": 0,
+  "monster_spawn_light_level": {
+    "type": "minecraft:uniform",
+    "value": {
+      "max_inclusive": 7,
+      "min_inclusive": 0
+    }
+  }
 }

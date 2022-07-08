@@ -2,11 +2,11 @@ package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
-import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.spheroid.decorators.*;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinitions;
+import de.dafuqs.starrysky.spheroid.decorators.*;
 import de.dafuqs.starrysky.spheroid.types.*;
 import de.dafuqs.starrysky.spheroid.types.unique.BeeHiveSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.unique.GeodeSpheroidType;

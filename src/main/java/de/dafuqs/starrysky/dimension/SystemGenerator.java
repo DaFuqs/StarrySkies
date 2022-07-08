@@ -8,10 +8,10 @@ import de.dafuqs.starrysky.spheroid.lists.SpheroidListVanillaNether;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.CheckedRandom;
+import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -116,7 +116,7 @@ public class SystemGenerator {
     private @NotNull ChunkRandom getSystemRandom(@NotNull Point systemPoint) {
         int firstChunkPosX = systemPoint.x * SYSTEM_SIZE_CHUNKS;
         int firstChunkPosZ = systemPoint.y * SYSTEM_SIZE_CHUNKS;
-        ChunkRandom systemRandom = new ChunkRandom(new SimpleRandom(StarrySkyCommon.starryWorld.getSeed()));
+        ChunkRandom systemRandom = new ChunkRandom(new CheckedRandom(StarrySkyCommon.starryWorld.getSeed()));
         systemRandom.setCarverSeed(StarrySkyCommon.starryWorld.getSeed(), firstChunkPosX, firstChunkPosZ); // and the seed from the first chunk+
         StarrySkyCommon.log(DEBUG, "Generated seed for system at " + systemPoint.x + "," + systemPoint.y + "(first chunk: " + firstChunkPosX + "," + firstChunkPosZ);
         return systemRandom;

@@ -8,7 +8,7 @@ import de.dafuqs.starrysky.spheroid.spheroids.unique.GeodeSpheroid;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.util.math.random.ChunkRandom;
 
 import java.util.ArrayList;
 

@@ -21,13 +21,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.random.ChunkRandom;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class EndCitySpheroid extends Spheroid {
 

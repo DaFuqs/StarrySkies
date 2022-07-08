@@ -15,13 +15,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.random.ChunkRandom;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class StrongholdSpheroid extends Spheroid {
 
@@ -30,7 +30,6 @@ public class StrongholdSpheroid extends Spheroid {
     private final BlockState MOSSY_STONE_BRICKS = Blocks.MOSSY_STONE_BRICKS.getDefaultState();
     private final BlockState OAK_PLANKS = Blocks.OAK_PLANKS.getDefaultState();
     private final BlockState END_PORTAL_FRAME = Blocks.END_PORTAL_FRAME.getDefaultState();
-    private final BlockState SPAWNER = Blocks.SPAWNER.getDefaultState();
     private final BlockState LAVA = Blocks.LAVA.getDefaultState();
     private final BlockState IRON_BARS = Blocks.IRON_BARS.getDefaultState();
     private final BlockState BOOKSHELF = Blocks.BOOKSHELF.getDefaultState();

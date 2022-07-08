@@ -4,10 +4,10 @@ import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class HangingCaveBlockDecorator extends SpheroidDecorator {

@@ -6,11 +6,11 @@ import de.dafuqs.starrysky.dimension.SpheroidLoader;
 import de.dafuqs.starrysky.spheroid.types.CoreSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.DoubleCoreSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.ModularSpheroidType;
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
+import net.minecraft.loot.LootPool;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.util.Identifier;
@@ -50,22 +50,24 @@ public class SpheroidListAppliedEnergistics2 extends SpheroidList {
         // Only fill AE2 loot table with items when AE2 is loaded.
         // Otherwise the items don't even exist and vanilla throws
         // an error even though the loot table is not used
-        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, supplier, setter) -> {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (APPLIED_ENERGISTICS_METEOR_CHEST_LOOT_TABLE.equals(id)) {
                 StarrySkyCommon.log(DEBUG, "Creating AE2 loot table...");
-
-                Item CALCULATION_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "calculation_processor_press"));
-                Item ENGINEERING_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "engineering_processor_press"));
-                Item LOGIC_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "logic_processor_press"));
-                Item SILICON_PRESS = Registry.ITEM.get(new Identifier("appliedenergistics2", "silicon_press"));
-
-                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+    
+                Item CALCULATION_PRESS = Registry.ITEM.get(new Identifier(MOD_ID, "calculation_processor_press"));
+                Item ENGINEERING_PRESS = Registry.ITEM.get(new Identifier(MOD_ID, "engineering_processor_press"));
+                Item LOGIC_PRESS = Registry.ITEM.get(new Identifier(MOD_ID, "logic_processor_press"));
+                Item SILICON_PRESS = Registry.ITEM.get(new Identifier(MOD_ID, "silicon_press"));
+    
+                LootPool pool = LootPool.builder()
                         .rolls(UniformLootNumberProvider.create(1, 3))
-                        .withEntry(ItemEntry.builder(CALCULATION_PRESS).build())
-                        .withEntry(ItemEntry.builder(ENGINEERING_PRESS).build())
-                        .withEntry(ItemEntry.builder(LOGIC_PRESS).build())
-                        .withEntry(ItemEntry.builder(SILICON_PRESS).build());
-                supplier.withPool(poolBuilder.build());
+                        .with(ItemEntry.builder(CALCULATION_PRESS).build())
+                        .with(ItemEntry.builder(ENGINEERING_PRESS).build())
+                        .with(ItemEntry.builder(LOGIC_PRESS).build())
+                        .with(ItemEntry.builder(SILICON_PRESS).build())
+                        .build();
+    
+                tableBuilder.pool(pool);
             }
         });
     }

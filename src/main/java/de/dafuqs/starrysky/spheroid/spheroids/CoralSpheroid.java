@@ -1,16 +1,16 @@
 package de.dafuqs.starrysky.spheroid.spheroids;
 
-import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.spheroid.lists.SpheroidList;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.random.ChunkRandom;
 
 import java.util.ArrayList;
 

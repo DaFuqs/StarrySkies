@@ -6,7 +6,7 @@ import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.spheroid.spheroids.unique.EndCitySpheroid;
 import de.dafuqs.starrysky.spheroid.types.SpheroidType;
-import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.util.math.random.ChunkRandom;
 
 import java.util.ArrayList;
 

@@ -7,10 +7,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.EndGatewayBlockEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class EndGatewayDecorator extends SpheroidDecorator {
 

@@ -16,13 +16,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.BeeEntity;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.random.ChunkRandom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,7 +176,7 @@ public class BeeHiveSpheroid extends Spheroid {
     }
 
     public void setRandomQueenProperties (BeeEntity beeEntity, ChunkRandom chunkRandom){
-        beeEntity.setCustomName(new TranslatableText("bee.queen"));
+        beeEntity.setCustomName(Text.translatable("bee.queen"));
         beeEntity.setHealth(beeEntity.getHealth() * (random.nextFloat() * 3 + 5)); //way higher than default
         beeEntity.setMovementSpeed((float) (beeEntity.getMovementSpeed() * (random.nextFloat() * 0.5 + 0.5))); //slower than default
         beeEntity.setAbsorptionAmount((float) (beeEntity.getAbsorptionAmount() * (random.nextFloat() * 1.5 + 1))); //higher than default

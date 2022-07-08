@@ -7,10 +7,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class SeaGreensDecorator extends SpheroidDecorator {

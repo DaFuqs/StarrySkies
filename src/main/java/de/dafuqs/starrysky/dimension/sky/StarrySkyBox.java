@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import de.dafuqs.starrysky.StarrySkyCommon;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.option.Option;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -46,7 +45,7 @@ public class StarrySkyBox {
         }
 
         GameOptions options = MinecraftClient.getInstance().options;
-        float distance = 16F * (float) Option.RENDER_DISTANCE.get(options) - 8F;
+        float distance = 16F * (float) options.getViewDistance().getValue() - 8F;
         int color = (int) Math.abs(((Math.abs((world.getTimeOfDay()-6000) % 24000)-12000)/47)); // 47 = 12000 (half day)  /255 (max hue)
         int rawLight = (int) ((world.getTimeOfDay() / 12000) % 15); // a day is 24000; max light level = 15
         int vertexLight = 0x00f000f0 >> 2 | rawLight >> 3 | rawLight;

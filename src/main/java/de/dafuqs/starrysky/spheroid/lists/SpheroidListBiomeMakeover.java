@@ -1,9 +1,9 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.decorators.*;
 import de.dafuqs.starrysky.spheroid.types.ModularSpheroidType;
 import de.dafuqs.starrysky.spheroid.types.MushroomSpheroidType;

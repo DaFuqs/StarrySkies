@@ -1,8 +1,8 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
 import de.dafuqs.starrysky.StarrySkyCommon;
-import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
+import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.decorators.GroundDecorator;
 import de.dafuqs.starrysky.spheroid.decorators.PlantDecorator;
 import net.fabricmc.loader.api.FabricLoader;

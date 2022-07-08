@@ -4,12 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractFireBlockMixin",
-    "DimensionTypeMixin",
     "EndGatewayBlockEntityAccessor",
     "EndGatewayBlockEntityMixin",
     "EndPortalBlockMixin",
     "EntityAccessor",
-    "EntityMixin"
+    "EntityMixin",
+    "ServerWorldMixin"
   ],
   "client": [
     "client.WorldRendererMixin"

@@ -10,12 +10,12 @@ import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public abstract class SpheroidDecorator {
 

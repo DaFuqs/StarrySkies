@@ -7,7 +7,7 @@ import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
 import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.spheroid.spheroids.ShellSpheroid;
 import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.util.math.random.ChunkRandom;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

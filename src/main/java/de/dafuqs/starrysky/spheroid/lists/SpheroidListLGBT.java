@@ -1,8 +1,8 @@
 package de.dafuqs.starrysky.spheroid.lists;
 
+import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.dimension.SpheroidDistributionType;
 import de.dafuqs.starrysky.dimension.SpheroidLoader;
-import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.spheroid.types.StripesSpheroidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

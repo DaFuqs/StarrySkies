@@ -6,8 +6,6 @@ import de.dafuqs.starrysky.StarrySkyCommon;
 import de.dafuqs.starrysky.Support;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
@@ -16,6 +14,9 @@ import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.random.CheckedRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.RandomSeed;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.ChunkRegion;
@@ -25,17 +26,13 @@ import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.FixedBiomeSource;
-import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.Blender;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
-import net.minecraft.world.gen.random.AtomicSimpleRandom;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.RandomSeed;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.world.gen.noise.NoiseConfig;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +56,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     private final BlockState bottomBlockState;
     
     public static final Codec<StarrySkyChunkGenerator> CODEC = RecordCodecBuilder
-            .create(instance -> method_41042(instance)
+            .create(instance -> createStructureSetRegistryGetter(instance)
                     .and(instance.group(RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter(source -> source.biomeRegistry),
                             Codecs.NONNEGATIVE_INT.fieldOf("settings").forGetter((generator -> generator.spheroidDimensionType.ordinal())),
                             Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> generator.seed)))
@@ -92,6 +89,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         }
     }
     
+    // TODO: move to structure logic
     private static @Nullable BlockPos findClosestStrongholdSphere(BlockPos blockPos, @NotNull ServerWorld world, int radius) {
         ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
         if(chunkGenerator instanceof StarrySkyChunkGenerator) {
@@ -109,7 +107,12 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
     
     @Override
-    public void buildSurface(ChunkRegion region, StructureAccessor structures, @NotNull Chunk chunk) {
+    protected Codec<? extends ChunkGenerator> getCodec() {
+        return CODEC;
+    }
+    
+    @Override
+    public void buildSurface(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk) {
         ChunkPos chunkPos = chunk.getPos();
     
         int chunkPosStartX = chunkPos.getStartX();
@@ -128,23 +131,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
     
     @Override
-    protected Codec<? extends ChunkGenerator> getCodec() {
-        return CODEC;
-    }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public ChunkGenerator withSeed(long seed) {
-        return new StarrySkyChunkGenerator(this.field_37053, biomeRegistry, this.spheroidDimensionType.ordinal(), seed);
-    }
-    
-    @Override
-    public MultiNoiseUtil.MultiNoiseSampler getMultiNoiseSampler() {
-        return MultiNoiseUtil.method_40443();
-    }
-    
-    @Override
-    public void carve(ChunkRegion chunkRegion, long seed, BiomeAccess biomeAccess, StructureAccessor structureAccessor, Chunk chunk, GenerationStep.Carver generationStep) {
+    public void carve(ChunkRegion chunkRegion, long seed, NoiseConfig noiseConfig, BiomeAccess world, StructureAccessor structureAccessor, Chunk chunk, GenerationStep.Carver carverStep) {
         // no carver
     }
     
@@ -162,7 +149,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
     
     @Override
-    public CompletableFuture<Chunk> populateNoise(Executor executor, Blender blender, StructureAccessor structureAccessor, Chunk chunk) {
+    public CompletableFuture<Chunk> populateNoise(Executor executor, Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
         placeSpheroids(chunk); // generate spheres
         return CompletableFuture.completedFuture(chunk);
     }
@@ -171,7 +158,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     public void populateEntities(@NotNull ChunkRegion chunkRegion) {
         ChunkPos chunkPos = chunkRegion.getCenterPos();
         RegistryEntry<Biome> biome = chunkRegion.getBiome(chunkPos.getStartPos().withY(chunkRegion.getTopY() - 1));
-        ChunkRandom chunkRandom = new ChunkRandom(new AtomicSimpleRandom(RandomSeed.getSeed()));
+        ChunkRandom chunkRandom = new ChunkRandom(new CheckedRandom(RandomSeed.getSeed()));
         chunkRandom.setPopulationSeed(chunkRegion.getSeed(), chunkPos.getStartX(), chunkPos.getStartZ());
         SpawnHelper.populateEntities(chunkRegion, biome, chunkPos, chunkRandom);
         
@@ -192,23 +179,24 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
     }
     
     @Override
-    public int getHeight(int x, int z, Heightmap.Type heightmap, HeightLimitView world) {
+    public int getHeight(int x, int z, Heightmap.Type heightmap, HeightLimitView world, NoiseConfig noiseConfig) {
         return floorHeight;
     }
-
+    
     @Override
-    public VerticalBlockSample getColumnSample(int x, int z, @NotNull HeightLimitView world) {
+    public void getDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
+    
+    }
+    
+    @Override
+    public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world, NoiseConfig noiseConfig) {
         BlockState[] states = new BlockState[world.getHeight()];
         Arrays.fill(states, Blocks.AIR.getDefaultState());
         return new VerticalBlockSample(world.getBottomY(), states);
     }
     
-    @Override
-    public void getDebugHudText(List<String> text, BlockPos pos) {
-    }
-    
     public void placeSpheroids(@NotNull Chunk chunk) {
-        ChunkRandom chunkRandom = new ChunkRandom(new SimpleRandom(StarrySkyCommon.starryWorld.getSeed()));
+        ChunkRandom chunkRandom = new ChunkRandom(new CheckedRandom(StarrySkyCommon.starryWorld.getSeed()));
         chunkRandom.setCarverSeed(StarrySkyCommon.starryWorld.getSeed(), chunk.getPos().getRegionX(), chunk.getPos().getRegionZ());
 
         List<Spheroid> localSystem = systemGenerator.getSystemAtChunkPos(chunk.getPos().x, chunk.getPos().z);

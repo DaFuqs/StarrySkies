@@ -14,5 +14,7 @@
   "coordinate_scale": 8.0,
   "piglin_safe" : true,
   "has_skylight": true,
-  "has_ceiling": false
+  "has_ceiling": false,
+  "monster_spawn_block_light_limit": 15,
+  "monster_spawn_light_level": 11
 }

@@ -1,10 +1,10 @@
 package de.dafuqs.starrysky.spheroid.types;
 
-import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.advancements.SpheroidAdvancementIdentifier;
 import de.dafuqs.starrysky.spheroid.SpheroidDecorator;
+import de.dafuqs.starrysky.spheroid.SpheroidEntitySpawnDefinition;
 import de.dafuqs.starrysky.spheroid.spheroids.Spheroid;
-import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.util.math.random.ChunkRandom;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

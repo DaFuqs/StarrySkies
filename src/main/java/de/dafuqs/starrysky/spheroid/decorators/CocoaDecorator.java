@@ -8,15 +8,13 @@ import net.minecraft.block.CocoaBlock;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 
 import java.util.ArrayList;
-import java.util.Random;
-
 
 public class CocoaDecorator extends SpheroidDecorator {
-
-
+    
     private static final BlockState GROWN_COCOA_BLOCKSTATE = Blocks.COCOA.getDefaultState().with(CocoaBlock.AGE, 2); // 2 = fully grown
     private static final BlockState AIR_BLOCKSTATE = Blocks.CAVE_AIR.getDefaultState();
 

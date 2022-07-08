@@ -9,7 +9,7 @@ import de.dafuqs.starrysky.spheroid.spheroids.CaveSpheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.util.math.random.ChunkRandom;
 
 import java.util.ArrayList;
 
