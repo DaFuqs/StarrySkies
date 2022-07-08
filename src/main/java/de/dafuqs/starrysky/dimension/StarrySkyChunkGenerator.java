@@ -23,7 +23,6 @@ import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.FixedBiomeSource;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
@@ -67,7 +66,7 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
                     .apply(instance, instance.stable(StarrySkyChunkGenerator::new)));
     
     public StarrySkyChunkGenerator(Registry<StructureSet> structureSets, Registry<Biome> biomeRegistry, int spheroidDimensionTypeOrdinal, long seed) {
-        super(structureSets, Optional.empty(), createBiomeSource(biomeRegistry));
+        super(structureSets, Optional.empty(), createBiomeSource(biomeRegistry, spheroidDimensionTypeOrdinal));
         
         this.biomeRegistry = biomeRegistry;
         this.spheroidDimensionType = SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal];
@@ -79,8 +78,18 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
         this.floorHeight = spheroidDimensionType.getFloorHeight();
     }
     
-    private static FixedBiomeSource createBiomeSource(Registry<Biome> biomeRegistry) {
-        return new FixedBiomeSource(biomeRegistry.getOrCreateEntry(BiomeKeys.PLAINS)); // TODO
+    private static FixedBiomeSource createBiomeSource(Registry<Biome> biomeRegistry, int spheroidDimensionTypeOrdinal) {
+        switch (spheroidDimensionTypeOrdinal) {
+            case 0 -> {
+                return new FixedBiomeSource(biomeRegistry.getOrCreateEntry(StarrySkyBiomeKeys.OVERWORLD));
+            }
+            case 1 -> {
+                return new FixedBiomeSource(biomeRegistry.getOrCreateEntry(StarrySkyBiomeKeys.NETHER));
+            }
+            default -> {
+                return new FixedBiomeSource(biomeRegistry.getOrCreateEntry(StarrySkyBiomeKeys.END));
+            }
+        }
     }
     
     private static @Nullable BlockPos findClosestStrongholdSphere(BlockPos blockPos, @NotNull ServerWorld world, int radius) {
