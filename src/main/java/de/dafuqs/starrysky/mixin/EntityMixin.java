@@ -3,7 +3,9 @@ package de.dafuqs.starrysky.mixin;
 import de.dafuqs.starrysky.StarrySkyDimensionTravelHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.TeleportTarget;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,9 +30,9 @@ public abstract class EntityMixin {
         }
     }
 
-    @ModifyVariable(method = "tickNetherPortal", at = @At("STORE"), ordinal = 1)
-    private ServerWorld injected(ServerWorld x) {
-        return StarrySkyDimensionTravelHandler.modifyNetherPortalDestination((Entity) (Object) this, x);
+    @ModifyVariable(method = "tickPortal()V", at = @At("STORE"))
+    private RegistryKey<World> injected(RegistryKey<World> registryKey) {
+        return StarrySkyDimensionTravelHandler.modifyNetherPortalDestination((Entity) (Object) this, registryKey);
     }
 
 }

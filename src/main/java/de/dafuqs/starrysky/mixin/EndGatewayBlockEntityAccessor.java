@@ -11,9 +11,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(EndGatewayBlockEntity.class)
 public interface EndGatewayBlockEntityAccessor {
 	
-	@Accessor("teleportCooldown")
-	void setTeleportCooldown(int teleportCooldown);
-	
 	@Accessor("exitPortalPos")
 	BlockPos getExitPortalPos();
 	

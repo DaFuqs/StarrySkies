@@ -33,11 +33,11 @@ public class StarrySkyDimensionTravelHandler {
     public static final BlockPos END_SPAWN_BLOCK_POS = new BlockPos(10, 64, 0);
     public static final BlockPos OVERWORLD_SPAWN_BLOCK_POS = new BlockPos(16, 85, 16);
 
-    public static ServerWorld modifyNetherPortalDestination(@NotNull Entity thisEntity, ServerWorld serverWorld) {
+    public static RegistryKey<World> modifyNetherPortalDestination(@NotNull Entity thisEntity, RegistryKey<World> serverWorld) {
         if(thisEntity.getEntityWorld().getRegistryKey().equals(StarrySkyDimension.OVERWORLD_KEY)) {
-            return StarrySkyCommon.starryWorldNether;
+            return StarrySkyCommon.starryWorldNether.getRegistryKey();
         } else if(thisEntity.getEntityWorld().getRegistryKey().equals(StarrySkyDimension.NETHER_KEY)) {
-            return StarrySkyCommon.starryWorld;
+            return StarrySkyCommon.starryWorld.getRegistryKey();
         }
         return serverWorld;
     }
