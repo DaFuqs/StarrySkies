@@ -5,7 +5,7 @@
 	"dimension": "starry_skies:starry_skies",
 	"min_size": 5,
 	"max_size": 7,
-	"type": "starry_skies:fluid",
+	"type": "starry_skies:fluid_core",
 	"type_data": {
 		"fluid": "minecraft:water",
 		"min_shell_size": 1,
@@ -13,7 +13,7 @@
 		"min_fill_amount": 0.7,
 		"max_fill_amount": 1.0,
 		"hole_in_bottom_chance": 0.75,
-		"weighted_outer_blocks": {
+		"shell_block": {
 			"minecraft:glass": 100,
 			"minecraft:black_stained_glass": 1,
 			"minecraft:blue_stained_glass": 1,
@@ -33,11 +33,9 @@
 			"minecraft:yellow_stained_glass": 1,
 			"minecraft:tinted_glass": 1
 		},
-		"core": {
-			"block": "minecraft:slime_block",
-			"min_size": 1,
-			"max_size": 3
-		}
+		"core_block": "minecraft:slime_block",
+		"min_core_size": 1,
+		"max_core_size": 3
 	},
 	"decorators": {
 		"starry_skies:sea_greens": 0.25

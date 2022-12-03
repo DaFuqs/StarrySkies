@@ -3,6 +3,7 @@ package de.dafuqs.starryskies.spheroids.types;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.Support;
+import de.dafuqs.starryskies.spheroids.BlockStateSupplier;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -43,10 +44,10 @@ public class CaveSpheroid extends Spheroid {
 	
 	public static class Template extends Spheroid.Template {
 		
-		private final BlockState shellBlock;
+		private final BlockStateSupplier shellBlock;
 		private final int minShellRadius;
 		private final int maxShellRadius;
-		private final BlockState caveFloorBlock;
+		private BlockState caveFloorBlock = null;
 		private BlockState topBlock = null;
 		private BlockState bottomBlock = null;
 		private Identifier lootTable = null;
@@ -58,7 +59,7 @@ public class CaveSpheroid extends Spheroid {
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
-			this.shellBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "shell_block"), false).blockState();
+			this.shellBlock = BlockStateSupplier.of(typeData.get("shell_block"));
 			if(JsonHelper.hasString(typeData, "top_block")) {
 				this.topBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "top_block"), false).blockState();
 			}
@@ -67,8 +68,6 @@ public class CaveSpheroid extends Spheroid {
 			}
 			if(JsonHelper.hasString(typeData, "cave_floor_block")) {
 				this.caveFloorBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "cave_floor_block"), false).blockState();
-			} else {
-				this.caveFloorBlock = shellBlock;
 			}
 			if(JsonHelper.hasJsonObject(typeData, "treasure_chest")) {
 				JsonObject treasureChestObject = JsonHelper.getObject(typeData, "treasure_chest");
@@ -77,25 +76,15 @@ public class CaveSpheroid extends Spheroid {
 			}
 		}
 		
-		public BlockState getTopBlock() {
-			return topBlock != null ? topBlock : shellBlock;
-		}
-		
-		public BlockState getBottomBlock() {
-			return bottomBlock != null ? bottomBlock : shellBlock;
-		}
-		
 		@Override
 		public CaveSpheroid generate(ChunkRandom random) {
 			int shellRadius = Support.getRandomBetween(random, this.minShellRadius, this.maxShellRadius);
-			BlockState topBlock = getTopBlock();
-			BlockState bottomBlock = getBottomBlock();
 			
 			Identifier lootTable = null;
 			if (random.nextFloat() < lootTableChance) {
 				lootTable = this.lootTable;
 			}
-			return new CaveSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, caveFloorBlock, shellBlock, shellRadius, getTopBlock(), getBottomBlock(), lootTable);
+			return new CaveSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, caveFloorBlock, shellBlock.get(random), shellRadius, topBlock, bottomBlock, lootTable);
 		}
 		
 	}
@@ -136,15 +125,19 @@ public class CaveSpheroid extends Spheroid {
 					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
 					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
 					if (d == this.radius) {
-						if (isBottomBlock(d, x2, y2, z2)) {
+						if (bottomBlock != null && isBottomBlock(d, x2, y2, z2)) {
 							chunk.setBlockState(currBlockPos, this.bottomBlock, false);
-						} else if (isTopBlock(d, x2, y2, z2)) {
+						} else if (topBlock != null &&isTopBlock(d, x2, y2, z2)) {
 							chunk.setBlockState(currBlockPos, this.topBlock, false);
 						} else {
 							chunk.setBlockState(currBlockPos, this.shellBlock, false);
 						}
 					} else if (isAboveCaveFloorBlock(d, x2, y2, z2, shellRadius)) {
-						chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock, false);
+						if(this.caveFloorBlock == null) {
+							chunk.setBlockState(currBlockPos.down(), this.shellBlock, false);
+						} else {
+							chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock, false);
+						}
 						addDecorationBlockPosition(currBlockPos.down());
 						if (hasChest && x2 - x == 0 && z2 - z == 0) {
 							placeCenterChestWithLootTable(chunk, currBlockPos, chestLootTable, random, false);

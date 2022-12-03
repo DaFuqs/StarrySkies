@@ -18,6 +18,7 @@ import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -45,12 +46,18 @@ public class SpheroidTemplateLoader extends JsonDataLoader implements Identifiab
 		prepared.forEach((identifier, jsonElement) -> {
 			JsonObject jsonObject = jsonElement.getAsJsonObject();
 			
+			Spheroid.Template template;
+			Identifier spheroidType = null;
 			try {
-				Spheroid.Template template;
-				Identifier spheroidType = Identifier.tryParse(JsonHelper.getString(jsonObject, "type"));
+				spheroidType = Identifier.tryParse(JsonHelper.getString(jsonObject, "type"));
 				
-				Class<? extends Spheroid.Template> templateClass = StarryRegistries.SPHEROID_TYPE.get(spheroidType);
-				template = templateClass.getConstructor(jsonObject.getClass()).newInstance(jsonObject);
+				try {
+					Class<? extends Spheroid.Template> templateClass = StarryRegistries.SPHEROID_TYPE.get(spheroidType);
+					template = templateClass.getConstructor(jsonObject.getClass()).newInstance(jsonObject);
+				} catch (NullPointerException e) {
+					StarrySkies.log(Level.ERROR, "Error reading sphere json definition " + identifier + ": Spheroid Type " + spheroidType + " is not known.");
+					return;
+				}
 				
 				Identifier generationGroup = null;
 				float generationWeight = 0;
@@ -60,8 +67,12 @@ public class SpheroidTemplateLoader extends JsonDataLoader implements Identifiab
 				}
 				
 				registerSpheroidType(generationGroup, generationWeight, template);
+			} catch (IllegalStateException e) {
+				// TODO: registry is already frozen
+			} catch (InvocationTargetException e) {
+				StarrySkies.log(Level.ERROR, "Error reading sphere json definition " + identifier + ": " + e.getTargetException());
 			} catch (Exception e) {
-				StarrySkies.log(Level.ERROR, "Error reading sphere json definition " + identifier + ":" + e.getMessage());
+				StarrySkies.log(Level.ERROR, "Error reading sphere json definition " + identifier + ": " + e);
 				e.printStackTrace();
 			}
 		});

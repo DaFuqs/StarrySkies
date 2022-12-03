@@ -1,6 +1,6 @@
 {
 	"id": "stones",
-	"weighted_block_states": {
+	"blocks": {
 		"minecraft:stone": 1000,
 		"minecraft:granite": 100,
 		"minecraft:diorite": 100,

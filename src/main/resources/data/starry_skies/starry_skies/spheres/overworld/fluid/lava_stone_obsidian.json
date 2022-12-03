@@ -5,7 +5,7 @@
 	"dimension": "starry_skies:starry_skies",
 	"min_size": 10,
 	"max_size": 20,
-	"type": "starry_skies:fluid",
+	"type": "starry_skies:fluid_core",
 	"type_data": {
 		"fluid": "minecraft:lava",
 		"min_shell_size": 3,
@@ -13,18 +13,16 @@
 		"min_fill_amount": 0.5,
 		"max_fill_amount": 0.8,
 		"hole_in_bottom_chance": 0.5,
-		"weighted_outer_blocks": {
+		"shell_block": {
 			"minecraft:stone": 5,
 			"minecraft:deepslate": 2,
 			"minecraft:granite": 1,
 			"minecraft:diorite": 1,
 			"minecraft:andesite": 1
 		},
-		"core": {
-			"block": "minecraft:obsidian",
-			"min_size": 2,
-			"max_size": 5
-		}
+		"core_block": "minecraft:obsidian",
+		"min_core_size": 2,
+		"max_core_size": 5
 	},
 	"decorators": {
 		"starry_skies:x_spot_ruined_portal": 0.1

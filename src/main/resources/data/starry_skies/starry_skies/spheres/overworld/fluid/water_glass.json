@@ -13,7 +13,7 @@
 		"min_fill_amount": 0.25,
 		"max_fill_amount": 0.9,
 		"hole_in_bottom_chance": 0.25,
-		"weighted_outer_blocks": {
+		"shell_block": {
 			"minecraft:glass": 100,
 			"minecraft:black_stained_glass": 1,
 			"minecraft:blue_stained_glass": 1,

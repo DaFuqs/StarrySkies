@@ -9,7 +9,7 @@
 	"type_data": {
 		"min_shell_size": 2,
 		"max_shell_size": 5,
-		"cave_floor_block": "minecraft:crimson_cylium",
+		"cave_floor_block": "minecraft:crimson_nylium",
 		"shell_block": "minecraft:netherrack",
 		"treasure_chest": {
 			"loot_table": "minecraft/chests/ruined_portal",

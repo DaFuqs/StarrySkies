@@ -23,6 +23,7 @@ public class SpheroidTypes {
 	public static final Class<? extends Spheroid.Template> END_CITY = register("end_city", EndCitySpheroid.Template.class);
 	public static final Class<? extends Spheroid.Template> SHELL = register("shell", ShellSpheroid.Template.class);
 	public static final Class<? extends Spheroid.Template> FLUID = register("fluid", FluidSpheroid.Template.class);
+	public static final Class<? extends Spheroid.Template> CORE_FLUID = register("fluid_core", FluidCoreSpheroid.Template.class);
 	public static final Class<? extends Spheroid.Template> MUSHROOM = register("mushroom", MushroomSpheroid.Template.class);
 	public static final Class<? extends Spheroid.Template> SHELL_CORE = register("shell_core", ShellCoreSpheroid.Template.class);
 	public static final Class<? extends Spheroid.Template> BEE_HIVE = register("bee_hive", BeeHiveSpheroid.Template.class);

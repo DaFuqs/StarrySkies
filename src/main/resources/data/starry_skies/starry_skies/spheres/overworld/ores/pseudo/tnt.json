@@ -9,8 +9,8 @@
 	"type_data": {
 		"min_core_size": 2,
 		"max_core_size": 4,
-		"inner_block": "minecraft:tnt",
-		"weighted_outer_blocks": {
+		"core_block": "minecraft:tnt",
+		"main_block": {
 			"minecraft:stone": 1000,
 			"minecraft:deepslate": 1000,
 			"minecraft:infested_stone": 500,

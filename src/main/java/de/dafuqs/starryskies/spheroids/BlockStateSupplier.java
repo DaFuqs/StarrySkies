@@ -9,6 +9,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,13 +60,12 @@ public abstract class BlockStateSupplier {
 	
 	public static class WeightedBlockStateSupplier extends BlockStateSupplier {
 		
-		Map<BlockState, Float> states;
+		Map<BlockState, Float> states = new HashMap<>();
 		
-		// TODO
 		public WeightedBlockStateSupplier(JsonElement json) throws CommandSyntaxException {
-			for(JsonElement e : json.getAsJsonArray()) {
-				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
-				float weight = e.getAsFloat();
+			for(Map.Entry<String, JsonElement> e : json.getAsJsonObject().entrySet()) {
+				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getKey(), false).blockState();
+				float weight = e.getValue().getAsFloat();
 				states.put(state, weight);
 			}
 		}

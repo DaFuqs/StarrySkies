@@ -52,7 +52,7 @@ public class DungeonSpheroid extends Spheroid {
 			this.entityType = Registry.ENTITY_TYPE.get(Identifier.tryParse(JsonHelper.getString(typeData, "entity_type")));
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
-			this.shellBlock = BlockStateSupplier.of(JsonHelper.getObject(typeData, "block"));
+			this.shellBlock = BlockStateSupplier.of(typeData.get("shell_block"));
 		}
 		
 		@Override

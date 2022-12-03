@@ -9,7 +9,7 @@
 	"type_data": {
 		"min_shell_size": 2,
 		"max_shell_size": 5,
-		"shell_block": "minecraft:dripstone",
+		"shell_block": "minecraft:dripstone_block",
 		"treasure_chest": {
 			"loot_table": "minecraft:chests/abandoned_mineshaft_chest",
 			"chance": 0.5

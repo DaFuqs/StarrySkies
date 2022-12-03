@@ -61,7 +61,7 @@ public class ShellCoreSpheroid extends Spheroid {
 			this.maxCoreRadius = JsonHelper.getInt(typeData, "max_core_size");
 			this.mainBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "main_block"), false).blockState();
 			this.coreBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "core_block"), false).blockState();
-			this.shellBlock = BlockStateSupplier.of(JsonHelper.getObject(typeData, "shell_block"));
+			this.shellBlock = BlockStateSupplier.of(typeData.get("shell_block"));
 		}
 		
 		@Override

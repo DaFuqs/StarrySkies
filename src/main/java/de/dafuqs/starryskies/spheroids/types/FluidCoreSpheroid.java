@@ -19,7 +19,7 @@ import net.minecraft.world.chunk.Chunk;
 
 import java.util.List;
 
-public class FluidSpheroid extends Spheroid {
+public class FluidCoreSpheroid extends Spheroid {
 	
 	private final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
 	private final BlockState fluidBlock;
@@ -27,9 +27,11 @@ public class FluidSpheroid extends Spheroid {
 	private final float shellRadius;
 	private final float fillAmount;
 	private final boolean holeInBottom;
+	private final BlockState coreBlock;
+	private float coreRadius;
 	
-	public FluidSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
-	                     BlockState fluidBlock, BlockState shellBlock, float shellRadius, float fillAmount, boolean holeInBottom) {
+	public FluidCoreSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	                         BlockState fluidBlock, BlockState shellBlock, float shellRadius, float fillAmount, boolean holeInBottom, BlockState coreBlock, float coreRadius) {
 		
 		super(template, radius, decorators, spawns, random);
 		this.fluidBlock = fluidBlock;
@@ -37,18 +39,33 @@ public class FluidSpheroid extends Spheroid {
 		this.shellRadius = shellRadius;
 		this.fillAmount = fillAmount;
 		this.holeInBottom = holeInBottom;
+		this.coreBlock = coreBlock;
+		
+		if (this.coreBlock != null) {
+			this.coreRadius = coreRadius;
+		} else {
+			this.coreRadius = 0;
+		}
+		
+		if (this.coreRadius >= this.radius - this.shellRadius - 1) {
+			this.coreRadius = this.radius - this.shellRadius - 2;
+		}
 	}
 	
 	public static class Template extends Spheroid.Template {
 		
 		private final Fluid fluid;
-		private final BlockStateSupplier shellBlock;
-		
-		private final int minShellRadius;
-		private final int maxShellRadius;
 		private final float minFillAmount;
 		private final float maxFillAmount;
 		private final float holeInBottomChance;
+		
+		private final BlockStateSupplier shellBlock;
+		private final int minShellRadius;
+		private final int maxShellRadius;
+		
+		private final BlockStateSupplier coreBlock;
+		private final int minCoreRadius;
+		private final int maxCoreRadius;
 		
 		public Template(JsonObject data) throws CommandSyntaxException {
 			super(data);
@@ -61,26 +78,31 @@ public class FluidSpheroid extends Spheroid {
 			this.maxFillAmount = JsonHelper.getFloat(typeData, "max_fill_amount");
 			this.holeInBottomChance = JsonHelper.getFloat(typeData, "hole_in_bottom_chance");
 			this.shellBlock = BlockStateSupplier.of(typeData.get("shell_block"));
+			this.coreBlock = BlockStateSupplier.of(typeData.get("core_block"));
+			this.minCoreRadius = JsonHelper.getInt(typeData, "min_core_size");
+			this.maxCoreRadius = JsonHelper.getInt(typeData, "max_core_size");
 		}
 		
 		@Override
-		public FluidSpheroid generate(ChunkRandom random) {
+		public FluidCoreSpheroid generate(ChunkRandom random) {
 			int shellRadius = Support.getRandomBetween(random, this.minShellRadius, this.maxShellRadius);
+			int coreRadius = Support.getRandomBetween(random, this.minCoreRadius, this.maxCoreRadius);
 			float fillAmount = Support.getRandomBetween(random, this.minFillAmount, this.maxFillAmount);
 			boolean holeInBottom = random.nextFloat() < this.holeInBottomChance;
 			BlockState fluidBlockState = this.fluid.getDefaultState().getBlockState();
-			return new FluidSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, fluidBlockState, shellBlock.get(random), shellRadius, fillAmount, holeInBottom);
+			return new FluidCoreSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, fluidBlockState, shellBlock.get(random), shellRadius, fillAmount, holeInBottom, coreBlock.get(random), coreRadius);
 		}
 		
 	}
 	
 	public String getDescription() {
-		return "+++ FluidSpheroid +++" +
+		return "+++ FluidCoreSpheroid +++" +
 				"\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
 				"\nTemplateID: " + this.template.getID() +
 				"\nRadius: " + this.radius +
 				"\nShell: " + this.shellBlock.toString() + "(Radius: " + this.shellRadius + ")" +
 				"\nLiquid: " + this.fluidBlock.toString() +
+				"\nCore: " + this.coreBlock + "(Radius: " + this.coreRadius + ")" +
 				"\nFill Percent: " + this.fillAmount +
 				"\nHole in bottom: " + this.holeInBottom;
 	}
@@ -106,6 +128,8 @@ public class FluidSpheroid extends Spheroid {
 					if (this.holeInBottom && (x - x2) == 0 && (z - z2) == 0 && (y - y2 + 1) >= liquidRadius) {
 						chunk.setBlockState(new BlockPos(currBlockPos), this.fluidBlock, false);
 						chunk.markBlockForPostProcessing(currBlockPos); // making it drop down after generation
+					} else if (this.coreBlock != null && d <= this.coreRadius) {
+						chunk.setBlockState(currBlockPos, this.coreBlock, false);
 					} else if (d <= liquidRadius) {
 						if (y2 <= maxLiquidY) {
 							chunk.setBlockState(currBlockPos, this.fluidBlock, false);

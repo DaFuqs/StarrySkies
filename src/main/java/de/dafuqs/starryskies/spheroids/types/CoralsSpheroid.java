@@ -48,7 +48,7 @@ public class CoralsSpheroid extends Spheroid {
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
-			this.validShellBlocks = BlockStateSupplier.of(JsonHelper.getObject(typeData, "block"));
+			this.validShellBlocks = BlockStateSupplier.of(typeData.get("shell_block"));
 		}
 		
 		@Override

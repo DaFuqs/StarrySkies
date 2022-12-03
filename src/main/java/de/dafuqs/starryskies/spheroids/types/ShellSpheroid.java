@@ -21,17 +21,17 @@ import java.util.Map;
 
 public class ShellSpheroid extends Spheroid {
 	
-	protected BlockState coreBlock;
+	protected BlockState innerBlock;
 	protected BlockState shellBlock;
 	protected float shellRadius;
 	private final LinkedHashMap<BlockState, Float> shellSpeckleBlockStates;
 	
 	public ShellSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
-	                     BlockState coreBlock, BlockState shellBlock, float shellRadius, LinkedHashMap<BlockState, Float> shellSpeckleBlockStates) {
+	                     BlockState innerBlock, BlockState shellBlock, float shellRadius, LinkedHashMap<BlockState, Float> shellSpeckleBlockStates) {
 		
 		super(template, radius, decorators, spawns, random);
 		this.radius = radius;
-		this.coreBlock = coreBlock;
+		this.innerBlock = innerBlock;
 		this.shellBlock = shellBlock;
 		this.shellRadius = shellRadius;
 		this.shellSpeckleBlockStates = shellSpeckleBlockStates;
@@ -39,7 +39,7 @@ public class ShellSpheroid extends Spheroid {
 	
 	public static class Template extends Spheroid.Template {
 		
-		private final BlockState coreBlock;
+		private final BlockState innerBlock;
 		private final BlockStateSupplier shellBlock;
 		private final int minShellRadius;
 		private final int maxShellRadius;
@@ -51,13 +51,13 @@ public class ShellSpheroid extends Spheroid {
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
-			this.coreBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "core_block"), false).blockState();
-			this.shellBlock = BlockStateSupplier.of(JsonHelper.getObject(typeData, "shell_block"));
+			this.innerBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "main_block"), false).blockState();
+			this.shellBlock = BlockStateSupplier.of(typeData.get("shell_block"));
 		}
 		
 		@Override
 		public ShellSpheroid generate(ChunkRandom random) {
-			return new ShellSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, coreBlock, shellBlock.get(random), randomBetween(random, minShellRadius, maxShellRadius), shellSpeckleBlockStates);
+			return new ShellSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, innerBlock, shellBlock.get(random), randomBetween(random, minShellRadius, maxShellRadius), shellSpeckleBlockStates);
 		}
 		
 	}
@@ -68,7 +68,7 @@ public class ShellSpheroid extends Spheroid {
 				"\nTemplateID: " + this.template.getID() +
 				"\nRadius: " + this.radius +
 				"\nShell: " + this.shellBlock.toString() + " (Radius: " + this.shellRadius + ")" +
-				"\nCore: " + this.coreBlock.toString();
+				"\nCore: " + this.innerBlock.toString();
 	}
 	
 	@Override
@@ -89,7 +89,7 @@ public class ShellSpheroid extends Spheroid {
 					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
 					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
 					if (d <= (this.radius - this.shellRadius)) {
-						chunk.setBlockState(currBlockPos, this.coreBlock, false);
+						chunk.setBlockState(currBlockPos, this.innerBlock, false);
 					} else if (d <= this.radius) {
 						if (hasSpeckles) {
 							BlockState finalBlockState = shellBlock;

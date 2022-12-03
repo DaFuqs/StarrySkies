@@ -48,7 +48,7 @@ public class CoreSpheroid extends Spheroid {
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.coreBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "core_block"), false).blockState();
-			this.shellBlock = BlockStateSupplier.of(JsonHelper.getObject(typeData, "main_block"));
+			this.shellBlock = BlockStateSupplier.of(typeData.get("main_block"));
 			this.minCoreRadius = JsonHelper.getInt(typeData, "min_core_size");
 			this.maxCoreRadius = JsonHelper.getInt(typeData, "max_core_size");
 		}

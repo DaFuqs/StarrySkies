@@ -5,7 +5,7 @@
 	"dimension": "starry_skies:starry_skies_nether",
 	"min_size": 10,
 	"max_size": 20,
-	"type": "starry_skies:fluid",
+	"type": "starry_skies:fluid_core",
 	"type_data": {
 		"fluid": "minecraft:lava",
 		"min_shell_size": 2,
@@ -18,11 +18,9 @@
 			"minecraft:basalt": 1,
 			"minecraft:magma_block": 1
 		},
-		"core": {
-			"block": "minecraft:bedrock",
-			"min_size": 2,
-			"max_size": 5
-		}
+		"core_block": "minecraft:bedrock",
+		"min_core_size": 2,
+		"max_core_size": 5
 	},
 	"decorators": {},
 	"spawns": []
