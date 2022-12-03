@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:brown_mushroom"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_brown_mushroom.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_brown_mushroom.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_skies:sphere_group_uncommon",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+            "id": "starry_skies:overworld/wood/acacia_wood"
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+	"id": "ice_cave",
+	"generation_group": "treasure",
+	"generation_weight": 1.0,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 6,
+	"max_size": 10,
+	"type": "starry_skies:cave",
+	"type_data": {
+		"min_shell_size": 2,
+		"max_shell_size": 3,
+		"shell_block": "minecraft:ice",
+		"cave_floor_block": "minecraft:snow",
+		"treasure_chest": {
+			"loot_table": "minecraft:chests/igloo_chest",
+			"chance": 0.5
+		}
+	},
+	"decorators": {
+		"starry_skies:sweet_berries": 0.5
+	},
+	"spawns": [
+		{
+			"type": "minecraft:polar_bear",
+			"chance": 0.25,
+			"min_count": 2,
+			"max_count": 3
+		},
+		{
+			"type": "minecraft:goat",
+			"chance": 0.25,
+			"min_count": 2,
+			"max_count": 4
+		},
+		{
+			"type": "minecraft:fox",
+			"chance": 0.25,
+			"min_count": 2,
+			"max_count": 3
+		}
+	]
+}

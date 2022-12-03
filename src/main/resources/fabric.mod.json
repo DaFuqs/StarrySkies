@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "starry_sky",
+  "id": "starry_skies",
   "version": "${version}",
 
   "name": "Starry Skies",
@@ -13,18 +13,18 @@
     "sources": "https://github.com/DaFuqs/StarrySky"
   },
   "license": "MIT",
-  "icon": "assets/starry_sky/icon.png",
+  "icon": "assets/starry_skies/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "de.dafuqs.starrysky.StarrySkyCommon"
+      "de.dafuqs.starryskies.StarrySkies"
     ],
     "modmenu": [
-      "de.dafuqs.starrysky.configs.ModMenuConfig"
+      "de.dafuqs.starryskies.configs.ModMenuConfig"
     ]
   },
   "mixins": [
-    "starry_sky.mixins.json"
+    "starry_skies.mixins.json"
   ],
   "depends": {
     "minecraft": ">=1.19.2",
@@ -32,5 +32,6 @@
     "fabric": "*",
     "cloth-config": ">=8.0.0"
   },
-  "suggests": { }
+  "suggests": { },
+  "accessWidener" : "starry_skies.accesswidener"
 }

@@ -1,0 +1,21 @@
+{
+	"id": "redstone",
+	"generation_group": "ores",
+	"generation_weight": 2.0,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 4,
+	"max_size": 8,
+	"type": "starry_skies:core",
+	"type_data": {
+		"core_block": "minecraft:deepslate_redstone_ore",
+		"min_core_size": 4,
+		"max_core_size": 8,
+		"main_block": {
+			"minecraft:deepslate": 10,
+			"minecraft:cobbled_deepslate": 2,
+			"minecraft:infested_deepslate": 1
+		}
+	},
+	"decorators": {},
+	"spawns": []
+}

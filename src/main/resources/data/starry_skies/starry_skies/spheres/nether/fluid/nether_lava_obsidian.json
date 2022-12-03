@@ -1,0 +1,29 @@
+{
+	"id": "nether_lava_obsidian",
+	"generation_group": "fluid",
+	"generation_weight": 2.0,
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 10,
+	"max_size": 20,
+	"type": "starry_skies:fluid",
+	"type_data": {
+		"fluid": "minecraft:lava",
+		"min_shell_size": 2,
+		"max_shell_size": 5,
+		"min_fill_amount": 0.5,
+		"max_fill_amount": 1.0,
+		"hole_in_bottom_chance": 0.25,
+		"shell_block": {
+			"minecraft:netherrack": 5,
+			"minecraft:basalt": 1,
+			"minecraft:magma_block": 1
+		},
+		"core": {
+			"block": "minecraft:obsidian",
+			"min_size": 2,
+			"max_size": 5
+		}
+	},
+	"decorators": {},
+	"spawns": []
+}

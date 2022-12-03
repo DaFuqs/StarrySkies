@@ -1,0 +1,22 @@
+{
+	"id": "snow_packed_ice_blue_ice",
+	"generation_group": "decorative",
+	"generation_weight": 0.4,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 8,
+	"type": "starry_skies:shell_core",
+	"type_data": {
+		"main_block": "minecraft:ice",
+		"core_block": "minecraft:blue_ice",
+		"min_core_size": 1,
+		"max_core_size": 3,
+		"shell_block": "minecraft:snow_block",
+		"min_shell_size": 2,
+		"max_shell_size": 4
+	},
+	"decorators": {
+		"starry_skies:sweet_berries": 0.2
+	},
+	"spawns": []
+}

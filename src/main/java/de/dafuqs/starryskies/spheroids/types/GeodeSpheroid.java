@@ -1,0 +1,111 @@
+package de.dafuqs.starryskies.spheroids.types;
+
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.Support;
+import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
+import net.minecraft.block.BlockState;
+import net.minecraft.command.argument.BlockArgumentParser;
+import net.minecraft.entity.EntityType;
+import net.minecraft.util.JsonHelper;
+import net.minecraft.util.Pair;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.chunk.Chunk;
+
+import java.util.List;
+
+public class GeodeSpheroid extends Spheroid {
+	
+	private final BlockState innerBlockState;
+	private final BlockState innerSpecklesBlockState;
+	private final float speckleChance;
+	private final BlockState middleBlockSate;
+	private final BlockState outerBlockState;
+	
+	public GeodeSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	                     BlockState innerBlockState, BlockState innerSpecklesBlockState, float speckleChance, BlockState middleBlockSate, BlockState outerBlockState) {
+		
+		super(template, radius, decorators, spawns, random);
+		
+		this.innerBlockState = innerBlockState;
+		this.innerSpecklesBlockState = innerSpecklesBlockState;
+		this.speckleChance = speckleChance;
+		this.middleBlockSate = middleBlockSate;
+		this.outerBlockState = outerBlockState;
+	}
+	
+	public static class Template extends Spheroid.Template {
+		
+		private final BlockState innerBlockState;
+		private final BlockState innerSpecklesBlockState;
+		private final float speckleChance;
+		private final BlockState middleBlockSate;
+		private final BlockState outerBlockState;
+		
+		public Template(JsonObject data) throws CommandSyntaxException {
+			super(data);
+			
+			JsonObject typeData = JsonHelper.getObject(data, "type_data");
+			this.innerBlockState = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "inner_block"), false).blockState();
+			this.innerSpecklesBlockState = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "inner_speckles_block"), false).blockState();
+			this.speckleChance = JsonHelper.getFloat(typeData, "inner_speckles_block_chance");
+			this.middleBlockSate = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "middle_block"), false).blockState();
+			this.outerBlockState = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "outer_block"), false).blockState();
+		}
+		
+		@Override
+		public GeodeSpheroid generate(ChunkRandom random) {
+			return new GeodeSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, innerBlockState, innerSpecklesBlockState, speckleChance, middleBlockSate, outerBlockState);
+		}
+		
+	}
+	
+	@Override
+	public String getDescription() {
+		return "+++ GeodeSpheroid +++" +
+				"\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
+				"\nTemplateID: " + this.template.getID() +
+				"\nRadius: " + this.radius +
+				"\nInnerBlock: " + this.innerBlockState +
+				"\nInnerSpecklesBlock: " + this.innerSpecklesBlockState +
+				"\nSpeckleChance: " + this.speckleChance +
+				"\nMiddleBlock: " + this.middleBlockSate +
+				"\nOuterBlock: " + this.outerBlockState;
+	}
+	
+	@Override
+	public void generate(Chunk chunk) {
+		int chunkX = chunk.getPos().x;
+		int chunkZ = chunk.getPos().z;
+		
+		int x = this.getPosition().getX();
+		int y = this.getPosition().getY();
+		int z = this.getPosition().getZ();
+		
+		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
+		for (float x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
+			for (float y2 = y - this.radius; y2 <= y + this.radius; y2++) {
+				for (float z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
+					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
+					float d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
+					if (d < radius - 4) {
+						// nothing
+					} else if (d < radius - 3) {
+						if (random.nextFloat() < speckleChance) {
+							chunk.setBlockState(currBlockPos, innerSpecklesBlockState, false);
+						} else {
+							chunk.setBlockState(currBlockPos, innerBlockState, false);
+						}
+					} else if (d < radius - 2) {
+						chunk.setBlockState(currBlockPos, middleBlockSate, false);
+					} else if (d < radius - 1) {
+						chunk.setBlockState(currBlockPos, outerBlockState, false);
+					}
+				}
+			}
+		}
+	}
+	
+}

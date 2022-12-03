@@ -1,0 +1,18 @@
+{
+	"id": "pride_bi",
+	"generation_group": "decorative",
+	"generation_weight": 0.5,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 16,
+	"type": "starry_skies:stacked_horizontal",
+	"type_data": {
+		"blocks": [
+			"minecraft:magenta_wool",
+			"minecraft:purple_wool",
+			"minecraft:blue_wool"
+		]
+	},
+	"decorators": {},
+	"spawns": []
+}

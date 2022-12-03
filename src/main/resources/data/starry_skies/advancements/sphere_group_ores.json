@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:gold_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_group_ores.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_group_ores.description"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:starry_skies",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+            "id": "starry_skies:overworld/wood/acacia_wood"
+      }
+    }
+  }
+}

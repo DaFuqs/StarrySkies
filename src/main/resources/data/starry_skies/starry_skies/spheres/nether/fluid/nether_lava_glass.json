@@ -1,0 +1,25 @@
+{
+	"id": "nether_lava_glass",
+	"generation_group": "fluid",
+	"generation_weight": 10.0,
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 5,
+	"max_size": 14,
+	"type": "starry_skies:fluid",
+	"type_data": {
+		"fluid": "minecraft:lava",
+		"min_shell_size": 1,
+		"max_shell_size": 3,
+		"min_fill_amount": 0.25,
+		"max_fill_amount": 0.9,
+		"hole_in_bottom_chance": 0.50,
+		"shell_block": [
+			"black_stained_glass",
+			"orange_stained_glass",
+			"red_stained_glass",
+			"yellow_stained_glass"
+		]
+	},
+	"decorators": {},
+	"spawns": []
+}

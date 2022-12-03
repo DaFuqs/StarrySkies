@@ -1,0 +1,14 @@
+{
+	"id": "nether_yellow_stained_glass",
+	"generation_group": "decorative",
+	"generation_weight": 0.5,
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 5,
+	"max_size": 8,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:yellow_stained_glass"
+	},
+	"decorators": {},
+	"spawns": []
+}

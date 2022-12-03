@@ -1,0 +1,22 @@
+﻿{
+  "display": {
+    "icon": {
+      "item": "minecraft:end_crystal"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.starry_skies_end.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.starry_skies_end.description"
+    },
+    "background": "starry_skies:textures/advancement_background.png"
+  },
+  "criteria": {
+    "starry_skies_0": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "starry_skies:starry_skies_end"
+      }
+    }
+  }
+}

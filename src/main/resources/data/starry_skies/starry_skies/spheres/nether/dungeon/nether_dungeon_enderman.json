@@ -1,0 +1,23 @@
+{
+	"id": "nether_dungeon_enderman",
+	"generation_group": "dungeon",
+	"generation_weight": 1.5,
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 6,
+	"max_size": 11,
+	"type": "starry_skies:dungeon",
+	"type_data": {
+		"entity_type": "minecraft:enderman",
+		"min_shell_size": 2,
+		"max_shell_size": 4,
+		"shell_block": {
+			"minecraft:nether_bricks": 25,
+			"minecraft:blackstone": 5,
+			"minecraft:netherrack": 3,
+			"minecraft:magma_block": 1,
+			"minecraft:obsidian": 1
+		}
+	},
+	"decorators": {},
+	"spawns": []
+}

@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:coal_ore"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_coal.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_coal.description"
+    },
+    "hidden": false
+  },
+  "parent": "starry_skies:sphere_group_ores",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+            "id": "starry_skies:overworld/wood/acacia_wood"
+      }
+    }
+  }
+}

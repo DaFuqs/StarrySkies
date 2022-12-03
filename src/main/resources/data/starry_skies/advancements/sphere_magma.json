@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:magma_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_magma.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_magma.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_skies:sphere_group_uncommon",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+            "id": "starry_skies:overworld/wood/acacia_wood"
+      }
+    }
+  }
+}

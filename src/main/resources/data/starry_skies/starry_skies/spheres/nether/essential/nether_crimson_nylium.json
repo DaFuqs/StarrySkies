@@ -1,0 +1,26 @@
+{
+	"id": "nether_crimson_nylium",
+	"generation_group": "essential",
+	"generation_weight": 4.0,
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 9,
+	"max_size": 15,
+	"type": "starry_skies:modular",
+	"type_data": {
+		"main_block": "minecraft:netherrack",
+		"top_block": "minecraft:crimson_nylium"
+	},
+	"decorators": {
+		"starry_skies:crimson_roots": 0.8,
+		"starry_skies:weeping_vines": 0.8,
+		"starry_skies:crimson_fungus": 0.3
+	},
+	"spawns": [
+		{
+			"type": "minecraft:hoglin",
+			"chance": 0.4,
+			"min_count": 3,
+			"max_count": 5
+		}
+	]
+}

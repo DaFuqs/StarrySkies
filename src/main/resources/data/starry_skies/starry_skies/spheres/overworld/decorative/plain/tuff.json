@@ -1,0 +1,14 @@
+{
+	"id": "tuff",
+	"generation_group": "decorative",
+	"generation_weight": 1.0,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 8,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:tuff"
+	},
+	"decorators": {},
+	"spawns": []
+}

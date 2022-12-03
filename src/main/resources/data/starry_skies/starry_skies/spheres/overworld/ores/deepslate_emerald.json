@@ -1,0 +1,21 @@
+{
+	"id": "emerald",
+	"generation_group": "ores",
+	"generation_weight": 0.03,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 6,
+	"type": "starry_skies:core",
+	"type_data": {
+		"core_block": "minecraft:deepslate_emerald_ore",
+		"min_core_size": 1,
+		"max_core_size": 3,
+		"main_block": {
+			"minecraft:deepslate": 10,
+			"minecraft:infested_deepslate": 5,
+			"minecraft:cobbled_deepslate": 2
+		}
+	},
+	"decorators": {},
+	"spawns": []
+}

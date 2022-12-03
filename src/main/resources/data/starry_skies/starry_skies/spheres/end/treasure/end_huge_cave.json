@@ -1,0 +1,21 @@
+{
+	"id": "end_huge_cave",
+	"generation_group": "treasure",
+	"generation_weight": 1.0,
+	"dimension": "starry_skies:starry_skies_end",
+	"min_size": 20,
+	"max_size": 30,
+	"type": "starry_skies:cave",
+	"type_data": {
+		"min_shell_size": 2,
+		"max_shell_size": 5,
+		"cave_floor_block": "minecraft:end_stone",
+		"shell_block": "minecraft:end_stone_bricks",
+		"treasure_chest": {
+			"loot_table": "minecraft/chests/end_city_treasure_chest",
+			"chance": 0.3
+		}
+	},
+	"decorators": {},
+	"spawns": []
+}

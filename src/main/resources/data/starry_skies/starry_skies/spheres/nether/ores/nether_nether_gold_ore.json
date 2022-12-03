@@ -1,0 +1,21 @@
+{
+	"id": "nether_nether_gold_ore",
+	"generation_group": "ores",
+	"generation_weight": 4.0,
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 5,
+	"max_size": 10,
+	"type": "starry_skies:core",
+	"type_data": {
+		"core_block": "minecraft:nether_gold_ore",
+		"min_core_size": 2,
+		"max_core_size": 5,
+		"main_block": {
+			"minecraft:netherrack": 5,
+			"minecraft:basalt": 1,
+			"minecraft:magma_block": 1
+		}
+	},
+	"decorators": {},
+	"spawns": []
+}

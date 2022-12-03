@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:podzol"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_podzol.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_podzol.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_skies:sphere_group_uncommon",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+            "id": "starry_skies:overworld/wood/acacia_wood"
+      }
+    }
+  }
+}

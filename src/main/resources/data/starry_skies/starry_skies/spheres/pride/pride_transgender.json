@@ -1,0 +1,20 @@
+{
+	"id": "pride_transgender",
+	"generation_group": "decorative",
+	"generation_weight": 0.5,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 16,
+	"type": "starry_skies:stacked_horizontal",
+	"type_data": {
+		"blocks": [
+			"minecraft:light_blue_wool",
+			"minecraft:pink_wool",
+			"minecraft:white_wool",
+			"minecraft:pink_wool",
+			"minecraft:light_blue_wool"
+		]
+	},
+	"decorators": {},
+	"spawns": []
+}

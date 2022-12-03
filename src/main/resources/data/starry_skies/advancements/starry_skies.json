@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:filled_map"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.starry_skies.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.starry_skies.description"
+    },
+    "background": "starry_skies:textures/advancement_background.png"
+  },
+  "criteria": {
+    "starry_skies_0": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "starry_skies:starry_skies"
+      }
+    }
+  }
+}

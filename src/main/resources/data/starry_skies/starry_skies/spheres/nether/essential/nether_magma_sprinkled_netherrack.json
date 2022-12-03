@@ -1,0 +1,21 @@
+{
+	"id": "nether_magma_sprinkled_netherrack",
+	"generation_group": "essential",
+	"generation_weight": 10.0,
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 7,
+	"max_size": 16,
+	"type": "starry_skies:shell",
+	"type_data": {
+		"main_block": "minecraft:netherrack",
+		"shell_block": "minecraft:netherrack",
+		"shell_speckles": {
+			"block": "minecraft:flowering_azalea_leaves[distance=1]",
+			"chance": 0.15
+		}
+	},
+	"decorators": {
+		"starry_skies:center_pond_lava": 0.15
+	},
+	"spawns": []
+}

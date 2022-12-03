@@ -1,0 +1,12 @@
+{
+	"id": "nether",
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 7,
+	"max_size": 16,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:netherrack"
+	},
+	"decorators": {},
+	"spawns": []
+}

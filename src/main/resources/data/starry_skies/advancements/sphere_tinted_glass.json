@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:tinted_glass"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_tinted_glass.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_tinted_glass.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_skies:sphere_group_rare",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+            "id": "starry_skies:overworld/wood/acacia_wood"
+      }
+    }
+  }
+}

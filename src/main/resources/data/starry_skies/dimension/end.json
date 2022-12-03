@@ -1,0 +1,12 @@
+{
+  "type": "starry_skies:end",
+  "generator": {
+    "type": "starry_skies:starry_skies_chunk_generator",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "starry_skies:starry_skies_end_biome"
+    },
+    "seed": 0,
+    "settings": 2
+  }
+}

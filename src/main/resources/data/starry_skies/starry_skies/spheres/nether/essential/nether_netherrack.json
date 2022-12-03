@@ -1,0 +1,33 @@
+{
+	"id": "nether_netherrack",
+	"generation_group": "essential",
+	"generation_weight": 10.0,
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 7,
+	"max_size": 16,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:netherrack"
+	},
+	"decorators": {
+		"starry_skies:fire": 0.3,
+		"starry_skies:ruined_portal": 0.03,
+		"starry_skies:mushrooms_brown": 0.2,
+		"starry_skies:mushrooms_red": 0.2,
+		"starry_skies:center_pond_lava": 0.05
+	},
+	"spawns": [
+		{
+			"type": "minecraft:skeleton_horse",
+			"chance": 0.01,
+			"min_count": 1,
+			"max_count": 1
+		},
+		{
+			"type": "minecraft:zombie_horse",
+			"chance": 0.01,
+			"min_count": 1,
+			"max_count": 1
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"id": "green_stained_glass",
+	"generation_group": "decorative",
+	"generation_weight": 0.02,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 10,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:green_stained_glass"
+	},
+	"decorators": {},
+	"spawns": []
+}

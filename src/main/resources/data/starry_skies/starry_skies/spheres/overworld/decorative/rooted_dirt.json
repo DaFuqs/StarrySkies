@@ -1,0 +1,18 @@
+{
+	"id": "rooted_dirt",
+	"generation_group": "decorative",
+	"generation_weight": 1.0,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 7,
+	"max_size": 12,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:rooted_dirt"
+	},
+	"decorators": {
+		"starry_skies:azalea": 0.75,
+		"starry_skies:flowering_azalea": 0.75,
+		"starry_skies:hanging_roots": 0.75
+	},
+	"spawns": []
+}

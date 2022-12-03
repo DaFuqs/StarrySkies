@@ -1,0 +1,14 @@
+{
+	"id": "mossy_cobblestone",
+	"generation_group": "decorative",
+	"generation_weight": 0.1,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 6,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:mossy_cobblestone"
+	},
+	"decorators": {},
+	"spawns": []
+}

@@ -16,7 +16,7 @@ The Starry Skies dimensions consist out of never ending floating spheres floatin
 Build a **portal out of packed ice** and light it with flint & steel. [can be configured in the config].
 The other dimensions are accessed like their vanilla counterparts: Via nether and end portals, respectively.
 
-If you want to start in the Starry Sky go ahead! The mod "GlobalSpawn" can be used to set "starry_sky:starry_sky" as your spawn dimension.
+If you want to start in the Starry Sky go ahead! The mod "GlobalSpawn" can be used to set "starry_skies:starry_skies" as your spawn dimension.
 At x:16 y:90 z:16 will always be a wooden sphere, so that will be a great starting point for your adventure.
 
 **WARNING:** Due to how custom dimensions are currently implemented by Mojang custom dimensions are only loaded after the second server start!

@@ -1,0 +1,25 @@
+{
+	"id": "podzol_bamboo_pond",
+	"generation_group": "decorative",
+	"generation_weight": 0.5,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 10,
+	"max_size": 15,
+	"type": "starry_skies:modular",
+	"type_data": {
+		"main_block": "minecraft:dirt",
+		"top_block": "minecraft:podzol"
+	},
+	"decorators": {
+		"starry_skies:bamboo": 0.7,
+		"starry_skies:center_pond_shipwreck_chest": 0.5
+	},
+	"spawns": [
+		{
+			"type": "minecraft:parrot",
+			"chance": 0.4,
+			"min_count": 2,
+			"max_count": 2
+		}
+	]
+}

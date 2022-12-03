@@ -1,0 +1,23 @@
+﻿{
+  "display": {
+    "icon": {
+        "item": "minecraft:soul_sand"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_soul_sand.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_soul_sand.description"
+    },
+    "hidden": false
+  },
+  "parent": "starry_skies:starry_skies_nether",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+            "id": "starry_skies:overworld/wood/acacia_wood"
+      }
+    }
+  }
+}

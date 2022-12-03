@@ -1,0 +1,21 @@
+{
+	"id": "pride_gay",
+	"generation_group": "decorative",
+	"generation_weight": 0.5,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 16,
+	"type": "starry_skies:stacked_horizontal",
+	"type_data": {
+		"blocks": [
+			"minecraft:red_wool",
+			"minecraft:orange_wool",
+			"minecraft:yellow_wool",
+			"minecraft:green_wool",
+			"minecraft:cyan_wool",
+			"minecraft:purple_wool"
+		]
+	},
+	"decorators": {},
+	"spawns": []
+}

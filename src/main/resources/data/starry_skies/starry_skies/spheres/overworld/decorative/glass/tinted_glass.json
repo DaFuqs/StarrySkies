@@ -1,0 +1,14 @@
+{
+	"id": "tinted_glass",
+	"generation_group": "decorative",
+	"generation_weight": 0.005,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 10,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:tinted_glass"
+	},
+	"decorators": {},
+	"spawns": []
+}

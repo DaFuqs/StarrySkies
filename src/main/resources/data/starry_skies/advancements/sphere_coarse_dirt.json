@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:coarse_dirt"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_coarse_dirt.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_coarse_dirt.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_skies:sphere_group_uncommon",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+            "id": "starry_skies:overworld/wood/acacia_wood"
+      }
+    }
+  }
+}

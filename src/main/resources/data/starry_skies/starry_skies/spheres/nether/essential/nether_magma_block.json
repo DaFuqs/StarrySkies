@@ -1,0 +1,17 @@
+{
+	"id": "nether_magma_block",
+	"generation_group": "essential",
+	"generation_weight": 2.0,
+	"dimension": "starry_skies:starry_skies_nether",
+	"min_size": 5,
+	"max_size": 8,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:netherrack"
+	},
+	"decorators": {
+		"starry_skies:fire": 0.5,
+		"starry_skies:center_pond_lava": 0.15
+	},
+	"spawns": []
+}

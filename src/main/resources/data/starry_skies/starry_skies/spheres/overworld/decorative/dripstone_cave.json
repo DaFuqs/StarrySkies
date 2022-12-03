@@ -1,0 +1,23 @@
+{
+	"id": "dripstone_cave",
+	"generation_group": "decorative",
+	"generation_weight": 1.0,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 5,
+	"max_size": 12,
+	"type": "starry_skies:cave",
+	"type_data": {
+		"min_shell_size": 2,
+		"max_shell_size": 5,
+		"shell_block": "minecraft:dripstone",
+		"treasure_chest": {
+			"loot_table": "minecraft:chests/abandoned_mineshaft_chest",
+			"chance": 0.5
+		}
+	},
+	"decorators": {
+		"starry_skies:pointed_dripstone_cave": 1.0,
+		"starry_skies:glow_lichen": 0.3
+	},
+	"spawns": []
+}

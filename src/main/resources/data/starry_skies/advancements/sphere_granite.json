@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+        "item": "minecraft:granite"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_granite.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_granite.description"
+    },
+    "hidden": true
+  },
+  "parent": "starry_skies:sphere_group_common",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+            "id": "starry_skies:overworld/wood/acacia_wood"
+      }
+    }
+  }
+}

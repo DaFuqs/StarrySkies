@@ -1,0 +1,14 @@
+{
+	"id": "granite",
+	"generation_group": "decorative",
+	"generation_weight": 1.0,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 6,
+	"max_size": 11,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:granite"
+	},
+	"decorators": {},
+	"spawns": []
+}

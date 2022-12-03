@@ -1,0 +1,20 @@
+{
+	"id": "end_dungeon_enderman",
+	"generation_group": "starry_skies:end/dungeon",
+	"generation_weight": 20,
+	"min_size": 6,
+	"max_size": 11,
+	"type": "starry_skies:dungeon",
+	"type_data": {
+		"entity_type": "minecraft:enderman",
+		"min_shell_size": 2,
+		"max_shell_size": 3,
+		"shell_block": {
+			"minecraft:end_stone_bricks": 10,
+			"minecraft:purpur_block": 5,
+			"minecraft:end_stone": 1
+		}
+	},
+	"decorators": {},
+	"spawns": []
+}

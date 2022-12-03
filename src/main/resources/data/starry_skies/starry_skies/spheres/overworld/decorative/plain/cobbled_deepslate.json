@@ -1,0 +1,14 @@
+{
+	"id": "cobbled_deepslate",
+	"generation_group": "decorative",
+	"generation_weight": 0.2,
+	"dimension": "starry_skies:starry_skies",
+	"min_size": 4,
+	"max_size": 10,
+	"type": "starry_skies:simple",
+	"type_data": {
+		"block": "minecraft:cobbled_deepslate"
+	},
+	"decorators": {},
+	"spawns": []
+}
