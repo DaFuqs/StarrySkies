@@ -1,8 +1,7 @@
 {
 	"id": "red_mushroom",
-	"generation_group": "treasure",
+	"generation_group": "starry_skies:overworld/treasure",
 	"generation_weight": 0.7,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 4,
 	"max_size": 8,
 	"type": "starry_skies:mushroom",

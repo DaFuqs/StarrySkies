@@ -1,8 +1,7 @@
 {
 	"id": "huge_dirt_cave",
-	"generation_group": "treasure",
+	"generation_group": "starry_skies:overworld/treasure",
 	"generation_weight": 1.0,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 20,
 	"max_size": 30,
 	"type": "starry_skies:cave",

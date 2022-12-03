@@ -1,8 +1,7 @@
 {
 	"id": "slime_block",
-	"generation_group": "ores",
+	"generation_group": "starry_skies:overworld/ores",
 	"generation_weight": 0.05,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 4,
 	"max_size": 8,
 	"type": "starry_skies:core",

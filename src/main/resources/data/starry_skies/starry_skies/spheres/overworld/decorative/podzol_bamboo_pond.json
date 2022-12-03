@@ -1,8 +1,7 @@
 {
 	"id": "podzol_bamboo_pond",
-	"generation_group": "decorative",
+	"generation_group": "starry_skies:overworld/decorative",
 	"generation_weight": 0.5,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 10,
 	"max_size": 15,
 	"type": "starry_skies:modular",

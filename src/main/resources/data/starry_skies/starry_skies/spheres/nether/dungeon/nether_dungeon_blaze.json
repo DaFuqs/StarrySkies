@@ -1,8 +1,7 @@
 {
 	"id": "nether_dungeon_blaze",
-	"generation_group": "dungeon",
+	"generation_group": "starry_skies:nether/dungeon",
 	"generation_weight": 1.5,
-	"dimension": "starry_skies:starry_skies_nether",
 	"min_size": 6,
 	"max_size": 11,
 	"type": "starry_skies:dungeon",

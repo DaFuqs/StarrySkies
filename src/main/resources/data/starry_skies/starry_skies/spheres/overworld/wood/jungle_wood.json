@@ -1,8 +1,7 @@
 {
 	"id": "jungle_wood",
-	"generation_group": "wood",
+	"generation_group": "starry_skies:overworld/wood",
 	"generation_weight": 1.5,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 10,
 	"max_size": 20,
 	"type": "starry_skies:shell",

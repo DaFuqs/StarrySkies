@@ -286,8 +286,12 @@ public abstract class Spheroid implements Serializable {
 			
 			for (Map.Entry<String, JsonElement> e : jsonObject.entrySet()) {
 				SpheroidDecorator decorator = StarryRegistries.SPHEROID_DECORATOR.get(Identifier.tryParse(e.getKey()));
-				float chance = e.getValue().getAsFloat();
-				d.put(decorator, chance);
+				if(decorator == null) {
+					StarrySkies.log(Level.WARN, "Spheroid specifies non-existing decorator "+ e.getKey() + ". Will be ignored.");
+				} else {
+					float chance = e.getValue().getAsFloat();
+					d.put(decorator, chance);
+				}
 			}
 			
 			return d;

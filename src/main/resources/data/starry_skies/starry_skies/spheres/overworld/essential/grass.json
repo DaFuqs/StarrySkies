@@ -1,8 +1,7 @@
 {
 	"id": "grass",
-	"generation_group": "essential",
+	"generation_group": "starry_skies:overworld/essential",
 	"generation_weight": 10.0,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 5,
 	"max_size": 20,
 	"type": "starry_skies:modular",

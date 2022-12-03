@@ -1,6 +1,5 @@
 {
 	"id": "overworld",
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 8,
 	"max_size": 15,
 	"type": "starry_skies:shell",

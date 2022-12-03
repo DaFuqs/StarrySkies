@@ -1,8 +1,7 @@
 {
 	"id": "the_sun",
-	"generation_group": "treasure",
+	"generation_group": "starry_skies:overworld/treasure",
 	"generation_weight": 0.05,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 50,
 	"max_size": 50,
 	"type": "starry_skies:shell_core",

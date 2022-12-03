@@ -29,6 +29,8 @@ public class SpheroidDecorators {
 	public static SpheroidDecorator FERNS = register("ferns", new PlantDecorator(Blocks.FERN.getDefaultState(), 0.1F));
 	public static SpheroidDecorator LARGE_FERNS = register("large_ferns", new DoublePlantDecorator(Blocks.LARGE_FERN.getDefaultState(), 0.1F));
 	public static SpheroidDecorator RUINED_PORTAL = register("ruined_portal", new RuinedPortalDecorator(LootTables.RUINED_PORTAL_CHEST));
+	public static SpheroidDecorator MUSHROOMS_BROWN = register("mushrooms_brown", new PlantDecorator(Blocks.BROWN_MUSHROOM.getDefaultState(), 0.05F));
+	public static SpheroidDecorator MUSHROOMS_RED = register("mushrooms_red", new PlantDecorator(Blocks.RED_MUSHROOM.getDefaultState(), 0.03F));
 	
 	public static SpheroidDecorator POINTED_DRIPSTONE_UP = register("pointed_dripstone_up", new PointedDripstoneDecorator(0.2F, PointedDripstoneDecorator.PointedDripstoneDecoratorMode.UP));
 	public static SpheroidDecorator POINTED_DRIPSTONE_CAVE = register("pointed_dripstone_cave", new PointedDripstoneDecorator(0.2F, PointedDripstoneDecorator.PointedDripstoneDecoratorMode.CAVE));

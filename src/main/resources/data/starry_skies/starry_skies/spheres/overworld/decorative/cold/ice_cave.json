@@ -1,8 +1,7 @@
 {
 	"id": "ice_cave",
-	"generation_group": "treasure",
+	"generation_group": "starry_skies:overworld/treasure",
 	"generation_weight": 1.0,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 6,
 	"max_size": 10,
 	"type": "starry_skies:cave",

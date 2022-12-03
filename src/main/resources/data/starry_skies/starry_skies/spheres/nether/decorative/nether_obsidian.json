@@ -1,8 +1,7 @@
 {
 	"id": "nether_obsidian",
-	"generation_group": "decorative",
+	"generation_group": "starry_skies:nether/decorative",
 	"generation_weight": 1.5,
-	"dimension": "starry_skies:starry_skies_nether",
 	"min_size": 5,
 	"max_size": 8,
 	"type": "starry_skies:simple",

@@ -1,8 +1,7 @@
 {
 	"id": "end_city",
-	"generation_group": "treasure",
+	"generation_group": "starry_skies:end/treasure",
 	"generation_weight": 3.0,
-	"dimension": "starry_skies:starry_skies_end",
 	"min_size": 20,
 	"max_size": 40,
 	"type": "starry_skies:end_city",

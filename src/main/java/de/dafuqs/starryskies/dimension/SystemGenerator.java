@@ -3,7 +3,6 @@ package de.dafuqs.starryskies.dimension;
 import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.data_loaders.SpheroidTemplateLoader;
-import de.dafuqs.starryskies.spheroids.StarryRegistries;
 import de.dafuqs.starryskies.spheroids.types.Spheroid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.CheckedRandom;
@@ -200,27 +199,27 @@ public class SystemGenerator {
 		switch (this.spheroidDimensionType) {
 			case NETHER:
 				if (systemPointX == 0 && systemPointZ == 0) {
-					spheroid = StarryRegistries.SPHEROID_TEMPLATE.get(StarrySkies.locate("nether_spawn")).generate(random);
+					spheroid = SpheroidTemplateLoader.STARTER_NETHER.generate(random);
 					spheroid.setPositionAndCalculateChunks(new BlockPos(16, 70, 16));
 					defaultSpheroids.add(spheroid);
 				}
 				break;
 			case END:
 				if (systemPointX == 0 && systemPointZ == 0) {
-					spheroid = StarryRegistries.SPHEROID_TEMPLATE.get(StarrySkies.locate("end_spawn1")).generate(random);
+					spheroid = SpheroidTemplateLoader.STARTER_END_DRAGON.generate(random);
 					spheroid.setPositionAndCalculateChunks(new BlockPos(0, 30, 0));
 					defaultSpheroids.add(spheroid);
 				} else if ((systemPointX == -1 && systemPointZ == 0)
 						|| (systemPointX == 0 && systemPointZ == -1)
 						|| (systemPointX == -1 && systemPointZ == -1)) {
-					spheroid = StarryRegistries.SPHEROID_TEMPLATE.get(StarrySkies.locate("end_spawn2")).generate(random);
+					spheroid = SpheroidTemplateLoader.STARTER_END.generate(random);
 					spheroid.setPositionAndCalculateChunks(new BlockPos(0, 30, 0));
 					defaultSpheroids.add(spheroid);
 				}
 				break;
 			default:
 				if (systemPointX == 0 && systemPointZ == 0) {
-					spheroid = StarryRegistries.SPHEROID_TEMPLATE.get(StarrySkies.locate("overworld_spawn")).generate(random);
+					spheroid = SpheroidTemplateLoader.STARTER_OVERWORLD.generate(random);
 					spheroid.setPositionAndCalculateChunks(new BlockPos(16, 70, 16));
 					defaultSpheroids.add(spheroid);
 				}

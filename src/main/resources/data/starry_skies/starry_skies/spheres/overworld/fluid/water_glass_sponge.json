@@ -1,8 +1,7 @@
 {
 	"id": "water_glass_clay",
-	"generation_group": "fluid",
+	"generation_group": "starry_skies:overworld/fluid",
 	"generation_weight": 0.2,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 5,
 	"max_size": 10,
 	"type": "starry_skies:fluid_core",

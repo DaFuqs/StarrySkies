@@ -1,8 +1,7 @@
 {
 	"id": "warped_wood",
-	"generation_group": "wood",
+	"generation_group": "starry_skies:nether/wood",
 	"generation_weight": 10.0,
-	"dimension": "starry_skies:starry_skies_nether",
 	"min_size": 8,
 	"max_size": 15,
 	"type": "starry_skies:shell",

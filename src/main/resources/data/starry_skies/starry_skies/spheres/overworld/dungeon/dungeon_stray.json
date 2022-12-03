@@ -1,8 +1,7 @@
 {
 	"id": "dungeon_stray",
-	"generation_group": "decorative",
+	"generation_group": "starry_skies:overworld/decorative",
 	"generation_weight": 1.5,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 6,
 	"max_size": 11,
 	"type": "starry_skies:dungeon",

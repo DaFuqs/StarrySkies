@@ -1,8 +1,7 @@
 {
 	"id": "nether_bedrock",
-	"generation_group": "treasure",
+	"generation_group": "starry_skies:nether/treasure",
 	"generation_weight": 1.0,
-	"dimension": "starry_skies:starry_skies_nether",
 	"min_size": 4,
 	"max_size": 7,
 	"type": "starry_skies:simple",

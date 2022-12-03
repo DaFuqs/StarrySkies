@@ -1,8 +1,7 @@
 {
 	"id": "rainbow_concrete",
-	"generation_group": "treasure",
+	"generation_group": "starry_skies:overworld/treasure",
 	"generation_weight": 1.0,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 5,
 	"max_size": 16,
 	"type": "starry_skies:rainbow",

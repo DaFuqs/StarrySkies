@@ -1,8 +1,7 @@
 {
 	"id": "ice_packed_ice_blue_ice",
-	"generation_group": "decorative",
+	"generation_group": "starry_skies:overworld/decorative",
 	"generation_weight": 0.3,
-	"dimension": "starry_skies:starry_skies",
 	"min_size": 5,
 	"max_size": 8,
 	"type": "starry_skies:shell_core",

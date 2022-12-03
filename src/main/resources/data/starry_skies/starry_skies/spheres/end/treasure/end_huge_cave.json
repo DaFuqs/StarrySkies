@@ -1,8 +1,7 @@
 {
 	"id": "end_huge_cave",
-	"generation_group": "treasure",
+	"generation_group": "starry_skies:end/treasure",
 	"generation_weight": 1.0,
-	"dimension": "starry_skies:starry_skies_end",
 	"min_size": 20,
 	"max_size": 30,
 	"type": "starry_skies:cave",

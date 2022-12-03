@@ -1,8 +1,7 @@
 {
 	"id": "nether_lava_stone",
-	"generation_group": "fluid",
+	"generation_group": "starry_skies:nether/fluid",
 	"generation_weight": 5.0,
-	"dimension": "starry_skies:starry_skies_nether",
 	"min_size": 5,
 	"max_size": 14,
 	"type": "starry_skies:fluid",
