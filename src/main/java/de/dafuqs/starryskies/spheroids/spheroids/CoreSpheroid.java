@@ -6,14 +6,12 @@ import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.BlockStateSupplier;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.List;
@@ -39,7 +37,7 @@ public class CoreSpheroid extends Spheroid {
 	
 	public static class Template extends Spheroid.Template {
 		
-		private final BlockState coreBlock;
+		private final BlockStateSupplier coreBlock;
 		private final BlockStateSupplier shellBlock;
 		private final int minCoreRadius;
 		private final int maxCoreRadius;
@@ -48,7 +46,7 @@ public class CoreSpheroid extends Spheroid {
 			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			this.coreBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "core_block"), false).blockState();
+			this.coreBlock = BlockStateSupplier.of(typeData.get("core_block"));
 			this.shellBlock = BlockStateSupplier.of(typeData.get("main_block"));
 			this.minCoreRadius = JsonHelper.getInt(typeData, "min_core_size");
 			this.maxCoreRadius = JsonHelper.getInt(typeData, "max_core_size");
@@ -59,7 +57,7 @@ public class CoreSpheroid extends Spheroid {
 			float radius = randomBetween(random, minSize, maxSize);
 			int coreRadius = Support.getRandomBetween(random, this.minCoreRadius, this.maxCoreRadius);
 			coreRadius = Math.min(coreRadius, (int) radius - 1);
-			return new CoreSpheroid(this, radius, selectDecorators(random), selectSpawns(random), random, coreBlock, shellBlock.get(random), coreRadius);
+			return new CoreSpheroid(this, radius, selectDecorators(random), selectSpawns(random), random, coreBlock.get(random), shellBlock.get(random), coreRadius);
 		}
 		
 	}

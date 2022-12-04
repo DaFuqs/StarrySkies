@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 
 import static org.apache.logging.log4j.Level.INFO;
 
-public class SpheroidListAppliedEnergistics2 extends SpheroidList {
+public class SpheroidListAppliedEnergistics2 {
 	
 	private static final String MOD_ID = "appliedenergistics2";
 	private static final Identifier APPLIED_ENERGISTICS_METEOR_CHEST_LOOT_TABLE = new Identifier("starry_skies", "appliedenergistics2_meteor_chest");

@@ -7,6 +7,7 @@ import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
@@ -44,14 +45,13 @@ public class WeightedBlockGroupsLoader extends JsonDataLoader implements Identif
 			}
 			
 			for(Map.Entry<String, JsonElement> e : jsonElement.getAsJsonObject().entrySet()) {
-				BlockState state = null;
 				try {
-					state = BlockArgumentParser.block(Registry.BLOCK, e.getKey(), false).blockState();
+					BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getKey(), false).blockState();
+					float weight = e.getValue().getAsFloat();
+					map.put(state, weight);
 				} catch (CommandSyntaxException ex) {
 					StarrySkies.log(Level.WARN, "Block group " + identifier + " tries to load a non-existing block: " + e.getKey() + ". Will be ignored.");
 				}
-				float weight = e.getValue().getAsFloat();
-				map.put(state, weight);
 			}
 			
 			if(newMap) {
@@ -72,6 +72,10 @@ public class WeightedBlockGroupsLoader extends JsonDataLoader implements Identif
 	
 	public static BlockState getRandomStateInGroup(Identifier identifier, Random random) {
 		Map<BlockState, Float> group = BLOCK_GROUPS.get(identifier);
+		if(group == null || group.size() == 0) {
+			StarrySkies.log(Level.WARN, "Referencing empty/non-existing WeightedBlockGroup: " + identifier + ". Using AIR instead.");
+			return Blocks.AIR.getDefaultState();
+		}
 		return Support.getWeightedRandom(group, random);
 	}
 	

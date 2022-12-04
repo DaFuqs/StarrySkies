@@ -5,9 +5,10 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.BlockStateSupplier;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import de.dafuqs.starryskies.spheroids.lists.SpheroidList;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CoralParentBlock;
+import net.minecraft.block.SeaPickleBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.world.chunk.Chunk;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoralsSpheroid extends Spheroid {
@@ -24,6 +26,33 @@ public class CoralsSpheroid extends Spheroid {
 	protected float shellRadius;
 	protected BlockState WATER = Blocks.WATER.getDefaultState();
 	protected Identifier centerChestLootTable;
+	
+	public static final ArrayList<BlockState> LIST_FULL_CORAL_BLOCKS = new ArrayList<>() {{
+		add(Blocks.BRAIN_CORAL_BLOCK.getDefaultState());
+		add(Blocks.TUBE_CORAL_BLOCK.getDefaultState());
+		add(Blocks.BUBBLE_CORAL_BLOCK.getDefaultState());
+		add(Blocks.FIRE_CORAL_BLOCK.getDefaultState());
+		add(Blocks.HORN_CORAL_BLOCK.getDefaultState());
+	}};
+	
+	public static final ArrayList<BlockState> LIST_WATERLOGGABLE_CORAL_BLOCKS = new ArrayList<>() {{
+		add(Blocks.BRAIN_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		add(Blocks.TUBE_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		add(Blocks.BUBBLE_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		add(Blocks.FIRE_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		add(Blocks.HORN_CORAL.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		
+		add(Blocks.BRAIN_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		add(Blocks.TUBE_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		add(Blocks.BUBBLE_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		add(Blocks.FIRE_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		add(Blocks.HORN_CORAL_FAN.getDefaultState().with(CoralParentBlock.WATERLOGGED, true));
+		
+		add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 1));
+		add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 2));
+		add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 3));
+		add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 4));
+	}};
 	
 	public CoralsSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
 	                      BlockState shellBlock, float shellRadius, Identifier centerChestLootTable) {
@@ -118,11 +147,11 @@ public class CoralsSpheroid extends Spheroid {
 	}
 	
 	public BlockState getRandomCoralBlock(ChunkRandom random) {
-		return SpheroidList.LIST_FULL_CORAL_BLOCKS.get(random.nextInt(SpheroidList.LIST_FULL_CORAL_BLOCKS.size()));
+		return LIST_FULL_CORAL_BLOCKS.get(random.nextInt(LIST_FULL_CORAL_BLOCKS.size()));
 	}
 	
 	public BlockState getRandomWaterLoggableBlock(ChunkRandom random) {
-		return SpheroidList.LIST_WATERLOGGABLE_CORAL_BLOCKS.get(random.nextInt(SpheroidList.LIST_WATERLOGGABLE_CORAL_BLOCKS.size()));
+		return LIST_WATERLOGGABLE_CORAL_BLOCKS.get(random.nextInt(LIST_WATERLOGGABLE_CORAL_BLOCKS.size()));
 	}
 	
 }

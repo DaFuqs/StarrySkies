@@ -1,0 +1,15 @@
+{
+	"generation_group": "starry_skies:overworld/ores",
+	"generation_weight": 0.05,
+	"min_size": 3,
+	"max_size": 4,
+	"type": "starry_skies:core",
+	"type_data": {
+		"core_block": "%starry_skies:unobtainium_ore",
+		"min_core_size": 1,
+		"max_core_size": 1,
+		"main_block": "$starry_skies:dungeon_stones"
+	},
+	"decorators": {},
+	"spawns": []
+}

@@ -1,0 +1,15 @@
+{
+	"generation_group": "starry_skies:nether/ores",
+	"generation_weight": 1.5,
+	"min_size": 7,
+	"max_size": 9,
+	"type": "starry_skies:core",
+	"type_data": {
+		"core_block": "%starry_skies:truesilver",
+		"min_core_size": 3,
+		"max_core_size": 5,
+		"main_block": "$starry_skies:nether_stones"
+	},
+	"decorators": {},
+	"spawns": []
+}

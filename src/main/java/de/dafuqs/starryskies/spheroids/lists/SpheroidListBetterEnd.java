@@ -6,7 +6,7 @@ import net.fabricmc.loader.api.FabricLoader;
 
 import static org.apache.logging.log4j.Level.INFO;
 
-public class SpheroidListBetterEnd extends SpheroidList {
+public class SpheroidListBetterEnd {
 	
 	private static final String MOD_ID = "betterend";
 	

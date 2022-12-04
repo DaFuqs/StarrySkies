@@ -1,0 +1,15 @@
+{
+	"generation_group": "starry_skies:overworld/ores",
+	"generation_weight": 4.0,
+	"min_size": 6,
+	"max_size": 10,
+	"type": "starry_skies:core",
+	"type_data": {
+		"core_block": "%starry_skies:tin_ore",
+		"min_core_size": 5,
+		"max_core_size": 7,
+		"main_block": "$starry_skies:stones"
+	},
+	"decorators": {},
+	"spawns": []
+}

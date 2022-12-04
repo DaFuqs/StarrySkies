@@ -3,6 +3,7 @@ package de.dafuqs.starryskies.spheroids;
 import com.google.gson.*;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.Support;
+import de.dafuqs.starryskies.data_loaders.UniqueBlockGroupsLoader;
 import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupsLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.BlockArgumentParser;
@@ -24,6 +25,8 @@ public abstract class BlockStateSupplier {
 		if(jsonElement instanceof JsonPrimitive) {
 			if(jsonElement.getAsString().startsWith("$")) {
 				return new WeightedBlockStateGroupSupplier(jsonElement);
+			} else if(jsonElement.getAsString().startsWith("%")) {
+				return new UniqueBlockStateGroupSupplier(jsonElement);
 			} else {
 				return new SingleBlockStateSupplier(jsonElement);
 			}
@@ -97,6 +100,22 @@ public abstract class BlockStateSupplier {
 		
 		public BlockState get(Random random) {
 			return WeightedBlockGroupsLoader.getRandomStateInGroup(identifier, random);
+		}
+		
+	}
+	
+	public static class UniqueBlockStateGroupSupplier extends BlockStateSupplier {
+		
+		Identifier identifier;
+		
+		public UniqueBlockStateGroupSupplier(@NotNull JsonElement json) {
+			String s = json.getAsString();
+			s = s.substring(1);
+			identifier = Identifier.tryParse(s);
+		}
+		
+		public BlockState get(Random random) {
+			return UniqueBlockGroupsLoader.getFirstStateInGroup(identifier);
 		}
 		
 	}
