@@ -104,11 +104,12 @@ public class BeeHiveSpheroid extends Spheroid {
 		float shellDistance = startRingDistance - this.flowerRingSpacing;
 		float coreDistance = shellDistance - shellRadius;
 		
-		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 		BlockState beeHiveBlockState = Blocks.BEE_NEST.getDefaultState();
-		for (float x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
-			for (float y2 = y - this.radius; y2 <= y + this.radius; y2++) {
-				for (float z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
+		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
+		int ceiledRadius = (int) Math.ceil(this.radius);
+		for (float x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= Math.min(chunkX * 16 + 15, x + ceiledRadius); x2++) {
+			for (float y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
+				for (float z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= Math.min(chunkZ * 16 + 15, z + ceiledRadius); z2++) {
 					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
 					double d = Support.getDistance(x, y, z, x2, y2, z2);
 					if (d == 0) {

@@ -71,7 +71,7 @@ public class FluidCoreSpheroid extends Spheroid {
 			super(data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			this.fluid = Registry.FLUID.get(Identifier.tryParse(JsonHelper.getString(typeData, "min_shell_size")));
+			this.fluid = Registry.FLUID.get(Identifier.tryParse(JsonHelper.getString(typeData, "fluid")));
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
 			this.minFillAmount = JsonHelper.getFloat(typeData, "min_fill_amount");
@@ -120,9 +120,10 @@ public class FluidCoreSpheroid extends Spheroid {
 		float maxLiquidY = y + ((this.fillAmount / 100.0F) * liquidRadius * 2 - liquidRadius);
 		
 		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
-		for (float x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
-			for (float y2 = y - this.radius; y2 <= y + this.radius; y2++) {
-				for (float z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
+		int ceiledRadius = (int) Math.ceil(this.radius);
+		for (float x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= Math.min(chunkX * 16 + 15, x + ceiledRadius); x2++) {
+			for (float y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
+				for (float z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= Math.min(chunkZ * 16 + 15, z + ceiledRadius); z2++) {
 					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
 					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
 					if (this.holeInBottom && (x - x2) == 0 && (z - z2) == 0 && (y - y2 + 1) >= liquidRadius) {
