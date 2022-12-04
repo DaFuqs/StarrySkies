@@ -142,13 +142,13 @@ public class OceanMonumentSpheroid extends Spheroid {
 	 * @return
 	 */
 	@Override
-	public boolean shouldPopulateEntities(ChunkPos chunkPos) {
+	public boolean isCenterInChunk(ChunkPos chunkPos) {
 		return isInChunk(chunkPos);
 	}
 	
 	@Override
 	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-		if (shouldPopulateEntities(chunkPos)) {
+		if (isCenterInChunk(chunkPos)) {
 			for (BlockPos guardianPosition : guardianPositions) {
 				if (Support.isBlockPosInChunkPos(chunkPos, guardianPosition)) {
 					int xCord = chunkPos.x;

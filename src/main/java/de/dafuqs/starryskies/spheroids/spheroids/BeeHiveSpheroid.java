@@ -193,7 +193,7 @@ public class BeeHiveSpheroid extends Spheroid {
 	
 	@Override
 	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-		if (shouldPopulateEntities(chunkPos)) {
+		if (isCenterInChunk(chunkPos)) {
 			if (queenBeehiveBlockEntity != null) {
 				// queen
 				BeeEntity queen = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());

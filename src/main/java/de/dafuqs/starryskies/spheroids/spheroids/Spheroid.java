@@ -172,7 +172,7 @@ public abstract class Spheroid implements Serializable {
 		LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, lootTable);
 	}
 	
-	public boolean shouldPopulateEntities(@NotNull ChunkPos chunkPos) {
+	public boolean isCenterInChunk(@NotNull ChunkPos chunkPos) {
 		return (this.getPosition().getX() >= chunkPos.getStartX()
 				&& this.getPosition().getX() <= chunkPos.getStartX() + 15
 				&& this.getPosition().getZ() >= chunkPos.getStartZ()
@@ -180,7 +180,7 @@ public abstract class Spheroid implements Serializable {
 	}
 	
 	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-		if (shouldPopulateEntities(chunkPos)) {
+		if (isCenterInChunk(chunkPos)) {
 			StarrySkies.log(Level.DEBUG, "Populating entities for spheroid in chunk x:" + chunkPos.x + " z:" + chunkPos.z + " (StartX:" + chunkPos.getStartX() + " StartZ:" + chunkPos.getStartZ() + ") " + this.getDescription());
 			for (Pair<EntityType, Integer> spawnEntry : spawns) {
 				int xCord = chunkPos.getStartX();
@@ -190,9 +190,9 @@ public abstract class Spheroid implements Serializable {
 				
 				for (int i = 0; i < spawnEntry.getRight(); i++) {
 					int startingX = this.getPosition().getX();
-					int startingY = this.getPosition().getY() + (int) this.getRadius() + 1;
+					int startingY = this.getPosition().getY() + this.getRadius() + 1;
 					int startingZ = this.getPosition().getZ();
-					int minHeight = this.getPosition().getY() - (int) this.getRadius();
+					int minHeight = this.getPosition().getY() - this.getRadius();
 					BlockPos.Mutable blockPos = new BlockPos.Mutable(startingX, startingY, startingZ);
 					int height = Support.getLowerGroundBlock(chunkRegion, blockPos, minHeight) + 1;
 					
@@ -263,16 +263,6 @@ public abstract class Spheroid implements Serializable {
 			);
 		}
 		
-		public Spheroid.Template addDecorator(SpheroidDecorator decorator, float chance) {
-			this.decorators.put(decorator, chance);
-			return this;
-		}
-		
-		public Spheroid.Template addSpawn(SpheroidEntitySpawnDefinition spawnDefinition) {
-			this.spawns.add(spawnDefinition);
-			return this;
-		}
-		
 		public Identifier getID() {
 			return id;
 		}
@@ -326,8 +316,8 @@ public abstract class Spheroid implements Serializable {
 			List<Pair<EntityType, Integer>> spawns = new ArrayList<>();
 			for (SpheroidEntitySpawnDefinition entry : this.spawns) {
 				if (random.nextFloat() < entry.chance) {
-					int count = entry.minCount + random.nextInt(maxSize - minSize + 1);
-					spawns.add(new Pair(entry.entityType, count));
+					int count = Support.getRandomBetween(random, entry.minCount, entry.maxCount);
+					spawns.add(new Pair<>(entry.entityType, count));
 				}
 			}
 			return spawns;

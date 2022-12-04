@@ -117,7 +117,7 @@ public class FluidCoreSpheroid extends Spheroid {
 		int z = this.getPosition().getZ();
 		
 		float liquidRadius = this.radius - this.shellRadius;
-		float maxLiquidY = y + ((this.fillAmount / 100.0F) * liquidRadius * 2 - liquidRadius);
+		float maxLiquidY = y + (this.fillAmount * liquidRadius * 2 - liquidRadius);
 		
 		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 		int ceiledRadius = (int) Math.ceil(this.radius);
