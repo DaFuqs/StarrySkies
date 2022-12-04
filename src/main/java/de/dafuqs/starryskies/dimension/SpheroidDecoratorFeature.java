@@ -2,7 +2,7 @@ package de.dafuqs.starryskies.dimension;
 
 import com.mojang.serialization.Codec;
 import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.spheroids.types.Spheroid;
+import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;

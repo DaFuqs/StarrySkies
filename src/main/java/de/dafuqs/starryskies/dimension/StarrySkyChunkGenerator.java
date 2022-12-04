@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.spheroids.types.Spheroid;
+import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;

@@ -1,4 +1,4 @@
-package de.dafuqs.starryskies.spheroids.types;
+package de.dafuqs.starryskies.spheroids.spheroids;
 
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -17,69 +17,57 @@ import net.minecraft.world.chunk.Chunk;
 
 import java.util.List;
 
-public class ShellCoreSpheroid extends Spheroid {
+public class CoreSpheroid extends Spheroid {
 	
 	private final BlockState coreBlock;
-	private final BlockState mainBlock;
 	private final BlockState shellBlock;
-	private final float coreRadius;
-	private final float shellRadius;
+	private float coreRadius;
 	
-	public ShellCoreSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
-	                         BlockState coreBlock, BlockState mainBlock, BlockState shellBlock, float coreRadius, float shellRadius) {
+	public CoreSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	                    BlockState coreBlock, BlockState shellBlock, float coreRadius) {
 		
 		super(template, radius, decorators, spawns, random);
 		this.coreBlock = coreBlock;
-		this.mainBlock = mainBlock;
 		this.shellBlock = shellBlock;
-		this.shellRadius = shellRadius;
+		this.coreRadius = coreRadius;
 		
-		if (radius <= shellRadius + coreRadius) { //inner core radius <= 0
-			this.coreRadius = Math.max(1, radius - shellRadius - 2); //Reduce inner core up to a min of 1
-		} else {
-			this.coreRadius = coreRadius;
+		if (this.coreRadius >= this.radius) {
+			this.coreRadius = this.radius - 1;
 		}
 	}
 	
 	public static class Template extends Spheroid.Template {
 		
-		private final BlockState mainBlock;
 		private final BlockState coreBlock;
 		private final BlockStateSupplier shellBlock;
 		private final int minCoreRadius;
 		private final int maxCoreRadius;
-		private final int minShellRadius;
-		private final int maxShellRadius;
 		
 		public Template(JsonObject data) throws CommandSyntaxException {
 			super(data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
-			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
+			this.coreBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "core_block"), false).blockState();
+			this.shellBlock = BlockStateSupplier.of(typeData.get("main_block"));
 			this.minCoreRadius = JsonHelper.getInt(typeData, "min_core_size");
 			this.maxCoreRadius = JsonHelper.getInt(typeData, "max_core_size");
-			this.mainBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "main_block"), false).blockState();
-			this.coreBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "core_block"), false).blockState();
-			this.shellBlock = BlockStateSupplier.of(typeData.get("shell_block"));
 		}
 		
 		@Override
-		public ShellCoreSpheroid generate(ChunkRandom random) {
-			return new ShellCoreSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, coreBlock, mainBlock, shellBlock.get(random), randomBetween(random, minCoreRadius, maxCoreRadius), randomBetween(random, minShellRadius, maxShellRadius));
+		public CoreSpheroid generate(ChunkRandom random) {
+			int coreRadius = Support.getRandomBetween(random, this.minCoreRadius, this.maxCoreRadius);
+			return new CoreSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, coreBlock, shellBlock.get(random), coreRadius);
 		}
 		
 	}
 	
-	@Override
 	public String getDescription() {
-		return "+++ DoubleCoreSpheroid +++" +
+		return "+++ CoreSpheroid +++" +
 				"\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
 				"\nTemplateID: " + this.template.getID() +
 				"\nRadius: " + this.radius +
-				"\nMain Block: " + this.mainBlock.toString() +
-				"\nShell BLock: " + this.shellBlock.toString() + " (Radius: " + this.shellRadius + ")" +
-				"\nCore Block: " + this.coreBlock.toString() + " (Radius: " + this.coreRadius + ")";
+				"\nShell: " + this.shellBlock.toString() +
+				"\nCore: " + this.coreBlock.toString() + " (Radius: " + this.coreRadius + ")";
 	}
 	
 	@Override
@@ -99,8 +87,6 @@ public class ShellCoreSpheroid extends Spheroid {
 					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
 					if (d <= this.coreRadius) {
 						chunk.setBlockState(currBlockPos, this.coreBlock, false);
-					} else if (d <= this.radius - this.shellRadius) {
-						chunk.setBlockState(currBlockPos, this.mainBlock, false);
 					} else if (d <= this.radius) {
 						chunk.setBlockState(currBlockPos, this.shellBlock, false);
 						if (isTopBlock(d, x2, y2, z2)) {

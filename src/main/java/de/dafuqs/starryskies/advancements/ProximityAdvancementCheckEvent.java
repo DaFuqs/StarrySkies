@@ -2,7 +2,7 @@ package de.dafuqs.starryskies.advancements;
 
 import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.spheroids.types.Spheroid;
+import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;

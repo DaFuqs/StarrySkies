@@ -1,7 +1,7 @@
 package de.dafuqs.starryskies.spheroids;
 
 import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.spheroids.types.*;
+import de.dafuqs.starryskies.spheroids.spheroids.*;
 import net.minecraft.util.registry.Registry;
 
 public class SpheroidTypes {

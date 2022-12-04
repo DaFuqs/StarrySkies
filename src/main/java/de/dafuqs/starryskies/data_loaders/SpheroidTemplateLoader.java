@@ -7,7 +7,7 @@ import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.dimension.SpheroidDimensionType;
 import de.dafuqs.starryskies.spheroids.StarryRegistries;
-import de.dafuqs.starryskies.spheroids.types.Spheroid;
+import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;

@@ -1,7 +1,7 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import de.dafuqs.starryskies.spheroids.types.Spheroid;
+import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.ChorusFlowerBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;

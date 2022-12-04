@@ -3,7 +3,7 @@ package de.dafuqs.starryskies.dimension;
 import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.data_loaders.SpheroidTemplateLoader;
-import de.dafuqs.starryskies.spheroids.types.Spheroid;
+import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.math.random.ChunkRandom;
@@ -25,7 +25,7 @@ public class SystemGenerator {
 	
 	// spawning probabilities
 	private final SpheroidDimensionType spheroidDimensionType;
-	private final HashMap<Point, List<de.dafuqs.starryskies.spheroids.types.Spheroid>> cache = new HashMap<>();
+	private final HashMap<Point, List<de.dafuqs.starryskies.spheroids.spheroids.Spheroid>> cache = new HashMap<>();
 	public static SpheroidTemplateLoader spheroidLoader;
 	
 	private final int SYSTEM_SIZE_CHUNKS;
@@ -52,7 +52,7 @@ public class SystemGenerator {
 			return new BlockPos(xPos, yPos, zPos);
 		}
 		
-		private int distanceSquared(@NotNull de.dafuqs.starryskies.spheroids.types.Spheroid pl1) {
+		private int distanceSquared(@NotNull de.dafuqs.starryskies.spheroids.spheroids.Spheroid pl1) {
 			int xDist = xPos - pl1.getPosition().getX();
 			int yDist = yPos - pl1.getPosition().getY();
 			int zDist = zPos - pl1.getPosition().getZ();
@@ -93,13 +93,13 @@ public class SystemGenerator {
 	 * @param chunkZ chunk chunkZ location
 	 * @return List of planetoids representing the system this chunk is in
 	 */
-	public List<de.dafuqs.starryskies.spheroids.types.Spheroid> getSystemAtChunkPos(int chunkX, int chunkZ) {
+	public List<de.dafuqs.starryskies.spheroids.spheroids.Spheroid> getSystemAtChunkPos(int chunkX, int chunkZ) {
 		Point systemPos = Support.getSystemCoordinateFromChunkCoordinate(chunkX, chunkZ);
 		return getSystemAtPoint(systemPos);
 	}
 	
-	public List<de.dafuqs.starryskies.spheroids.types.Spheroid> getSystemAtPoint(Point systemPos) {
-		List<de.dafuqs.starryskies.spheroids.types.Spheroid> curSystem = cache.get(systemPos);
+	public List<de.dafuqs.starryskies.spheroids.spheroids.Spheroid> getSystemAtPoint(Point systemPos) {
+		List<de.dafuqs.starryskies.spheroids.spheroids.Spheroid> curSystem = cache.get(systemPos);
 		
 		if (curSystem == null) {
 			//doesn't exist. Generate new system and cache it
@@ -141,22 +141,22 @@ public class SystemGenerator {
 	}
 	
 	
-	private @NotNull List<de.dafuqs.starryskies.spheroids.types.Spheroid> generateSpheroidsAtSystemPoint(@NotNull Point systemPoint) {
+	private @NotNull List<de.dafuqs.starryskies.spheroids.spheroids.Spheroid> generateSpheroidsAtSystemPoint(@NotNull Point systemPoint) {
 		int systemPointX = systemPoint.x;
 		int systemPointZ = systemPoint.y;
 		
 		ChunkRandom systemRandom = getSystemRandom(systemPoint);
 		
 		// Places a log/leaf planet at 16, 16 in the overworld etc.
-		ArrayList<de.dafuqs.starryskies.spheroids.types.Spheroid> defaultSpheroids = getDefaultSpheroids(systemPointX, systemPointZ, systemRandom);
-		ArrayList<de.dafuqs.starryskies.spheroids.types.Spheroid> spheroids = new ArrayList<>(defaultSpheroids);
+		ArrayList<de.dafuqs.starryskies.spheroids.spheroids.Spheroid> defaultSpheroids = getDefaultSpheroids(systemPointX, systemPointZ, systemRandom);
+		ArrayList<de.dafuqs.starryskies.spheroids.spheroids.Spheroid> spheroids = new ArrayList<>(defaultSpheroids);
 		
 		// try to create DENSITY planets in system
 		int worldHeight = StarrySkies.starryWorld.getHeight();
 		for (int currentDensity = 0; currentDensity < SPHERE_DENSITY; currentDensity++) {
 			
 			// create new planets
-			de.dafuqs.starryskies.spheroids.types.Spheroid currentSpheroid = getRandomSpheroid(systemRandom);
+			de.dafuqs.starryskies.spheroids.spheroids.Spheroid currentSpheroid = getRandomSpheroid(systemRandom);
 			TempPosition tempPosition = new TempPosition();
 			
 			// set position, check bounds with system edges on x and z
@@ -169,7 +169,7 @@ public class SystemGenerator {
 			// check for collisions with existing spheroids
 			// if any collision, discard it
 			boolean discard = false;
-			for (de.dafuqs.starryskies.spheroids.types.Spheroid spheroid : spheroids) {
+			for (de.dafuqs.starryskies.spheroids.spheroids.Spheroid spheroid : spheroids) {
 				//each spheroid has to be at least pl1.radius + pl2.radius + min distance apart
 				int distMin = (int) (spheroid.getRadius() + currentSpheroid.getRadius() + MIN_DISTANCE_BETWEEN_SPHERES);
 				int distSquared = tempPosition.distanceSquared(spheroid);
@@ -193,9 +193,9 @@ public class SystemGenerator {
 		return spheroids;
 	}
 	
-	private ArrayList<de.dafuqs.starryskies.spheroids.types.Spheroid> getDefaultSpheroids(int systemPointX, int systemPointZ, ChunkRandom random) {
-		ArrayList<de.dafuqs.starryskies.spheroids.types.Spheroid> defaultSpheroids = new ArrayList<>();
-		de.dafuqs.starryskies.spheroids.types.Spheroid spheroid;
+	private ArrayList<de.dafuqs.starryskies.spheroids.spheroids.Spheroid> getDefaultSpheroids(int systemPointX, int systemPointZ, ChunkRandom random) {
+		ArrayList<de.dafuqs.starryskies.spheroids.spheroids.Spheroid> defaultSpheroids = new ArrayList<>();
+		de.dafuqs.starryskies.spheroids.spheroids.Spheroid spheroid;
 		switch (this.spheroidDimensionType) {
 			case NETHER:
 				if (systemPointX == 0 && systemPointZ == 0) {
@@ -227,7 +227,7 @@ public class SystemGenerator {
 		return defaultSpheroids;
 	}
 	
-	private de.dafuqs.starryskies.spheroids.types.Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
+	private de.dafuqs.starryskies.spheroids.spheroids.Spheroid getRandomSpheroid(ChunkRandom systemRandom) {
 		Spheroid.Template template;
 		do {
 			template = SpheroidTemplateLoader.getWeightedRandomSpheroid(spheroidDimensionType, systemRandom);

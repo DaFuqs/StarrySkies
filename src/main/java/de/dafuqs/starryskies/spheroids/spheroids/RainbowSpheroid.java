@@ -1,4 +1,4 @@
-package de.dafuqs.starryskies.spheroids.types;
+package de.dafuqs.starryskies.spheroids.spheroids;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

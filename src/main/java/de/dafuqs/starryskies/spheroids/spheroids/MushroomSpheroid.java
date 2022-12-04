@@ -1,4 +1,4 @@
-package de.dafuqs.starryskies.spheroids.types;
+package de.dafuqs.starryskies.spheroids.spheroids;
 
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

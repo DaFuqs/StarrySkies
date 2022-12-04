@@ -1,7 +1,7 @@
 package de.dafuqs.starryskies;
 
 import de.dafuqs.starryskies.dimension.SystemGenerator;
-import de.dafuqs.starryskies.spheroids.types.Spheroid;
+import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
