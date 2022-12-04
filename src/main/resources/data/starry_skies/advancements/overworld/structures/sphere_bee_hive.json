@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:honey_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_bee_hive.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_bee_hive.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_structures",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/treasure/bee_hive"
+        ]
+      }
+    }
+  }
+}

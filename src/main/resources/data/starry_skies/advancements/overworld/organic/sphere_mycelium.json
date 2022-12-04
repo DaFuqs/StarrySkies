@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:mycelium"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_mycelium.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_mycelium.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_organic",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/decorative/mycelium"
+        ]
+      }
+    }
+  }
+}

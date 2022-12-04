@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:dripstone_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_dripstone.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_dripstone.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_stones",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/wood/acacia_wood"
+        ]
+      }
+    }
+  }
+}

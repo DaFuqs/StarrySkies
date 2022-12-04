@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:iron_shovel"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_beach.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_beach.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_organic",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/decorative/grass_pond",
+          "starry_skies:overworld/decorative/sand_pond",
+          "starry_skies:overworld/decorative/podzol_bamboo_pond"
+        ]
+      }
+    }
+  }
+}

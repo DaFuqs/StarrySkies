@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:cobweb"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_cave.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_cave.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_structures",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/treasure/huge_dirt_cave",
+          "starry_skies:overworld/decorative/ice_cave",
+          "starry_skies:overworld/decorative/stone_cave",
+          "starry_skies:overworld/decorative/dripstone_cave"
+        ]
+      }
+    }
+  }
+}

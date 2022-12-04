@@ -1,0 +1,38 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:stone"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.group_ores.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.group_ores.description"
+    },
+    "hidden": false,
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:starry_skies",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/decorative/plain/andesite",
+          "starry_skies:overworld/decorative/plain/basalt",
+          "starry_skies:overworld/decorative/plain/deepslate",
+          "starry_skies:overworld/decorative/plain/cobbled_deepslate",
+          "starry_skies:overworld/decorative/plain/cobblestone",
+          "starry_skies:overworld/decorative/plain/deepslate",
+          "starry_skies:overworld/decorative/plain/diorite",
+          "starry_skies:overworld/decorative/plain/granite",
+          "starry_skies:overworld/decorative/plain/mossy_cobblestone",
+          "starry_skies:overworld/decorative/plain/obsidian",
+          "starry_skies:overworld/decorative/plain/stone",
+          "starry_skies:overworld/decorative/plain/tuff"
+        ]
+      }
+    }
+  }
+}

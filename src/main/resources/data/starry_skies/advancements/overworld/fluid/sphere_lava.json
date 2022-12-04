@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:lava_bucket"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_lava.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_lava.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_fluids",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/fluid/lava_glass",
+          "starry_skies:overworld/fluid/lava_stone",
+          "starry_skies:overworld/fluid/lava_stone_magma",
+          "starry_skies:overworld/fluid/lava_stone_obsidian"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:gold_ore"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_gold.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_gold.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_ores",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/ores/gold",
+          "starry_skies:overworld/ores/deepslate_gold"
+        ]
+      }
+    }
+  }
+}

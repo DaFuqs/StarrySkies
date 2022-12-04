@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:tube_coral"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_coral.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_coral.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_fluids",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/treasure/corals_glass",
+          "starry_skies:overworld/treasure/corals_stone"
+        ]
+      }
+    }
+  }
+}

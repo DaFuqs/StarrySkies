@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:water_bucket"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_water.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_water.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_fluids",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/fluid/water_glass",
+          "starry_skies:overworld/fluid/water_glass_clay",
+          "starry_skies:overworld/fluid/water_glass_ice",
+          "starry_skies:overworld/fluid/water_glass_slime_block",
+          "starry_skies:overworld/fluid/water_glass_sponge",
+          "starry_skies:overworld/fluid/water_ice_packed_ice"
+        ]
+      }
+    }
+  }
+}

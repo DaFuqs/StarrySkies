@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:moss_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.group_organic.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.group_organic.description"
+    },
+    "hidden": false,
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:starry_skies",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/decorative/grass_pond",
+          "starry_skies:overworld/decorative/sand_pond",
+          "starry_skies:overworld/decorative/podzol_bamboo_pond",
+          "starry_skies:overworld/treasure/red_mushroom",
+          "starry_skies:overworld/decorative/plain/coarse_dirt",
+          "starry_skies:overworld/essential/grass",
+          "starry_skies:overworld/essential/gravel",
+          "starry_skies:overworld/decorative/mycelium",
+          "starry_skies:overworld/decorative/podzol_bamboo",
+          "starry_skies:overworld/decorative/podzol_bamboo_pond",
+          "starry_skies:overworld/decorative/podzol_ferns",
+          "starry_skies:overworld/treasure/red_mushroom",
+          "starry_skies:overworld/essential/red_sand",
+          "starry_skies:overworld/decorative/rooted_dirt",
+          "starry_skies:overworld/essential/sand"
+        ]
+      }
+    }
+  }
+}

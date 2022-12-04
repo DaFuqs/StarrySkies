@@ -1,0 +1,42 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:cyan_stained_glass"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_stained_glass.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_stained_glass.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_crystalline",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/decorative/glass/black_stained_glass",
+          "starry_skies:overworld/decorative/glass/blue_stained_glass",
+          "starry_skies:overworld/decorative/glass/brown_stained_glass",
+          "starry_skies:overworld/decorative/glass/cyan_stained_glass",
+          "starry_skies:overworld/decorative/glass/gray_stained_glass",
+          "starry_skies:overworld/decorative/glass/green_stained_glass",
+          "starry_skies:overworld/decorative/glass/light_blue_stained_glass",
+          "starry_skies:overworld/decorative/glass/light_gray_stained_glass",
+          "starry_skies:overworld/decorative/glass/lime_stained_glass",
+          "starry_skies:overworld/decorative/glass/magenta_stained_glass",
+          "starry_skies:overworld/decorative/glass/orange_stained_glass",
+          "starry_skies:overworld/decorative/glass/pink_stained_glass",
+          "starry_skies:overworld/decorative/glass/purple_stained_glass",
+          "starry_skies:overworld/decorative/glass/red_stained_glass",
+          "starry_skies:overworld/decorative/glass/white_stained_glass",
+          "starry_skies:overworld/decorative/glass/yellow_stained_glass"
+        ]
+      }
+    }
+  }
+}

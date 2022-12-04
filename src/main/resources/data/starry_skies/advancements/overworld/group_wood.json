@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:oak_wood"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.group_wood.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.group_wood.description"
+    },
+    "hidden": false,
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:starry_skies",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/wood/acacia_wood",
+          "starry_skies:overworld/wood/azalea_wood",
+          "starry_skies:overworld/wood/birch_wood",
+          "starry_skies:overworld/wood/dark_oak_wood",
+          "starry_skies:overworld/wood/jungle_wood",
+          "starry_skies:overworld/wood/oak_wood",
+          "starry_skies:overworld/wood/spruce_wood"
+        ]
+      }
+    }
+  }
+}

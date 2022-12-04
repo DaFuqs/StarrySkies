@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:copper_ore"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_copper.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_copper.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_ores",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/ores/copper",
+          "starry_skies:overworld/ores/deepslate_copper"
+        ]
+      }
+    }
+  }
+}

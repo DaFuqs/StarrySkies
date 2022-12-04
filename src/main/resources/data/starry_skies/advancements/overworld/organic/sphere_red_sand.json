@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:red_sand"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_red_sand.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_red_sand.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_organic",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/essential/red_sand"
+        ]
+      }
+    }
+  }
+}

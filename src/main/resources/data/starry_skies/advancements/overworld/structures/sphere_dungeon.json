@@ -1,0 +1,38 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:spawner"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_dungeon.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_dungeon.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_structures",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/treasure/dungeon/cave_spider",
+          "starry_skies:overworld/treasure/dungeon/creeper",
+          "starry_skies:overworld/treasure/dungeon/drowned",
+          "starry_skies:overworld/treasure/dungeon/enderman",
+          "starry_skies:overworld/treasure/dungeon/husk",
+          "starry_skies:overworld/treasure/dungeon/silverfish",
+          "starry_skies:overworld/treasure/dungeon/skeleton",
+          "starry_skies:overworld/treasure/dungeon/slime",
+          "starry_skies:overworld/treasure/dungeon/spider",
+          "starry_skies:overworld/treasure/dungeon/stray",
+          "starry_skies:overworld/treasure/dungeon/witch",
+          "starry_skies:overworld/treasure/dungeon/zombie"
+        ]
+      }
+    }
+  }
+}

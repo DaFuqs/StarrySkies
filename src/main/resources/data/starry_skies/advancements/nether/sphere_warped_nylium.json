@@ -1,0 +1,27 @@
+﻿{
+  "display": {
+    "icon": {
+      "item": "minecraft:warped_nylium"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_warped_nylium.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_warped_nylium.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:starry_skies_nether",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:nether/essential/warped_nylium"
+        ]
+      }
+    }
+  }
+}

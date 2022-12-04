@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:orange_wool"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.group_rainbow.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.group_rainbow.description"
+    },
+    "hidden": false,
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:starry_skies",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/treasure/rainbow/concrete",
+          "starry_skies:overworld/treasure/rainbow/concrete_powder",
+          "starry_skies:overworld/treasure/rainbow/glass",
+          "starry_skies:overworld/treasure/rainbow/terracotta",
+          "starry_skies:overworld/treasure/rainbow/wool"
+        ]
+      }
+    }
+  }
+}

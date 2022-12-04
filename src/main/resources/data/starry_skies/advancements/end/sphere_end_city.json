@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:purpur_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_end_city.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_end_city.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "rewards": {
+    "experience": 50
+  },
+  "parent": "starry_skies:starry_skies_end",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:end/treasure/end_city"
+        ]
+      }
+    }
+  }
+}

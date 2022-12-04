@@ -1,0 +1,42 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:iron_block"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.group_ores.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.group_ores.description"
+    },
+    "hidden": false,
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:starry_skies",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/ores/coal",
+          "starry_skies:overworld/ores/deepslate_coal",
+          "starry_skies:overworld/ores/copper",
+          "starry_skies:overworld/ores/deepslate_copper",
+          "starry_skies:overworld/ores/diamond",
+          "starry_skies:overworld/ores/deepslate_diamond",
+          "starry_skies:overworld/ores/emerald",
+          "starry_skies:overworld/ores/deepslate_emerald",
+          "starry_skies:overworld/ores/gold",
+          "starry_skies:overworld/ores/deepslate_gold",
+          "starry_skies:overworld/ores/iron",
+          "starry_skies:overworld/ores/deepslate_iron",
+          "starry_skies:overworld/ores/lapis",
+          "starry_skies:overworld/ores/deepslate_lapis",
+          "starry_skies:overworld/ores/redstone",
+          "starry_skies:overworld/ores/deepslate_redstone"
+        ]
+      }
+    }
+  }
+}

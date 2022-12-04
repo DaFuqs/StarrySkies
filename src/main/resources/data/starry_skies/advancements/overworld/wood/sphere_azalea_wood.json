@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:flowering_azalea_leaves"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_azalea_wood.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_azalea_wood.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "starry_skies:overworld/group_wood",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/wood/azalea_wood"
+        ]
+      }
+    }
+  }
+}

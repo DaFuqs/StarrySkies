@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:prismarine_bricks"
+    },
+    "title": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_ocean_monument.title"
+    },
+    "description": {
+      "translate": "advancements.dafuqs.starry_skies.sphere_ocean_monument.description"
+    },
+    "hidden": false,
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "rewards": {
+    "experience": 50
+  },
+  "parent": "starry_skies:overworld/group_structures",
+  "criteria": {
+    "sphere_discovered": {
+      "trigger": "starry_skies:spheroid_discovered",
+      "conditions": {
+        "ids": [
+          "starry_skies:overworld/treasure/ocean_monument"
+        ]
+      }
+    }
+  }
+}
