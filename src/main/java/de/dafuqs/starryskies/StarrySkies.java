@@ -61,11 +61,9 @@ public class StarrySkies implements ModInitializer {
 		SpheroidTypes.initialize();
 		SpheroidDecorators.initialize();
 		
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidBlockGroupsLoader.INSTANCE);
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(WeightedBlockGroupsLoader.INSTANCE);
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidDistributionLoader.INSTANCE);
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidWeightedBlockLoader.INSTANCE);
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidTemplateLoader.INSTANCE);
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidDecoratorsLoader.INSTANCE);
 		
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			ClosestSpheroidCommand.register(dispatcher);

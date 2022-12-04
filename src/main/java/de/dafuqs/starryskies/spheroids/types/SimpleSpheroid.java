@@ -46,31 +46,30 @@ public class SimpleSpheroid extends Spheroid {
 	}
 	
 	public String getDescription() {
-		String s = "+++ SimpleSpheroid +++" +
+		return "+++ SimpleSpheroid +++" +
 				"\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
 				"\nTemplateID: " + this.template.getID() +
 				"\nRadius: " + this.radius +
 				"\nBlock: " + this.blockState.toString();
-		
-		return s;
 	}
 	
 	public void generate(Chunk chunk) {
 		int chunkX = chunk.getPos().x;
 		int chunkZ = chunk.getPos().z;
 		
-		int x = this.getPosition().getX();
-		int y = this.getPosition().getY();
-		int z = this.getPosition().getZ();
-		
 		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
-		for (float x2 = Math.max(chunkX * 16, x - this.radius); x2 <= Math.min(chunkX * 16 + 15, x + this.radius); x2++) {
-			for (float y2 = y - this.radius; y2 <= y + this.radius; y2++) {
-				for (float z2 = Math.max(chunkZ * 16, z - this.radius); z2 <= Math.min(chunkZ * 16 + 15, z + this.radius); z2++) {
-					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
-					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
+		int posX = this.getPosition().getX();
+		int posY = this.getPosition().getY();
+		int posZ = this.getPosition().getZ();
+		
+		int ceiledRadius = (int) Math.ceil(this.radius);
+		for (int currX = Math.max(chunkX * 16, posX - ceiledRadius); currX <= Math.min(chunkX * 16 + 15, posX + ceiledRadius); currX++) {
+			for (int currY = posY - ceiledRadius; currY <= posY + ceiledRadius; currY++) {
+				for (int currZ = Math.max(chunkZ * 16, posZ - ceiledRadius); currZ <= Math.min(chunkZ * 16 + 15, posZ + ceiledRadius); currZ++) {
+					BlockPos currBlockPos = new BlockPos(currX, currY, currZ);
+					double distance = Support.getDistance(posX, posY, posZ, currX, currY, currZ);
 					
-					if (d <= this.radius) {
+					if (distance <= this.radius) {
 						chunk.setBlockState(currBlockPos, this.blockState, false);
 					}
 				}

@@ -9,11 +9,7 @@
 		"entity_type": "minecraft:enderman",
 		"min_shell_size": 2,
 		"max_shell_size": 3,
-		"shell_block": {
-			"minecraft:end_stone_bricks": 10,
-			"minecraft:purpur_block": 5,
-			"minecraft:end_stone": 1
-		}
+		"shell_block": "$starry_skies:end_dungeon_stones"
 	},
 	"decorators": {},
 	"spawns": []

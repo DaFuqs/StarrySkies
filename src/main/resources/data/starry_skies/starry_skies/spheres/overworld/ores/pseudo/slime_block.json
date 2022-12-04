@@ -9,17 +9,7 @@
 		"min_core_size": 2,
 		"max_core_size": 4,
 		"core_block": "minecraft:slime_block",
-		"main_block": {
-			"minecraft:stone": 1000,
-			"minecraft:deepslate": 1000,
-			"minecraft:infested_stone": 500,
-			"minecraft:granite": 100,
-			"minecraft:diorite": 100,
-			"minecraft:andesite": 100,
-			"minecraft:infested_cobblestone": 50,
-			"minecraft:cobblestone": 10,
-			"minecraft:mossy_cobblestone": 1
-		}
+		"main_block": "$starry_skies:stones"
 	},
 	"decorators": {},
 	"spawns": []

@@ -3,10 +3,14 @@ package de.dafuqs.starryskies.spheroids;
 import com.google.gson.*;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.Support;
+import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupsLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.BlockArgumentParser;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,9 +19,14 @@ import java.util.Map;
 
 public abstract class BlockStateSupplier {
 	
-	public static BlockStateSupplier of(JsonElement jsonElement) throws CommandSyntaxException {
+	@Contract("_ -> new")
+	public static @NotNull BlockStateSupplier of(JsonElement jsonElement) throws CommandSyntaxException {
 		if(jsonElement instanceof JsonPrimitive) {
-			return new SingleBlockStateSupplier(jsonElement);
+			if(jsonElement.getAsString().startsWith("$")) {
+				return new WeightedBlockStateGroupSupplier(jsonElement);
+			} else {
+				return new SingleBlockStateSupplier(jsonElement);
+			}
 		} else if(jsonElement instanceof JsonArray) {
 			return new BlockStateListSupplier(jsonElement);
 		} else if(jsonElement instanceof JsonObject) {
@@ -32,7 +41,7 @@ public abstract class BlockStateSupplier {
 		
 		BlockState state;
 		
-		public SingleBlockStateSupplier(JsonElement json) throws CommandSyntaxException {
+		public SingleBlockStateSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
 			state = BlockArgumentParser.block(Registry.BLOCK, json.getAsString(), false).blockState();
 		}
 		
@@ -46,13 +55,13 @@ public abstract class BlockStateSupplier {
 		
 		List<BlockState> states = new ArrayList<>();
 		
-		public BlockStateListSupplier(JsonElement json) throws CommandSyntaxException {
+		public BlockStateListSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
 			for(JsonElement e : json.getAsJsonArray()) {
 				states.add(BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState());
 			}
 		}
 		
-		public BlockState get(Random random) {
+		public BlockState get(@NotNull Random random) {
 			return states.get(random.nextInt(states.size()));
 		}
 		
@@ -62,7 +71,7 @@ public abstract class BlockStateSupplier {
 		
 		Map<BlockState, Float> states = new HashMap<>();
 		
-		public WeightedBlockStateSupplier(JsonElement json) throws CommandSyntaxException {
+		public WeightedBlockStateSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
 			for(Map.Entry<String, JsonElement> e : json.getAsJsonObject().entrySet()) {
 				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getKey(), false).blockState();
 				float weight = e.getValue().getAsFloat();
@@ -72,6 +81,22 @@ public abstract class BlockStateSupplier {
 		
 		public BlockState get(Random random) {
 			return Support.getWeightedRandom(states, random);
+		}
+		
+	}
+	
+	public static class WeightedBlockStateGroupSupplier extends BlockStateSupplier {
+		
+		Identifier identifier;
+		
+		public WeightedBlockStateGroupSupplier(@NotNull JsonElement json) {
+			String s = json.getAsString();
+			s = s.substring(1);
+			identifier = Identifier.tryParse(s);
+		}
+		
+		public BlockState get(Random random) {
+			return WeightedBlockGroupsLoader.getRandomStateInGroup(identifier, random);
 		}
 		
 	}

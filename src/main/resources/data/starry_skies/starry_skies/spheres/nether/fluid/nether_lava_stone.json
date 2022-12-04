@@ -12,11 +12,7 @@
 		"min_fill_amount": 0.1,
 		"max_fill_amount": 1.0,
 		"hole_in_bottom_chance": 0.50,
-		"shell_block": {
-			"minecraft:netherrack": 5,
-			"minecraft:basalt": 1,
-			"minecraft:magma_block": 1
-		}
+		"shell_block": "$starry_skies:nether_stones"
 	},
 	"decorators": {},
 	"spawns": []

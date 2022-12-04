@@ -10,8 +10,8 @@
 		"min_core_size": 1,
 		"max_core_size": 3,
 		"main_block": {
-			"minecraft:deepslate": 10,
-			"minecraft:infested_deepslate": 5,
+			"minecraft:infested_deepslate": 10,
+			"minecraft:deepslate": 5,
 			"minecraft:cobbled_deepslate": 2
 		}
 	},

@@ -21,8 +21,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-;
-
 public class SpheroidTemplateLoader extends JsonDataLoader implements IdentifiableResourceReloadListener {
 	
 	public static final String ID = "starry_skies/spheres";

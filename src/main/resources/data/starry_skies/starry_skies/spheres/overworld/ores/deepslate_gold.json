@@ -9,11 +9,7 @@
 		"core_block": "minecraft:deepslate_gold_ore",
 		"min_core_size": 2,
 		"max_core_size": 4,
-		"main_block": {
-			"minecraft:deepslate": 10,
-			"minecraft:cobbled_deepslate": 2,
-			"minecraft:infested_deepslate": 1
-		}
+		"main_block": "$starry_skies:deepslates"
 	},
 	"decorators": {},
 	"spawns": []

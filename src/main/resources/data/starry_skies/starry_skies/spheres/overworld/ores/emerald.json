@@ -9,16 +9,7 @@
 		"core_block": "minecraft:emerald_ore",
 		"min_core_size": 1,
 		"max_core_size": 3,
-		"main_block": {
-			"minecraft:stone": 1000,
-			"minecraft:infested_stone": 500,
-			"minecraft:granite": 100,
-			"minecraft:diorite": 100,
-			"minecraft:andesite": 100,
-			"minecraft:infested_cobblestone": 50,
-			"minecraft:cobblestone": 10,
-			"minecraft:mossy_cobblestone": 1
-		}
+		"main_block": "$starry_skies:mountain_stones"
 	},
 	"decorators": {},
 	"spawns": []
