@@ -3,11 +3,9 @@ package de.dafuqs.starryskies.dimension;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureSet;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.dynamic.RegistryOps;
@@ -34,7 +32,6 @@ import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -86,23 +83,6 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 				return new FixedBiomeSource(biomeRegistry.getOrCreateEntry(StarrySkyBiomes.END_KEY));
 			}
 		}
-	}
-	
-	// TODO: move to structure logic
-	private static @Nullable BlockPos findClosestStrongholdSphere(BlockPos blockPos, @NotNull ServerWorld world, int radius) {
-		ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
-		if (chunkGenerator instanceof StarrySkyChunkGenerator) {
-			Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroid3x3(world, blockPos, StarrySkies.locate("overworld/treasure/stronghold"));
-			
-			if (Math.sqrt(spheroidDistance.squaredDistance) <= radius * 16) {
-				return spheroidDistance.spheroid.getPosition();
-			}
-		}
-		return null;
-	}
-	
-	public SpheroidDimensionType getSpheroidDimensionType() {
-		return this.spheroidDimensionType;
 	}
 	
 	@Override

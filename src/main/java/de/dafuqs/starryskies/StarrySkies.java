@@ -5,6 +5,7 @@ import de.dafuqs.starryskies.advancements.StarryAdvancementCriteria;
 import de.dafuqs.starryskies.commands.ClosestSpheroidCommand;
 import de.dafuqs.starryskies.configs.StarrySkyConfig;
 import de.dafuqs.starryskies.data_loaders.*;
+import de.dafuqs.starryskies.dimension.SpheroidDimensionType;
 import de.dafuqs.starryskies.dimension.StarrySkyBiomes;
 import de.dafuqs.starryskies.dimension.StarrySkyChunkGenerator;
 import de.dafuqs.starryskies.dimension.StarrySkyDimension;
@@ -86,6 +87,10 @@ public class StarrySkies implements ModInitializer {
 		log(INFO, "Finished loading.");
 	}
 	
+	public static Identifier locate(String name) {
+		return new Identifier(MOD_ID, name);
+	}
+	
 	public static void log(Level logLevel, String message) {
 		LOGGER.log(logLevel, "[StarrySkies] " + message);
 	}
@@ -95,8 +100,19 @@ public class StarrySkies implements ModInitializer {
 		return isStarryWorld(worldRegistryKey);
 	}
 	
-	public static Identifier locate(String name) {
-		return new Identifier(MOD_ID, name);
+	
+	public static ServerWorld getStarryWorld(SpheroidDimensionType dimensionType) {
+		switch (dimensionType) {
+			case OVERWORLD -> {
+				return starryWorld;
+			}
+			case NETHER -> {
+				return starryWorldNether;
+			}
+			default -> {
+				return starryWorldEnd;
+			}
+		}
 	}
 	
 	public static boolean isStarryWorld(RegistryKey<World> worldRegistryKey) {
