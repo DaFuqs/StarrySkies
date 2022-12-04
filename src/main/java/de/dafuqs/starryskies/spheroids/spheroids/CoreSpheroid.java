@@ -56,8 +56,10 @@ public class CoreSpheroid extends Spheroid {
 		
 		@Override
 		public CoreSpheroid generate(ChunkRandom random) {
+			float radius = randomBetween(random, minSize, maxSize);
 			int coreRadius = Support.getRandomBetween(random, this.minCoreRadius, this.maxCoreRadius);
-			return new CoreSpheroid(this, randomBetween(random, minSize, maxSize), selectDecorators(random), selectSpawns(random), random, coreBlock, shellBlock.get(random), coreRadius);
+			coreRadius = Math.min(coreRadius, (int) radius - 1);
+			return new CoreSpheroid(this, radius, selectDecorators(random), selectSpawns(random), random, coreBlock, shellBlock.get(random), coreRadius);
 		}
 		
 	}
