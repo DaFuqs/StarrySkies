@@ -10,6 +10,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
@@ -53,8 +54,8 @@ public class OceanMonumentSpheroid extends Spheroid {
 		private final int minCoreRadius;
 		private final int maxCoreRadius;
 		
-		public Template(JsonObject data) throws CommandSyntaxException {
-			super(data);
+		public Template(Identifier identifier, JsonObject data) throws CommandSyntaxException {
+			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");

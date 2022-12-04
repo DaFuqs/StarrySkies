@@ -1,5 +1,4 @@
 {
-	"id": "water_glass_ice",
 	"generation_group": "starry_skies:overworld/fluid",
 	"generation_weight": 0.8,
 	"min_size": 8,

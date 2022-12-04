@@ -16,6 +16,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
@@ -57,8 +58,8 @@ public class BeeHiveSpheroid extends Spheroid {
 		private final int minFlowerRingSpacing;
 		private final int maxFlowerRingSpacing;
 		
-		public Template(JsonObject data) throws CommandSyntaxException {
-			super(data);
+		public Template(Identifier identifier, JsonObject data) throws CommandSyntaxException {
+			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.minShellSize = JsonHelper.getInt(typeData, "min_shell_size");

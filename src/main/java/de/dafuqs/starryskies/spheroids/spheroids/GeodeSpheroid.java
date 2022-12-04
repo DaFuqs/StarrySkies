@@ -7,6 +7,7 @@ import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
@@ -44,8 +45,8 @@ public class GeodeSpheroid extends Spheroid {
 		private final BlockState middleBlockSate;
 		private final BlockState outerBlockState;
 		
-		public Template(JsonObject data) throws CommandSyntaxException {
-			super(data);
+		public Template(Identifier identifier, JsonObject data) throws CommandSyntaxException {
+			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.innerBlockState = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "inner_block"), false).blockState();

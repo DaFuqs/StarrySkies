@@ -1,5 +1,4 @@
 {
-	"id": "redstone",
 	"generation_group": "starry_skies:overworld/ores",
 	"generation_weight": 2.0,
 	"min_size": 4,

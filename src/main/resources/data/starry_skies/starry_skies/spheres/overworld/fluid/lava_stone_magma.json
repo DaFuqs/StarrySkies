@@ -1,5 +1,4 @@
 {
-	"id": "lava_stone_magma",
 	"generation_group": "starry_skies:overworld/fluid",
 	"generation_weight": 1.0,
 	"min_size": 5,

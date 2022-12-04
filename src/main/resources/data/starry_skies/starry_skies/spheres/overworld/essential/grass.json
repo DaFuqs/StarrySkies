@@ -1,5 +1,4 @@
 {
-	"id": "grass",
 	"generation_group": "starry_skies:overworld/essential",
 	"generation_weight": 10.0,
 	"min_size": 5,

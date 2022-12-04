@@ -254,12 +254,12 @@ public abstract class Spheroid implements Serializable {
 		protected Map<SpheroidDecorator, Float> decorators;
 		protected List<SpheroidEntitySpawnDefinition> spawns;
 		
-		public Template(JsonObject jsonObject) throws CommandSyntaxException {
-			this(Identifier.tryParse(JsonHelper.getString(jsonObject, "id")),
-					JsonHelper.getInt(jsonObject, "min_size"),
-					JsonHelper.getInt(jsonObject, "max_size"),
-					readDecorators(JsonHelper.getObject(jsonObject, "decorators")),
-					readSpawns(JsonHelper.getArray(jsonObject, "spawns"))
+		public Template(Identifier identifier, JsonObject jsonObject) throws CommandSyntaxException {
+			this(identifier,
+				 JsonHelper.getInt(jsonObject, "min_size"),
+				 JsonHelper.getInt(jsonObject, "max_size"),
+				 readDecorators(JsonHelper.getObject(jsonObject, "decorators")),
+				 readSpawns(JsonHelper.getArray(jsonObject, "spawns"))
 			);
 		}
 		

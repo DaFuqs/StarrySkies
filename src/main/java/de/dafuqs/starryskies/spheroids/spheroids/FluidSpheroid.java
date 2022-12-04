@@ -50,8 +50,8 @@ public class FluidSpheroid extends Spheroid {
 		private final float maxFillAmount;
 		private final float holeInBottomChance;
 		
-		public Template(JsonObject data) throws CommandSyntaxException {
-			super(data);
+		public Template(Identifier identifier, JsonObject data) throws CommandSyntaxException {
+			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.fluid = Registry.FLUID.get(Identifier.tryParse(JsonHelper.getString(typeData, "fluid")));

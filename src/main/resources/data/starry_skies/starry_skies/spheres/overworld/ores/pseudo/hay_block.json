@@ -1,5 +1,4 @@
 {
-	"id": "hay_block",
 	"generation_group": "starry_skies:overworld/ores",
 	"generation_weight": 0.05,
 	"min_size": 4,

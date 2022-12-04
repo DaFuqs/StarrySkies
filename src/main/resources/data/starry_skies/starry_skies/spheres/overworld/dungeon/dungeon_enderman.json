@@ -1,5 +1,4 @@
 {
-	"id": "dungeon_enderman",
 	"generation_group": "starry_skies:overworld/decorative",
 	"generation_weight": 1.5,
 	"min_size": 6,

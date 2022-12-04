@@ -8,6 +8,7 @@ import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
@@ -43,8 +44,8 @@ public class CoreSpheroid extends Spheroid {
 		private final int minCoreRadius;
 		private final int maxCoreRadius;
 		
-		public Template(JsonObject data) throws CommandSyntaxException {
-			super(data);
+		public Template(Identifier identifier, JsonObject data) throws CommandSyntaxException {
+			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.coreBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "core_block"), false).blockState();

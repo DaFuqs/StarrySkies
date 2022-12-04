@@ -1,5 +1,4 @@
 {
-	"id": "lapis",
 	"generation_group": "starry_skies:overworld/ores",
 	"generation_weight": 0.3,
 	"min_size": 5,

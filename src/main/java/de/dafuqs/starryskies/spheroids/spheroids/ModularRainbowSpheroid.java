@@ -8,6 +8,7 @@ import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
@@ -39,8 +40,8 @@ public class ModularRainbowSpheroid extends Spheroid {
 		private final List<BlockState> topBlocks = new ArrayList<>();
 		private final List<BlockState> bottomBlocks = new ArrayList<>();
 		
-		public Template(JsonObject data) throws CommandSyntaxException {
-			super(data);
+		public Template(Identifier identifier, JsonObject data) throws CommandSyntaxException {
+			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			for (JsonElement e : JsonHelper.getArray(typeData, "blocks")) {

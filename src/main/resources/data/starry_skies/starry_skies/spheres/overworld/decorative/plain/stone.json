@@ -1,5 +1,4 @@
 {
-	"id": "stone",
 	"generation_group": "starry_skies:overworld/decorative",
 	"generation_weight": 2.0,
 	"min_size": 5,

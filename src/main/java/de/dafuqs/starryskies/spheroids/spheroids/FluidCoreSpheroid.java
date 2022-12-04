@@ -67,8 +67,8 @@ public class FluidCoreSpheroid extends Spheroid {
 		private final int minCoreRadius;
 		private final int maxCoreRadius;
 		
-		public Template(JsonObject data) throws CommandSyntaxException {
-			super(data);
+		public Template(Identifier identifier, JsonObject data) throws CommandSyntaxException {
+			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.fluid = Registry.FLUID.get(Identifier.tryParse(JsonHelper.getString(typeData, "fluid")));

@@ -1,5 +1,4 @@
 {
-	"id": "diamond",
 	"generation_group": "starry_skies:overworld/ores",
 	"generation_weight": 0.2,
 	"min_size": 3,

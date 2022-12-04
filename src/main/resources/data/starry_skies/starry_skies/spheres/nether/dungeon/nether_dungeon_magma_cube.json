@@ -1,5 +1,4 @@
 {
-	"id": "nether_dungeon_magma_cube",
 	"generation_group": "starry_skies:nether/dungeon",
 	"generation_weight": 1.5,
 	"min_size": 6,

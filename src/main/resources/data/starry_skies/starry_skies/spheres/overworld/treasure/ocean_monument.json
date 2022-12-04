@@ -1,5 +1,4 @@
 {
-	"id": "ocean_monument",
 	"generation_group": "starry_skies:overworld/treasure",
 	"generation_weight": 0.5,
 	"min_size": 25,

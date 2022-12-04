@@ -60,7 +60,7 @@ public class SpheroidTemplateLoader extends JsonDataLoader implements Identifiab
 				
 				try {
 					Class<? extends Spheroid.Template> templateClass = StarryRegistries.SPHEROID_TYPE.get(spheroidType);
-					template = templateClass.getConstructor(jsonObject.getClass()).newInstance(jsonObject);
+					template = templateClass.getConstructor(Identifier.class, jsonObject.getClass()).newInstance(identifier, jsonObject);
 				} catch (NullPointerException e) {
 					StarrySkies.log(Level.ERROR, "Error reading sphere json definition " + identifier + ": Spheroid Type " + spheroidType + " is not known.");
 					return;

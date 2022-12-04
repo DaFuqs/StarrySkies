@@ -1,5 +1,4 @@
 {
-	"id": "nether_ancient_debris",
 	"generation_group": "starry_skies:nether/ores",
 	"generation_weight": 0.5,
 	"min_size": 5,

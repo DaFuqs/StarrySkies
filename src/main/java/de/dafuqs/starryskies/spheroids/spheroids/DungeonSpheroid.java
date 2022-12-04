@@ -45,8 +45,8 @@ public class DungeonSpheroid extends Spheroid {
 		private final int minShellRadius;
 		private final int maxShellRadius;
 		
-		public Template(JsonObject data) throws CommandSyntaxException {
-			super(data);
+		public Template(Identifier identifier, JsonObject data) throws CommandSyntaxException {
+			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.entityType = Registry.ENTITY_TYPE.get(Identifier.tryParse(JsonHelper.getString(typeData, "entity_type")));

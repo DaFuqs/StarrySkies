@@ -1,5 +1,4 @@
 {
-	"id": "nether_nether_gold_ore",
 	"generation_group": "starry_skies:nether/ores",
 	"generation_weight": 4.0,
 	"min_size": 5,

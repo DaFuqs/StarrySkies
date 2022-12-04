@@ -1,5 +1,4 @@
 {
-	"id": "end_dungeon_enderman",
 	"generation_group": "starry_skies:end/dungeon",
 	"generation_weight": 20,
 	"min_size": 6,

@@ -1,5 +1,4 @@
 {
-	"id": "oak_wood",
 	"generation_group": "starry_skies:overworld/wood",
 	"generation_weight": 5.0,
 	"min_size": 8,
