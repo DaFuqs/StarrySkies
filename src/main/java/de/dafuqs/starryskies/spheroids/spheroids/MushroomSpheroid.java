@@ -81,17 +81,23 @@ public class MushroomSpheroid extends Spheroid {
 		BlockState placementBlockstateInner = this.mushroomBlock.with(Properties.UP, false).with(Properties.NORTH, false).with(Properties.EAST, false).with(Properties.SOUTH, false).with(Properties.WEST, false).with(Properties.DOWN, false);
 		
 		int ceiledRadius = (int) Math.ceil(this.radius);
-		for (float x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= Math.min(chunkX * 16 + 15, x + ceiledRadius); x2++) {
-			for (float y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
-				for (float z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= Math.min(chunkZ * 16 + 15, z + ceiledRadius); z2++) {
+		int maxX = Math.min(chunkX * 16 + 15, x + ceiledRadius);
+		int maxZ =  Math.min(chunkZ * 16 + 15, z + ceiledRadius);
+		for (int x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= maxX; x2++) {
+			for (int y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
+				for (int z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= maxZ; z2++) {
+					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
+					if (d > this.radius) {
+						continue;
+					}
 					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
-					double d = Support.getDistance(x, y, z, x2, y2, z2);
+					
 					long rounded = Math.round(d);
 					if (rounded <= (this.radius - this.shellRadius)) {
 						chunk.setBlockState(currBlockPos, this.stemBlock, false);
 					} else if (d <= this.radius - 0.5) {
 						chunk.setBlockState(currBlockPos, placementBlockstateInner, false);
-					} else if (rounded <= this.radius) {
+					} else {
 						// not perfectly correct, but eh
 						BlockState placementBlockstateOuter = this.mushroomBlock.with(Properties.UP, true).with(Properties.NORTH, true).with(Properties.EAST, true).with(Properties.SOUTH, true).with(Properties.WEST, true).with(Properties.DOWN, true);
 						chunk.setBlockState(currBlockPos, placementBlockstateOuter, false);

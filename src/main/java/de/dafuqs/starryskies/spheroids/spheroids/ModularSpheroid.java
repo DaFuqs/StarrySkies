@@ -84,21 +84,23 @@ public class ModularSpheroid extends Spheroid {
 		
 		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 		int ceiledRadius = (int) Math.ceil(this.radius);
-		for (float x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= Math.min(chunkX * 16 + 15, x + ceiledRadius); x2++) {
-			for (float y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
-				for (float z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= Math.min(chunkZ * 16 + 15, z + ceiledRadius); z2++) {
-					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
+		int maxX = Math.min(chunkX * 16 + 15, x + ceiledRadius);
+		int maxZ =  Math.min(chunkZ * 16 + 15, z + ceiledRadius);
+		for (int x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= maxX; x2++) {
+			for (int y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
+				for (int z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= maxZ; z2++) {
 					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
-					if (d == this.radius) {
-						if (isBottomBlock(d, x2, y2, z2)) {
-							chunk.setBlockState(currBlockPos, this.bottomBlock, false);
-						} else if (isTopBlock(d, x2, y2, z2)) {
-							chunk.setBlockState(currBlockPos, this.topBlock, false);
-							addDecorationBlockPosition(currBlockPos);
-						} else {
-							chunk.setBlockState(currBlockPos, this.mainBlock, false);
-						}
-					} else if (d <= this.radius) {
+					if (d > this.radius) {
+						continue;
+					}
+					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
+					
+					if (this.bottomBlock != null && isBottomBlock(d, x2, y2, z2)) {
+						chunk.setBlockState(currBlockPos, this.bottomBlock, false);
+					} else if (this.topBlock != null && isTopBlock(d, x2, y2, z2)) {
+						chunk.setBlockState(currBlockPos, this.topBlock, false);
+						addDecorationBlockPosition(currBlockPos);
+					} else {
 						chunk.setBlockState(currBlockPos, this.mainBlock, false);
 					}
 				}

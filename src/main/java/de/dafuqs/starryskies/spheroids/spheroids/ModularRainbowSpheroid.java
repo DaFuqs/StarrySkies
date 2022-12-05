@@ -87,24 +87,32 @@ public class ModularRainbowSpheroid extends Spheroid {
 		
 		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 		int ceiledRadius = (int) Math.ceil(this.radius);
-		for (float x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= Math.min(chunkX * 16 + 15, x + ceiledRadius); x2++) {
-			for (float y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
-				for (float z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= Math.min(chunkZ * 16 + 15, z + ceiledRadius); z2++) {
-					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
+		int maxX = Math.min(chunkX * 16 + 15, x + ceiledRadius);
+		int maxZ =  Math.min(chunkZ * 16 + 15, z + ceiledRadius);
+		for (int x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= maxX; x2++) {
+			for (int y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
+				for (int z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= maxZ; z2++) {
 					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
-					if (d == this.radius) {
-						if (bottomBlocks != null && isBottomBlock(d, x2, y2, z2)) {
-							int currentBlockID = (int) (Math.abs(x2) + Math.abs(y2) + Math.abs(z2)) % this.bottomBlocks.size();
-							chunk.setBlockState(currBlockPos, this.bottomBlocks.get(currentBlockID), false);
-							continue;
-						} else if (topBlocks != null && isTopBlock(d, x2, y2, z2)) {
-							int currentBlockID = (int) (Math.abs(x2) + Math.abs(y2) + Math.abs(z2)) % this.topBlocks.size();
-							chunk.setBlockState(currBlockPos, this.topBlocks.get(currentBlockID), false);
-							continue;
-						}
+					if (d > this.radius) {
+						continue;
 					}
-					if (d <= this.radius) {
-						int currentBlockID = (int) (Math.abs(x2) + Math.abs(y2) + Math.abs(z2)) % this.rainbowBlocks.size();
+					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
+					
+					int rainbowBlockMod = Math.abs(x2) + Math.abs(y2) + Math.abs(z2);
+					if (d > this.radius - 1) {
+						if (bottomBlocks != null && isBottomBlock(d, x2, y2, z2)) {
+							int currentBlockID = rainbowBlockMod % this.bottomBlocks.size();
+							chunk.setBlockState(currBlockPos, this.bottomBlocks.get(currentBlockID), false);
+						} else if (topBlocks != null && isTopBlock(d, x2, y2, z2)) {
+							int currentBlockID = rainbowBlockMod % this.topBlocks.size();
+							chunk.setBlockState(currBlockPos, this.topBlocks.get(currentBlockID), false);
+						} else {
+							int currentBlockID = rainbowBlockMod % this.rainbowBlocks.size();
+							BlockState currentBlockState = this.rainbowBlocks.get(currentBlockID);
+							chunk.setBlockState(currBlockPos, currentBlockState, false);
+						}
+					} else {
+						int currentBlockID = rainbowBlockMod % this.rainbowBlocks.size();
 						BlockState currentBlockState = this.rainbowBlocks.get(currentBlockID);
 						chunk.setBlockState(currBlockPos, currentBlockState, false);
 					}

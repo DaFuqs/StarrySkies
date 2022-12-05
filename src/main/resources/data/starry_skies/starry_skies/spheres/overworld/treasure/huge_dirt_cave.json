@@ -9,7 +9,7 @@
 		"max_shell_size": 5,
 		"cave_floor_block": "minecraft:coarse_dirt",
 		"shell_block": "minecraft:dirt",
-		"top_block": "minecraft:grass",
+		"top_block": "minecraft:grass_block",
 		"treasure_chest": {
 			"loot_table": "minecraft:chests/abandoned_mineshaft_chest",
 			"chance": 0.5

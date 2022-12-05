@@ -81,11 +81,13 @@ public class StackedHorizontalSpheroid extends Spheroid {
 			
 			for (float x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= Math.min(chunkX * 16 + 15, x + ceiledRadius); x2++) {
 				for (float z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= Math.min(chunkZ * 16 + 15, z + ceiledRadius); z2++) {
-					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
 					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
-					if (d < ceiledRadius) {
-						chunk.setBlockState(currBlockPos, currentBlockState, false);
+					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
+					if (d > this.radius) {
+						continue;
 					}
+					
+					chunk.setBlockState(currBlockPos, currentBlockState, false);
 				}
 			}
 		}

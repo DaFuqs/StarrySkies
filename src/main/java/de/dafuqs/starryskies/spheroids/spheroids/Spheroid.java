@@ -138,7 +138,7 @@ public abstract class Spheroid implements Serializable {
 	}
 	
 	protected boolean isTopBlock(long d, double x, double y, double z) {
-		if (d == this.radius) {
+		if (d > this.radius - 1) {
 			long dist2 = Math.round(Support.getDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y + 1, z));
 			return dist2 > this.radius;
 		} else {
@@ -147,7 +147,7 @@ public abstract class Spheroid implements Serializable {
 	}
 	
 	protected boolean isBottomBlock(long d, double x, double y, double z) {
-		if (d == this.radius) {
+		if (d > this.radius - 1) {
 			long dist2 = Math.round(Support.getDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
 			return dist2 > this.radius;
 		} else {

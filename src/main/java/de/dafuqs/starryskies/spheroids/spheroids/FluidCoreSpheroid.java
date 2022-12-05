@@ -121,15 +121,21 @@ public class FluidCoreSpheroid extends Spheroid {
 		
 		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 		int ceiledRadius = (int) Math.ceil(this.radius);
-		for (float x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= Math.min(chunkX * 16 + 15, x + ceiledRadius); x2++) {
-			for (float y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
-				for (float z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= Math.min(chunkZ * 16 + 15, z + ceiledRadius); z2++) {
-					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
+		int maxX = Math.min(chunkX * 16 + 15, x + ceiledRadius);
+		int maxZ =  Math.min(chunkZ * 16 + 15, z + ceiledRadius);
+		for (int x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= maxX; x2++) {
+			for (int y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
+				for (int z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= maxZ; z2++) {
 					long d = Math.round(Support.getDistance(x, y, z, x2, y2, z2));
+					if (d > this.radius) {
+						continue;
+					}
+					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
+					
 					if (this.holeInBottom && (x - x2) == 0 && (z - z2) == 0 && (y - y2 + 1) >= liquidRadius) {
 						chunk.setBlockState(new BlockPos(currBlockPos), this.fluidBlock, false);
 						chunk.markBlockForPostProcessing(currBlockPos); // making it drop down after generation
-					} else if (this.coreBlock != null && d <= this.coreRadius) {
+					} else if (d <= this.coreRadius) {
 						chunk.setBlockState(currBlockPos, this.coreBlock, false);
 					} else if (d <= liquidRadius) {
 						if (y2 <= maxLiquidY) {
@@ -140,7 +146,7 @@ public class FluidCoreSpheroid extends Spheroid {
 						} else {
 							chunk.setBlockState(currBlockPos, CAVE_AIR, false);
 						}
-					} else if (d <= this.radius) {
+					} else {
 						chunk.setBlockState(currBlockPos, this.shellBlock, false);
 					}
 				}
