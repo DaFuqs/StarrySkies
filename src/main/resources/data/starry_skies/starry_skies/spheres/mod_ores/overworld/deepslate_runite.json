@@ -1,14 +1,14 @@
 {
 	"generation_group": "starry_skies:overworld/ores",
-	"generation_weight": 0.2,
-	"min_size": 4,
-	"max_size": 6,
+	"generation_weight": 0.5,
+	"min_size": 6,
+	"max_size": 8,
 	"type": "starry_skies:core",
 	"type_data": {
-		"core_block": "%starry_skies:adamantine_ore",
-		"min_core_size": 1,
-		"max_core_size": 2,
-		"main_block": "$starry_skies:dungeon_stones"
+		"core_block": "%starry_skies:deepslate_runite_ore",
+		"min_core_size": 2,
+		"max_core_size": 5,
+		"main_block": "$starry_skies:deepslate"
 	},
 	"decorators": {},
 	"spawns": [],
@@ -16,7 +16,7 @@
 		{
 			"condition": "starry_skies:unique_block_group_exist",
 			"values": [
-				"starry_skies:adamantine_ore"
+				"starry_skies:deepslate_runite_ore"
 			]
 		}
 	]

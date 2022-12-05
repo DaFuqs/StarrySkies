@@ -8,7 +8,7 @@
 		"core_block": "%starry_skies:aquarium_ore",
 		"min_core_size": 4,
 		"max_core_size": 7,
-		"main_block": "$starry_skies:ocean_stones"
+		"main_block": "$starry_skies:stone"
 	},
 	"decorators": {},
 	"spawns": [],

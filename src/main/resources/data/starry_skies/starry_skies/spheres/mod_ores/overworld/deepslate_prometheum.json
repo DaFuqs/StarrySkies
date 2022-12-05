@@ -1,14 +1,14 @@
 {
 	"generation_group": "starry_skies:overworld/ores",
 	"generation_weight": 0.4,
-	"min_size": 4,
-	"max_size": 7,
+	"min_size": 6,
+	"max_size": 9,
 	"type": "starry_skies:core",
 	"type_data": {
-		"core_block": "%starry_skies:aetherium_ore",
-		"min_core_size": 2,
-		"max_core_size": 3,
-		"main_block": "$starry_skies:dungeon_stones"
+		"core_block": "%starry_skies:deepslate_prometheum_ore",
+		"min_core_size": 4,
+		"max_core_size": 4,
+		"main_block": "$starry_skies:deepslate"
 	},
 	"decorators": {},
 	"spawns": [],
@@ -16,7 +16,7 @@
 		{
 			"condition": "starry_skies:unique_block_group_exist",
 			"values": [
-				"starry_skies:aetherium_ore"
+				"starry_skies:deepslate_prometheum_ore"
 			]
 		}
 	]

@@ -1,6 +1,6 @@
 {
 	"generation_group": "starry_skies:overworld/ores",
-	"generation_weight": 1.4,
+	"generation_weight": 0.5,
 	"min_size": 6,
 	"max_size": 8,
 	"type": "starry_skies:core",
@@ -8,7 +8,7 @@
 		"core_block": "%starry_skies:runite_ore",
 		"min_core_size": 2,
 		"max_core_size": 5,
-		"main_block": "$starry_skies:stones"
+		"main_block": "$starry_skies:stone"
 	},
 	"decorators": {},
 	"spawns": [],
