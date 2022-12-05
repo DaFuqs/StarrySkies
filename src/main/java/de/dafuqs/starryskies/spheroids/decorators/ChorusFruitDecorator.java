@@ -10,18 +10,15 @@ import net.minecraft.world.StructureWorldAccess;
 
 public class ChorusFruitDecorator extends SpheroidDecorator {
 	
-	private static final int chorusChance = 30;
+	private static final float chorusChance = 0.03F;
 	
 	@Override
 	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		for (BlockPos bp : getTopBlocks(world, origin, spheroid)) {
-			int r = random.nextInt(chorusChance);
-			
-			if (r == 0) {
+			if (random.nextFloat() < chorusChance) {
 				ChorusFlowerBlock.generate(world, bp.up(), random, 8);
 			}
 		}
 	}
-	
 	
 }
