@@ -8,7 +8,7 @@
 		"core_block": "%starry_skies:deepslate_unobtainium_ore",
 		"min_core_size": 1,
 		"max_core_size": 1,
-		"main_block": "$starry_skies:deepslate"
+		"main_block": "$starry_skies:deepslates"
 	},
 	"decorators": {},
 	"spawns": [],

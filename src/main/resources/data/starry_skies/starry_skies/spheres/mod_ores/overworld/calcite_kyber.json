@@ -8,7 +8,7 @@
 		"core_block": "%starry_skies:calcite_kyber_ore",
 		"min_core_size": 4,
 		"max_core_size": 7,
-		"main_block": "$starry_skies:calcite"
+		"main_block": "minecraft:calcite"
 	},
 	"decorators": {},
 	"spawns": [],

@@ -8,7 +8,7 @@
 		"core_block": "%starry_skies:tuff_orichalcum_ore",
 		"min_core_size": 1,
 		"max_core_size": 2,
-		"main_block": "$starry_skies:tuff"
+		"main_block": "minecraft:tuff"
 	},
 	"decorators": {},
 	"spawns": [],

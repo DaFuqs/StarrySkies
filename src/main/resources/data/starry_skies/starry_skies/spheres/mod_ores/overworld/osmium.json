@@ -8,7 +8,7 @@
 		"core_block": "%starry_skies:osmium_ore",
 		"min_core_size": 5,
 		"max_core_size": 8,
-		"main_block": "$starry_skies:stone"
+		"main_block": "$starry_skies:stones"
 	},
 	"decorators": {},
 	"spawns": [],
