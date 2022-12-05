@@ -1,6 +1,6 @@
 {
 	"generation_group": "starry_skies:overworld/decorative",
-	"generation_weight": 0.5,
+	"generation_weight": 0.1,
 	"min_size": 5,
 	"max_size": 16,
 	"type": "starry_skies:stacked_horizontal",
