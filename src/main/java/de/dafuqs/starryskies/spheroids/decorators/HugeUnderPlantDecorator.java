@@ -5,10 +5,9 @@ import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
-
-import java.util.ArrayList;
 
 
 public class HugeUnderPlantDecorator extends SpheroidDecorator {
@@ -41,17 +40,13 @@ public class HugeUnderPlantDecorator extends SpheroidDecorator {
 	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
-		
-		int spheroidY = spheroid.getPosition().getY();
-		for (BlockPos bp : decorationBlockPositions) {
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		for (BlockPos bp : getBottomBlocks(world, origin, spheroid)) {
 			
 			if (random.nextFloat() < PLANT_CHANCE) {
-				BlockPos flippedBlockPos = bp.down((bp.getY() - spheroidY) * 2);
-				
 				int thisHeight = Support.getRandomBetween(random, MIN_HEIGHT, MAX_HEIGHT);
 				for (int i = 1; i < thisHeight + 1; i++) {
-					if (world.getBlockState(flippedBlockPos.down(i)).isAir()) {
+					if (world.getBlockState(bp.down(i)).isAir()) {
 						
 						BlockState placementBlockState = PLANT_BLOCKSTATE;
 						if (i == 1 && FIRST_BLOCKSTATE != null) {
@@ -60,10 +55,10 @@ public class HugeUnderPlantDecorator extends SpheroidDecorator {
 							placementBlockState = LAST_BLOCKSTATE;
 						}
 						
-						world.setBlockState(flippedBlockPos.down(i), placementBlockState, 3);
+						world.setBlockState(bp.down(i), placementBlockState, 3);
 					} else {
 						if (i > 1 && LAST_BLOCKSTATE != null) {
-							world.setBlockState(flippedBlockPos.down(i - 1), LAST_BLOCKSTATE, 3);
+							world.setBlockState(bp.down(i - 1), LAST_BLOCKSTATE, 3);
 						}
 						break;
 					}

@@ -5,17 +5,20 @@ import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WallTorchBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class EndPortalDecorator extends SpheroidDecorator {
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		if(!spheroid.isCenterInChunk(origin)) {
+			return;
+		}
 		this.generate(world, new BlockPos(0, 64, 0), false);
 	}
 	
@@ -59,11 +62,6 @@ public class EndPortalDecorator extends SpheroidDecorator {
 				structureWorldAccess.setBlockState(new BlockPos(blockPos2), Blocks.AIR.getDefaultState(), 3);
 			}
 		}
-	}
-	
-	@Override
-	public SpheroidDecorationMode getDecorationMode() {
-		return SpheroidDecorationMode.CENTER_CHUNK;
 	}
 	
 }

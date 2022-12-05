@@ -14,7 +14,6 @@
 		}
 	},
 	"decorators": {
-		"starry_skies:pointed_dripstone_cave": 1.0,
 		"starry_skies:glow_lichen": 0.3
 	},
 	"spawns": []

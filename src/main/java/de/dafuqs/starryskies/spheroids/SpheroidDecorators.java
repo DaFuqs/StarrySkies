@@ -23,7 +23,6 @@ public class SpheroidDecorators {
 	public static SpheroidDecorator CENTER_POND_UNDERWATER_RUIN_BIG_CHEST = register("center_pond_underwater_ruin_big_chest", new CenterPondDecorator(Blocks.GRAVEL.getDefaultState(), Blocks.WATER.getDefaultState(), LootTables.UNDERWATER_RUIN_BIG_CHEST, 0.5F));
 	public static SpheroidDecorator CENTER_POND_SHIPWRECK_CHEST = register("center_pond_shipwreck_chest", new CenterPondDecorator(Blocks.SAND.getDefaultState(), Blocks.WATER.getDefaultState(), LootTables.SHIPWRECK_TREASURE_CHEST, 0.5F));
 	public static SpheroidDecorator CENTER_POND_LAVA = register("center_pond_lava", new CenterPondDecorator(Blocks.OBSIDIAN.getDefaultState(), Blocks.LAVA.getDefaultState(), LootTables.RUINED_PORTAL_CHEST, 0.25F));
-	public static SpheroidDecorator MUSHROOMS = register("mushrooms", new MushroomDecorator());
 	public static SpheroidDecorator DEAD_GRASS = register("dead_grass", new PlantDecorator(Blocks.DEAD_BUSH.getDefaultState(), 0.05F));
 	public static SpheroidDecorator SWEET_BERRIES = register("sweet_berries", new PlantDecorator(Blocks.SWEET_BERRY_BUSH.getDefaultState(), 0.03F));
 	public static SpheroidDecorator FERNS = register("ferns", new PlantDecorator(Blocks.FERN.getDefaultState(), 0.1F));
@@ -32,8 +31,6 @@ public class SpheroidDecorators {
 	public static SpheroidDecorator MUSHROOMS_BROWN = register("mushrooms_brown", new PlantDecorator(Blocks.BROWN_MUSHROOM.getDefaultState(), 0.05F));
 	public static SpheroidDecorator MUSHROOMS_RED = register("mushrooms_red", new PlantDecorator(Blocks.RED_MUSHROOM.getDefaultState(), 0.03F));
 	
-	public static SpheroidDecorator POINTED_DRIPSTONE_UP = register("pointed_dripstone_up", new PointedDripstoneDecorator(0.2F, PointedDripstoneDecorator.PointedDripstoneDecoratorMode.UP));
-	public static SpheroidDecorator POINTED_DRIPSTONE_CAVE = register("pointed_dripstone_cave", new PointedDripstoneDecorator(0.2F, PointedDripstoneDecorator.PointedDripstoneDecoratorMode.CAVE));
 	public static SpheroidDecorator GLOW_LICHEN = register("glow_lichen", new GlowLichenDecorator(0.1F));
 	public static SpheroidDecorator HANGING_ROOTS = register("hanging_roots", new UnderPlantDecorator(Blocks.HANGING_ROOTS.getDefaultState(), 0.2F));
 	

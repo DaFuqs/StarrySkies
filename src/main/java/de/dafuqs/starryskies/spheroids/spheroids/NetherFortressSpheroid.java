@@ -97,12 +97,13 @@ public class NetherFortressSpheroid extends Spheroid {
 					if (d > this.radius) {
 						continue;
 					}
+					
 					BlockPos currBlockPos = new BlockPos(x2, y2, z2);
 					
 					if (d <= shellDistance) {
 						chunk.setBlockState(currBlockPos, NETHER_BRICKS, false);
 					}
-					if (d < this.getRadius() - 9 && (y2 % 10 == (this.position.getY() + 9) % 10 && x2 % 10 == (this.position.getX()) % 10 && z2 % 10 == (this.position.getZ()) % 10)) {
+					if (d < this.getRadius() - 10 && (y2 % 10 == (this.position.getY() + 9) % 10 && x2 % 10 == (this.position.getX()) % 10 && z2 % 10 == (this.position.getZ()) % 10)) {
 						interiorDecoratorPositions.add(currBlockPos);
 					}
 				}

@@ -99,7 +99,6 @@ public class ModularSpheroid extends Spheroid {
 						chunk.setBlockState(currBlockPos, this.bottomBlock, false);
 					} else if (this.topBlock != null && isTopBlock(d, x2, y2, z2)) {
 						chunk.setBlockState(currBlockPos, this.topBlock, false);
-						addDecorationBlockPosition(currBlockPos);
 					} else {
 						chunk.setBlockState(currBlockPos, this.mainBlock, false);
 					}

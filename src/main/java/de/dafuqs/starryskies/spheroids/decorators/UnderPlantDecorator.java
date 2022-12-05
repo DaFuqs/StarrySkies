@@ -4,10 +4,9 @@ import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
-
-import java.util.ArrayList;
 
 
 public class UnderPlantDecorator extends SpheroidDecorator {
@@ -24,9 +23,9 @@ public class UnderPlantDecorator extends SpheroidDecorator {
 	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		int spheroidY = spheroid.getPosition().getY();
-		for (BlockPos bp : decorationBlockPositions) {
+		for (BlockPos bp : getBottomBlocks(world, origin, spheroid)) {
 			BlockPos flippedBlockPos = bp.down((bp.getY() - spheroidY) * 2);
 			
 			if (world.getBlockState(flippedBlockPos.down()).isAir()) {

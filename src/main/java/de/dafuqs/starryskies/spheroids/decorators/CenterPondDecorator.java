@@ -7,10 +7,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
-
-import java.util.ArrayList;
 
 
 public class CenterPondDecorator extends SpheroidDecorator {
@@ -28,7 +27,11 @@ public class CenterPondDecorator extends SpheroidDecorator {
 	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		if(!spheroid.isCenterInChunk(origin)) {
+			return;
+		}
+		
 		// doesn't make sense on small spheroids
 		if (spheroid.getRadius() > 9) {
 			int pondRadius = (int) (spheroid.getRadius() / 2.5);
@@ -98,13 +101,9 @@ public class CenterPondDecorator extends SpheroidDecorator {
 			}
 			
 			if (lootChestPosition != null) {
-				placeLootChestAtPosition(world, lootChestPosition, lootTable, random);
+				placeLootChest(world, lootChestPosition, lootTable, random);
 			}
 		}
 	}
 	
-	@Override
-	public SpheroidDecorationMode getDecorationMode() {
-		return SpheroidDecorationMode.CENTER_CHUNK;
-	}
 }

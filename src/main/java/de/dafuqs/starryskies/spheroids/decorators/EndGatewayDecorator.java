@@ -7,15 +7,17 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.EndGatewayBlockEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
-
-import java.util.ArrayList;
 
 public class EndGatewayDecorator extends SpheroidDecorator {
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		if(!spheroid.isCenterInChunk(origin)) {
+			return;
+		}
 		
 		BlockPos exitBlockPos = StarrySkyDimensionTravelHandler.END_SPAWN_BLOCK_POS;
 		BlockPos portalBlockPos = spheroid.getPosition();
@@ -47,11 +49,6 @@ public class EndGatewayDecorator extends SpheroidDecorator {
 				world.setBlockState(blockPos2, Blocks.AIR.getDefaultState(), 3);
 			}
 		}
-	}
-	
-	@Override
-	public SpheroidDecorationMode getDecorationMode() {
-		return SpheroidDecorationMode.CENTER_CHUNK;
 	}
 	
 }

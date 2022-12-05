@@ -6,11 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -22,45 +22,39 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
 	private static final int SUGAR_CANE_CHANCE = 2;
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
-		if (decorationBlockPositions.size() > 0) {
-			int currentTries = 0;
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		for(BlockPos pos : getTopBlocks(world, origin, spheroid, random, WATER_POND_TRIES)) {
 			boolean canGenerate;
-			do {
-				BlockPos randomBlockPos = decorationBlockPositions.get(random.nextInt(decorationBlockPositions.size()));
+			// check if all 4 sides of the future water pond are solid
+			canGenerate = true;
+			Iterator<Direction> direction = Direction.Type.HORIZONTAL.iterator();
+			while (direction.hasNext() && canGenerate) {
+				BlockPos currentCheckBlockPos = pos.offset(direction.next());
 				
-				// check if all 4 sides of the future water pond are solid
-				canGenerate = true;
-				Iterator<Direction> direction = Direction.Type.HORIZONTAL.iterator();
-				while (direction.hasNext() && canGenerate) {
-					BlockPos currentCheckBlockPos = randomBlockPos.offset(direction.next());
-					
-					if (!world.getBlockState(currentCheckBlockPos).isSolidBlock(world, currentCheckBlockPos)
-							|| !world.getBlockState(currentCheckBlockPos.up()).isAir()) {
-						canGenerate = false;
-					}
+				if (!world.getBlockState(currentCheckBlockPos).isSolidBlock(world, currentCheckBlockPos)
+						|| !world.getBlockState(currentCheckBlockPos.up()).isAir()) {
+					canGenerate = false;
 				}
+			}
+			
+			if (canGenerate) {
+				world.setBlockState(pos, Blocks.WATER.getDefaultState(), 3);
 				
-				if (canGenerate) {
-					world.setBlockState(randomBlockPos, Blocks.WATER.getDefaultState(), 3);
-					
-					// place sugar cane with chance
-					direction = Direction.Type.HORIZONTAL.iterator();
-					while (direction.hasNext()) {
-						Direction currentDirection = direction.next();
-						if (random.nextInt(SUGAR_CANE_CHANCE) == 0) {
-							BlockPos sugarCaneBlockPos = randomBlockPos.up().offset(currentDirection);
-							int sugarCaneHeight = random.nextInt(3);
-							for (int i = 0; i <= sugarCaneHeight; i++) {
-								if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCKSTATE, world, sugarCaneBlockPos.up(i))) {
-									world.setBlockState(sugarCaneBlockPos.up(i), SUGAR_CANE_BLOCKSTATE, 3);
-								}
+				// place sugar cane with chance
+				direction = Direction.Type.HORIZONTAL.iterator();
+				while (direction.hasNext()) {
+					Direction currentDirection = direction.next();
+					if (random.nextInt(SUGAR_CANE_CHANCE) == 0) {
+						BlockPos sugarCaneBlockPos = pos.up().offset(currentDirection);
+						int sugarCaneHeight = random.nextInt(3);
+						for (int i = 0; i <= sugarCaneHeight; i++) {
+							if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCKSTATE, world, sugarCaneBlockPos.up(i))) {
+								world.setBlockState(sugarCaneBlockPos.up(i), SUGAR_CANE_BLOCKSTATE, 3);
 							}
 						}
 					}
 				}
-				currentTries++;
-			} while (currentTries < WATER_POND_TRIES);
+			}
 		}
 	}
 }

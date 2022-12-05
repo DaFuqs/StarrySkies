@@ -7,11 +7,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.CocoaBlock;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
-
-import java.util.ArrayList;
 
 public class CocoaDecorator extends SpheroidDecorator {
 	
@@ -19,7 +18,11 @@ public class CocoaDecorator extends SpheroidDecorator {
 	private static final BlockState AIR_BLOCKSTATE = Blocks.CAVE_AIR.getDefaultState();
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		if(!spheroid.isCenterInChunk(origin)) {
+			return;
+		}
+		
 		for (int x = -2; x < 3; x++) {
 			for (int y = -2; y < 3; y++) {
 				for (int z = -2; z < 3; z++) {
@@ -50,10 +53,5 @@ public class CocoaDecorator extends SpheroidDecorator {
 			}
 		}
 	}
-	
-	@Override
-	public SpheroidDecorationMode getDecorationMode() {
-		return SpheroidDecorationMode.CENTER_CHUNK;
-	}
-	
+
 }

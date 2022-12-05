@@ -97,9 +97,6 @@ public class CoreSpheroid extends Spheroid {
 						chunk.setBlockState(currBlockPos, this.coreBlock, false);
 					} else {
 						chunk.setBlockState(currBlockPos, this.shellBlock, false);
-						if (isTopBlock(d, x2, y2, z2)) {
-							addDecorationBlockPosition(currBlockPos);
-						}
 					}
 				}
 			}

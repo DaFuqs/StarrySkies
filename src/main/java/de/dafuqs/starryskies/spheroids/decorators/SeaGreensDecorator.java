@@ -7,10 +7,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
-
-import java.util.ArrayList;
 
 
 public class SeaGreensDecorator extends SpheroidDecorator {
@@ -23,8 +22,8 @@ public class SeaGreensDecorator extends SpheroidDecorator {
 	private static final BlockState TALL_SEAGRASS_LOWER = Blocks.TALL_SEAGRASS.getDefaultState().with(TallSeagrassBlock.HALF, DoubleBlockHalf.LOWER);
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
-		for (BlockPos bp : decorationBlockPositions) {
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		for (BlockPos bp : getCaveBottomBlocks(world, origin, spheroid)) {
 			int r = random.nextInt(4);
 			
 			if (r == 0) {

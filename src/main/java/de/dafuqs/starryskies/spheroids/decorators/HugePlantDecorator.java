@@ -5,10 +5,9 @@ import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
-
-import java.util.ArrayList;
 
 
 public class HugePlantDecorator extends SpheroidDecorator {
@@ -41,8 +40,12 @@ public class HugePlantDecorator extends SpheroidDecorator {
 	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
-		for (BlockPos bp : decorationBlockPositions) {
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		for (BlockPos bp : getTopBlocks(world, origin, spheroid)) {
+			BlockState posState = world.getBlockState(bp);
+			if (!posState.isFullCube(world, bp)) {
+				continue;
+			}
 			
 			if (random.nextFloat() < PLANT_CHANCE) {
 				int thisHeight = Support.getRandomBetween(random, MIN_HEIGHT, MAX_HEIGHT);

@@ -51,11 +51,6 @@ public abstract class Spheroid implements Serializable {
 	protected BlockPos position;
 	protected ChunkRandom random;
 	
-	/**
-	 * The tracker for blocks to be decorated. Filled in generate()
-	 **/
-	private final List<BlockPos> decorationBlockPositions = new ArrayList<>();
-	
 	public Spheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random) {
 		this.template = template;
 		this.radius = radius;
@@ -80,7 +75,7 @@ public abstract class Spheroid implements Serializable {
 	
 	public abstract String getDescription();
 	
-	public boolean isInChunk(ChunkPos chunkPos) {
+	public boolean isInChunk(@NotNull ChunkPos chunkPos) {
 		int radius = getRadius();
 		int xMin = this.position.getX() - radius - 16;
 		int xMax = this.position.getX() + radius + 15;
@@ -89,42 +84,21 @@ public abstract class Spheroid implements Serializable {
 		return (chunkPos.getStartX() >= xMin && chunkPos.getEndX() <= xMax) && (chunkPos.getStartZ() >= zMin && chunkPos.getEndZ() <= zMax);
 	}
 	
-	public boolean hasDecorators() {
-		return this.decorators.size() > 0;
-	}
-	
-	public void addDecorationBlockPosition(BlockPos blockPos) {
-		if (hasDecorators()) {
-			this.decorationBlockPositions.add(blockPos);
-		}
+	public boolean isCenterInChunk(@NotNull ChunkPos chunkPos) {
+		return (this.getPosition().getX() >= chunkPos.getStartX()
+				&& this.getPosition().getX() <= chunkPos.getStartX() + 15
+				&& this.getPosition().getZ() >= chunkPos.getStartZ()
+				&& this.getPosition().getZ() <= chunkPos.getStartZ() + 15);
 	}
 	
 	public void decorate(StructureWorldAccess world, BlockPos origin, Random random) {
 		if (this.decorators.size() > 0) {
-			ChunkPos originChunkPos = new ChunkPos(origin);
-			ArrayList<BlockPos> decorationsPosInChunk = null;
 			for (SpheroidDecorator decorator : this.decorators) {
 				StarrySkies.log(Level.DEBUG, "Decorator: " + decorator.getClass());
-				if (decorator.getDecorationMode() == SpheroidDecorator.SpheroidDecorationMode.ALL_CHUNKS) {
-					if (decorationsPosInChunk == null) {
-						decorationsPosInChunk = new ArrayList<>();
-						for (BlockPos blockPos : this.decorationBlockPositions) {
-							if (Support.isBlockPosInChunkPos(originChunkPos, blockPos)) {
-								decorationsPosInChunk.add(blockPos);
-							}
-						}
-					}
-					try {
-						decorator.decorateSpheroid(world, this, decorationsPosInChunk, random);
-					} catch (RuntimeException e) {
-						// We are asking a region for a chunk out of bound ಠ_ಠ
-					}
-				} else if (Support.isBlockPosInChunkPos(originChunkPos, this.position)) {
-					try {
-						decorator.decorateSpheroid(world, this, new ArrayList<>(List.of(origin)), random);
-					} catch (RuntimeException e) {
-						// We are asking a region for a chunk out of bound ಠ_ಠ
-					}
+				try {
+					decorator.decorateSpheroid(world, new ChunkPos(origin), this, random);
+				} catch (RuntimeException e) {
+					// Are we asking a region for a chunk out of bounds? ಠ_ಠ
 				}
 			}
 		}
@@ -163,13 +137,6 @@ public abstract class Spheroid implements Serializable {
 		chunk.setBlockState(blockPos, chestBlockState, false);
 		chunk.setBlockEntity(new ChestBlockEntity(blockPos, chestBlockState));
 		LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, lootTable);
-	}
-	
-	public boolean isCenterInChunk(@NotNull ChunkPos chunkPos) {
-		return (this.getPosition().getX() >= chunkPos.getStartX()
-				&& this.getPosition().getX() <= chunkPos.getStartX() + 15
-				&& this.getPosition().getZ() >= chunkPos.getStartZ()
-				&& this.getPosition().getZ() <= chunkPos.getStartZ() + 15);
 	}
 	
 	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {

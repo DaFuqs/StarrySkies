@@ -7,11 +7,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
-
-import java.util.ArrayList;
 
 
 public class RuinedPortalDecorator extends SpheroidDecorator {
@@ -28,7 +27,10 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
 	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, Spheroid spheroid, ArrayList<BlockPos> decorationBlockPositions, Random random) {
+	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		if(!spheroid.isCenterInChunk(origin)) {
+			return;
+		}
 		BlockPos spheroidPosition = spheroid.getPosition();
 		
 		// place floor
@@ -89,7 +91,7 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
 		
 		if (centerTopBlockY != spheroidPosition.getY()) {
 			BlockPos lootChestPosition = new BlockPos(randomX, centerTopBlockY, randomZ).up();
-			placeLootChestAtPosition(world, lootChestPosition, lootTable, random);
+			placeLootChest(world, lootChestPosition, lootTable, random);
 		}
 	}
 	
@@ -98,10 +100,5 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
 			world.setBlockState(blockPos, OBSIDIAN, 3);
 		}
 	}
-	
-	@Override
-	public SpheroidDecorationMode getDecorationMode() {
-		return SpheroidDecorationMode.CENTER_CHUNK;
-	}
-	
+
 }
