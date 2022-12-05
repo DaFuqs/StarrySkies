@@ -52,8 +52,8 @@ public class StarrySkies implements ModInitializer {
 		CONFIG = AutoConfig.getConfigHolder(StarrySkyConfig.class).getConfig();
 		
 		// Register all the stuff
-		StarrySkies.log(INFO, "Registering all the worldgen stuff...");
 		Registry.register(Registry.CHUNK_GENERATOR, new Identifier(MOD_ID, "starry_skies_chunk_generator"), StarrySkyChunkGenerator.CODEC);
+		StarryResourceConditions.register();
 		StarrySkyBiomes.initialize();
 		StarrySkyDimension.setupPortals();
 		DecoratorFeatures.initialize();

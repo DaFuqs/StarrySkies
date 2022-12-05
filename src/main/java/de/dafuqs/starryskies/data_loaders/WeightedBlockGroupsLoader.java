@@ -67,7 +67,7 @@ public class WeightedBlockGroupsLoader extends JsonDataLoader implements Identif
 	}
 	
 	public static boolean existsGroup(Identifier identifier) {
-		return BLOCK_GROUPS.containsKey(identifier);
+		return BLOCK_GROUPS.containsKey(identifier) && BLOCK_GROUPS.get(identifier).size() > 0;
 	}
 	
 	public static BlockState getRandomStateInGroup(Identifier identifier, Random random) {

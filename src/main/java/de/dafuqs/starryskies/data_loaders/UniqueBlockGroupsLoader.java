@@ -49,7 +49,8 @@ public class UniqueBlockGroupsLoader extends JsonDataLoader implements Identifia
 					BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
 					list.add(state);
 				} catch (CommandSyntaxException ex) {
-					StarrySkies.log(Level.WARN, "Block group " + identifier + " tries to load a non-existing block: " + e + ". Will be ignored.");
+					// Block does not exist
+					//StarrySkies.log(Level.WARN, "Block group " + identifier + " tries to load a non-existing block: " + e + ". Will be ignored.");
 				}
 			}
 			
@@ -66,7 +67,7 @@ public class UniqueBlockGroupsLoader extends JsonDataLoader implements Identifia
 	}
 	
 	public static boolean existsGroup(Identifier identifier) {
-		return BLOCK_GROUPS.containsKey(identifier);
+		return BLOCK_GROUPS.containsKey(identifier) && BLOCK_GROUPS.get(identifier).size() > 0;
 	}
 	
 	public static BlockState getFirstStateInGroup(Identifier identifier) {

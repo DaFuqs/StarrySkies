@@ -11,5 +11,13 @@
 		"main_block": "$starry_skies:ocean_stones"
 	},
 	"decorators": {},
-	"spawns": []
+	"spawns": [],
+	"fabric:load_conditions": [
+		{
+			"condition": "starry_skies:unique_block_group_exist",
+			"values": [
+				"starry_skies:aquarium_ore"
+			]
+		}
+	]
 }
