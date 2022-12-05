@@ -141,53 +141,39 @@ public class OceanMonumentSpheroid extends Spheroid {
 		}
 	}
 	
-	/**
-	 * Populate guardians in every chunk the spheroid is in
-	 * The default would be just the center chunk
-	 *
-	 * @param chunkPos
-	 * @return
-	 */
-	@Override
-	public boolean isCenterInChunk(ChunkPos chunkPos) {
-		return isInChunk(chunkPos);
-	}
-	
 	@Override
 	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-		if (isCenterInChunk(chunkPos)) {
-			for (BlockPos guardianPosition : guardianPositions) {
-				if (Support.isBlockPosInChunkPos(chunkPos, guardianPosition)) {
-					int xCord = chunkPos.x;
-					int zCord = chunkPos.z;
+		for (BlockPos guardianPosition : guardianPositions) {
+			if (Support.isBlockPosInChunkPos(chunkPos, guardianPosition)) {
+				int xCord = chunkPos.x;
+				int zCord = chunkPos.z;
+				
+				chunkRandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
+				
+				MobEntity mobentity;
+				if (random.nextFloat() < 0.08) {
+					mobentity = EntityType.ELDER_GUARDIAN.create(chunkRegion.toServerWorld());
+				} else {
+					mobentity = EntityType.GUARDIAN.create(chunkRegion.toServerWorld());
+				}
+				
+				if (mobentity != null) {
+					float width = mobentity.getWidth();
+					double xLength = MathHelper.clamp(guardianPosition.getX(), (double) chunkPos.getStartX() + (double) width, (double) chunkPos.getStartX() + 16.0D - (double) width);
+					double zLength = MathHelper.clamp(guardianPosition.getZ(), (double) chunkPos.getStartZ() + (double) width, (double) chunkPos.getStartZ() + 16.0D - (double) width);
 					
-					chunkRandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
-					
-					MobEntity mobentity;
-					if (random.nextFloat() < 0.08) {
-						mobentity = EntityType.ELDER_GUARDIAN.create(chunkRegion.toServerWorld());
-					} else {
-						mobentity = EntityType.GUARDIAN.create(chunkRegion.toServerWorld());
-					}
-					
-					if (mobentity != null) {
-						float width = mobentity.getWidth();
-						double xLength = MathHelper.clamp(guardianPosition.getX(), (double) chunkPos.getStartX() + (double) width, (double) chunkPos.getStartX() + 16.0D - (double) width);
-						double zLength = MathHelper.clamp(guardianPosition.getZ(), (double) chunkPos.getStartZ() + (double) width, (double) chunkPos.getStartZ() + 16.0D - (double) width);
-						
-						try {
-							mobentity.refreshPositionAndAngles(xLength, guardianPosition.getY(), zLength, chunkRandom.nextFloat() * 360.0F, 0.0F);
-							mobentity.setPersistent();
-							if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
-								mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);
-								boolean success = chunkRegion.spawnEntity(mobentity);
-								if (!success) {
-									return;
-								}
+					try {
+						mobentity.refreshPositionAndAngles(xLength, guardianPosition.getY(), zLength, chunkRandom.nextFloat() * 360.0F, 0.0F);
+						mobentity.setPersistent();
+						if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
+							mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);
+							boolean success = chunkRegion.spawnEntity(mobentity);
+							if (!success) {
+								return;
 							}
-						} catch (Exception exception) {
-							StarrySkies.log(WARN, "Failed to spawn mob on sphere" + this.getDescription() + "\nException: " + exception);
 						}
+					} catch (Exception exception) {
+						StarrySkies.log(WARN, "Failed to spawn mob on sphere" + this.getDescription() + "\nException: " + exception);
 					}
 				}
 			}

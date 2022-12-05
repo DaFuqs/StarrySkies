@@ -52,10 +52,6 @@ public abstract class Spheroid implements Serializable {
 	protected ChunkRandom random;
 	
 	/**
-	 * Chunks this spheroid should be generated in
-	 **/
-	private final HashSet<ChunkPos> chunksOfSpheroid = new HashSet<>();
-	/**
 	 * The tracker for blocks to be decorated. Filled in generate()
 	 **/
 	private final List<BlockPos> decorationBlockPositions = new ArrayList<>();
@@ -68,22 +64,14 @@ public abstract class Spheroid implements Serializable {
 		this.random = random;
 	}
 	
+	public void setPosition(BlockPos position) {
+		this.position = position;
+	}
+	
 	public abstract void generate(Chunk chunk);
 	
 	public BlockPos getPosition() {
 		return position;
-	}
-	
-	public void setPositionAndCalculateChunks(BlockPos blockPos) {
-		this.position = blockPos;
-		
-		for (int currXPos = blockPos.getX() - Math.round(radius); currXPos <= blockPos.getX() + Math.round(radius); currXPos++) {
-			for (int currZPos = blockPos.getZ() - Math.round(radius); currZPos <= blockPos.getZ() + Math.round(radius); currZPos++) {
-				int cx = (int) Math.floor(currXPos / 16.0D);
-				int cz = (int) Math.floor(currZPos / 16.0D);
-				this.chunksOfSpheroid.add(new ChunkPos(cx, cz));
-			}
-		}
 	}
 	
 	public int getRadius() {
@@ -93,7 +81,12 @@ public abstract class Spheroid implements Serializable {
 	public abstract String getDescription();
 	
 	public boolean isInChunk(ChunkPos chunkPos) {
-		return this.chunksOfSpheroid.contains(chunkPos);
+		int radius = getRadius();
+		int xMin = this.position.getX() - radius - 16;
+		int xMax = this.position.getX() + radius + 15;
+		int zMin = this.position.getZ() - radius - 16;
+		int zMax = this.position.getZ() + radius + 15;
+		return (chunkPos.getStartX() >= xMin && chunkPos.getEndX() <= xMax) && (chunkPos.getStartZ() >= zMin && chunkPos.getEndZ() <= zMax);
 	}
 	
 	public boolean hasDecorators() {
@@ -223,15 +216,6 @@ public abstract class Spheroid implements Serializable {
 			}
 			StarrySkies.log(Level.DEBUG, "Finished populating");
 		}
-	}
-	
-	public boolean shouldDecorate(BlockPos blockPos) {
-		for (ChunkPos chunkPos : this.chunksOfSpheroid) {
-			if (Support.isBlockPosInChunkPos(chunkPos, blockPos)) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	protected void placeSpawner(@NotNull WorldAccess worldAccess, BlockPos blockPos, EntityType entityType) {

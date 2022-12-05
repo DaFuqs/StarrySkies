@@ -146,7 +146,7 @@ public class SystemGenerator {
 			
 			if (!discard) {
 				// no intersections with other spheres => add it to the list
-				currentSpheroid.setPositionAndCalculateChunks(spherePos);
+				currentSpheroid.setPosition(spherePos);
 				spheroids.add(currentSpheroid);
 			}
 		}
@@ -163,27 +163,27 @@ public class SystemGenerator {
 			case NETHER:
 				if (systemPointX == 0 && systemPointZ == 0) {
 					spheroid = SpheroidTemplateLoader.STARTER_NETHER.generate(random);
-					spheroid.setPositionAndCalculateChunks(new BlockPos(16, 70, 16));
+					spheroid.setPosition(new BlockPos(16, 70, 16));
 					defaultSpheroids.add(spheroid);
 				}
 				break;
 			case END:
 				if (systemPointX == 0 && systemPointZ == 0) {
 					spheroid = SpheroidTemplateLoader.STARTER_END_DRAGON.generate(random);
-					spheroid.setPositionAndCalculateChunks(new BlockPos(0, 30, 0));
+					spheroid.setPosition(new BlockPos(0, 30, 0));
 					defaultSpheroids.add(spheroid);
 				} else if ((systemPointX == -1 && systemPointZ == 0)
 						|| (systemPointX == 0 && systemPointZ == -1)
 						|| (systemPointX == -1 && systemPointZ == -1)) {
 					spheroid = SpheroidTemplateLoader.STARTER_END.generate(random);
-					spheroid.setPositionAndCalculateChunks(new BlockPos(0, 30, 0));
+					spheroid.setPosition(new BlockPos(0, 30, 0));
 					defaultSpheroids.add(spheroid);
 				}
 				break;
 			default:
 				if (systemPointX == 0 && systemPointZ == 0) {
 					spheroid = SpheroidTemplateLoader.STARTER_OVERWORLD.generate(random);
-					spheroid.setPositionAndCalculateChunks(new BlockPos(16, 70, 16));
+					spheroid.setPosition(new BlockPos(16, 70, 16));
 					defaultSpheroids.add(spheroid);
 				}
 		}
