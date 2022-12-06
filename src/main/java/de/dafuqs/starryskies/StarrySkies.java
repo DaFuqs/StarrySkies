@@ -10,7 +10,7 @@ import de.dafuqs.starryskies.dimension.StarrySkyBiomes;
 import de.dafuqs.starryskies.dimension.StarrySkyChunkGenerator;
 import de.dafuqs.starryskies.dimension.StarrySkyDimension;
 import de.dafuqs.starryskies.spheroids.DecoratorFeatures;
-import de.dafuqs.starryskies.spheroids.SpheroidDecorators;
+import de.dafuqs.starryskies.spheroids.SpheroidDecoratorTypes;
 import de.dafuqs.starryskies.spheroids.SpheroidTypes;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
@@ -60,10 +60,11 @@ public class StarrySkies implements ModInitializer {
 		StarryAdvancementCriteria.register();
 		
 		SpheroidTypes.initialize();
-		SpheroidDecorators.initialize();
+		SpheroidDecoratorTypes.initialize();
 		
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(UniqueBlockGroupsLoader.INSTANCE);
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(WeightedBlockGroupsLoader.INSTANCE);
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidDecoratorLoader.INSTANCE);
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidDistributionLoader.INSTANCE);
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidTemplateLoader.INSTANCE);
 		

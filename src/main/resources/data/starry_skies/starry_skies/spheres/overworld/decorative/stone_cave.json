@@ -22,8 +22,8 @@
 		}
 	},
 	"decorators": {
-		"starry_skies:mushrooms_red": 0.3,
-		"starry_skies:mushrooms_brown": 0.3
+		"starry_skies:red_mushrooms": 0.3,
+		"starry_skies:brown_mushrooms": 0.3
 	},
 	"spawns": []
 }

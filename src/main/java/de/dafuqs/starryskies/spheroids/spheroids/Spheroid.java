@@ -6,9 +6,9 @@ import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
+import de.dafuqs.starryskies.data_loaders.SpheroidDecoratorLoader;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.SpheroidEntitySpawnDefinition;
-import de.dafuqs.starryskies.spheroids.StarryRegistries;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
@@ -37,7 +37,10 @@ import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.apache.logging.log4j.Level.WARN;
 
@@ -96,10 +99,11 @@ public abstract class Spheroid implements Serializable {
 			for (SpheroidDecorator decorator : this.decorators) {
 				StarrySkies.log(Level.DEBUG, "Decorator: " + decorator.getClass());
 				try {
-					decorator.decorateSpheroid(world, new ChunkPos(origin), this, random);
+					decorator.decorate(world, new ChunkPos(origin), this, random);
 				} catch (RuntimeException e) {
 					// Are we asking a region for a chunk out of bounds? ಠ_ಠ
 				}
+				StarrySkies.log(Level.DEBUG, "Decorator finished");
 			}
 		}
 	}
@@ -209,7 +213,7 @@ public abstract class Spheroid implements Serializable {
 			this(identifier,
 				 JsonHelper.getInt(jsonObject, "min_size"),
 				 JsonHelper.getInt(jsonObject, "max_size"),
-				 readDecorators(JsonHelper.getObject(jsonObject, "decorators")),
+				 readDecorators(JsonHelper.getObject(jsonObject, "decorators"), identifier),
 				 readSpawns(JsonHelper.getArray(jsonObject, "spawns"))
 			);
 		}
@@ -222,13 +226,13 @@ public abstract class Spheroid implements Serializable {
 			return min + random.nextFloat() * (max - min);
 		}
 		
-		private static Map<SpheroidDecorator, Float> readDecorators(JsonObject jsonObject) {
+		private static Map<SpheroidDecorator, Float> readDecorators(JsonObject jsonObject, Identifier identifier) {
 			Map<SpheroidDecorator, Float> d = new LinkedHashMap<>();
 			
 			for (Map.Entry<String, JsonElement> e : jsonObject.entrySet()) {
-				SpheroidDecorator decorator = StarryRegistries.SPHEROID_DECORATOR.get(Identifier.tryParse(e.getKey()));
+				SpheroidDecorator decorator = SpheroidDecoratorLoader.getDecorator(Identifier.tryParse(e.getKey()));
 				if(decorator == null) {
-					StarrySkies.log(Level.WARN, "Spheroid specifies non-existing decorator "+ e.getKey() + ". Will be ignored.");
+					StarrySkies.log(Level.WARN, "Spheroid " + identifier + " specifies non-existing decorator "+ e.getKey() + ". Will be ignored.");
 				} else {
 					float chance = e.getValue().getAsFloat();
 					d.put(decorator, chance);

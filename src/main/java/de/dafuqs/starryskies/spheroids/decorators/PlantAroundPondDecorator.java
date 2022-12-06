@@ -1,8 +1,10 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -14,16 +16,21 @@ import net.minecraft.world.StructureWorldAccess;
 import java.util.Iterator;
 
 
-public class SugarCanePondDecorator extends SpheroidDecorator {
+public class PlantAroundPondDecorator extends SpheroidDecorator {
 	
-	private static final Block SUGAR_CANE_BLOCK = Blocks.SUGAR_CANE;
-	private static final BlockState SUGAR_CANE_BLOCKSTATE = Blocks.SUGAR_CANE.getDefaultState();
-	private static final int WATER_POND_TRIES = 3;
-	private static final int SUGAR_CANE_CHANCE = 2;
+	private final BlockState block = Blocks.SUGAR_CANE.getDefaultState();
+	private final int pond_tries = 3;
+	private final float plant_chance = 0.5F;
+	private final int minHeight = 1;
+	private final int maxHeight = 3;
+	
+	public PlantAroundPondDecorator(JsonObject data) throws CommandSyntaxException {
+		super(data);
+	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
-		for(BlockPos pos : getTopBlocks(world, origin, spheroid, random, WATER_POND_TRIES)) {
+	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+		for(BlockPos pos : getTopBlocks(world, origin, spheroid, random, pond_tries)) {
 			boolean canGenerate;
 			// check if all 4 sides of the future water pond are solid
 			canGenerate = true;
@@ -44,12 +51,12 @@ public class SugarCanePondDecorator extends SpheroidDecorator {
 				direction = Direction.Type.HORIZONTAL.iterator();
 				while (direction.hasNext()) {
 					Direction currentDirection = direction.next();
-					if (random.nextInt(SUGAR_CANE_CHANCE) == 0) {
+					if (random.nextFloat() < plant_chance) {
 						BlockPos sugarCaneBlockPos = pos.up().offset(currentDirection);
-						int sugarCaneHeight = random.nextInt(3);
+						int sugarCaneHeight = Support.getRandomBetween(random, minHeight, maxHeight);
 						for (int i = 0; i <= sugarCaneHeight; i++) {
-							if (SUGAR_CANE_BLOCK.canPlaceAt(SUGAR_CANE_BLOCKSTATE, world, sugarCaneBlockPos.up(i))) {
-								world.setBlockState(sugarCaneBlockPos.up(i), SUGAR_CANE_BLOCKSTATE, 3);
+							if (block.canPlaceAt(world, sugarCaneBlockPos.up(i))) {
+								world.setBlockState(sugarCaneBlockPos.up(i), block, 3);
 							}
 						}
 					}

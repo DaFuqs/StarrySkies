@@ -1,11 +1,14 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
@@ -15,19 +18,21 @@ import net.minecraft.world.StructureWorldAccess;
 
 public class RuinedPortalDecorator extends SpheroidDecorator {
 	
-	private final Identifier lootTable;
-	private final BlockState NETHERRACK = Blocks.NETHERRACK.getDefaultState();
-	private final BlockState MAGMA_BLOCK = Blocks.MAGMA_BLOCK.getDefaultState();
-	private final BlockState LAVA = Blocks.LAVA.getDefaultState();
-	private final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
-	private final static float OBSIDIAN_CHANCE = 0.9F;
+	private static final BlockState NETHERRACK = Blocks.NETHERRACK.getDefaultState();
+	private static final BlockState MAGMA_BLOCK = Blocks.MAGMA_BLOCK.getDefaultState();
+	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
+	private static final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
+	private static final float OBSIDIAN_CHANCE = 0.9F;
 	
-	public RuinedPortalDecorator(Identifier lootTable) {
-		this.lootTable = lootTable;
+	private final Identifier lootTable;
+	
+	public RuinedPortalDecorator(JsonObject data) throws CommandSyntaxException {
+		super(data);
+		this.lootTable = Identifier.tryParse(JsonHelper.getString(data, "loot_table"));
 	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		if(!spheroid.isCenterInChunk(origin)) {
 			return;
 		}

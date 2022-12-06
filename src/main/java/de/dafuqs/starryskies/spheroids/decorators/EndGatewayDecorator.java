@@ -1,5 +1,7 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.StarrySkyDimensionTravelHandler;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
@@ -13,8 +15,12 @@ import net.minecraft.world.StructureWorldAccess;
 
 public class EndGatewayDecorator extends SpheroidDecorator {
 	
+	public EndGatewayDecorator(JsonObject data) throws CommandSyntaxException {
+		super(data);
+	}
+	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		if(!spheroid.isCenterInChunk(origin)) {
 			return;
 		}

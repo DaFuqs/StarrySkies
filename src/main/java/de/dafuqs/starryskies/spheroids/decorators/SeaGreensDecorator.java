@@ -1,5 +1,7 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
@@ -21,8 +23,12 @@ public class SeaGreensDecorator extends SpheroidDecorator {
 	private static final BlockState TALL_SEAGRASS_UPPER = Blocks.TALL_SEAGRASS.getDefaultState().with(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
 	private static final BlockState TALL_SEAGRASS_LOWER = Blocks.TALL_SEAGRASS.getDefaultState().with(TallSeagrassBlock.HALF, DoubleBlockHalf.LOWER);
 	
+	public SeaGreensDecorator(JsonObject data) throws CommandSyntaxException {
+		super(data);
+	}
+	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		for (BlockPos bp : getCaveBottomBlocks(world, origin, spheroid)) {
 			int r = random.nextInt(4);
 			

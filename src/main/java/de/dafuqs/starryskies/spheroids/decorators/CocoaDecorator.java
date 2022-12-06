@@ -1,5 +1,7 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
@@ -14,11 +16,16 @@ import net.minecraft.world.StructureWorldAccess;
 
 public class CocoaDecorator extends SpheroidDecorator {
 	
-	private static final BlockState GROWN_COCOA_BLOCKSTATE = Blocks.COCOA.getDefaultState().with(CocoaBlock.AGE, 2); // 2 = fully grown
-	private static final BlockState AIR_BLOCKSTATE = Blocks.CAVE_AIR.getDefaultState();
+	private final BlockState AIR = Blocks.CAVE_AIR.getDefaultState();
+	private final BlockState COCOA;
+	
+	public CocoaDecorator(JsonObject data) throws CommandSyntaxException {
+		super(data);
+		this.COCOA = Blocks.COCOA.getDefaultState().with(CocoaBlock.AGE, 2); // 2 = fully grown
+	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		if(!spheroid.isCenterInChunk(origin)) {
 			return;
 		}
@@ -43,10 +50,10 @@ public class CocoaDecorator extends SpheroidDecorator {
 								direction = Direction.NORTH;
 							}
 						}
-						world.setBlockState(bp, GROWN_COCOA_BLOCKSTATE.with(HorizontalFacingBlock.FACING, direction), 3);
+						world.setBlockState(bp, COCOA.with(HorizontalFacingBlock.FACING, direction), 3);
 					} else {
 						if (Math.abs(y) != 2 || (Math.abs(x) != 2 && Math.abs(z) != 2)) {
-							world.setBlockState(bp, AIR_BLOCKSTATE, 3);
+							world.setBlockState(bp, AIR, 3);
 						}
 					}
 				}

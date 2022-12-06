@@ -1,11 +1,14 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.util.JsonHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
@@ -25,12 +28,13 @@ public class DripleafDecorator extends SpheroidDecorator {
 	
 	private final int tries;
 	
-	public DripleafDecorator(int tries) {
-		this.tries = tries;
+	public DripleafDecorator(JsonObject data) throws CommandSyntaxException {
+		super(data);
+		this.tries = JsonHelper.getInt(data, "tries");
 	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		for (BlockPos bp : getCaveBottomBlocks(world, origin, spheroid, random, tries)) {
 			boolean canGenerate;
 			

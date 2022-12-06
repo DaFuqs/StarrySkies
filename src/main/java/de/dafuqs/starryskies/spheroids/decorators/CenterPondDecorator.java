@@ -1,14 +1,19 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.StructureWorldAccess;
 
 
@@ -16,18 +21,19 @@ public class CenterPondDecorator extends SpheroidDecorator {
 	
 	private final Identifier lootTable;
 	private final float lootTableChance;
-	private final BlockState beach_block_state;
-	private final BlockState liquid_block_state;
+	private final BlockState beachBlock;
+	private final BlockState fluidBlock;
 	
-	public CenterPondDecorator(BlockState beach_block_state, BlockState liquid_block_state, Identifier lootTable, float lootTableChance) {
-		this.beach_block_state = beach_block_state;
-		this.liquid_block_state = liquid_block_state;
-		this.lootTable = lootTable;
-		this.lootTableChance = lootTableChance;
+	public CenterPondDecorator(JsonObject data) throws CommandSyntaxException {
+		super(data);
+		this.beachBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "beach_block"), false).blockState();
+		this.fluidBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "fluid_block"), false).blockState();
+		this.lootTable = Identifier.tryParse(JsonHelper.getString(data, "loot_table"));
+		this.lootTableChance = JsonHelper.getFloat(data, "loot_table_chance");
 	}
-	
+
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		if(!spheroid.isCenterInChunk(origin)) {
 			return;
 		}
@@ -84,9 +90,9 @@ public class CenterPondDecorator extends SpheroidDecorator {
 								if (hasLootChest && x == 0 && z == 0 && lootChestPosition == null) {
 									lootChestPosition = currentBlockPos;
 								}
-								blockState = liquid_block_state;
+								blockState = fluidBlock;
 							} else if (pondDistance < 1.70) {
-								blockState = beach_block_state;
+								blockState = beachBlock;
 							}
 						}
 						

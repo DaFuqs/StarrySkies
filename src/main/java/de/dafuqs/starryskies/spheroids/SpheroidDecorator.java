@@ -1,5 +1,7 @@
 package de.dafuqs.starryskies.spheroids;
 
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,13 +22,17 @@ import java.util.List;
 
 public abstract class SpheroidDecorator {
 	
+	public SpheroidDecorator(JsonObject data) throws CommandSyntaxException {
+
+	}
+	
 	/**
 	 * In contrast to vanilla the spheroid decorators are queried by the spheroid
 	 * not ran after the chunk generation
 	 * The spheroid tracks all blocks that can be decorated and the decorator
 	 * takes them, checks for spawning criteria and
 	 */
-	public abstract void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random);
+	public abstract void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random);
 	
 	protected void placeLootChest(@NotNull StructureWorldAccess world, BlockPos blockPos, Identifier lootTable, Random random) {
 		BlockState chestBlockState = Blocks.CHEST.getDefaultState();
@@ -137,7 +143,7 @@ public abstract class SpheroidDecorator {
 		
 		for (int i = 0; i < amount; i++) {
 			int x2 = minX + random.nextInt(maxX - minX + 1);
-			int z2 = minX + random.nextInt(maxZ - minZ + 1);
+			int z2 = minZ + random.nextInt(maxZ - minZ + 1);
 			for (int y2 = y + rad; y2 > y; y2--) {
 				mutable.set(x2, y2, z2);
 				if (!world.getBlockState(mutable).isAir()) {
@@ -166,7 +172,7 @@ public abstract class SpheroidDecorator {
 		
 		for (int i = 0; i < amount; i++) {
 			int x2 = minX + random.nextInt(maxX - minX + 1);
-			int z2 = minX + random.nextInt(maxZ - minZ + 1);
+			int z2 = minZ + random.nextInt(maxZ - minZ + 1);
 			for (int y2 = y - rad; y2 < y; y2++) {
 				mutable.set(x2, y2, z2);
 				if (!world.getBlockState(mutable).isAir()) {
@@ -228,7 +234,7 @@ public abstract class SpheroidDecorator {
 		
 		for (int i = 0; i < amount; i++) {
 			int x2 = minX + random.nextInt(maxX - minX + 1);
-			int z2 = minX + random.nextInt(maxZ - minZ + 1);
+			int z2 = minZ + random.nextInt(maxZ - minZ + 1);
 			boolean hitShell = false;
 			for (int y2 = y - rad; y2 < y; y2++) {
 				mutable.set(x2, y2, z2);

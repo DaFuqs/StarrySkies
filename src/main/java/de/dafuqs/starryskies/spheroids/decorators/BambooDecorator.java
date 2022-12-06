@@ -1,5 +1,7 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
+import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BambooBlock;
@@ -16,16 +18,15 @@ public class BambooDecorator extends SpheroidDecorator {
 	
 	private static final Block bambooBlock = Blocks.BAMBOO;
 	private static final int BAMBOO_CHANCE = 13;
-	private final BlockState bambooBlockState;
-	private final BlockState bambooSaplingBlockState;
+	private static final BlockState bambooBlockState = Blocks.BAMBOO.getDefaultState().with(BambooBlock.AGE, 0).with(BambooBlock.STAGE, 0);
+	private static final BlockState bambooSaplingBlockState = Blocks.BAMBOO_SAPLING.getDefaultState();
 	
-	public BambooDecorator(BlockState placementBlockState, BlockState bambooSaplingBlockState) {
-		this.bambooBlockState = placementBlockState;
-		this.bambooSaplingBlockState = bambooSaplingBlockState;
+	public BambooDecorator(JsonObject data) throws CommandSyntaxException {
+		super(data);
 	}
 	
 	@Override
-	public void decorateSpheroid(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
+	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		for (BlockPos bp : getTopBlocks(world, origin, spheroid)) {
 			int r = random.nextInt(BAMBOO_CHANCE);
 			

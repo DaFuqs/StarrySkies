@@ -18,6 +18,7 @@ import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WeightedBlockGroupsLoader extends JsonDataLoader implements IdentifiableResourceReloadListener {
@@ -40,7 +41,7 @@ public class WeightedBlockGroupsLoader extends JsonDataLoader implements Identif
 			if(BLOCK_GROUPS.containsKey(identifier)) {
 				map = BLOCK_GROUPS.get(identifier);
 			} else {
-				map = new HashMap<>();
+				map = new LinkedHashMap<>();
 				newMap = true;
 			}
 			

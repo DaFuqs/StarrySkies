@@ -9,7 +9,7 @@
 		"top_block": "minecraft:podzol"
 	},
 	"decorators": {
-		"starry_skies:center_pond_shipwreck_chest": 0.5,
+		"starry_skies:center_pond_shipwreck_treasure_chest": 0.5,
 		"starry_skies:bamboo": 0.7
 	},
 	"spawns": [

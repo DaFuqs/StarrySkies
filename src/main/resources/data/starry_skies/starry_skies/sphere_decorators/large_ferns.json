@@ -1,0 +1,8 @@
+{
+  "type": "starry_skies:double_block",
+  "type_data": {
+    "block": "minecraft:large_fern",
+    "chance": 0.1
+
+  }
+}
