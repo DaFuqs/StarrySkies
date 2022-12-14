@@ -38,7 +38,7 @@ public class StackedHorizontalSpheroid extends Spheroid {
 			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			for(JsonElement e : JsonHelper.getArray(typeData, "blocks")) {
+			for (JsonElement e : JsonHelper.getArray(typeData, "blocks")) {
 				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
 				stripesBlockStates.add(state);
 			}

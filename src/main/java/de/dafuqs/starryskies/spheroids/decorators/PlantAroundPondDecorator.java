@@ -30,7 +30,7 @@ public class PlantAroundPondDecorator extends SpheroidDecorator {
 	
 	@Override
 	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
-		for(BlockPos pos : getTopBlocks(world, origin, spheroid, random, pond_tries)) {
+		for (BlockPos pos : getTopBlocks(world, origin, spheroid, random, pond_tries)) {
 			boolean canGenerate;
 			// check if all 4 sides of the future water pond are solid
 			canGenerate = true;

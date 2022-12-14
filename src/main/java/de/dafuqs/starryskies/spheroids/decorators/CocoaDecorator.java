@@ -26,7 +26,7 @@ public class CocoaDecorator extends SpheroidDecorator {
 	
 	@Override
 	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
-		if(!spheroid.isCenterInChunk(origin)) {
+		if (!spheroid.isCenterInChunk(origin)) {
 			return;
 		}
 		
@@ -60,5 +60,5 @@ public class CocoaDecorator extends SpheroidDecorator {
 			}
 		}
 	}
-
+	
 }

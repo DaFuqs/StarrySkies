@@ -37,27 +37,28 @@ public class UniqueBlockGroupsLoader extends JsonDataLoader implements Identifia
 			
 			List<BlockState> list;
 			boolean newMap = false;
-			if(BLOCK_GROUPS.containsKey(identifier)) {
+			if (BLOCK_GROUPS.containsKey(identifier)) {
 				list = BLOCK_GROUPS.get(identifier);
 			} else {
 				list = new ArrayList<>();
 				newMap = true;
 			}
 			
-			for(JsonElement e : jsonElement.getAsJsonArray()) {
+			for (JsonElement e : jsonElement.getAsJsonArray()) {
 				try {
 					BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
 					list.add(state);
 				} catch (CommandSyntaxException ex) {
-					// Block does not exist
-					//StarrySkies.log(Level.WARN, "Block group " + identifier + " tries to load a non-existing block: " + e + ". Will be ignored.");
+					if (StarrySkies.CONFIG.packCreatorMode) {
+						StarrySkies.log(Level.WARN, "Block group " + identifier + " tries to load a non-existing block: " + e + ". Will be ignored.");
+					}
 				}
 			}
 			
-			if(newMap) {
+			if (newMap) {
 				BLOCK_GROUPS.put(identifier, list);
 			}
-		
+			
 		});
 	}
 	
@@ -72,7 +73,7 @@ public class UniqueBlockGroupsLoader extends JsonDataLoader implements Identifia
 	
 	public static BlockState getFirstStateInGroup(Identifier identifier) {
 		List<BlockState> group = BLOCK_GROUPS.get(identifier);
-		if(group == null || group.size() == 0) {
+		if (group == null || group.size() == 0) {
 			StarrySkies.log(Level.WARN, "Referencing empty/non-existing UniqueBlockGroup: " + identifier + ". Using AIR instead.");
 			return Blocks.AIR.getDefaultState();
 		}

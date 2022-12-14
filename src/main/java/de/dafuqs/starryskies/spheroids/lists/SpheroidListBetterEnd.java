@@ -1,24 +1,12 @@
 package de.dafuqs.starryskies.spheroids.lists;
 
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.data_loaders.SpheroidTemplateLoader;
-import net.fabricmc.loader.api.FabricLoader;
-
-import static org.apache.logging.log4j.Level.INFO;
-
 public class SpheroidListBetterEnd {
 	
 	private static final String MOD_ID = "betterend";
 	
-	
-	public static boolean shouldGenerate() {
-		return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkies.CONFIG.generateBetterEndSpheroids;
-	}
-	
-	public static void setup(SpheroidTemplateLoader spheroidLoader) {
-		StarrySkies.log(INFO, "Loading Better End integration...");
-
-        /*BlockState end_stone = Blocks.END_STONE.getDefaultState();
+	// TODO: migrate those to json
+	/*public static void setup(SpheroidTemplateLoader spheroidLoader) {
+        BlockState end_stone = Blocks.END_STONE.getDefaultState();
 
         // CHORUS FOREST
         BlockState chorus_nylium = getDefaultBlockState(MOD_ID,"chorus_nylium"); // overgrown end stone
@@ -97,8 +85,8 @@ public class SpheroidListBetterEnd {
         BlockState end_lily = getDefaultBlockState(MOD_ID,"end_lily"); // bottom, middle, top (top of water), waterloggable
         BlockState bubble_coral = getDefaultBlockState(MOD_ID,"bubble_coral"); // bottom of water
         */
-		
-		// PAINTED MOUNTAINS
+	
+	// PAINTED MOUNTAINS
         /*BlockState flavolite = getDefaultBlockState(MOD_ID,"flavolite");
         SpheroidType FLAVOLITE = new ModularSpheroidType(null, 6, 12, flavolite);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.ESSENTIAL, 0.4F, FLAVOLITE);
@@ -302,7 +290,7 @@ public class SpheroidListBetterEnd {
 
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.FLUID, 0.2F, WATER_BRIMSTONE);
         spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.FLUID, 0.2F, WATER_SULPHURIC_ROCK);
-        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.2F, BRIMSTONE_SULPHURIC_ROCK);*/
-	}
+        spheroidLoader.registerSpheroidType(END, SpheroidDistributionType.DECORATIVE, 0.2F, BRIMSTONE_SULPHURIC_ROCK);
+	}*/
 	
 }

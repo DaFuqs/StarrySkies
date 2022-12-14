@@ -22,17 +22,17 @@ public abstract class BlockStateSupplier {
 	
 	@Contract("_ -> new")
 	public static @NotNull BlockStateSupplier of(JsonElement jsonElement) throws CommandSyntaxException {
-		if(jsonElement instanceof JsonPrimitive) {
-			if(jsonElement.getAsString().startsWith("$")) {
+		if (jsonElement instanceof JsonPrimitive) {
+			if (jsonElement.getAsString().startsWith("$")) {
 				return new WeightedBlockStateGroupSupplier(jsonElement);
-			} else if(jsonElement.getAsString().startsWith("%")) {
+			} else if (jsonElement.getAsString().startsWith("%")) {
 				return new UniqueBlockStateGroupSupplier(jsonElement);
 			} else {
 				return new SingleBlockStateSupplier(jsonElement);
 			}
-		} else if(jsonElement instanceof JsonArray) {
+		} else if (jsonElement instanceof JsonArray) {
 			return new BlockStateListSupplier(jsonElement);
-		} else if(jsonElement instanceof JsonObject) {
+		} else if (jsonElement instanceof JsonObject) {
 			return new WeightedBlockStateSupplier(jsonElement);
 		}
 		throw new JsonParseException("Could not parse json values as BlockStateSupplier: " + jsonElement);
@@ -59,7 +59,7 @@ public abstract class BlockStateSupplier {
 		List<BlockState> states = new ArrayList<>();
 		
 		public BlockStateListSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
-			for(JsonElement e : json.getAsJsonArray()) {
+			for (JsonElement e : json.getAsJsonArray()) {
 				states.add(BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState());
 			}
 		}
@@ -75,7 +75,7 @@ public abstract class BlockStateSupplier {
 		Map<BlockState, Float> states = new HashMap<>();
 		
 		public WeightedBlockStateSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
-			for(Map.Entry<String, JsonElement> e : json.getAsJsonObject().entrySet()) {
+			for (Map.Entry<String, JsonElement> e : json.getAsJsonObject().entrySet()) {
 				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getKey(), false).blockState();
 				float weight = e.getValue().getAsFloat();
 				states.put(state, weight);

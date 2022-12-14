@@ -45,7 +45,7 @@ public class StarrySkies implements ModInitializer {
 	
 	@Override
 	public void onInitialize() {
-
+		
 		//Set up config
 		log(INFO, "Starting up...");
 		AutoConfig.register(StarrySkyConfig.class, JanksonConfigSerializer::new);
@@ -55,7 +55,9 @@ public class StarrySkies implements ModInitializer {
 		Registry.register(Registry.CHUNK_GENERATOR, new Identifier(MOD_ID, "starry_skies_chunk_generator"), StarrySkyChunkGenerator.CODEC);
 		StarryResourceConditions.register();
 		StarrySkyBiomes.initialize();
-		StarrySkyDimension.setupPortals();
+		if (CONFIG.registerStarryPortal) {
+			StarrySkyDimension.setupPortals();
+		}
 		DecoratorFeatures.initialize();
 		StarryAdvancementCriteria.register();
 		

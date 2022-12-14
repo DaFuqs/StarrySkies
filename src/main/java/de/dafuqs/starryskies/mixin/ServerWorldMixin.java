@@ -54,7 +54,7 @@ public abstract class ServerWorldMixin {
 		ChunkGenerator chunkGenerator = thisWorld.getChunkManager().getChunkGenerator();
 		if (chunkGenerator instanceof StarrySkyChunkGenerator) {
 			Support.SpheroidDistance spheroidDistance = Support.getClosestSpheroid3x3(thisWorld, pos, StarrySkies.locate("overworld/treasure/stronghold"));
-			if(spheroidDistance == null) {
+			if (spheroidDistance == null) {
 				cir.setReturnValue(null);
 			} else {
 				cir.setReturnValue(spheroidDistance.spheroid.getPosition());

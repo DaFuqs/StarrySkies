@@ -31,10 +31,10 @@ public class CenterPondDecorator extends SpheroidDecorator {
 		this.lootTable = Identifier.tryParse(JsonHelper.getString(data, "loot_table"));
 		this.lootTableChance = JsonHelper.getFloat(data, "loot_table_chance");
 	}
-
+	
 	@Override
 	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
-		if(!spheroid.isCenterInChunk(origin)) {
+		if (!spheroid.isCenterInChunk(origin)) {
 			return;
 		}
 		

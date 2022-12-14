@@ -23,7 +23,7 @@ import java.util.List;
 public abstract class SpheroidDecorator {
 	
 	public SpheroidDecorator(JsonObject data) throws CommandSyntaxException {
-
+	
 	}
 	
 	/**

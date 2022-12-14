@@ -32,7 +32,7 @@ public class MultifaceGrowthDecorator extends SpheroidDecorator {
 		super(data);
 		Block block = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "block"), false).blockState().getBlock();
 		List<Block> placeableOn = new ArrayList<>();
-		for(JsonElement e : data.get("placeable_on_blocks").getAsJsonArray()) {
+		for (JsonElement e : data.get("placeable_on_blocks").getAsJsonArray()) {
 			placeableOn.add(BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState().getBlock());
 		}
 		featureConfig = new MultifaceGrowthFeatureConfig((MultifaceGrowthBlock) block, 20, false, true, true, 0.5F, RegistryEntryList.of(Block::getRegistryEntry, placeableOn));

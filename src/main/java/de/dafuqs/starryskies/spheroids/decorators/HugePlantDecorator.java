@@ -31,12 +31,12 @@ public class HugePlantDecorator extends SpheroidDecorator {
 		super(data);
 		block = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "block"), false).blockState();
 		chance = JsonHelper.getFloat(data, "chance");
-		if(JsonHelper.hasString(data, "first_block")) {
+		if (JsonHelper.hasString(data, "first_block")) {
 			firstBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "first_block"), false).blockState();
 		} else {
 			firstBlock = null;
 		}
-		if(JsonHelper.hasString(data, "last_block")) {
+		if (JsonHelper.hasString(data, "last_block")) {
 			lastBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "last_block"), false).blockState();
 		} else {
 			lastBlock = null;

@@ -1,24 +1,12 @@
 package de.dafuqs.starryskies.spheroids.lists;
 
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.data_loaders.SpheroidTemplateLoader;
-import net.fabricmc.loader.api.FabricLoader;
-
-import static org.apache.logging.log4j.Level.INFO;
-
 public class SpheroidListBetterNether {
 	
 	private static final String MOD_ID = "betternether";
 	
-	
-	public static boolean shouldGenerate() {
-		return FabricLoader.getInstance().isModLoaded(MOD_ID) && StarrySkies.CONFIG.generateBetterNetherSpheroids;
-	}
-	
-	public static void setup(SpheroidTemplateLoader spheroidLoader) {
-		StarrySkies.log(INFO, "Loading Better Nether integration...");
-
-        /*BlockState netherrack = Blocks.NETHERRACK.getDefaultState();
+	// TODO: migrate those to json
+	/*public static void setup(SpheroidTemplateLoader spheroidLoader) {
+        BlockState netherrack = Blocks.NETHERRACK.getDefaultState();
 
         // ORES
         BlockState cincinnasite_ore = getDefaultBlockState(MOD_ID,"cincinnasite_ore");
@@ -31,8 +19,8 @@ public class SpheroidListBetterNether {
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 1.5F, CINCINNASITE_ORE);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 0.8F, NETHER_LAPIS_ORE);
         spheroidLoader.registerSpheroidType(NETHER, SpheroidDistributionType.ORE, 0.4F, NETHER_RUBY_ORE);*/
-		
-		// STALACTITES
+	
+	// STALACTITES
         /*BlockState netherrack_stalactite = getDefaultBlockState(MOD_ID,"netherrack_stalactite"); // size: 0, 1, ...
         BlockState glowstone_stalactite = getDefaultBlockState(MOD_ID,"glowstone_stalactite"); // size: 0, 1, ...
         BlockState basalt_stalactite = getDefaultBlockState(MOD_ID,"basalt_stalactite"); // size: 0, 1, ...
@@ -51,8 +39,8 @@ public class SpheroidListBetterNether {
         SpheroidListVanillaNether.NETHER_GOLD_ORE.addDecorator(NETHERRACK_STALACTITE_DECORATOR, 0.2F);
         SpheroidListVanillaNether.NETHER_GOLD_ORE.addDecorator(GLOWSTONE_STALACTITE_DECORATOR, 0.2F);
         SpheroidListVanillaNether.BASALT.addDecorator(BASALT_STALACTITE_DECORATOR, 0.2F);*/
-		
-		// GEYSER
+	
+	// GEYSER
         /*BlockState geyser = getDefaultBlockState(MOD_ID,"geyser"); // on netherrack, close to magma
         PlantDecorator GEYSER_DECORATOR = new PlantDecorator(geyser, 0.08F);
         SpheroidListVanillaNether.NETHERRACK.addDecorator(GEYSER_DECORATOR, 0.05F);
@@ -310,7 +298,7 @@ public class SpheroidListBetterNether {
         BlockState lucis_mushroom = getDefaultBlockState(MOD_ID,"lucis_mushroom"); // several
         BlockState jungle_moss = getDefaultBlockState(MOD_ID,"jungle_moss"); // facing <direction>
         BlockState wall_mushroom_brown = getDefaultBlockState(MOD_ID,"wall_mushroom_brown"); // facing <direction>
-        BlockState wall_mushroom_red = getDefaultBlockState(MOD_ID,"wall_mushroom_red"); // facing <direction>*/
-	}
+        BlockState wall_mushroom_red = getDefaultBlockState(MOD_ID,"wall_mushroom_red"); // facing <direction>
+	}*/
 	
 }

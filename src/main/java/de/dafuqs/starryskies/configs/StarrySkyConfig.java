@@ -11,8 +11,19 @@ import net.minecraft.util.registry.Registry;
 @Config(name = "StarrySky")
 public class StarrySkyConfig implements ConfigData {
 	
-	// wiki:
-	// https://gitlab.com/sargunv-mc-mods/auto-config/-/wikis/home
+	@ConfigEntry.Category("GENERAL")
+	@Comment(value = """
+			
+			Logs errors when loading Datapack Spheres and decorators to the log.""")
+	public boolean packCreatorMode = true;
+	
+	@ConfigEntry.Category("GENERAL")
+	@Comment(value = """
+			
+			Should Starry register Portal Blocks for Overworld <=> Starry Skies travel.
+			If set to false can be used completely serverside, as long as you add a means to travel between dimensions.""")
+	public boolean registerStarryPortal = true;
+	
 	@ConfigEntry.Gui.PrefixText()
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
@@ -208,88 +219,6 @@ public class StarrySkyConfig implements ConfigData {
 			The block generating at y=0 (if floorHeight > 0)
 			Default: BEDROCK""")
 	public String bottomBlockEnd = "BEDROCK";
-	
-	@ConfigEntry.Gui.PrefixText
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nGenerate Pride Spheroids")
-	public boolean generatePrideSpheroids = false;
-	
-	@ConfigEntry.Gui.PrefixText
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Astromine Integration")
-	public boolean generateAstromineSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Industrial Revolution Integration")
-	public boolean generateIndustrialRevolutionSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Applied Energistics 2 Integration")
-	public boolean generateAppliedEnergistics2Spheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Modern Industrialization Integration")
-	public boolean generateModernIndustrializationSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Tech Reborn Integration")
-	public boolean generateTechRebornSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Sakura Rosea Integration")
-	public boolean generateSakuraRoseaSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Terrestria Integration")
-	public boolean generateTerrestriaSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Traverse Integration")
-	public boolean generateTraverseSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Sandwichable Integration")
-	public boolean generateSandwichableSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Biomes You Go Integration")
-	public boolean generateBYGSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Unearthed Integration")
-	public boolean generateUnearthedSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Blockus Integration")
-	public boolean generateBlockusSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Mythic Metals Integration")
-	public boolean generateMythicMetalsSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable BetterNether Integration")
-	public boolean generateBetterNetherSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable BetterEnd Integration")
-	public boolean generateBetterEndSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Cinderscapes Integration")
-	public boolean generateCinderscapesSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Ecotones Integration")
-	public boolean generateEcotonesSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Woods And Mires Integration")
-	public boolean generateWoodsAndMiresSpheroids = true;
-	
-	@ConfigEntry.Category("SPHEROIDS")
-	@Comment(value = "\nEnable Biome Makeover Integration")
-	public boolean generateBiomeMakeoverSpheroids = true;
 	
 	private boolean isValidBlock(String blockName) {
 		// validate floorBlock

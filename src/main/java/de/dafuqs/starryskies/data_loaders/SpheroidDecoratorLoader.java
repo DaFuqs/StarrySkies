@@ -44,7 +44,9 @@ public class SpheroidDecoratorLoader extends JsonDataLoader implements Identifia
 					JsonObject typeData = JsonHelper.getObject(jsonObject, "type_data", null);
 					decorator = templateClass.getConstructor(JsonObject.class).newInstance(typeData);
 				} catch (NullPointerException e) {
-					StarrySkies.log(Level.ERROR, "Error reading sphere json definition " + identifier + ": Spheroid Type " + decoratorTypeID + " is not known.");
+					if (StarrySkies.CONFIG.packCreatorMode) {
+						StarrySkies.log(Level.WARN, "Error reading sphere json definition " + identifier + ": Spheroid Type " + decoratorTypeID + " is not known.");
+					}
 					return;
 				}
 				

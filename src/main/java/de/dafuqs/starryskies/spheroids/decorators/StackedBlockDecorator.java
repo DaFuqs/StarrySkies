@@ -33,11 +33,11 @@ public class StackedBlockDecorator extends SpheroidDecorator {
 	@Override
 	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
 		for (BlockPos bp : getTopBlocks(world, origin, spheroid)) {
-			if(random.nextFloat() < chance) {
+			if (random.nextFloat() < chance) {
 				int height = Support.getRandomBetween(random, minHeight, maxHeight);
 				for (int i = 0; i < height; i++) {
-					if (block.canPlaceAt(world, bp.up(i+1))) {
-						world.setBlockState(bp.up(i+1), block, 3);
+					if (block.canPlaceAt(world, bp.up(i + 1))) {
+						world.setBlockState(bp.up(i + 1), block, 3);
 					}
 				}
 			}

@@ -39,7 +39,7 @@ public class RainbowSpheroid extends Spheroid {
 			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			for(JsonElement e : JsonHelper.getArray(typeData, "blocks")) {
+			for (JsonElement e : JsonHelper.getArray(typeData, "blocks")) {
 				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
 				rainbowBlocks.add(state);
 			}
@@ -77,7 +77,7 @@ public class RainbowSpheroid extends Spheroid {
 		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 		int ceiledRadius = (int) Math.ceil(this.radius);
 		int maxX = Math.min(chunkX * 16 + 15, x + ceiledRadius);
-		int maxZ =  Math.min(chunkZ * 16 + 15, z + ceiledRadius);
+		int maxZ = Math.min(chunkZ * 16 + 15, z + ceiledRadius);
 		for (int x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= maxX; x2++) {
 			for (int y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
 				for (int z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= maxZ; z2++) {

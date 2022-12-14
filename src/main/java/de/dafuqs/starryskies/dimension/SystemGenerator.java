@@ -85,7 +85,7 @@ public class SystemGenerator {
 		List<Spheroid> curSystem = cache.get(systemPos);
 		
 		if (curSystem == null) {
-			if(world == null) {
+			if (world == null) {
 				world = StarrySkies.getStarryWorld(spheroidDimensionType);
 			}
 			

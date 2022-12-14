@@ -17,7 +17,7 @@ public class StarrySkyBiomes {
 	}
 	
 	public static void initialize() {
-
+	
 	}
 	
 }

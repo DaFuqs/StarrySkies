@@ -24,7 +24,7 @@ public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDisco
 	
 	public SpheroidDiscoveredCriterion.Conditions conditionsFromJson(JsonObject jsonObject, EntityPredicate.Extended extended, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
 		Identifier[] identifiers;
-		if(jsonObject.has("ids")) {
+		if (jsonObject.has("ids")) {
 			identifiers = deserializeAll(jsonObject.get("ids"));
 		} else {
 			identifiers = new Identifier[0];
@@ -35,7 +35,7 @@ public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDisco
 	private static Identifier[] deserializeAll(JsonElement json) {
 		JsonArray array = json.getAsJsonArray();
 		Identifier[] ids = new Identifier[array.size()];
-		for(int i = 0; i < array.size(); i++) {
+		for (int i = 0; i < array.size(); i++) {
 			ids[i] = Identifier.tryParse(array.get(i).getAsString());
 		}
 		return ids;
@@ -43,7 +43,7 @@ public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDisco
 	
 	private static JsonElement serializeAll(Identifier[] identifiers) {
 		JsonArray array = new JsonArray();
-		for(Identifier id : identifiers) {
+		for (Identifier id : identifiers) {
 			array.add(id.toString());
 		}
 		return array;
@@ -69,14 +69,14 @@ public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDisco
 		}
 		
 		public boolean matches(Identifier spheroidIdentifier) {
-			if(this.identifiers.length == 0) {
+			if (this.identifiers.length == 0) {
 				return true;
 			}
-			if(spheroidIdentifier == null) {
+			if (spheroidIdentifier == null) {
 				return true;
 			}
-			for(Identifier id : identifiers) {
-				if(spheroidIdentifier.equals(id)) {
+			for (Identifier id : identifiers) {
+				if (spheroidIdentifier.equals(id)) {
 					return true;
 				}
 			}

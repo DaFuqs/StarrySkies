@@ -33,7 +33,7 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
 	
 	@Override
 	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {
-		if(!spheroid.isCenterInChunk(origin)) {
+		if (!spheroid.isCenterInChunk(origin)) {
 			return;
 		}
 		BlockPos spheroidPosition = spheroid.getPosition();
@@ -105,5 +105,5 @@ public class RuinedPortalDecorator extends SpheroidDecorator {
 			world.setBlockState(blockPos, OBSIDIAN, 3);
 		}
 	}
-
+	
 }

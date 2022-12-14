@@ -38,27 +38,29 @@ public class WeightedBlockGroupsLoader extends JsonDataLoader implements Identif
 			
 			Map<BlockState, Float> map;
 			boolean newMap = false;
-			if(BLOCK_GROUPS.containsKey(identifier)) {
+			if (BLOCK_GROUPS.containsKey(identifier)) {
 				map = BLOCK_GROUPS.get(identifier);
 			} else {
 				map = new LinkedHashMap<>();
 				newMap = true;
 			}
 			
-			for(Map.Entry<String, JsonElement> e : jsonElement.getAsJsonObject().entrySet()) {
+			for (Map.Entry<String, JsonElement> e : jsonElement.getAsJsonObject().entrySet()) {
 				try {
 					BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getKey(), false).blockState();
 					float weight = e.getValue().getAsFloat();
 					map.put(state, weight);
 				} catch (CommandSyntaxException ex) {
-					StarrySkies.log(Level.WARN, "Block group " + identifier + " tries to load a non-existing block: " + e.getKey() + ". Will be ignored.");
+					if (StarrySkies.CONFIG.packCreatorMode) {
+						StarrySkies.log(Level.WARN, "Block group " + identifier + " tries to load a non-existing block: " + e.getKey() + ". Will be ignored.");
+					}
 				}
 			}
 			
-			if(newMap) {
+			if (newMap) {
 				BLOCK_GROUPS.put(identifier, map);
 			}
-		
+			
 		});
 	}
 	
@@ -73,7 +75,7 @@ public class WeightedBlockGroupsLoader extends JsonDataLoader implements Identif
 	
 	public static BlockState getRandomStateInGroup(Identifier identifier, Random random) {
 		Map<BlockState, Float> group = BLOCK_GROUPS.get(identifier);
-		if(group == null || group.size() == 0) {
+		if (group == null || group.size() == 0) {
 			StarrySkies.log(Level.WARN, "Referencing empty/non-existing WeightedBlockGroup: " + identifier + ". Using AIR instead.");
 			return Blocks.AIR.getDefaultState();
 		}

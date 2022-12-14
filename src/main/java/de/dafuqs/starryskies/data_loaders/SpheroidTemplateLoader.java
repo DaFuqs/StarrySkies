@@ -62,29 +62,31 @@ public class SpheroidTemplateLoader extends JsonDataLoader implements Identifiab
 					Class<? extends Spheroid.Template> templateClass = StarryRegistries.SPHEROID_TYPE.get(spheroidType);
 					template = templateClass.getConstructor(Identifier.class, jsonObject.getClass()).newInstance(identifier, jsonObject);
 				} catch (NullPointerException e) {
-					StarrySkies.log(Level.ERROR, "Error reading sphere json definition " + identifier + ": Spheroid Type " + spheroidType + " is not known.");
+					if (StarrySkies.CONFIG.packCreatorMode) {
+						StarrySkies.log(Level.WARN, "Error reading sphere json definition " + identifier + ": Spheroid Type " + spheroidType + " is not known.");
+					}
 					return;
 				}
 				
 				Identifier generationGroup = null;
 				float generationWeight = 0;
-				if(JsonHelper.hasString(jsonObject, "generation_group")) {
+				if (JsonHelper.hasString(jsonObject, "generation_group")) {
 					generationGroup = Identifier.tryParse(JsonHelper.getString(jsonObject, "generation_group"));
 					generationWeight = JsonHelper.getFloat(jsonObject, "generation_weight", 0);
 				}
 				
-				if(identifier.equals(STARTER_OVERWORLD_ID)) {
+				if (identifier.equals(STARTER_OVERWORLD_ID)) {
 					STARTER_OVERWORLD = template;
-				} else if(identifier.equals(STARTER_NETHER_ID)) {
+				} else if (identifier.equals(STARTER_NETHER_ID)) {
 					STARTER_NETHER = template;
-				} else if(identifier.equals(STARTER_END_DRAGON_ID)) {
+				} else if (identifier.equals(STARTER_END_DRAGON_ID)) {
 					STARTER_END_DRAGON = template;
-				} else if(identifier.equals(STARTER_END_ID)) {
+				} else if (identifier.equals(STARTER_END_ID)) {
 					STARTER_END = template;
-				} else if(generationGroup != null && generationWeight > 0) {
+				} else if (generationGroup != null && generationWeight > 0) {
 					LinkedHashMap<Spheroid.Template, Float> weightedMap = WEIGHTED_SPHEROID_TYPES.get(generationGroup);
-					if(weightedMap == null) {
-						StarrySkies.log(Level.WARN, "Spheroid " + identifier + "specifies non-existing generation_group "+ generationGroup + ". Will be ignored.");
+					if (weightedMap == null) {
+						StarrySkies.log(Level.WARN, "Spheroid " + identifier + "specifies non-existing generation_group " + generationGroup + ". Will be ignored.");
 					} else {
 						weightedMap.put(template, generationWeight);
 					}

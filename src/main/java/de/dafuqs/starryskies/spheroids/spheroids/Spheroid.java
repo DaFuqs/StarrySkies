@@ -211,10 +211,10 @@ public abstract class Spheroid implements Serializable {
 		
 		public Template(Identifier identifier, JsonObject jsonObject) throws CommandSyntaxException {
 			this(identifier,
-				 JsonHelper.getInt(jsonObject, "min_size"),
-				 JsonHelper.getInt(jsonObject, "max_size"),
-				 readDecorators(JsonHelper.getObject(jsonObject, "decorators"), identifier),
-				 readSpawns(JsonHelper.getArray(jsonObject, "spawns"))
+					JsonHelper.getInt(jsonObject, "min_size"),
+					JsonHelper.getInt(jsonObject, "max_size"),
+					readDecorators(JsonHelper.getObject(jsonObject, "decorators"), identifier),
+					readSpawns(JsonHelper.getArray(jsonObject, "spawns"))
 			);
 		}
 		
@@ -231,8 +231,10 @@ public abstract class Spheroid implements Serializable {
 			
 			for (Map.Entry<String, JsonElement> e : jsonObject.entrySet()) {
 				SpheroidDecorator decorator = SpheroidDecoratorLoader.getDecorator(Identifier.tryParse(e.getKey()));
-				if(decorator == null) {
-					StarrySkies.log(Level.WARN, "Spheroid " + identifier + " specifies non-existing decorator "+ e.getKey() + ". Will be ignored.");
+				if (decorator == null) {
+					if (StarrySkies.CONFIG.packCreatorMode) {
+						StarrySkies.log(Level.WARN, "Spheroid " + identifier + " specifies non-existing decorator " + e.getKey() + ". Will be ignored.");
+					}
 				} else {
 					float chance = e.getValue().getAsFloat();
 					d.put(decorator, chance);
