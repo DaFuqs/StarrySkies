@@ -26,7 +26,6 @@ public class SystemGenerator {
 	// spawning probabilities
 	private final SpheroidDimensionType spheroidDimensionType;
 	private final HashMap<Point, List<de.dafuqs.starryskies.spheroids.spheroids.Spheroid>> cache = new HashMap<>();
-	public static SpheroidTemplateLoader spheroidLoader;
 	public static ServerWorld world;
 	
 	private final int SYSTEM_SIZE_CHUNKS;
@@ -168,11 +167,8 @@ public class SystemGenerator {
 				}
 				break;
 			case END:
-				if (systemPointX == 0 && systemPointZ == 0) {
-					spheroid = SpheroidTemplateLoader.STARTER_END_DRAGON.generate(random);
-					spheroid.setPosition(new BlockPos(0, 30, 0));
-					defaultSpheroids.add(spheroid);
-				} else if ((systemPointX == -1 && systemPointZ == 0)
+				if (       (systemPointX == 0 && systemPointZ == 0)
+					    || (systemPointX == -1 && systemPointZ == 0)
 						|| (systemPointX == 0 && systemPointZ == -1)
 						|| (systemPointX == -1 && systemPointZ == -1)) {
 					spheroid = SpheroidTemplateLoader.STARTER_END.generate(random);

@@ -32,11 +32,9 @@ public class SpheroidTemplateLoader extends JsonDataLoader implements Identifiab
 	public static Identifier STARTER_OVERWORLD_ID = StarrySkies.locate("spawn/overworld");
 	public static Identifier STARTER_NETHER_ID = StarrySkies.locate("spawn/nether");
 	public static Identifier STARTER_END_ID = StarrySkies.locate("spawn/end");
-	public static Identifier STARTER_END_DRAGON_ID = StarrySkies.locate("spawn/end_dragon");
 	public static Spheroid.Template STARTER_OVERWORLD;
 	public static Spheroid.Template STARTER_NETHER;
 	public static Spheroid.Template STARTER_END;
-	public static Spheroid.Template STARTER_END_DRAGON;
 	
 	protected SpheroidTemplateLoader() {
 		super(new Gson(), ID);
@@ -79,8 +77,6 @@ public class SpheroidTemplateLoader extends JsonDataLoader implements Identifiab
 					STARTER_OVERWORLD = template;
 				} else if (identifier.equals(STARTER_NETHER_ID)) {
 					STARTER_NETHER = template;
-				} else if (identifier.equals(STARTER_END_DRAGON_ID)) {
-					STARTER_END_DRAGON = template;
 				} else if (identifier.equals(STARTER_END_ID)) {
 					STARTER_END = template;
 				} else if (generationGroup != null && generationWeight > 0) {

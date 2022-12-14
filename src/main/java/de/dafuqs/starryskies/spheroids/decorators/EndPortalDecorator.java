@@ -25,7 +25,7 @@ public class EndPortalDecorator extends SpheroidDecorator {
 		if (!spheroid.isCenterInChunk(origin)) {
 			return;
 		}
-		this.generate(world, new BlockPos(0, 64, 0), false);
+		this.generate(world, new BlockPos(0, 64, 0), true);
 	}
 	
 	public boolean generate(StructureWorldAccess structureWorldAccess, BlockPos blockPos, boolean open) {
