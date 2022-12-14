@@ -147,6 +147,7 @@ public abstract class Spheroid implements Serializable {
 		if (isCenterInChunk(chunkPos)) {
 			StarrySkies.log(Level.DEBUG, "Populating entities for spheroid in chunk x:" + chunkPos.x + " z:" + chunkPos.z + " (StartX:" + chunkPos.getStartX() + " StartZ:" + chunkPos.getStartZ() + ") " + this.getDescription());
 			for (Pair<EntityType, Integer> spawnEntry : spawns) {
+				
 				int xCord = chunkPos.getStartX();
 				int zCord = chunkPos.getStartZ();
 				
@@ -164,11 +165,11 @@ public abstract class Spheroid implements Serializable {
 						Entity entity = spawnEntry.getLeft().create(chunkRegion.toServerWorld());
 						if (entity != null) {
 							float width = entity.getWidth();
-							double xLength = MathHelper.clamp(startingX, (double) xCord + (double) width, (double) xCord + 16.0D - (double) width);
+							double xPos = MathHelper.clamp(startingX, (double) xCord + (double) width, (double) xCord + 16.0D - (double) width);
 							double zLength = MathHelper.clamp(startingZ, (double) zCord + (double) width, (double) zCord + 16.0D - (double) width);
 							
 							try {
-								entity.refreshPositionAndAngles(xLength, height, zLength, chunkRandom.nextFloat() * 360.0F, 0.0F);
+								entity.refreshPositionAndAngles(xPos, height, zLength, chunkRandom.nextFloat() * 360.0F, 0.0F);
 								if (entity instanceof MobEntity mobentity) {
 									if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
 										mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);
