@@ -8,12 +8,10 @@
 		"core_block": "minecraft:nether_quartz_ore",
 		"min_core_size": 4,
 		"max_core_size": 8,
-		"main_block": {
-			"minecraft:netherrack": 5,
-			"minecraft:basalt": 1,
-			"minecraft:magma_block": 1
-		}
+		"main_block": "$starry_skies:nether_stones"
 	},
-	"decorators": {},
+	"decorators": {
+		"starry_skies:mod_compat/cinderscapes/polypite_quartz": 0.1
+	},
 	"spawns": []
 }

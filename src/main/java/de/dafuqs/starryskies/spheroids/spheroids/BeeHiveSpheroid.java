@@ -2,7 +2,9 @@ package de.dafuqs.starryskies.spheroids.spheroids;
 
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
+import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupsLoader;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
@@ -35,34 +37,6 @@ public class BeeHiveSpheroid extends Spheroid {
 	private final int flowerRingSpacing;
 	private BeehiveBlockEntity queenBeehiveBlockEntity;
 	private final List<BeehiveBlockEntity> outerBeehiveBlockEntities;
-	
-	public static ArrayList<BlockState> LIST_FLOWERS = new ArrayList<>() {{
-		add(Blocks.DANDELION.getDefaultState());
-		add(Blocks.POPPY.getDefaultState());
-		add(Blocks.BLUE_ORCHID.getDefaultState());
-		add(Blocks.ALLIUM.getDefaultState());
-		add(Blocks.AZURE_BLUET.getDefaultState());
-		add(Blocks.ORANGE_TULIP.getDefaultState());
-		add(Blocks.PINK_TULIP.getDefaultState());
-		add(Blocks.RED_TULIP.getDefaultState());
-		add(Blocks.WHITE_TULIP.getDefaultState());
-		add(Blocks.OXEYE_DAISY.getDefaultState());
-		add(Blocks.CORNFLOWER.getDefaultState());
-		add(Blocks.LILY_OF_THE_VALLEY.getDefaultState());
-		add(Blocks.LILAC.getDefaultState());
-		add(Blocks.ROSE_BUSH.getDefaultState());
-		add(Blocks.PEONY.getDefaultState());
-		add(Blocks.AZALEA.getDefaultState());
-		add(Blocks.FLOWERING_AZALEA.getDefaultState());
-	}};
-	
-	public static ArrayList<BlockState> LIST_TALL_FLOWERS = new ArrayList<>() {{
-		add(Blocks.SUNFLOWER.getDefaultState());
-		add(Blocks.LILAC.getDefaultState());
-		add(Blocks.ROSE_BUSH.getDefaultState());
-		add(Blocks.PEONY.getDefaultState());
-		add(Blocks.LARGE_FERN.getDefaultState());
-	}};
 	
 	public BeeHiveSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
 	                       int shellRadius, int flowerRingRadius, int flowerRingSpacing) {
@@ -216,12 +190,15 @@ public class BeeHiveSpheroid extends Spheroid {
 		}
 	}
 	
+	private static final Identifier FLOWERS_GROUP_ID = StarrySkies.locate("flowers");
+	private static final Identifier TALL_FLOWERS_GROUP_ID = StarrySkies.locate("tall_flowers");
+	
 	public BlockState getRandomFlower(ChunkRandom random) {
-		return LIST_FLOWERS.get(random.nextInt(LIST_FLOWERS.size()));
+		return WeightedBlockGroupsLoader.getRandomStateInGroup(FLOWERS_GROUP_ID, random);
 	}
 	
 	public BlockState getRandomTallFlower(ChunkRandom random) {
-		return LIST_TALL_FLOWERS.get(random.nextInt(LIST_TALL_FLOWERS.size()));
+		return WeightedBlockGroupsLoader.getRandomStateInGroup(TALL_FLOWERS_GROUP_ID, random);
 	}
 	
 	@Override
