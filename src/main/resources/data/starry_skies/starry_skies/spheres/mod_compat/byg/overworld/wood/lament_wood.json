@@ -7,7 +7,7 @@
 	"type_data": {
 		"min_shell_size": 2,
 		"max_shell_size": 2,
-		"main_block": "byg:lament_log",
+		"main_block": "byg:lament_wood",
 		"shell_block": "byg:lament_leaves[distance=1]"
 	},
 	"decorators": {},

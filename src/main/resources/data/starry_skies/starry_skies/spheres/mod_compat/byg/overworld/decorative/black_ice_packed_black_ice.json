@@ -5,8 +5,8 @@
 	"max_size": 13,
 	"type": "starry_skies:core",
 	"type_data": {
-		"main_block": "minecraft:black_ice",
-		"core_block": "minecraft:packed_black_ice",
+		"main_block": "byg:black_ice",
+		"core_block": "byg:packed_black_ice",
 		"min_core_size": 3,
 		"max_core_size": 5
 	},
@@ -14,7 +14,6 @@
 		"starry_skies:mod_compat/byg/winter_succulents": 0.75,
 		"starry_skies:sweet_berries": 0.4
 	},
-	"decorators": {},
 	"spawns": [],
 	"fabric:load_conditions": [
 		{

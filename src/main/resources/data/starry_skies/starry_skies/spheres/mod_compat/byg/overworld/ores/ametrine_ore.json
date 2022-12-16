@@ -1,11 +1,11 @@
 {
-	"generation_group": "starry_skies:overworld/ore",
+	"generation_group": "starry_skies:overworld/ores",
 	"generation_weight": 0.01,
 	"min_size": 5,
 	"max_size": 6,
 	"type": "starry_skies:core",
 	"type_data": {
-		"core_block": "byg:pendorite_ore",
+		"core_block": "byg:ametrine_ore",
 		"min_core_size": 2,
 		"max_core_size": 3,
 		"main_block": "$starry_skies:mountain_stones"

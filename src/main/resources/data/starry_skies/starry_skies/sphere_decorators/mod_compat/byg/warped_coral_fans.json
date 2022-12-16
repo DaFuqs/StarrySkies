@@ -1,8 +1,8 @@
 {
 	"type": "starry_skies:single_block",
 	"type_data": {
-		"block": "byg:winter_grass",
-		"chance": 0.05
+		"block": "byg:warped_coral_fan",
+		"chance": 0.75
 	},
 	"fabric:load_conditions": [
 		{

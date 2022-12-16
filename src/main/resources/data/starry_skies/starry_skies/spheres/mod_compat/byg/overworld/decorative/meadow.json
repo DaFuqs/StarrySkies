@@ -5,8 +5,8 @@
 	"max_size": 14,
 	"type": "starry_skies:modular",
 	"type_data": {
-		"main_block": "byg:meadow_dirt",
-		"top_block": "byg:meadow_grass_block"
+		"main_block": "byg:lush_dirt",
+		"top_block": "byg:lush_grass_block"
 	},
 	"decorators": {
 		"starry_skies:mod_compat/byg/blueberry_bushes": 0.5
