@@ -1,6 +1,6 @@
 {
 	"generation_group": "starry_skies:overworld/ores",
-	"generation_weight": 6.0,
+	"generation_weight": 3.0,
 	"min_size": 5,
 	"max_size": 14,
 	"type": "starry_skies:core",

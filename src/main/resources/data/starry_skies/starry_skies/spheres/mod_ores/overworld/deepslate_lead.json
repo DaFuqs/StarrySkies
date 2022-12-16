@@ -1,14 +1,14 @@
 {
 	"generation_group": "starry_skies:overworld/ores",
-	"generation_weight": 0.4,
-	"min_size": 6,
-	"max_size": 8,
+	"generation_weight": 0.5,
+	"min_size": 5,
+	"max_size": 15,
 	"type": "starry_skies:core",
 	"type_data": {
-		"core_block": "%starry_skies:salt_ore",
-		"min_core_size": 3,
-		"max_core_size": 5,
-		"main_block": "$starry_skies:stones"
+		"core_block": "%starry_skies:deepslate_lead_ore",
+		"min_core_size": 4,
+		"max_core_size": 6,
+		"main_block": "$starry_skies:deepslates"
 	},
 	"decorators": {},
 	"spawns": [],
@@ -16,7 +16,7 @@
 		{
 			"condition": "starry_skies:unique_block_group_exist",
 			"values": [
-				"starry_skies:salt_ore"
+				"starry_skies:deepslate_lead_ore"
 			]
 		}
 	]
