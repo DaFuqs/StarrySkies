@@ -15,6 +15,7 @@ public class SpheroidDecoratorTypes {
 	public static Class<? extends SpheroidDecorator> DOUBLE_BLOCK = register("double_block", DoubleBlockDecorator.class);
 	public static Class<? extends SpheroidDecorator> STACKED_BLOCK = register("stacked_block", StackedBlockDecorator.class);
 	public static Class<? extends SpheroidDecorator> GROUND_BLOCK = register("ground_block", GroundDecorator.class);
+	public static Class<? extends SpheroidDecorator> CAVE_BOTTOM_BLOCK = register("cave_bottom_block", CaveBottomDecorator.class);
 	public static Class<? extends SpheroidDecorator> PLANT_AROUND_POND = register("plant_around_pond", PlantAroundPondDecorator.class);
 	public static Class<? extends SpheroidDecorator> CENTER_POND = register("center_pond", CenterPondDecorator.class);
 	public static Class<? extends SpheroidDecorator> MULTIFACE_GROWTH = register("multiface_growth", MultifaceGrowthDecorator.class);

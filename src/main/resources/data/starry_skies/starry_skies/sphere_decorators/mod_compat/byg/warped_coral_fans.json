@@ -2,7 +2,7 @@
 	"type": "starry_skies:single_block",
 	"type_data": {
 		"block": "byg:warped_coral_fan",
-		"chance": 0.75
+		"chance": 0.075
 	},
 	"fabric:load_conditions": [
 		{

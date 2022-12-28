@@ -1,5 +1,5 @@
 {
-	"type": "starry_skies:single_block",
+	"type": "starry_skies:cave_bottom_block",
 	"type_data": {
 		"block": "betterend:charnia_green",
 		"chance": 0.1
