@@ -2,7 +2,7 @@
 	"type": "starry_skies:single_block",
 	"type_data": {
 		"block": "byg:scorched_grass",
-		"chance": 0.1
+		"chance": 0.05
 	},
 	"fabric:load_conditions": [
 		{

@@ -10,11 +10,9 @@
 	"minecraft:cobbled_deepslate": 0.1,
 	"minecraft:infested_stone": 0.1,
 	"minecraft:infested_deepslate": 0.1,
-
 	"terrestria:mossy_basalt_cobblestone": 50,
 	"terrestria:basalt_cobblestone": 10,
 	"terrestria:basalt": 50,
-
 	"byg:overgrown_stone": 25,
 	"byg:mossy_stone": 25
 }

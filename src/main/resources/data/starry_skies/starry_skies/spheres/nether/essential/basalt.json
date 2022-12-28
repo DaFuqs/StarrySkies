@@ -8,7 +8,8 @@
 		"block": "minecraft:basalt"
 	},
 	"decorators": {
-		"starry_skies:center_pond_lava": 0.08
+		"starry_skies:center_pond_lava": 0.08,
+		"starry_skies:mod_compat/betternether/basalt_stalactites": 0.2
 	},
 	"spawns": []
 }

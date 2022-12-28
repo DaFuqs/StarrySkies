@@ -1,5 +1,5 @@
 {
-	"generation_group": "starry_skies:nether/decorative",
+	"generation_group": "starry_skies:nether/essential",
 	"generation_weight": 10.0,
 	"min_size": 5,
 	"max_size": 12,
@@ -8,7 +8,8 @@
 		"block": "minecraft:glowstone"
 	},
 	"decorators": {
-		"starry_skies:mod_compat/byg/weeping_roots": 0.05
+		"starry_skies:mod_compat/byg/weeping_roots": 0.05,
+		"starry_skies:mod_compat/betternether/glowstone_stalactites": 0.1
 	},
 	"spawns": []
 }

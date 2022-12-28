@@ -16,6 +16,8 @@
 		"min_core_size": 2,
 		"max_core_size": 5
 	},
-	"decorators": {},
+	"decorators": {
+		"starry_skies:mod_compat/betternether/geysers": 0.4
+	},
 	"spawns": []
 }

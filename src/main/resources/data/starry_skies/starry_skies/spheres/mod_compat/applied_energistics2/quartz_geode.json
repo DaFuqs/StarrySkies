@@ -13,7 +13,7 @@
 	},
 	"decorators": {
 		"starry_skies:mod_compat/ae2/x_spot_presses": 1.0
-	},	
+	},
 	"spawns": [],
 	"fabric:load_conditions": [
 		{
