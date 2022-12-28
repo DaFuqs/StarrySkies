@@ -5,7 +5,7 @@
 	"max_size": 15,
 	"type": "starry_skies:modular",
 	"type_data": {
-		"main_block": "minecraft:nether_wart_block",
+		"main_block": "minecraft:netherrack",
 		"top_block": "betternether:jungle_grass"
 	},
 	"decorators": {
