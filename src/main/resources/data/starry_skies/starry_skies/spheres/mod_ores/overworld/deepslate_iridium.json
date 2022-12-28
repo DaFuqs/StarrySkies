@@ -1,14 +1,14 @@
 {
 	"generation_group": "starry_skies:overworld/ores",
-	"generation_weight": 0.01,
+	"generation_weight": 0.04,
 	"min_size": 5,
 	"max_size": 6,
 	"type": "starry_skies:core",
 	"type_data": {
-		"core_block": "%starry_skies:iridium_ore",
+		"core_block": "%starry_skies:deepslate_iridium_ore",
 		"min_core_size": 1,
 		"max_core_size": 2,
-		"main_block": "$starry_skies:dungeon_stones"
+		"main_block": "$starry_skies:deepslates"
 	},
 	"decorators": {},
 	"spawns": [],
@@ -16,7 +16,7 @@
 		{
 			"condition": "starry_skies:unique_block_group_exist",
 			"values": [
-				"starry_skies:iridium_ore"
+				"starry_skies:deepslate_iridium_ore"
 			]
 		}
 	]
