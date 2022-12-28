@@ -5,7 +5,7 @@
 	"max_size": 10,
 	"type": "starry_skies:modular",
 	"type_data": {
-		"main_block": "minecraft:end_stone",
+		"main_block": "byg:ether_stone",
 		"top_block": "byg:vermilion_sculk"
 	},
 	"decorators": {
