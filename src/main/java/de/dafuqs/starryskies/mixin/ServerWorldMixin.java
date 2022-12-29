@@ -3,9 +3,9 @@ package de.dafuqs.starryskies.mixin;
 import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.dimension.StarrySkyChunkGenerator;
+import net.minecraft.registry.tag.StructureTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.StructureTags;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -27,7 +27,7 @@ public abstract class ServerWorldMixin {
 		put(StructureTags.ON_OCEAN_EXPLORER_MAPS, StarrySkies.locate("overworld/treasure/ocean_monument"));
 	}};
 	
-	@Inject(at = @At("HEAD"), method = "locateStructure(Lnet/minecraft/tag/TagKey;Lnet/minecraft/util/math/BlockPos;IZ)Lnet/minecraft/util/math/BlockPos;", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "locateStructure(Lnet/minecraft/registry/tag/TagKey;Lnet/minecraft/util/math/BlockPos;IZ)Lnet/minecraft/util/math/BlockPos;", cancellable = true)
 	public void starryskies$locateStructure(TagKey<Structure> structureTag, BlockPos pos, int radius, boolean skipReferencedStructures, CallbackInfoReturnable<BlockPos> cir) {
 		ServerWorld thisWorld = (ServerWorld) (Object) this;
 		ChunkGenerator chunkGenerator = thisWorld.getChunkManager().getChunkGenerator();

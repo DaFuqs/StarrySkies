@@ -54,7 +54,7 @@ public class CoralsSpheroid extends Spheroid {
 		add(Blocks.SEA_PICKLE.getDefaultState().with(SeaPickleBlock.WATERLOGGED, true).with(SeaPickleBlock.PICKLES, 4));
 	}};
 	
-	public CoralsSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public CoralsSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                      BlockState shellBlock, float shellRadius, Identifier centerChestLootTable) {
 		
 		super(template, radius, decorators, spawns, random);
@@ -68,7 +68,7 @@ public class CoralsSpheroid extends Spheroid {
 		private final BlockStateSupplier validShellBlocks;
 		private final int minShellRadius;
 		private final int maxShellRadius;
-		private Identifier lootTable;
+		private Identifier lootTable; // TODO: huh
 		float lootTableChance;
 		
 		public Template(Identifier identifier, JsonObject data) throws CommandSyntaxException {

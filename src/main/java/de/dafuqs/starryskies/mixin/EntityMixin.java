@@ -2,8 +2,8 @@ package de.dafuqs.starryskies.mixin;
 
 import de.dafuqs.starryskies.StarrySkyDimensionTravelHandler;
 import net.minecraft.entity.Entity;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;

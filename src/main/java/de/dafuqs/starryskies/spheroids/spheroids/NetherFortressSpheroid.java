@@ -38,7 +38,7 @@ public class NetherFortressSpheroid extends Spheroid {
 	private final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	
 	
-	public NetherFortressSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public NetherFortressSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                              int shellRadius) {
 		
 		super(template, radius, decorators, spawns, random);

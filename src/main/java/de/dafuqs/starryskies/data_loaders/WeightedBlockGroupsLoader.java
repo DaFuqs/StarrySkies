@@ -8,13 +8,11 @@ import de.dafuqs.starryskies.Support;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.profiler.Profiler;
-import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 
 import java.util.HashMap;
@@ -47,7 +45,7 @@ public class WeightedBlockGroupsLoader extends JsonDataLoader implements Identif
 			
 			for (Map.Entry<String, JsonElement> e : jsonElement.getAsJsonObject().entrySet()) {
 				try {
-					BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getKey(), false).blockState();
+					BlockState state = StarrySkies.getStateFromString(e.getKey());
 					float weight = e.getValue().getAsFloat();
 					map.put(state, weight);
 				} catch (CommandSyntaxException ex) {

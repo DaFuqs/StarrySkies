@@ -6,23 +6,20 @@ import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.structure.StructureSet;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.dynamic.Codecs;
-import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.math.random.RandomSeed;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
-import net.minecraft.world.biome.source.FixedBiomeSource;
+import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
@@ -35,15 +32,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public class StarrySkyChunkGenerator extends ChunkGenerator {
 	
-	private final long seed;
 	private final SystemGenerator systemGenerator;
-	private final Registry<Biome> biomeRegistry;
 	
 	// Dimension Type values
 	private final SpheroidDimensionType spheroidDimensionType;
@@ -51,38 +45,19 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 	private final BlockState floorBlockState;
 	private final BlockState bottomBlockState;
 	
-	public static final Codec<StarrySkyChunkGenerator> CODEC = RecordCodecBuilder
-			.create(instance -> createStructureSetRegistryGetter(instance)
-					.and(instance.group(RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter(source -> source.biomeRegistry),
-							Codecs.NONNEGATIVE_INT.fieldOf("settings").forGetter((generator -> generator.spheroidDimensionType.ordinal())),
-							Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> generator.seed)))
-					.apply(instance, instance.stable(StarrySkyChunkGenerator::new)));
+	public static final Codec<StarrySkyChunkGenerator> CODEC = RecordCodecBuilder.create(
+			(instance) -> instance.group(BiomeSource.CODEC.fieldOf("biome_source")
+					.forGetter((generator) -> generator.biomeSource), Codecs.NONNEGATIVE_INT.fieldOf("settings")
+					.forGetter((generator) -> generator.spheroidDimensionType.ordinal())
+			).apply(instance, instance.stable(StarrySkyChunkGenerator::new)));
 	
-	public StarrySkyChunkGenerator(Registry<StructureSet> structureSets, Registry<Biome> biomeRegistry, int spheroidDimensionTypeOrdinal, long seed) {
-		super(structureSets, Optional.empty(), createBiomeSource(biomeRegistry, spheroidDimensionTypeOrdinal));
-		
-		this.biomeRegistry = biomeRegistry;
+	public StarrySkyChunkGenerator(BiomeSource biomeSource, int spheroidDimensionTypeOrdinal) {
+		super(biomeSource);
 		this.spheroidDimensionType = SpheroidDimensionType.values()[spheroidDimensionTypeOrdinal];
-		this.seed = seed;
-		
 		this.systemGenerator = new SystemGenerator(spheroidDimensionType);
 		this.floorBlockState = spheroidDimensionType.getFloorBlockState();
 		this.bottomBlockState = spheroidDimensionType.getBottomBlockState();
 		this.floorHeight = spheroidDimensionType.getFloorHeight();
-	}
-	
-	private static FixedBiomeSource createBiomeSource(Registry<Biome> biomeRegistry, int spheroidDimensionTypeOrdinal) {
-		switch (spheroidDimensionTypeOrdinal) {
-			case 0 -> {
-				return new FixedBiomeSource(biomeRegistry.getOrCreateEntry(StarrySkyBiomes.OVERWORLD_KEY));
-			}
-			case 1 -> {
-				return new FixedBiomeSource(biomeRegistry.getOrCreateEntry(StarrySkyBiomes.NETHER_KEY));
-			}
-			default -> {
-				return new FixedBiomeSource(biomeRegistry.getOrCreateEntry(StarrySkyBiomes.END_KEY));
-			}
-		}
 	}
 	
 	@Override

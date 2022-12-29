@@ -5,6 +5,7 @@ import de.dafuqs.starryskies.mixin.EntityAccessor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.NetherPortalBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
@@ -13,14 +14,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockLocating;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
-import net.minecraft.world.dimension.AreaHelper;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.dimension.NetherPortal;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -111,13 +111,13 @@ public class StarrySkyDimensionTravelHandler {
 					if (blockState.contains(Properties.HORIZONTAL_AXIS)) {
 						axis2 = blockState.get(Properties.HORIZONTAL_AXIS);
 						BlockLocating.Rectangle rectangle = BlockLocating.getLargestRectangle(lastNetherPortalPosition, axis2, 21, Direction.Axis.Y, 21, (blockPos) -> thisEntity.getEntityWorld().getBlockState(blockPos) == blockState);
-						vec3d2 = AreaHelper.entityPosInPortal(rectangle, axis2, thisEntity.getPos(), thisEntity.getDimensions(thisEntity.getPose()));
+						vec3d2 = NetherPortal.entityPosInPortal(rectangle, axis2, thisEntity.getPos(), thisEntity.getDimensions(thisEntity.getPose()));
 					} else {
 						axis2 = Direction.Axis.X;
 						vec3d2 = new Vec3d(0.5D, 0.0D, 0.0D);
 					}
 					
-					return AreaHelper.getNetherTeleportTarget(destination, arg, axis2, vec3d2, thisEntity.getDimensions(thisEntity.getPose()), thisEntity.getVelocity(), thisEntity.getYaw(), thisEntity.getPitch());
+					return NetherPortal.getNetherTeleportTarget(destination, arg, axis2, vec3d2, thisEntity, thisEntity.getVelocity(), thisEntity.getYaw(), thisEntity.getPitch());
 				});
 				
 				if (a.isPresent()) {

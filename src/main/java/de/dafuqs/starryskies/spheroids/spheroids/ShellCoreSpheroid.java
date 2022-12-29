@@ -2,18 +2,17 @@ package de.dafuqs.starryskies.spheroids.spheroids;
 
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.BlockStateSupplier;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class ShellCoreSpheroid extends Spheroid {
 	private final float coreRadius;
 	private final float shellRadius;
 	
-	public ShellCoreSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public ShellCoreSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                         BlockState coreBlock, BlockState mainBlock, BlockState shellBlock, float coreRadius, float shellRadius) {
 		
 		super(template, radius, decorators, spawns, random);
@@ -60,8 +59,8 @@ public class ShellCoreSpheroid extends Spheroid {
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
 			this.minCoreRadius = JsonHelper.getInt(typeData, "min_core_size");
 			this.maxCoreRadius = JsonHelper.getInt(typeData, "max_core_size");
-			this.mainBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "main_block"), false).blockState();
-			this.coreBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "core_block"), false).blockState();
+			this.mainBlock = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "main_block"));
+			this.coreBlock = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "core_block"));
 			this.shellBlock = BlockStateSupplier.of(typeData.get("shell_block"));
 		}
 		

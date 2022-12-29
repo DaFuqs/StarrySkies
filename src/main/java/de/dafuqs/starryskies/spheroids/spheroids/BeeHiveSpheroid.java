@@ -38,7 +38,7 @@ public class BeeHiveSpheroid extends Spheroid {
 	private BeehiveBlockEntity queenBeehiveBlockEntity;
 	private final List<BeehiveBlockEntity> outerBeehiveBlockEntities;
 	
-	public BeeHiveSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public BeeHiveSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                       int shellRadius, int flowerRingRadius, int flowerRingSpacing) {
 		
 		super(template, radius, decorators, spawns, random);

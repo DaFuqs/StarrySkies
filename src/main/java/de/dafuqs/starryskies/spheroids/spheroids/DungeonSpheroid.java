@@ -12,24 +12,24 @@ import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootTables;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.List;
 
 public class DungeonSpheroid extends Spheroid {
 	
-	private final EntityType entityType;
+	private final EntityType<?> entityType;
 	private final BlockState shellBlock;
 	private final float shellRadius;
 	
-	public DungeonSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
-	                       EntityType entityType, BlockState shellBlock, float shellRadius) {
+	public DungeonSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
+	                       EntityType<?> entityType, BlockState shellBlock, float shellRadius) {
 		
 		super(template, radius, decorators, spawns, random);
 		
@@ -40,7 +40,7 @@ public class DungeonSpheroid extends Spheroid {
 	
 	public static class Template extends Spheroid.Template {
 		
-		private final EntityType entityType;
+		private final EntityType<?> entityType;
 		private final BlockStateSupplier shellBlock;
 		private final int minShellRadius;
 		private final int maxShellRadius;
@@ -49,7 +49,7 @@ public class DungeonSpheroid extends Spheroid {
 			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			this.entityType = Registry.ENTITY_TYPE.get(Identifier.tryParse(JsonHelper.getString(typeData, "entity_type")));
+			this.entityType = Registries.ENTITY_TYPE.get(Identifier.tryParse(JsonHelper.getString(typeData, "entity_type")));
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
 			this.shellBlock = BlockStateSupplier.of(typeData.get("shell_block"));
@@ -102,8 +102,8 @@ public class DungeonSpheroid extends Spheroid {
 						chunk.setBlockState(currBlockPos, Blocks.SPAWNER.getDefaultState(), false);
 						chunk.setBlockEntity(new MobSpawnerBlockEntity(currBlockPos, Blocks.SPAWNER.getDefaultState()));
 						BlockEntity blockEntity_1 = chunk.getBlockEntity(currBlockPos);
-						if (blockEntity_1 instanceof MobSpawnerBlockEntity) {
-							((MobSpawnerBlockEntity) blockEntity_1).getLogic().setEntityId(this.entityType);
+						if (blockEntity_1 instanceof MobSpawnerBlockEntity mobSpawnerBlockEntity) {
+							mobSpawnerBlockEntity.getLogic().setEntityId(this.entityType, null, random, currBlockPos);
 						}
 					} else if (d == (this.radius - this.shellRadius - 1) &&
 							Math.round(Support.getDistance(x, y, z, x2, y2 - 1, z2)) == (this.radius - this.shellRadius) && random.nextInt((int) radius * 8) == 0) {

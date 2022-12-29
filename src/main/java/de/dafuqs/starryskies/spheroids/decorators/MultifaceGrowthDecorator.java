@@ -3,18 +3,17 @@ package de.dafuqs.starryskies.spheroids.decorators;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.Block;
 import net.minecraft.block.MultifaceGrowthBlock;
-import net.minecraft.command.argument.BlockArgumentParser;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntryList;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.MultifaceGrowthFeature;
 import net.minecraft.world.gen.feature.MultifaceGrowthFeatureConfig;
@@ -30,10 +29,11 @@ public class MultifaceGrowthDecorator extends SpheroidDecorator {
 	
 	public MultifaceGrowthDecorator(JsonObject data) throws CommandSyntaxException {
 		super(data);
-		Block block = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "block"), false).blockState().getBlock();
+		Block block = StarrySkies.getBlockFromString(JsonHelper.getString(data, "block"));
 		List<Block> placeableOn = new ArrayList<>();
 		for (JsonElement e : data.get("placeable_on_blocks").getAsJsonArray()) {
-			placeableOn.add(BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState().getBlock());
+			Block block2 = StarrySkies.getBlockFromString(e.getAsString());
+			placeableOn.add(block2);
 		}
 		featureConfig = new MultifaceGrowthFeatureConfig((MultifaceGrowthBlock) block, 20, false, true, true, 0.5F, RegistryEntryList.of(Block::getRegistryEntry, placeableOn));
 		chance = JsonHelper.getFloat(data, "chance");

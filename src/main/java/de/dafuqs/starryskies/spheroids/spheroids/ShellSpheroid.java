@@ -2,18 +2,17 @@ package de.dafuqs.starryskies.spheroids.spheroids;
 
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.BlockStateSupplier;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.LinkedHashMap;
@@ -27,7 +26,7 @@ public class ShellSpheroid extends Spheroid {
 	protected float shellRadius;
 	private final LinkedHashMap<BlockState, Float> shellSpeckleBlockStates;
 	
-	public ShellSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public ShellSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                     BlockState innerBlock, BlockState shellBlock, float shellRadius, LinkedHashMap<BlockState, Float> shellSpeckleBlockStates) {
 		
 		super(template, radius, decorators, spawns, random);
@@ -52,7 +51,7 @@ public class ShellSpheroid extends Spheroid {
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
-			this.innerBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "main_block"), false).blockState();
+			this.innerBlock = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "main_block"));
 			this.shellBlock = BlockStateSupplier.of(typeData.get("shell_block"));
 		}
 		

@@ -4,7 +4,7 @@
     "type": "starry_skies:starry_skies_chunk_generator",
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "starry_skies:starry_skies_nether_biome"
+      "biome": "starry_skies:nether"
     },
     "seed": 0,
     "settings": 1

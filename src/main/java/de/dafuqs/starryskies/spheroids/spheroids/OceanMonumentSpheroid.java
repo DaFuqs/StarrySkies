@@ -39,7 +39,7 @@ public class OceanMonumentSpheroid extends Spheroid {
 	
 	private final ArrayList<BlockPos> guardianPositions = new ArrayList<>();
 	
-	public OceanMonumentSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public OceanMonumentSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                             int coreRadius, int shellRadius) {
 		
 		super(template, radius, decorators, spawns, random);

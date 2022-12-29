@@ -9,9 +9,9 @@ import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
+import org.joml.Matrix4f;
 
 import java.util.LinkedHashMap;
 
@@ -56,7 +56,7 @@ public class StarrySkyBox {
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 		RenderSystem.depthMask(false);
-		RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+		RenderSystem.setShader(GameRenderer::getPositionTexProgram);
 		
 		for (int i = 0; i < 6; ++i) {
 			matrices.push();
@@ -65,23 +65,23 @@ public class StarrySkyBox {
 			}
 			if (i == 1) {
 				RenderSystem.setShaderTexture(0, this.textures.get(WEST));
-				matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
+				matrices.multiply(RotationAxis.POSITIVE_X.rotation(90.0F));
 			}
 			if (i == 2) {
 				RenderSystem.setShaderTexture(0, this.textures.get(EAST));
-				matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
+				matrices.multiply(RotationAxis.POSITIVE_X.rotation(-90.0F));
 			}
 			if (i == 3) {
 				RenderSystem.setShaderTexture(0, this.textures.get(UP));
-				matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
+				matrices.multiply(RotationAxis.POSITIVE_X.rotation(180.0F));
 			}
 			if (i == 4) {
 				RenderSystem.setShaderTexture(0, this.textures.get(NORTH));
-				matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
+				matrices.multiply(RotationAxis.POSITIVE_Z.rotation(90.0F));
 			}
 			if (i == 5) {
 				RenderSystem.setShaderTexture(0, this.textures.get(SOUTH));
-				matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
+				matrices.multiply(RotationAxis.POSITIVE_Z.rotation(-90.0F));
 			}
 			
 			Tessellator tessellator = Tessellator.getInstance();

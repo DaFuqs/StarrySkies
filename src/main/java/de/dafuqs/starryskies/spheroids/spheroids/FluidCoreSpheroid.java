@@ -9,12 +9,12 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class FluidCoreSpheroid extends Spheroid {
 	private final BlockState coreBlock;
 	private float coreRadius;
 	
-	public FluidCoreSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public FluidCoreSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                         BlockState fluidBlock, BlockState shellBlock, float shellRadius, float fillAmount, boolean holeInBottom, BlockState coreBlock, float coreRadius) {
 		
 		super(template, radius, decorators, spawns, random);
@@ -71,7 +71,7 @@ public class FluidCoreSpheroid extends Spheroid {
 			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			this.fluid = Registry.FLUID.get(Identifier.tryParse(JsonHelper.getString(typeData, "fluid")));
+			this.fluid = Registries.FLUID.get(Identifier.tryParse(JsonHelper.getString(typeData, "fluid")));
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
 			this.minFillAmount = JsonHelper.getFloat(typeData, "min_fill_amount");

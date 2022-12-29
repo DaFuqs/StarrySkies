@@ -2,7 +2,7 @@ package de.dafuqs.starryskies.spheroids;
 
 import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.spheroids.decorators.*;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registry;
 
 public class SpheroidDecoratorTypes {
 	

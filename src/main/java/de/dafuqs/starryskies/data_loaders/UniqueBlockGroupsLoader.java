@@ -7,12 +7,10 @@ import de.dafuqs.starryskies.StarrySkies;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
-import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
@@ -46,7 +44,7 @@ public class UniqueBlockGroupsLoader extends JsonDataLoader implements Identifia
 			
 			for (JsonElement e : jsonElement.getAsJsonArray()) {
 				try {
-					BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
+					BlockState state = StarrySkies.getStateFromString(e.getAsString());
 					list.add(state);
 				} catch (CommandSyntaxException ex) {
 					if (StarrySkies.CONFIG.packCreatorMode) {

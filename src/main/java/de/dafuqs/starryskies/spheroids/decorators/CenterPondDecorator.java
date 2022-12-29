@@ -2,18 +2,17 @@ package de.dafuqs.starryskies.spheroids.decorators;
 
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.StructureWorldAccess;
 
 
@@ -26,11 +25,13 @@ public class CenterPondDecorator extends SpheroidDecorator {
 	
 	public CenterPondDecorator(JsonObject data) throws CommandSyntaxException {
 		super(data);
-		this.beachBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "beach_block"), false).blockState();
-		this.fluidBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "fluid_block"), false).blockState();
+		this.beachBlock = StarrySkies.getStateFromString(JsonHelper.getString(data, "beach_block"));
+		this.fluidBlock = StarrySkies.getStateFromString(JsonHelper.getString(data, "fluid_block"));
 		this.lootTable = Identifier.tryParse(JsonHelper.getString(data, "loot_table"));
 		this.lootTableChance = JsonHelper.getFloat(data, "loot_table_chance");
 	}
+	
+	
 	
 	@Override
 	public void decorate(StructureWorldAccess world, ChunkPos origin, Spheroid spheroid, Random random) {

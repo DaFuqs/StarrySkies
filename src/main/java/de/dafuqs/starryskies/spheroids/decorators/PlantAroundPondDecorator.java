@@ -19,10 +19,10 @@ import java.util.Iterator;
 public class PlantAroundPondDecorator extends SpheroidDecorator {
 	
 	private final BlockState block = Blocks.SUGAR_CANE.getDefaultState();
-	private final int pond_tries = 3;
-	private final float plant_chance = 0.5F;
-	private final int minHeight = 1;
-	private final int maxHeight = 3;
+	private static final int pond_tries = 3;
+	private static final float plant_chance = 0.5F;
+	private static final int minHeight = 1;
+	private static final int maxHeight = 3;
 	
 	public PlantAroundPondDecorator(JsonObject data) throws CommandSyntaxException {
 		super(data);

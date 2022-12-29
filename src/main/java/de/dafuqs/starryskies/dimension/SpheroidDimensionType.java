@@ -2,9 +2,10 @@ package de.dafuqs.starryskies.dimension;
 
 import de.dafuqs.starryskies.StarrySkies;
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.Biome;
 import org.apache.logging.log4j.Level;
 
@@ -41,13 +42,13 @@ public enum SpheroidDimensionType {
 	public BlockState getFloorBlockState() {
 		switch (this) {
 			case OVERWORLD -> {
-				return Registry.BLOCK.get(new Identifier(StarrySkies.CONFIG.floorBlockOverworld.toLowerCase())).getDefaultState();
+				return Registries.BLOCK.get(new Identifier(StarrySkies.CONFIG.floorBlockOverworld.toLowerCase())).getDefaultState();
 			}
 			case NETHER -> {
-				return Registry.BLOCK.get(new Identifier(StarrySkies.CONFIG.floorBlockNether.toLowerCase())).getDefaultState();
+				return Registries.BLOCK.get(new Identifier(StarrySkies.CONFIG.floorBlockNether.toLowerCase())).getDefaultState();
 			}
 			default -> {
-				return Registry.BLOCK.get(new Identifier(StarrySkies.CONFIG.floorBlockEnd.toLowerCase())).getDefaultState();
+				return Registries.BLOCK.get(new Identifier(StarrySkies.CONFIG.floorBlockEnd.toLowerCase())).getDefaultState();
 			}
 		}
 	}
@@ -55,13 +56,13 @@ public enum SpheroidDimensionType {
 	public BlockState getBottomBlockState() {
 		switch (this) {
 			case OVERWORLD -> {
-				return Registry.BLOCK.get(new Identifier(StarrySkies.CONFIG.bottomBlockOverworld.toLowerCase())).getDefaultState();
+				return Registries.BLOCK.get(new Identifier(StarrySkies.CONFIG.bottomBlockOverworld.toLowerCase())).getDefaultState();
 			}
 			case NETHER -> {
-				return Registry.BLOCK.get(new Identifier(StarrySkies.CONFIG.bottomBlockNether.toLowerCase())).getDefaultState();
+				return Registries.BLOCK.get(new Identifier(StarrySkies.CONFIG.bottomBlockNether.toLowerCase())).getDefaultState();
 			}
 			default -> {
-				return Registry.BLOCK.get(new Identifier(StarrySkies.CONFIG.bottomBlockEnd.toLowerCase())).getDefaultState();
+				return Registries.BLOCK.get(new Identifier(StarrySkies.CONFIG.bottomBlockEnd.toLowerCase())).getDefaultState();
 			}
 		}
 	}
@@ -69,13 +70,13 @@ public enum SpheroidDimensionType {
 	public RegistryEntry<Biome> getBiome(Registry<Biome> biomeRegistry) {
 		switch (this) {
 			case OVERWORLD -> {
-				return biomeRegistry.getOrCreateEntry(StarrySkyBiomes.OVERWORLD_KEY);
+				return biomeRegistry.entryOf(StarrySkyBiomes.OVERWORLD_KEY);
 			}
 			case NETHER -> {
-				return biomeRegistry.getOrCreateEntry(StarrySkyBiomes.NETHER_KEY);
+				return biomeRegistry.entryOf(StarrySkyBiomes.NETHER_KEY);
 			}
 			default -> {
-				return biomeRegistry.getOrCreateEntry(StarrySkyBiomes.END_KEY);
+				return biomeRegistry.entryOf(StarrySkyBiomes.END_KEY);
 			}
 		}
 	}

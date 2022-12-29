@@ -15,7 +15,7 @@
     "starry_skies_0": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
-        "to": "starry_skies:starry_skies_end"
+        "to": "starry_skies:end"
       }
     }
   }

@@ -2,17 +2,16 @@ package de.dafuqs.starryskies.spheroids.spheroids;
 
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class GeodeSpheroid extends Spheroid {
 	private final BlockState middleBlockSate;
 	private final BlockState outerBlockState;
 	
-	public GeodeSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public GeodeSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                     BlockState innerBlockState, BlockState innerSpecklesBlockState, float speckleChance, BlockState middleBlockSate, BlockState outerBlockState) {
 		
 		super(template, radius, decorators, spawns, random);
@@ -49,11 +48,11 @@ public class GeodeSpheroid extends Spheroid {
 			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			this.innerBlockState = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "inner_block"), false).blockState();
-			this.innerSpecklesBlockState = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "inner_speckles_block"), false).blockState();
+			this.innerBlockState = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "inner_block"));
+			this.innerSpecklesBlockState = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "inner_speckles_block"));
 			this.speckleChance = JsonHelper.getFloat(typeData, "inner_speckles_block_chance");
-			this.middleBlockSate = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "middle_block"), false).blockState();
-			this.outerBlockState = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "outer_block"), false).blockState();
+			this.middleBlockSate = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "middle_block"));
+			this.outerBlockState = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "outer_block"));
 		}
 		
 		@Override

@@ -20,6 +20,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
@@ -28,7 +29,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
@@ -49,12 +49,12 @@ public abstract class Spheroid implements Serializable {
 	protected Spheroid.Template template;
 	protected float radius;
 	protected List<SpheroidDecorator> decorators;
-	protected List<Pair<EntityType, Integer>> spawns;
+	protected List<Pair<EntityType<?>, Integer>> spawns;
 	
 	protected BlockPos position;
 	protected ChunkRandom random;
 	
-	public Spheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random) {
+	public Spheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random) {
 		this.template = template;
 		this.radius = radius;
 		this.decorators = decorators;
@@ -146,7 +146,7 @@ public abstract class Spheroid implements Serializable {
 	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
 		if (isCenterInChunk(chunkPos)) {
 			StarrySkies.log(Level.DEBUG, "Populating entities for spheroid in chunk x:" + chunkPos.x + " z:" + chunkPos.z + " (StartX:" + chunkPos.getStartX() + " StartZ:" + chunkPos.getStartZ() + ") " + this.getDescription());
-			for (Pair<EntityType, Integer> spawnEntry : spawns) {
+			for (Pair<EntityType<?>, Integer> spawnEntry : spawns) {
 				
 				int xCord = chunkPos.getStartX();
 				int zCord = chunkPos.getStartZ();
@@ -190,11 +190,11 @@ public abstract class Spheroid implements Serializable {
 		}
 	}
 	
-	protected void placeSpawner(@NotNull WorldAccess worldAccess, BlockPos blockPos, EntityType entityType) {
+	protected void placeSpawner(@NotNull WorldAccess worldAccess, BlockPos blockPos, EntityType<?> entityType) {
 		worldAccess.setBlockState(blockPos, Blocks.SPAWNER.getDefaultState(), 3);
 		BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos);
 		if (blockEntity instanceof MobSpawnerBlockEntity) {
-			((MobSpawnerBlockEntity) blockEntity).getLogic().setEntityId(entityType);
+			((MobSpawnerBlockEntity) blockEntity).getLogic().setEntityId(entityType, null, worldAccess.getRandom(), blockPos);
 		}
 	}
 	
@@ -250,7 +250,7 @@ public abstract class Spheroid implements Serializable {
 			
 			for (JsonElement e : jsonArray) {
 				JsonObject o = e.getAsJsonObject();
-				EntityType entityType = Registry.ENTITY_TYPE.get(Identifier.tryParse(JsonHelper.getString(o, "type")));
+				EntityType<?> entityType = Registries.ENTITY_TYPE.get(Identifier.tryParse(JsonHelper.getString(o, "type")));
 				int minCount = JsonHelper.getInt(o, "min_count");
 				int maxCount = JsonHelper.getInt(o, "max_count");
 				float chance = JsonHelper.getFloat(o, "chance");
@@ -270,8 +270,8 @@ public abstract class Spheroid implements Serializable {
 			return decorators;
 		}
 		
-		protected List<Pair<EntityType, Integer>> selectSpawns(Random random) {
-			List<Pair<EntityType, Integer>> spawns = new ArrayList<>();
+		protected List<Pair<EntityType<?>, Integer>> selectSpawns(Random random) {
+			List<Pair<EntityType<?>, Integer>> spawns = new ArrayList<>();
 			for (SpheroidEntitySpawnDefinition entry : this.spawns) {
 				if (random.nextFloat() < entry.chance) {
 					int count = Support.getRandomBetween(random, entry.minCount, entry.maxCount);

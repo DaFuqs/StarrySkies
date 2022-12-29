@@ -1,5 +1,6 @@
 package de.dafuqs.starryskies;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.starryskies.advancements.ProximityAdvancementCheckEvent;
 import de.dafuqs.starryskies.advancements.StarryAdvancementCriteria;
 import de.dafuqs.starryskies.commands.ClosestSpheroidCommand;
@@ -19,12 +20,16 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.command.argument.BlockArgumentParser;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -52,7 +57,7 @@ public class StarrySkies implements ModInitializer {
 		CONFIG = AutoConfig.getConfigHolder(StarrySkyConfig.class).getConfig();
 		
 		// Register all the stuff
-		Registry.register(Registry.CHUNK_GENERATOR, new Identifier(MOD_ID, "starry_skies_chunk_generator"), StarrySkyChunkGenerator.CODEC);
+		Registry.register(Registries.CHUNK_GENERATOR, new Identifier(MOD_ID, "starry_skies_chunk_generator"), StarrySkyChunkGenerator.CODEC);
 		StarryResourceConditions.register();
 		StarrySkyBiomes.initialize();
 		if (CONFIG.registerStarryPortal) {
@@ -63,12 +68,6 @@ public class StarrySkies implements ModInitializer {
 		
 		SpheroidTypes.initialize();
 		SpheroidDecoratorTypes.initialize();
-		
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(UniqueBlockGroupsLoader.INSTANCE);
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(WeightedBlockGroupsLoader.INSTANCE);
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidDecoratorLoader.INSTANCE);
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidDistributionLoader.INSTANCE);
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidTemplateLoader.INSTANCE);
 		
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			ClosestSpheroidCommand.register(dispatcher);
@@ -86,6 +85,12 @@ public class StarrySkies implements ModInitializer {
 			}
 		});
 		
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(UniqueBlockGroupsLoader.INSTANCE);
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(WeightedBlockGroupsLoader.INSTANCE);
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidDecoratorLoader.INSTANCE);
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidDistributionLoader.INSTANCE);
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidTemplateLoader.INSTANCE);
+		
 		ServerTickEvents.END_SERVER_TICK.register(new ProximityAdvancementCheckEvent());
 		
 		log(INFO, "Finished loading.");
@@ -99,11 +104,18 @@ public class StarrySkies implements ModInitializer {
 		LOGGER.log(logLevel, "[StarrySkies] " + message);
 	}
 	
+	public static BlockState getStateFromString(String s) throws CommandSyntaxException {
+		return BlockArgumentParser.block(Registries.BLOCK.getReadOnlyWrapper(), s, false).blockState();
+	}
+	
+	public static Block getBlockFromString(String s) {
+		return Registries.BLOCK.get(Identifier.tryParse(s));
+	}
+	
 	public static boolean inStarryWorld(ServerPlayerEntity serverPlayerEntity) {
 		RegistryKey<World> worldRegistryKey = serverPlayerEntity.getEntityWorld().getRegistryKey();
 		return isStarryWorld(worldRegistryKey);
 	}
-	
 	
 	public static ServerWorld getStarryWorld(SpheroidDimensionType dimensionType) {
 		switch (dimensionType) {
@@ -127,7 +139,6 @@ public class StarrySkies implements ModInitializer {
 			return worldRegistryKey.equals(StarrySkies.starryWorld.getRegistryKey())
 					|| worldRegistryKey.equals(starryWorldNether.getRegistryKey())
 					|| worldRegistryKey.equals(starryWorldEnd.getRegistryKey());
-			
 		}
 	}
 	

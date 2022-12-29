@@ -3,17 +3,16 @@ package de.dafuqs.starryskies.spheroids.spheroids;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class ModularRainbowSpheroid extends Spheroid {
 	private final List<BlockState> topBlocks;
 	private final List<BlockState> bottomBlocks;
 	
-	public ModularRainbowSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public ModularRainbowSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                              List<BlockState> rainbowBlocks, List<BlockState> topBlocks, List<BlockState> bottomBlocks) {
 		
 		super(template, radius, decorators, spawns, random);
@@ -45,15 +44,15 @@ public class ModularRainbowSpheroid extends Spheroid {
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			for (JsonElement e : JsonHelper.getArray(typeData, "blocks")) {
-				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
+				BlockState state = StarrySkies.getStateFromString(e.getAsString());
 				this.rainbowBlocks.add(state);
 			}
 			for (JsonElement e : JsonHelper.getArray(typeData, "top_blocks")) {
-				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
+				BlockState state = StarrySkies.getStateFromString(e.getAsString());
 				this.topBlocks.add(state);
 			}
 			for (JsonElement e : JsonHelper.getArray(typeData, "bottom_blocks")) {
-				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
+				BlockState state = StarrySkies.getStateFromString(e.getAsString());
 				this.bottomBlocks.add(state);
 			}
 		}

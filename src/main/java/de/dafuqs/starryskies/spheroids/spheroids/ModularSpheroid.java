@@ -2,17 +2,16 @@ package de.dafuqs.starryskies.spheroids.spheroids;
 
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class ModularSpheroid extends Spheroid {
 	private final BlockState topBlock;
 	private final BlockState bottomBlock;
 	
-	public ModularSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public ModularSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                       BlockState mainBlock, BlockState topBlock, BlockState bottomBlock) {
 		
 		super(template, radius, decorators, spawns, random);
@@ -42,12 +41,12 @@ public class ModularSpheroid extends Spheroid {
 			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			this.mainBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "main_block"), false).blockState();
+			this.mainBlock = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "main_block"));
 			if (JsonHelper.hasString(typeData, "top_block")) {
-				this.topBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "top_block"), false).blockState();
+				this.topBlock = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "top_block"));
 			}
 			if (JsonHelper.hasString(typeData, "bottom_block")) {
-				this.bottomBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "bottom_block"), false).blockState();
+				this.bottomBlock = StarrySkies.getStateFromString(JsonHelper.getString(typeData, "bottom_block"));
 			}
 		}
 		

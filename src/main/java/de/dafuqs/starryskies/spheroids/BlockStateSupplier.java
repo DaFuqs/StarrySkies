@@ -2,14 +2,13 @@ package de.dafuqs.starryskies.spheroids;
 
 import com.google.gson.*;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.data_loaders.UniqueBlockGroupsLoader;
 import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupsLoader;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,7 +44,7 @@ public abstract class BlockStateSupplier {
 		BlockState state;
 		
 		public SingleBlockStateSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
-			state = BlockArgumentParser.block(Registry.BLOCK, json.getAsString(), false).blockState();
+			state = StarrySkies.getStateFromString(json.getAsString());
 		}
 		
 		public BlockState get(Random random) {
@@ -60,7 +59,7 @@ public abstract class BlockStateSupplier {
 		
 		public BlockStateListSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
 			for (JsonElement e : json.getAsJsonArray()) {
-				states.add(BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState());
+				states.add(StarrySkies.getStateFromString(e.getAsString()));
 			}
 		}
 		
@@ -76,7 +75,7 @@ public abstract class BlockStateSupplier {
 		
 		public WeightedBlockStateSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
 			for (Map.Entry<String, JsonElement> e : json.getAsJsonObject().entrySet()) {
-				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getKey(), false).blockState();
+				BlockState state = StarrySkies.getStateFromString(e.getKey());
 				float weight = e.getValue().getAsFloat();
 				states.put(state, weight);
 			}

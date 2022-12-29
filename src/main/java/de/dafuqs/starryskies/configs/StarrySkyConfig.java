@@ -5,8 +5,8 @@ import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 @Config(name = "StarrySky")
 public class StarrySkyConfig implements ConfigData {
@@ -15,7 +15,7 @@ public class StarrySkyConfig implements ConfigData {
 	@Comment(value = """
 			
 			Logs errors when loading Datapack Spheres and decorators to the log.""")
-	public boolean packCreatorMode = true;
+	public boolean packCreatorMode = false;
 	
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
@@ -224,7 +224,7 @@ public class StarrySkyConfig implements ConfigData {
 		// validate floorBlock
 		try {
 			Identifier identifier = new Identifier(blockName.toLowerCase());
-			BlockState bs = Registry.BLOCK.get(identifier).getDefaultState();
+			BlockState bs = Registries.BLOCK.get(identifier).getDefaultState();
 			if (bs == null) {
 				return false;
 			}

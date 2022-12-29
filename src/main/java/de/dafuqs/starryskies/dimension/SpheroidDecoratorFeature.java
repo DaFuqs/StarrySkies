@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class SpheroidDecoratorFeature extends Feature {
+public class SpheroidDecoratorFeature extends Feature<DefaultFeatureConfig> {
 	
-	public SpheroidDecoratorFeature(Codec configCodec) {
+	public SpheroidDecoratorFeature(Codec<DefaultFeatureConfig> configCodec) {
 		super(DefaultFeatureConfig.CODEC);
 	}
 	

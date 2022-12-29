@@ -46,7 +46,7 @@ public class EndCitySpheroid extends Spheroid {
 	private final ArrayList<BlockPos> interiorDecoratorPositions = new ArrayList<>();
 	
 	
-	public EndCitySpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public EndCitySpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                       int shellRadius) {
 		
 		super(template, radius, decorators, spawns, random);

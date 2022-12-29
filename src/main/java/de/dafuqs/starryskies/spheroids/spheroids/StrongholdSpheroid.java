@@ -45,7 +45,7 @@ public class StrongholdSpheroid extends Spheroid {
 	private BlockPos portalPosition;
 	private final ArrayList<BlockPos> interiorDecoratorPositions = new ArrayList<>();
 	
-	public StrongholdSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public StrongholdSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                          int shellRadius) {
 		
 		super(template, radius, decorators, spawns, random);
@@ -114,8 +114,6 @@ public class StrongholdSpheroid extends Spheroid {
 							} else {
 								chunk.setBlockState(currBlockPos, STONE_BRICKS, false);
 							}
-						} else {
-							// AIR
 						}
 					} else {
 						if (y2 % 2 == 0) {

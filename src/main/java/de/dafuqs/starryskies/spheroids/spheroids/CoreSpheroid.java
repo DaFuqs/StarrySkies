@@ -22,7 +22,7 @@ public class CoreSpheroid extends Spheroid {
 	private final BlockState shellBlock;
 	private float coreRadius;
 	
-	public CoreSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType, Integer>> spawns, ChunkRandom random,
+	public CoreSpheroid(Spheroid.Template template, float radius, List<SpheroidDecorator> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
 	                    BlockState coreBlock, BlockState shellBlock, float coreRadius) {
 		
 		super(template, radius, decorators, spawns, random);
