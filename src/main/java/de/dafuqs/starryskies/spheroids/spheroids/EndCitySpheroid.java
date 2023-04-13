@@ -1,35 +1,22 @@
 package de.dafuqs.starryskies.spheroids.spheroids;
 
-import com.google.gson.JsonObject;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.EndRodBlock;
-import net.minecraft.block.WallSkullBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BrewingStandBlockEntity;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.loot.LootTables;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.Pair;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.chunk.Chunk;
+import com.google.gson.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.spheroids.*;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.*;
+import net.minecraft.entity.*;
+import net.minecraft.item.*;
+import net.minecraft.loot.*;
+import net.minecraft.nbt.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.random.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class EndCitySpheroid extends Spheroid {
 	

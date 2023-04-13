@@ -1,6 +1,6 @@
 package de.dafuqs.starryskies.advancements;
 
-import net.fabricmc.fabric.mixin.object.builder.CriteriaAccessor;
+import net.fabricmc.fabric.mixin.object.builder.*;
 
 public class StarryAdvancementCriteria {
 	

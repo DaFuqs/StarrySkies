@@ -1,41 +1,32 @@
 package de.dafuqs.starryskies.spheroids.decorators;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
-import net.minecraft.block.Block;
-import net.minecraft.block.MultifaceGrowthBlock;
-import net.minecraft.command.argument.BlockArgumentParser;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntryList;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.feature.MultifaceGrowthFeature;
-import net.minecraft.world.gen.feature.MultifaceGrowthFeatureConfig;
+import com.google.gson.*;
+import com.mojang.brigadier.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.spheroids.*;
+import de.dafuqs.starryskies.spheroids.spheroids.*;
+import net.minecraft.block.*;
+import net.minecraft.command.argument.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.util.registry.*;
+import net.minecraft.world.*;
+import net.minecraft.world.gen.feature.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class MultifaceGrowthDecorator extends SpheroidDecorator {
 	
-	private final MultifaceGrowthFeatureConfig featureConfig;
+	private final GlowLichenFeatureConfig featureConfig;
 	private final float chance;
 	
 	public MultifaceGrowthDecorator(JsonObject data) throws CommandSyntaxException {
 		super(data);
-		Block block = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(data, "block"), false).blockState().getBlock();
 		List<Block> placeableOn = new ArrayList<>();
 		for (JsonElement e : data.get("placeable_on_blocks").getAsJsonArray()) {
-			placeableOn.add(BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState().getBlock());
+			placeableOn.add(new BlockArgumentParser(new StringReader(e.getAsString()), true).parse(false).getBlockState().getBlock());
 		}
-		featureConfig = new MultifaceGrowthFeatureConfig((MultifaceGrowthBlock) block, 20, false, true, true, 0.5F, RegistryEntryList.of(Block::getRegistryEntry, placeableOn));
+		featureConfig = new GlowLichenFeatureConfig(20, false, true, true, 0.5F, RegistryEntryList.of(Block::getRegistryEntry, placeableOn));
 		chance = JsonHelper.getFloat(data, "chance");
 	}
 	
@@ -49,7 +40,7 @@ public class MultifaceGrowthDecorator extends SpheroidDecorator {
 				for (int i = 0; i < spheroid.getRadius(); i++) {
 					if (!world.getBlockState(currentPos.up(i)).isAir()) {
 						if (world.getBlockState(currentPos.up(i - 1)).isAir()) {
-							MultifaceGrowthFeature.generate(world, currentPos, world.getBlockState(bp), featureConfig, random, Arrays.asList(Direction.values()));
+							GlowLichenFeature.generate(world, currentPos, world.getBlockState(bp), featureConfig, random, Arrays.asList(Direction.values()));
 						}
 						break;
 					}

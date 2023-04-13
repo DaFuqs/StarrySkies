@@ -1,19 +1,16 @@
 package de.dafuqs.starryskies.mixin.client;
 
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.dimension.StarrySkyDimension;
-import de.dafuqs.starryskies.dimension.sky.StarrySkyBox;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.Matrix4f;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.dimension.*;
+import de.dafuqs.starryskies.dimension.sky.*;
+import net.fabricmc.api.*;
+import net.minecraft.client.*;
+import net.minecraft.client.render.*;
+import net.minecraft.client.util.math.*;
+import net.minecraft.util.math.*;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.*;
 
 /**
  * Rendering the custom sky box

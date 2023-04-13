@@ -1,15 +1,14 @@
 package de.dafuqs.starryskies.advancements;
 
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.spheroids.spheroids.*;
+import net.fabricmc.fabric.api.event.lifecycle.v1.*;
+import net.minecraft.server.*;
+import net.minecraft.server.network.*;
 
-import java.util.Optional;
+import java.util.*;
 
-import static org.apache.logging.log4j.Level.DEBUG;
+import static org.apache.logging.log4j.Level.*;
 
 public class ProximityAdvancementCheckEvent implements ServerTickEvents.EndTick {
 	

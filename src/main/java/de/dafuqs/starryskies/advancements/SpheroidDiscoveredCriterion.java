@@ -1,18 +1,13 @@
 package de.dafuqs.starryskies.advancements;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
-import net.minecraft.advancement.criterion.AbstractCriterion;
-import net.minecraft.advancement.criterion.AbstractCriterionConditions;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
+import com.google.gson.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.spheroids.spheroids.*;
+import net.minecraft.advancement.criterion.*;
+import net.minecraft.predicate.entity.*;
+import net.minecraft.server.network.*;
+import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
 
 public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDiscoveredCriterion.Conditions> {
 	

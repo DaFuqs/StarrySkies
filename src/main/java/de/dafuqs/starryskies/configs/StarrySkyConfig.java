@@ -1,12 +1,11 @@
 package de.dafuqs.starryskies.configs;
 
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import me.shedaniel.autoconfig.*;
+import me.shedaniel.autoconfig.annotation.*;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.*;
+import net.minecraft.block.*;
+import net.minecraft.util.*;
+import net.minecraft.util.registry.*;
 
 @Config(name = "StarrySky")
 public class StarrySkyConfig implements ConfigData {
@@ -15,7 +14,7 @@ public class StarrySkyConfig implements ConfigData {
 	@Comment(value = """
 			
 			Logs errors when loading Datapack Spheres and decorators to the log.""")
-	public boolean packCreatorMode = true;
+	public boolean packCreatorMode = false;
 	
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """

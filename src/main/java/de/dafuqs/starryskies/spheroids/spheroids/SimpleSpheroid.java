@@ -1,21 +1,19 @@
 package de.dafuqs.starryskies.spheroids.spheroids;
 
-import com.google.gson.JsonObject;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
-import net.minecraft.entity.EntityType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.Pair;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.chunk.Chunk;
+import com.google.gson.*;
+import com.mojang.brigadier.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.spheroids.*;
+import net.minecraft.block.*;
+import net.minecraft.command.argument.*;
+import net.minecraft.entity.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.random.*;
 
-import java.util.List;
+import java.util.*;
 
 public class SimpleSpheroid extends Spheroid {
 	
@@ -36,7 +34,7 @@ public class SimpleSpheroid extends Spheroid {
 			super(identifier, data);
 			
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
-			this.blockState = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "block"), false).blockState();
+			this.blockState = new BlockArgumentParser(new StringReader(JsonHelper.getString(typeData, "block")), false).parse(false).getBlockState();
 		}
 		
 		@Override

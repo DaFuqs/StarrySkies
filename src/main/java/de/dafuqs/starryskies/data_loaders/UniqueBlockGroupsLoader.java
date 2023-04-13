@@ -1,24 +1,18 @@
 package de.dafuqs.starryskies.data_loaders;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.StarrySkies;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.command.argument.BlockArgumentParser;
-import net.minecraft.resource.JsonDataLoader;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.profiler.Profiler;
-import net.minecraft.util.registry.Registry;
-import org.apache.logging.log4j.Level;
+import com.google.gson.*;
+import com.mojang.brigadier.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.*;
+import net.fabricmc.fabric.api.resource.*;
+import net.minecraft.block.*;
+import net.minecraft.command.argument.*;
+import net.minecraft.resource.*;
+import net.minecraft.util.*;
+import net.minecraft.util.profiler.*;
+import org.apache.logging.log4j.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UniqueBlockGroupsLoader extends JsonDataLoader implements IdentifiableResourceReloadListener {
 	
@@ -46,7 +40,7 @@ public class UniqueBlockGroupsLoader extends JsonDataLoader implements Identifia
 			
 			for (JsonElement e : jsonElement.getAsJsonArray()) {
 				try {
-					BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState();
+					BlockState state = new BlockArgumentParser(new StringReader(e.getAsString()), true).parse(false).getBlockState();
 					list.add(state);
 				} catch (CommandSyntaxException ex) {
 					if (StarrySkies.CONFIG.packCreatorMode) {

@@ -1,14 +1,13 @@
 package de.dafuqs.starryskies.dimension;
 
-import de.dafuqs.starryskies.StarrySkies;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.world.biome.Biome;
-import org.apache.logging.log4j.Level;
+import de.dafuqs.starryskies.*;
+import net.minecraft.block.*;
+import net.minecraft.util.*;
+import net.minecraft.util.registry.*;
+import net.minecraft.world.biome.*;
+import org.apache.logging.log4j.*;
 
-import java.util.Locale;
+import java.util.*;
 
 public enum SpheroidDimensionType {
 	OVERWORLD,

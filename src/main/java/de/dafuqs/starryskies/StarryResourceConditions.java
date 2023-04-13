@@ -1,14 +1,9 @@
 package de.dafuqs.starryskies;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import de.dafuqs.starryskies.data_loaders.UniqueBlockGroupsLoader;
-import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupsLoader;
-import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
+import com.google.gson.*;
+import de.dafuqs.starryskies.data_loaders.*;
+import net.fabricmc.fabric.api.resource.conditions.v1.*;
+import net.minecraft.util.*;
 
 public class StarryResourceConditions {
 	

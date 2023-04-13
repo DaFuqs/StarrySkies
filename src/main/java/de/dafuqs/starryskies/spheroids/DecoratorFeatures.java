@@ -1,18 +1,14 @@
 package de.dafuqs.starryskies.spheroids;
 
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.dimension.SpheroidDecoratorFeature;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.dimension.*;
+import net.minecraft.util.*;
+import net.minecraft.util.registry.*;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier;
-import net.minecraft.world.gen.placementmodifier.PlacementModifier;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.gen.placementmodifier.*;
+import org.jetbrains.annotations.*;
 
-import java.util.List;
+import java.util.*;
 
 public class DecoratorFeatures {
 	

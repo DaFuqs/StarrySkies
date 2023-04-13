@@ -1,22 +1,16 @@
 package de.dafuqs.starryskies.data_loaders;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import de.dafuqs.starryskies.spheroids.StarryRegistries;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
-import net.minecraft.resource.JsonDataLoader;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.profiler.Profiler;
-import org.apache.logging.log4j.Level;
+import com.google.gson.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.spheroids.*;
+import net.fabricmc.fabric.api.resource.*;
+import net.minecraft.resource.*;
+import net.minecraft.util.*;
+import net.minecraft.util.profiler.*;
+import org.apache.logging.log4j.*;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.lang.reflect.*;
+import java.util.*;
 
 public class SpheroidDecoratorLoader extends JsonDataLoader implements IdentifiableResourceReloadListener {
 	

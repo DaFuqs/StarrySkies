@@ -1,25 +1,19 @@
 package de.dafuqs.starryskies.data_loaders;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.dimension.SpheroidDimensionType;
-import de.dafuqs.starryskies.spheroids.StarryRegistries;
-import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
-import net.minecraft.resource.JsonDataLoader;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.profiler.Profiler;
-import org.apache.logging.log4j.Level;
+import com.google.gson.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.dimension.*;
+import de.dafuqs.starryskies.spheroids.*;
+import de.dafuqs.starryskies.spheroids.spheroids.*;
+import net.fabricmc.fabric.api.resource.*;
+import net.minecraft.resource.*;
+import net.minecraft.util.*;
+import net.minecraft.util.profiler.*;
+import net.minecraft.world.gen.random.*;
+import org.apache.logging.log4j.*;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.lang.reflect.*;
+import java.util.*;
 
 public class SpheroidTemplateLoader extends JsonDataLoader implements IdentifiableResourceReloadListener {
 	

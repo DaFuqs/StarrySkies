@@ -1,22 +1,20 @@
 package de.dafuqs.starryskies.spheroids.spheroids;
 
-import com.google.gson.JsonObject;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
-import net.minecraft.entity.EntityType;
+import com.google.gson.*;
+import com.mojang.brigadier.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.spheroids.*;
+import net.minecraft.block.*;
+import net.minecraft.command.argument.*;
+import net.minecraft.entity.*;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.Pair;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.random.*;
 
-import java.util.List;
+import java.util.*;
 
 public class MushroomSpheroid extends Spheroid {
 	
@@ -47,8 +45,8 @@ public class MushroomSpheroid extends Spheroid {
 			JsonObject typeData = JsonHelper.getObject(data, "type_data");
 			this.minShellRadius = JsonHelper.getInt(typeData, "min_shell_size");
 			this.maxShellRadius = JsonHelper.getInt(typeData, "max_shell_size");
-			this.stemBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "stem_block"), false).blockState();
-			this.mushroomBlock = BlockArgumentParser.block(Registry.BLOCK, JsonHelper.getString(typeData, "mushroom_block"), false).blockState();
+			this.stemBlock = new BlockArgumentParser(new StringReader(JsonHelper.getString(typeData, "stem_block")), false).parse(false).getBlockState();
+			this.mushroomBlock = new BlockArgumentParser(new StringReader(JsonHelper.getString(typeData, "mushroom_block")), false).parse(false).getBlockState();
 		}
 		
 		@Override

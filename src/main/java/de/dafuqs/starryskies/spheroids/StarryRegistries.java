@@ -1,12 +1,10 @@
 package de.dafuqs.starryskies.spheroids;
 
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.spheroids.decorators.SingleBlock;
-import de.dafuqs.starryskies.spheroids.spheroids.SimpleSpheroid;
-import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.spheroids.decorators.*;
+import de.dafuqs.starryskies.spheroids.spheroids.*;
+import net.minecraft.util.*;
+import net.minecraft.util.registry.*;
 
 public class StarryRegistries {
 	

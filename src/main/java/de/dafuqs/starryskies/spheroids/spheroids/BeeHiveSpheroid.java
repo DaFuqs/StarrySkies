@@ -1,34 +1,24 @@
 package de.dafuqs.starryskies.spheroids.spheroids;
 
-import com.google.gson.JsonObject;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupsLoader;
-import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import net.minecraft.block.BeehiveBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.TallPlantBlock;
-import net.minecraft.block.entity.BeehiveBlockEntity;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.BeeEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.Pair;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.chunk.Chunk;
+import com.google.gson.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.data_loaders.*;
+import de.dafuqs.starryskies.spheroids.*;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.*;
+import net.minecraft.block.enums.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.passive.*;
+import net.minecraft.text.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.random.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BeeHiveSpheroid extends Spheroid {
 	
@@ -223,7 +213,7 @@ public class BeeHiveSpheroid extends Spheroid {
 	}
 	
 	public void setRandomQueenProperties(BeeEntity beeEntity, ChunkRandom chunkRandom) {
-		beeEntity.setCustomName(Text.translatable("bee.queen"));
+		beeEntity.setCustomName(new TranslatableText("bee.queen"));
 		beeEntity.setHealth(beeEntity.getHealth() * (random.nextFloat() * 3 + 5)); //way higher than default
 		beeEntity.setMovementSpeed((float) (beeEntity.getMovementSpeed() * (random.nextFloat() * 0.5 + 0.5))); //slower than default
 		beeEntity.setAbsorptionAmount((float) (beeEntity.getAbsorptionAmount() * (random.nextFloat() * 1.5 + 1))); //higher than default

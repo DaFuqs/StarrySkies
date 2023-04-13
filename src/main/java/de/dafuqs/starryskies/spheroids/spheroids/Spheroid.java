@@ -1,48 +1,27 @@
 package de.dafuqs.starryskies.spheroids.spheroids;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.data_loaders.SpheroidDecoratorLoader;
-import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import de.dafuqs.starryskies.spheroids.SpheroidEntitySpawnDefinition;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
-import net.minecraft.block.entity.MobSpawnerBlockEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.Pair;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.chunk.Chunk;
-import org.apache.logging.log4j.Level;
-import org.jetbrains.annotations.NotNull;
+import com.google.gson.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.data_loaders.*;
+import de.dafuqs.starryskies.spheroids.*;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.mob.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.util.registry.*;
+import net.minecraft.world.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.random.*;
+import org.apache.logging.log4j.*;
+import org.jetbrains.annotations.*;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
-import static org.apache.logging.log4j.Level.WARN;
+import static org.apache.logging.log4j.Level.*;
 
 public abstract class Spheroid implements Serializable {
 	

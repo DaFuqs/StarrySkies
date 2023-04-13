@@ -27,10 +27,10 @@
     "starry_skies.mixins.json"
   ],
   "depends": {
-    "minecraft": ">=1.19.2",
+    "minecraft": ">=1.18.0",
     "fabricloader": ">=0.12.6",
     "fabric": "*",
-    "cloth-config": ">=8.0.0"
+    "cloth-config": ">=6.0.0"
   },
   "suggests": { },
   "accessWidener" : "starry_skies.accesswidener"

@@ -1,17 +1,16 @@
 package de.dafuqs.starryskies.commands;
 
-import com.mojang.brigadier.CommandDispatcher;
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.Support;
-import net.minecraft.command.argument.IdentifierArgumentType;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
+import com.mojang.brigadier.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.*;
+import net.minecraft.command.argument.*;
+import net.minecraft.server.command.*;
+import net.minecraft.server.network.*;
+import net.minecraft.text.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 
-import java.util.Optional;
+import java.util.*;
 
 public class ClosestSpheroidCommand {
 	
@@ -23,7 +22,7 @@ public class ClosestSpheroidCommand {
 						.executes((context -> execute(context.getSource(), IdentifierArgumentType.getIdentifier(context, "identifier"))))));
 	}
 	
-	private static int execute(ServerCommandSource source, Identifier identifier) {
+	private static int execute(ServerCommandSource source, Identifier identifier) throws CommandSyntaxException {
 		ServerPlayerEntity caller = source.getPlayer();
 		
 		Optional<Support.SpheroidDistance> spheroidDistance;
@@ -34,9 +33,9 @@ public class ClosestSpheroidCommand {
 		}
 		
 		if (spheroidDistance.isPresent()) {
-			source.sendFeedback(Text.translatable(spheroidDistance.get().spheroid.getDescription()), false);
+			source.sendFeedback(new LiteralText(spheroidDistance.get().spheroid.getDescription()), false);
 		} else {
-			source.sendFeedback(Text.translatable("Could not determine closest spheroid. :("), false);
+			source.sendFeedback(new LiteralText("Could not determine closest spheroid. :("), false);
 		}
 		
 		return 1;

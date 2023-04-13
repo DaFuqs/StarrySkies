@@ -1,36 +1,26 @@
 package de.dafuqs.starryskies;
 
-import de.dafuqs.starryskies.advancements.ProximityAdvancementCheckEvent;
-import de.dafuqs.starryskies.advancements.StarryAdvancementCriteria;
-import de.dafuqs.starryskies.commands.ClosestSpheroidCommand;
-import de.dafuqs.starryskies.configs.StarrySkyConfig;
+import de.dafuqs.starryskies.advancements.*;
+import de.dafuqs.starryskies.commands.*;
+import de.dafuqs.starryskies.configs.*;
 import de.dafuqs.starryskies.data_loaders.*;
-import de.dafuqs.starryskies.dimension.SpheroidDimensionType;
-import de.dafuqs.starryskies.dimension.StarrySkyBiomes;
-import de.dafuqs.starryskies.dimension.StarrySkyChunkGenerator;
-import de.dafuqs.starryskies.dimension.StarrySkyDimension;
-import de.dafuqs.starryskies.spheroids.DecoratorFeatures;
-import de.dafuqs.starryskies.spheroids.SpheroidDecoratorTypes;
-import de.dafuqs.starryskies.spheroids.SpheroidTypes;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import de.dafuqs.starryskies.dimension.*;
+import de.dafuqs.starryskies.spheroids.*;
+import me.shedaniel.autoconfig.*;
+import me.shedaniel.autoconfig.serializer.*;
+import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.command.v1.*;
+import net.fabricmc.fabric.api.event.lifecycle.v1.*;
+import net.fabricmc.fabric.api.resource.*;
+import net.minecraft.resource.*;
+import net.minecraft.server.network.*;
+import net.minecraft.server.world.*;
+import net.minecraft.util.*;
+import net.minecraft.util.registry.*;
+import net.minecraft.world.*;
+import org.apache.logging.log4j.*;
 
-import static org.apache.logging.log4j.Level.INFO;
+import static org.apache.logging.log4j.Level.*;
 
 public class StarrySkies implements ModInitializer {
 	
@@ -70,9 +60,7 @@ public class StarrySkies implements ModInitializer {
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidDistributionLoader.INSTANCE);
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SpheroidTemplateLoader.INSTANCE);
 		
-		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-			ClosestSpheroidCommand.register(dispatcher);
-		});
+		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> ClosestSpheroidCommand.register(dispatcher));
 		
 		// triggers everytime a world is loaded
 		// so for overworld, nether, ... (they all share the same seed)

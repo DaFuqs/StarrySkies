@@ -1,19 +1,14 @@
 package de.dafuqs.starryskies.data_loaders;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.dimension.SpheroidDimensionType;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
-import net.minecraft.resource.JsonDataLoader;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.profiler.Profiler;
-import org.jetbrains.annotations.NotNull;
+import com.google.gson.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.dimension.*;
+import net.fabricmc.fabric.api.resource.*;
+import net.minecraft.resource.*;
+import net.minecraft.util.*;
+import net.minecraft.util.profiler.*;
+import net.minecraft.world.gen.random.*;
+import org.jetbrains.annotations.*;
 
 import java.util.*;
 

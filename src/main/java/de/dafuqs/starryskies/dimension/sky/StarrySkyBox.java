@@ -1,19 +1,17 @@
 package de.dafuqs.starryskies.dimension.sky;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import de.dafuqs.starryskies.StarrySkies;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.GameOptions;
+import com.mojang.blaze3d.systems.*;
+import de.dafuqs.starryskies.*;
+import net.fabricmc.api.*;
+import net.minecraft.client.*;
+import net.minecraft.client.option.*;
 import net.minecraft.client.render.*;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3f;
-import net.minecraft.world.World;
+import net.minecraft.client.util.math.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.*;
 
-import java.util.LinkedHashMap;
+import java.util.*;
 
 /**
  * Renderer for the custom skybox
@@ -48,7 +46,7 @@ public class StarrySkyBox {
 		}
 		
 		GameOptions options = MinecraftClient.getInstance().options;
-		float distance = 16F * (float) options.getViewDistance().getValue() - 8F;
+		float distance = 16F * (float) options.getViewDistance() - 8F;
 		int color = (int) Math.abs(((Math.abs((world.getTimeOfDay() - 6000) % 24000) - 12000) / 47)); // 47 = 12000 (half day)  /255 (max hue)
 		int rawLight = (int) ((world.getTimeOfDay() / 12000) % 15); // a day is 24000; max light level = 15
 		int vertexLight = 0x00f000f0 >> 2 | rawLight >> 3 | rawLight;

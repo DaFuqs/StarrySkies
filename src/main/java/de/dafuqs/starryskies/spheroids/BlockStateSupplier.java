@@ -1,22 +1,16 @@
 package de.dafuqs.starryskies.spheroids;
 
 import com.google.gson.*;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.data_loaders.UniqueBlockGroupsLoader;
-import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupsLoader;
-import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import com.mojang.brigadier.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.data_loaders.*;
+import net.minecraft.block.*;
+import net.minecraft.command.argument.*;
+import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class BlockStateSupplier {
 	
@@ -45,7 +39,7 @@ public abstract class BlockStateSupplier {
 		BlockState state;
 		
 		public SingleBlockStateSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
-			state = BlockArgumentParser.block(Registry.BLOCK, json.getAsString(), false).blockState();
+			state = new BlockArgumentParser(new StringReader(json.getAsString()), false).parse(false).getBlockState();
 		}
 		
 		public BlockState get(Random random) {
@@ -60,7 +54,7 @@ public abstract class BlockStateSupplier {
 		
 		public BlockStateListSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
 			for (JsonElement e : json.getAsJsonArray()) {
-				states.add(BlockArgumentParser.block(Registry.BLOCK, e.getAsString(), false).blockState());
+				states.add(new BlockArgumentParser(new StringReader(e.getAsString()), true).parse(false).getBlockState());
 			}
 		}
 		
@@ -76,7 +70,7 @@ public abstract class BlockStateSupplier {
 		
 		public WeightedBlockStateSupplier(@NotNull JsonElement json) throws CommandSyntaxException {
 			for (Map.Entry<String, JsonElement> e : json.getAsJsonObject().entrySet()) {
-				BlockState state = BlockArgumentParser.block(Registry.BLOCK, e.getKey(), false).blockState();
+				BlockState state = new BlockArgumentParser(new StringReader(e.getKey()), false).parse(false).getBlockState();
 				float weight = e.getValue().getAsFloat();
 				states.put(state, weight);
 			}
