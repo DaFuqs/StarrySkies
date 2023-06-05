@@ -10,9 +10,9 @@ import net.minecraft.block.entity.*;
 import net.minecraft.block.enums.*;
 import net.minecraft.entity.*;
 import net.minecraft.nbt.*;
+import net.minecraft.registry.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.math.random.*;
 import net.minecraft.world.*;
 import net.minecraft.world.chunk.*;
@@ -191,7 +191,7 @@ public class BeeHiveSpheroid extends Spheroid {
 	}
 	
 	@Override
-	public void populateEntities(ChunkPos chunkPos, ServerWorldAccess chunkRegion, Random random) {
+	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
 		if (isCenterInChunk(chunkPos)) {
 			if (queenBeehiveBlockEntity != null) {
 				queenBeehiveBlockEntity.addBee(getBee(), random.nextInt(599), false);
@@ -208,7 +208,7 @@ public class BeeHiveSpheroid extends Spheroid {
 	
 	public NbtCompound getBee() {
 		NbtCompound nbtCompound = new NbtCompound();
-		nbtCompound.putString("id", Registry.ENTITY_TYPE.getId(EntityType.BEE).toString());
+		nbtCompound.putString("id", Registries.ENTITY_TYPE.getId(EntityType.BEE).toString());
 		return nbtCompound;
 	}
 	

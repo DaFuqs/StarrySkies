@@ -142,7 +142,7 @@ public class OceanMonumentSpheroid extends Spheroid {
 	}
 	
 	@Override
-	public void populateEntities(ChunkPos chunkPos, ServerWorldAccess chunkRegion, Random random) {
+	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
 		for (BlockPos guardianPosition : guardianPositions) {
 			if (Support.isBlockPosInChunkPos(chunkPos, guardianPosition)) {
 
