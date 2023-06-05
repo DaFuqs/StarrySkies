@@ -29,9 +29,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.*;
 import net.minecraft.world.chunk.Chunk;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
@@ -143,15 +141,13 @@ public abstract class Spheroid implements Serializable {
 		LootableContainerBlockEntity.setLootTable(chunk, random, blockPos, lootTable);
 	}
 	
-	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
+	public void populateEntities(ChunkPos chunkPos, ServerWorldAccess chunkRegion, Random random) {
 		if (isCenterInChunk(chunkPos)) {
 			StarrySkies.log(Level.DEBUG, "Populating entities for spheroid in chunk x:" + chunkPos.x + " z:" + chunkPos.z + " (StartX:" + chunkPos.getStartX() + " StartZ:" + chunkPos.getStartZ() + ") " + this.getDescription());
 			for (Pair<EntityType, Integer> spawnEntry : spawns) {
 				
 				int xCord = chunkPos.getStartX();
 				int zCord = chunkPos.getStartZ();
-				
-				chunkRandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
 				
 				for (int i = 0; i < spawnEntry.getRight(); i++) {
 					int startingX = this.getPosition().getX();
@@ -169,7 +165,7 @@ public abstract class Spheroid implements Serializable {
 							double zLength = MathHelper.clamp(startingZ, (double) zCord + (double) width, (double) zCord + 16.0D - (double) width);
 							
 							try {
-								entity.refreshPositionAndAngles(xPos, height, zLength, chunkRandom.nextFloat() * 360.0F, 0.0F);
+								entity.refreshPositionAndAngles(xPos, height, zLength, random.nextFloat() * 360.0F, 0.0F);
 								if (entity instanceof MobEntity mobentity) {
 									if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
 										mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);

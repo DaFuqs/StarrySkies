@@ -1,34 +1,24 @@
 package de.dafuqs.starryskies.spheroids.spheroids;
 
-import com.google.gson.JsonObject;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.Support;
-import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupsLoader;
-import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
-import net.minecraft.block.BeehiveBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.TallPlantBlock;
-import net.minecraft.block.entity.BeehiveBlockEntity;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.BeeEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.Pair;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.chunk.Chunk;
+import com.google.gson.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.data_loaders.*;
+import de.dafuqs.starryskies.spheroids.*;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.*;
+import net.minecraft.block.enums.*;
+import net.minecraft.entity.*;
+import net.minecraft.nbt.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.util.math.random.*;
+import net.minecraft.util.registry.*;
+import net.minecraft.world.*;
+import net.minecraft.world.chunk.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BeeHiveSpheroid extends Spheroid {
 	
@@ -202,40 +192,25 @@ public class BeeHiveSpheroid extends Spheroid {
 	}
 	
 	@Override
-	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
+	public void populateEntities(ChunkPos chunkPos, ServerWorldAccess chunkRegion, Random random) {
 		if (isCenterInChunk(chunkPos)) {
 			if (queenBeehiveBlockEntity != null) {
-				// queen
-				BeeEntity queen = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
-				setRandomQueenProperties(queen, chunkRandom);
-				queenBeehiveBlockEntity.tryEnterHive(queen, false);
+				queenBeehiveBlockEntity.addBee(getBee(), random.nextInt(599), false);
 			}
 			
 			for (BeehiveBlockEntity beehiveBlockEntity : this.outerBeehiveBlockEntities) {
-				// add 2-3 bees to each hive
-				int j = 2 + random.nextInt(2);
-				for (int k = 0; k < j; ++k) {
-					BeeEntity beeEntity = new BeeEntity(EntityType.BEE, chunkRegion.toServerWorld());
-					beehiveBlockEntity.tryEnterHive(beeEntity, false, random.nextInt(599));
+				int beeCount = 2 + random.nextInt(2);
+				for(int j = 0; j < beeCount; ++j) {
+					beehiveBlockEntity.addBee(getBee(), random.nextInt(599), false);
 				}
 			}
 		}
 	}
 	
-	public void setRandomQueenProperties(BeeEntity beeEntity, ChunkRandom chunkRandom) {
-		beeEntity.setCustomName(Text.translatable("bee.queen"));
-		beeEntity.setHealth(beeEntity.getHealth() * (random.nextFloat() * 3 + 5)); //way higher than default
-		beeEntity.setMovementSpeed((float) (beeEntity.getMovementSpeed() * (random.nextFloat() * 0.5 + 0.5))); //slower than default
-		beeEntity.setAbsorptionAmount((float) (beeEntity.getAbsorptionAmount() * (random.nextFloat() * 1.5 + 1))); //higher than default
-		
-		StatusEffectInstance statusEffectInstance1 = new StatusEffectInstance(StatusEffects.HASTE, Integer.MAX_VALUE, 1);
-		StatusEffectInstance statusEffectInstance2 = new StatusEffectInstance(StatusEffects.STRENGTH, Integer.MAX_VALUE, 3);
-		StatusEffectInstance statusEffectInstance3 = new StatusEffectInstance(StatusEffects.REGENERATION, Integer.MAX_VALUE, 1);
-		beeEntity.addStatusEffect(statusEffectInstance1);
-		beeEntity.addStatusEffect(statusEffectInstance2);
-		beeEntity.addStatusEffect(statusEffectInstance3);
-		
-		beeEntity.setAngerTime(Integer.MAX_VALUE);
+	public NbtCompound getBee() {
+		NbtCompound nbtCompound = new NbtCompound();
+		nbtCompound.putString("id", Registry.ENTITY_TYPE.getId(EntityType.BEE).toString());
+		return nbtCompound;
 	}
 	
 }
