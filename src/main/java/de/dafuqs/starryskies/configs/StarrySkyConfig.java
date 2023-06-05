@@ -15,7 +15,7 @@ public class StarrySkyConfig implements ConfigData {
 	@Comment(value = """
 			
 			Logs errors when loading Datapack Spheres and decorators to the log.""")
-	public boolean packCreatorMode = true;
+	public boolean packCreatorMode = false;
 	
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
