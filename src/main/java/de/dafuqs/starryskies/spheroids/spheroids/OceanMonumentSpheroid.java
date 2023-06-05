@@ -16,8 +16,8 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.world.ChunkRegion;
+import net.minecraft.util.math.random.*;
+import net.minecraft.world.*;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.ArrayList;
@@ -142,14 +142,10 @@ public class OceanMonumentSpheroid extends Spheroid {
 	}
 	
 	@Override
-	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
+	public void populateEntities(ChunkPos chunkPos, ServerWorldAccess chunkRegion, Random random) {
 		for (BlockPos guardianPosition : guardianPositions) {
 			if (Support.isBlockPosInChunkPos(chunkPos, guardianPosition)) {
-				int xCord = chunkPos.x;
-				int zCord = chunkPos.z;
-				
-				chunkRandom.setPopulationSeed(chunkRegion.getSeed(), xCord, zCord);
-				
+
 				MobEntity mobentity;
 				if (random.nextFloat() < 0.08) {
 					mobentity = EntityType.ELDER_GUARDIAN.create(chunkRegion.toServerWorld());
@@ -163,7 +159,7 @@ public class OceanMonumentSpheroid extends Spheroid {
 					double zLength = MathHelper.clamp(guardianPosition.getZ(), (double) chunkPos.getStartZ() + (double) width, (double) chunkPos.getStartZ() + 16.0D - (double) width);
 					
 					try {
-						mobentity.refreshPositionAndAngles(xLength, guardianPosition.getY(), zLength, chunkRandom.nextFloat() * 360.0F, 0.0F);
+						mobentity.refreshPositionAndAngles(xLength, guardianPosition.getY(), zLength, random.nextFloat() * 360.0F, 0.0F);
 						mobentity.setPersistent();
 						if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
 							mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(new BlockPos(mobentity.getPos())), SpawnReason.CHUNK_GENERATION, null, null);
