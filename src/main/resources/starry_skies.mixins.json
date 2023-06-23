@@ -11,9 +11,7 @@
     "EntityMixin",
     "ServerWorldMixin"
   ],
-  "client": [
-    "client.WorldRendererMixin"
-  ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

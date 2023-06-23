@@ -4,8 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
 import net.minecraft.command.argument.IdentifierArgumentType;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.command.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -30,13 +29,13 @@ public class ClosestSpheroidCommand {
 		if (identifier == null) {
 			spheroidDistance = Support.getClosestSpheroidToPlayer(caller);
 		} else {
-			spheroidDistance = Optional.ofNullable(Support.getClosestSpheroid3x3(source.getWorld(), new BlockPos(source.getPosition()), identifier));
+			spheroidDistance = Optional.ofNullable(Support.getClosestSpheroid3x3(source.getWorld(), BlockPos.ofFloored(source.getPosition()), identifier));
 		}
 		
 		if (spheroidDistance.isPresent()) {
-			source.sendFeedback(Text.translatable(spheroidDistance.get().spheroid.getDescription()), false);
+			source.sendFeedback(() -> Text.translatable(spheroidDistance.get().spheroid.getDescription()), false);
 		} else {
-			source.sendFeedback(Text.translatable("Could not determine closest spheroid. :("), false);
+			source.sendFeedback(() -> Text.translatable("Could not determine closest spheroid. :("), false);
 		}
 		
 		return 1;

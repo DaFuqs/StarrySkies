@@ -1,49 +1,21 @@
 {
-  "precipitation": "rain",
-  "category": "none",
-  "player_spawn_friendly": true,
-  "depth": 0,
-  "scale": 0,
   "temperature": 1,
-  "temperature_modifier": "none",
   "downfall": 0.5,
+  "has_precipitation": false,
+  "temperature_modifier": "none",
+  "creature_spawn_probability": 0.5,
   "effects": {
+    "sky_color": 7907327,
+    "fog_color": 6200513,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
       "block_search_extent": 8,
-      "offset": 2.0
-    },
-    "sky_color": 7907327,
-    "fog_color": 6200513,
-    "water_color": 4159204,
-    "water_fog_color": 329011
+      "offset": 2
+    }
   },
-  "surface_builder": "minecraft:grass",
-  "carvers": {},
-  "features": [
-    [],
-    [],
-    [ "starry_skies:spheroid_decorator" ],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [
-      "minecraft:forest_flowers",
-      "minecraft:flower_plain",
-      "minecraft:flower_swamp",
-      "minecraft:flower_warm",
-      "minecraft:flower_default",
-      "minecraft:patch_grass_forest",
-      "minecraft:patch_pumpkin",
-      "minecraft:patch_melon"
-    ],
-    []
-  ],
-  "starts": [],
   "spawners": {
     "monster": [
       {
@@ -138,6 +110,30 @@
     "water_ambient": [],
     "misc": []
   },
-  "creature_spawn_probability": 0.5,
-  "spawn_costs": { }
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [
+      "starry_skies:spheroid_decorator"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:forest_flowers",
+      "minecraft:flower_plain",
+      "minecraft:flower_swamp",
+      "minecraft:flower_warm",
+      "minecraft:flower_default",
+      "minecraft:patch_grass_forest",
+      "minecraft:patch_pumpkin",
+      "minecraft:patch_melon"
+    ],
+    []
+  ]
 }

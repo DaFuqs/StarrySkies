@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class AbstractFireBlockMixin {
 	
 	@Inject(method = {"isOverworldOrNether"}, at = {@At("HEAD")}, cancellable = true)
-	private static void isOverworldOrNether(World world, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+	private static void starryskies$isOverworldOrNether(World world, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
 		if (StarrySkies.CONFIG.enableNetherPortalsToStarryNether) {
 			if (world.getRegistryKey().equals(StarrySkyDimension.OVERWORLD_KEY) || world.getRegistryKey().equals(StarrySkyDimension.NETHER_KEY)) {
 				callbackInfoReturnable.setReturnValue(true);

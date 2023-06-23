@@ -79,32 +79,32 @@ public class StarrySkyDimensionTravelHandler {
 	// Handler for Entity.getTeleportTarget
 	// returning null means letting vanilla handling it the default way
 	public static @Nullable TeleportTarget handleGetTeleportTarget(@NotNull Entity thisEntity, ServerWorld destination) {
-		boolean isTravellingToStarryEnd = thisEntity.world.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.END_KEY;
-		boolean isTravellingBackFromStarryEnd = thisEntity.world.getRegistryKey() == StarrySkyDimension.END_KEY && destination.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY;
+		boolean isTravellingToStarryEnd = thisEntity.getWorld().getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.END_KEY;
+		boolean isTravellingBackFromStarryEnd = thisEntity.getWorld().getRegistryKey() == StarrySkyDimension.END_KEY && destination.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY;
 		if (!isTravellingBackFromStarryEnd && !isTravellingToStarryEnd) {
-			boolean isTravellingToStarryNether = thisEntity.world.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.NETHER_KEY;
-			boolean isTravellingBackFromStarryNether = thisEntity.world.getRegistryKey() == StarrySkyDimension.NETHER_KEY && destination.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY;
+			boolean isTravellingToStarryNether = thisEntity.getWorld().getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY && destination.getRegistryKey() == StarrySkyDimension.NETHER_KEY;
+			boolean isTravellingBackFromStarryNether = thisEntity.getWorld().getRegistryKey() == StarrySkyDimension.NETHER_KEY && destination.getRegistryKey() == StarrySkyDimension.OVERWORLD_KEY;
 			
 			if (!isTravellingToStarryNether && !isTravellingBackFromStarryNether) {
 				// HANDLE VANILLA DIMENSIONS NORMALLY
 				return null;
 			} else {
 				WorldBorder worldBorder = destination.getWorldBorder();
-				double d = Math.max(-2.9999872E7D, worldBorder.getBoundWest() + 16.0D);
-				double e = Math.max(-2.9999872E7D, worldBorder.getBoundNorth() + 16.0D);
-				double f = Math.min(2.9999872E7D, worldBorder.getBoundEast() - 16.0D);
-				double g = Math.min(2.9999872E7D, worldBorder.getBoundSouth() - 16.0D);
+				double d = Math.max(-3D, worldBorder.getBoundWest() + 16.0D);
+				double e = Math.max(-3D, worldBorder.getBoundNorth() + 16.0D);
+				double f = Math.min(3D, worldBorder.getBoundEast() - 16.0D);
+				double g = Math.min(3D, worldBorder.getBoundSouth() - 16.0D);
 				
 				// h = dimensionScale modifier. 0.125 for overworld => nether
-				double h = DimensionType.getCoordinateScaleFactor(thisEntity.world.getDimension(), destination.getDimension());
-				BlockPos blockPos3 = new BlockPos(MathHelper.clamp(thisEntity.getX() * h, d, f), thisEntity.getY(), MathHelper.clamp(thisEntity.getZ() * h, e, g));
+				double h = DimensionType.getCoordinateScaleFactor(thisEntity.getWorld().getDimension(), destination.getDimension());
+				BlockPos blockPos3 = BlockPos.ofFloored(MathHelper.clamp(thisEntity.getX() * h, d, f), thisEntity.getY(), MathHelper.clamp(thisEntity.getZ() * h, e, g));
 				
 				// no teleport / vanilla-checks.
 				// Non-Player entities won't create new nether portals
 				// and none do already exist
 				Optional<TeleportTarget> a = destination.getPortalForcer().getPortalRect(blockPos3, isTravellingToStarryNether, worldBorder).map((arg) -> {
 					BlockPos lastNetherPortalPosition = ((EntityAccessor) thisEntity).getLastNetherPortalPosition();
-					BlockState blockState = thisEntity.world.getBlockState(lastNetherPortalPosition);
+					BlockState blockState = thisEntity.getWorld().getBlockState(lastNetherPortalPosition);
 					
 					Direction.Axis axis2;
 					Vec3d vec3d2;
@@ -125,7 +125,7 @@ public class StarrySkyDimensionTravelHandler {
 					return a.get();
 					// no portal exists => generate one, if player
 				} else if (thisEntity instanceof ServerPlayerEntity) {
-					Direction.Axis axis = thisEntity.world.getBlockState(((EntityAccessor) thisEntity).getLastNetherPortalPosition()).getOrEmpty(NetherPortalBlock.AXIS).orElse(Direction.Axis.X);
+					Direction.Axis axis = thisEntity.getWorld().getBlockState(((EntityAccessor) thisEntity).getLastNetherPortalPosition()).getOrEmpty(NetherPortalBlock.AXIS).orElse(Direction.Axis.X);
 					Optional<BlockLocating.Rectangle> optional2 = destination.getPortalForcer().createPortal(blockPos3, axis);
 					if (optional2.isEmpty()) {
 						StarrySkies.log(ERROR, "Unable to create a portal, likely target out of world border");

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EntityMixin {
 	
 	@Inject(at = @At("HEAD"), method = "getTeleportTarget", cancellable = true)
-	void getTeleportTarget(ServerWorld destination, CallbackInfoReturnable<TeleportTarget> callbackInfo) {
+	void starryskies$getTeleportTarget(ServerWorld destination, CallbackInfoReturnable<TeleportTarget> callbackInfo) {
 		Entity thisEntity = (Entity) (Object) this;
 		TeleportTarget newTeleportTarget = StarrySkyDimensionTravelHandler.handleGetTeleportTarget(thisEntity, destination);
 		if (newTeleportTarget != null) {
@@ -31,7 +31,7 @@ public abstract class EntityMixin {
 	}
 	
 	@ModifyVariable(method = "tickPortal()V", at = @At("STORE"))
-	private RegistryKey<World> injected(RegistryKey<World> registryKey) {
+	private RegistryKey<World> starryskies$tickPortal(RegistryKey<World> registryKey) {
 		return StarrySkyDimensionTravelHandler.modifyNetherPortalDestination((Entity) (Object) this, registryKey);
 	}
 	

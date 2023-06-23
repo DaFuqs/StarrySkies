@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import de.dafuqs.starryskies.StarrySkies;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.render.*;
@@ -15,11 +16,8 @@ import org.joml.Matrix4f;
 
 import java.util.LinkedHashMap;
 
-/**
- * Renderer for the custom skybox
- */
 @Environment(EnvType.CLIENT)
-public class StarrySkyBox {
+public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 	
 	public static final Identifier UP = new Identifier("skybox", "up");
 	public static final Identifier DOWN = new Identifier("skybox", "down");
@@ -28,7 +26,7 @@ public class StarrySkyBox {
 	public static final Identifier NORTH = new Identifier("skybox", "north");
 	public static final Identifier SOUTH = new Identifier("skybox", "south");
 	
-	public LinkedHashMap<Identifier, Identifier> textures = new LinkedHashMap<>();
+	public final LinkedHashMap<Identifier, Identifier> textures = new LinkedHashMap<>();
 	
 	public StarrySkyBox(String up, String down, String west, String east, String north, String south) {
 		this.textures.put(UP, new Identifier(StarrySkies.MOD_ID, up));
@@ -39,7 +37,8 @@ public class StarrySkyBox {
 		this.textures.put(SOUTH, new Identifier(StarrySkies.MOD_ID, south));
 	}
 	
-	public void render(MatrixStack matrices, float tickDelta) {
+	@Override
+	public void render(WorldRenderContext context) {
 		MinecraftClient client = MinecraftClient.getInstance();
 		World world = client.world;
 		
@@ -58,6 +57,7 @@ public class StarrySkyBox {
 		RenderSystem.depthMask(false);
 		RenderSystem.setShader(GameRenderer::getPositionTexProgram);
 		
+		MatrixStack matrices = context.matrixStack();
 		for (int i = 0; i < 6; ++i) {
 			matrices.push();
 			if (i == 0) {
@@ -65,23 +65,23 @@ public class StarrySkyBox {
 			}
 			if (i == 1) {
 				RenderSystem.setShaderTexture(0, this.textures.get(WEST));
-				matrices.multiply(RotationAxis.POSITIVE_X.rotation(90.0F));
+				matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
 			}
 			if (i == 2) {
 				RenderSystem.setShaderTexture(0, this.textures.get(EAST));
-				matrices.multiply(RotationAxis.POSITIVE_X.rotation(-90.0F));
+				matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0F));
 			}
 			if (i == 3) {
 				RenderSystem.setShaderTexture(0, this.textures.get(UP));
-				matrices.multiply(RotationAxis.POSITIVE_X.rotation(180.0F));
+				matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
 			}
 			if (i == 4) {
 				RenderSystem.setShaderTexture(0, this.textures.get(NORTH));
-				matrices.multiply(RotationAxis.POSITIVE_Z.rotation(90.0F));
+				matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
 			}
 			if (i == 5) {
 				RenderSystem.setShaderTexture(0, this.textures.get(SOUTH));
-				matrices.multiply(RotationAxis.POSITIVE_Z.rotation(-90.0F));
+				matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
 			}
 			
 			Tessellator tessellator = Tessellator.getInstance();
@@ -98,9 +98,7 @@ public class StarrySkyBox {
 		}
 		
 		RenderSystem.depthMask(true);
-		RenderSystem.enableTexture();
 		RenderSystem.disableBlend();
-		
 	}
 	
 }

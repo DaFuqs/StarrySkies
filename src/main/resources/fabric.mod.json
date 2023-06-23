@@ -19,6 +19,9 @@
     "main": [
       "de.dafuqs.starryskies.StarrySkies"
     ],
+    "client": [
+      "de.dafuqs.starryskies.StarrySkiesClient"
+    ],
     "modmenu": [
       "de.dafuqs.starryskies.configs.ModMenuConfig"
     ]

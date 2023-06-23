@@ -1,18 +1,13 @@
 package de.dafuqs.starryskies.advancements;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.spheroids.spheroids.Spheroid;
-import net.minecraft.advancement.criterion.AbstractCriterion;
-import net.minecraft.advancement.criterion.AbstractCriterionConditions;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
+import com.google.gson.*;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.spheroids.spheroids.*;
+import net.minecraft.advancement.criterion.*;
+import net.minecraft.predicate.entity.*;
+import net.minecraft.server.network.*;
+import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
 
 public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDiscoveredCriterion.Conditions> {
 	
@@ -22,14 +17,14 @@ public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDisco
 		return ID;
 	}
 	
-	public SpheroidDiscoveredCriterion.Conditions conditionsFromJson(JsonObject jsonObject, EntityPredicate.Extended extended, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
+	public SpheroidDiscoveredCriterion.Conditions conditionsFromJson(JsonObject jsonObject, LootContextPredicate lootContextPredicate, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
 		Identifier[] identifiers;
 		if (jsonObject.has("ids")) {
 			identifiers = deserializeAll(jsonObject.get("ids"));
 		} else {
 			identifiers = new Identifier[0];
 		}
-		return new SpheroidDiscoveredCriterion.Conditions(extended, identifiers);
+		return new SpheroidDiscoveredCriterion.Conditions(lootContextPredicate, identifiers);
 	}
 	
 	private static Identifier[] deserializeAll(JsonElement json) {
@@ -57,7 +52,7 @@ public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDisco
 		
 		private final Identifier[] identifiers;
 		
-		public Conditions(EntityPredicate.Extended player, @Nullable Identifier[] identifiers) {
+		public Conditions(LootContextPredicate player, @Nullable Identifier[] identifiers) {
 			super(ID, player);
 			this.identifiers = identifiers;
 		}
