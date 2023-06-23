@@ -152,9 +152,9 @@ public class StarrySkyConfig implements ConfigData {
 			When set to  1 there will the specified BottomBlock at y=1 and the floor block up to the floor height
 			When set to >1 there will the specified BottomBlock at y=1
 			When set to  0 there will be no ground, only void
-			Default: 3 (2 layers water, 1 layer bedrock)""")
+			Default: 0 (only void)""")
 	@ConfigEntry.BoundedDiscrete(min = 0, max = 128)
-	public int floorHeightOverworld = 3;
+	public int floorHeightOverworld = 0;
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
@@ -177,9 +177,9 @@ public class StarrySkyConfig implements ConfigData {
 			When set to  1 there will the specified BottomBlock at y=1 and the floor block up to the floor height
 			When set to >1 there will the specified BottomBlock at y=1
 			When set to  0 there will be no ground, only void
-			Default: 3 (2 layers water, 1 layer bedrock)""")
+			Default: 0 (only void)""")
 	@ConfigEntry.BoundedDiscrete(min = 0, max = 128)
-	public int floorHeightNether = 3;
+	public int floorHeightNether = 0;
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
