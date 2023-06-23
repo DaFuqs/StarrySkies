@@ -9,8 +9,8 @@
     "DaFuqs"
   ],
   "contact": {
-    "homepage": "https://github.com/DaFuqs/StarrySky",
-    "sources": "https://github.com/DaFuqs/StarrySky"
+    "homepage": "https://github.com/DaFuqs/StarrySkies",
+    "sources": "https://github.com/DaFuqs/StarrySkies"
   },
   "license": "MIT",
   "icon": "assets/starry_skies/icon.png",
@@ -27,7 +27,7 @@
     "starry_skies.mixins.json"
   ],
   "depends": {
-    "minecraft": ">=1.19.3",
+    "minecraft": ">=1.20.0",
     "fabricloader": "*",
     "fabric": "*",
     "cloth-config": "*"
