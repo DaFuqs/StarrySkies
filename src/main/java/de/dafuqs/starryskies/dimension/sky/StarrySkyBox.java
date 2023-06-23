@@ -1,40 +1,37 @@
 package de.dafuqs.starryskies.dimension.sky;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import de.dafuqs.starryskies.StarrySkies;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import com.mojang.blaze3d.systems.*;
+import de.dafuqs.starryskies.*;
+import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.*;
+import net.minecraft.client.option.*;
 import net.minecraft.client.render.*;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
-import net.minecraft.world.World;
-import org.joml.Matrix4f;
+import net.minecraft.client.util.math.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.*;
+import org.joml.*;
 
-import java.util.LinkedHashMap;
+import java.lang.Math;
 
 @Environment(EnvType.CLIENT)
 public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 	
-	public static final Identifier UP = new Identifier("skybox", "up");
-	public static final Identifier DOWN = new Identifier("skybox", "down");
-	public static final Identifier WEST = new Identifier("skybox", "west");
-	public static final Identifier EAST = new Identifier("skybox", "east");
-	public static final Identifier NORTH = new Identifier("skybox", "north");
-	public static final Identifier SOUTH = new Identifier("skybox", "south");
-	
-	public final LinkedHashMap<Identifier, Identifier> textures = new LinkedHashMap<>();
+	public final Identifier UP;
+	public final Identifier DOWN;
+	public final Identifier WEST;
+	public final Identifier EAST;
+	public final Identifier NORTH;
+	public final Identifier SOUTH;
 	
 	public StarrySkyBox(String up, String down, String west, String east, String north, String south) {
-		this.textures.put(UP, new Identifier(StarrySkies.MOD_ID, up));
-		this.textures.put(DOWN, new Identifier(StarrySkies.MOD_ID, down));
-		this.textures.put(WEST, new Identifier(StarrySkies.MOD_ID, west));
-		this.textures.put(EAST, new Identifier(StarrySkies.MOD_ID, east));
-		this.textures.put(NORTH, new Identifier(StarrySkies.MOD_ID, north));
-		this.textures.put(SOUTH, new Identifier(StarrySkies.MOD_ID, south));
+		UP = new Identifier(StarrySkies.MOD_ID, up);
+		DOWN = new Identifier(StarrySkies.MOD_ID, down);
+		WEST = new Identifier(StarrySkies.MOD_ID, west);
+		EAST = new Identifier(StarrySkies.MOD_ID, east);
+		NORTH = new Identifier(StarrySkies.MOD_ID, north);
+		SOUTH = new Identifier(StarrySkies.MOD_ID, south);
 	}
 	
 	@Override
@@ -61,26 +58,26 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 		for (int i = 0; i < 6; ++i) {
 			matrices.push();
 			if (i == 0) {
-				RenderSystem.setShaderTexture(0, this.textures.get(DOWN));
+				RenderSystem.setShaderTexture(0, DOWN);
 			}
 			if (i == 1) {
-				RenderSystem.setShaderTexture(0, this.textures.get(WEST));
+				RenderSystem.setShaderTexture(0, WEST);
 				matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
 			}
 			if (i == 2) {
-				RenderSystem.setShaderTexture(0, this.textures.get(EAST));
+				RenderSystem.setShaderTexture(0, EAST);
 				matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0F));
 			}
 			if (i == 3) {
-				RenderSystem.setShaderTexture(0, this.textures.get(UP));
+				RenderSystem.setShaderTexture(0, UP);
 				matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
 			}
 			if (i == 4) {
-				RenderSystem.setShaderTexture(0, this.textures.get(NORTH));
+				RenderSystem.setShaderTexture(0, NORTH);
 				matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
 			}
 			if (i == 5) {
-				RenderSystem.setShaderTexture(0, this.textures.get(SOUTH));
+				RenderSystem.setShaderTexture(0, SOUTH);
 				matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
 			}
 			
