@@ -1,41 +1,30 @@
 package de.dafuqs.starryskies;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import de.dafuqs.starryskies.advancements.ProximityAdvancementCheckEvent;
-import de.dafuqs.starryskies.advancements.StarryAdvancementCriteria;
-import de.dafuqs.starryskies.commands.ClosestSpheroidCommand;
-import de.dafuqs.starryskies.configs.StarrySkyConfig;
+import com.google.gson.*;
+import com.mojang.brigadier.exceptions.*;
+import de.dafuqs.starryskies.advancements.*;
+import de.dafuqs.starryskies.commands.*;
+import de.dafuqs.starryskies.configs.*;
 import de.dafuqs.starryskies.data_loaders.*;
-import de.dafuqs.starryskies.dimension.SpheroidDimensionType;
-import de.dafuqs.starryskies.dimension.StarrySkyBiomes;
-import de.dafuqs.starryskies.dimension.StarrySkyChunkGenerator;
-import de.dafuqs.starryskies.dimension.StarrySkyDimension;
-import de.dafuqs.starryskies.spheroids.DecoratorFeatures;
-import de.dafuqs.starryskies.spheroids.SpheroidDecoratorTypes;
-import de.dafuqs.starryskies.spheroids.SpheroidTypes;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockArgumentParser;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import de.dafuqs.starryskies.dimension.*;
+import de.dafuqs.starryskies.spheroids.*;
+import me.shedaniel.autoconfig.*;
+import me.shedaniel.autoconfig.serializer.*;
+import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.command.v2.*;
+import net.fabricmc.fabric.api.event.lifecycle.v1.*;
+import net.fabricmc.fabric.api.resource.*;
+import net.minecraft.block.*;
+import net.minecraft.command.argument.*;
+import net.minecraft.registry.*;
+import net.minecraft.resource.*;
+import net.minecraft.server.network.*;
+import net.minecraft.server.world.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
+import org.apache.logging.log4j.*;
 
-import static org.apache.logging.log4j.Level.INFO;
+import static org.apache.logging.log4j.Level.*;
 
 public class StarrySkies implements ModInitializer {
 	
@@ -106,6 +95,14 @@ public class StarrySkies implements ModInitializer {
 	
 	public static BlockState getStateFromString(String s) throws CommandSyntaxException {
 		return BlockArgumentParser.block(Registries.BLOCK.getReadOnlyWrapper(), s, false).blockState();
+	}
+	
+	public static BlockArgumentParser.BlockResult getBlockResult(JsonObject json, String element) throws CommandSyntaxException {
+		return BlockArgumentParser.block(Registries.BLOCK.getReadOnlyWrapper(), JsonHelper.getString(json, element), true);
+	}
+	
+	public static BlockArgumentParser.BlockResult getBlockResult(String element) throws CommandSyntaxException {
+		return BlockArgumentParser.block(Registries.BLOCK.getReadOnlyWrapper(), element, true);
 	}
 	
 	public static Block getBlockFromString(String s) {

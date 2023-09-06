@@ -97,6 +97,7 @@ public class BeeHiveSpheroid extends Spheroid {
 		
 		BlockState beeHiveBlockState = Blocks.BEE_NEST.getDefaultState();
 		random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
+		
 		int ceiledRadius = (int) Math.ceil(this.radius);
 		int maxX = Math.min(chunkX * 16 + 15, x + ceiledRadius);
 		int maxZ = Math.min(chunkZ * 16 + 15, z + ceiledRadius);

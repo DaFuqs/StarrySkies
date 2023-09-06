@@ -9,13 +9,12 @@ import de.dafuqs.starryskies.Support;
 import de.dafuqs.starryskies.data_loaders.SpheroidDecoratorLoader;
 import de.dafuqs.starryskies.spheroids.SpheroidDecorator;
 import de.dafuqs.starryskies.spheroids.SpheroidEntitySpawnDefinition;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ChestBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
+import net.minecraft.command.argument.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -129,6 +128,17 @@ public abstract class Spheroid implements Serializable {
 	protected boolean isAboveCaveFloorBlock(long d, double x, double y, double z, float shellRadius) {
 		int distance1 = (int) Math.round(Support.getDistance(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), x, y - 1, z));
 		return d == (this.radius - shellRadius) && distance1 > (this.radius - shellRadius);
+	}
+	
+	protected void setBlockResult(Chunk chunk, BlockPos pos, BlockArgumentParser.BlockResult block) {
+		chunk.setBlockState(pos, block.blockState(), false);
+		if(block.blockState().getBlock() instanceof BlockEntityProvider blockEntityProvider) {
+			BlockEntity blockEntity = blockEntityProvider.createBlockEntity(pos, block.blockState());
+			if (blockEntity != null) {
+				chunk.setBlockEntity(blockEntity);
+				blockEntity.readNbt(block.nbt());
+			}
+		}
 	}
 	
 	protected void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos, Identifier lootTable, Random random, boolean waterLogged) {

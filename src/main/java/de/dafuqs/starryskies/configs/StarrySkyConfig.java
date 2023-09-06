@@ -149,8 +149,8 @@ public class StarrySkyConfig implements ConfigData {
 	@Comment(value = """
 			
 			If (or how high) there should be a world floor.
-			When set to  1 there will the specified BottomBlock at y=1 and the floor block up to the floor height
-			When set to >1 there will the specified BottomBlock at y=1
+			When set to >1 there will the specified BottomBlock at y=1 and the floor block up to the floor height
+			When set to  1 there will the specified BottomBlock at y=1
 			When set to  0 there will be no ground, only void
 			Default: 0 (only void)""")
 	@ConfigEntry.BoundedDiscrete(min = 0, max = 128)
