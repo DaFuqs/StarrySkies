@@ -89,6 +89,10 @@ public class StarrySkies implements ModInitializer {
 		return new Identifier(MOD_ID, name);
 	}
 	
+	public static String locatePlain(String name) {
+		return locate(name).toString();
+	}
+	
 	public static void log(Level logLevel, String message) {
 		LOGGER.log(logLevel, "[StarrySkies] " + message);
 	}

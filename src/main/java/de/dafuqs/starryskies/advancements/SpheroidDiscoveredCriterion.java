@@ -1,7 +1,6 @@
 package de.dafuqs.starryskies.advancements;
 
 import com.google.gson.*;
-import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.spheroids.spheroids.*;
 import net.minecraft.advancement.criterion.*;
 import net.minecraft.predicate.entity.*;
@@ -9,23 +8,9 @@ import net.minecraft.server.network.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
 
+import java.util.*;
+
 public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDiscoveredCriterion.Conditions> {
-	
-	public static final Identifier ID = StarrySkies.locate("spheroid_discovered");
-	
-	public Identifier getId() {
-		return ID;
-	}
-	
-	public SpheroidDiscoveredCriterion.Conditions conditionsFromJson(JsonObject jsonObject, LootContextPredicate lootContextPredicate, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
-		Identifier[] identifiers;
-		if (jsonObject.has("ids")) {
-			identifiers = deserializeAll(jsonObject.get("ids"));
-		} else {
-			identifiers = new Identifier[0];
-		}
-		return new SpheroidDiscoveredCriterion.Conditions(lootContextPredicate, identifiers);
-	}
 	
 	private static Identifier[] deserializeAll(JsonElement json) {
 		JsonArray array = json.getAsJsonArray();
@@ -48,17 +33,28 @@ public class SpheroidDiscoveredCriterion extends AbstractCriterion<SpheroidDisco
 		this.trigger(player, (conditions) -> conditions.matches(spheroid.getTemplate().getID()));
 	}
 	
+	@Override
+	protected Conditions conditionsFromJson(JsonObject json, Optional<LootContextPredicate> predicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
+		Identifier[] identifiers;
+		if (json.has("ids")) {
+			identifiers = deserializeAll(json.get("ids"));
+		} else {
+			identifiers = new Identifier[0];
+		}
+		return new SpheroidDiscoveredCriterion.Conditions(predicate, identifiers);
+	}
+	
 	public static class Conditions extends AbstractCriterionConditions {
 		
 		private final Identifier[] identifiers;
 		
-		public Conditions(LootContextPredicate player, @Nullable Identifier[] identifiers) {
-			super(ID, player);
+		public Conditions(Optional<LootContextPredicate> playerPredicate, @Nullable Identifier[] identifiers) {
+			super(playerPredicate);
 			this.identifiers = identifiers;
 		}
 		
-		public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
-			JsonObject jsonObject = super.toJson(predicateSerializer);
+		public JsonObject toJson() {
+			JsonObject jsonObject = super.toJson();
 			jsonObject.add("ids", serializeAll(identifiers));
 			return jsonObject;
 		}

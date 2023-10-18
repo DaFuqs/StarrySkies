@@ -1,13 +1,14 @@
 package de.dafuqs.starryskies.advancements;
 
-import net.fabricmc.fabric.mixin.object.builder.CriteriaAccessor;
+import de.dafuqs.starryskies.*;
+import net.minecraft.advancement.criterion.*;
 
 public class StarryAdvancementCriteria {
 	
 	public static SpheroidDiscoveredCriterion SPHEROID_DISCOVERED;
 	
 	public static void register() {
-		SPHEROID_DISCOVERED = CriteriaAccessor.callRegister(new SpheroidDiscoveredCriterion());
+		SPHEROID_DISCOVERED = Criteria.register(StarrySkies.locatePlain("spheroid_discovered"), new SpheroidDiscoveredCriterion());
 	}
 	
 }
