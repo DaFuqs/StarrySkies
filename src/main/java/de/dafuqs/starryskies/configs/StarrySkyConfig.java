@@ -13,13 +13,11 @@ public class StarrySkyConfig implements ConfigData {
 	
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			
 			Logs errors when loading Datapack Spheres and decorators to the log.""")
 	public boolean packCreatorMode = false;
 	
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			
 			Should Starry register Portal Blocks for Overworld <=> Starry Skies travel.
 			If set to false can be used completely serverside, as long as you add a means to travel between dimensions.""")
 	public boolean registerStarryPortal = true;
@@ -27,7 +25,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.PrefixText()
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			
 			The block the portal to the Starry Sky dimension needs to be built with.
 			Build it like a nether portal & has to be activated with flint & steel
 			Default: PACKED_ICE""")
@@ -35,28 +32,30 @@ public class StarrySkyConfig implements ConfigData {
 	
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			
+			The Color for the Portal to Starry Skies
+			Default: 11983869 (light, grayish blue)""")
+	public int starrySkyPortalColor = 11983869;
+	
+	@ConfigEntry.Category("GENERAL")
+	@Comment(value = """
 			The height of clouds in the Starry Sky dimension.
 			Default: 270""")
 	public float cloudHeight = 270F;
 	
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			
 			Use a fancy rainbow skybox instead of a generic one.
 			Default: true""")
 	public boolean rainbowSkybox = true;
 	
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			
 			If true nether portals in Starry Sky lead to Scary Sky, if false portals do not form.
 			Default: true""")
 	public boolean enableNetherPortalsToStarryNether = true;
 	
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			
 			If true end portals in Starry Sky lead to Scarcy Sky, if false to the vanilla end.
 			Default: true""")
 	public boolean enableEndPortalsToStarryEnd = true;
@@ -64,7 +63,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			
 			The '/sphere' command lists all the data of the closest sphere (position, blocks, ...)
 			
 			Default: 0""")
@@ -74,7 +72,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("SYSTEM GENERATION")
 	@Comment(value = """
-			
 			Spheroids are generated in systems.
 			Each system consists out of x spheroids over y chunks.
 			How big each system should be in chunks²
@@ -87,7 +84,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("SYSTEM GENERATION")
 	@Comment(value = """
-			
 			How many spheres a system can contain max.
 			Some will fail because of distance restrictions
 			so it's not an exact value
@@ -97,7 +93,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("SYSTEM GENERATION")
 	@Comment(value = """
-			
 			How much empty blocks should be enforced between individual spheres.
 			If the distance is too low generation of that one sphere will be cancelled.
 			Default: 10
@@ -107,7 +102,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("SYSTEM GENERATION")
 	@Comment(value = """
-			
 			How many spheres a system can contain max.
 			Some will fail because of distance restrictions
 			so it's not an exact value
@@ -117,7 +111,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("SYSTEM GENERATION")
 	@Comment(value = """
-			
 			How much empty blocks should be enforced between individual spheres.
 			If the distance is too low generation of that one sphere will be cancelled.
 			Default: 10
@@ -127,7 +120,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("SYSTEM GENERATION")
 	@Comment(value = """
-			
 			How many spheres a system can contain max.
 			Some will fail because of distance restrictions
 			so it's not an exact value
@@ -137,7 +129,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("SYSTEM GENERATION")
 	@Comment(value = """
-			
 			How much empty blocks should be enforced between individual spheres.
 			If the distance is too low generation of that one sphere will be cancelled.
 			Default: 10
@@ -147,7 +138,6 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.PrefixText
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
-			
 			If (or how high) there should be a world floor.
 			When set to  1 there will the specified BottomBlock at y=1 and the floor block up to the floor height
 			When set to >1 there will the specified BottomBlock at y=1
@@ -158,21 +148,18 @@ public class StarrySkyConfig implements ConfigData {
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
-			
 			The block generating at y>1 (if floorHeight > 1)
 			Default: WATER""")
 	public String floorBlockOverworld = "WATER";
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
-			
 			The block generating at y=0 (if floorHeight > 0)
 			Default: BEDROCK""")
 	public String bottomBlockOverworld = "BEDROCK";
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
-			
 			If (or how high) there should be a world floor.
 			When set to  1 there will the specified BottomBlock at y=1 and the floor block up to the floor height
 			When set to >1 there will the specified BottomBlock at y=1
@@ -183,21 +170,18 @@ public class StarrySkyConfig implements ConfigData {
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
-			
 			The block generating at y>1 (if floorHeight > 1)
 			Default: LAVA""")
 	public String floorBlockNether = "LAVA";
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
-			
 			The block generating at y=0 (if floorHeight > 0)
 			Default: BEDROCK""")
 	public String bottomBlockNether = "BEDROCK";
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
-			
 			If (or how high) there should be a world floor.
 			When set to  1 there will the specified BottomBlock at y=1 and the floor block up to the floor height
 			When set to >1 there will the specified BottomBlock at y=1
@@ -208,14 +192,12 @@ public class StarrySkyConfig implements ConfigData {
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
-			
 			The block generating at y>1 (if floorHeight > 1)
 			Default: WATER""")
 	public String floorBlockEnd = "WATER";
 	
 	@ConfigEntry.Category("WORLD FLOOR GENERATION")
 	@Comment(value = """
-			
 			The block generating at y=0 (if floorHeight > 0)
 			Default: BEDROCK""")
 	public String bottomBlockEnd = "BEDROCK";

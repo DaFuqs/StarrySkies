@@ -17,6 +17,7 @@
   "text.autoconfig.StarrySky.option.registerStarryPortal": "Register Starry Portal",
   "text.autoconfig.StarrySky.option.starrySkyPortalFrameBlock.@PrefixText": "The blocks with which the portals to the Starry Sky dimensions needs to be built with. Build it like a nether portal & has to be activated with flint & steel.",
   "text.autoconfig.StarrySky.option.starrySkyPortalFrameBlock": "Starry Sky Portal Frame Block",
+  "text.autoconfig.StarrySky.option.starrySkyPortalColor": "Starry Sky Portal Color",
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel.@Tooltip": "The '/sphere' command lists all the data of the closest sphere (position, blocks, ...)",
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel": "Required Permission Level for /sphere Command",
   "text.autoconfig.StarrySky.option.cloudHeight": "Cloud Height",

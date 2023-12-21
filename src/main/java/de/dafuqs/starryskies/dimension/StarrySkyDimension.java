@@ -30,7 +30,7 @@ public class StarrySkyDimension {
 		Identifier portalFrameBlockIdentifier = new Identifier(StarrySkies.CONFIG.starrySkyPortalFrameBlock.toLowerCase());
 		Block portalFrameBlock = Registry.BLOCK.get(portalFrameBlockIdentifier);
 		
-		PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, STARRY_SKIES_DIMENSION_ID, 11983869); // light, greyish blue
+		PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, STARRY_SKIES_DIMENSION_ID, StarrySkies.CONFIG.starrySkyPortalColor);
 		CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);
 	}
 	
