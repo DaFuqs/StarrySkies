@@ -12,6 +12,7 @@ import net.minecraft.entity.effect.*;
 import net.minecraft.util.*;
 import org.joml.*;
 
+// TODO: the rainbow skybox is not rendering correctly
 @Environment(EnvType.CLIENT)
 public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 
