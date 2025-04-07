@@ -2,7 +2,10 @@
   "type": "starry_skies:single_block",
   "config": {
     "block": {
-      "Name": "minecraft:sweet_berry_bush"
+      "Name": "minecraft:sweet_berry_bush",
+      "Properties": {
+        "age": "3"
+      }
     },
     "chance": 0.02
   }

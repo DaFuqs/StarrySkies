@@ -9,6 +9,7 @@ public class SphereDecorators {
 
 	public static SphereDecorator<BambooDecoratorConfig> BAMBOO = register("bamboo", new BambooDecorator(BambooDecoratorConfig.CODEC));
 	public static SphereDecorator<SingleBlockDecoratorConfig> SINGLE_BLOCK = register("single_block", new SingleBlockDecorator(SingleBlockDecoratorConfig.CODEC));
+	public static SphereDecorator<SingleBlockProviderDecoratorConfig> SINGLE_BLOCK_PROVIDER = register("single_block_provider", new SingleBlockProviderDecorator(SingleBlockProviderDecoratorConfig.CODEC));
 	public static SphereDecorator<DoubleBlockDecoratorConfig> DOUBLE_BLOCK = register("double_block", new DoubleBlockDecorator(DoubleBlockDecoratorConfig.CODEC));
 	public static SphereDecorator<StackedBlockDecoratorConfig> STACKED_BLOCK = register("stacked_block", new StackedBlockDecorator(StackedBlockDecoratorConfig.CODEC));
 	public static SphereDecorator<GroundBlockDecoratorConfig> GROUND_BLOCK = register("ground_block", new GroundBlockDecorator(GroundBlockDecoratorConfig.CODEC));

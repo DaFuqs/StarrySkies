@@ -6,7 +6,7 @@
       "state": {
         "Name": "minecraft:creaking_heart",
         "Properties": {
-          "active": "false",
+          "creaking_heart_state": "dormant",
           "axis": "y",
           "natural": "true"
         }

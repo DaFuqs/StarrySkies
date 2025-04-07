@@ -6,7 +6,7 @@
       "entries": [
         {
           "data": {
-            "Name": "minecraft:pink_petals",
+            "Name": "minecraft:wildflowers",
             "Properties": {
               "facing": "north"
             }
@@ -15,7 +15,7 @@
         },
         {
           "data": {
-            "Name": "minecraft:pink_petals",
+            "Name": "minecraft:wildflowers",
             "Properties": {
               "facing": "east"
             }
@@ -24,7 +24,7 @@
         },
         {
           "data": {
-            "Name": "minecraft:pink_petals",
+            "Name": "minecraft:wildflowers",
             "Properties": {
               "facing": "south"
             }
@@ -33,7 +33,7 @@
         },
         {
           "data": {
-            "Name": "minecraft:pink_petals",
+            "Name": "minecraft:wildflowers",
             "Properties": {
               "facing": "west"
             }

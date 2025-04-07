@@ -1,0 +1,9 @@
+{
+  "type": "starry_skies:single_block",
+  "config": {
+    "block": {
+      "Name": "minecraft:firefly_bush"
+    },
+    "chance": 0.01
+  }
+}
