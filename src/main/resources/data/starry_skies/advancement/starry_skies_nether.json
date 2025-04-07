@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancements.starry_skies.starry_skies_nether.description"
     },
-    "background": "starry_skies:textures/advancement_background.png"
+    "background": "starry_skies:gui/advancement_background"
   },
   "criteria": {
     "starry_skies_0": {
