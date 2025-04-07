@@ -1,21 +1,31 @@
 package de.dafuqs.starryskies.client.sky;
 
+import com.mojang.blaze3d.buffers.*;
 import com.mojang.blaze3d.systems.*;
+import com.mojang.blaze3d.textures.*;
+import com.mojang.blaze3d.vertex.*;
 import de.dafuqs.starryskies.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.minecraft.block.enums.*;
 import net.minecraft.client.*;
+import net.minecraft.client.gl.*;
 import net.minecraft.client.render.*;
+import net.minecraft.client.texture.*;
+import net.minecraft.client.util.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.util.*;
 import org.joml.*;
 
-// TODO: the rainbow skybox is not rendering correctly
+import java.util.*;
+
+// TODO: the rainbow skybox is currently nonfunctional
 @Environment(EnvType.CLIENT)
 public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
-
+	
+	private GpuBuffer skyVertexBuffer;
+	
 	public final Identifier UP;
 	public final Identifier DOWN;
 	public final Identifier WEST;
@@ -38,7 +48,12 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 		if (cameraSubmersionType == CameraSubmersionType.POWDER_SNOW || cameraSubmersionType == CameraSubmersionType.LAVA || hasBlindnessOrDarkness(context.camera())) {
 			return;
 		}
-		renderStarrySky(context);
+		if (skyVertexBuffer == null) {
+			// that needs to be initialized very, very late, and there is no real hook for it afaik,
+			// so a null check will do
+			skyVertexBuffer = createStarrySky();
+		}
+		renderStarrySky();
 	}
 	
 	private boolean hasBlindnessOrDarkness(Camera camera) {
@@ -50,68 +65,53 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 		}
 	}
 	
+	private static GpuBuffer createStarrySky() {
+		BufferAllocator bufferAllocator = new BufferAllocator(24 * VertexFormats.POSITION_TEXTURE_COLOR.getVertexSize());
+		
+		GpuBuffer gpuBuffer;
+		BufferBuilder bufferBuilder = new BufferBuilder(bufferAllocator, VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
+		
+		for (int i = 0; i < 6; ++i) {
+			Matrix4f matrix4f = new Matrix4f();
+			switch (i) {
+				case 1 -> matrix4f.rotationX(1.5707964F);
+				case 2 -> matrix4f.rotationX(-1.5707964F);
+				case 3 -> matrix4f.rotationX(3.1415927F);
+				case 4 -> matrix4f.rotationZ(1.5707964F);
+				case 5 -> matrix4f.rotationZ(-1.5707964F);
+			}
+			
+			bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(-14145496);
+			bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(-14145496);
+			bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(-14145496);
+			bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(-14145496);
+		}
+		
+		BuiltBuffer builtBuffer = bufferBuilder.end();
+		gpuBuffer = RenderSystem.getDevice().createBuffer(() -> "StarrySkies sky vertex buffer", BufferType.VERTICES, BufferUsage.STATIC_WRITE, builtBuffer.getBuffer());
+		builtBuffer.close();
+		
+		bufferAllocator.close();
+		return gpuBuffer;
+	}
+	
 	// See WorldRenderer.renderEndSky() for inspiration
-	private void renderStarrySky(WorldRenderContext context) {
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
-		RenderSystem.depthMask(false);
-		Tessellator tessellator = Tessellator.getInstance();
+	private void renderStarrySky() {
+		TextureManager textureManager = MinecraftClient.getInstance().getTextureManager();
+		AbstractTexture abstractTexture = textureManager.getTexture(DOWN);
+		abstractTexture.setFilter(TriState.FALSE, false);
+		RenderSystem.ShapeIndexBuffer shapeIndexBuffer = RenderSystem.getSequentialBuffer(VertexFormat.DrawMode.QUADS);
+		GpuBuffer gpuBuffer = shapeIndexBuffer.getIndexBuffer(36);
+		GpuTexture gpuTexture = MinecraftClient.getInstance().getFramebuffer().getColorAttachment();
+		GpuTexture gpuTexture2 = MinecraftClient.getInstance().getFramebuffer().getDepthAttachment();
+		RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(gpuTexture, OptionalInt.empty(), gpuTexture2, OptionalDouble.empty());
 		
-		Matrix4f matrix4f = context.positionMatrix();
-		
-		float tickDelta = MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(false);
-		int color = context.world().getSkyColor(context.camera().getPos(), tickDelta);
-		
-		RenderSystem.setShaderTexture(0, DOWN);
-		BufferBuilder bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-		bufferBuilder.vertex(matrix4f, -100.0f, -100.0f, -100.0f).texture(0.0F, 0.0F).color(color);
-		bufferBuilder.vertex(matrix4f, -100.0f, -100.0f, 100.0f).texture(0.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, -100.0f, 100.0f).texture(1.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, -100.0f, -100.0f).texture(1.0F, 0.0F).color(color);
-		BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-		
-		RenderSystem.setShaderTexture(0, WEST);
-		bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-		bufferBuilder.vertex(matrix4f, -100.0f, 100.0f, -100.0f).texture(0.0F, 0.0F).color(color);
-		bufferBuilder.vertex(matrix4f, -100.0f, -100.0f, -99.0f).texture(0.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, -100.0f, -99.0f).texture(1.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, 100.0f, -100.0f).texture(1.0F, 0.0F).color(color);
-		BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-		
-		RenderSystem.setShaderTexture(0, EAST);
-		bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-		bufferBuilder.vertex(matrix4f, -100.0f, -100.0f, 100.0f).texture(0.0F, 0.0F).color(color);
-		bufferBuilder.vertex(matrix4f, -100.0f, 100.0f, 100.0f).texture(0.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, 100.0f, 100.0f).texture(1.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, -100.0f, 100.0f).texture(1.0F, 0.0F).color(color);
-		BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-		
-		RenderSystem.setShaderTexture(0, UP);
-		bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-		bufferBuilder.vertex(matrix4f, -100.0f, 100.0f, 101.0f).texture(0.0F, 0.0F).color(color);
-		bufferBuilder.vertex(matrix4f, -100.0f, 100.0f, -100.0f).texture(0.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, 100.0f, -100.0f).texture(1.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, 100.0f, 100.0f).texture(1.0F, 0.0F).color(color);
-		BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-		
-		RenderSystem.setShaderTexture(0, NORTH);
-		bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-		bufferBuilder.vertex(matrix4f, 100.0f, -100.0f, -100.0f).texture(0.0F, 0.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, -100.0f, 100.0f).texture(0.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, 100.0f, 100.0f).texture(1.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, 100.0f, 100.0f, -100.0f).texture(1.0F, 0.0F).color(color);
-		BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-		
-		RenderSystem.setShaderTexture(0, SOUTH);
-		bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-		bufferBuilder.vertex(matrix4f, -100.0f, 100.0f, -100.0f).texture(0.0F, 0.0F).color(color);
-		bufferBuilder.vertex(matrix4f, -100.0f, 100.0f, 100.0f).texture(0.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, -100.0f, -100.0f, 100.0f).texture(1.0F, 1.0F).color(color);
-		bufferBuilder.vertex(matrix4f, -100.0f, -100.0f, -100.0f).texture(1.0F, 0.0F).color(color);
-		BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-		
-		RenderSystem.depthMask(true);
-		RenderSystem.disableBlend();
+		renderPass.setPipeline(RenderPipelines.POSITION_TEX_COLOR_END_SKY);
+		renderPass.bindSampler("Sampler0", abstractTexture.getGlTexture());
+		renderPass.setVertexBuffer(0, this.skyVertexBuffer);
+		renderPass.setIndexBuffer(gpuBuffer, shapeIndexBuffer.getIndexType());
+		renderPass.drawIndexed(0, 36);
+		renderPass.close();
 	}
 	
 	

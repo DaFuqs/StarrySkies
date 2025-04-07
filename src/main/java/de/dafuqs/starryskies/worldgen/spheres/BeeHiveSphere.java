@@ -107,16 +107,16 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 						
 						if (d == 0) {
 							// bee hive in center
-							chunk.setBlockState(currBlockPos, beeHiveBlockState, false);
+							chunk.setBlockState(currBlockPos, beeHiveBlockState);
 							this.queenBeehiveBlockEntity = new BeehiveBlockEntity(currBlockPos, beeHiveBlockState);
 							chunk.setBlockEntity(queenBeehiveBlockEntity);
 						} else if (d <= coreDistance) {
 							// core
 							int r = random.nextInt((int) Math.ceil(coreDistance / 3F)); // way more honey in the middle
 							if (coreDistance - r <= d) {
-								chunk.setBlockState(currBlockPos, Blocks.HONEY_BLOCK.getDefaultState(), false);
+								chunk.setBlockState(currBlockPos, Blocks.HONEY_BLOCK.getDefaultState());
 							} else {
-								chunk.setBlockState(currBlockPos, Blocks.AIR.getDefaultState(), false);
+								chunk.setBlockState(currBlockPos, Blocks.AIR.getDefaultState());
 							}
 						} else if (d <= shellDistance) {
 							if (y2 - y == 0 && d - shellDistance < -0.5 && random.nextInt(10) == 0) {
@@ -147,7 +147,7 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 								}
 								// set the block
 								BlockState blockState = Blocks.BEE_NEST.getDefaultState().with(BeehiveBlock.FACING, direction);
-								chunk.setBlockState(currBlockPos, blockState, false);
+								chunk.setBlockState(currBlockPos, blockState);
 								
 								// set and save the blockentity
 								BeehiveBlockEntity outerBeehiveBlockEntity = new BeehiveBlockEntity(currBlockPos, blockState);
@@ -157,20 +157,20 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 								
 								// shell
 								if (random.nextInt(10) == 0) {
-									chunk.setBlockState(currBlockPos, Blocks.HONEY_BLOCK.getDefaultState(), false);
+									chunk.setBlockState(currBlockPos, Blocks.HONEY_BLOCK.getDefaultState());
 								} else {
-									chunk.setBlockState(currBlockPos, Blocks.HONEYCOMB_BLOCK.getDefaultState(), false);
+									chunk.setBlockState(currBlockPos, Blocks.HONEYCOMB_BLOCK.getDefaultState());
 								}
 							}
 						} else if (y - y2 == 0 && d > startRingDistance && d <= endRingDistance) {
-							chunk.setBlockState(currBlockPos, Blocks.GRASS_BLOCK.getDefaultState(), false);
+							chunk.setBlockState(currBlockPos, Blocks.GRASS_BLOCK.getDefaultState());
 							int rand = random.nextInt(4);
 							if (rand == 0) {
-								chunk.setBlockState(currBlockPos.up(), getRandomFlower(random), false);
+								chunk.setBlockState(currBlockPos.up(), getRandomFlower(random));
 							} else if (rand == 1) {
 								BlockState randomTallFlower = getRandomTallFlower(registryManager, random, currBlockPos);
-								chunk.setBlockState(currBlockPos.up(), randomTallFlower.with(TallPlantBlock.HALF, DoubleBlockHalf.LOWER), false);
-								chunk.setBlockState(currBlockPos.up(2), randomTallFlower.with(TallPlantBlock.HALF, DoubleBlockHalf.UPPER), false);
+								chunk.setBlockState(currBlockPos.up(), randomTallFlower.with(TallPlantBlock.HALF, DoubleBlockHalf.LOWER));
+								chunk.setBlockState(currBlockPos.up(2), randomTallFlower.with(TallPlantBlock.HALF, DoubleBlockHalf.UPPER));
 							}
 						}
 					}

@@ -121,7 +121,7 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 		} else {
 			chestBlockState = Blocks.CHEST.getDefaultState();
 		}
-		chunk.setBlockState(blockPos, chestBlockState, false);
+		chunk.setBlockState(blockPos, chestBlockState);
 
 		LootableContainerBlockEntity blockEntity = new ChestBlockEntity(blockPos, chestBlockState);
 		chunk.setBlockEntity(new ChestBlockEntity(blockPos, chestBlockState));

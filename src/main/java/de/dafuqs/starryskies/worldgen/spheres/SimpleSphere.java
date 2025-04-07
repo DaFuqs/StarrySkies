@@ -87,7 +87,7 @@ public class SimpleSphere extends Sphere<SimpleSphere.Config> {
 						}
 						
 						currBlockPos.set(x2, y2, z2);
-						chunk.setBlockState(currBlockPos, this.state.get(random, currBlockPos), false);
+						chunk.setBlockState(currBlockPos, this.state.get(random, currBlockPos));
 					}
 				}
 			}

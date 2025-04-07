@@ -95,11 +95,11 @@ public class ModularSphere extends Sphere<ModularSphere.Config> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (this.bottomBlock != null && isBottomBlock(d, x2, y2, z2)) {
-							chunk.setBlockState(currBlockPos, this.bottomBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.bottomBlock.get(random, currBlockPos));
 						} else if (this.topBlock != null && isTopBlock(d, x2, y2, z2)) {
-							chunk.setBlockState(currBlockPos, this.topBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.topBlock.get(random, currBlockPos));
 						} else {
-							chunk.setBlockState(currBlockPos, this.mainBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.mainBlock.get(random, currBlockPos));
 						}
 					}
 				}

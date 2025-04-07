@@ -94,30 +94,30 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (d <= this.coreRadius) {
-							chunk.setBlockState(currBlockPos, TREASURE, false);
+							chunk.setBlockState(currBlockPos, TREASURE);
 						} else if (d < coreRadius + 3) {
-							chunk.setBlockState(currBlockPos, WATER, false);
+							chunk.setBlockState(currBlockPos, WATER);
 						} else if (d == coreRadius + 3) {
 							if (Math.abs(x2 - x) < 2 || Math.abs(z2 - z) < 2) {
-								chunk.setBlockState(currBlockPos, WATER, false);
+								chunk.setBlockState(currBlockPos, WATER);
 							} else {
-								chunk.setBlockState(currBlockPos, DARK_PRISMARINE, false);
+								chunk.setBlockState(currBlockPos, DARK_PRISMARINE);
 							}
 						} else if (d <= shellDistance) {
 							if (y2 % 10 == 0 || x2 % 10 == 0 || z2 % 10 == 0) {
 								if ((y2 - y) % 6 == 0 && ((x2 - x) % 4 == 2 || (z2 - z) % 4 == 0)) {
-									chunk.setBlockState(currBlockPos, SEA_LANTERN, false);
+									chunk.setBlockState(currBlockPos, SEA_LANTERN);
 								} else {
-									chunk.setBlockState(currBlockPos, PRISMARINE_BRICKS, false);
+									chunk.setBlockState(currBlockPos, PRISMARINE_BRICKS);
 								}
 							} else {
-								chunk.setBlockState(currBlockPos, WATER, false);
+								chunk.setBlockState(currBlockPos, WATER);
 							}
 						} else {
 							if (y2 % 2 == 0) {
-								chunk.setBlockState(currBlockPos, PRISMARINE, false);
+								chunk.setBlockState(currBlockPos, PRISMARINE);
 							} else {
-								chunk.setBlockState(currBlockPos, PRISMARINE_BRICKS, false);
+								chunk.setBlockState(currBlockPos, PRISMARINE_BRICKS);
 							}
 						}
 					}

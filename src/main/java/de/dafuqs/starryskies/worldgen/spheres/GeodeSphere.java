@@ -113,7 +113,7 @@ public class GeodeSphere extends Sphere<GeodeSphere.Config> {
 							// nothing
 						} else if (d < this.radius - 3) {
 							if (random.nextFloat() < speckleChance) {
-								chunk.setBlockState(currBlockPos, innerSpecklesBlockState.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos, innerSpecklesBlockState.get(random, currBlockPos));
 								
 								// since we are operating on a chunk-by-chunk basis,
 								// we cannot spill into neighnoring chunks. So if a budding block
@@ -125,17 +125,17 @@ public class GeodeSphere extends Sphere<GeodeSphere.Config> {
 										if (crystalState.contains(Properties.FACING)) {
 											crystalState = crystalState.with(Properties.FACING, direction);
 										}
-										chunk.setBlockState(posInDirection, crystalState, false);
+										chunk.setBlockState(posInDirection, crystalState);
 									}
 								}
 								
 							} else {
-								chunk.setBlockState(currBlockPos, innerBlockState.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos, innerBlockState.get(random, currBlockPos));
 							}
 						} else if (d < this.radius - 2) {
-							chunk.setBlockState(currBlockPos, middleBlockState.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, middleBlockState.get(random, currBlockPos));
 						} else if (d < this.radius - 1) {
-							chunk.setBlockState(currBlockPos, outerBlockState.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, outerBlockState.get(random, currBlockPos));
 						}
 					}
 				}

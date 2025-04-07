@@ -89,7 +89,7 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 						}
 						
 						currBlockPos.set(x2, y2, z2);
-						chunk.setBlockState(currBlockPos, currentBlockState, false);
+						chunk.setBlockState(currBlockPos, currentBlockState);
 					}
 				}
 			}

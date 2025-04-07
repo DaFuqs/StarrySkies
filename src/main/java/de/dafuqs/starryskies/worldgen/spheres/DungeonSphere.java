@@ -127,27 +127,27 @@ public class DungeonSphere extends Sphere<DungeonSphere.Config> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (d == 0) {
-							chunk.setBlockState(currBlockPos, Blocks.SPAWNER.getDefaultState(), false);
+							chunk.setBlockState(currBlockPos, Blocks.SPAWNER.getDefaultState());
 							chunk.setBlockEntity(new MobSpawnerBlockEntity(currBlockPos, Blocks.SPAWNER.getDefaultState()));
 							if (chunk.getBlockEntity(currBlockPos) instanceof MobSpawnerBlockEntity mobSpawnerBlockEntity) {
 								mobSpawnerBlockEntity.getLogic().setEntityId(this.entityType, null, random, currBlockPos);
 							}
 						} else if (d > this.radius - 1) {
 							if (isBottomBlock(d, x2, y2, z2)) {
-								chunk.setBlockState(currBlockPos, this.bottomBlock.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos, this.bottomBlock.get(random, currBlockPos));
 							} else if (isTopBlock(d, x2, y2, z2)) {
-								chunk.setBlockState(currBlockPos, this.topBlock.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos, this.topBlock.get(random, currBlockPos));
 							} else {
-								chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos));
 							}
 						} else if (d <= this.radius - this.shellThickness) {
 							Point point = new Point(x2, z2);
 							if (!floorBlocks.containsKey(point)) {
 								floorBlocks.put(new Point(x2, z2), y2);
-								chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock.get(random, currBlockPos));
 								if (random.nextFloat() < treasureEntry.chance()) {
 									BlockPos immutable = currBlockPos.toImmutable();
-									chunk.setBlockState(immutable, CHEST_STATE, false);
+									chunk.setBlockState(immutable, CHEST_STATE);
 									chunk.setBlockEntity(new ChestBlockEntity(immutable, CHEST_STATE));
 									if (chunk.getBlockEntity(immutable) instanceof ChestBlockEntity chestBlockEntity) {
 										chestBlockEntity.setLootTable(treasureEntry.lootTable(), random.nextLong());
@@ -155,7 +155,7 @@ public class DungeonSphere extends Sphere<DungeonSphere.Config> {
 								}
 							}
 						} else if (d < this.radius) {
-							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos));
 						}
 					}
 				}

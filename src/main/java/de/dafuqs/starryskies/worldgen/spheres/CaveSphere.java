@@ -130,24 +130,24 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 						
 						if (d > this.radius - 1) {
 							if (isBottomBlock(d, x2, y2, z2)) {
-								chunk.setBlockState(currBlockPos, this.bottomBlock.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos, this.bottomBlock.get(random, currBlockPos));
 							} else if (isTopBlock(d, x2, y2, z2)) {
-								chunk.setBlockState(currBlockPos, this.topBlock.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos, this.topBlock.get(random, currBlockPos));
 							} else {
-								chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos));
 							}
 						} else if (d <= this.radius - this.shellThickness) {
 							Point point = new Point(x2, z2);
 							if (!floorBlocks.containsKey(point)) {
 								floorBlocks.put(new Point(x2, z2), y2);
-								chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock.get(random, currBlockPos), false);
+								chunk.setBlockState(currBlockPos.down(), this.caveFloorBlock.get(random, currBlockPos));
 								if (hasChest && x2 - x == 0 && z2 - z == 0) {
 									placeCenterChestWithLootTable(chunk, currBlockPos.toImmutable(), chestLootTable, random, false);
 								}
 								
 							}
 						} else if (d < this.radius) {
-							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos));
 						}
 					}
 				}

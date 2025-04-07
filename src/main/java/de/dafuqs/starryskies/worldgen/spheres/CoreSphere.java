@@ -89,9 +89,9 @@ public class CoreSphere extends Sphere<CoreSphere.Config> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (d < this.coreRadius) {
-							chunk.setBlockState(currBlockPos, this.coreBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.coreBlock.get(random, currBlockPos));
 						} else {
-							chunk.setBlockState(currBlockPos, this.mainBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.mainBlock.get(random, currBlockPos));
 						}
 					}
 				}

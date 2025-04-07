@@ -107,16 +107,16 @@ public class FluidSphere extends Sphere<FluidSphere.Config> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (this.holeInBottom && (x - x2) == 0 && (z - z2) == 0 && (y - y2 + 1) >= liquidRadius) {
-							chunk.setBlockState(new BlockPos(currBlockPos), this.fluidBlock, false);
+							chunk.setBlockState(new BlockPos(currBlockPos), this.fluidBlock);
 							chunk.markBlockForPostProcessing(currBlockPos); // making it drip down after generation
 						} else if (d <= liquidRadius) {
 							if (y2 <= maxLiquidY) {
-								chunk.setBlockState(currBlockPos, this.fluidBlock, false);
+								chunk.setBlockState(currBlockPos, this.fluidBlock);
 							} else {
-								chunk.setBlockState(currBlockPos, CAVE_AIR, false);
+								chunk.setBlockState(currBlockPos, CAVE_AIR);
 							}
 						} else {
-							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos));
 						}
 					}
 				}

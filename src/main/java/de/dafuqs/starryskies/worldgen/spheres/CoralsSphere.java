@@ -138,18 +138,18 @@ public class CoralsSphere extends Sphere<CoralsSphere.Config> {
 							if (rand < 2) {
 								BlockState coral = getRandomCoralBlock(random);
 								if (rand == 0 && chunk.getBlockState(currBlockPos.down()).getBlock() == Blocks.WATER) {
-									chunk.setBlockState(currBlockPos.down(), coral, false);
-									chunk.setBlockState(currBlockPos, getRandomWaterLoggableBlock(random), false);
+									chunk.setBlockState(currBlockPos.down(), coral);
+									chunk.setBlockState(currBlockPos, getRandomWaterLoggableBlock(random));
 								} else {
-									chunk.setBlockState(currBlockPos, coral, false);
+									chunk.setBlockState(currBlockPos, coral);
 								}
 							} else {
-								chunk.setBlockState(currBlockPos, WATER, false);
+								chunk.setBlockState(currBlockPos, WATER);
 							}
 						} else if (d <= (this.radius - this.shellRadius)) {
-							chunk.setBlockState(currBlockPos, WATER, false);
+							chunk.setBlockState(currBlockPos, WATER);
 						} else {
-							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos));
 						}
 					}
 				}

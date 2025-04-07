@@ -43,17 +43,17 @@ public class StructureInteriorSphere extends ShellSphere<StructureInteriorSphere
 				SphereStateProvider.CODEC.fieldOf("main_block").forGetter((config) -> config.innerBlock),
 				SphereStateProvider.CODEC.fieldOf("shell_block").forGetter((config) -> config.shellBlock),
 				IntProvider.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness),
-				DataPool.createCodec(Identifier.CODEC).fieldOf("center_structures").forGetter((config) -> config.centerStructures),
-				DataPool.createCodec(Identifier.CODEC).fieldOf("structures").forGetter((config) -> config.outerStructures)
+				Pool.createCodec(Identifier.CODEC).fieldOf("center_structures").forGetter((config) -> config.centerStructures),
+				Pool.createCodec(Identifier.CODEC).fieldOf("structures").forGetter((config) -> config.outerStructures)
 		).apply(instance, (sphereConfig, innerBlock, shellBlock, shellThickness, centerStructures, outerStructures)
 				-> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, innerBlock, shellBlock, shellThickness, centerStructures, outerStructures)));
 		
 		protected final IntProvider shellThickness;
-		protected final DataPool<Identifier> centerStructures;
-		protected final DataPool<Identifier> outerStructures;
+		protected final Pool<Identifier> centerStructures;
+		protected final Pool<Identifier> outerStructures;
 		
 		public Config(FloatProvider size, Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Optional<Generation> generation,
-					  SphereStateProvider innerBlock, SphereStateProvider shellBlock, IntProvider shellThickness, DataPool<Identifier> centerStructures, DataPool<Identifier> outerStructures) {
+					  SphereStateProvider innerBlock, SphereStateProvider shellBlock, IntProvider shellThickness, Pool<Identifier> centerStructures, Pool<Identifier> outerStructures) {
 			super(size, decorators, spawns, generation, innerBlock, shellBlock, shellThickness);
 			this.shellThickness = shellThickness;
 			this.centerStructures = centerStructures;
@@ -65,11 +65,11 @@ public class StructureInteriorSphere extends ShellSphere<StructureInteriorSphere
 		
 		protected final float shellRadius;
 		// These should all be 9x9x9 in size
-		protected final DataPool<Identifier> centerStructures;
-		protected final DataPool<Identifier> outerStructures;
+		protected final Pool<Identifier> centerStructures;
+		protected final Pool<Identifier> outerStructures;
 		
 		public Placed(ConfiguredSphere<? extends Sphere<Config>, Config> configuredSphere, float radius, List<RegistryEntry<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
-					  BlockStateProvider innerBlock, BlockStateProvider shellBlock, int shellRadius, float shellRadius1, DataPool<Identifier> centerStructures, DataPool<Identifier> outerStructures) {
+					  BlockStateProvider innerBlock, BlockStateProvider shellBlock, int shellRadius, float shellRadius1, Pool<Identifier> centerStructures, Pool<Identifier> outerStructures) {
 			super(configuredSphere, radius, decorators, spawns, random, innerBlock, shellBlock, shellRadius);
 			this.shellRadius = shellRadius1;
 			this.centerStructures = centerStructures;
@@ -107,12 +107,12 @@ public class StructureInteriorSphere extends ShellSphere<StructureInteriorSphere
 						if (d < iMaxRadius) {
 							mutable.set(x2, y2, z2);
 							if (Support.isBlockPosInChunkPos(chunkPos, mutable)) {
-								DataPool<Identifier> structurePool = d == 0 ? centerStructures : outerStructures;
-								Identifier structureId = structurePool.getDataOrEmpty(random).get();
+								Pool<Identifier> structurePool = d == 0 ? centerStructures : outerStructures;
+								Identifier structureId = structurePool.get(random);
 								StructureTemplate template = templateManager.getTemplate(structureId).orElse(null);
 								if (template != null) {
 									BlockPos set = mutable.set(x2 - pivot, y2, z2 - pivot).toImmutable();
-									// TODO: what about giving them a random rotation via BlockRotation.random(random)? (need to adjust the pos, though)
+									// TODO: how about giving them a random rotation via BlockRotation.random(random)? (need to adjust the pos, though)
 									StructurePlacementData structurePlacementData = new StructurePlacementData().setRotation(BlockRotation.NONE).setIgnoreEntities(false);
 									template.place(world, set, set, structurePlacementData, StructureBlockBlockEntity.createRandom(this.position.asLong()), 2);
 								} else {

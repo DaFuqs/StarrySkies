@@ -41,12 +41,13 @@ public class StarrySkyConfig implements ConfigData {
 			Higher values make spheres spread out farther, having more air in between
 			Default: 50""")
 	public int systemSizeChunks = 50;
-
-	@ConfigEntry.Category("GENERAL")
+	
+	// TODO: the rainbow skybox is currently nonfunctional
+	/*@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
 			Use a fancy rainbow skybox instead of a generic one.
 			Default: true""")
-	public boolean rainbowSkybox = true;
+	public boolean rainbowSkybox = true;*/
 
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """

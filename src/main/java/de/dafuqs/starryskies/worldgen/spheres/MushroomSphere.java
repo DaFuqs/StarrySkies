@@ -95,13 +95,13 @@ public class MushroomSphere extends Sphere<MushroomSphere.Config> {
 						
 						long rounded = Math.round(d);
 						if (rounded <= (this.radius - this.shellRadius)) {
-							chunk.setBlockState(currBlockPos, this.stemBlock, false);
+							chunk.setBlockState(currBlockPos, this.stemBlock);
 						} else if (d <= this.radius - 0.5) {
-							chunk.setBlockState(currBlockPos, placementBlockstateInner, false);
+							chunk.setBlockState(currBlockPos, placementBlockstateInner);
 						} else {
 							// not perfectly correct, but eh
 							BlockState placementBlockstateOuter = this.mushroomBlock.with(net.minecraft.state.property.Properties.UP, true).with(net.minecraft.state.property.Properties.NORTH, true).with(net.minecraft.state.property.Properties.EAST, true).with(net.minecraft.state.property.Properties.SOUTH, true).with(net.minecraft.state.property.Properties.WEST, true).with(Properties.DOWN, true);
-							chunk.setBlockState(currBlockPos, placementBlockstateOuter, false);
+							chunk.setBlockState(currBlockPos, placementBlockstateOuter);
 						}
 					}
 				}

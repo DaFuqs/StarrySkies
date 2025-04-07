@@ -98,9 +98,9 @@ public class ShellSphere<SC extends ShellSphere.Config> extends Sphere<SC> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (d <= (this.radius - this.shellRadius)) {
-							chunk.setBlockState(currBlockPos, this.innerBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.innerBlock.get(random, currBlockPos));
 						} else {
-							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos), false);
+							chunk.setBlockState(currBlockPos, this.shellBlock.get(random, currBlockPos));
 						}
 					}
 				}
