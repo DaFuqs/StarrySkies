@@ -32,12 +32,12 @@
   "commands.starry_skies.locate.sphere.noop": "无法在附近找到星球",
   "commands.starry_skies.locate.sphere.not_found": "无法在附近找到 “%s” 类型的星球",
 
-  "advancements.starry_skies.starry_skies.title": "星际穿越",
-  "advancements.starry_skies.starry_skies.description": "进入繁星世界。",
-  "advancements.starry_skies.starry_skies_nether.title": "孽缘之空",
-  "advancements.starry_skies.starry_skies_nether.description": "与繁星世界类似（但更恐怖！）。",
-  "advancements.starry_skies.starry_skies_end.title": "隐匿星界",
-  "advancements.starry_skies.starry_skies_end.description": "与繁星世界类似（但……不太一样）。",
+  "advancements.starry_skies.starry_skies.title": "繁星之空",
+  "advancements.starry_skies.starry_skies.description": "星际穿越",
+  "advancements.starry_skies.starry_skies_nether.title": "煞星之空",
+  "advancements.starry_skies.starry_skies_nether.description": "惧星世界",
+  "advancements.starry_skies.starry_skies_end.title": "贵星之空",
+  "advancements.starry_skies.starry_skies_end.description": "隐匿星界",
 
   "advancements.starry_skies.group_structures.title": "结构之星",
   "advancements.starry_skies.group_structures.description": "第一次踏足于包含结构的星球",
