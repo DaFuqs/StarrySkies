@@ -20,9 +20,9 @@
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel.@Tooltip": "‘/starry_skies_locate’ 命令可以列出最近的星球的所有数据（位置，组成方块……）。",
   "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel": "需要具备 ‘/sphere’ 命令的权限",
   "text.autoconfig.StarrySky.option.cloudHeight": "云层高度",
-  "text.autoconfig.StarrySky.option.rainbowSkybox": "繁星世界繁星浩空维度的天空使用华丽的彩虹天空颜色，而不是原版的天空颜色",
-  "text.autoconfig.StarrySky.option.enableNetherPortalsToStarryNether": "本选项设置为 “是” 时，繁星浩空的下界传送门会传送到 “异星惊空” 维度，设置为 “否” 时，则下界传送门不会形成。",
-  "text.autoconfig.StarrySky.option.enableEndPortalsToStarryEnd": "本选项设置为 “是” 时，繁星浩空的末地传送门会传送到 “贵星深空” 维度，设置为 “否” 时，则激活的末地传送门会传送至原版末地维度。",
+  "text.autoconfig.StarrySky.option.rainbowSkybox": "繁星世界中的繁星浩空维度的天空使用华丽的彩虹天空颜色，而不是原版的天空颜色",
+  "text.autoconfig.StarrySky.option.enableNetherPortalsToStarryNether": "本选项设置为 “是” 时，繁星浩空维度的下界传送门会传送到 “异星惊空” 维度，设置为 “否” 时，则下界传送门不会形成。",
+  "text.autoconfig.StarrySky.option.enableEndPortalsToStarryEnd": "本选项设置为 “是” 时，繁星浩空维度的末地传送门会传送到 “贵星深空” 维度，设置为 “否” 时，则激活的末地传送门会传送至原版末地维度。",
 
   "text.autoconfig.StarrySky.option.systemSizeChunks.@PrefixText": "球体以星系为单位生成。每个星系由 x 个球体组成，分布在 y 个区块中。每个星系的区块大小²。生成值越高，星系边界处细微的 “间隙” 就越少，但由于星系是一次性生成的，因此高的值可能会导致每次生成新星系时都出现轻微的卡顿（但总体卡顿会降低）。",
   "text.autoconfig.StarrySky.option.systemSizeChunks.@Tooltip": "区块中应该生成星系有多大²",
