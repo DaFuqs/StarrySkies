@@ -21,9 +21,9 @@ public class ProximityAdvancementCheckEvent implements ServerTickEvents.EndTick 
 			StarrySkies.LOGGER.debug("Advancement check start. Players: {}", minecraftServer.getPlayerManager().getCurrentPlayerCount());
 			for (ServerPlayerEntity serverPlayerEntity : minecraftServer.getPlayerManager().getPlayerList()) {
 				StarrySkies.LOGGER.debug("Checking player {}", serverPlayerEntity.getName());
-				if (StarrySkies.isStarryWorld(serverPlayerEntity.getServerWorld())) {
+				if (StarrySkies.isStarryWorld(serverPlayerEntity.getWorld())) {
 					StarrySkies.LOGGER.debug("In starry world");
-					Optional<Support.SphereDistance> distance = Support.getClosestSphere(serverPlayerEntity.getServerWorld(), serverPlayerEntity.getBlockPos());
+					Optional<Support.SphereDistance> distance = Support.getClosestSphere(serverPlayerEntity.getWorld(), serverPlayerEntity.getBlockPos());
 					if (distance.isPresent() && (Math.sqrt(distance.get().squaredDistance)) < distance.get().sphere.getRadius() + 2) {
 						PlacedSphere<?> sphere = distance.get().sphere;
 						StarryAdvancementCriteria.SPHERE_DISCOVERED.trigger(serverPlayerEntity, sphere);

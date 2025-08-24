@@ -88,29 +88,35 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 		}
 		
 		BuiltBuffer builtBuffer = bufferBuilder.end();
-		gpuBuffer = RenderSystem.getDevice().createBuffer(() -> "StarrySkies sky vertex buffer", BufferType.VERTICES, BufferUsage.STATIC_WRITE, builtBuffer.getBuffer());
+		gpuBuffer = RenderSystem.getDevice().createBuffer(() -> "Top sky vertex buffer", 32, builtBuffer.getBuffer());
 		builtBuffer.close();
 		
 		bufferAllocator.close();
 		return gpuBuffer;
 	}
 	
-	// See WorldRenderer.renderEndSky() for inspiration
+	// See SkyRendering.renderEndSky() for inspiration
 	private void renderStarrySky() {
 		TextureManager textureManager = MinecraftClient.getInstance().getTextureManager();
 		AbstractTexture abstractTexture = textureManager.getTexture(DOWN);
-		abstractTexture.setFilter(TriState.FALSE, false);
+		abstractTexture.setUseMipmaps(false);
 		RenderSystem.ShapeIndexBuffer shapeIndexBuffer = RenderSystem.getSequentialBuffer(VertexFormat.DrawMode.QUADS);
 		GpuBuffer gpuBuffer = shapeIndexBuffer.getIndexBuffer(36);
-		GpuTexture gpuTexture = MinecraftClient.getInstance().getFramebuffer().getColorAttachment();
-		GpuTexture gpuTexture2 = MinecraftClient.getInstance().getFramebuffer().getDepthAttachment();
-		RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(gpuTexture, OptionalInt.empty(), gpuTexture2, OptionalDouble.empty());
+		GpuTextureView gpuTextureView = MinecraftClient.getInstance().getFramebuffer().getColorAttachmentView();
+		GpuTextureView gpuTextureView2 = MinecraftClient.getInstance().getFramebuffer().getDepthAttachmentView();
+		GpuBufferSlice gpuBufferSlice = RenderSystem.getDynamicUniforms().write(RenderSystem.getModelViewMatrix(), new Vector4f(1.0F, 1.0F, 1.0F, 1.0F), new Vector3f(), new Matrix4f(), 0.0F);
+		RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> {
+			return "Starry sky";
+		}, gpuTextureView, OptionalInt.empty(), gpuTextureView2, OptionalDouble.empty());
 		
 		renderPass.setPipeline(RenderPipelines.POSITION_TEX_COLOR_END_SKY);
-		renderPass.bindSampler("Sampler0", abstractTexture.getGlTexture());
+		RenderSystem.bindDefaultUniforms(renderPass);
+		renderPass.setUniform("DynamicTransforms", gpuBufferSlice);
+		renderPass.bindSampler("Sampler0", abstractTexture.getGlTextureView());
 		renderPass.setVertexBuffer(0, this.skyVertexBuffer);
 		renderPass.setIndexBuffer(gpuBuffer, shapeIndexBuffer.getIndexType());
-		renderPass.drawIndexed(0, 36);
+		renderPass.drawIndexed(0, 0, 36, 1);
+
 		renderPass.close();
 	}
 	

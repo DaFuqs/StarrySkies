@@ -110,7 +110,7 @@ public class StarrySkies implements ModInitializer {
 		 */
 		EntitySleepEvents.STOP_SLEEPING.register((entity, sleepingPos) -> {
 			if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
-				ServerWorld world = serverPlayerEntity.getServerWorld();
+				ServerWorld world = serverPlayerEntity.getWorld();
 				if (isStarryWorld(world) && serverPlayerEntity.canResetTimeBySleeping()) {
 					long nextDay = world.getTimeOfDay() + 24000L;
 					long mod = nextDay - nextDay % 24000L;
