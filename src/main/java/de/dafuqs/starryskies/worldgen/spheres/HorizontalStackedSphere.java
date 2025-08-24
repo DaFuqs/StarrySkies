@@ -55,7 +55,7 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 		
 		@Override
 		public String getDescription(DynamicRegistryManager registryManager) {
-			return "+++ HoprizontalStackedSphere +++" +
+			return "+++ HorizontalStackedSphere +++" +
 					"\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
 					"\nTemplateID: " + this.getID(registryManager) +
 					"\nRadius: " + this.radius;
