@@ -29,6 +29,11 @@
   "mixins": [
     "starry_skies.mixins.json"
   ],
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/class_761": ["de/dafuqs/starryskies/client/fix/RenderSkyArgumentCapture"]
+    }
+  },
   "depends": {
     "minecraft": ">=${minecraft_version}",
     "fabricloader": "*",
