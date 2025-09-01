@@ -42,12 +42,11 @@ public class StarrySkyConfig implements ConfigData {
 			Default: 50""")
 	public int systemSizeChunks = 50;
 	
-	// TODO: the rainbow skybox is currently nonfunctional
-	/*@ConfigEntry.Category("GENERAL")
+	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
 			Use a fancy rainbow skybox instead of a generic one.
 			Default: true""")
-	public boolean rainbowSkybox = true;*/
+	public boolean rainbowSkybox = true;
 
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
