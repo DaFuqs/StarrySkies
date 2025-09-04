@@ -1,8 +1,4 @@
 {
-  "biome.starry_skies.starry_skies_biome": "繁星浩空",
-  "biome.starry_skies.starry_skies_nether_biome": "异星惊空",
-  "biome.starry_skies.starry_skies_end_biome": "贵星深空",
-
   "biome.starry_skies.overworld": "繁星浩空",
   "biome.starry_skies.nether": "异星惊空",
   "biome.starry_skies.end": "贵星深空",
@@ -236,7 +232,7 @@
   "advancements.starry_skies.sphere_crimson_wood.description": "第一次踏足于绯红菌星球",
   "advancements.starry_skies.sphere_warped_wood.title": "诡异行星",
   "advancements.starry_skies.sphere_warped_wood.description": "第一次踏足于诡异菌星球",
-  
+
   "advancements.starry_skies.sphere_end_dungeon.title": "末地地牢之星",
   "advancements.starry_skies.sphere_end_dungeon.description": "在贵星深空维度中，第一次踏足于包含地牢的星球",
   "advancements.starry_skies.sphere_end_gateway.title": "归途",

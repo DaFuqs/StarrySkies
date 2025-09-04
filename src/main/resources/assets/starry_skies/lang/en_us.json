@@ -1,7 +1,7 @@
 {
-  "biome.starry_skies.starry_skies_biome": "Starry Sky",
-  "biome.starry_skies.starry_skies_nether_biome": "Scary Sky",
-  "biome.starry_skies.starry_skies_end_biome": "Scarcy Sky",
+  "biome.starry_skies.overworld": "Starry Sky",
+  "biome.starry_skies.nether": "Scary Sky",
+  "biome.starry_skies.end": "Scarcy Sky",
 
   "text.autoconfig.StarrySky.title": "Starry Skies Config",
   "text.autoconfig.StarrySky.category.GENERAL": "General",
