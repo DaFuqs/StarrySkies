@@ -2,6 +2,7 @@ package de.dafuqs.starryskies.client.sky;
 
 import com.mojang.blaze3d.buffers.*;
 import com.mojang.blaze3d.systems.*;
+import com.mojang.blaze3d.textures.*;
 import com.mojang.blaze3d.vertex.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.client.fix.*;
@@ -17,7 +18,6 @@ import net.minecraft.client.world.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.*;
 
 import java.util.*;
 
@@ -57,10 +57,10 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 		}
 		// Create a proper frame pass so the starry sky would render
 		// Mimics vanilla logic
-		RenderSkyArgumentCapture capture = context.worldRenderer();
+		RenderSkyArgumentCapture capture = (RenderSkyArgumentCapture) context.worldRenderer();
 		FrameGraphBuilder frameGraphBuilder = capture.starrySkies$frameGraphBuilder();
 		DefaultFramebufferSet framebufferSet = capture.starrySkies$framebufferSet();
-		Fog fog = capture.starrySkies$fog();
+		GpuBufferSlice fog = capture.starrySkies$fog();
 		
 		FramePass framePass = frameGraphBuilder.createPass("sky");
 		// NOTE: framebufferSet.mainFramebuffer is a Handle over MinecraftClient.getInstance().getFramebuffer()
@@ -92,45 +92,49 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 				textureManager.getTexture(UP),
 				textureManager.getTexture(DOWN),
 		};
-		for (var skyTexture : skyTextures) skyTexture.setFilter(TriState.FALSE, false);
+		for (var skyTexture : skyTextures) skyTexture.setFilter(false, false);
 		
-		float[] prev = RenderSystem.getShaderColor();
+		//float[] prev = RenderSystem.getShaderColor();
 		
 		Camera camera = context.camera();
 		ClientWorld world = context.world();
 		float tickProgress = context.tickCounter().getTickProgress(false);
 		int color = world.getSkyColor(camera.getPos(), tickProgress);
-		RenderSystem.setShaderColor(
+		/*RenderSystem.setShaderColor(
 				ColorHelper.getRedFloat(color),
 				ColorHelper.getGreenFloat(color),
 				ColorHelper.getBlueFloat(color),
-				ColorHelper.getAlphaFloat(color));
+				ColorHelper.getAlphaFloat(color));*/
 		
 		// The number 36 comes from VertexFormat.DrawMode.QUADS.getIndexCount(24)
 		// the formula of which is vertexCount / 4 * 6, i.e. 6 indices per 4 vertices (1 quad)
 		GpuBuffer idxBuf = indexBuffer.getIndexBuffer(36);
 		Framebuffer framebuffer = client.getFramebuffer();
 		
-		try (RenderPass renderPass = RenderSystem.getDevice()
+		GpuTextureView gpuTextureView = framebuffer.getColorAttachmentView();
+		GpuTextureView gpuTextureView2 = framebuffer.getDepthAttachmentView();
+		
+		RenderPass renderPass = RenderSystem.getDevice()
 				.createCommandEncoder()
-				.createRenderPass(framebuffer.getColorAttachment(), OptionalInt.empty(),
-						framebuffer.useDepthAttachment ? framebuffer.getDepthAttachment() : null, OptionalDouble.empty())) {
-			// NOTE: using POSITION_TEX_COLOR_END_SKY because it uses BlendFunction.TRANSLUCENT
-			// The skybox texture looks washed out on POSITION_TEX_COLOR_CELESTIAL due to its BlendFunction.OVERLAY
-			renderPass.setPipeline(RenderPipelines.POSITION_TEX_COLOR_END_SKY);
-			renderPass.setIndexBuffer(idxBuf, indexBuffer.getIndexType());
-			renderPass.setVertexBuffer(0, this.skyVertexBuffer);
-			if (RenderSystem.SCISSOR_STATE.isEnabled()) {
+				.createRenderPass(() -> "Cubemap", gpuTextureView, OptionalInt.empty(), gpuTextureView2, OptionalDouble.empty());
+		
+		// NOTE: using POSITION_TEX_COLOR_END_SKY because it uses BlendFunction.TRANSLUCENT
+		// The skybox texture looks washed out on POSITION_TEX_COLOR_CELESTIAL due to its BlendFunction.OVERLAY
+		renderPass.setPipeline(RenderPipelines.POSITION_TEX_COLOR_END_SKY);
+		renderPass.setIndexBuffer(idxBuf, indexBuffer.getIndexType());
+		renderPass.setVertexBuffer(0, this.skyVertexBuffer);
+			/*if (RenderSystem.SCISSOR_STATE.isEnabled()) {
 				renderPass.enableScissor(RenderSystem.SCISSOR_STATE);
-			}
-			// draw each quad (side) with a different texture
-			// 6 indices per quad, as per VertexFormat.DrawMode.QUADS.getIndexCount(4)
-			for (int i = 0; i < 6; ++i) {
-				renderPass.bindSampler("Sampler0", skyTextures[i].getGlTexture());
-				renderPass.drawIndexed(6 * i, 6);
-			}
+			}*/
+		// draw each quad (side) with a different texture
+		// 6 indices per quad, as per VertexFormat.DrawMode.QUADS.getIndexCount(4)
+		for (int i = 0; i < 6; ++i) {
+			renderPass.bindSampler("Sampler0", skyTextures[i].getGlTextureView());
+			renderPass.drawIndexed(6 * i, 6 * i, 36, 6); // TODO
 		}
-		RenderSystem.setShaderColor(prev[0], prev[1], prev[2], prev[3]);
+		//RenderSystem.setShaderColor(prev[0], prev[1], prev[2], prev[3]);
+		
+		renderPass.close();
 	}
 	
 	// Write skybox vertices into skyVertexBuffer with the specified vertex color
@@ -183,11 +187,12 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 			bufferBuilder.vertex(100.0f, -100.0f, -100.0f).texture(1.0F, 0.0F).color(color);
 			bufferBuilder.vertex(-100.0f, -100.0f, -100.0f).texture(0.0F, 0.0F).color(color);
 			
-			try (BuiltBuffer builtBuffer = bufferBuilder.end()) {
-				return RenderSystem.getDevice()
-						.createBuffer(() -> "StarrySkies sky vertex buffer", BufferType.VERTICES,
-								BufferUsage.STATIC_WRITE, builtBuffer.getBuffer());
-			}
+			BuiltBuffer builtBuffer = bufferBuilder.end();
+			GpuBuffer gpuBuffer = RenderSystem.getDevice().createBuffer(() -> "Top sky vertex buffer", 32, builtBuffer.getBuffer());
+			builtBuffer.close();
+			
+			bufferAllocator.close();
+			return gpuBuffer;
 		}
 	}
 

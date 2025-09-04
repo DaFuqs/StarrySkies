@@ -1,5 +1,6 @@
 package de.dafuqs.starryskies.mixin.fix;
 
+import com.mojang.blaze3d.buffers.*;
 import de.dafuqs.starryskies.client.fix.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.render.*;
@@ -18,13 +19,12 @@ public class WorldRendererMixinFix implements RenderSkyArgumentCapture {
 	@Unique
 	FrameGraphBuilder frameGraphBuilder;
 	@Unique
-	Fog fog;
+	GpuBufferSlice fog;
 	
 	
 	@Inject(at = @At(value = "HEAD"), method = "renderSky", order = 999 /* apply just before Fabric API */)
-	private void renderSky(FrameGraphBuilder frameGraphBuilder, Camera camera, float tickProgress, Fog fog, CallbackInfo info) {
+	private void renderSky(FrameGraphBuilder frameGraphBuilder, Camera camera, float tickProgress, GpuBufferSlice fog, CallbackInfo ci) {
 		this.frameGraphBuilder = frameGraphBuilder;
-		this.fog = fog;
 	}
 	
 	@Override
@@ -38,7 +38,8 @@ public class WorldRendererMixinFix implements RenderSkyArgumentCapture {
 	}
 	
 	@Override
-	public Fog starrySkies$fog() {
+	public GpuBufferSlice starrySkies$fog() {
 		return fog;
 	}
+	
 }

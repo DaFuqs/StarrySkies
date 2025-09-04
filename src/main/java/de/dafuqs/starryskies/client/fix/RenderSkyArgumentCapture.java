@@ -1,5 +1,6 @@
 package de.dafuqs.starryskies.client.fix;
 
+import com.mojang.blaze3d.buffers.*;
 import net.minecraft.client.render.*;
 
 // Workaround for the fact that FAPI does *not* provide frameGraphBuilder and framebufferSet to the API user
@@ -9,5 +10,5 @@ public interface RenderSkyArgumentCapture {
 	
 	FrameGraphBuilder starrySkies$frameGraphBuilder();
 	
-	Fog starrySkies$fog();
+	GpuBufferSlice starrySkies$fog();
 }
