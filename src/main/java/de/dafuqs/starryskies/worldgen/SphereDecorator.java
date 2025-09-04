@@ -74,11 +74,13 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
+		int minX = Math.max(chunkPos.getEndX(), x - rad);
+		int minZ = Math.max(chunkPos.getEndZ(), z - rad);
 		int maxX = Math.min(chunkPos.getEndX(), x + rad);
 		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		for (int x2 = Math.max(chunkPos.getStartX(), x - rad); x2 <= maxX; x2++) {
-			for (int z2 = Math.max(chunkPos.getStartZ(), z - rad); z2 <= maxZ; z2++) {
+		for (int x2 = minX; x2 <= maxX; x2++) {
+			for (int z2 = minZ; z2 <= maxZ; z2++) {
 				for (int y2 = y + rad; y2 > y; y2--) {
 					mutable.set(x2, y2, z2);
 					if (!world.getBlockState(mutable).isAir()) {
@@ -99,11 +101,13 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
+		int minX = Math.max(chunkPos.getEndX(), x - rad);
+		int minZ = Math.max(chunkPos.getEndZ(), z - rad);
 		int maxX = Math.min(chunkPos.getEndX(), x + rad);
 		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		for (int x2 = Math.max(chunkPos.getStartX(), x - rad); x2 <= maxX; x2++) {
-			for (int z2 = Math.max(chunkPos.getStartZ(), z - rad); z2 <= maxZ; z2++) {
+		for (int x2 = minX; x2 <= maxX; x2++) {
+			for (int z2 = minZ; z2 <= maxZ; z2++) {
 				for (int y2 = y - rad; y2 < y; y2++) {
 					mutable.set(x2, y2, z2);
 					if (!world.getBlockState(mutable).isAir()) {
@@ -153,11 +157,13 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
+		int minX = Math.max(chunkPos.getStartX(), x - rad);
+		int minZ = Math.max(chunkPos.getStartZ(), z - rad);
 		int maxX = Math.min(chunkPos.getEndX(), x + rad);
 		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		for (int x2 = Math.max(chunkPos.getStartX(), x - rad); x2 <= maxX; x2++) {
-			for (int z2 = Math.max(chunkPos.getStartZ(), z - rad); z2 <= maxZ; z2++) {
+		for (int x2 = minX; x2 <= maxX; x2++) {
+			for (int z2 = minZ; z2 <= maxZ; z2++) {
 				boolean hitShell = false;
 				for (int y2 = y - rad; y2 < y; y2++) {
 					mutable.set(x2, y2, z2);
