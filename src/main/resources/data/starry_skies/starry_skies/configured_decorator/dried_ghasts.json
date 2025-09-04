@@ -1,0 +1,9 @@
+{
+  "type": "starry_skies:single_block",
+  "config": {
+    "block": {
+      "Name": "minecraft:dried_ghast"
+    },
+    "chance": 0.02
+  }
+}

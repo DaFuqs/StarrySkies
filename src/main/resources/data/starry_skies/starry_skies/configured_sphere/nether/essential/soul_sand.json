@@ -15,13 +15,14 @@
     },
 
     "decorators": {
+      "starry_skies:center_pond_lava": 0.05,
       "starry_skies:soul_fire": 0.25,
       "starry_skies:nether_wart": 0.1,
-      "starry_skies:center_pond_lava": 0.05
+      "starry_skies:dried_ghasts": 0.9
     },
     "spawns": [],
     "generation": {
-      "weight": 4.0,
+      "weight": 6.0,
       "group": "starry_skies:nether/essential"
     }
   }
