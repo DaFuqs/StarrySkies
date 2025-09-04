@@ -24,7 +24,7 @@ public class HugePlantDecorator extends SphereDecorator<HugePlantDecoratorConfig
 
 		for (BlockPos bp : getTopBlocks(world, origin, sphere)) {
 			BlockState posState = world.getBlockState(bp);
-			if (!posState.isFullCube(world, bp)) {
+			if (!posState.isSolidBlock(world, bp)) {
 				continue;
 			}
 

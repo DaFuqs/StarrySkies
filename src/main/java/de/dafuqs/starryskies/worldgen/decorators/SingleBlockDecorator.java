@@ -23,7 +23,7 @@ public class SingleBlockDecorator extends SphereDecorator<SingleBlockDecoratorCo
 
 		for (BlockPos bp : getTopBlocks(world, origin, sphere)) {
 			BlockState posState = world.getBlockState(bp);
-			if (posState.isFullCube(world, bp) && world.getBlockState(bp.up()).isAir()) {
+			if (posState.isSolidBlock(world, bp) && world.getBlockState(bp.up()).isAir()) {
 				if (random.nextFloat() < config.chance()) {
 					world.setBlockState(bp.up(), config.state(), Block.NOTIFY_ALL);
 				}

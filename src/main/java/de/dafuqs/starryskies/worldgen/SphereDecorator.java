@@ -74,8 +74,8 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
-		int minX = Math.max(chunkPos.getEndX(), x - rad);
-		int minZ = Math.max(chunkPos.getEndZ(), z - rad);
+		int minX = Math.max(chunkPos.getStartX(), x - rad);
+		int minZ = Math.max(chunkPos.getStartZ(), z - rad);
 		int maxX = Math.min(chunkPos.getEndX(), x + rad);
 		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
@@ -101,8 +101,8 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
-		int minX = Math.max(chunkPos.getEndX(), x - rad);
-		int minZ = Math.max(chunkPos.getEndZ(), z - rad);
+		int minX = Math.max(chunkPos.getStartX(), x - rad);
+		int minZ = Math.max(chunkPos.getStartZ(), z - rad);
 		int maxX = Math.min(chunkPos.getEndX(), x + rad);
 		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
