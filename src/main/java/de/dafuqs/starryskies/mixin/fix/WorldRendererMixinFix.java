@@ -25,6 +25,7 @@ public class WorldRendererMixinFix implements RenderSkyArgumentCapture {
 	@Inject(at = @At(value = "HEAD"), method = "renderSky", order = 999 /* apply just before Fabric API */)
 	private void renderSky(FrameGraphBuilder frameGraphBuilder, Camera camera, float tickProgress, GpuBufferSlice fog, CallbackInfo ci) {
 		this.frameGraphBuilder = frameGraphBuilder;
+		this.fog = fog;
 	}
 	
 	@Override
