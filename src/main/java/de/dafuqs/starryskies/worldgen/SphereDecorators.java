@@ -31,6 +31,7 @@ public class SphereDecorators {
 	public static SphereDecorator<ChorusFruitDecoratorConfig> CHORUS_FRUIT = register("chorus_fruit", new ChorusFruitDecorator(ChorusFruitDecoratorConfig.CODEC));
 	public static SphereDecorator<BrushableBlockDecoratorConfig> BRUSHABLE_BLOCK = register("brushable_block", new BrushableBlockDecorator(BrushableBlockDecoratorConfig.CODEC));
 	public static SphereDecorator<CaveColumnDecoratorConfig> CAVE_COLUMN = register("cave_column", new CaveColumnDecorator(CaveColumnDecoratorConfig.CODEC));
+	public static SphereDecorator<CenterChestDecoratorConfig> CENTER_CHEST = register("center_chest", new CenterChestDecorator(CenterChestDecoratorConfig.CODEC));
 
 	public static void initialize() {
 
