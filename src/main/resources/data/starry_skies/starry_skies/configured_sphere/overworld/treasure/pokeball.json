@@ -1,0 +1,45 @@
+{
+  "type": "starry_skies:horizontal_stacked",
+  "config": {
+    "blocks": [
+      {
+        "Name": "minecraft:red_wool"
+      },
+      {
+        "Name": "minecraft:red_wool"
+      },
+      {
+        "Name": "minecraft:red_wool"
+      },
+      {
+        "Name": "minecraft:red_wool"
+      },
+      {
+        "Name": "minecraft:black_wool"
+      },
+      {
+        "Name": "minecraft:white_wool"
+      },
+      {
+        "Name": "minecraft:white_wool"
+      },
+      {
+        "Name": "minecraft:white_wool"
+      },
+      {
+        "Name": "minecraft:white_wool"
+      }
+    ],
+    "size": 9,
+
+    "decorators": {
+      "starry_skies:center_chest_spawn_eggs": 1.0
+    },
+
+    "spawns": [],
+    "generation": {
+      "weight": 0.2,
+      "group": "starry_skies:overworld/treasure"
+    }
+  }
+}

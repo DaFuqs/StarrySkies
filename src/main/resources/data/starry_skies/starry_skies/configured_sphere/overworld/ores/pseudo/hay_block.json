@@ -6,9 +6,12 @@
       "group": "stones"
     },
     "core_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:rotated_block_provider",
       "state": {
-        "Name": "minecraft:hay_block"
+        "Name": "minecraft:hay_block",
+        "Properties": {
+          "axis": "y"
+        }
       }
     },
     "core_radius": {

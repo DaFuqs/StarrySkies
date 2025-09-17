@@ -1,0 +1,27 @@
+{
+  "type": "starry_skies:simple",
+  "config": {
+    "block": {
+      "type": "minecraft:rotated_block_provider",
+      "state": {
+        "Name": "minecraft:hay_block",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+
+    "size": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 3,
+      "max_exclusive": 5
+    },
+
+    "decorators": {},
+    "spawns": [],
+    "generation": {
+      "weight": 0.1,
+      "group": "starry_skies:overworld/decorative"
+    }
+  }
+}
