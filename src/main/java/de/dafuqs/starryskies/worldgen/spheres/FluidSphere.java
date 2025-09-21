@@ -39,7 +39,7 @@ public class FluidSphere extends Sphere<FluidSphere.Config> {
 				IntProvider.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness),
 				BlockState.CODEC.fieldOf("fluid_block").forGetter((config) -> config.fluidBlock),
 				FloatProvider.createValidatedCodec(0.0F, 1.0F).fieldOf("fluid_fill_percent").forGetter((config) -> config.fillPercent),
-				Codecs.POSITIVE_FLOAT.fieldOf("hole_in_bottom_chance").forGetter((config) -> config.holeInBottomChance)
+				Codecs.NON_NEGATIVE_FLOAT.fieldOf("hole_in_bottom_chance").forGetter((config) -> config.holeInBottomChance)
 		).apply(instance, (sphereConfig, shellBlock, shellThickness, fluidBlock, fillAmount, holeInBottom) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, shellBlock, shellThickness, fluidBlock, fillAmount, holeInBottom)));
 		
 		protected final SphereStateProvider shellBlock;

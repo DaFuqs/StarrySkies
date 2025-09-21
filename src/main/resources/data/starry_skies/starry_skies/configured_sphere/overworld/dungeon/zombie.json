@@ -1,7 +1,6 @@
 {
-  "type": "starry_skies:dungeon",
+  "type": "starry_skies:cave",
   "config": {
-    "entity_type": "minecraft:zombie",
     "shell_block": {
       "type": "starry_skies:weighted_block_group_state_provider",
       "group": "overworld_dungeon_stones"
@@ -11,18 +10,16 @@
       "min_inclusive": 2,
       "max_exclusive": 3
     },
-    "treasure_chest": {
-      "loot_table": "minecraft:chests/simple_dungeon",
-      "chance": 0.02
-    },
-
     "size": {
       "type": "minecraft:uniform",
       "min_inclusive": 6,
       "max_exclusive": 11
     },
 
-    "decorators": {},
+    "decorators": {
+      "starry_skies:spawner/zombie": 1.0,
+      "starry_skies:scattered_treasure/simple_dungeon": 1.0
+    },
     "spawns": [],
     "generation": {
       "weight": 1.5,

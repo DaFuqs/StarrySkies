@@ -31,7 +31,9 @@ public class SphereDecorators {
 	public static SphereDecorator<ChorusFruitDecoratorConfig> CHORUS_FRUIT = register("chorus_fruit", new ChorusFruitDecorator(ChorusFruitDecoratorConfig.CODEC));
 	public static SphereDecorator<BrushableBlockDecoratorConfig> BRUSHABLE_BLOCK = register("brushable_block", new BrushableBlockDecorator(BrushableBlockDecoratorConfig.CODEC));
 	public static SphereDecorator<CaveColumnDecoratorConfig> CAVE_COLUMN = register("cave_column", new CaveColumnDecorator(CaveColumnDecoratorConfig.CODEC));
-	public static SphereDecorator<CenterChestDecoratorConfig> CENTER_CHEST = register("center_chest", new CenterChestDecorator(CenterChestDecoratorConfig.CODEC));
+	public static SphereDecorator<LootChestDecoratorConfig> LOOT_CHEST = register("loot_chest", new LootChestDecorator(LootChestDecoratorConfig.CODEC));
+	public static SphereDecorator<ScatteredLootChestsDecoratorConfig> SCATTERED_LOOT_CHESTS = register("scattered_loot_chests", new ScatteredLootChestsDecorator(ScatteredLootChestsDecoratorConfig.CODEC));
+	public static SphereDecorator<MobSpawnerDecoratorConfig> MOB_SPAWNER = register("mob_spawner", new MobSpawnerDecorator(MobSpawnerDecoratorConfig.CODEC));
 
 	public static void initialize() {
 

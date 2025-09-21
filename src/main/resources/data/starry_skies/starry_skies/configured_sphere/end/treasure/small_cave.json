@@ -18,10 +18,6 @@
         "Name": "minecraft:end_stone"
       }
     },
-    "treasure_chest": {
-      "loot_table": "minecraft/chests/end_city_treasure_chest",
-      "chance": 0.1
-    },
 
     "size": {
       "type": "minecraft:uniform",
@@ -29,7 +25,9 @@
       "max_exclusive": 13
     },
 
-    "decorators": {},
+    "decorators": {
+      "starry_skies:treasure/end_city_treasure_cave_floor": 0.1
+    },
     "spawns": [],
     "generation": {
       "weight": 8.0,

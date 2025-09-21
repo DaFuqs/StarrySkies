@@ -184,6 +184,31 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		return list;
 	}
 	
+	protected @Nullable BlockPos getCaveBottomBlock(StructureWorldAccess world, BlockPos pos, PlacedSphere<?> sphere) {
+		int x = sphere.getPosition().getX();
+		int z = sphere.getPosition().getZ();
+		int y = sphere.getPosition().getY();
+		
+		int rad = sphere.getRadius();
+		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		boolean hitShell = false;
+		
+		for (int y2 = y - rad; y2 < y; y2++) {
+			mutable.set(x, y2, z);
+			BlockState state = world.getBlockState(mutable);
+			boolean airOrFluid = state.isAir() || state.getFluidState().getFluid() != Fluids.EMPTY;
+			if (airOrFluid && !hitShell) {
+			
+			} else if (!airOrFluid) {
+				hitShell = true;
+			} else {
+				return mutable.down();
+			}
+		}
+		
+		return null;
+	}
+	
 	protected List<BlockPos> getRandomCaveBottomBlocks(StructureWorldAccess world, ChunkPos chunkPos, PlacedSphere<?> sphere, Random random, int amount) {
 		List<BlockPos> list = new ArrayList<>();
 		

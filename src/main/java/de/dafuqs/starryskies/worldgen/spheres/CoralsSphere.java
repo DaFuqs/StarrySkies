@@ -7,7 +7,6 @@ import de.dafuqs.starryskies.state_providers.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
-import net.minecraft.loot.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.util.*;
@@ -18,7 +17,6 @@ import net.minecraft.util.math.intprovider.*;
 import net.minecraft.util.math.random.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.stateprovider.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -57,12 +55,7 @@ public class CoralsSphere extends Sphere<CoralsSphere.Config> {
 	
 	@Override
 	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<CoralsSphere.Config>, Config> configuredSphere, Config config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius) {
-		@Nullable RegistryKey<LootTable> lootTable = null;
-		if (config.treasureEntry.isPresent() && random.nextLong() < config.treasureEntry.get().chance()) {
-			lootTable = config.treasureEntry.get().lootTable();
-		}
-		
-		return new CoralsSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.shellBlock.getForSphere(random, pos), config.shellThickness.get(random), lootTable);
+		return new CoralsSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.shellBlock.getForSphere(random, pos), config.shellThickness.get(random));
 	}
 	
 	public static class Config extends SphereConfig {
@@ -71,21 +64,18 @@ public class CoralsSphere extends Sphere<CoralsSphere.Config> {
 				SphereConfig.CONFIG_CODEC.forGetter((config) -> config),
 				SphereStateProvider.CODEC.fieldOf("shell_block").forGetter((config) -> config.shellBlock),
 				IntProvider.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness),
-				Codecs.POSITIVE_FLOAT.fieldOf("hole_in_bottom_chance").forGetter((config) -> config.holeInBottomChance),
-				TreasureChestEntry.CODEC.optionalFieldOf("treasure_chest").forGetter((config) -> config.treasureEntry)
-		).apply(instance, (sphereConfig, shellBlock, shellThickness, holeInBottomChance, treasureEntry) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, shellBlock, shellThickness, holeInBottomChance, treasureEntry)));
+				Codecs.NON_NEGATIVE_FLOAT.fieldOf("hole_in_bottom_chance").forGetter((config) -> config.holeInBottomChance)
+		).apply(instance, (sphereConfig, shellBlock, shellThickness, holeInBottomChance) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, shellBlock, shellThickness, holeInBottomChance)));
 		
 		protected final SphereStateProvider shellBlock;
 		protected final IntProvider shellThickness;
 		protected final float holeInBottomChance;
-		private final Optional<TreasureChestEntry> treasureEntry;
 		
-		public Config(FloatProvider size, Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Optional<Generation> generation, SphereStateProvider shellBlock, IntProvider shellThickness, float holeInBottomChance, Optional<TreasureChestEntry> treasureEntry) {
+		public Config(FloatProvider size, Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Optional<Generation> generation, SphereStateProvider shellBlock, IntProvider shellThickness, float holeInBottomChance) {
 			super(size, decorators, spawns, generation);
 			this.shellBlock = shellBlock;
 			this.shellThickness = shellThickness;
 			this.holeInBottomChance = holeInBottomChance;
-			this.treasureEntry = treasureEntry;
 		}
 		
 	}
@@ -94,15 +84,12 @@ public class CoralsSphere extends Sphere<CoralsSphere.Config> {
 		
 		private final BlockStateProvider shellBlock;
 		private final float shellRadius;
-		@Nullable
-		private final RegistryKey<LootTable> chestLootTable;
 		
 		public Placed(ConfiguredSphere<? extends Sphere<CoralsSphere.Config>, CoralsSphere.Config> configuredSphere, float radius, List<RegistryEntry<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
-					  BlockStateProvider shellBlock, float shellRadius, @Nullable RegistryKey<LootTable> chestLootTable) {
+					  BlockStateProvider shellBlock, float shellRadius) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.shellBlock = shellBlock;
 			this.shellRadius = shellRadius;
-			this.chestLootTable = chestLootTable;
 		}
 		
 		@Override
@@ -119,8 +106,6 @@ public class CoralsSphere extends Sphere<CoralsSphere.Config> {
 			int maxX = Math.min(chunkX * 16 + 15, x + ceiledRadius);
 			int maxZ = Math.min(chunkZ * 16 + 15, z + ceiledRadius);
 			
-			boolean hasChest = this.chestLootTable != null;
-			
 			BlockPos.Mutable currBlockPos = new BlockPos.Mutable();
 			for (int x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= maxX; x2++) {
 				for (int y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
@@ -131,9 +116,7 @@ public class CoralsSphere extends Sphere<CoralsSphere.Config> {
 						}
 						currBlockPos.set(x2, y2, z2);
 						
-						if (d == 0 && hasChest) {
-							placeCenterChestWithLootTable(chunk, currBlockPos.toImmutable(), this.chestLootTable, random, true);
-						} else if (d <= (this.radius - this.shellRadius - 1)) {
+						if (d <= (this.radius - this.shellRadius - 1)) {
 							int rand = random.nextInt(7);
 							if (rand < 2) {
 								BlockState coral = getRandomCoralBlock(random);

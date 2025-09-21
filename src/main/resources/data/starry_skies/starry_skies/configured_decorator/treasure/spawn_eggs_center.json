@@ -1,6 +1,7 @@
 {
-  "type": "starry_skies:center_chest",
+  "type": "starry_skies:loot_chest",
   "config": {
+    "position": "center",
     "loot_table": "starry_skies:chests/spawn_eggs"
   }
 }

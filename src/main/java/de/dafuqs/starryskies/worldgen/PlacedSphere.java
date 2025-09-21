@@ -6,7 +6,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.*;
-import net.minecraft.loot.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.util.*;
@@ -112,20 +111,6 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 		} else {
 			return false;
 		}
-	}
-
-	protected void placeCenterChestWithLootTable(Chunk chunk, BlockPos blockPos, RegistryKey<LootTable> lootTable, Random random, boolean waterLogged) {
-		BlockState chestBlockState;
-		if (waterLogged) {
-			chestBlockState = Blocks.CHEST.getDefaultState().with(ChestBlock.WATERLOGGED, true);
-		} else {
-			chestBlockState = Blocks.CHEST.getDefaultState();
-		}
-		chunk.setBlockState(blockPos, chestBlockState);
-
-		LootableContainerBlockEntity blockEntity = new ChestBlockEntity(blockPos, chestBlockState);
-		chunk.setBlockEntity(new ChestBlockEntity(blockPos, chestBlockState));
-		blockEntity.setLootTable(lootTable, random.nextLong());
 	}
 
 	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {

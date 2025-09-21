@@ -1,7 +1,6 @@
 {
-  "type": "starry_skies:dungeon",
+  "type": "starry_skies:cave",
   "config": {
-    "entity_type": "minecraft:hoglin",
     "shell_block": {
       "type": "starry_skies:weighted_block_group_state_provider",
       "group": "nether_dungeon_stones"
@@ -11,10 +10,6 @@
       "min_inclusive": 2,
       "max_exclusive": 4
     },
-    "treasure_chest": {
-      "loot_table": "minecraft:chests/nether_bridge",
-      "chance": 0.02
-    },
 
     "size": {
       "type": "minecraft:uniform",
@@ -22,7 +17,10 @@
       "max_exclusive": 11
     },
 
-    "decorators": {},
+    "decorators": {
+      "starry_skies:spawner/hoglin": 1.0,
+      "starry_skies:scattered_treasure/nether_bridge": 1.0
+    },
     "spawns": [],
     "generation": {
       "weight": 1.5,

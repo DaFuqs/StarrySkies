@@ -1,0 +1,7 @@
+{
+  "type": "starry_skies:mob_spawner",
+  "config": {
+    "position": "center",
+    "entity_type": "minecraft:strider"
+  }
+}

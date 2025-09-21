@@ -16,10 +16,6 @@
         "Name": "minecraft:sculk"
       }
     },
-    "treasure_chest": {
-      "loot_table": "minecraft:chests/ancient_city",
-      "chance": 0.5
-    },
 
     "size": {
       "type": "minecraft:uniform",
@@ -28,6 +24,7 @@
     },
 
     "decorators": {
+      "starry_skies:treasure/ancient_city_cave_floor": 0.5,
       "starry_skies:sculk_veins": 0.8,
       "starry_skies:sculk_sensors": 0.8,
       "starry_skies:sculk_catalysts": 0.8,

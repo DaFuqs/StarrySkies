@@ -53,10 +53,6 @@
         }
       ]
     },
-    "treasure_chest": {
-      "loot_table": "minecraft:chests/abandoned_mineshaft_chest",
-      "chance": 0.5
-    },
 
     "size": {
       "type": "minecraft:uniform",
@@ -65,6 +61,7 @@
     },
 
     "decorators": {
+      "starry_skies:treasure/abandoned_mineshaft_cave_floor": 0.5,
       "starry_skies:red_mushrooms_cave": 0.3,
       "starry_skies:brown_mushrooms_cave": 0.3
     },

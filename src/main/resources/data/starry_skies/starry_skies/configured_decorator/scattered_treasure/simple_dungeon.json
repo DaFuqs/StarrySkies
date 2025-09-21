@@ -1,0 +1,8 @@
+{
+  "type": "starry_skies:scattered_loot_chests",
+  "config": {
+    "position": "cave_floor",
+    "chance_per_valid_position": 0.02,
+    "loot_table": "minecraft:chests/simple_dungeon"
+  }
+}

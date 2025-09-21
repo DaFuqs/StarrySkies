@@ -11,10 +11,6 @@
       "min_inclusive": 1,
       "max_inclusive": 2
     },
-    "treasure_chest": {
-      "loot_table": "minecraft:chests/buried_treasure",
-      "chance": 0.5
-    },
 
     "size": {
       "type": "minecraft:uniform",
@@ -22,7 +18,9 @@
       "max_exclusive": 20
     },
 
-    "decorators": {},
+    "decorators": {
+      "starry_skies:treasure/buried_treasure_center": 0.5
+    },
     "spawns": [],
     "generation": {
       "weight": 1.0,
