@@ -45,7 +45,7 @@
     "decorators": {},
     "spawns": [],
     "generation": {
-      "weight": 0.03,
+      "weight": 0.05,
       "group": "starry_skies:overworld/ores"
     }
   }
