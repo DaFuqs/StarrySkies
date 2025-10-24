@@ -27,7 +27,9 @@ public class ShellCoreSphere extends Sphere<ShellCoreSphere.Config> {
 	@Override
 	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<ShellCoreSphere.Config>, Config> configuredSphere, Config config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius) {
 		return new ShellCoreSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random,
-				config.mainBlock.getForSphere(random, pos), config.shellBlock.getForSphere(random, pos), config.shellThickness.get(random), config.coreBlock.getForSphere(random, pos), config.coreRadius.get(random));
+				config.mainBlock.getForSphere(random, pos), config.shellBlock.getForSphere(random, pos), config.shellThickness.get(random), config.coreBlock.getForSphere(random, pos),
+				Math.max(radius - 1, config.coreRadius.get(random)) // enforce a min shell of 1 block
+		);
 	}
 	
 	public static class Config extends SphereConfig {

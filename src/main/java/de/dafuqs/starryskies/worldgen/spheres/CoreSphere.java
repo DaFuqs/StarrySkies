@@ -25,7 +25,9 @@ public class CoreSphere extends Sphere<CoreSphere.Config> {
 	
 	@Override
 	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<CoreSphere.Config>, Config> configuredSphere, Config config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius) {
-		return new CoreSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.mainBlock.getForSphere(random, pos), config.coreBlock.getForSphere(random, pos), config.coreRadius.get(random));
+		return new CoreSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.mainBlock.getForSphere(random, pos), config.coreBlock.getForSphere(random, pos),
+				Math.max(radius - 1, config.coreRadius.get(random)) // enforce a min shell of 1 block
+		);
 	}
 	
 	public static class Config extends SphereConfig {

@@ -24,15 +24,6 @@ public class ShellSphere<SC extends ShellSphere.Config> extends Sphere<SC> {
 		super(configCodec);
 	}
 	
-	/*public ShellSphere(Codec<ShellSphere.Config> codec) {
-		super(codec);
-	}
-	
-	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<ShellSphere.Config>, Config> configuredSphere, Config config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius) {
-	
-	}*/
-	
 	@Override
 	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<SC>, SC> configuredSphere, SC config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius) {
 		return new ShellSphere.Placed<>(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.innerBlock.getForSphere(random, pos), config.shellBlock.getForSphere(random, pos), config.shellThickness.get(random));
