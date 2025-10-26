@@ -20,7 +20,7 @@
     },
     "center_structures": [
       {
-        "weight": 1,
+        "weight": 2.5,
         "data": "starry_skies:nether_fortress/blaze_spawner"
       }
     ],
