@@ -16,6 +16,7 @@
       "min_inclusive": 2,
       "max_inclusive": 3
     },
+    "bee_nest_chance": 0.12,
 
     "size": {
       "type": "minecraft:uniform",

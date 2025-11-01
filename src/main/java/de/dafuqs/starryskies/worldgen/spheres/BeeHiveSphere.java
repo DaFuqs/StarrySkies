@@ -12,11 +12,11 @@ import net.minecraft.entity.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.util.*;
+import net.minecraft.util.dynamic.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.floatprovider.*;
 import net.minecraft.util.math.intprovider.*;
 import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
 import net.minecraft.world.chunk.*;
 
 import java.util.*;
@@ -32,7 +32,7 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 	
 	@Override
 	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<BeeHiveSphere.Config>, Config> configuredSphere, Config config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius) {
-		return new BeeHiveSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.shellThickness.get(random), config.flowerRingRadius.get(random), config.flowerRingSpacing.get(random));
+		return new BeeHiveSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.shellThickness.get(random), config.flowerRingRadius.get(random), config.flowerRingSpacing.get(random), config.beeNestChance);
 	}
 	
 	public static class Config extends SphereConfig {
@@ -41,18 +41,21 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 				SphereConfig.CONFIG_CODEC.forGetter((config) -> config),
 				IntProvider.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness),
 				IntProvider.POSITIVE_CODEC.fieldOf("flower_ring_radius").forGetter((config) -> config.shellThickness),
-				IntProvider.POSITIVE_CODEC.fieldOf("flower_ring_spacing").forGetter((config) -> config.shellThickness)
-		).apply(instance, (sphereConfig, shellThickness, flowerRingRadius, flowerRingSpacing) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, shellThickness, flowerRingRadius, flowerRingSpacing)));
+				IntProvider.POSITIVE_CODEC.fieldOf("flower_ring_spacing").forGetter((config) -> config.shellThickness),
+				Codecs.POSITIVE_FLOAT.fieldOf("bee_nest_chance").forGetter((config) -> config.beeNestChance)
+		).apply(instance, (sphereConfig, shellThickness, flowerRingRadius, flowerRingSpacing, beeNestChance) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, shellThickness, flowerRingRadius, flowerRingSpacing, beeNestChance)));
 		
 		protected final IntProvider shellThickness;
 		protected final IntProvider flowerRingRadius;
 		protected final IntProvider flowerRingSpacing;
+		protected final float beeNestChance;
 		
-		public Config(FloatProvider size, Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Optional<Generation> generation, IntProvider shellThickness, IntProvider flowerRingRadius, IntProvider flowerRingSpacing) {
+		public Config(FloatProvider size, Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Optional<Generation> generation, IntProvider shellThickness, IntProvider flowerRingRadius, IntProvider flowerRingSpacing, float beeNestChance) {
 			super(size, decorators, spawns, generation);
 			this.shellThickness = shellThickness;
 			this.flowerRingRadius = flowerRingRadius;
 			this.flowerRingSpacing = flowerRingSpacing;
+			this.beeNestChance = beeNestChance;
 		}
 		
 	}
@@ -62,16 +65,15 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 		private final int shellThickness;
 		private final int flowerRingRadius;
 		private final int flowerRingSpacing;
-		
-		private final List<BeehiveBlockEntity> outerBeehiveBlockEntities = new ArrayList<>();
-		private BeehiveBlockEntity queenBeehiveBlockEntity;
+		private final float beeNestChance;
 		
 		public Placed(ConfiguredSphere<? extends Sphere<BeeHiveSphere.Config>, BeeHiveSphere.Config> configuredSphere, float radius, List<RegistryEntry<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
-					  int shellThickness, int flowerRingRadius, int flowerRingSpacing) {
+					  int shellThickness, int flowerRingRadius, int flowerRingSpacing, float beeNestChance) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.shellThickness = shellThickness;
 			this.flowerRingRadius = flowerRingRadius;
 			this.flowerRingSpacing = flowerRingSpacing;
+			this.beeNestChance = beeNestChance;
 		}
 		
 		@Override
@@ -108,8 +110,9 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 						if (d == 0) {
 							// bee hive in center
 							chunk.setBlockState(currBlockPos, beeHiveBlockState);
-							this.queenBeehiveBlockEntity = new BeehiveBlockEntity(currBlockPos, beeHiveBlockState);
-							chunk.setBlockEntity(queenBeehiveBlockEntity);
+							BeehiveBlockEntity beehiveBlockEntity = new BeehiveBlockEntity(currBlockPos, beeHiveBlockState);
+							addBees(beehiveBlockEntity);
+							chunk.setBlockEntity(beehiveBlockEntity);
 						} else if (d <= coreDistance) {
 							// core
 							int r = random.nextInt((int) Math.ceil(coreDistance / 3F)); // way more honey in the middle
@@ -119,7 +122,7 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 								chunk.setBlockState(currBlockPos, Blocks.AIR.getDefaultState());
 							}
 						} else if (d <= shellDistance) {
-							if (y2 - y == 0 && d - shellDistance < -0.5 && random.nextInt(10) == 0) {
+							if (y2 - y == 0 && random.nextFloat() < beeNestChance) {
 								// middle outer shell: random hives
 								Direction direction;
 								float xDist = x2 - x;
@@ -145,16 +148,21 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 										direction = Direction.WEST;
 									}
 								}
-								// set the block
-								BlockState blockState = Blocks.BEE_NEST.getDefaultState().with(BeehiveBlock.FACING, direction);
-								chunk.setBlockState(currBlockPos, blockState);
 								
-								// set and save the blockentity
-								BeehiveBlockEntity outerBeehiveBlockEntity = new BeehiveBlockEntity(currBlockPos, blockState);
-								chunk.setBlockEntity(outerBeehiveBlockEntity);
-								this.outerBeehiveBlockEntities.add(outerBeehiveBlockEntity);
+								// is the block the potential beehive facing to the outside of the sphere?
+								float dist2 = Math.round(Support.getDistance(new BlockPos(x2, y2, z2).offset(direction), spherePos));
+								if (dist2 > this.radius) {
+									chunk.setBlockState(currBlockPos, Blocks.HONEYCOMB_BLOCK.getDefaultState());
+								} else {
+									BlockState blockState = Blocks.BEE_NEST.getDefaultState().with(BeehiveBlock.FACING, direction);
+									chunk.setBlockState(currBlockPos, blockState);
+									
+									// set and save the blockentity
+									BeehiveBlockEntity outerBeehiveBlockEntity = new BeehiveBlockEntity(currBlockPos, blockState);
+									addBees(outerBeehiveBlockEntity);
+									chunk.setBlockEntity(outerBeehiveBlockEntity);
+								}
 							} else {
-								
 								// shell
 								if (random.nextInt(10) == 0) {
 									chunk.setBlockState(currBlockPos, Blocks.HONEY_BLOCK.getDefaultState());
@@ -186,23 +194,13 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 			return WeightedBlockGroupDataLoader.INSTANCE.getEntry(TALL_FLOWERS_GROUP, random);
 		}
 		
-		@Override
-		public void populateEntities(ChunkPos chunkPos, StructureWorldAccess world, ChunkRandom chunkRandom) {
-			super.populateEntities(chunkPos, world, chunkRandom);
-			
-			if (isCenterInChunk(chunkPos)) {
-				if (queenBeehiveBlockEntity != null) {
-					queenBeehiveBlockEntity.addBee(getBee());
-				}
-				
-				for (BeehiveBlockEntity beehiveBlockEntity : this.outerBeehiveBlockEntities) {
-					int beeCount = 2 + random.nextInt(2);
-					for (int j = 0; j < beeCount; ++j) {
-						beehiveBlockEntity.addBee(getBee());
-					}
-				}
+		protected void addBees(BeehiveBlockEntity beeHive) {
+			int beeCount = 2 + random.nextInt(2);
+			for (int j = 0; j < beeCount; ++j) {
+				beeHive.addBee(getBee());
 			}
 		}
+		
 		
 		public BeehiveBlockEntity.BeeData getBee() {
 			return BeehiveBlockEntity.BeeData.create(random.nextInt(599));
