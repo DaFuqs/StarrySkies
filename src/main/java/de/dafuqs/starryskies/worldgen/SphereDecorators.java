@@ -35,6 +35,7 @@ public class SphereDecorators {
 	public static SphereDecorator<ScatteredLootChestsDecoratorConfig> SCATTERED_LOOT_CHESTS = register("scattered_loot_chests", new ScatteredLootChestsDecorator(ScatteredLootChestsDecoratorConfig.CODEC));
 	public static SphereDecorator<MobSpawnerDecoratorConfig> MOB_SPAWNER = register("mob_spawner", new MobSpawnerDecorator(MobSpawnerDecoratorConfig.CODEC));
 	public static SphereDecorator<BottomBlocksDecoratorConfig> BOTTOM_BLOCKS = register("bottom_blocks", new BottomBlocksDecorator(BottomBlocksDecoratorConfig.CODEC));
+	public static SphereDecorator<PointedDripstoneDecoratorConfig> POINTED_DRIPSTONE = register("pointed_dripstone", new PointedDripstoneDecorator(PointedDripstoneDecoratorConfig.CODEC));
 
 	public static void initialize() {
 
