@@ -32,7 +32,8 @@ public class SeaGreensDecorator extends SphereDecorator<SphereDecoratorConfig.De
 		for (BlockPos bp : getCaveBottomBlocks(world, origin, sphere)) {
 			int r = random.nextInt(4);
 			
-			if (world.getBlockState(bp).getBlock() != Blocks.WATER) {
+			BlockPos up = bp.up();
+			if (world.getBlockState(up).getBlock() != Blocks.WATER) {
 				continue;
 			}
 			
@@ -48,11 +49,11 @@ public class SeaGreensDecorator extends SphereDecorator<SphereDecoratorConfig.De
 					}
 				}
 			} else if (r == 1) {
-				world.setBlockState(bp.up(), SEAGRASS, 3);
+				world.setBlockState(up, SEAGRASS, 3);
 			} else if (r == 2) {
 				if (world.getBlockState(bp.up(2)).getBlock() == Blocks.WATER) {
 					world.setBlockState(bp.up(2), TALL_SEAGRASS_UPPER, 3);
-					world.setBlockState(bp.up(), TALL_SEAGRASS_LOWER, 3);
+					world.setBlockState(up, TALL_SEAGRASS_LOWER, 3);
 				}
 			}
 		}
