@@ -136,8 +136,8 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 		}
 		
 		@Override
-		public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-			super.populateEntities(chunkPos, chunkRegion, chunkRandom);
+		public void populateEntities(ChunkPos chunkPos, StructureWorldAccess world, ChunkRandom chunkRandom) {
+			super.populateEntities(chunkPos, world, chunkRandom);
 			
 			BlockPos.Mutable mutable = new BlockPos.Mutable();
 			int iRadius = (int) radius - 5;
@@ -148,7 +148,7 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 						if (d < this.radius - this.shellRadius) {
 							mutable.set(x2, y2, z2);
 							if (Support.isBlockPosInChunkPos(chunkPos, mutable)) {
-								if (spawnGuardian(chunkPos, chunkRegion, mutable)) return;
+								if (spawnGuardian(chunkPos, world, mutable)) return;
 							}
 						}
 					}
@@ -156,7 +156,7 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 			}
 		}
 		
-		private boolean spawnGuardian(ChunkPos chunkPos, ChunkRegion chunkRegion, BlockPos guardianPosition) {
+		private boolean spawnGuardian(ChunkPos chunkPos, StructureWorldAccess chunkRegion, BlockPos guardianPosition) {
 			MobEntity mobentity;
 			if (random.nextFloat() < 0.08) {
 				mobentity = EntityType.ELDER_GUARDIAN.create(chunkRegion.toServerWorld(), SpawnReason.CHUNK_GENERATION);

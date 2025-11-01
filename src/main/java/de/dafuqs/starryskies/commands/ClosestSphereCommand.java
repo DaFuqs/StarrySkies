@@ -25,7 +25,7 @@ public class ClosestSphereCommand {
 	
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
 		dispatcher.register(CommandManager.literal("starryskies_locate")
-				.requires((source) -> source.hasPermissionLevel(StarrySkies.CONFIG.sphereCommandRequiredPermissionLevel))
+				.requires((source) -> source.hasPermissionLevel(StarrySkies.CONFIG.locateSphereCommandRequiredPermissionLevel))
 				.executes((context -> execute(context.getSource())))
 				.then(CommandManager.argument("sphere", RegistryEntryPredicateArgumentType.registryEntryPredicate(registryAccess, StarryRegistryKeys.CONFIGURED_SPHERE))
 						.executes(context -> execute(context.getSource(), RegistryEntryPredicateArgumentType.getRegistryEntryPredicate(context, "sphere", StarryRegistryKeys.CONFIGURED_SPHERE)))));

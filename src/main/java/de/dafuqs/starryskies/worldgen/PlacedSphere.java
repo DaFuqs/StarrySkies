@@ -2,8 +2,6 @@ package de.dafuqs.starryskies.worldgen;
 
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
-import net.minecraft.block.*;
-import net.minecraft.block.entity.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.*;
 import net.minecraft.registry.*;
@@ -17,6 +15,7 @@ import net.minecraft.world.chunk.*;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 public abstract class PlacedSphere<SC extends SphereConfig> {
 
@@ -73,6 +72,21 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 		int zMax = this.position.getZ() + radius + 15;
 		return (chunkPos.getStartX() >= xMin && chunkPos.getEndX() <= xMax) && (chunkPos.getStartZ() >= zMin && chunkPos.getEndZ() <= zMax);
 	}
+	
+	public Stream<ChunkPos> streamChunksWithSphere() {
+		return ChunkPos.stream(
+				new ChunkPos(ChunkSectionPos.getSectionCoord(position.getX() - this.getRadius()), ChunkSectionPos.getSectionCoord(position.getZ() - this.getRadius())),
+				new ChunkPos(ChunkSectionPos.getSectionCoord(position.getX() + this.getRadius()), ChunkSectionPos.getSectionCoord(position.getZ() + this.getRadius()))
+		);
+	}
+	
+	public Stream<BlockPos> streamBlockPosesOfSpheres() {
+		int r = (int) Math.ceil(radius);
+		return BlockPos.stream(
+				position.getX() - r, position.getY() - r, position.getZ() - r,
+				position.getX() + r, position.getY() + r, position.getZ() + r
+		);
+	}
 
 	public boolean isCenterInChunk(@NotNull ChunkPos chunkPos) {
 		return (this.getPosition().getX() >= chunkPos.getStartX()
@@ -112,8 +126,8 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 			return false;
 		}
 	}
-
-	public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
+	
+	public void populateEntities(ChunkPos chunkPos, StructureWorldAccess chunkRegion, ChunkRandom chunkRandom) {
 		if (isCenterInChunk(chunkPos)) {
 			StarrySkies.LOGGER.debug("Populating entities for sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunkPos.x, chunkPos.z, chunkPos.getStartX(), chunkPos.getStartZ(), this.getDescription(chunkRegion.getRegistryManager()));
 			for (Pair<EntityType<?>, Integer> spawnEntry : spawns) {
@@ -157,14 +171,6 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 				}
 			}
 			StarrySkies.LOGGER.debug("Finished populating");
-		}
-	}
-
-	protected void placeSpawner(@NotNull WorldAccess worldAccess, BlockPos blockPos, EntityType<?> entityType) {
-		worldAccess.setBlockState(blockPos, Blocks.SPAWNER.getDefaultState(), 3);
-		BlockEntity blockEntity = worldAccess.getBlockEntity(blockPos);
-		if (blockEntity instanceof MobSpawnerBlockEntity mobSpawnerBlockEntity) {
-			mobSpawnerBlockEntity.getLogic().setEntityId(entityType, null, worldAccess.getRandom(), blockPos);
 		}
 	}
 

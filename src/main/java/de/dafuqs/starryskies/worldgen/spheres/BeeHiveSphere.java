@@ -187,8 +187,8 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 		}
 		
 		@Override
-		public void populateEntities(ChunkPos chunkPos, ChunkRegion chunkRegion, ChunkRandom chunkRandom) {
-			super.populateEntities(chunkPos, chunkRegion, chunkRandom);
+		public void populateEntities(ChunkPos chunkPos, StructureWorldAccess world, ChunkRandom chunkRandom) {
+			super.populateEntities(chunkPos, world, chunkRandom);
 			
 			if (isCenterInChunk(chunkPos)) {
 				if (queenBeehiveBlockEntity != null) {

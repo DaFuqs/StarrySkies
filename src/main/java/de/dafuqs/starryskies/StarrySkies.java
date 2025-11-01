@@ -19,6 +19,8 @@ import net.fabricmc.fabric.api.resource.*;
 import net.kyrptonaught.customportalapi.*;
 import net.kyrptonaught.customportalapi.util.*;
 import net.minecraft.block.*;
+import net.minecraft.command.argument.*;
+import net.minecraft.command.argument.serialize.*;
 import net.minecraft.registry.*;
 import net.minecraft.resource.*;
 import net.minecraft.server.network.*;
@@ -69,7 +71,11 @@ public class StarrySkies implements ModInitializer {
 		SphereDecorators.initialize();
 		StarryAdvancementCriteria.register();
 		
-		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> ClosestSphereCommand.register(dispatcher, registryAccess));
+		ArgumentTypes.register(Registries.COMMAND_ARGUMENT_TYPE, "starry_skies_configured_sphere", ConfiguredSphereArgumentType.class, ConstantArgumentSerializer.of(ConfiguredSphereArgumentType::configuredSphere));
+		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
+			ClosestSphereCommand.register(commandDispatcher, commandRegistryAccess);
+			GenerateSphereCommand.register(commandDispatcher, commandRegistryAccess);
+		});
 		ServerTickEvents.END_SERVER_TICK.register(new ProximityAdvancementCheckEvent());
 		
 		// Build a final map of sphere generation data for each chunk generator
