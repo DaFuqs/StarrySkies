@@ -1,0 +1,14 @@
+{
+  "type": "starry_skies:huge_hanging_plant",
+  "config": {
+    "block": {
+      "Name": "minecraft:pointed_dripstone",
+      "Properties": {
+        "vertical_direction": "down"
+      }
+    },
+    "min_height": 1,
+    "max_height": 5,
+    "chance": 0.2
+  }
+}
