@@ -21,11 +21,11 @@
     },
 
     "decorators": {
-      "starry_skies:ruined_portal": 0.03,
-      "starry_skies:sugar_cane_pond": 0.15,
-      "starry_skies:bushes": 0.1,
-      "starry_skies:pink_petals": 0.05,
-      "starry_skies:wildflowers": 0.1
+      "starry_skies:ruined_portal": 0.05,
+      "starry_skies:sugar_cane_pond": 0.2,
+      "starry_skies:bushes": 0.15,
+      "starry_skies:pink_petals": 0.01,
+      "starry_skies:wildflowers": 0.15
     },
     "spawns": [
       {
