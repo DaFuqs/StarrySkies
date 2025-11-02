@@ -5,6 +5,6 @@
       "Name": "minecraft:suspicious_sand"
     },
     "loot_table": "minecraft:archaeology/trail_ruins_rare",
-    "chance": 0.5
+    "chance": 0.1
   }
 }
