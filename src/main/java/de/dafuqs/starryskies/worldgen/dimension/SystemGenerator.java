@@ -217,7 +217,7 @@ public class SystemGenerator {
 				
 				// set position, check bounds with system edges on x and z
 				float radius = selectedSphere.getSize(systemRandom);
-				int iRadius = (int) radius;
+				int iRadius = (int) Math.ceil(radius);
 				int xPos = Support.getRandomBetween(systemRandom, iRadius, (systemSizeChunks * 16 - iRadius));
 				xPos += systemSizeChunks * 16 * systemPoint.x;
 				int zPos = Support.getRandomBetween(systemRandom, iRadius, (systemSizeChunks * 16 - iRadius));
