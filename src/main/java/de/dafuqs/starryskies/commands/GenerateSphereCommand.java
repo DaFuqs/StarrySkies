@@ -1,7 +1,6 @@
 package de.dafuqs.starryskies.commands;
 
 import com.mojang.brigadier.*;
-import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.command.*;
 import net.minecraft.command.argument.*;
@@ -15,7 +14,7 @@ public class GenerateSphereCommand {
 	
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
 		dispatcher.register(CommandManager.literal("starryskies_generate")
-				.requires((source) -> source.hasPermissionLevel(StarrySkies.CONFIG.generateSphereCommandRequiredPermissionLevel))
+				.requires(CommandManager.requirePermissionLevel(CommandManager.GAMEMASTERS_CHECK))
 				.then(CommandManager.argument("sphere", new ConfiguredSphereArgumentType(registryAccess))
 						.executes(context -> execute(context.getSource(), null, context.getArgument("sphere", RegistryEntry.class)))
 						.then(CommandManager.argument("pos", BlockPosArgumentType.blockPos())

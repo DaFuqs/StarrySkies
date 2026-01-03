@@ -1,19 +1,24 @@
 plugins {
-	id 'fabric-loom' version '1.11-SNAPSHOT'
+	id 'fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
 
 version = project.mod_version
 group = project.maven_group
 
+base {
+	archivesName = project.archives_base_name
+}
+
 loom {
 	accessWidenerPath = file("src/main/resources/starry_skies.accesswidener")
 }
 
 repositories {
+	maven { url = "https://maven.is-immensely.gay/releases" } // CustomPortalAPI
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com/" }
-	maven { url = "https://maven.kyrptonaught.dev" }
+	//maven { url = "https://maven.kyrptonaught.dev" } // CustomPortalAPI
 }
 
 dependencies {
@@ -41,6 +46,10 @@ processResources {
 	}
 }
 
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+}
+
 java {
 	withSourcesJar()
 
@@ -49,8 +58,10 @@ java {
 }
 
 jar {
+	inputs.property "archivesName", project.base.archivesName
+
 	from("LICENSE") {
-		rename { "${it}_${project.archives_base_name}" }
+		rename { "${it}_${inputs.properties.archivesName}" }
 	}
 }
 

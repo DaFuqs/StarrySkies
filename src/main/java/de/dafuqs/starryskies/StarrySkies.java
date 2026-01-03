@@ -26,8 +26,8 @@ import net.minecraft.resource.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.util.*;
-import net.minecraft.world.*;
 import net.minecraft.world.gen.chunk.*;
+import net.minecraft.world.rule.*;
 import org.slf4j.*;
 
 import java.util.*;
@@ -116,19 +116,18 @@ public class StarrySkies implements ModInitializer {
 		 */
 		EntitySleepEvents.STOP_SLEEPING.register((entity, sleepingPos) -> {
 			if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
-				ServerWorld world = serverPlayerEntity.getWorld();
+				ServerWorld world = serverPlayerEntity.getEntityWorld();
 				if (isStarryWorld(world) && serverPlayerEntity.canResetTimeBySleeping()) {
 					long nextDay = world.getTimeOfDay() + 24000L;
 					long mod = nextDay - nextDay % 24000L;
 					world.getServer().getOverworld().setTimeOfDay(mod);
 					
-					if (world.getGameRules().getBoolean(GameRules.DO_WEATHER_CYCLE) && world.isRaining()) {
+					if (world.getGameRules().getValue(GameRules.ADVANCE_WEATHER) && world.isRaining()) {
 						world.getServer().getOverworld().resetWeather();
 					}
 				}
 			}
 		});
-		
 		
 		if (CONFIG.registerStarryPortal) {
 			setupPortals();

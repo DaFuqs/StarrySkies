@@ -4,9 +4,7 @@ import com.mojang.blaze3d.buffers.*;
 import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
 import de.dafuqs.starryskies.*;
-import de.dafuqs.starryskies.client.fix.*;
 import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.minecraft.block.enums.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gl.*;
@@ -23,7 +21,7 @@ import org.joml.*;
 import java.util.*;
 
 @Environment(EnvType.CLIENT)
-public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
+public class StarrySkyBox {
 
 	private GpuBuffer skyVertexBuffer;
 	private RenderSystem.ShapeIndexBuffer indexBuffer;
@@ -43,11 +41,10 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 		NORTH = StarrySkies.id(north);
 		SOUTH = StarrySkies.id(south);
 	}
-
-	@Override
-	public void render(WorldRenderContext context) {
-		CameraSubmersionType cameraSubmersionType = context.camera().getSubmersionType();
-		if (cameraSubmersionType == CameraSubmersionType.POWDER_SNOW || cameraSubmersionType == CameraSubmersionType.LAVA || hasBlindnessOrDarkness(context.camera())) {
+	
+	public void render(WorldRenderer worldRenderer, Camera camera, FrameGraphBuilder frameGraphBuilder, DefaultFramebufferSet framebufferSet, GpuBufferSlice fog) {
+		CameraSubmersionType cameraSubmersionType = camera.getSubmersionType();
+		if (cameraSubmersionType == CameraSubmersionType.POWDER_SNOW || cameraSubmersionType == CameraSubmersionType.LAVA || hasBlindnessOrDarkness(camera)) {
 			return;
 		}
 		if (skyVertexBuffer == null) {
@@ -58,10 +55,6 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 		}
 		// Create a proper frame pass so the starry sky would render
 		// Mimics vanilla logic
-		RenderSkyArgumentCapture capture = context.worldRenderer();
-		FrameGraphBuilder frameGraphBuilder = capture.starrySkies$frameGraphBuilder();
-		DefaultFramebufferSet framebufferSet = capture.starrySkies$framebufferSet();
-		GpuBufferSlice fog = capture.starrySkies$fog();
 		
 		FramePass framePass = frameGraphBuilder.createPass("sky");
 		// NOTE: framebufferSet.mainFramebuffer is a Handle over MinecraftClient.getInstance().getFramebuffer()
@@ -82,7 +75,7 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 	}
 	
 	// See WorldRenderer.renderSky() + CubeMapRenderer for inspiration
-	private void renderStarrySky(WorldRenderContext context) {
+	private void renderStarrySky(WorldRenderer worldRenderer, Camera camera) {
 		MinecraftClient client = MinecraftClient.getInstance();
 		TextureManager textureManager = client.getTextureManager();
 		AbstractTexture[] skyTextures = {
@@ -95,7 +88,6 @@ public class StarrySkyBox implements DimensionRenderingRegistry.SkyRenderer {
 		};
 		for (var skyTexture : skyTextures) skyTexture.setFilter(false, false);
 		
-		Camera camera = context.camera();
 		ClientWorld world = context.world();
 		float tickProgress = context.tickCounter().getTickProgress(false);
 		int color = world.getSkyColor(camera.getPos(), tickProgress);

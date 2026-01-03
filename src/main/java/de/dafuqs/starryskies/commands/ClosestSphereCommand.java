@@ -19,13 +19,11 @@ import java.util.Optional;
 
 public class ClosestSphereCommand {
 	
-	private static final DynamicCommandExceptionType SPHERE_NOT_FOUND_EXCEPTION = new DynamicCommandExceptionType((id) -> {
-		return Text.stringifiedTranslatable("commands.starry_skies.locate.sphere.not_found", id);
-	});
+	private static final DynamicCommandExceptionType SPHERE_NOT_FOUND_EXCEPTION = new DynamicCommandExceptionType((id) -> Text.stringifiedTranslatable("commands.starry_skies.locate.sphere.not_found", id));
 	
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
 		dispatcher.register(CommandManager.literal("starryskies_locate")
-				.requires((source) -> source.hasPermissionLevel(StarrySkies.CONFIG.locateSphereCommandRequiredPermissionLevel))
+				.requires(CommandManager.requirePermissionLevel(CommandManager.MODERATORS_CHECK))
 				.executes((context -> execute(context.getSource())))
 				.then(CommandManager.argument("sphere", RegistryEntryPredicateArgumentType.registryEntryPredicate(registryAccess, StarryRegistryKeys.CONFIGURED_SPHERE))
 						.executes(context -> execute(context.getSource(), RegistryEntryPredicateArgumentType.getRegistryEntryPredicate(context, "sphere", StarryRegistryKeys.CONFIGURED_SPHERE)))));

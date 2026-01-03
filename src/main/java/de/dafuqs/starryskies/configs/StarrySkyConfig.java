@@ -60,20 +60,6 @@ public class StarrySkyConfig implements ConfigData {
 			Default: true""")
 	public boolean enableEndPortalsToStarryEnd = true;
 
-	@ConfigEntry.Gui.Tooltip()
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The '/starryskies_locate' command lists all the data of the closest sphere (position, blocks, ...)
-			Default: 2""")
-	public int locateSphereCommandRequiredPermissionLevel = 2;
-	
-	@ConfigEntry.Gui.Tooltip()
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The '/starryskies_generate' command lets users generate new spheres
-			Default: 4""")
-	public int generateSphereCommandRequiredPermissionLevel = 4;
-
 	private boolean isValidBlock(String blockName) {
 		// validate floorBlock
 		try {

@@ -25,7 +25,7 @@ public abstract class EndPortalBlockMixin {
 			if (sourceIsStarryEnd || sourceIsStarryOverworld) {
 				// show the credits
 				// taken from EndPortalBlock.onEntityCollision()
-				if (!world.isClient && sourceIsStarryEnd && entity instanceof ServerPlayerEntity serverPlayerEntity) {
+				if (!world.isClient() && sourceIsStarryEnd && entity instanceof ServerPlayerEntity serverPlayerEntity) {
 					if (!serverPlayerEntity.seenCredits) {
 						serverPlayerEntity.detachForDimensionChange();
 						cir.cancel();

@@ -10,7 +10,7 @@ public class ModMenuConfig implements ModMenuApi {
 
 	@Override
 	public ConfigScreenFactory<?> getModConfigScreenFactory() {
-		return parent -> AutoConfig.getConfigScreen(StarrySkyConfig.class, parent).get();
+		return parent -> AutoConfigClient.getConfigScreen(StarrySkyConfig.class, parent).get();
 	}
 
 }
