@@ -9,7 +9,6 @@
     "ServerWorldMixin"
   ],
   "client": [
-    "fix.WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

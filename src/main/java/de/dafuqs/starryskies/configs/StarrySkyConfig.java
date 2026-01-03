@@ -31,22 +31,10 @@ public class StarrySkyConfig implements ConfigData {
 
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			The height of clouds in the Starry Sky dimension.
-			Default: 270""")
-	public float cloudHeight = 270F;
-
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
 			The amount of chunks each sphere system spans.
 			Higher values make spheres spread out farther, having more air in between
 			Default: 50""")
 	public int systemSizeChunks = 50;
-	
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			Use a fancy rainbow skybox instead of a generic one.
-			Default: true""")
-	public boolean rainbowSkybox = true;
 
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
