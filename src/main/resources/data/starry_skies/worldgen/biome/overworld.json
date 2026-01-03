@@ -1,19 +1,14 @@
 {
+  "attributes": {
+    "minecraft:visual/sky_color": "#78a7ff"
+  },
+
   "temperature": 0.6,
   "downfall": 0.5,
   "has_precipitation": true,
   "creature_spawn_probability": 0.5,
   "effects": {
-    "sky_color": 7907327,
-    "fog_color": 6200513,
-    "water_color": 4159204,
-    "water_fog_color": 329011,
-    "mood_sound": {
-      "sound": "minecraft:ambient.cave",
-      "tick_delay": 6000,
-      "block_search_extent": 8,
-      "offset": 2
-    }
+    "water_color": "#3f76e4"
   },
   "spawners": {
     "monster": [
@@ -31,7 +26,7 @@
       },
       {
         "type": "minecraft:zombie_villager",
-        "weight": 5,
+        "weight": 10,
         "minCount": 1,
         "maxCount": 1
       },
@@ -61,9 +56,15 @@
       },
       {
         "type": "minecraft:witch",
-        "weight": 5,
+        "weight": 19,
         "minCount": 1,
         "maxCount": 1
+      },
+      {
+        "type": "minecraft:zombie_horse",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
       }
     ],
     "creature": [
@@ -107,7 +108,8 @@
     "ambient": [],
     "water_creature": [],
     "water_ambient": [],
-    "misc": []
+    "misc": [],
+    "underground_water_creature": []
   },
   "spawn_costs": {},
   "carvers": [],

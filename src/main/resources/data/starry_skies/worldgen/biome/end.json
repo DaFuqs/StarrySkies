@@ -1,18 +1,9 @@
 {
   "temperature": 0.5,
   "downfall": 0.5,
-  "has_precipitation": true,
+  "has_precipitation": false,
   "effects": {
-    "sky_color": 0,
-    "fog_color": 10518688,
-    "water_color": 4159204,
-    "water_fog_color": 329011,
-    "mood_sound": {
-      "sound": "minecraft:ambient.cave",
-      "tick_delay": 6000,
-      "block_search_extent": 8,
-      "offset": 2
-    }
+    "water_color": "#3f76e4"
   },
   "spawners": {
     "monster": [
