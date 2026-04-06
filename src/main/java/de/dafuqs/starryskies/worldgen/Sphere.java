@@ -1,9 +1,9 @@
 package de.dafuqs.starryskies.worldgen;
 
 import com.mojang.serialization.*;
-import net.minecraft.registry.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 
 public abstract class Sphere<SC extends SphereConfig> {
 	
@@ -13,7 +13,7 @@ public abstract class Sphere<SC extends SphereConfig> {
 		this.codec = configCodec.fieldOf("config").xmap((config) -> new ConfiguredSphere<>(this, config), ConfiguredSphere::config);
 	}
 	
-	public abstract PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<SC>, SC> configuredSphere, SC config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius);
+	public abstract PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<SC>, SC> configuredSphere, SC config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius);
 	
 	public MapCodec<ConfiguredSphere<Sphere<SC>, SC>> getCodec() {
 		return this.codec;

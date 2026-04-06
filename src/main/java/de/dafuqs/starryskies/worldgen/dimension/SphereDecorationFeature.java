@@ -2,25 +2,26 @@ package de.dafuqs.starryskies.worldgen.dimension;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.util.math.*;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.feature.util.*;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import org.jetbrains.annotations.*;
 
-public class SphereDecorationFeature extends Feature<DefaultFeatureConfig> {
+public class SphereDecorationFeature extends Feature<NoneFeatureConfiguration> {
 
-	public SphereDecorationFeature(Codec<DefaultFeatureConfig> configCodec) {
+	public SphereDecorationFeature(Codec<NoneFeatureConfiguration> configCodec) {
 		super(configCodec);
 	}
 
 	@Override
-	public boolean generate(@NotNull FeatureContext featureContext) {
-		if (featureContext.getGenerator() instanceof StarrySkyChunkGenerator starrySkyChunkGenerator) {
+	public boolean place(@NotNull FeaturePlaceContext featureContext) {
+		if (featureContext.chunkGenerator() instanceof StarrySkyChunkGenerator starrySkyChunkGenerator) {
 			SystemGenerator systemGenerator = starrySkyChunkGenerator.getSystemGenerator();
 			
-			for (PlacedSphere<?> sphere : systemGenerator.getSystem(featureContext.getWorld(), featureContext.getOrigin())) {
-				if (sphere.isInChunk(new ChunkPos(featureContext.getOrigin()))) {
-					sphere.decorate(featureContext.getWorld(), featureContext.getOrigin(), featureContext.getRandom());
+			for (PlacedSphere<?> sphere : systemGenerator.getSystem(featureContext.level(), featureContext.origin())) {
+				if (sphere.isInChunk(new ChunkPos(featureContext.origin()))) {
+					sphere.decorate(featureContext.level(), featureContext.origin(), featureContext.random());
 				}
 			}
 		}

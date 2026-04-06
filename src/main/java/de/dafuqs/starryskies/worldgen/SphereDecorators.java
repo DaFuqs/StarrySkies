@@ -3,7 +3,7 @@ package de.dafuqs.starryskies.worldgen;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.decorators.*;
-import net.minecraft.registry.*;
+import net.minecraft.core.Registry;
 
 public class SphereDecorators {
 

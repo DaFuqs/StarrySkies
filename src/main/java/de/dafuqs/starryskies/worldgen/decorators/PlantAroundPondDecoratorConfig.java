@@ -2,7 +2,8 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class PlantAroundPondDecoratorConfig implements SphereDecoratorConfig {
 
@@ -11,7 +12,7 @@ public class PlantAroundPondDecoratorConfig implements SphereDecoratorConfig {
 	public static final float plant_chance = 0.5F;
 	public static final int minHeight = 1;
 	public static final int maxHeight = 3;
-	public final BlockState block = Blocks.SUGAR_CANE.getDefaultState();
+	public final BlockState block = Blocks.SUGAR_CANE.defaultBlockState();
 
 	// TODO: make configurable
 	public PlantAroundPondDecoratorConfig() {

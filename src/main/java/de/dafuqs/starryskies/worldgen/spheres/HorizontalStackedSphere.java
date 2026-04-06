@@ -4,15 +4,16 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.entity.*;
-import net.minecraft.registry.*;
-import net.minecraft.registry.entry.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.util.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.floatprovider.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.chunk.*;
+import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -23,7 +24,7 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<HorizontalStackedSphere.Config>, HorizontalStackedSphere.Config> configuredSphere, HorizontalStackedSphere.Config config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius) {
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<HorizontalStackedSphere.Config>, HorizontalStackedSphere.Config> configuredSphere, HorizontalStackedSphere.Config config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
 		return new Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.states);
 	}
 	
@@ -36,7 +37,7 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 		
 		protected final List<BlockState> states;
 		
-		public Config(FloatProvider size, Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Optional<Generation> generation, List<BlockState> states) {
+		public Config(FloatProvider size, Map<Holder<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, @Nullable Generation generation, List<BlockState> states) {
 			super(size, decorators, spawns, generation);
 			this.states = states;
 		}
@@ -47,14 +48,14 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 		
 		private final List<BlockState> states;
 		
-		public Placed(ConfiguredSphere<? extends Sphere<HorizontalStackedSphere.Config>, HorizontalStackedSphere.Config> configuredSphere, float radius, List<RegistryEntry<ConfiguredSphereDecorator<?, ?>>> decorators,
-					  List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random, List<BlockState> states) {
+		public Placed(ConfiguredSphere<? extends Sphere<HorizontalStackedSphere.Config>, HorizontalStackedSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators,
+                      List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random, List<BlockState> states) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.states = states;
 		}
 		
 		@Override
-		public String getDescription(DynamicRegistryManager registryManager) {
+		public String getDescription(RegistryAccess registryManager) {
 			return "+++ HorizontalStackedSphere +++" +
 					"\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
 					"\nTemplateID: " + this.getID(registryManager) +
@@ -62,7 +63,7 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 		}
 		
 		@Override
-		public void generate(Chunk chunk, DynamicRegistryManager registryManager) {
+		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
 			int chunkX = chunk.getPos().x;
 			int chunkZ = chunk.getPos().z;
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
@@ -75,7 +76,7 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 			int maxX = Math.min(chunkX * 16 + 15, x + ceiledRadius);
 			int maxZ = Math.min(chunkZ * 16 + 15, z + ceiledRadius);
 			
-			BlockPos.Mutable currBlockPos = new BlockPos.Mutable();
+			BlockPos.MutableBlockPos currBlockPos = new BlockPos.MutableBlockPos();
 			for (int y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
 				float currentSphereHeight = y - y2 + ceiledRadius;
 				int currentBlockStateIndex = (int) ((currentSphereHeight * states.size() - 1) / (ceiledRadius * 2));

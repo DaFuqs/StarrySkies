@@ -6,13 +6,17 @@ import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.*;
 import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.block.*;
-import net.minecraft.registry.*;
-import net.minecraft.util.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
-import net.minecraft.world.chunk.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import org.jetbrains.annotations.*;
 
 import java.awt.*;
@@ -77,58 +81,58 @@ public class SystemGenerator {
 	 * @param chunkZ chunk chunkZ location
 	 * @return The List of spheres representing the system this chunk is in
 	 */
-	public System getSystem(WorldAccess worldAccess, long seed, int chunkX, int chunkZ) {
+	public System getSystem(LevelAccessor worldAccess, long seed, int chunkX, int chunkZ) {
 		Point systemPos = Support.getSystemCoordinateFromChunkCoordinate(chunkX, chunkZ);
 		return getSystem(worldAccess, seed, systemPos);
 	}
 	
-	public System getSystem(StructureWorldAccess world, BlockPos pos) {
+	public System getSystem(WorldGenLevel world, BlockPos pos) {
 		ChunkPos chunkPos = new ChunkPos(pos);
 		Point systemPos = Support.getSystemCoordinateFromChunkCoordinate(chunkPos.x, chunkPos.z);
 		return getSystem(world, world.getSeed(), systemPos);
 	}
 	
-	public System getSystem(StructureWorldAccess world, Point systemPos) {
+	public System getSystem(WorldGenLevel world, Point systemPos) {
 		System system = systemCache.get(systemPos);
 		
 		if (system == null) {
 			// System at that pos is not generated yet
 			// Generate new system and cache it
-			system = System.generateSystem(this, world.getBottomY(), world.getHeight(), world.getSeed(), systemPos, world.getRegistryManager());
+			system = System.generateSystem(this, world.getMinY(), world.getHeight(), world.getSeed(), systemPos, world.registryAccess());
 			systemCache.put(systemPos, system);
 		}
 		
 		return system;
 	}
 	
-	public System getSystem(WorldAccess worldAccess, long seed, Point systemPos) {
+	public System getSystem(LevelAccessor worldAccess, long seed, Point systemPos) {
 		System system = systemCache.get(systemPos);
 		
 		if (system == null) {
 			// System at that pos is not generated yet
 			// Generate new system and cache it
-			system = System.generateSystem(this, worldAccess.getBottomY(), worldAccess.getHeight(), seed, systemPos, worldAccess.getRegistryManager());
+			system = System.generateSystem(this, worldAccess.getMinY(), worldAccess.getHeight(), seed, systemPos, worldAccess.registryAccess());
 			systemCache.put(systemPos, system);
 		}
 		
 		return system;
 	}
 	
-	public Iterable<? extends PlacedSphere<?>> getSystem(Chunk chunk, long seed, DynamicRegistryManager registryManager) {
+	public Iterable<? extends PlacedSphere<?>> getSystem(ChunkAccess chunk, long seed, RegistryAccess registryManager) {
 		Point systemPos = Support.getSystemCoordinateFromChunkCoordinate(chunk.getPos().x, chunk.getPos().z);
 		System system = systemCache.get(systemPos);
 		
 		if (system == null) {
 			// System at that pos is not generated yet
 			// Generate new system and cache it
-			system = System.generateSystem(this, chunk.getBottomY(), chunk.getHeight(), seed, systemPos, registryManager);
+			system = System.generateSystem(this, chunk.getMinY(), chunk.getHeight(), seed, systemPos, registryManager);
 			systemCache.put(systemPos, system);
 		}
 		
 		return system;
 	}
 	
-	public record DefaultSphere(int systemX, int systemZ, int x, int y, int z, Identifier sphereId) {
+	public record DefaultSphere(int systemX, int systemZ, int x, int y, int z, ResourceLocation sphereId) {
 		public static final Codec<DefaultSphere> CODEC = RecordCodecBuilder.create(
 				instance -> instance.group(
 						Codec.INT.fieldOf("system_x").forGetter(s -> s.systemX),
@@ -136,18 +140,18 @@ public class SystemGenerator {
 						Codec.INT.fieldOf("x").forGetter(s -> s.x),
 						Codec.INT.fieldOf("y").forGetter(s -> s.y),
 						Codec.INT.fieldOf("z").forGetter(s -> s.z),
-						Identifier.CODEC.fieldOf("sphere_id").forGetter(s -> s.sphereId)
+						ResourceLocation.CODEC.fieldOf("sphere_id").forGetter(s -> s.sphereId)
 				).apply(instance, DefaultSphere::new)
 		);
 	}
 	
 	public record System(List<PlacedSphere<?>> spheres) implements Iterable<PlacedSphere<?>> {
 		
-		private static System generateSystem(SystemGenerator systemGenerator, int bottomY, int worldHeight, long seed, @NotNull Point systemPoint, DynamicRegistryManager registryManager) {
+		private static System generateSystem(SystemGenerator systemGenerator, int bottomY, int worldHeight, long seed, @NotNull Point systemPoint, RegistryAccess registryManager) {
 			int systemPointX = systemPoint.x;
 			int systemPointZ = systemPoint.y;
 			
-			ChunkRandom systemRandom = getSystemRandom(systemPoint, seed);
+			WorldgenRandom systemRandom = getSystemRandom(systemPoint, seed);
 			
 			// Places a log/leaf planet at 16, 16 in the overworld etc.
 			List<PlacedSphere<?>> defaultSpheres = getDefaultSpheres(systemGenerator, systemPointX, systemPointZ, systemRandom, registryManager);
@@ -170,22 +174,22 @@ public class SystemGenerator {
 			return new System(spheresInSystem);
 		}
 		
-		private static @NotNull ChunkRandom getSystemRandom(@NotNull Point systemPoint, long seed) {
-			ChunkRandom systemRandom = new ChunkRandom(new CheckedRandom(seed));
-			systemRandom.setCarverSeed(seed, systemPoint.x, systemPoint.y);
+		private static @NotNull WorldgenRandom getSystemRandom(@NotNull Point systemPoint, long seed) {
+			WorldgenRandom systemRandom = new WorldgenRandom(new LegacyRandomSource(seed));
+			systemRandom.setLargeFeatureSeed(seed, systemPoint.x, systemPoint.y);
 			return systemRandom;
 		}
 		
-		private static List<PlacedSphere<?>> getDefaultSpheres(SystemGenerator systemGenerator, int systemPointX, int systemPointZ, ChunkRandom systemRandom, DynamicRegistryManager registryManager) {
+		private static List<PlacedSphere<?>> getDefaultSpheres(SystemGenerator systemGenerator, int systemPointX, int systemPointZ, WorldgenRandom systemRandom, RegistryAccess registryManager) {
 			if (systemGenerator.defaultSpheres.isEmpty()) {
 				return List.of();
 			}
 			
-			Registry<ConfiguredSphere<?, ?>> templateRegistry = registryManager.getOrThrow(StarryRegistryKeys.CONFIGURED_SPHERE);
+			Registry<ConfiguredSphere<?, ?>> templateRegistry = registryManager.lookupOrThrow(StarryRegistryKeys.CONFIGURED_SPHERE);
 			ArrayList<PlacedSphere<?>> defaultSpheres = new ArrayList<>();
 			for (DefaultSphere defaultSphere : systemGenerator.defaultSpheres) {
 				if (systemPointX == defaultSphere.systemX && systemPointZ == defaultSphere.systemZ) {
-					ConfiguredSphere<?, ?> template = templateRegistry.get(defaultSphere.sphereId);
+					ConfiguredSphere<?, ?> template = templateRegistry.getValue(defaultSphere.sphereId);
 					if (template != null) {
 						BlockPos pos = new BlockPos(defaultSphere.x, defaultSphere.y, defaultSphere.z);
 						PlacedSphere<?> sphere = template.generate(systemRandom, registryManager, pos, template.getSize(systemRandom));
@@ -198,7 +202,7 @@ public class SystemGenerator {
 			return defaultSpheres;
 		}
 		
-		private static @Nullable PlacedSphere<?> getRandomSphere(SystemGenerator systemGenerator, ChunkRandom systemRandom, @NotNull Point systemPoint, DynamicRegistryManager registryManager, int bottomY, int worldHeight, List<PlacedSphere<?>> spheresInSystem) {
+		private static @Nullable PlacedSphere<?> getRandomSphere(SystemGenerator systemGenerator, WorldgenRandom systemRandom, @NotNull Point systemPoint, RegistryAccess registryManager, int bottomY, int worldHeight, List<PlacedSphere<?>> spheresInSystem) {
 			ConfiguredSphere<?, ?> selectedSphere;
 			PlacedSphere<?> placed;
 			
@@ -233,7 +237,7 @@ public class SystemGenerator {
 				for (PlacedSphere<?> sphere : spheresInSystem) {
 					//each sphere has to be at least pl1.radius + pl2.radius + min distance apart
 					int distMin = (sphere.getRadius() + iRadius + systemGenerator.minDistanceBetweenSpheres);
-					double distSquared = spherePos.getSquaredDistance(sphere.getPosition());
+					double distSquared = spherePos.distSqr(sphere.getPosition());
 					if (distSquared < distMin * distMin) {
 						placed = null;
 						break;

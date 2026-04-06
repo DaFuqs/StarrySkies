@@ -2,11 +2,12 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.block.enums.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.BambooStalkBlock;
+import net.minecraft.world.level.block.state.properties.BambooLeaves;
 
 public class BambooDecorator extends SphereDecorator<BambooDecoratorConfig> {
 
@@ -16,30 +17,30 @@ public class BambooDecorator extends SphereDecorator<BambooDecoratorConfig> {
 
 	@Override
 	public boolean generate(SphereFeatureContext<BambooDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		BambooDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		BambooDecoratorConfig config = context.config();
 
 		for (BlockPos bp : getTopBlocks(world, origin, sphere)) {
 			if (random.nextFloat() < config.chance()) {
 				if (random.nextFloat() < config.saplingChance()) {
-					if (config.bambooBlockState().canPlaceAt(world, bp.up())) {
-						world.setBlockState(bp.up(), config.bambooBlockState(), 3);
+					if (config.bambooBlockState().canSurvive(world, bp.above())) {
+						world.setBlock(bp.above(), config.bambooBlockState(), 3);
 					}
 				} else {
 					int height = random.nextInt(8);
 					for (int i = 1; i < height; i++) {
-						if (config.bambooBlockState().canPlaceAt(world, bp.up(i))) {
+						if (config.bambooBlockState().canSurvive(world, bp.above(i))) {
 							if (i == 3 && height < 5) {
-								world.setBlockState(bp.up(i), config.bambooBlockState().with(BambooBlock.LEAVES, BambooLeaves.NONE), 3);
+								world.setBlock(bp.above(i), config.bambooBlockState().setValue(BambooStalkBlock.LEAVES, BambooLeaves.NONE), 3);
 							} else if (i > 4) {
-								world.setBlockState(bp.up(i), config.bambooBlockState().with(BambooBlock.LEAVES, BambooLeaves.LARGE), 3);
+								world.setBlock(bp.above(i), config.bambooBlockState().setValue(BambooStalkBlock.LEAVES, BambooLeaves.LARGE), 3);
 							} else if (i > 2) {
-								world.setBlockState(bp.up(i), config.bambooBlockState().with(BambooBlock.LEAVES, BambooLeaves.SMALL), 3);
+								world.setBlock(bp.above(i), config.bambooBlockState().setValue(BambooStalkBlock.LEAVES, BambooLeaves.SMALL), 3);
 							} else {
-								world.setBlockState(bp.up(i), config.bambooBlockState().with(BambooBlock.LEAVES, BambooLeaves.NONE), 3);
+								world.setBlock(bp.above(i), config.bambooBlockState().setValue(BambooStalkBlock.LEAVES, BambooLeaves.NONE), 3);
 							}
 						}
 					}

@@ -3,13 +3,13 @@
   "package": "de.dafuqs.starryskies.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "AbstractFireBlockMixin",
+    "BaseFireBlockMixin",
     "EndPortalBlockMixin",
     "NetherPortalBlockMixin",
-    "ServerWorldMixin"
+    "ServerLevelMixin"
   ],
   "client": [
-    "fix.WorldRendererMixinFix"
+    "fix.LevelRendererMixinFix"
   ],
   "injectors": {
     "defaultRequire": 1

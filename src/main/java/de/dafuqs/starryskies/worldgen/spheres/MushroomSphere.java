@@ -4,17 +4,18 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.entity.*;
-import net.minecraft.registry.*;
-import net.minecraft.registry.entry.*;
-import net.minecraft.state.property.Properties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.util.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.floatprovider.*;
-import net.minecraft.util.math.intprovider.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.chunk.*;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -25,8 +26,8 @@ public class MushroomSphere extends Sphere<MushroomSphere.Config> {
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<MushroomSphere.Config>, Config> configuredSphere, Config config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius) {
-		return new MushroomSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.stemBlock, config.mushroomBlock, config.shellThickness.get(random));
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<MushroomSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
+		return new MushroomSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.stemBlock, config.mushroomBlock, config.shellThickness.sample(random));
 	}
 	
 	public static class Config extends SphereConfig {
@@ -42,7 +43,7 @@ public class MushroomSphere extends Sphere<MushroomSphere.Config> {
 		protected final BlockState mushroomBlock;
 		protected final IntProvider shellThickness;
 		
-		public Config(FloatProvider size, Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Optional<Generation> generation, BlockState stemBlock, BlockState mushroomBlock, IntProvider shellThickness) {
+		public Config(FloatProvider size, Map<Holder<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, @Nullable Generation generation, BlockState stemBlock, BlockState mushroomBlock, IntProvider shellThickness) {
 			super(size, decorators, spawns, generation);
 			this.stemBlock = stemBlock;
 			this.mushroomBlock = mushroomBlock;
@@ -57,8 +58,8 @@ public class MushroomSphere extends Sphere<MushroomSphere.Config> {
 		private final BlockState mushroomBlock;
 		private final float shellRadius;
 		
-		public Placed(ConfiguredSphere<? extends Sphere<MushroomSphere.Config>, MushroomSphere.Config> configuredSphere, float radius, List<RegistryEntry<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random,
-					  BlockState stemBlock, BlockState mushroomBlock, float shellRadius) {
+		public Placed(ConfiguredSphere<? extends Sphere<MushroomSphere.Config>, MushroomSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random,
+                      BlockState stemBlock, BlockState mushroomBlock, float shellRadius) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.stemBlock = stemBlock;
 			this.mushroomBlock = mushroomBlock;
@@ -66,7 +67,7 @@ public class MushroomSphere extends Sphere<MushroomSphere.Config> {
 		}
 		
 		@Override
-		public void generate(Chunk chunk, DynamicRegistryManager registryManager) {
+		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
 			int chunkX = chunk.getPos().x;
 			int chunkZ = chunk.getPos().z;
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
@@ -81,23 +82,23 @@ public class MushroomSphere extends Sphere<MushroomSphere.Config> {
 			
 			// see: HugeRedMushroomFeature
 			BlockState placementBlockstateInner = this.mushroomBlock
-					.with(Properties.UP, false)
-					.with(Properties.NORTH, false)
-					.with(Properties.EAST, false)
-					.with(Properties.SOUTH, false)
-					.with(Properties.WEST, false)
-					.with(Properties.DOWN, false);
+					.setValue(BlockStateProperties.UP, false)
+					.setValue(BlockStateProperties.NORTH, false)
+					.setValue(BlockStateProperties.EAST, false)
+					.setValue(BlockStateProperties.SOUTH, false)
+					.setValue(BlockStateProperties.WEST, false)
+					.setValue(BlockStateProperties.DOWN, false);
 			
 			// not perfectly correct, but eh
 			BlockState placementBlockstateOuter = this.mushroomBlock
-					.with(Properties.UP, true)
-					.with(Properties.NORTH, true)
-					.with(Properties.EAST, true)
-					.with(Properties.SOUTH, true)
-					.with(Properties.WEST, true)
-					.with(Properties.DOWN, true);
+					.setValue(BlockStateProperties.UP, true)
+					.setValue(BlockStateProperties.NORTH, true)
+					.setValue(BlockStateProperties.EAST, true)
+					.setValue(BlockStateProperties.SOUTH, true)
+					.setValue(BlockStateProperties.WEST, true)
+					.setValue(BlockStateProperties.DOWN, true);
 			
-			BlockPos.Mutable currBlockPos = new BlockPos.Mutable();
+			BlockPos.MutableBlockPos currBlockPos = new BlockPos.MutableBlockPos();
 			for (int x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= maxX; x2++) {
 				for (int y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
 					for (int z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= maxZ; z2++) {
@@ -121,7 +122,7 @@ public class MushroomSphere extends Sphere<MushroomSphere.Config> {
 		}
 		
 		@Override
-		public String getDescription(DynamicRegistryManager registryManager) {
+		public String getDescription(RegistryAccess registryManager) {
 			return "+++ MushroomSphere +++" +
 					"\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
 					"\nTemplateID: " + this.getID(registryManager) +

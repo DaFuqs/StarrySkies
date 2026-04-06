@@ -2,9 +2,10 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
 import org.jetbrains.annotations.*;
 
 /**
@@ -18,11 +19,11 @@ public class LootChestDecorator extends SphereDecorator<LootChestDecoratorConfig
 	
 	@Override
 	public boolean generate(SphereFeatureContext<LootChestDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		LootChestDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		LootChestDecoratorConfig config = context.config();
 		
 		if (!sphere.isCenterInChunk(origin)) {
 			return false;
@@ -31,9 +32,9 @@ public class LootChestDecorator extends SphereDecorator<LootChestDecoratorConfig
 		LootChestDecoratorConfig.Position position = config.position();
 		
 		@Nullable BlockPos chestPos = switch (position) {
-			case TOP_CENTER -> sphere.getPosition().up(sphere.getRadius() + 1);
+			case TOP_CENTER -> sphere.getPosition().above(sphere.getRadius() + 1);
 			case CENTER -> sphere.getPosition();
-			case CAVE_FLOOR -> getCaveBottomBlock(world, sphere.getPosition().up(), sphere);
+			case CAVE_FLOOR -> getCaveBottomBlock(world, sphere.getPosition().above(), sphere);
 		};
 		
 		if (chestPos != null) {

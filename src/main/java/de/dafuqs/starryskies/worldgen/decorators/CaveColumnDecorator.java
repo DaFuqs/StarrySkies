@@ -2,10 +2,12 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 
 
 public class CaveColumnDecorator extends SphereDecorator<CaveColumnDecoratorConfig> {
@@ -16,11 +18,11 @@ public class CaveColumnDecorator extends SphereDecorator<CaveColumnDecoratorConf
 	
 	@Override
 	public boolean generate(SphereFeatureContext<CaveColumnDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		CaveColumnDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		CaveColumnDecoratorConfig config = context.config();
 		
 		if (!sphere.isCenterInChunk(origin)) {
 			return false;
@@ -28,22 +30,22 @@ public class CaveColumnDecorator extends SphereDecorator<CaveColumnDecoratorConf
 		
 		BlockPos spherePos = sphere.getPosition();
 		int sphereY = spherePos.getY();
-		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		
-		world.setBlockState(spherePos, config.centerState().get(random, mutable), Block.NOTIFY_ALL);
+		world.setBlock(spherePos, config.centerState().getState(random, mutable), Block.UPDATE_ALL);
 		
 		mutable.set(spherePos.getX(), spherePos.getY() + 1, spherePos.getZ());
 		int maxY = findNextNonAirBlockInDirection(world, mutable, Direction.UP, sphere.getRadius()).getY();
 		for (int y = sphereY + 1; y < maxY; y++) {
 			mutable.set(spherePos.getX(), y, spherePos.getZ());
-			world.setBlockState(mutable, config.columnState().get(random, mutable), Block.NOTIFY_ALL);
+			world.setBlock(mutable, config.columnState().getState(random, mutable), Block.UPDATE_ALL);
 		}
 		
 		mutable.set(spherePos.getX(), spherePos.getY() - 1, spherePos.getZ());
 		int minY = findNextNonAirBlockInDirection(world, mutable, Direction.DOWN, sphere.getRadius()).getY();
 		for (int y = sphereY - 1; y > minY; y--) {
 			mutable.set(spherePos.getX(), y, spherePos.getZ());
-			world.setBlockState(mutable, config.columnState().get(random, mutable), Block.NOTIFY_ALL);
+			world.setBlock(mutable, config.columnState().getState(random, mutable), Block.UPDATE_ALL);
 		}
 		
 		return true;

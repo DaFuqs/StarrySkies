@@ -3,10 +3,10 @@ package de.dafuqs.starryskies.worldgen.decorators;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 
 public record StackedBlockDecoratorConfig(BlockState block, float chance, int minHeight,
-										  int maxHeight) implements SphereDecoratorConfig {
+                                          int maxHeight) implements SphereDecoratorConfig {
 
 	public static final Codec<StackedBlockDecoratorConfig> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(

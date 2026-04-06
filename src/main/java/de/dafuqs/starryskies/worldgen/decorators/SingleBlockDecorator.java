@@ -2,10 +2,12 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class SingleBlockDecorator extends SphereDecorator<SingleBlockDecoratorConfig> {
 
@@ -15,17 +17,17 @@ public class SingleBlockDecorator extends SphereDecorator<SingleBlockDecoratorCo
 
 	@Override
 	public boolean generate(SphereFeatureContext<SingleBlockDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		SingleBlockDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		SingleBlockDecoratorConfig config = context.config();
 
 		for (BlockPos bp : getTopBlocks(world, origin, sphere)) {
 			BlockState posState = world.getBlockState(bp);
-			if (posState.isSolidBlock(world, bp) && world.getBlockState(bp.up()).isAir()) {
+			if (posState.isRedstoneConductor(world, bp) && world.getBlockState(bp.above()).isAir()) {
 				if (random.nextFloat() < config.chance()) {
-					world.setBlockState(bp.up(), config.state(), Block.NOTIFY_ALL);
+					world.setBlock(bp.above(), config.state(), Block.UPDATE_ALL);
 				}
 			}
 		}

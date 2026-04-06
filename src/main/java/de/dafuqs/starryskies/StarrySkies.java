@@ -18,16 +18,17 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.*;
 import net.fabricmc.fabric.api.resource.*;
 import net.kyrptonaught.customportalapi.*;
 import net.kyrptonaught.customportalapi.util.*;
-import net.minecraft.block.*;
-import net.minecraft.command.argument.*;
-import net.minecraft.command.argument.serialize.*;
-import net.minecraft.registry.*;
-import net.minecraft.resource.*;
-import net.minecraft.server.network.*;
-import net.minecraft.server.world.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraft.world.gen.chunk.*;
+import net.minecraft.commands.synchronization.ArgumentTypeInfos;
+import net.minecraft.commands.synchronization.SingletonArgumentInfo;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import org.slf4j.*;
 
 import java.util.*;
@@ -38,16 +39,16 @@ public class StarrySkies implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static StarrySkyConfig CONFIG;
 	
-	public static Identifier id(String name) {
-		return Identifier.of(MOD_ID, name);
+	public static ResourceLocation id(String name) {
+		return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
 	}
 	
 	public static String idPlain(String name) {
 		return id(name).toString();
 	}
 	
-	public static boolean isStarryWorld(ServerWorld world) {
-		ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
+	public static boolean isStarryWorld(ServerLevel world) {
+		ChunkGenerator chunkGenerator = world.getChunkSource().getGenerator();
 		return chunkGenerator instanceof StarrySkyChunkGenerator;
 	}
 	
@@ -58,11 +59,11 @@ public class StarrySkies implements ModInitializer {
 		AutoConfig.register(StarrySkyConfig.class, JanksonConfigSerializer::new);
 		CONFIG = AutoConfig.getConfigHolder(StarrySkyConfig.class).getConfig();
 		
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(UniqueBlockGroupDataLoader.INSTANCE);
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(WeightedBlockGroupDataLoader.INSTANCE);
+		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(UniqueBlockGroupDataLoader.INSTANCE);
+		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(WeightedBlockGroupDataLoader.INSTANCE);
 		
 		// Register all the stuff
-		Registry.register(Registries.CHUNK_GENERATOR, StarrySkies.id("starry_skies"), StarrySkyChunkGenerator.CODEC);
+		Registry.register(BuiltInRegistries.CHUNK_GENERATOR, StarrySkies.id("starry_skies"), StarrySkyChunkGenerator.CODEC);
 		
 		StarryRegistries.register();
 		StarryStateProviders.register();
@@ -71,7 +72,7 @@ public class StarrySkies implements ModInitializer {
 		SphereDecorators.initialize();
 		StarryAdvancementCriteria.register();
 		
-		ArgumentTypes.register(Registries.COMMAND_ARGUMENT_TYPE, "starry_skies_configured_sphere", ConfiguredSphereArgumentType.class, ConstantArgumentSerializer.of(ConfiguredSphereArgumentType::configuredSphere));
+		ArgumentTypeInfos.register(BuiltInRegistries.COMMAND_ARGUMENT_TYPE, "starry_skies_configured_sphere", ConfiguredSphereArgumentType.class, SingletonArgumentInfo.contextAware(ConfiguredSphereArgumentType::configuredSphere));
 		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
 			ClosestSphereCommand.register(commandDispatcher, commandRegistryAccess);
 			GenerateSphereCommand.register(commandDispatcher, commandRegistryAccess);
@@ -80,16 +81,16 @@ public class StarrySkies implements ModInitializer {
 		
 		// Build a final map of sphere generation data for each chunk generator
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
-			Registry<GenerationGroup> generationGroupRegistry = server.getRegistryManager().getOrThrow(StarryRegistryKeys.GENERATION_GROUP);
-			Registry<SystemGenerator> systemGeneratorRegistry = server.getRegistryManager().getOrThrow(StarryRegistryKeys.SYSTEM_GENERATOR);
-			Registry<ConfiguredSphere<?, ?>> configuredSphereRegistry = server.getRegistryManager().getOrThrow(StarryRegistryKeys.CONFIGURED_SPHERE);
+			Registry<GenerationGroup> generationGroupRegistry = server.registryAccess().lookupOrThrow(StarryRegistryKeys.GENERATION_GROUP);
+			Registry<SystemGenerator> systemGeneratorRegistry = server.registryAccess().lookupOrThrow(StarryRegistryKeys.SYSTEM_GENERATOR);
+			Registry<ConfiguredSphere<?, ?>> configuredSphereRegistry = server.registryAccess().lookupOrThrow(StarryRegistryKeys.CONFIGURED_SPHERE);
 			
 			for (GenerationGroup generationGroup : generationGroupRegistry) {
 				// cursed generator group id lookup. Using getEntries() does return random order, making worldgen undeterministic :C
-				Identifier generationGroupId = generationGroupRegistry.getKey(generationGroup).get().getValue();
-				Identifier systemGeneratorId = generationGroup.systemGeneratorId();
+				ResourceLocation generationGroupId = generationGroupRegistry.getResourceKey(generationGroup).orElseThrow().location();
+				ResourceLocation systemGeneratorId = generationGroup.systemGeneratorId();
 				
-				SystemGenerator systemGenerator = systemGeneratorRegistry.get(systemGeneratorId);
+				SystemGenerator systemGenerator = systemGeneratorRegistry.getValue(systemGeneratorId);
 				if (systemGenerator == null) {
 					LOGGER.error("System generator with id {} referenced in starry skies generation group {} was not found", generationGroup.systemGeneratorId(), generationGroupId);
 					continue;
@@ -97,9 +98,9 @@ public class StarrySkies implements ModInitializer {
 				
 				Map<ConfiguredSphere<?, ?>, Float> weightedSpheres = new Object2ObjectArrayMap<>();
 				for (ConfiguredSphere<?, ?> sphere : configuredSphereRegistry) {
-					Optional<SphereConfig.Generation> sphereGenerationGroup = sphere.getGenerationGroup();
-					if (sphereGenerationGroup.isPresent() && sphereGenerationGroup.get().group().equals(generationGroupId)) {
-						weightedSpheres.put(sphere, sphereGenerationGroup.get().weight());
+					SphereConfig.Generation sphereGenerationGroup = sphere.getGenerationGroup();
+					if (sphereGenerationGroup != null && sphereGenerationGroup.group().equals(generationGroupId)) {
+						weightedSpheres.put(sphere, sphereGenerationGroup.weight());
 					}
 				}
 				
@@ -115,15 +116,15 @@ public class StarrySkies implements ModInitializer {
 			Weather and time of day is also only tracked in the overworld
 		 */
 		EntitySleepEvents.STOP_SLEEPING.register((entity, sleepingPos) -> {
-			if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
-				ServerWorld world = serverPlayerEntity.getWorld();
-				if (isStarryWorld(world) && serverPlayerEntity.canResetTimeBySleeping()) {
-					long nextDay = world.getTimeOfDay() + 24000L;
+			if (entity instanceof ServerPlayer serverPlayerEntity) {
+				ServerLevel world = serverPlayerEntity.level();
+				if (isStarryWorld(world) && serverPlayerEntity.isSleepingLongEnough()) {
+					long nextDay = world.getDayTime() + 24000L;
 					long mod = nextDay - nextDay % 24000L;
-					world.getServer().getOverworld().setTimeOfDay(mod);
+					world.getServer().overworld().setDayTime(mod);
 					
-					if (world.getGameRules().getBoolean(GameRules.DO_WEATHER_CYCLE) && world.isRaining()) {
-						world.getServer().getOverworld().resetWeather();
+					if (world.getGameRules().getBoolean(GameRules.RULE_WEATHER_CYCLE) && world.isRaining()) {
+						world.getServer().overworld().resetWeatherCycle();
 					}
 				}
 			}
@@ -140,8 +141,8 @@ public class StarrySkies implements ModInitializer {
 	public static void setupPortals() {
 		StarrySkies.LOGGER.info("Setting up Portal to Starry Skies...");
 		
-		Identifier portalFrameBlockIdentifier = Identifier.tryParse(StarrySkies.CONFIG.starrySkyPortalFrameBlock.toLowerCase());
-		Block portalFrameBlock = Registries.BLOCK.get(portalFrameBlockIdentifier);
+		ResourceLocation portalFrameBlockIdentifier = ResourceLocation.tryParse(StarrySkies.CONFIG.starrySkyPortalFrameBlock.toLowerCase());
+		Block portalFrameBlock = BuiltInRegistries.BLOCK.getValue(portalFrameBlockIdentifier);
 		
 		PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, StarryDimensionKeys.STARRY_SKIES_DIMENSION_ID, StarrySkies.CONFIG.starrySkyPortalColor);
 		CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);

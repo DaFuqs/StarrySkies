@@ -3,9 +3,9 @@ package de.dafuqs.starryskies.configs;
 import me.shedaniel.autoconfig.*;
 import me.shedaniel.autoconfig.annotation.*;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.*;
-import net.minecraft.block.*;
-import net.minecraft.registry.*;
-import net.minecraft.util.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
 
 @Config(name = "StarrySky")
 public class StarrySkyConfig implements ConfigData {
@@ -77,11 +77,9 @@ public class StarrySkyConfig implements ConfigData {
 	private boolean isValidBlock(String blockName) {
 		// validate floorBlock
 		try {
-			Identifier identifier = Identifier.tryParse(blockName.toLowerCase());
-			BlockState bs = Registries.BLOCK.get(identifier).getDefaultState();
-			if (bs == null) {
+			ResourceLocation identifier = ResourceLocation.tryParse(blockName.toLowerCase());
+			if (identifier == null || BuiltInRegistries.BLOCK.getOptional(identifier).isEmpty())
 				return false;
-			}
 		} catch (Exception e) {
 			return false;
 		}

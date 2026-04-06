@@ -3,11 +3,12 @@ package de.dafuqs.starryskies.worldgen.decorators;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
 
-public class HugePlantDecoratorConfig implements SphereDecoratorConfig {
+public record HugePlantDecoratorConfig(BlockState block, BlockState firstBlock, BlockState lastBlock, float chance,
+									   int minHeight, int maxHeight) implements SphereDecoratorConfig {
 
 	public static final Codec<HugePlantDecoratorConfig> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(
@@ -20,20 +21,8 @@ public class HugePlantDecoratorConfig implements SphereDecoratorConfig {
 			).apply(instance, HugePlantDecoratorConfig::new)
 	);
 
-	public final BlockState block;
-	public final BlockState firstBlock;
-	public final BlockState lastBlock;
-	public final float chance;
-	public final int minHeight;
-	public final int maxHeight;
-
 	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	public HugePlantDecoratorConfig(BlockState block, Optional<BlockState> firstBlock, Optional<BlockState> lastBlock, float chance, int minHeight, int maxHeight) {
-		this.block = block;
-		this.firstBlock = firstBlock.orElse(null);
-		this.lastBlock = lastBlock.orElse(null);
-		this.chance = chance;
-		this.minHeight = minHeight;
-		this.maxHeight = maxHeight;
-	}
+        this(block, firstBlock.orElse(null), lastBlock.orElse(null), chance, minHeight, maxHeight);
+    }
 }
