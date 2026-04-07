@@ -4,8 +4,7 @@ import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -27,7 +26,7 @@ public class SingleBlockProviderDecorator extends SphereDecorator<SingleBlockPro
 			BlockState posState = world.getBlockState(bp);
 			if (posState.isRedstoneConductor(world, bp) && world.getBlockState(bp.above()).isAir()) {
 				if (random.nextFloat() < config.chance()) {
-					world.setBlock(bp.above(), config.state().getState(random, bp), Block.UPDATE_ALL);
+					world.setBlock(bp.above(), config.state().getState(world, random, bp), Block.UPDATE_ALL);
 				}
 			}
 		}

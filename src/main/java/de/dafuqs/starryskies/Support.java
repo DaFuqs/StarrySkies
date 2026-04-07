@@ -3,15 +3,11 @@ package de.dafuqs.starryskies;
 import com.mojang.datafixers.util.*;
 import de.dafuqs.starryskies.worldgen.*;
 import de.dafuqs.starryskies.worldgen.dimension.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.LevelAccessor;
-import org.jetbrains.annotations.*;
+import net.minecraft.world.level.*;
+import org.jspecify.annotations.*;
 
 import java.awt.*;
 import java.util.List;
@@ -56,7 +52,7 @@ public class Support {
 		}
 	}
 	
-	public static Optional<Pair<BlockPos, Holder<ConfiguredSphere<?, ?>>>> getClosestSphere3x3(@NotNull ServerLevel serverWorld, BlockPos position, Predicate<Holder<ConfiguredSphere<?, ?>>> predicate, RegistryAccess registryManager) {
+	public static Optional<Pair<BlockPos, Holder<ConfiguredSphere<?, ?>>>> getClosestSphere3x3(@NonNull ServerLevel serverWorld, BlockPos position, Predicate<Holder<ConfiguredSphere<?, ?>>> predicate, RegistryAccess registryManager) {
 		if (!(serverWorld.getChunkSource().getGenerator() instanceof StarrySkyChunkGenerator starrySkyChunkGenerator)) {
 			return Optional.empty();
 		}
@@ -86,7 +82,7 @@ public class Support {
 		return Optional.empty();
 	}
 
-	public static <E> E getWeightedRandom(@NotNull Map<E, Float> weights, RandomSource random) {
+	public static <E> E getWeightedRandom(@NonNull Map<E, Float> weights, RandomSource random) {
 		E result = null;
 		double bestValue = Double.MAX_VALUE;
 
@@ -101,7 +97,7 @@ public class Support {
 		return result;
 	}
 
-	public static @NotNull Point getSystemCoordinateFromChunkCoordinate(int chunkX, int chunkZ) {
+	public static @NonNull Point getSystemCoordinateFromChunkCoordinate(int chunkX, int chunkZ) {
 		int systemSizeChunks = StarrySkies.CONFIG.systemSizeChunks;
 
 		int sysX;
@@ -128,11 +124,11 @@ public class Support {
 	 * @param highest The highest number (inclusive)
 	 * @return The random number between lowest and highest
 	 */
-	public static int getRandomBetween(@NotNull RandomSource random, int lowest, int highest) {
+	public static int getRandomBetween(@NonNull RandomSource random, int lowest, int highest) {
 		return lowest + random.nextInt(highest - lowest + 1);
 	}
 
-	public static float getRandomBetween(@NotNull RandomSource random, float lowest, float highest) {
+	public static float getRandomBetween(@NonNull RandomSource random, float lowest, float highest) {
 		return lowest + random.nextFloat() * (highest - lowest);
 	}
 
@@ -140,18 +136,18 @@ public class Support {
 		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2));
 	}
 
-	public static double getDistance(@NotNull BlockPos blockPos1, @NotNull BlockPos blockpos2) {
+	public static double getDistance(@NonNull BlockPos blockPos1, @NonNull BlockPos blockpos2) {
 		return getDistance(blockPos1.getX(), blockPos1.getY(), blockPos1.getZ(), blockpos2.getX(), blockpos2.getY(), blockpos2.getZ());
 	}
 
-	public static boolean isBlockPosInChunkPos(@NotNull ChunkPos chunkPos, @NotNull BlockPos blockPos) {
+	public static boolean isBlockPosInChunkPos(@NonNull ChunkPos chunkPos, @NonNull BlockPos blockPos) {
 		return (blockPos.getX() >= chunkPos.getMinBlockX()
 				&& blockPos.getX() < chunkPos.getMinBlockX() + 16
 				&& blockPos.getZ() >= chunkPos.getMinBlockZ()
 				&& blockPos.getZ() < chunkPos.getMinBlockZ() + 16);
 	}
 
-	public static int getLowerGroundBlock(LevelAccessor world, @NotNull BlockPos position, int minHeight) {
+	public static int getLowerGroundBlock(LevelAccessor world, @NonNull BlockPos position, int minHeight) {
 		BlockPos.MutableBlockPos blockPos$Mutable = new BlockPos.MutableBlockPos(position.getX(), position.getY(), position.getZ());
 
 		//if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land
@@ -164,7 +160,7 @@ public class Support {
 		return blockPos$Mutable.getY();
 	}
 
-	public static int getUpperGroundBlock(LevelAccessor world, @NotNull BlockPos position, int minHeight) {
+	public static int getUpperGroundBlock(LevelAccessor world, @NonNull BlockPos position, int minHeight) {
 		BlockPos.MutableBlockPos blockPos$Mutable = new BlockPos.MutableBlockPos(position.getX(), position.getY(), position.getZ());
 
 		//if height is an air block, move down until we reached a solid block. We are now on the surface of a piece of land

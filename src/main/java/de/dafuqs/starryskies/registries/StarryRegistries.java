@@ -19,7 +19,7 @@ public class StarryRegistries {
 	}
 
 	public static <T> Registry<T> create(ResourceKey<Registry<T>> key) {
-		return FabricRegistryBuilder.createSimple(key).attribute(RegistryAttribute.MODDED).buildAndRegister();
+		return FabricRegistryBuilder.create(key).attribute(RegistryAttribute.MODDED).buildAndRegister();
 	}
 
 }

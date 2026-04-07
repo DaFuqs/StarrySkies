@@ -3,7 +3,7 @@ package de.dafuqs.starryskies.worldgen.decorators;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 import java.util.*;
@@ -17,7 +17,7 @@ public record BottomBlocksDecoratorConfig(Optional<BlockStateProvider> topState,
 					BlockStateProvider.CODEC.optionalFieldOf("top_block").forGetter(decorator -> decorator.topState),
 					BlockStateProvider.CODEC.fieldOf("block").forGetter(decorator -> decorator.state),
 					BlockStateProvider.CODEC.optionalFieldOf("bottom_block").forGetter(decorator -> decorator.bottomState),
-					IntProvider.codec(0, 8).fieldOf("height").forGetter(decorator -> decorator.height)
+					IntProviders.codec(0, 8).fieldOf("height").forGetter(decorator -> decorator.height)
 			).apply(instance, BottomBlocksDecoratorConfig::new));
 	
 }

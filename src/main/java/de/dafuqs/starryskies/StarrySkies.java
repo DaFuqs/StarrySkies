@@ -13,20 +13,16 @@ import me.shedaniel.autoconfig.*;
 import me.shedaniel.autoconfig.serializer.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.command.v2.*;
-import net.fabricmc.fabric.api.entity.event.v1.*;
 import net.fabricmc.fabric.api.event.lifecycle.v1.*;
-import net.fabricmc.fabric.api.resource.*;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.kyrptonaught.customportalapi.*;
 import net.kyrptonaught.customportalapi.util.*;
-import net.minecraft.commands.synchronization.ArgumentTypeInfos;
-import net.minecraft.commands.synchronization.SingletonArgumentInfo;
+import net.minecraft.commands.synchronization.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import org.slf4j.*;
@@ -39,8 +35,8 @@ public class StarrySkies implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static StarrySkyConfig CONFIG;
 	
-	public static ResourceLocation id(String name) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
+	public static Identifier id(String name) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, name);
 	}
 	
 	public static String idPlain(String name) {
@@ -58,9 +54,9 @@ public class StarrySkies implements ModInitializer {
 		LOGGER.info("Starting up...");
 		AutoConfig.register(StarrySkyConfig.class, JanksonConfigSerializer::new);
 		CONFIG = AutoConfig.getConfigHolder(StarrySkyConfig.class).getConfig();
-		
-		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(UniqueBlockGroupDataLoader.INSTANCE);
-		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(WeightedBlockGroupDataLoader.INSTANCE);
+
+		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(  UniqueBlockGroupDataLoader.ID,   UniqueBlockGroupDataLoader.INSTANCE);
+		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(WeightedBlockGroupDataLoader.ID, WeightedBlockGroupDataLoader.INSTANCE);
 		
 		// Register all the stuff
 		Registry.register(BuiltInRegistries.CHUNK_GENERATOR, StarrySkies.id("starry_skies"), StarrySkyChunkGenerator.CODEC);
@@ -87,8 +83,8 @@ public class StarrySkies implements ModInitializer {
 			
 			for (GenerationGroup generationGroup : generationGroupRegistry) {
 				// cursed generator group id lookup. Using getEntries() does return random order, making worldgen undeterministic :C
-				ResourceLocation generationGroupId = generationGroupRegistry.getResourceKey(generationGroup).orElseThrow().location();
-				ResourceLocation systemGeneratorId = generationGroup.systemGeneratorId();
+				Identifier generationGroupId = generationGroupRegistry.getResourceKey(generationGroup).orElseThrow().identifier();
+				Identifier systemGeneratorId = generationGroup.systemGeneratorId();
 				
 				SystemGenerator systemGenerator = systemGeneratorRegistry.getValue(systemGeneratorId);
 				if (systemGenerator == null) {
@@ -110,26 +106,6 @@ public class StarrySkies implements ModInitializer {
 			}
 		});
 		
-		/*
-			Workaround for https://bugs.mojang.com/browse/MC-188578:
-			Sleeping in a bed in a custom dimension doesn't set time to day
-			Weather and time of day is also only tracked in the overworld
-		 */
-		EntitySleepEvents.STOP_SLEEPING.register((entity, sleepingPos) -> {
-			if (entity instanceof ServerPlayer serverPlayerEntity) {
-				ServerLevel world = serverPlayerEntity.level();
-				if (isStarryWorld(world) && serverPlayerEntity.isSleepingLongEnough()) {
-					long nextDay = world.getDayTime() + 24000L;
-					long mod = nextDay - nextDay % 24000L;
-					world.getServer().overworld().setDayTime(mod);
-					
-					if (world.getGameRules().getBoolean(GameRules.RULE_WEATHER_CYCLE) && world.isRaining()) {
-						world.getServer().overworld().resetWeatherCycle();
-					}
-				}
-			}
-		});
-		
 		
 		if (CONFIG.registerStarryPortal) {
 			setupPortals();
@@ -141,7 +117,7 @@ public class StarrySkies implements ModInitializer {
 	public static void setupPortals() {
 		StarrySkies.LOGGER.info("Setting up Portal to Starry Skies...");
 		
-		ResourceLocation portalFrameBlockIdentifier = ResourceLocation.tryParse(StarrySkies.CONFIG.starrySkyPortalFrameBlock.toLowerCase());
+		Identifier portalFrameBlockIdentifier = Identifier.tryParse(StarrySkies.CONFIG.starrySkyPortalFrameBlock.toLowerCase());
 		Block portalFrameBlock = BuiltInRegistries.BLOCK.getValue(portalFrameBlockIdentifier);
 		
 		PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, StarryDimensionKeys.STARRY_SKIES_DIMENSION_ID, StarrySkies.CONFIG.starrySkyPortalColor);

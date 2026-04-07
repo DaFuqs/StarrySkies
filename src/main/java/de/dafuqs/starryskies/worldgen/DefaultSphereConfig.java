@@ -5,7 +5,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 
 public class DefaultSphereConfig implements FeatureConfiguration {
 	public static final DefaultSphereConfig INSTANCE = new DefaultSphereConfig();
-	public static final Codec<DefaultSphereConfig> CODEC = Codec.unit(() -> INSTANCE);
+	public static final Codec<DefaultSphereConfig> CODEC = MapCodec.unitCodec(() -> INSTANCE);
 
 	public DefaultSphereConfig() {
 	}

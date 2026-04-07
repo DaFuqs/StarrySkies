@@ -5,17 +5,15 @@ import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.state_providers.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.*;
 import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.FloatProvider;
-import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -26,8 +24,8 @@ public class ShellSphere<SC extends ShellSphere.Config> extends Sphere<SC> {
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<SC>, SC> configuredSphere, SC config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
-		return new ShellSphere.Placed<>(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.innerBlock.getForSphere(random, pos), config.shellBlock.getForSphere(random, pos), config.shellThickness.sample(random));
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<SC>, SC> configuredSphere, SC config, WorldgenRandom random, WorldGenLevel level, BlockPos pos, float radius) {
+		return new ShellSphere.Placed<>(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.innerBlock.getForSphere(level, random, pos), config.shellBlock.getForSphere(level, random, pos), config.shellThickness.sample(random));
 	}
 	
 	public static class Config extends SphereConfig {
@@ -36,7 +34,7 @@ public class ShellSphere<SC extends ShellSphere.Config> extends Sphere<SC> {
 				SphereConfig.CONFIG_CODEC.forGetter((config) -> config),
 				SphereStateProvider.CODEC.fieldOf("main_block").forGetter((config) -> config.innerBlock),
 				SphereStateProvider.CODEC.fieldOf("shell_block").forGetter((config) -> config.shellBlock),
-				IntProvider.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness)
+				IntProviders.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness)
 		).apply(instance, (sphereConfig, innerBlock, shellBlock, shellThickness) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, innerBlock, shellBlock, shellThickness)));
 		
 		protected final SphereStateProvider innerBlock;
@@ -66,9 +64,9 @@ public class ShellSphere<SC extends ShellSphere.Config> extends Sphere<SC> {
 		}
 		
 		@Override
-		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
-			int chunkX = chunk.getPos().x;
-			int chunkZ = chunk.getPos().z;
+		public void generate(ChunkAccess chunk, WorldGenLevel level) {
+			int chunkX = chunk.getPos().x();
+			int chunkZ = chunk.getPos().z();
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 			BlockPos spherePos = this.getPosition();
 			int x = spherePos.getX();
@@ -90,9 +88,9 @@ public class ShellSphere<SC extends ShellSphere.Config> extends Sphere<SC> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (d <= (this.radius - this.shellRadius)) {
-							chunk.setBlockState(currBlockPos, this.innerBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.innerBlock.getState(level, random, currBlockPos));
 						} else {
-							chunk.setBlockState(currBlockPos, this.shellBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.shellBlock.getState(level, random, currBlockPos));
 						}
 					}
 				}

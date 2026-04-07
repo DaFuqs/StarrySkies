@@ -5,16 +5,15 @@ import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.state_providers.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.*;
 import net.minecraft.util.*;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -25,13 +24,13 @@ public class ModularSphere extends Sphere<ModularSphere.Config> {
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<ModularSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
-		BlockStateProvider mainProvider = config.mainBlock.getForSphere(random, pos);
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<ModularSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, WorldGenLevel level, BlockPos pos, float radius) {
+		BlockStateProvider mainProvider = config.mainBlock.getForSphere(level, random, pos);
 		
 		return new ModularSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random,
 				mainProvider,
-				config.topBlock != null ? config.topBlock.getForSphere(random, pos) : mainProvider,
-				config.bottomBlock != null ? config.bottomBlock.getForSphere(random, pos) : mainProvider
+				config.topBlock != null ? config.topBlock.getForSphere(level, random, pos) : mainProvider,
+				config.bottomBlock != null ? config.bottomBlock.getForSphere(level, random, pos) : mainProvider
 		);
 	}
 	
@@ -72,9 +71,9 @@ public class ModularSphere extends Sphere<ModularSphere.Config> {
 		}
 		
 		@Override
-		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
-			int chunkX = chunk.getPos().x;
-			int chunkZ = chunk.getPos().z;
+		public void generate(ChunkAccess chunk, WorldGenLevel level) {
+			int chunkX = chunk.getPos().x();
+			int chunkZ = chunk.getPos().z();
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 			BlockPos spherePos = this.getPosition();
 			int x = spherePos.getX();
@@ -96,11 +95,11 @@ public class ModularSphere extends Sphere<ModularSphere.Config> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (this.bottomBlock != null && isBottomBlock(d, x2, y2, z2)) {
-							chunk.setBlockState(currBlockPos, this.bottomBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.bottomBlock.getState(level, random, currBlockPos));
 						} else if (this.topBlock != null && isTopBlock(d, x2, y2, z2)) {
-							chunk.setBlockState(currBlockPos, this.topBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.topBlock.getState(level, random, currBlockPos));
 						} else {
-							chunk.setBlockState(currBlockPos, this.mainBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.mainBlock.getState(level, random, currBlockPos));
 						}
 					}
 				}

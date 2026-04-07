@@ -7,15 +7,13 @@ import com.mojang.datafixers.util.Pair;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.Util;
-import net.minecraft.commands.CommandBuildContext;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
+import net.minecraft.util.Util;
+import net.minecraft.commands.*;
 import net.minecraft.commands.arguments.ResourceOrTagArgument;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.core.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.commands.LocateCommand;
+import net.minecraft.server.permissions.*;
 
 import java.util.Optional;
 
@@ -26,7 +24,7 @@ public class ClosestSphereCommand {
 	
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess) {
 		dispatcher.register(Commands.literal("starryskies_locate")
-				.requires((source) -> source.hasPermission(StarrySkies.CONFIG.locateSphereCommandRequiredPermissionLevel))
+				.requires((source) -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(StarrySkies.CONFIG.locateSphereCommandRequiredPermissionLevel))))
 				.executes((context -> execute(context.getSource())))
 				.then(Commands.argument("sphere", ResourceOrTagArgument.resourceOrTag(registryAccess, StarryRegistryKeys.CONFIGURED_SPHERE))
 						.executes(context -> execute(context.getSource(), ResourceOrTagArgument.getResourceOrTag(context, "sphere", StarryRegistryKeys.CONFIGURED_SPHERE)))));

@@ -9,13 +9,14 @@ import net.minecraft.core.*;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.util.*;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.BuddingAmethystBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -26,9 +27,9 @@ public class GeodeSphere extends Sphere<GeodeSphere.Config> {
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<GeodeSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<GeodeSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, WorldGenLevel level, BlockPos pos, float radius) {
 		return new GeodeSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random,
-				config.innerBlockState.getForSphere(random, pos), config.innerSpecklesBlockState.getForSphere(random, pos), config.speckleChance, config.innerSpecklesAttachedBlockState.getForSphere(random, pos), config.middleBlockState.getForSphere(random, pos), config.outerBlockState.getForSphere(random, pos));
+				config.innerBlockState.getForSphere(level, random, pos), config.innerSpecklesBlockState.getForSphere(level, random, pos), config.speckleChance, config.innerSpecklesAttachedBlockState.getForSphere(level, random, pos), config.middleBlockState.getForSphere(level, random, pos), config.outerBlockState.getForSphere(level, random, pos));
 	}
 	
 	public static class Config extends SphereConfig {
@@ -85,9 +86,9 @@ public class GeodeSphere extends Sphere<GeodeSphere.Config> {
 		}
 		
 		@Override
-		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
-			int chunkX = chunk.getPos().x;
-			int chunkZ = chunk.getPos().z;
+		public void generate(ChunkAccess chunk, WorldGenLevel level) {
+			int chunkX = chunk.getPos().x();
+			int chunkZ = chunk.getPos().z();
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 			BlockPos spherePos = this.getPosition();
 			int x = spherePos.getX();
@@ -112,14 +113,14 @@ public class GeodeSphere extends Sphere<GeodeSphere.Config> {
 							// nothing
 						} else if (d < this.radius - 3) {
 							if (random.nextFloat() < speckleChance) {
-								chunk.setBlockState(currBlockPos, innerSpecklesBlockState.getState(random, currBlockPos));
+								chunk.setBlockState(currBlockPos, innerSpecklesBlockState.getState(level, random, currBlockPos));
 
 								// since we are operating on a chunk-by-chunk basis,
 								// we cannot spill into neighnoring chunks. So if a budding block
 								// is at a chunk border it will not have attached crystals. Big sad
 								for (Direction direction : Direction.values()) {
 									BlockPos posInDirection = currBlockPos.relative(direction);
-									BlockState crystalState = innerSpecklesAttachedBlockState.getState(random, posInDirection);
+									BlockState crystalState = innerSpecklesAttachedBlockState.getState(level, random, posInDirection);
 									if (Support.isBlockPosInChunkPos(chunk.getPos(), posInDirection) && BuddingAmethystBlock.canClusterGrowAtState(chunk.getBlockState(posInDirection))) {
 										if (crystalState.hasProperty(BlockStateProperties.FACING)) {
 											crystalState = crystalState.setValue(BlockStateProperties.FACING, direction);
@@ -129,12 +130,12 @@ public class GeodeSphere extends Sphere<GeodeSphere.Config> {
 								}
 
 							} else {
-								chunk.setBlockState(currBlockPos, innerBlockState.getState(random, currBlockPos));
+								chunk.setBlockState(currBlockPos, innerBlockState.getState(level, random, currBlockPos));
 							}
 						} else if (d < this.radius - 2) {
-							chunk.setBlockState(currBlockPos, middleBlockState.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, middleBlockState.getState(level, random, currBlockPos));
 						} else if (d < this.radius - 1) {
-							chunk.setBlockState(currBlockPos, outerBlockState.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, outerBlockState.getState(level, random, currBlockPos));
 						}
 					}
 				}

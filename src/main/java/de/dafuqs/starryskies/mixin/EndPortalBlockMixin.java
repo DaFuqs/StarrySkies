@@ -2,11 +2,9 @@ package de.dafuqs.starryskies.mixin;
 
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.*;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EndPortalBlock;
@@ -28,7 +26,7 @@ public abstract class EndPortalBlockMixin {
 			if (sourceIsStarryEnd || sourceIsStarryOverworld) {
 				// show the credits
 				// taken from EndPortalBlock.onEntityCollision()
-				if (!world.isClientSide && sourceIsStarryEnd && entity instanceof ServerPlayer serverPlayerEntity) {
+				if (!world.isClientSide() && sourceIsStarryEnd && entity instanceof ServerPlayer serverPlayerEntity) {
 					if (!serverPlayerEntity.seenCredits) {
 						serverPlayerEntity.showEndCredits();
 						cir.cancel();

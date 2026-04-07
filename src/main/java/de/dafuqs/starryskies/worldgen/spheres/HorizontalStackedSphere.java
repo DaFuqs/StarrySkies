@@ -10,10 +10,11 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.util.*;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -24,7 +25,7 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<HorizontalStackedSphere.Config>, HorizontalStackedSphere.Config> configuredSphere, HorizontalStackedSphere.Config config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<HorizontalStackedSphere.Config>, HorizontalStackedSphere.Config> configuredSphere, HorizontalStackedSphere.Config config, WorldgenRandom random, WorldGenLevel level, BlockPos pos, float radius) {
 		return new Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.states);
 	}
 	
@@ -63,9 +64,9 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 		}
 		
 		@Override
-		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
-			int chunkX = chunk.getPos().x;
-			int chunkZ = chunk.getPos().z;
+		public void generate(ChunkAccess chunk, WorldGenLevel level) {
+			int chunkX = chunk.getPos().x();
+			int chunkZ = chunk.getPos().z();
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 			BlockPos spherePos = this.getPosition();
 			int x = spherePos.getX();

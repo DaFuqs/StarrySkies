@@ -1,4 +1,5 @@
-accessWidener v1 named
+classTweaker v1 official
 
 accessible method net/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProvider type ()Lnet/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProviderType;
 accessible method net/minecraft/commands/synchronization/ArgumentTypeInfos register (Lnet/minecraft/core/Registry;Ljava/lang/String;Ljava/lang/Class;Lnet/minecraft/commands/synchronization/ArgumentTypeInfo;)Lnet/minecraft/commands/synchronization/ArgumentTypeInfo;
+accessible method net/minecraft/commands/arguments/ResourceOrIdArgument getResource (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Lnet/minecraft/core/Holder;

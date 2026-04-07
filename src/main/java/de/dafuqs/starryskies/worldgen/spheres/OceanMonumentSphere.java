@@ -6,18 +6,14 @@ import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.*;
 import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.FloatProvider;
-import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.util.valueproviders.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -35,7 +31,7 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<OceanMonumentSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<OceanMonumentSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, WorldGenLevel level, BlockPos pos, float radius) {
 		return new OceanMonumentSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.coreRadius.sample(random), config.shellThickness.sample(random));
 	}
 	
@@ -43,8 +39,8 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 		
 		public static final Codec<OceanMonumentSphere.Config> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
 				SphereConfig.CONFIG_CODEC.forGetter((config) -> config),
-				FloatProvider.codec(1.0F, 32.0F).fieldOf("core_radius").forGetter((config) -> config.coreRadius),
-				IntProvider.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness)
+				FloatProviders.codec(1.0F, 32.0F).fieldOf("core_radius").forGetter((config) -> config.coreRadius),
+				IntProviders.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness)
 		).apply(instance, (sphereConfig, coreRadius, shellThickness) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, coreRadius, shellThickness)));
 		
 		protected final FloatProvider coreRadius;
@@ -70,9 +66,9 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 		}
 		
 		@Override
-		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
-			int chunkX = chunk.getPos().x;
-			int chunkZ = chunk.getPos().z;
+		public void generate(ChunkAccess chunk, WorldGenLevel level) {
+			int chunkX = chunk.getPos().x();
+			int chunkZ = chunk.getPos().z();
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 			BlockPos spherePos = this.getPosition();
 			int x = spherePos.getX();

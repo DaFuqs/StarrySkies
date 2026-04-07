@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.portal.TeleportTransition;
-import org.jetbrains.annotations.*;
+import org.jspecify.annotations.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;

@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.block.Block;
 
 public record PointedDripstoneDecoratorConfig(Block block, IntProvider height,
@@ -14,7 +14,7 @@ public record PointedDripstoneDecoratorConfig(Block block, IntProvider height,
 	public static final Codec<PointedDripstoneDecoratorConfig> CODEC = RecordCodecBuilder.create((instance) ->
 			instance.group(
 					BuiltInRegistries.BLOCK.byNameCodec().fieldOf("block").forGetter(decorator -> decorator.block),
-					IntProvider.POSITIVE_CODEC.fieldOf("height").forGetter(decorator -> decorator.height),
+					IntProviders.POSITIVE_CODEC.fieldOf("height").forGetter(decorator -> decorator.height),
 					ExtraCodecs.POSITIVE_FLOAT.fieldOf("chance").forGetter(decorator -> decorator.chance)
 			).apply(instance, PointedDripstoneDecoratorConfig::new));
 	

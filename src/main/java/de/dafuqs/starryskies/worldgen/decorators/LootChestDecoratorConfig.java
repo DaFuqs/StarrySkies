@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.storage.loot.LootTable;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public record LootChestDecoratorConfig(ResourceKey<LootTable> lootTable,
                                        Position position) implements SphereDecoratorConfig {
@@ -24,7 +24,7 @@ public record LootChestDecoratorConfig(ResourceKey<LootTable> lootTable,
 		}
 		
 		@Override
-		public @NotNull String getSerializedName() {
+		public @NonNull String getSerializedName() {
 			return id;
 		}
 		

@@ -40,7 +40,7 @@ public class BottomBlocksDecorator extends SphereDecorator<BottomBlocksDecorator
 								? config.topState().get()
 								: config.state();
 				
-				BlockState state = provider.getState(random, currPos);
+				BlockState state = provider.getState(world, random, currPos);
 				world.setBlock(currPos, state, 3);
 			}
 			

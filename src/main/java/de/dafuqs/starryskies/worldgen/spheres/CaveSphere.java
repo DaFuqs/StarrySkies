@@ -6,16 +6,15 @@ import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.state_providers.*;
 import de.dafuqs.starryskies.worldgen.*;
 import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.*;
 import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.awt.*;
 import java.util.List;
@@ -28,14 +27,14 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<CaveSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
-		BlockStateProvider shellProvider = config.shellBlock.getForSphere(random, pos);
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<CaveSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, WorldGenLevel level, BlockPos pos, float radius) {
+		BlockStateProvider shellProvider = config.shellBlock.getForSphere(level, random, pos);
 		
 		return new CaveSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random,
 				shellProvider,
-				config.topBlock != null ? config.topBlock.getForSphere(random, pos) : shellProvider,
-				config.bottomBlock != null ? config.bottomBlock.getForSphere(random, pos) : shellProvider,
-				config.caveFloorBlock != null  ? config.caveFloorBlock.getForSphere(random, pos) : shellProvider,
+				config.topBlock != null ? config.topBlock.getForSphere(level, random, pos) : shellProvider,
+				config.bottomBlock != null ? config.bottomBlock.getForSphere(level, random, pos) : shellProvider,
+				config.caveFloorBlock != null  ? config.caveFloorBlock.getForSphere(level, random, pos) : shellProvider,
 				config.shellThickness.sample(random));
 	}
 	
@@ -47,7 +46,7 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 				SphereStateProvider.CODEC.optionalFieldOf("top_block").forGetter((config) -> Optional.ofNullable(config.topBlock)),
 				SphereStateProvider.CODEC.optionalFieldOf("bottom_block").forGetter((config) -> Optional.ofNullable(config.bottomBlock)),
 				SphereStateProvider.CODEC.optionalFieldOf("cave_floor_block").forGetter((config) -> Optional.ofNullable(config.caveFloorBlock)),
-				FloatProvider.codec(1.0F, 32.0F).fieldOf("shell_thickness").forGetter((config) -> config.shellThickness)
+				FloatProviders.codec(1.0F, 32.0F).fieldOf("shell_thickness").forGetter((config) -> config.shellThickness)
 		).apply(instance, (sphereConfig, shellBlock, topBlock, bottomBlock, caveFloorBlock, shellRadius) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, shellBlock, topBlock.orElse(null), bottomBlock.orElse(null), caveFloorBlock.orElse(null), shellRadius)));
 		
 		private final SphereStateProvider shellBlock;
@@ -88,9 +87,9 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 		}
 		
 		@Override
-		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
-			int chunkX = chunk.getPos().x;
-			int chunkZ = chunk.getPos().z;
+		public void generate(ChunkAccess chunk, WorldGenLevel level) {
+			int chunkX = chunk.getPos().x();
+			int chunkZ = chunk.getPos().z();
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 			BlockPos spherePos = this.getPosition();
 			int x = spherePos.getX();
@@ -115,20 +114,20 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 						
 						if (d > this.radius - 1) {
 							if (isBottomBlock(d, x2, y2, z2)) {
-								chunk.setBlockState(currBlockPos, this.bottomBlock.getState(random, currBlockPos));
+								chunk.setBlockState(currBlockPos, this.bottomBlock.getState(level, random, currBlockPos));
 							} else if (isTopBlock(d, x2, y2, z2)) {
-								chunk.setBlockState(currBlockPos, this.topBlock.getState(random, currBlockPos));
+								chunk.setBlockState(currBlockPos, this.topBlock.getState(level, random, currBlockPos));
 							} else {
-								chunk.setBlockState(currBlockPos, this.shellBlock.getState(random, currBlockPos));
+								chunk.setBlockState(currBlockPos, this.shellBlock.getState(level, random, currBlockPos));
 							}
 						} else if (d <= this.radius - this.shellThickness) {
 							Point point = new Point(x2, z2);
 							if (!floorBlocks.containsKey(point)) {
 								floorBlocks.put(new Point(x2, z2), y2);
-								chunk.setBlockState(currBlockPos.below(), this.caveFloorBlock.getState(random, currBlockPos));
+								chunk.setBlockState(currBlockPos.below(), this.caveFloorBlock.getState(level, random, currBlockPos));
 							}
 						} else if (d < this.radius) {
-							chunk.setBlockState(currBlockPos, this.shellBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.shellBlock.getState(level, random, currBlockPos));
 						}
 					}
 				}

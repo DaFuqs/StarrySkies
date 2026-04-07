@@ -5,19 +5,17 @@ import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.state_providers.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.*;
 import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.FloatProvider;
-import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -28,9 +26,9 @@ public class FluidCoreSphere extends Sphere<FluidCoreSphere.Config> {
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<FluidCoreSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<FluidCoreSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, WorldGenLevel level, BlockPos pos, float radius) {
 		return new FluidCoreSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random,
-				config.shellBlock.getForSphere(random, pos), config.shellThickness.sample(random), config.fluidBlock, config.fillPercent.sample(random), config.holeInBottomChance > random.nextFloat(), config.coreBlock.getForSphere(random, pos), config.coreRadius.sample(random));
+				config.shellBlock.getForSphere(level, random, pos), config.shellThickness.sample(random), config.fluidBlock, config.fillPercent.sample(random), config.holeInBottomChance > random.nextFloat(), config.coreBlock.getForSphere(level, random, pos), config.coreRadius.sample(random));
 	}
 	
 	public static class Config extends SphereConfig {
@@ -38,12 +36,12 @@ public class FluidCoreSphere extends Sphere<FluidCoreSphere.Config> {
 		public static final Codec<FluidCoreSphere.Config> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
 				SphereConfig.CONFIG_CODEC.forGetter((config) -> config),
 				SphereStateProvider.CODEC.fieldOf("shell_block").forGetter((config) -> config.shellBlock),
-				IntProvider.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness),
+				IntProviders.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness),
 				BlockState.CODEC.fieldOf("fluid_block").forGetter((config) -> config.fluidBlock),
-				FloatProvider.codec(0.0F, 1.0F).fieldOf("fluid_fill_percent").forGetter((config) -> config.fillPercent),
+				FloatProviders.codec(0.0F, 1.0F).fieldOf("fluid_fill_percent").forGetter((config) -> config.fillPercent),
 				ExtraCodecs.NON_NEGATIVE_FLOAT.fieldOf("hole_in_bottom_chance").forGetter((config) -> config.holeInBottomChance),
 				SphereStateProvider.CODEC.fieldOf("core_block").forGetter((config) -> config.coreBlock),
-				FloatProvider.codec(1.0F, 32.0F).fieldOf("core_radius").forGetter((config) -> config.coreRadius)
+				FloatProviders.codec(1.0F, 32.0F).fieldOf("core_radius").forGetter((config) -> config.coreRadius)
 		).apply(instance, (sphereConfig, shellBlock, shellThickness, fluidBlock, fillAmount, holeInBottom, coreBlock, coreRadius) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, shellBlock, shellThickness, fluidBlock, fillAmount, holeInBottom, coreBlock, coreRadius)));
 		
 		protected final SphereStateProvider shellBlock;
@@ -93,9 +91,9 @@ public class FluidCoreSphere extends Sphere<FluidCoreSphere.Config> {
 		}
 		
 		@Override
-		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
-			int chunkX = chunk.getPos().x;
-			int chunkZ = chunk.getPos().z;
+		public void generate(ChunkAccess chunk, WorldGenLevel level) {
+			int chunkX = chunk.getPos().x();
+			int chunkZ = chunk.getPos().z();
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 			BlockPos spherePos = this.getPosition();
 			int x = spherePos.getX();
@@ -123,7 +121,7 @@ public class FluidCoreSphere extends Sphere<FluidCoreSphere.Config> {
 							chunk.setBlockState(new BlockPos(currBlockPos), this.fluidBlock);
 							chunk.markPosForPostprocessing(currBlockPos); // makes it drop down after generation is complete
 						} else if (d <= this.coreRadius) {
-							chunk.setBlockState(currBlockPos, this.coreBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.coreBlock.getState(level, random, currBlockPos));
 						} else if (d <= liquidRadius) {
 							if (y2 <= maxLiquidY) {
 								chunk.setBlockState(currBlockPos, this.fluidBlock);
@@ -131,7 +129,7 @@ public class FluidCoreSphere extends Sphere<FluidCoreSphere.Config> {
 								chunk.setBlockState(currBlockPos, CAVE_AIR);
 							}
 						} else {
-							chunk.setBlockState(currBlockPos, this.shellBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.shellBlock.getState(level, random, currBlockPos));
 						}
 					}
 				}

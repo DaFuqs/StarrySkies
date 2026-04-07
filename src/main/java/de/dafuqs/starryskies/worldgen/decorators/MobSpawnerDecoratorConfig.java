@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.EntityType;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public record MobSpawnerDecoratorConfig(ResourceKey<EntityType<?>> entityType,
                                         Position position) implements SphereDecoratorConfig {
@@ -24,7 +24,7 @@ public record MobSpawnerDecoratorConfig(ResourceKey<EntityType<?>> entityType,
 		}
 		
 		@Override
-		public @NotNull String getSerializedName() {
+		public @NonNull String getSerializedName() {
 			return id;
 		}
 	}

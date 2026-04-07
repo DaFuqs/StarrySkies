@@ -2,15 +2,12 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.core.*;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -37,7 +34,7 @@ public class MobSpawnerDecorator extends SphereDecorator<MobSpawnerDecoratorConf
 		
 		MobSpawnerDecoratorConfig.Position position = config.position();
 		
-		@Nullable BlockPos spawnerPos = switch (position) {
+		BlockPos spawnerPos = switch (position) {
 			case TOP_CENTER -> sphere.getPosition().above(sphere.getRadius() + 1);
 			case CENTER -> sphere.getPosition();
 			case CAVE_FLOOR -> getCaveBottomBlock(world, sphere.getPosition().above(), sphere);

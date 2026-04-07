@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class PlantAroundPondDecoratorConfig implements SphereDecoratorConfig {
 
-	public static final Codec<PlantAroundPondDecoratorConfig> CODEC = Codec.unit(PlantAroundPondDecoratorConfig::new);
+	public static final Codec<PlantAroundPondDecoratorConfig> CODEC = MapCodec.unitCodec(PlantAroundPondDecoratorConfig::new);
 	public static final int pond_tries = 3;
 	public static final float plant_chance = 0.5F;
 	public static final int minHeight = 1;

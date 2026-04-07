@@ -2,23 +2,14 @@ package de.dafuqs.starryskies.worldgen;
 
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.SectionPos;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.*;
+import net.minecraft.resources.*;
 import net.minecraft.util.*;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jetbrains.annotations.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -49,12 +40,12 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 		return registryManager.lookupOrThrow(StarryRegistryKeys.CONFIGURED_SPHERE).wrapAsHolder(this.configuredSphere);
 	}
 
-	public ResourceLocation getID(RegistryAccess registryManager) {
+	public Identifier getID(RegistryAccess registryManager) {
 		Registry<ConfiguredSphere<?, ?>> registry = registryManager.lookupOrThrow(StarryRegistryKeys.CONFIGURED_SPHERE);
 		return registry.getKey(this.configuredSphere);
 	}
 
-	public abstract void generate(ChunkAccess chunk, RegistryAccess registryManager);
+	public abstract void generate(ChunkAccess chunk, WorldGenLevel level);
 
 	public BlockPos getPosition() {
 		return position;
@@ -70,7 +61,7 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 
 	public abstract String getDescription(RegistryAccess registryManager);
 
-	public boolean isInChunk(@NotNull ChunkPos chunkPos) {
+	public boolean isInChunk(@NonNull ChunkPos chunkPos) {
 		int radius = getRadius();
 		int xMin = this.position.getX() - radius - 16;
 		int xMax = this.position.getX() + radius + 15;
@@ -94,7 +85,7 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 		);
 	}
 
-	public boolean isCenterInChunk(@NotNull ChunkPos chunkPos) {
+	public boolean isCenterInChunk(@NonNull ChunkPos chunkPos) {
 		return (this.getPosition().getX() >= chunkPos.getMinBlockX()
 				&& this.getPosition().getX() <= chunkPos.getMinBlockX() + 15
 				&& this.getPosition().getZ() >= chunkPos.getMinBlockZ()
@@ -135,7 +126,7 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 	
 	public void populateEntities(ChunkPos chunkPos, WorldGenLevel chunkRegion, WorldgenRandom chunkRandom) {
 		if (isCenterInChunk(chunkPos)) {
-			StarrySkies.LOGGER.debug("Populating entities for sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunkPos.x, chunkPos.z, chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), this.getDescription(chunkRegion.registryAccess()));
+			StarrySkies.LOGGER.debug("Populating entities for sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunkPos.x(), chunkPos.z(), chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), this.getDescription(chunkRegion.registryAccess()));
 			for (Tuple<EntityType<?>, Integer> spawnEntry : spawns) {
 
 				int xCord = chunkPos.getMinBlockX();

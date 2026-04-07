@@ -5,8 +5,8 @@ import com.mojang.serialization.codecs.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 
 public class SphereStateProvider {
 	
@@ -25,11 +25,11 @@ public class SphereStateProvider {
 		this.rerollForEveryPos = rerollForEveryPos;
 	}
 	
-	public BlockStateProvider getForSphere(RandomSource random, BlockPos spherePos) {
+	public BlockStateProvider getForSphere(WorldGenLevel level, RandomSource random, BlockPos spherePos) {
 		if (rerollForEveryPos) {
 			return provider;
 		} else {
-			return BlockStateProvider.simple(provider.getState(random, spherePos));
+			return BlockStateProvider.simple(provider.getState(level, random, spherePos));
 		}
 	}
 	

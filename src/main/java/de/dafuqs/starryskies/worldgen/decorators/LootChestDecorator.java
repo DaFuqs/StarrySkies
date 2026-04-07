@@ -4,9 +4,7 @@ import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
-import org.jetbrains.annotations.*;
+import net.minecraft.world.level.*;
 
 /**
  * Places a chest with loot
@@ -31,7 +29,7 @@ public class LootChestDecorator extends SphereDecorator<LootChestDecoratorConfig
 		
 		LootChestDecoratorConfig.Position position = config.position();
 		
-		@Nullable BlockPos chestPos = switch (position) {
+		BlockPos chestPos = switch (position) {
 			case TOP_CENTER -> sphere.getPosition().above(sphere.getRadius() + 1);
 			case CENTER -> sphere.getPosition();
 			case CAVE_FLOOR -> getCaveBottomBlock(world, sphere.getPosition().above(), sphere);

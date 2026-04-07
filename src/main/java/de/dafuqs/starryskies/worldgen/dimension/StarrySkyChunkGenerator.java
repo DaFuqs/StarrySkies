@@ -5,29 +5,17 @@ import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.core.*;
 import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.server.level.WorldGenRegion;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.LevelHeightAccessor;
-import net.minecraft.world.level.NaturalSpawner;
-import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.StructureManager;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeManager;
-import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.LegacyRandomSource;
-import net.minecraft.world.level.levelgen.RandomState;
-import net.minecraft.world.level.levelgen.RandomSupport;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.blending.Blender;
-import org.jetbrains.annotations.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -48,12 +36,12 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 	}
 
 	@Override
-	protected @NotNull MapCodec<? extends ChunkGenerator> codec() {
+	protected @NonNull MapCodec<? extends ChunkGenerator> codec() {
 		return CODEC;
 	}
 
 	@Override
-	public void buildSurface(WorldGenRegion region, StructureManager structures, RandomState noiseConfig, ChunkAccess chunk) {
+	public void buildSurface(@NonNull WorldGenRegion region, @NonNull StructureManager structures, @NonNull RandomState noiseConfig, ChunkAccess chunk) {
 		ChunkPos chunkPos = chunk.getPos();
 
 		int chunkPosStartX = chunkPos.getMinBlockX();
@@ -72,13 +60,13 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 	}
 	
 	@Override
-	public void applyCarvers(WorldGenRegion chunkRegion, long seed, RandomState noiseConfig, BiomeManager biomeAccess, StructureManager structureAccessor, ChunkAccess chunk) {
+	public void applyCarvers(@NonNull WorldGenRegion chunkRegion, long seed, @NonNull RandomState noiseConfig, @NonNull BiomeManager biomeAccess, @NonNull StructureManager structureAccessor, @NonNull ChunkAccess chunk) {
 		// no carver
 		// generate spheres
-		for (PlacedSphere<?> sphere : systemGenerator.value().getSystem(chunk, seed, structureAccessor.registryAccess())) {
+		for (PlacedSphere<?> sphere : systemGenerator.value().getSystem(chunk, seed, chunkRegion)) {
 			if (sphere.isInChunk(chunk.getPos())) {
-				StarrySkies.LOGGER.debug("Generating sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunk.getPos().x, chunk.getPos().z, chunk.getPos().getMinBlockX(), chunk.getPos().getMinBlockZ(), sphere.getDescription(structureAccessor.registryAccess()));
-				sphere.generate(chunk, structureAccessor.registryAccess());
+				StarrySkies.LOGGER.debug("Generating sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunk.getPos().x(), chunk.getPos().z(), chunk.getPos().getMinBlockX(), chunk.getPos().getMinBlockZ(), sphere.getDescription(structureAccessor.registryAccess()));
+				sphere.generate(chunk, chunkRegion);
 				StarrySkies.LOGGER.debug("Generation Finished.");
 			}
 		}
@@ -90,19 +78,19 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 	}
 	
 	@Override
-	public @NotNull CompletableFuture<ChunkAccess> fillFromNoise(Blender blender, RandomState noiseConfig, StructureManager structureAccessor, ChunkAccess chunk) {
+	public @NonNull CompletableFuture<ChunkAccess> fillFromNoise(@NonNull Blender blender, @NonNull RandomState noiseConfig, @NonNull StructureManager structureAccessor, @NonNull ChunkAccess chunk) {
 		return CompletableFuture.completedFuture(chunk);
 	}
 
 	@Override
-	public void spawnOriginalMobs(@NotNull WorldGenRegion chunkRegion) {
+	public void spawnOriginalMobs(@NonNull WorldGenRegion chunkRegion) {
 		ChunkPos chunkPos = chunkRegion.getCenter();
 		Holder<Biome> biome = chunkRegion.getBiome(chunkPos.getWorldPosition().atY(chunkRegion.getMaxY()));
 		WorldgenRandom chunkRandom = new WorldgenRandom(new LegacyRandomSource(RandomSupport.generateUniqueSeed()));
 		chunkRandom.setDecorationSeed(chunkRegion.getSeed(), chunkPos.getMinBlockX(), chunkPos.getMinBlockZ());
 		NaturalSpawner.spawnMobsForChunkGeneration(chunkRegion, biome, chunkPos, chunkRandom);
 		
-		for (PlacedSphere<?> sphere : systemGenerator.value().getSystem(chunkRegion.getLevel(), chunkRegion.getSeed(), chunkPos.x, chunkPos.z)) {
+		for (PlacedSphere<?> sphere : systemGenerator.value().getSystem(chunkRegion, chunkRegion.getSeed(), chunkPos.x(), chunkPos.z())) {
 			sphere.populateEntities(chunkPos, chunkRegion, chunkRandom);
 		}
 	}
@@ -118,17 +106,17 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 	}
 
 	@Override
-	public int getBaseHeight(int x, int z, Heightmap.Types heightmap, LevelHeightAccessor world, RandomState noiseConfig) {
+	public int getBaseHeight(int x, int z, Heightmap.@NonNull Types heightmap, @NonNull LevelHeightAccessor world, @NonNull RandomState noiseConfig) {
 		return systemGenerator.value().getFloorHeight();
 	}
 	
 	@Override
-	public void addDebugScreenInfo(List<String> text, RandomState noiseConfig, BlockPos pos) {
+	public void addDebugScreenInfo(@NonNull List<String> text, @NonNull RandomState noiseConfig, @NonNull BlockPos pos) {
 	
 	}
 
 	@Override
-	public @NotNull NoiseColumn getBaseColumn(int x, int z, LevelHeightAccessor world, RandomState noiseConfig) {
+	public @NonNull NoiseColumn getBaseColumn(int x, int z, LevelHeightAccessor world, @NonNull RandomState noiseConfig) {
 		BlockState[] states = new BlockState[world.getHeight()];
 		Arrays.fill(states, Blocks.AIR.defaultBlockState());
 		return new NoiseColumn(world.getMinY(), states);

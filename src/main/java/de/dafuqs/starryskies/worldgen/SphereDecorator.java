@@ -1,20 +1,16 @@
 package de.dafuqs.starryskies.worldgen;
 
 import com.mojang.serialization.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootTable;
-import org.jetbrains.annotations.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -33,10 +29,10 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 	public abstract boolean generate(SphereFeatureContext<FC> context);
 
 	public boolean generateIfValid(FC config, WorldGenLevel world, RandomSource random, BlockPos pos, PlacedSphere<?> sphere) {
-		return world.ensureCanWrite(pos) && this.generate(new SphereFeatureContext<>(world, random, new ChunkPos(pos), sphere, config));
+		return world.ensureCanWrite(pos) && this.generate(new SphereFeatureContext<>(world, random, ChunkPos.containing(pos), sphere, config));
 	}
 
-	protected void placeLootChest(@NotNull WorldGenLevel world, BlockPos blockPos, ResourceKey<LootTable> lootTable, RandomSource random) {
+	protected void placeLootChest(@NonNull WorldGenLevel world, BlockPos blockPos, ResourceKey<LootTable> lootTable, RandomSource random) {
 		BlockState chestBlockState = Blocks.CHEST.defaultBlockState();
 
 		// if the chest is placed in water: waterlog it!

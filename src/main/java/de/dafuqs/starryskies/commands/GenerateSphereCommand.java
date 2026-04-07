@@ -3,26 +3,26 @@ package de.dafuqs.starryskies.commands;
 import com.mojang.brigadier.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.commands.CommandBuildContext;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
+import net.minecraft.commands.*;
+import net.minecraft.commands.arguments.ResourceOrIdArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.core.*;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.permissions.*;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jetbrains.annotations.*;
+import org.jspecify.annotations.*;
 
 public class GenerateSphereCommand {
 	
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess) {
 		dispatcher.register(Commands.literal("starryskies_generate")
-				.requires((source) -> source.hasPermission(StarrySkies.CONFIG.generateSphereCommandRequiredPermissionLevel))
+				.requires((source) -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(StarrySkies.CONFIG.generateSphereCommandRequiredPermissionLevel))))
 				.then(Commands.argument("sphere", new ConfiguredSphereArgumentType(registryAccess))
-						.executes(context -> execute(context.getSource(), null, context.getArgument("sphere", Holder.class)))
+						.executes(context -> execute(context.getSource(), null, ResourceOrIdArgument.getResource(context, "sphere")))
 						.then(Commands.argument("pos", BlockPosArgument.blockPos())
-								.executes(context -> execute(context.getSource(), BlockPosArgument.getLoadedBlockPos(context, "pos"), context.getArgument("sphere", Holder.class))))));
+								.executes(context -> execute(context.getSource(), BlockPosArgument.getLoadedBlockPos(context, "pos"), ResourceOrIdArgument.getResource(context, "sphere"))))));
 	}
 	
 	private static int execute(CommandSourceStack source, @Nullable BlockPos pos, Holder<ConfiguredSphere<?, ?>> entry) {
@@ -31,15 +31,16 @@ public class GenerateSphereCommand {
 		}
 		
 		ConfiguredSphere<?, ?> sphere = entry.value();
-		RandomSource random = source.getLevel().random;
+		ServerLevel level = source.getLevel();
+		RandomSource random = level.getRandom();
 		WorldgenRandom chunkRandom = new WorldgenRandom(random);
-		PlacedSphere<?> placed = sphere.generate(chunkRandom, source.getLevel().registryAccess(), pos, sphere.getSize(chunkRandom));
+		PlacedSphere<?> placed = sphere.generate(chunkRandom, level, pos, sphere.getSize(chunkRandom));
 		placed.setPosition(new BlockPos(pos.getX(), pos.getY(), pos.getZ()));
 		
-		placed.streamChunksWithSphere().forEach(chunkPos -> placed.generate(source.getLevel().getChunk(chunkPos.getWorldPosition()), source.registryAccess()));
-		placed.streamChunksWithSphere().forEach(chunkPos -> placed.decorate(source.getLevel(), chunkPos.getWorldPosition(), random));
-		placed.populateEntities(new ChunkPos(pos), source.getLevel(), chunkRandom);
-		placed.streamBlockPosesOfSpheres().forEach(blockPos -> source.getLevel().getChunkSource().blockChanged(blockPos));
+		placed.streamChunksWithSphere().forEach(chunkPos -> placed.generate(level.getChunk(chunkPos.getWorldPosition()), level));
+		placed.streamChunksWithSphere().forEach(chunkPos -> placed.decorate(level, chunkPos.getWorldPosition(), random));
+		placed.populateEntities(ChunkPos.containing(pos), level, chunkRandom);
+		placed.streamBlockPosesOfSpheres().forEach(blockPos -> level.getChunkSource().blockChanged(blockPos));
 		
 		return 0;
 	}

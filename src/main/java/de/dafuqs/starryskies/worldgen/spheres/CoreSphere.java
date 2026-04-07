@@ -5,16 +5,15 @@ import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.state_providers.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.*;
 import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -25,8 +24,8 @@ public class CoreSphere extends Sphere<CoreSphere.Config> {
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<CoreSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, RegistryAccess registryManager, BlockPos pos, float radius) {
-		return new CoreSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.mainBlock.getForSphere(random, pos), config.coreBlock.getForSphere(random, pos),
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<CoreSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, WorldGenLevel level, BlockPos pos, float radius) {
+		return new CoreSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.mainBlock.getForSphere(level, random, pos), config.coreBlock.getForSphere(level, random, pos),
 				Math.max(radius - 1, config.coreRadius.sample(random)) // enforce a min shell of 1 block
 		);
 	}
@@ -37,7 +36,7 @@ public class CoreSphere extends Sphere<CoreSphere.Config> {
 				SphereConfig.CONFIG_CODEC.forGetter((config) -> config),
 				SphereStateProvider.CODEC.fieldOf("main_block").forGetter((config) -> config.mainBlock),
 				SphereStateProvider.CODEC.fieldOf("core_block").forGetter((config) -> config.coreBlock),
-				FloatProvider.codec(1.0F, 32.0F).fieldOf("core_radius").forGetter((config) -> config.coreRadius)
+				FloatProviders.codec(1.0F, 32.0F).fieldOf("core_radius").forGetter((config) -> config.coreRadius)
 		).apply(instance, (sphereConfig, mainBlock, coreBlock, shellThickness) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, mainBlock, coreBlock, shellThickness)));
 		
 		protected final SphereStateProvider mainBlock;
@@ -68,9 +67,9 @@ public class CoreSphere extends Sphere<CoreSphere.Config> {
 		}
 		
 		@Override
-		public void generate(ChunkAccess chunk, RegistryAccess registryManager) {
-			int chunkX = chunk.getPos().x;
-			int chunkZ = chunk.getPos().z;
+		public void generate(ChunkAccess chunk, WorldGenLevel level) {
+			int chunkX = chunk.getPos().x();
+			int chunkZ = chunk.getPos().z();
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 			BlockPos spherePos = this.getPosition();
 			int x = spherePos.getX();
@@ -92,9 +91,9 @@ public class CoreSphere extends Sphere<CoreSphere.Config> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (d < this.coreRadius) {
-							chunk.setBlockState(currBlockPos, this.coreBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.coreBlock.getState(level, random, currBlockPos));
 						} else {
-							chunk.setBlockState(currBlockPos, this.mainBlock.getState(random, currBlockPos));
+							chunk.setBlockState(currBlockPos, this.mainBlock.getState(level, random, currBlockPos));
 						}
 					}
 				}
