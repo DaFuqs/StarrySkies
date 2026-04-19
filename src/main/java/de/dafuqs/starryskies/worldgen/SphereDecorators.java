@@ -1,7 +1,7 @@
 package de.dafuqs.starryskies.worldgen;
 
-import de.dafuqs.starryskies.*;
-import de.dafuqs.starryskies.registries.*;
+import de.dafuqs.starryskies.StarrySkies;
+import de.dafuqs.starryskies.registries.StarryRegistries;
 import de.dafuqs.starryskies.worldgen.decorators.*;
 import net.minecraft.core.Registry;
 
@@ -26,7 +26,6 @@ public class SphereDecorators {
 	public static SphereDecorator<SphereDecoratorConfig.DefaultSphereDecoratorConfig> COCOA = register("cocoa", new CocoaDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));
 	public static SphereDecorator<SphereDecoratorConfig.DefaultSphereDecoratorConfig> SEA_GREENS = register("sea_greens", new SeaGreensDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));
 	public static SphereDecorator<RuinedPortalDecoratorConfig> RUINED_PORTAL = register("ruined_portal", new RuinedPortalDecorator(RuinedPortalDecoratorConfig.CODEC));
-	public static SphereDecorator<SphereDecoratorConfig.DefaultSphereDecoratorConfig> END_PORTAL = register("end_portal", new EndPortalDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));
 	public static SphereDecorator<SphereDecoratorConfig.DefaultSphereDecoratorConfig> END_GATEWAY = register("end_gateway", new EndGatewayDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));
 	public static SphereDecorator<ChorusFruitDecoratorConfig> CHORUS_FRUIT = register("chorus_fruit", new ChorusFruitDecorator(ChorusFruitDecoratorConfig.CODEC));
 	public static SphereDecorator<BrushableBlockDecoratorConfig> BRUSHABLE_BLOCK = register("brushable_block", new BrushableBlockDecorator(BrushableBlockDecoratorConfig.CODEC));

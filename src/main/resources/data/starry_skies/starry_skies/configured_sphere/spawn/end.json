@@ -12,9 +12,7 @@
       "type": "minecraft:constant",
       "value": 34
     },
-    "decorators": {
-      "starry_skies:end_portal": 1.0
-    },
+    "decorators": {},
     "spawns": []
   }
 }
