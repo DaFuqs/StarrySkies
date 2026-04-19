@@ -1,4 +1,0 @@
-accessWidener v1 named
-
-accessible method net/minecraft/world/gen/stateprovider/BlockStateProvider getType ()Lnet/minecraft/world/gen/stateprovider/BlockStateProviderType;
-accessible method net/minecraft/command/argument/ArgumentTypes register (Lnet/minecraft/registry/Registry;Ljava/lang/String;Ljava/lang/Class;Lnet/minecraft/command/argument/serialize/ArgumentSerializer;)Lnet/minecraft/command/argument/serialize/ArgumentSerializer;

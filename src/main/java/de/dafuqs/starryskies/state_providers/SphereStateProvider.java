@@ -2,14 +2,15 @@ package de.dafuqs.starryskies.state_providers;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
-import net.minecraft.registry.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.gen.stateprovider.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 
 public class SphereStateProvider {
 	
-	public static final MapCodec<BlockStateProvider> BLOCK_STATE_PROVIDER_MAP_CODEC = Registries.BLOCK_STATE_PROVIDER_TYPE.getCodec().dispatchMap(BlockStateProvider::getType, BlockStateProviderType::getCodec);
+	public static final MapCodec<BlockStateProvider> BLOCK_STATE_PROVIDER_MAP_CODEC = BuiltInRegistries.BLOCKSTATE_PROVIDER_TYPE.byNameCodec().dispatchMap(BlockStateProvider::type, BlockStateProviderType::codec);
 	
 	public static final Codec<SphereStateProvider> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
 			BLOCK_STATE_PROVIDER_MAP_CODEC.forGetter((provider) -> provider.provider),
@@ -24,11 +25,11 @@ public class SphereStateProvider {
 		this.rerollForEveryPos = rerollForEveryPos;
 	}
 	
-	public BlockStateProvider getForSphere(Random random, BlockPos spherePos) {
+	public BlockStateProvider getForSphere(WorldGenLevel level, RandomSource random, BlockPos spherePos) {
 		if (rerollForEveryPos) {
 			return provider;
 		} else {
-			return BlockStateProvider.of(provider.get(random, spherePos));
+			return BlockStateProvider.simple(provider.getState(level, random, spherePos));
 		}
 	}
 	

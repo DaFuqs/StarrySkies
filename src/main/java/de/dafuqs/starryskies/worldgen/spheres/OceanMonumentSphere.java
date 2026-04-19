@@ -4,51 +4,49 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.mob.*;
-import net.minecraft.registry.*;
-import net.minecraft.registry.entry.*;
+import net.minecraft.core.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.floatprovider.*;
-import net.minecraft.util.math.intprovider.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
-import net.minecraft.world.chunk.*;
+import net.minecraft.util.valueproviders.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
 public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 	
-	private static final BlockState WATER = Blocks.WATER.getDefaultState();
-	private static final BlockState PRISMARINE = Blocks.PRISMARINE.getDefaultState();
-	private static final BlockState PRISMARINE_BRICKS = Blocks.PRISMARINE_BRICKS.getDefaultState();
-	private static final BlockState DARK_PRISMARINE = Blocks.DARK_PRISMARINE.getDefaultState();
-	private static final BlockState SEA_LANTERN = Blocks.SEA_LANTERN.getDefaultState();
-	private static final BlockState TREASURE = Blocks.WET_SPONGE.getDefaultState();
+	private static final BlockState WATER = Blocks.WATER.defaultBlockState();
+	private static final BlockState PRISMARINE = Blocks.PRISMARINE.defaultBlockState();
+	private static final BlockState PRISMARINE_BRICKS = Blocks.PRISMARINE_BRICKS.defaultBlockState();
+	private static final BlockState DARK_PRISMARINE = Blocks.DARK_PRISMARINE.defaultBlockState();
+	private static final BlockState SEA_LANTERN = Blocks.SEA_LANTERN.defaultBlockState();
+	private static final BlockState TREASURE = Blocks.WET_SPONGE.defaultBlockState();
 	
 	public OceanMonumentSphere(Codec<OceanMonumentSphere.Config> codec) {
 		super(codec);
 	}
 	
 	@Override
-	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<OceanMonumentSphere.Config>, Config> configuredSphere, Config config, ChunkRandom random, DynamicRegistryManager registryManager, BlockPos pos, float radius) {
-		return new OceanMonumentSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.coreRadius.get(random), config.shellThickness.get(random));
+	public PlacedSphere<?> generate(ConfiguredSphere<? extends Sphere<OceanMonumentSphere.Config>, Config> configuredSphere, Config config, WorldgenRandom random, WorldGenLevel level, BlockPos pos, float radius) {
+		return new OceanMonumentSphere.Placed(configuredSphere, radius, configuredSphere.getDecorators(random), configuredSphere.getSpawns(random), random, config.coreRadius.sample(random), config.shellThickness.sample(random));
 	}
 	
 	public static class Config extends SphereConfig {
 		
 		public static final Codec<OceanMonumentSphere.Config> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
 				SphereConfig.CONFIG_CODEC.forGetter((config) -> config),
-				FloatProvider.createValidatedCodec(1.0F, 32.0F).fieldOf("core_radius").forGetter((config) -> config.coreRadius),
-				IntProvider.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness)
+				FloatProviders.codec(1.0F, 32.0F).fieldOf("core_radius").forGetter((config) -> config.coreRadius),
+				IntProviders.POSITIVE_CODEC.fieldOf("shell_thickness").forGetter((config) -> config.shellThickness)
 		).apply(instance, (sphereConfig, coreRadius, shellThickness) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, coreRadius, shellThickness)));
 		
 		protected final FloatProvider coreRadius;
 		protected final IntProvider shellThickness;
 		
-		public Config(FloatProvider size, Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Optional<Generation> generation, FloatProvider coreRadius, IntProvider shellThickness) {
+		public Config(FloatProvider size, Map<Holder<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, @Nullable Generation generation, FloatProvider coreRadius, IntProvider shellThickness) {
 			super(size, decorators, spawns, generation);
 			this.coreRadius = coreRadius;
 			this.shellThickness = shellThickness;
@@ -61,16 +59,16 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 		private final float coreRadius;
 		private final float shellRadius;
 		
-		public Placed(ConfiguredSphere<? extends Sphere<OceanMonumentSphere.Config>, OceanMonumentSphere.Config> configuredSphere, float radius, List<RegistryEntry<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, ChunkRandom random, float coreRadius, float shellRadius) {
+		public Placed(ConfiguredSphere<? extends Sphere<OceanMonumentSphere.Config>, OceanMonumentSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random, float coreRadius, float shellRadius) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.coreRadius = coreRadius;
 			this.shellRadius = shellRadius;
 		}
 		
 		@Override
-		public void generate(Chunk chunk, DynamicRegistryManager registryManager) {
-			int chunkX = chunk.getPos().x;
-			int chunkZ = chunk.getPos().z;
+		public void generate(ChunkAccess chunk, WorldGenLevel level) {
+			int chunkX = chunk.getPos().x();
+			int chunkZ = chunk.getPos().z();
 			random.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 			BlockPos spherePos = this.getPosition();
 			int x = spherePos.getX();
@@ -83,7 +81,7 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 			
 			float shellDistance = this.radius - this.shellRadius;
 			
-			BlockPos.Mutable currBlockPos = new BlockPos.Mutable();
+			BlockPos.MutableBlockPos currBlockPos = new BlockPos.MutableBlockPos();
 			for (int x2 = Math.max(chunkX * 16, x - ceiledRadius); x2 <= maxX; x2++) {
 				for (int y2 = y - ceiledRadius; y2 <= y + ceiledRadius; y2++) {
 					for (int z2 = Math.max(chunkZ * 16, z - ceiledRadius); z2 <= maxZ; z2++) {
@@ -126,7 +124,7 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 		}
 		
 		@Override
-		public String getDescription(DynamicRegistryManager registryManager) {
+		public String getDescription(RegistryAccess registryManager) {
 			return "+++ OceanMonumentSphere +++" +
 					"\nPosition: x=" + this.getPosition().getX() + " y=" + this.getPosition().getY() + " z=" + this.getPosition().getZ() +
 					"\nTemplateID: " + this.getID(registryManager) +
@@ -136,10 +134,10 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 		}
 		
 		@Override
-		public void populateEntities(ChunkPos chunkPos, StructureWorldAccess world, ChunkRandom chunkRandom) {
+		public void populateEntities(ChunkPos chunkPos, WorldGenLevel world, WorldgenRandom chunkRandom) {
 			super.populateEntities(chunkPos, world, chunkRandom);
 			
-			BlockPos.Mutable mutable = new BlockPos.Mutable();
+			BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 			int iRadius = (int) radius - 5;
 			for (int x2 = position.getX() - iRadius; x2 <= position.getX() + iRadius; x2 += 10) {
 				for (int y2 = position.getY() - iRadius; y2 <= position.getY() + iRadius; y2 += 10) {
@@ -156,31 +154,31 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 			}
 		}
 		
-		private boolean spawnGuardian(ChunkPos chunkPos, StructureWorldAccess chunkRegion, BlockPos guardianPosition) {
-			MobEntity mobentity;
+		private boolean spawnGuardian(ChunkPos chunkPos, WorldGenLevel chunkRegion, BlockPos guardianPosition) {
+			Mob mobentity;
 			if (random.nextFloat() < 0.08) {
-				mobentity = EntityType.ELDER_GUARDIAN.create(chunkRegion.toServerWorld(), SpawnReason.CHUNK_GENERATION);
+				mobentity = EntityType.ELDER_GUARDIAN.create(chunkRegion.getLevel(), EntitySpawnReason.CHUNK_GENERATION);
 			} else {
-				mobentity = EntityType.GUARDIAN.create(chunkRegion.toServerWorld(), SpawnReason.CHUNK_GENERATION);
+				mobentity = EntityType.GUARDIAN.create(chunkRegion.getLevel(), EntitySpawnReason.CHUNK_GENERATION);
 			}
 			
 			if (mobentity != null) {
-				float width = mobentity.getWidth();
-				double xLength = MathHelper.clamp(guardianPosition.getX(), (double) chunkPos.getStartX() + (double) width, (double) chunkPos.getStartX() + 16.0D - (double) width);
-				double zLength = MathHelper.clamp(guardianPosition.getZ(), (double) chunkPos.getStartZ() + (double) width, (double) chunkPos.getStartZ() + 16.0D - (double) width);
+				float width = mobentity.getBbWidth();
+				double xLength = Mth.clamp(guardianPosition.getX(), (double) chunkPos.getMinBlockX() + (double) width, (double) chunkPos.getMinBlockX() + 16.0D - (double) width);
+				double zLength = Mth.clamp(guardianPosition.getZ(), (double) chunkPos.getMinBlockZ() + (double) width, (double) chunkPos.getMinBlockZ() + 16.0D - (double) width);
 				
 				try {
-					mobentity.refreshPositionAndAngles(xLength, guardianPosition.getY(), zLength, random.nextFloat() * 360.0F, 0.0F);
-					mobentity.setPersistent();
-					if (mobentity.canSpawn(chunkRegion, SpawnReason.CHUNK_GENERATION) && mobentity.canSpawn(chunkRegion)) {
-						mobentity.initialize(chunkRegion, chunkRegion.getLocalDifficulty(mobentity.getBlockPos()), SpawnReason.CHUNK_GENERATION, null);
-						boolean success = chunkRegion.spawnEntity(mobentity);
+					mobentity.snapTo(xLength, guardianPosition.getY(), zLength, random.nextFloat() * 360.0F, 0.0F);
+					mobentity.setPersistenceRequired();
+					if (mobentity.checkSpawnRules(chunkRegion, EntitySpawnReason.CHUNK_GENERATION) && mobentity.checkSpawnObstruction(chunkRegion)) {
+						mobentity.finalizeSpawn(chunkRegion, chunkRegion.getCurrentDifficultyAt(mobentity.blockPosition()), EntitySpawnReason.CHUNK_GENERATION, null);
+						boolean success = chunkRegion.addFreshEntity(mobentity);
 						if (!success) {
 							return true;
 						}
 					}
 				} catch (Exception exception) {
-					StarrySkies.LOGGER.warn("Failed to spawn mob on sphere {}\nException: {}", this.getDescription(chunkRegion.getRegistryManager()), exception);
+					StarrySkies.LOGGER.warn("Failed to spawn mob on sphere {}\nException: {}", this.getDescription(chunkRegion.registryAccess()), exception);
 				}
 			}
 			return false;

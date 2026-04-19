@@ -5,7 +5,7 @@ import de.dafuqs.starryskies.worldgen.*;
 
 public class ChorusFruitDecoratorConfig implements SphereDecoratorConfig {
 
-	public static Codec<ChorusFruitDecoratorConfig> CODEC = Codec.unit(ChorusFruitDecoratorConfig::new);
+	public static Codec<ChorusFruitDecoratorConfig> CODEC = MapCodec.unitCodec(ChorusFruitDecoratorConfig::new);
 
 	public final float chorusChance;
 

@@ -2,21 +2,24 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.block.enums.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TallSeagrassBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 
 
 public class SeaGreensDecorator extends SphereDecorator<SphereDecoratorConfig.DefaultSphereDecoratorConfig> {
 
 	// those are all always waterlogged
-	private static final BlockState KELP = Blocks.KELP.getDefaultState(); // the top
-	private static final BlockState KELP_PLANT = Blocks.KELP_PLANT.getDefaultState(); // the middle
-	private static final BlockState SEAGRASS = Blocks.SEAGRASS.getDefaultState();
-	private static final BlockState TALL_SEAGRASS_UPPER = Blocks.TALL_SEAGRASS.getDefaultState().with(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
-	private static final BlockState TALL_SEAGRASS_LOWER = Blocks.TALL_SEAGRASS.getDefaultState().with(TallSeagrassBlock.HALF, DoubleBlockHalf.LOWER);
+	private static final BlockState KELP = Blocks.KELP.defaultBlockState(); // the top
+	private static final BlockState KELP_PLANT = Blocks.KELP_PLANT.defaultBlockState(); // the middle
+	private static final BlockState SEAGRASS = Blocks.SEAGRASS.defaultBlockState();
+	private static final BlockState TALL_SEAGRASS_UPPER = Blocks.TALL_SEAGRASS.defaultBlockState().setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
+	private static final BlockState TALL_SEAGRASS_LOWER = Blocks.TALL_SEAGRASS.defaultBlockState().setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.LOWER);
 
 	public SeaGreensDecorator(Codec<SphereDecoratorConfig.DefaultSphereDecoratorConfig> codec) {
 		super(codec);
@@ -24,15 +27,15 @@ public class SeaGreensDecorator extends SphereDecorator<SphereDecoratorConfig.De
 
 	@Override
 	public boolean generate(SphereFeatureContext<SphereDecoratorConfig.DefaultSphereDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
 
 		for (BlockPos bp : getCaveBottomBlocks(world, origin, sphere)) {
 			int r = random.nextInt(4);
 			
-			BlockPos up = bp.up();
+			BlockPos up = bp.above();
 			if (world.getBlockState(up).getBlock() != Blocks.WATER) {
 				continue;
 			}
@@ -40,20 +43,20 @@ public class SeaGreensDecorator extends SphereDecorator<SphereDecoratorConfig.De
 			if (r == 0) {
 				int kelpHeight = random.nextInt(8);
 				for (int i = 0; i < kelpHeight; i++) {
-					if (world.getBlockState(bp.up(i + 1)).getBlock() == Blocks.WATER) {
-						if (world.getBlockState(bp.up(i + 2)).getBlock() == Blocks.WATER && i < kelpHeight - 1) {
-							world.setBlockState(bp.up(i + 1), KELP_PLANT, 3); // middle parts
+					if (world.getBlockState(bp.above(i + 1)).getBlock() == Blocks.WATER) {
+						if (world.getBlockState(bp.above(i + 2)).getBlock() == Blocks.WATER && i < kelpHeight - 1) {
+							world.setBlock(bp.above(i + 1), KELP_PLANT, 3); // middle parts
 						} else {
-							world.setBlockState(bp.up(i + 1), KELP, 3); // the top
+							world.setBlock(bp.above(i + 1), KELP, 3); // the top
 						}
 					}
 				}
 			} else if (r == 1) {
-				world.setBlockState(up, SEAGRASS, 3);
+				world.setBlock(up, SEAGRASS, 3);
 			} else if (r == 2) {
-				if (world.getBlockState(bp.up(2)).getBlock() == Blocks.WATER) {
-					world.setBlockState(bp.up(2), TALL_SEAGRASS_UPPER, 3);
-					world.setBlockState(up, TALL_SEAGRASS_LOWER, 3);
+				if (world.getBlockState(bp.above(2)).getBlock() == Blocks.WATER) {
+					world.setBlock(bp.above(2), TALL_SEAGRASS_UPPER, 3);
+					world.setBlock(up, TALL_SEAGRASS_LOWER, 3);
 				}
 			}
 		}

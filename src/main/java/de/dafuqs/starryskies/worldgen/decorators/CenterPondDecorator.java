@@ -3,10 +3,12 @@ package de.dafuqs.starryskies.worldgen.decorators;
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class CenterPondDecorator extends SphereDecorator<CenterPondDecoratorConfig> {
 
@@ -16,11 +18,11 @@ public class CenterPondDecorator extends SphereDecorator<CenterPondDecoratorConf
 
 	@Override
 	public boolean generate(SphereFeatureContext<CenterPondDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		CenterPondDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		CenterPondDecoratorConfig config = context.config();
 
 		if (!sphere.isCenterInChunk(origin)) {
 			return false;
@@ -29,7 +31,7 @@ public class CenterPondDecorator extends SphereDecorator<CenterPondDecoratorConf
 		// doesn't make sense on small spheres
 		if (sphere.getRadius() > 9) {
 			int pondRadius = (int) (sphere.getRadius() / 2.5);
-			BlockPos sphereTop = sphere.getPosition().up(sphere.getRadius());
+			BlockPos sphereTop = sphere.getPosition().above(sphere.getRadius());
 
 			int waterLevelY = sphereTop.getY();
 			boolean waterLevelSet = false;
@@ -37,7 +39,7 @@ public class CenterPondDecorator extends SphereDecorator<CenterPondDecoratorConf
 			for (int x = -pondRadius - 1; x <= pondRadius; x++) {
 				for (int y = -pondRadius; y < 1; y++) {
 					for (int z = -pondRadius - 1; z <= pondRadius; z++) {
-						BlockPos currentBlockPos = sphereTop.add(x, y, z);
+						BlockPos currentBlockPos = sphereTop.offset(x, y, z);
 						if (world.getBlockState(currentBlockPos).isAir()) {
 							waterLevelY = currentBlockPos.getY() - 1;
 							waterLevelSet = true;
@@ -66,11 +68,11 @@ public class CenterPondDecorator extends SphereDecorator<CenterPondDecoratorConf
 			for (int x = -pond15; x <= pond15; x++) {
 				for (int y = -pondRadius; y < pondRadius; y++) {
 					for (int z = -pond15; z <= pond15; z++) {
-						BlockPos currentBlockPos = sphereTop.add(x, y, z);
+						BlockPos currentBlockPos = sphereTop.offset(x, y, z);
 
 						BlockState blockState = null;
 						if (currentBlockPos.getY() > waterLevelY) {
-							blockState = Blocks.AIR.getDefaultState();
+							blockState = Blocks.AIR.defaultBlockState();
 						} else {
 							double distance = Support.getDistance(currentBlockPos, sphereTop);
 							double pondDistance = distance / pondRadius;
@@ -86,7 +88,7 @@ public class CenterPondDecorator extends SphereDecorator<CenterPondDecoratorConf
 
 						if (blockState != null) {
 							if (!world.getBlockState(currentBlockPos).isAir()) {
-								world.setBlockState(currentBlockPos, blockState, 3);
+								world.setBlock(currentBlockPos, blockState, 3);
 							}
 						}
 

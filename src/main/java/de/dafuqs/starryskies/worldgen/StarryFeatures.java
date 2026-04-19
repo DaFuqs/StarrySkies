@@ -2,16 +2,18 @@ package de.dafuqs.starryskies.worldgen;
 
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.dimension.*;
-import net.minecraft.registry.*;
-import net.minecraft.util.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 public class StarryFeatures {
 
 	public static Identifier SPHERE_DECORATOR_FEATURE_ID = StarrySkies.id("sphere_decoration");
-	public static Feature<DefaultFeatureConfig> SPHERE_DECORATION;
+	public static Feature<NoneFeatureConfiguration> SPHERE_DECORATION;
 
 	public static void initialize() {
-		SPHERE_DECORATION = Registry.register(Registries.FEATURE, SPHERE_DECORATOR_FEATURE_ID, new SphereDecorationFeature(DefaultFeatureConfig.CODEC));
+		SPHERE_DECORATION = Registry.register(BuiltInRegistries.FEATURE, SPHERE_DECORATOR_FEATURE_ID, new SphereDecorationFeature(NoneFeatureConfiguration.CODEC));
 	}
 }

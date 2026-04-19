@@ -2,13 +2,14 @@ package de.dafuqs.starryskies.mixin;
 
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
-import net.minecraft.block.*;
-import net.minecraft.entity.*;
-import net.minecraft.registry.*;
-import net.minecraft.server.network.*;
-import net.minecraft.server.world.*;
-import net.minecraft.util.math.*;
-import net.minecraft.world.*;
+import net.minecraft.core.*;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EndPortalBlock;
+import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
@@ -16,44 +17,44 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 @Mixin(EndPortalBlock.class)
 public abstract class EndPortalBlockMixin {
 	
-	@Inject(at = @At("HEAD"), method = "createTeleportTarget(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/world/TeleportTarget;", cancellable = true)
-	void starryskies$createTeleportTarget(ServerWorld world, Entity entity, BlockPos pos, CallbackInfoReturnable<TeleportTarget> cir) {
+	@Inject(at = @At("HEAD"), method = "getPortalDestination(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/portal/TeleportTransition;", cancellable = true)
+	void starryskies$createTeleportTarget(ServerLevel world, Entity entity, BlockPos pos, CallbackInfoReturnable<TeleportTransition> cir) {
 		if (StarrySkies.CONFIG.enableEndPortalsToStarryEnd) {
-			boolean sourceIsStarryEnd = world.getRegistryKey() == StarryDimensionKeys.END_KEY;
-			boolean sourceIsStarryOverworld = world.getRegistryKey() == StarryDimensionKeys.OVERWORLD_KEY;
+			boolean sourceIsStarryEnd = world.dimension() == StarryDimensionKeys.END_KEY;
+			boolean sourceIsStarryOverworld = world.dimension() == StarryDimensionKeys.OVERWORLD_KEY;
 			
 			if (sourceIsStarryEnd || sourceIsStarryOverworld) {
 				// show the credits
 				// taken from EndPortalBlock.onEntityCollision()
-				if (!world.isClient && sourceIsStarryEnd && entity instanceof ServerPlayerEntity serverPlayerEntity) {
+				if (!world.isClientSide() && sourceIsStarryEnd && entity instanceof ServerPlayer serverPlayerEntity) {
 					if (!serverPlayerEntity.seenCredits) {
-						serverPlayerEntity.detachForDimensionChange();
+						serverPlayerEntity.showEndCredits();
 						cir.cancel();
 					}
 				}
 				
-				RegistryKey<World> targetWorldKey = sourceIsStarryEnd ? StarryDimensionKeys.OVERWORLD_KEY : StarryDimensionKeys.END_KEY;
-				ServerWorld serverWorld = world.getServer().getWorld(targetWorldKey);
+				ResourceKey<Level> targetWorldKey = sourceIsStarryEnd ? StarryDimensionKeys.OVERWORLD_KEY : StarryDimensionKeys.END_KEY;
+				ServerLevel serverWorld = world.getServer().getLevel(targetWorldKey);
 				if (serverWorld == null) {
 					cir.cancel();
 				} else {
 					BlockPos targetPos = sourceIsStarryOverworld ? StarryDimensionKeys.STARRY_END_SPAWN_BLOCK_POS : StarryDimensionKeys.STARRY_OVERWORLD_SPAWN_BLOCK_POS;
-					Vec3d targetVec = targetPos.toBottomCenterPos();
-					float entityYaw = entity.getYaw();
+					Vec3 targetVec = targetPos.getBottomCenter();
+					float entityYaw = entity.getYRot();
 					if (sourceIsStarryOverworld) {
-						entityYaw = Direction.WEST.getPositiveHorizontalDegrees();
-						if (entity instanceof ServerPlayerEntity) {
+						entityYaw = Direction.WEST.toYRot();
+						if (entity instanceof ServerPlayer) {
 							targetVec = targetVec.subtract(0.0, 1.0, 0.0);
 						}
 					} else {
-						if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
-							cir.setReturnValue(serverPlayerEntity.getRespawnTarget(false, TeleportTarget.NO_OP));
+						if (entity instanceof ServerPlayer serverPlayerEntity) {
+							cir.setReturnValue(serverPlayerEntity.findRespawnPositionAndUseSpawnBlock(false, TeleportTransition.DO_NOTHING));
 						}
 						
-						targetVec = entity.getWorldSpawnPos(serverWorld, targetPos).toBottomCenterPos();
+						targetVec = entity.adjustSpawnLocation(serverWorld, targetPos).getBottomCenter();
 					}
 					
-					cir.setReturnValue(new TeleportTarget(serverWorld, targetVec, entity.getVelocity(), entityYaw, entity.getPitch(), TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(TeleportTarget.ADD_PORTAL_CHUNK_TICKET)));
+					cir.setReturnValue(new TeleportTransition(serverWorld, targetVec, entity.getDeltaMovement(), entityYaw, entity.getXRot(), TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET)));
 				}
 			}
 		}

@@ -1,20 +1,40 @@
 {
   "logical_height": 256,
   "infiniburn": "#minecraft:infiniburn_nether",
-  "effects": "minecraft:the_nether",
   "ambient_light": 0.1,
-  "fixed_time": 18000,
+  "cardinal_light": "nether",
+  "has_ender_dragon_fight": false,
+  "skybox": "none",
+  "timelines": "#minecraft:in_nether",
+  "has_fixed_time": true,
   "bed_works": false,
   "min_y": 0,
   "height": 256,
-  "respawn_anchor_works": true,
-  "has_raids": false,
-  "ultrawarm": true,
-  "natural": false,
   "coordinate_scale": 8.0,
-  "piglin_safe": true,
   "has_skylight": true,
   "has_ceiling": false,
   "monster_spawn_block_light_limit": 15,
-  "monster_spawn_light_level": 11
+  "monster_spawn_light_level": 11,
+  "attributes": {
+    "minecraft:gameplay/bed_rule": {
+      "can_set_spawn": "never",
+      "can_sleep": "never",
+      "explodes": true
+    },
+    "minecraft:gameplay/can_start_raid": false,
+    "minecraft:gameplay/fast_lava": true,
+    "minecraft:gameplay/piglins_zombify": false,
+    "minecraft:gameplay/respawn_anchor_works": true,
+    "minecraft:gameplay/sky_light_level": 4.0,
+    "minecraft:gameplay/snow_golem_melts": true,
+    "minecraft:gameplay/water_evaporates": true,
+    "minecraft:visual/ambient_light_color": "#302821",
+    "minecraft:visual/default_dripstone_particle": {
+      "type": "minecraft:dripping_dripstone_lava"
+    },
+    "minecraft:visual/fog_end_distance": 96.0,
+    "minecraft:visual/fog_start_distance": 10.0,
+    "minecraft:visual/sky_light_color": "#7a7aff",
+    "minecraft:visual/sky_light_factor": 0.0
+  }
 }

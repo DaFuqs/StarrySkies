@@ -2,10 +2,13 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Creates a small X on one side of the sphere
@@ -27,11 +30,11 @@ public class XMarksTheSpotDecorator extends SphereDecorator<XMarksTheSpotDecorat
 
 	@Override
 	public boolean generate(SphereFeatureContext<XMarksTheSpotDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		XMarksTheSpotDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		XMarksTheSpotDecoratorConfig config = context.config();
 
 		if (!sphere.isCenterInChunk(origin)) {
 			return false;
@@ -53,7 +56,7 @@ public class XMarksTheSpotDecorator extends SphereDecorator<XMarksTheSpotDecorat
 	/**
 	 * Draws an "X" in a 5x5 pattern on a sphere.
 	 */
-	private void paintXInDirection(StructureWorldAccess world, PlacedSphere<?> sphere, BlockState markingState, Direction direction) {
+	private void paintXInDirection(WorldGenLevel world, PlacedSphere<?> sphere, BlockState markingState, Direction direction) {
 		int startX;
 		int startY;
 		int startZ;
@@ -104,7 +107,7 @@ public class XMarksTheSpotDecorator extends SphereDecorator<XMarksTheSpotDecorat
 					}
 					BlockPos currentBlockPos = findNextNonAirBlockInDirection(world, startBlockPos, direction, sphere.getRadius());
 					if (currentBlockPos != null) {
-						world.setBlockState(currentBlockPos, markingState, Block.NOTIFY_ALL);
+						world.setBlock(currentBlockPos, markingState, Block.UPDATE_ALL);
 					}
 				}
 			}

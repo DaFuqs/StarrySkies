@@ -2,9 +2,10 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
 
 
 public class CaveBottomDecorator extends SphereDecorator<CaveBottomDecoratorConfig> {
@@ -15,15 +16,15 @@ public class CaveBottomDecorator extends SphereDecorator<CaveBottomDecoratorConf
 
 	@Override
 	public boolean generate(SphereFeatureContext<CaveBottomDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		CaveBottomDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		CaveBottomDecoratorConfig config = context.config();
 
 		for (BlockPos bp : getCaveBottomBlocks(world, origin, sphere)) {
-			if (random.nextFloat() < config.chance() && config.state().canPlaceAt(world, bp.up())) {
-				world.setBlockState(bp.up(), config.state(), 3);
+			if (random.nextFloat() < config.chance() && config.state().canSurvive(world, bp.above())) {
+				world.setBlock(bp.above(), config.state(), 3);
 			}
 		}
 

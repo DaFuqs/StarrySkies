@@ -1,15 +1,16 @@
 package de.dafuqs.starryskies.worldgen;
 
 import com.mojang.serialization.*;
-import net.minecraft.block.*;
-import net.minecraft.block.entity.*;
-import net.minecraft.fluid.*;
-import net.minecraft.loot.*;
-import net.minecraft.registry.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.core.*;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.loot.LootTable;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -27,16 +28,16 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 
 	public abstract boolean generate(SphereFeatureContext<FC> context);
 
-	public boolean generateIfValid(FC config, StructureWorldAccess world, Random random, BlockPos pos, PlacedSphere<?> sphere) {
-		return world.isValidForSetBlock(pos) && this.generate(new SphereFeatureContext<>(world, random, new ChunkPos(pos), sphere, config));
+	public boolean generateIfValid(FC config, WorldGenLevel world, RandomSource random, BlockPos pos, PlacedSphere<?> sphere) {
+		return world.ensureCanWrite(pos) && this.generate(new SphereFeatureContext<>(world, random, ChunkPos.containing(pos), sphere, config));
 	}
 
-	protected void placeLootChest(@NotNull StructureWorldAccess world, BlockPos blockPos, RegistryKey<LootTable> lootTable, Random random) {
-		BlockState chestBlockState = Blocks.CHEST.getDefaultState();
+	protected void placeLootChest(@NonNull WorldGenLevel world, BlockPos blockPos, ResourceKey<LootTable> lootTable, RandomSource random) {
+		BlockState chestBlockState = Blocks.CHEST.defaultBlockState();
 
 		// if the chest is placed in water: waterlog it!
-		if (world.getBlockState(blockPos) == Blocks.WATER.getDefaultState()) {
-			chestBlockState = chestBlockState.with(ChestBlock.WATERLOGGED, true);
+		if (world.getBlockState(blockPos) == Blocks.WATER.defaultBlockState()) {
+			chestBlockState = chestBlockState.setValue(ChestBlock.WATERLOGGED, true);
 		}
 
 		// Random direction placement for the chest
@@ -50,23 +51,23 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		}
 
 		// set the chest and add loot table
-		world.setBlockState(blockPos, chestBlockState.with(ChestBlock.FACING, randomDirection), 3);
+		world.setBlock(blockPos, chestBlockState.setValue(ChestBlock.FACING, randomDirection), 3);
 		BlockEntity chestBlockEntity = world.getBlockEntity(blockPos);
 		if (chestBlockEntity instanceof ChestBlockEntity) {
 			((ChestBlockEntity) chestBlockEntity).setLootTable(lootTable, random.nextLong());
 		}
 	}
 	
-	protected @Nullable BlockPos findNextNonAirBlockInDirection(StructureWorldAccess world, BlockPos blockPos, Direction direction, int maxBlocks) {
+	protected @Nullable BlockPos findNextNonAirBlockInDirection(WorldGenLevel world, BlockPos blockPos, Direction direction, int maxBlocks) {
 		for (int i = 0; i < maxBlocks; i++) {
-			if (!world.getBlockState(blockPos.offset(direction, i)).isAir()) {
-				return blockPos.offset(direction, i);
+			if (!world.getBlockState(blockPos.relative(direction, i)).isAir()) {
+				return blockPos.relative(direction, i);
 			}
 		}
 		return null;
 	}
 	
-	protected List<BlockPos> getTopBlocks(StructureWorldAccess world, ChunkPos chunkPos, PlacedSphere<?> sphere) {
+	protected List<BlockPos> getTopBlocks(WorldGenLevel world, ChunkPos chunkPos, PlacedSphere<?> sphere) {
 		List<BlockPos> list = new ArrayList<>();
 		
 		int x = sphere.getPosition().getX();
@@ -74,17 +75,17 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
-		int minX = Math.max(chunkPos.getStartX(), x - rad);
-		int minZ = Math.max(chunkPos.getStartZ(), z - rad);
-		int maxX = Math.min(chunkPos.getEndX(), x + rad);
-		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
-		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		int minX = Math.max(chunkPos.getMinBlockX(), x - rad);
+		int minZ = Math.max(chunkPos.getMinBlockZ(), z - rad);
+		int maxX = Math.min(chunkPos.getMaxBlockX(), x + rad);
+		int maxZ = Math.min(chunkPos.getMaxBlockZ(), z + rad);
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		for (int x2 = minX; x2 <= maxX; x2++) {
 			for (int z2 = minZ; z2 <= maxZ; z2++) {
 				for (int y2 = y + rad; y2 > y; y2--) {
 					mutable.set(x2, y2, z2);
 					if (!world.getBlockState(mutable).isAir()) {
-						list.add(mutable.toImmutable());
+						list.add(mutable.immutable());
 						break;
 					}
 				}
@@ -93,7 +94,7 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		return list;
 	}
 	
-	protected List<BlockPos> getBottomBlocks(StructureWorldAccess world, ChunkPos chunkPos, PlacedSphere<?> sphere) {
+	protected List<BlockPos> getBottomBlocks(WorldGenLevel world, ChunkPos chunkPos, PlacedSphere<?> sphere) {
 		List<BlockPos> list = new ArrayList<>();
 		
 		int x = sphere.getPosition().getX();
@@ -101,17 +102,17 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
-		int minX = Math.max(chunkPos.getStartX(), x - rad);
-		int minZ = Math.max(chunkPos.getStartZ(), z - rad);
-		int maxX = Math.min(chunkPos.getEndX(), x + rad);
-		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
-		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		int minX = Math.max(chunkPos.getMinBlockX(), x - rad);
+		int minZ = Math.max(chunkPos.getMinBlockZ(), z - rad);
+		int maxX = Math.min(chunkPos.getMaxBlockX(), x + rad);
+		int maxZ = Math.min(chunkPos.getMaxBlockZ(), z + rad);
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		for (int x2 = minX; x2 <= maxX; x2++) {
 			for (int z2 = minZ; z2 <= maxZ; z2++) {
 				for (int y2 = y - rad; y2 < y; y2++) {
 					mutable.set(x2, y2, z2);
 					if (!world.getBlockState(mutable).isAir()) {
-						list.add(mutable.toImmutable());
+						list.add(mutable.immutable());
 						break;
 					}
 				}
@@ -120,7 +121,7 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		return list;
 	}
 	
-	protected List<BlockPos> getTopBlocks(StructureWorldAccess world, ChunkPos chunkPos, PlacedSphere<?> sphere, Random random, int amount) {
+	protected List<BlockPos> getTopBlocks(WorldGenLevel world, ChunkPos chunkPos, PlacedSphere<?> sphere, RandomSource random, int amount) {
 		List<BlockPos> list = new ArrayList<>();
 		
 		int x = sphere.getPosition().getX();
@@ -128,11 +129,11 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
-		int minX = Math.max(chunkPos.getStartX(), x - rad);
-		int minZ = Math.max(chunkPos.getStartZ(), z - rad);
-		int maxX = Math.min(chunkPos.getEndX(), x + rad);
-		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
-		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		int minX = Math.max(chunkPos.getMinBlockX(), x - rad);
+		int minZ = Math.max(chunkPos.getMinBlockZ(), z - rad);
+		int maxX = Math.min(chunkPos.getMaxBlockX(), x + rad);
+		int maxZ = Math.min(chunkPos.getMaxBlockZ(), z + rad);
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
 		for (int i = 0; i < amount; i++) {
 			int x2 = minX + random.nextInt(maxX - minX + 1);
@@ -140,7 +141,7 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 			for (int y2 = y + rad; y2 > y; y2--) {
 				mutable.set(x2, y2, z2);
 				if (!world.getBlockState(mutable).isAir()) {
-					list.add(mutable.toImmutable());
+					list.add(mutable.immutable());
 					break;
 				}
 			}
@@ -149,7 +150,7 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		return list;
 	}
 	
-	protected List<BlockPos> getCaveBottomBlocks(StructureWorldAccess world, ChunkPos chunkPos, PlacedSphere<?> sphere) {
+	protected List<BlockPos> getCaveBottomBlocks(WorldGenLevel world, ChunkPos chunkPos, PlacedSphere<?> sphere) {
 		List<BlockPos> list = new ArrayList<>();
 		
 		int x = sphere.getPosition().getX();
@@ -157,24 +158,24 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
-		int minX = Math.max(chunkPos.getStartX(), x - rad);
-		int minZ = Math.max(chunkPos.getStartZ(), z - rad);
-		int maxX = Math.min(chunkPos.getEndX(), x + rad);
-		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
-		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		int minX = Math.max(chunkPos.getMinBlockX(), x - rad);
+		int minZ = Math.max(chunkPos.getMinBlockZ(), z - rad);
+		int maxX = Math.min(chunkPos.getMaxBlockX(), x + rad);
+		int maxZ = Math.min(chunkPos.getMaxBlockZ(), z + rad);
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		for (int x2 = minX; x2 <= maxX; x2++) {
 			for (int z2 = minZ; z2 <= maxZ; z2++) {
 				boolean hitShell = false;
 				for (int y2 = y - rad; y2 < y; y2++) {
 					mutable.set(x2, y2, z2);
 					BlockState state = world.getBlockState(mutable);
-					boolean airOrFluid = state.isAir() || state.getFluidState().getFluid() != Fluids.EMPTY;
+					boolean airOrFluid = state.isAir() || state.getFluidState().getType() != Fluids.EMPTY;
 					if (airOrFluid && !hitShell) {
 
 					} else if (!airOrFluid) {
 						hitShell = true;
 					} else {
-						list.add(mutable.down().toImmutable());
+						list.add(mutable.below().immutable());
 						break;
 					}
 				}
@@ -184,32 +185,32 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		return list;
 	}
 	
-	protected @Nullable BlockPos getCaveBottomBlock(StructureWorldAccess world, BlockPos pos, PlacedSphere<?> sphere) {
+	protected @Nullable BlockPos getCaveBottomBlock(WorldGenLevel world, BlockPos pos, PlacedSphere<?> sphere) {
 		int x = sphere.getPosition().getX();
 		int z = sphere.getPosition().getZ();
 		int y = sphere.getPosition().getY();
 		
 		int rad = sphere.getRadius();
-		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		boolean hitShell = false;
 		
 		for (int y2 = y - rad; y2 < y; y2++) {
 			mutable.set(x, y2, z);
 			BlockState state = world.getBlockState(mutable);
-			boolean airOrFluid = state.isAir() || state.getFluidState().getFluid() != Fluids.EMPTY;
+			boolean airOrFluid = state.isAir() || state.getFluidState().getType() != Fluids.EMPTY;
 			if (airOrFluid && !hitShell) {
 			
 			} else if (!airOrFluid) {
 				hitShell = true;
 			} else {
-				return mutable.down();
+				return mutable.below();
 			}
 		}
 		
 		return null;
 	}
 	
-	protected List<BlockPos> getRandomCaveBottomBlocks(StructureWorldAccess world, ChunkPos chunkPos, PlacedSphere<?> sphere, Random random, int amount) {
+	protected List<BlockPos> getRandomCaveBottomBlocks(WorldGenLevel world, ChunkPos chunkPos, PlacedSphere<?> sphere, RandomSource random, int amount) {
 		List<BlockPos> list = new ArrayList<>();
 		
 		int x = sphere.getPosition().getX();
@@ -217,11 +218,11 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		int z = sphere.getPosition().getZ();
 		
 		int rad = sphere.getRadius();
-		int minX = Math.max(chunkPos.getStartX(), x - rad);
-		int minZ = Math.max(chunkPos.getStartZ(), z - rad);
-		int maxX = Math.min(chunkPos.getEndX(), x + rad);
-		int maxZ = Math.min(chunkPos.getEndZ(), z + rad);
-		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		int minX = Math.max(chunkPos.getMinBlockX(), x - rad);
+		int minZ = Math.max(chunkPos.getMinBlockZ(), z - rad);
+		int maxX = Math.min(chunkPos.getMaxBlockX(), x + rad);
+		int maxZ = Math.min(chunkPos.getMaxBlockZ(), z + rad);
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
 		for (int i = 0; i < amount; i++) {
 			int x2 = minX + random.nextInt(maxX - minX + 1);
@@ -230,13 +231,13 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 			for (int y2 = y - rad; y2 < y; y2++) {
 				mutable.set(x2, y2, z2);
 				BlockState state = world.getBlockState(mutable);
-				boolean airOrFluid = state.isAir() || state.getFluidState().getFluid() != Fluids.EMPTY;
+				boolean airOrFluid = state.isAir() || state.getFluidState().getType() != Fluids.EMPTY;
 				if (airOrFluid && !hitShell) {
 
 				} else if (!airOrFluid) {
 					hitShell = true;
 				} else {
-					list.add(mutable.down().toImmutable());
+					list.add(mutable.below().immutable());
 					break;
 				}
 			}

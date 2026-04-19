@@ -2,7 +2,7 @@ package de.dafuqs.starryskies.worldgen;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
-import net.minecraft.util.*;
+import net.minecraft.resources.Identifier;
 
 public record GenerationGroup(Identifier systemGeneratorId, float weight) {
 

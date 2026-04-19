@@ -3,14 +3,16 @@ package de.dafuqs.starryskies.worldgen.decorators;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.entity.*;
-import net.minecraft.registry.*;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.*;
+import net.minecraft.world.entity.EntityType;
+import org.jspecify.annotations.NonNull;
 
-public record MobSpawnerDecoratorConfig(RegistryKey<EntityType<?>> entityType,
-										Position position) implements SphereDecoratorConfig {
+public record MobSpawnerDecoratorConfig(ResourceKey<EntityType<?>> entityType,
+                                        Position position) implements SphereDecoratorConfig {
 	
-	public enum Position implements StringIdentifiable {
+	public enum Position implements StringRepresentable {
 		CENTER("center"),
 		TOP_CENTER("top_center"),
 		CAVE_FLOOR("cave_floor");
@@ -22,15 +24,15 @@ public record MobSpawnerDecoratorConfig(RegistryKey<EntityType<?>> entityType,
 		}
 		
 		@Override
-		public String asString() {
+		public @NonNull String getSerializedName() {
 			return id;
 		}
 	}
 	
 	public static final Codec<MobSpawnerDecoratorConfig> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(
-					RegistryKey.createCodec(RegistryKeys.ENTITY_TYPE).fieldOf("entity_type").forGetter(decorator -> decorator.entityType),
-					StringIdentifiable.createCodec(Position::values).fieldOf("position").forGetter(decorator -> decorator.position)
+					ResourceKey.codec(Registries.ENTITY_TYPE).fieldOf("entity_type").forGetter(decorator -> decorator.entityType),
+					StringRepresentable.fromEnum(Position::values).fieldOf("position").forGetter(decorator -> decorator.position)
 			).apply(instance, MobSpawnerDecoratorConfig::new)
 	);
 	

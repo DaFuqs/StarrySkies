@@ -3,10 +3,10 @@ package de.dafuqs.starryskies.worldgen.decorators;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 
 public record BambooDecoratorConfig(float chance, float saplingChance, BlockState bambooBlockState,
-									BlockState bambooSaplingBlockState) implements SphereDecoratorConfig {
+                                    BlockState bambooSaplingBlockState) implements SphereDecoratorConfig {
 
 	public static final Codec<BambooDecoratorConfig> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(

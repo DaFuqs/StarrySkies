@@ -4,17 +4,18 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import it.unimi.dsi.fastutil.objects.*;
-import net.fabricmc.fabric.api.resource.*;
-import net.minecraft.block.*;
-import net.minecraft.registry.*;
-import net.minecraft.resource.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.*;
+import net.minecraft.server.packs.resources.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.profiler.*;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NonNull;
 
 import java.util.*;
 
-public class UniqueBlockGroupDataLoader extends JsonDataLoader<UniqueBlockGroupDataLoader.Entry> implements IdentifiableResourceReloadListener {
+public class UniqueBlockGroupDataLoader extends SimpleJsonResourceReloadListener<UniqueBlockGroupDataLoader.Entry> implements PreparableReloadListener {
 	
 	public static final String LOCATION = "starry_skies/unique_block_group";
 	public static final Identifier ID = StarrySkies.id(LOCATION);
@@ -30,11 +31,11 @@ public class UniqueBlockGroupDataLoader extends JsonDataLoader<UniqueBlockGroupD
 	}
 	
 	private UniqueBlockGroupDataLoader() {
-		super(Entry.CODEC, ResourceFinder.json(LOCATION));
+		super(Entry.CODEC, FileToIdConverter.json(LOCATION));
 	}
 	
 	@Override
-	protected void apply(Map<Identifier, Entry> prepared, ResourceManager manager, Profiler profiler) {
+	protected void apply(Map<Identifier, Entry> prepared, @NonNull ResourceManager manager, @NonNull ProfilerFiller profiler) {
 		for (Map.Entry<Identifier, Entry> entry : prepared.entrySet()) {
 			String groupName = entry.getValue().group;
 			if (GROUPS.containsKey(groupName)) {
@@ -42,30 +43,25 @@ public class UniqueBlockGroupDataLoader extends JsonDataLoader<UniqueBlockGroupD
 			}
 			
 			for (Identifier blockId : entry.getValue().blockIDs) {
-				Optional<Block> optionalBlock = Registries.BLOCK.getOptionalValue(blockId);
+				Optional<Block> optionalBlock = BuiltInRegistries.BLOCK.getOptional(blockId);
 				optionalBlock.ifPresent(block -> GROUPS.put(groupName, block));
 				return;
 			}
 		}
 	}
 	
-	@Override
-	public Identifier getFabricId() {
-		return ID;
-	}
-	
 	public Block get(String id) {
 		return GROUPS.get(id);
 	}
 	
-	public BlockState getEntry(String group, Random random) {
+	public BlockState getEntry(String group, RandomSource random) {
 		Block block = UniqueBlockGroupDataLoader.INSTANCE.get(group);
 		if (block == null) {
 			StarrySkies.LOGGER.warn("Trying to query a nonexistent UniqueBlockGroup: {}", group);
 			StarrySkies.LOGGER.error(Arrays.toString(Thread.currentThread().getStackTrace()));
-			return Blocks.AIR.getDefaultState();
+			return Blocks.AIR.defaultBlockState();
 		}
-		return block.getDefaultState();
+		return block.defaultBlockState();
 	}
 	
 }

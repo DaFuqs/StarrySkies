@@ -1,24 +1,30 @@
 {
   "logical_height": 256,
   "infiniburn": "#minecraft:infiniburn_end",
-  "effects": "minecraft:the_end",
   "ambient_light": 0.0,
-  "respawn_anchor_works": false,
-  "has_raids": false,
   "min_y": 0,
   "height": 256,
-  "natural": false,
   "coordinate_scale": 1.0,
-  "piglin_safe": false,
-  "bed_works": false,
   "has_skylight": true,
   "has_ceiling": false,
-  "fixed_time": 6000,
-  "ultrawarm": false,
+  "has_fixed_time": true,
+  "default_clock": "minecraft:the_end",
+  "has_ender_dragon_fight": true,
   "monster_spawn_block_light_limit": 0,
   "monster_spawn_light_level": {
     "type": "minecraft:uniform",
     "max_inclusive": 7,
     "min_inclusive": 0
+  },
+  "attributes": {
+    "minecraft:gameplay/bed_rule": {
+      "can_set_spawn": "never",
+      "can_sleep": "never",
+      "explodes": true
+    },
+    "minecraft:visual/ambient_light_color": "#3f473f",
+    "minecraft:visual/fog_color": "#181318",
+    "minecraft:visual/sky_light_color": "#ac60cd",
+    "minecraft:visual/sky_light_factor": 0.0
   }
 }

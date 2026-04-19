@@ -3,22 +3,23 @@ package de.dafuqs.starryskies.worldgen;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
-import net.minecraft.entity.*;
-import net.minecraft.registry.entry.*;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.*;
-import net.minecraft.util.math.floatprovider.*;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.valueproviders.*;
+import net.minecraft.world.entity.EntityType;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
 public class SphereConfig {
 	
 	public static final MapCodec<SphereConfig> CONFIG_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-			FloatProvider.createValidatedCodec(1.0F, 64.0F).fieldOf("size").forGetter(sphereConfig -> sphereConfig.size),
+			FloatProviders.codec(1.0F, 64.0F).fieldOf("size").forGetter(sphereConfig -> sphereConfig.size),
 			Codec.unboundedMap(ConfiguredSphereDecorator.REGISTRY_CODEC, Codec.FLOAT).fieldOf("decorators").forGetter(sphereConfig -> sphereConfig.decorators),
 			SphereEntitySpawnDefinition.CODEC.listOf().fieldOf("spawns").forGetter(sphereConfig -> sphereConfig.spawns),
-			Generation.CODEC.optionalFieldOf("generation").forGetter(sphereConfig -> sphereConfig.generation)
-	).apply(instance, SphereConfig::new));
+			Generation.CODEC.optionalFieldOf("generation").forGetter(sphereConfig -> Optional.ofNullable(sphereConfig.generation))
+	).apply(instance, (size, decorators, spawns, generation) -> new SphereConfig(size, decorators, spawns, generation.orElse(null))));
 	
 	public record Generation(Identifier group, float weight) {
 		public static final Codec<Generation> CODEC = RecordCodecBuilder.create(
@@ -30,20 +31,20 @@ public class SphereConfig {
 	}
 	
 	public final FloatProvider size;
-	public final Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators;
+	public final Map<Holder<ConfiguredSphereDecorator<?, ?>>, Float> decorators;
 	public final List<SphereEntitySpawnDefinition> spawns;
-	public final Optional<Generation> generation;
-	
-	public SphereConfig(FloatProvider size, Map<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Optional<Generation> generation) {
+	public final @Nullable Generation generation;
+
+	public SphereConfig(FloatProvider size, Map<Holder<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, @Nullable Generation generation) {
 		this.size = size;
 		this.decorators = decorators;
 		this.spawns = spawns;
 		this.generation = generation;
 	}
 	
-	List<RegistryEntry<ConfiguredSphereDecorator<?, ?>>> selectDecorators(Random random) {
-		List<RegistryEntry<ConfiguredSphereDecorator<?, ?>>> result = new ArrayList<>();
-		for (Map.Entry<RegistryEntry<ConfiguredSphereDecorator<?, ?>>, Float> entry : decorators.entrySet()) {
+	List<Holder<ConfiguredSphereDecorator<?, ?>>> selectDecorators(RandomSource random) {
+		List<Holder<ConfiguredSphereDecorator<?, ?>>> result = new ArrayList<>();
+		for (Map.Entry<Holder<ConfiguredSphereDecorator<?, ?>>, Float> entry : decorators.entrySet()) {
 			if (random.nextFloat() < entry.getValue()) {
 				result.add(entry.getKey());
 			}
@@ -51,12 +52,12 @@ public class SphereConfig {
 		return result;
 	}
 
-	List<Pair<EntityType<?>, Integer>> selectSpawns(Random random) {
-		List<Pair<EntityType<?>, Integer>> result = new ArrayList<>();
+	List<Tuple<EntityType<?>, Integer>> selectSpawns(RandomSource random) {
+		List<Tuple<EntityType<?>, Integer>> result = new ArrayList<>();
 		for (SphereEntitySpawnDefinition entry : spawns) {
 			if (random.nextFloat() < entry.chance) {
 				int count = Support.getRandomBetween(random, entry.minCount, entry.maxCount);
-				result.add(new Pair<>(entry.entityType, count));
+				result.add(new Tuple<>(entry.entityType, count));
 			}
 		}
 		return result;

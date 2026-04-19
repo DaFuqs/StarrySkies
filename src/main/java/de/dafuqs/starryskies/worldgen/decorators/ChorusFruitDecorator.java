@@ -2,10 +2,11 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.ChorusFlowerBlock;
 
 public class ChorusFruitDecorator extends SphereDecorator<ChorusFruitDecoratorConfig> {
 
@@ -15,16 +16,16 @@ public class ChorusFruitDecorator extends SphereDecorator<ChorusFruitDecoratorCo
 
 	@Override
 	public boolean generate(SphereFeatureContext<ChorusFruitDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		ChorusFruitDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		ChorusFruitDecoratorConfig config = context.config();
 
 		boolean success = false;
 		for (BlockPos bp : getTopBlocks(world, origin, sphere)) {
 			if (random.nextFloat() < config.chorusChance) {
-				ChorusFlowerBlock.generate(world, bp.up(), random, 8);
+				ChorusFlowerBlock.generatePlant(world, bp.above(), random, 8);
 				success = true;
 			}
 		}

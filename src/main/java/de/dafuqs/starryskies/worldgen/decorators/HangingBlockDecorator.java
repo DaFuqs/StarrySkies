@@ -2,9 +2,10 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
 
 public class HangingBlockDecorator extends SphereDecorator<HangingBlockDecoratorConfig> {
 
@@ -14,19 +15,19 @@ public class HangingBlockDecorator extends SphereDecorator<HangingBlockDecorator
 
 	@Override
 	public boolean generate(SphereFeatureContext<HangingBlockDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		HangingBlockDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		HangingBlockDecoratorConfig config = context.config();
 
 		int sphereY = sphere.getPosition().getY();
 		for (BlockPos bp : getBottomBlocks(world, origin, sphere)) {
-			BlockPos flippedBlockPos = bp.down((bp.getY() - sphereY) * 2);
+			BlockPos flippedBlockPos = bp.below((bp.getY() - sphereY) * 2);
 
-			if (world.getBlockState(flippedBlockPos.down()).isAir()) {
+			if (world.getBlockState(flippedBlockPos.below()).isAir()) {
 				if (random.nextFloat() < config.chance()) {
-					world.setBlockState(flippedBlockPos.down(), config.state(), 3);
+					world.setBlock(flippedBlockPos.below(), config.state(), 3);
 				}
 			}
 		}

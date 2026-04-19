@@ -5,18 +5,17 @@ import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.registry.entry.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.biome.source.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.chunk.*;
-import net.minecraft.world.gen.noise.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.core.*;
+import net.minecraft.resources.RegistryFileCodec;
+import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.blending.Blender;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -26,27 +25,27 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 	public static final MapCodec<StarrySkyChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(
 			(instance) -> instance.group(
 					BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
-					RegistryElementCodec.of(StarryRegistryKeys.SYSTEM_GENERATOR, SystemGenerator.CODEC).fieldOf("system_generator").forGetter((generator) -> generator.systemGenerator)
+					RegistryFileCodec.create(StarryRegistryKeys.SYSTEM_GENERATOR, SystemGenerator.CODEC).fieldOf("system_generator").forGetter((generator) -> generator.systemGenerator)
 			).apply(instance, StarrySkyChunkGenerator::new));
 
-	protected final RegistryEntry<SystemGenerator> systemGenerator;
+	protected final Holder<SystemGenerator> systemGenerator;
 
-	public StarrySkyChunkGenerator(BiomeSource biomeSource, RegistryEntry<SystemGenerator> systemGenerator) {
+	public StarrySkyChunkGenerator(BiomeSource biomeSource, Holder<SystemGenerator> systemGenerator) {
 		super(biomeSource);
 		this.systemGenerator = systemGenerator;
 	}
 
 	@Override
-	protected MapCodec<? extends ChunkGenerator> getCodec() {
+	protected @NonNull MapCodec<? extends ChunkGenerator> codec() {
 		return CODEC;
 	}
 
 	@Override
-	public void buildSurface(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk) {
+	public void buildSurface(@NonNull WorldGenRegion region, @NonNull StructureManager structures, @NonNull RandomState noiseConfig, ChunkAccess chunk) {
 		ChunkPos chunkPos = chunk.getPos();
 
-		int chunkPosStartX = chunkPos.getStartX();
-		int chunkPosStartZ = chunkPos.getStartZ();
+		int chunkPosStartX = chunkPos.getMinBlockX();
+		int chunkPosStartZ = chunkPos.getMinBlockZ();
 
 		// Generate floor if set
 		if (systemGenerator.value().getFloorHeight() > 0) {
@@ -61,37 +60,37 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 	}
 	
 	@Override
-	public void carve(ChunkRegion chunkRegion, long seed, NoiseConfig noiseConfig, BiomeAccess biomeAccess, StructureAccessor structureAccessor, Chunk chunk) {
+	public void applyCarvers(@NonNull WorldGenRegion chunkRegion, long seed, @NonNull RandomState noiseConfig, @NonNull BiomeManager biomeAccess, @NonNull StructureManager structureAccessor, @NonNull ChunkAccess chunk) {
 		// no carver
 		// generate spheres
-		for (PlacedSphere<?> sphere : systemGenerator.value().getSystem(chunk, seed, structureAccessor.getRegistryManager())) {
+		for (PlacedSphere<?> sphere : systemGenerator.value().getSystem(chunk, seed, chunkRegion)) {
 			if (sphere.isInChunk(chunk.getPos())) {
-				StarrySkies.LOGGER.debug("Generating sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunk.getPos().x, chunk.getPos().z, chunk.getPos().getStartX(), chunk.getPos().getStartZ(), sphere.getDescription(structureAccessor.getRegistryManager()));
-				sphere.generate(chunk, structureAccessor.getRegistryManager());
+				StarrySkies.LOGGER.debug("Generating sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunk.getPos().x(), chunk.getPos().z(), chunk.getPos().getMinBlockX(), chunk.getPos().getMinBlockZ(), sphere.getDescription(structureAccessor.registryAccess()));
+				sphere.generate(chunk, chunkRegion);
 				StarrySkies.LOGGER.debug("Generation Finished.");
 			}
 		}
 	}
 
 	@Override
-	public int getWorldHeight() {
+	public int getGenDepth() {
 		return systemGenerator.value().getFloorHeight();
 	}
 	
 	@Override
-	public CompletableFuture<Chunk> populateNoise(Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
+	public @NonNull CompletableFuture<ChunkAccess> fillFromNoise(@NonNull Blender blender, @NonNull RandomState noiseConfig, @NonNull StructureManager structureAccessor, @NonNull ChunkAccess chunk) {
 		return CompletableFuture.completedFuture(chunk);
 	}
 
 	@Override
-	public void populateEntities(@NotNull ChunkRegion chunkRegion) {
-		ChunkPos chunkPos = chunkRegion.getCenterPos();
-		RegistryEntry<Biome> biome = chunkRegion.getBiome(chunkPos.getStartPos().withY(chunkRegion.getTopYInclusive()));
-		ChunkRandom chunkRandom = new ChunkRandom(new CheckedRandom(RandomSeed.getSeed()));
-		chunkRandom.setPopulationSeed(chunkRegion.getSeed(), chunkPos.getStartX(), chunkPos.getStartZ());
-		SpawnHelper.populateEntities(chunkRegion, biome, chunkPos, chunkRandom);
+	public void spawnOriginalMobs(@NonNull WorldGenRegion chunkRegion) {
+		ChunkPos chunkPos = chunkRegion.getCenter();
+		Holder<Biome> biome = chunkRegion.getBiome(chunkPos.getWorldPosition().atY(chunkRegion.getMaxY()));
+		WorldgenRandom chunkRandom = new WorldgenRandom(new LegacyRandomSource(RandomSupport.generateUniqueSeed()));
+		chunkRandom.setDecorationSeed(chunkRegion.getSeed(), chunkPos.getMinBlockX(), chunkPos.getMinBlockZ());
+		NaturalSpawner.spawnMobsForChunkGeneration(chunkRegion, biome, chunkPos, chunkRandom);
 		
-		for (PlacedSphere<?> sphere : systemGenerator.value().getSystem(chunkRegion.toServerWorld(), chunkRegion.getSeed(), chunkPos.x, chunkPos.z)) {
+		for (PlacedSphere<?> sphere : systemGenerator.value().getSystem(chunkRegion, chunkRegion.getSeed(), chunkPos.x(), chunkPos.z())) {
 			sphere.populateEntities(chunkPos, chunkRegion, chunkRandom);
 		}
 	}
@@ -102,25 +101,25 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 	}
 
 	@Override
-	public int getMinimumY() {
+	public int getMinY() {
 		return 0;
 	}
 
 	@Override
-	public int getHeight(int x, int z, Heightmap.Type heightmap, HeightLimitView world, NoiseConfig noiseConfig) {
+	public int getBaseHeight(int x, int z, Heightmap.@NonNull Types heightmap, @NonNull LevelHeightAccessor world, @NonNull RandomState noiseConfig) {
 		return systemGenerator.value().getFloorHeight();
 	}
 	
 	@Override
-	public void appendDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
+	public void addDebugScreenInfo(@NonNull List<String> text, @NonNull RandomState noiseConfig, @NonNull BlockPos pos) {
 	
 	}
 
 	@Override
-	public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world, NoiseConfig noiseConfig) {
+	public @NonNull NoiseColumn getBaseColumn(int x, int z, LevelHeightAccessor world, @NonNull RandomState noiseConfig) {
 		BlockState[] states = new BlockState[world.getHeight()];
-		Arrays.fill(states, Blocks.AIR.getDefaultState());
-		return new VerticalBlockSample(world.getBottomY(), states);
+		Arrays.fill(states, Blocks.AIR.defaultBlockState());
+		return new NoiseColumn(world.getMinY(), states);
 	}
 	
 	public SystemGenerator getSystemGenerator() {

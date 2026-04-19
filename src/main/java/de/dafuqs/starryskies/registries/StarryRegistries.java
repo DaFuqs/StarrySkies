@@ -3,7 +3,8 @@ package de.dafuqs.starryskies.registries;
 import de.dafuqs.starryskies.worldgen.*;
 import de.dafuqs.starryskies.worldgen.dimension.*;
 import net.fabricmc.fabric.api.event.registry.*;
-import net.minecraft.registry.*;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 
 public class StarryRegistries {
 
@@ -17,8 +18,8 @@ public class StarryRegistries {
 		DynamicRegistries.registerSynced(StarryRegistryKeys.CONFIGURED_SPHERE_DECORATOR, ConfiguredSphereDecorator.CODEC);
 	}
 
-	public static <T> Registry<T> create(RegistryKey<Registry<T>> key) {
-		return FabricRegistryBuilder.createSimple(key).attribute(RegistryAttribute.MODDED).buildAndRegister();
+	public static <T> Registry<T> create(ResourceKey<Registry<T>> key) {
+		return FabricRegistryBuilder.create(key).attribute(RegistryAttribute.MODDED).buildAndRegister();
 	}
 
 }

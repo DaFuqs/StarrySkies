@@ -4,17 +4,18 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import it.unimi.dsi.fastutil.objects.*;
-import net.fabricmc.fabric.api.resource.*;
-import net.minecraft.block.*;
-import net.minecraft.registry.*;
-import net.minecraft.resource.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.*;
+import net.minecraft.server.packs.resources.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.profiler.*;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NonNull;
 
 import java.util.*;
 
-public class WeightedBlockGroupDataLoader extends JsonDataLoader<WeightedBlockGroupDataLoader.Entry> implements IdentifiableResourceReloadListener {
+public class WeightedBlockGroupDataLoader extends SimpleJsonResourceReloadListener<WeightedBlockGroupDataLoader.Entry> implements PreparableReloadListener {
 	
 	public static final String LOCATION = "starry_skies/weighted_block_group";
 	public static final Identifier ID = StarrySkies.id(LOCATION);
@@ -30,16 +31,16 @@ public class WeightedBlockGroupDataLoader extends JsonDataLoader<WeightedBlockGr
 	}
 	
 	private WeightedBlockGroupDataLoader() {
-		super(Entry.CODEC, ResourceFinder.json(LOCATION));
+		super(Entry.CODEC, FileToIdConverter.json(LOCATION));
 	}
 	
 	@Override
-	protected void apply(Map<Identifier, WeightedBlockGroupDataLoader.Entry> prepared, ResourceManager manager, Profiler profiler) {
+	protected void apply(Map<Identifier, WeightedBlockGroupDataLoader.Entry> prepared, @NonNull ResourceManager manager, @NonNull ProfilerFiller profiler) {
 		for (Map.Entry<Identifier, WeightedBlockGroupDataLoader.Entry> entry : prepared.entrySet()) {
 			String group = entry.getValue().group;
 			
 			for (Map.Entry<Identifier, Float> e : entry.getValue().weightedBlockIDs.entrySet()) {
-				Optional<Block> optionalBlock = Registries.BLOCK.getOptionalValue(e.getKey());
+				Optional<Block> optionalBlock = BuiltInRegistries.BLOCK.getOptional(e.getKey());
 				if (optionalBlock.isPresent()) {
 					Block block = optionalBlock.get();
 					float weight = e.getValue();
@@ -49,27 +50,22 @@ public class WeightedBlockGroupDataLoader extends JsonDataLoader<WeightedBlockGr
 		}
 	}
 	
-	@Override
-	public Identifier getFabricId() {
-		return ID;
-	}
-	
 	public Map<Block, Float> get(String blockGroup) {
 		return GROUPS.get(blockGroup);
 	}
 	
-	public BlockState getEntry(String group, Random random) {
+	public BlockState getEntry(String group, RandomSource random) {
 		Map<Block, Float> weightedBlocks = get(group);
 		if (weightedBlocks == null) {
 			StarrySkies.LOGGER.warn("Trying to query a nonexistent WeightedBlockGroup: {}", group);
 			StarrySkies.LOGGER.error(Arrays.toString(Thread.currentThread().getStackTrace()));
-			return Blocks.AIR.getDefaultState();
+			return Blocks.AIR.defaultBlockState();
 		} else if (weightedBlocks.isEmpty()) {
 			StarrySkies.LOGGER.warn("Trying to query an empty WeightedBlockGroup: {}", group);
 			StarrySkies.LOGGER.error(Arrays.toString(Thread.currentThread().getStackTrace()));
-			return Blocks.AIR.getDefaultState();
+			return Blocks.AIR.defaultBlockState();
 		}
-		return Support.getWeightedRandom(weightedBlocks, random).getDefaultState();
+		return Support.getWeightedRandom(weightedBlocks, random).defaultBlockState();
 	}
 	
 }

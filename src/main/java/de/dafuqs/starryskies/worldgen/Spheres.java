@@ -3,13 +3,13 @@ package de.dafuqs.starryskies.worldgen;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.spheres.*;
-import net.minecraft.registry.*;
+import net.minecraft.core.Registry;
 
 public class Spheres {
 	
 	// Highly configurable
 	public static final Sphere<SimpleSphere.Config> SIMPLE = register("simple", new SimpleSphere(SimpleSphere.Config.CODEC));
-	public static final Sphere<ShellSphere.Config> SHELL = register("shell", new ShellSphere(ShellSphere.Config.CODEC));
+	public static final Sphere<ShellSphere.Config> SHELL = register("shell", new ShellSphere<>(ShellSphere.Config.CODEC));
 	public static final Sphere<CoreSphere.Config> CORE = register("core", new CoreSphere(CoreSphere.Config.CODEC));
 	public static final Sphere<ModularSphere.Config> MODULAR = register("modular", new ModularSphere(ModularSphere.Config.CODEC));
 	public static final Sphere<CaveSphere.Config> CAVE = register("cave", new CaveSphere(CaveSphere.Config.CODEC));

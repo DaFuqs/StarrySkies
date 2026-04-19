@@ -3,18 +3,21 @@ package de.dafuqs.starryskies.worldgen.decorators;
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.block.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 
 public class RuinedPortalDecorator extends SphereDecorator<RuinedPortalDecoratorConfig> {
 
-	private static final BlockState NETHERRACK = Blocks.NETHERRACK.getDefaultState();
-	private static final BlockState MAGMA_BLOCK = Blocks.MAGMA_BLOCK.getDefaultState();
-	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
-	private static final BlockState OBSIDIAN = Blocks.OBSIDIAN.getDefaultState();
+	private static final BlockState NETHERRACK = Blocks.NETHERRACK.defaultBlockState();
+	private static final BlockState MAGMA_BLOCK = Blocks.MAGMA_BLOCK.defaultBlockState();
+	private static final BlockState LAVA = Blocks.LAVA.defaultBlockState();
+	private static final BlockState OBSIDIAN = Blocks.OBSIDIAN.defaultBlockState();
 	private static final float OBSIDIAN_CHANCE = 0.9F;
 
 	public RuinedPortalDecorator(Codec<RuinedPortalDecoratorConfig> codec) {
@@ -23,11 +26,11 @@ public class RuinedPortalDecorator extends SphereDecorator<RuinedPortalDecorator
 
 	@Override
 	public boolean generate(SphereFeatureContext<RuinedPortalDecoratorConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		PlacedSphere<?> sphere = context.getSphere();
-		ChunkPos origin = context.getChunkPos();
-		Random random = context.getRandom();
-		RuinedPortalDecoratorConfig config = context.getConfig();
+		WorldGenLevel world = context.world();
+		PlacedSphere<?> sphere = context.sphere();
+		ChunkPos origin = context.chunkPos();
+		RandomSource random = context.random();
+		RuinedPortalDecoratorConfig config = context.config();
 
 		if (!sphere.isCenterInChunk(origin)) {
 			return false;
@@ -46,12 +49,12 @@ public class RuinedPortalDecorator extends SphereDecorator<RuinedPortalDecorator
 					if (Math.abs(x * z) * 1.5 < randomI * randomI) {
 						BlockPos currentBlockPos = new BlockPos(spherePosition.getX() + x, upperY, spherePosition.getZ() + z);
 						switch (random.nextInt(6)) {
-							case 0 -> world.setBlockState(currentBlockPos, MAGMA_BLOCK, 3);
+							case 0 -> world.setBlock(currentBlockPos, MAGMA_BLOCK, 3);
 							case 1 -> {
-								world.setBlockState(currentBlockPos, LAVA, 3);
-								world.getChunk(currentBlockPos).markBlockForPostProcessing(currentBlockPos);
+								world.setBlock(currentBlockPos, LAVA, 3);
+								world.getChunk(currentBlockPos).markPosForPostprocessing(currentBlockPos);
 							}
-							default -> world.setBlockState(currentBlockPos, NETHERRACK, 3);
+							default -> world.setBlock(currentBlockPos, NETHERRACK, 3);
 						}
 					}
 				}
@@ -63,27 +66,27 @@ public class RuinedPortalDecorator extends SphereDecorator<RuinedPortalDecorator
 		BlockPos currentBlockPos = new BlockPos(spherePosition.getX(), centerTopBlockY, spherePosition.getZ());
 
 		placePortalBlock(world, currentBlockPos, random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 1), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 1), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.SOUTH, 1), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.NORTH, 1), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.SOUTH, 2), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.NORTH, 2), random);
 
-		placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(1), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(1), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(2), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(2), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(3), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(3), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(4), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(4), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.SOUTH, 2).above(), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.NORTH, 2).above(), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.SOUTH, 2).above(1), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.NORTH, 2).above(1), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.SOUTH, 2).above(2), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.NORTH, 2).above(2), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.SOUTH, 2).above(3), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.NORTH, 2).above(3), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.SOUTH, 2).above(4), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.NORTH, 2).above(4), random);
 
-		placePortalBlock(world, currentBlockPos.up(5), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 1).up(5), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 1).up(5), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.SOUTH, 2).up(5), random);
-		placePortalBlock(world, currentBlockPos.offset(Direction.NORTH, 2).up(5), random);
+		placePortalBlock(world, currentBlockPos.above(5), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.SOUTH, 1).above(5), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.NORTH, 1).above(5), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.SOUTH, 2).above(5), random);
+		placePortalBlock(world, currentBlockPos.relative(Direction.NORTH, 2).above(5), random);
 
 		// place loot chest
 		int randomX = Support.getRandomBetween(random, spherePosition.getX() - sphere.getRadius() / 2, spherePosition.getX() + sphere.getRadius() / 2);
@@ -91,16 +94,16 @@ public class RuinedPortalDecorator extends SphereDecorator<RuinedPortalDecorator
 		centerTopBlockY = Support.getLowerGroundBlock(world, new BlockPos(randomX, spherePosition.getY() + sphere.getRadius() + 2, randomZ), spherePosition.getY());
 
 		if (centerTopBlockY != spherePosition.getY()) {
-			BlockPos lootChestPosition = new BlockPos(randomX, centerTopBlockY, randomZ).up();
+			BlockPos lootChestPosition = new BlockPos(randomX, centerTopBlockY, randomZ).above();
 			placeLootChest(world, lootChestPosition, config.lootTable(), random);
 		}
 
 		return true;
 	}
 
-	private void placePortalBlock(StructureWorldAccess world, BlockPos blockPos, Random random) {
+	private void placePortalBlock(WorldGenLevel world, BlockPos blockPos, RandomSource random) {
 		if (random.nextFloat() < OBSIDIAN_CHANCE) {
-			world.setBlockState(blockPos, OBSIDIAN, 3);
+			world.setBlock(blockPos, OBSIDIAN, 3);
 		}
 	}
 
