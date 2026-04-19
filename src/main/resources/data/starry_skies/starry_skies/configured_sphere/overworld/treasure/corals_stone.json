@@ -21,7 +21,14 @@
     "decorators": {
       "starry_skies:treasure/buried_treasure_center": 0.5
     },
-    "spawns": [],
+    "spawns": [
+      {
+        "type": "minecraft:nautilus",
+        "chance": 0.5,
+        "min_count": 1,
+        "max_count": 2
+      }
+    ],
     "generation": {
       "weight": 1.0,
       "group": "starry_skies:overworld/treasure"
