@@ -1,20 +1,27 @@
 package de.dafuqs.starryskies.client.sky;
 
-import com.mojang.blaze3d.buffers.*;
+import com.mojang.blaze3d.buffers.GpuBuffer;
+import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.pipeline.RenderTarget;
-import com.mojang.blaze3d.systems.*;
+import com.mojang.blaze3d.systems.RenderPass;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import de.dafuqs.starryskies.client.StarrySkyBoxTextures;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.util.*;
-import org.joml.*;
+import net.minecraft.client.renderer.texture.AbstractTexture;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.util.ARGB;
+import net.minecraft.util.CommonColors;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class StarrySkyBox implements AutoCloseable {
 
 	private final GpuBuffer skyVertexBuffer;

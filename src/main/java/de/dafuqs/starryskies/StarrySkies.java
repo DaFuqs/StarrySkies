@@ -1,23 +1,23 @@
 package de.dafuqs.starryskies;
 
-import de.dafuqs.starryskies.advancements.*;
-import de.dafuqs.starryskies.commands.*;
-import de.dafuqs.starryskies.configs.*;
-import de.dafuqs.starryskies.data_loaders.*;
-import de.dafuqs.starryskies.registries.*;
-import de.dafuqs.starryskies.state_providers.*;
+import de.dafuqs.starryskies.advancements.ProximityAdvancementCheckEvent;
+import de.dafuqs.starryskies.advancements.StarryAdvancementCriteria;
+import de.dafuqs.starryskies.commands.ClosestSphereCommand;
+import de.dafuqs.starryskies.commands.ConfiguredSphereArgumentType;
+import de.dafuqs.starryskies.commands.GenerateSphereCommand;
+import de.dafuqs.starryskies.configs.StarrySkyConfig;
+import de.dafuqs.starryskies.data_loaders.UniqueBlockGroupDataLoader;
+import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupDataLoader;
+import de.dafuqs.starryskies.registries.StarryDimensionKeys;
+import de.dafuqs.starryskies.registries.StarryRegistries;
+import de.dafuqs.starryskies.registries.StarryRegistryKeys;
+import de.dafuqs.starryskies.state_providers.StarryStateProviders;
 import de.dafuqs.starryskies.worldgen.*;
-import de.dafuqs.starryskies.worldgen.dimension.*;
-import it.unimi.dsi.fastutil.objects.*;
-import me.shedaniel.autoconfig.*;
-import me.shedaniel.autoconfig.serializer.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.command.v2.*;
-import net.fabricmc.fabric.api.event.lifecycle.v1.*;
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-import net.kyrptonaught.customportalapi.*;
-import net.kyrptonaught.customportalapi.util.*;
-import net.minecraft.commands.synchronization.*;
+import de.dafuqs.starryskies.worldgen.dimension.StarrySkyChunkGenerator;
+import de.dafuqs.starryskies.worldgen.dimension.SystemGenerator;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.commands.synchronization.ArgumentTypeInfos;
+import net.minecraft.commands.synchronization.SingletonArgumentInfo;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -25,11 +25,19 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import org.slf4j.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Map;
 
-public class StarrySkies implements ModInitializer {
+@Mod(value = StarrySkies.MOD_ID)
+public class StarrySkies {
 	
 	public static final String MOD_ID = "starry_skies";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -47,13 +55,11 @@ public class StarrySkies implements ModInitializer {
 		ChunkGenerator chunkGenerator = world.getChunkSource().getGenerator();
 		return chunkGenerator instanceof StarrySkyChunkGenerator;
 	}
-	
-	@Override
-	public void onInitialize() {
-		//Set up config
+
+	public StarrySkies(IEventBus modBus, ModContainer modContainer) {
 		LOGGER.info("Starting up...");
-		AutoConfig.register(StarrySkyConfig.class, JanksonConfigSerializer::new);
-		CONFIG = AutoConfig.getConfigHolder(StarrySkyConfig.class).getConfig();
+		modContainer.registerConfig(ModConfig.Type.COMMON, StarrySkyConfig.CONFIG_SPEC);
+		modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
 		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(  UniqueBlockGroupDataLoader.ID,   UniqueBlockGroupDataLoader.INSTANCE);
 		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(WeightedBlockGroupDataLoader.ID, WeightedBlockGroupDataLoader.INSTANCE);
@@ -105,9 +111,9 @@ public class StarrySkies implements ModInitializer {
 				}
 			}
 		});
-		
-		
-		if (CONFIG.registerStarryPortal) {
+
+
+		if (CONFIG.registerStarryPortal.get()) {
 			setupPortals();
 		}
 		
@@ -116,11 +122,11 @@ public class StarrySkies implements ModInitializer {
 	
 	public static void setupPortals() {
 		StarrySkies.LOGGER.info("Setting up Portal to Starry Skies...");
-		
-		Identifier portalFrameBlockIdentifier = Identifier.tryParse(StarrySkies.CONFIG.starrySkyPortalFrameBlock.toLowerCase());
+
+		Identifier portalFrameBlockIdentifier = Identifier.tryParse(StarrySkies.CONFIG.starrySkiesPortalFrameBlock.get().toLowerCase());
 		Block portalFrameBlock = BuiltInRegistries.BLOCK.getValue(portalFrameBlockIdentifier);
-		
-		PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, StarryDimensionKeys.STARRY_SKIES_DIMENSION_ID, StarrySkies.CONFIG.starrySkyPortalColor);
+
+		PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, StarryDimensionKeys.STARRY_SKIES_DIMENSION_ID, StarrySkies.CONFIG.starrySkiesPortalColor);
 		CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);
 	}
 	

@@ -13,12 +13,12 @@ repositories {
 }
 
 base {
-	archivesName = project.archives_base_name
+    archivesName = archives_base_name
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
-minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
+// minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 
 runs {
 	configureEach {

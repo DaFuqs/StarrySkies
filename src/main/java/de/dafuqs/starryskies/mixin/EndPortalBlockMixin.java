@@ -1,25 +1,28 @@
 package de.dafuqs.starryskies.mixin;
 
-import de.dafuqs.starryskies.*;
-import de.dafuqs.starryskies.registries.*;
-import net.minecraft.core.*;
+import de.dafuqs.starryskies.StarrySkies;
+import de.dafuqs.starryskies.registries.StarryDimensionKeys;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.*;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EndPortalBlock;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EndPortalBlock.class)
 public abstract class EndPortalBlockMixin {
 	
 	@Inject(at = @At("HEAD"), method = "getPortalDestination(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/portal/TeleportTransition;", cancellable = true)
 	void starryskies$createTeleportTarget(ServerLevel world, Entity entity, BlockPos pos, CallbackInfoReturnable<TeleportTransition> cir) {
-		if (StarrySkies.CONFIG.enableEndPortalsToStarryEnd) {
+		if (StarrySkies.CONFIG.enableEndPortalsToStarryEnd.get()) {
 			boolean sourceIsStarryEnd = world.dimension() == StarryDimensionKeys.END_KEY;
 			boolean sourceIsStarryOverworld = world.dimension() == StarryDimensionKeys.OVERWORLD_KEY;
 			

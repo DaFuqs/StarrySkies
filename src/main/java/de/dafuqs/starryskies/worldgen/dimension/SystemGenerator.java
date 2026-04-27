@@ -1,24 +1,33 @@
 package de.dafuqs.starryskies.worldgen.dimension;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.starryskies.*;
-import de.dafuqs.starryskies.registries.*;
-import de.dafuqs.starryskies.worldgen.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.core.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.starryskies.StarrySkies;
+import de.dafuqs.starryskies.Support;
+import de.dafuqs.starryskies.registries.StarryRegistryKeys;
+import de.dafuqs.starryskies.worldgen.ConfiguredSphere;
+import de.dafuqs.starryskies.worldgen.PlacedSphere;
+import it.unimi.dsi.fastutil.objects.Object2FloatArrayMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.*;
-import org.jspecify.annotations.*;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
 
-import static de.dafuqs.starryskies.Support.*;
+import static de.dafuqs.starryskies.Support.getWeightedRandom;
 
 public class SystemGenerator {
 	
@@ -200,8 +209,8 @@ public class SystemGenerator {
 		private static @Nullable PlacedSphere<?> getRandomSphere(SystemGenerator systemGenerator, WorldgenRandom systemRandom, @NonNull Point systemPoint, WorldGenLevel level, int bottomY, int worldHeight, List<PlacedSphere<?>> spheresInSystem) {
 			ConfiguredSphere<?, ?> selectedSphere;
 			PlacedSphere<?> placed;
-			
-			int systemSizeChunks = StarrySkies.CONFIG.systemSizeChunks;
+
+			int systemSizeChunks = StarrySkies.CONFIG.systemSizeChunks.get();
 			
 			do {
 				do {

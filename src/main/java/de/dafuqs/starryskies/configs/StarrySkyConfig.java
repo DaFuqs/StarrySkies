@@ -1,77 +1,71 @@
 package de.dafuqs.starryskies.configs;
 
-import me.shedaniel.autoconfig.*;
-import me.shedaniel.autoconfig.annotation.*;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import org.apache.commons.lang3.tuple.Pair;
 
-@Config(name = "StarrySky")
-public class StarrySkyConfig implements ConfigData {
+public class StarrySkyConfig {
 
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			Should Starry register Portal Blocks for Overworld <=> Starry Skies travel""")
-	public boolean registerStarryPortal = true;
+	public static final StarrySkyConfig CONFIG;
+	public static final ModConfigSpec CONFIG_SPEC;
 
-	@ConfigEntry.Gui.PrefixText()
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The block the portal to the Starry Sky dimension needs to be built with.
-			Build it like a nether portal & has to be activated with flint & steel
-			Default: PACKED_ICE""")
-	public String starrySkyPortalFrameBlock = "PACKED_ICE";
+	static {
+		Pair<StarrySkyConfig, ModConfigSpec> pair = new ModConfigSpec.Builder().configure(StarrySkyConfig::new);
+		CONFIG = pair.getLeft();
+		CONFIG_SPEC = pair.getRight();
+	}
 
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The Color for the Portal to Starry Skies
-			Default: 11983869 (light, grayish blue)""")
-	public int starrySkyPortalColor = 11983869;
+	public ModConfigSpec.BooleanValue registerStarryPortal;
+	public ModConfigSpec.ConfigValue<String> starrySkiesPortalFrameBlock;
+	public ModConfigSpec.ConfigValue<Integer> starrySkiesPortalColor;
+	public ModConfigSpec.ConfigValue<Double> cloudHeight;
+	public ModConfigSpec.ConfigValue<Integer> systemSizeChunks;
+	public ModConfigSpec.BooleanValue rainbowSkybox;
+	public ModConfigSpec.BooleanValue enableNetherPortalsToStarryNether;
+	public ModConfigSpec.BooleanValue enableEndPortalsToStarryEnd;
+	public ModConfigSpec.ConfigValue<Integer> locateSphereCommandRequiredPermissionLevel;
+	public ModConfigSpec.ConfigValue<Integer> generateSphereCommandRequiredPermissionLevel;
 
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The height of clouds in the Starry Sky dimension.
-			Default: 270""")
-	public float cloudHeight = 270F;
+	private StarrySkyConfig(ModConfigSpec.Builder builder) {
+		registerStarryPortal = builder
+				.comment("Should Starry register Portal Blocks for Overworld <=> Starry Skies travel")
+				.define("register_starry_portal", true);
+		starrySkiesPortalFrameBlock = builder
+				.comment("The block the portal to the Starry Sky dimension needs to be built with.\n" +
+						"Build it like a nether portal & has to be activated with flint & steel")
+				.define("portal_frame_block", "minecraft:packed_ice");
+		starrySkiesPortalColor = builder
+				.comment("The Color for the Portal to Starry Skies")
+				.define("portal_color", 11983869);
+		cloudHeight = builder
+				.comment("The height of clouds in the Starry Sky dimension")
+				.define("cloud_height", 270D);
+		systemSizeChunks = builder
+				.comment("The amount of chunks each sphere system spans.\n" +
+						"Higher values make spheres spread out farther, having more air in between")
+				.define("system_size_chunks", 50);
+		rainbowSkybox = builder
+				.comment("Use a fancy rainbow skybox instead of a generic one.")
+				.define("rainbow_skybox", true);
+		enableNetherPortalsToStarryNether = builder
+				.comment("If true nether portals in Starry Sky lead to Scary Sky, if false portals do not form.")
+				.define("enable_nether_portals_to_starry_nether", true);
+		enableEndPortalsToStarryEnd = builder
+				.comment("If true end portals in Starry Sky lead to Scarcy Sky, if false to the vanilla end.")
+				.define("enable_end_portals_to_starry_end", true);
+		locateSphereCommandRequiredPermissionLevel = builder
+				.comment("The '/starryskies_locate' command lists all the data of the closest sphere (position, blocks, ...)")
+				.define("locate_sphere_command_permission_level", 2);
+		generateSphereCommandRequiredPermissionLevel = builder
+				.comment("The '/starryskies_generate' command lets users generate new spheres")
+				.define("generate_sphere_command_permission_level", 3);
 
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The amount of chunks each sphere system spans.
-			Higher values make spheres spread out farther, having more air in between
-			Default: 50""")
-	public int systemSizeChunks = 50;
-	
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			Use a fancy rainbow skybox instead of a generic one.
-			Default: true""")
-	public boolean rainbowSkybox = true;
-
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			If true nether portals in Starry Sky lead to Scary Sky, if false portals do not form.
-			Default: true""")
-	public boolean enableNetherPortalsToStarryNether = true;
-
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			If true end portals in Starry Sky lead to Scarcy Sky, if false to the vanilla end.
-			Default: true""")
-	public boolean enableEndPortalsToStarryEnd = true;
-
-	@ConfigEntry.Gui.Tooltip()
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The '/starryskies_locate' command lists all the data of the closest sphere (position, blocks, ...)
-			Default: 2""")
-	public int locateSphereCommandRequiredPermissionLevel = 2;
-	
-	@ConfigEntry.Gui.Tooltip()
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The '/starryskies_generate' command lets users generate new spheres
-			Default: 4""")
-	public int generateSphereCommandRequiredPermissionLevel = 4;
+		// portal frame blocks
+		if (!isValidBlock(starrySkiesPortalFrameBlock.get())) {
+			starrySkiesPortalFrameBlock.set("PACKED_ICE");
+		}
+	}
 
 	private boolean isValidBlock(String blockName) {
 		// validate floorBlock
@@ -83,15 +77,6 @@ public class StarrySkyConfig implements ConfigData {
 			return false;
 		}
 		return true;
-	}
-
-	@Override
-	public void validatePostLoad() {
-		// portal frame blocks
-		if (!isValidBlock(starrySkyPortalFrameBlock)) {
-			starrySkyPortalFrameBlock = "PACKED_ICE";
-		}
-
 	}
 
 }

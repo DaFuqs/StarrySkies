@@ -1,18 +1,26 @@
 package de.dafuqs.starryskies;
 
-import com.mojang.datafixers.util.*;
-import de.dafuqs.starryskies.worldgen.*;
-import de.dafuqs.starryskies.worldgen.dimension.*;
-import net.minecraft.core.*;
+import com.mojang.datafixers.util.Pair;
+import de.dafuqs.starryskies.worldgen.ConfiguredSphere;
+import de.dafuqs.starryskies.worldgen.PlacedSphere;
+import de.dafuqs.starryskies.worldgen.dimension.StarrySkyChunkGenerator;
+import de.dafuqs.starryskies.worldgen.dimension.SystemGenerator;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.*;
-import org.jspecify.annotations.*;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelAccessor;
+import org.jspecify.annotations.NonNull;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
-import java.util.function.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Support {
 
@@ -98,7 +106,7 @@ public class Support {
 	}
 
 	public static @NonNull Point getSystemCoordinateFromChunkCoordinate(int chunkX, int chunkZ) {
-		int systemSizeChunks = StarrySkies.CONFIG.systemSizeChunks;
+		int systemSizeChunks = StarrySkies.CONFIG.systemSizeChunks.get();
 
 		int sysX;
 		if (chunkX >= 0) {

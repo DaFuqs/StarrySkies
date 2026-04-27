@@ -1,24 +1,29 @@
 package de.dafuqs.starryskies.commands;
 
-import com.mojang.brigadier.*;
-import de.dafuqs.starryskies.*;
-import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.commands.*;
+import com.mojang.brigadier.CommandDispatcher;
+import de.dafuqs.starryskies.StarrySkies;
+import de.dafuqs.starryskies.worldgen.ConfiguredSphere;
+import de.dafuqs.starryskies.worldgen.PlacedSphere;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ResourceOrIdArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.permissions.*;
+import net.minecraft.server.permissions.Permission;
+import net.minecraft.server.permissions.PermissionLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jspecify.annotations.*;
+import org.jspecify.annotations.Nullable;
 
 public class GenerateSphereCommand {
 	
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess) {
 		dispatcher.register(Commands.literal("starryskies_generate")
-				.requires((source) -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(StarrySkies.CONFIG.generateSphereCommandRequiredPermissionLevel))))
+				.requires((source) -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(StarrySkies.CONFIG.generateSphereCommandRequiredPermissionLevel.get()))))
 				.then(Commands.argument("sphere", new ConfiguredSphereArgumentType(registryAccess))
 						.executes(context -> execute(context.getSource(), null, ResourceOrIdArgument.getResource(context, "sphere")))
 						.then(Commands.argument("pos", BlockPosArgument.blockPos())

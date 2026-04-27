@@ -1,8 +1,7 @@
 package de.dafuqs.starryskies.registries;
 
 import de.dafuqs.starryskies.worldgen.*;
-import de.dafuqs.starryskies.worldgen.dimension.*;
-import net.fabricmc.fabric.api.event.registry.*;
+import de.dafuqs.starryskies.worldgen.dimension.SystemGenerator;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 
