@@ -4,21 +4,23 @@ import de.dafuqs.starryskies.worldgen.*;
 import de.dafuqs.starryskies.worldgen.dimension.SystemGenerator;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
+import net.neoforged.neoforge.registries.RegistryBuilder;
 
 public class StarryRegistries {
 
-	public static final Registry<Sphere<?>> SPHERE = create(StarryRegistryKeys.SPHERE);
-	public static final Registry<SphereDecorator<?>> SPHERE_DECORATOR = create(StarryRegistryKeys.SPHERE_DECORATOR);
+	public static final Registry<Sphere<?>> SPHERE = create(StarryRegistryKeys.SPHERE, false);
+	public static final Registry<SphereDecorator<?>> SPHERE_DECORATOR = create(StarryRegistryKeys.SPHERE_DECORATOR, false);
 
-	public static void register() {
-		DynamicRegistries.register(StarryRegistryKeys.SYSTEM_GENERATOR, SystemGenerator.CODEC);
-		DynamicRegistries.register(StarryRegistryKeys.GENERATION_GROUP, GenerationGroup.CODEC);
-		DynamicRegistries.registerSynced(StarryRegistryKeys.CONFIGURED_SPHERE, ConfiguredSphere.CODEC); // Synced since it is used in the locate command
-		DynamicRegistries.registerSynced(StarryRegistryKeys.CONFIGURED_SPHERE_DECORATOR, ConfiguredSphereDecorator.CODEC);
+	public static void registerDynamicRegistries(DataPackRegistryEvent.NewRegistry event) {
+		event.dataPackRegistry(StarryRegistryKeys.SYSTEM_GENERATOR, SystemGenerator.CODEC);
+		event.dataPackRegistry(StarryRegistryKeys.GENERATION_GROUP, GenerationGroup.CODEC);
+		event.dataPackRegistry(StarryRegistryKeys.CONFIGURED_SPHERE, ConfiguredSphere.CODEC); // Synced since it is used in the locate command
+		event.dataPackRegistry(StarryRegistryKeys.CONFIGURED_SPHERE_DECORATOR, ConfiguredSphereDecorator.CODEC);
 	}
 
-	public static <T> Registry<T> create(ResourceKey<Registry<T>> key) {
-		return FabricRegistryBuilder.create(key).attribute(RegistryAttribute.MODDED).buildAndRegister();
+	private static <T> Registry<T> create(ResourceKey<? extends Registry<T>> key, boolean synced) {
+		return new RegistryBuilder<>(key).sync(synced).create();
 	}
 
 }
