@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
+import de.dafuqs.starryskies.configs.StarrySkyConfig;
 import de.dafuqs.starryskies.registries.StarryRegistryKeys;
 import de.dafuqs.starryskies.worldgen.ConfiguredSphere;
 import de.dafuqs.starryskies.worldgen.PlacedSphere;
@@ -210,7 +211,7 @@ public class SystemGenerator {
 			ConfiguredSphere<?, ?> selectedSphere;
 			PlacedSphere<?> placed;
 
-			int systemSizeChunks = StarrySkies.CONFIG.systemSizeChunks.get();
+			int systemSizeChunks = StarrySkyConfig.CONFIG.systemSizeChunks.get();
 			
 			do {
 				do {

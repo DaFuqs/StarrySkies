@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_25",
   "mixins": [
     "BaseFireBlockMixin",
+    "BlockStateProviderInvoker",
     "EndPortalBlockMixin",
     "NetherPortalBlockMixin",
     "ServerLevelMixin"

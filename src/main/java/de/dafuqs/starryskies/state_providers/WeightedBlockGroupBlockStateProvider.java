@@ -10,7 +10,8 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 import org.jspecify.annotations.NonNull;
 
 public class WeightedBlockGroupBlockStateProvider extends BlockStateProvider {
-	public static final MapCodec<WeightedBlockGroupBlockStateProvider> CODEC;
+
+	public static final MapCodec<WeightedBlockGroupBlockStateProvider> CODEC = ExtraCodecs.NON_EMPTY_STRING.fieldOf("group").xmap(WeightedBlockGroupBlockStateProvider::new, (provider) -> provider.group);
 	private final String group;
 	
 	protected WeightedBlockGroupBlockStateProvider(String group) {
@@ -18,14 +19,11 @@ public class WeightedBlockGroupBlockStateProvider extends BlockStateProvider {
 	}
 	
 	public @NonNull BlockStateProviderType<?> type() {
-		return StarryStateProviders.WEIGHTED_BLOCK_GROUP_STATE_PROVIDER;
+		return StarryStateProviders.WEIGHTED_BLOCK_GROUP_STATE_PROVIDER.get();
 	}
 	
 	public @NonNull BlockState getState(@NonNull WorldGenLevel level, @NonNull RandomSource random, @NonNull BlockPos pos) {
 		return WeightedBlockGroupDataLoader.INSTANCE.getEntry(group, random);
 	}
-	
-	static {
-		CODEC = ExtraCodecs.NON_EMPTY_STRING.fieldOf("group").xmap(WeightedBlockGroupBlockStateProvider::new, (provider) -> provider.group);
-	}
+
 }

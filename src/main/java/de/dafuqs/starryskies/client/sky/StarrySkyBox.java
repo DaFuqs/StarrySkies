@@ -13,15 +13,12 @@ import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.CommonColors;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
-@OnlyIn(Dist.CLIENT)
 public class StarrySkyBox implements AutoCloseable {
 
 	private final GpuBuffer skyVertexBuffer;

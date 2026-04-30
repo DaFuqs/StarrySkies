@@ -5,8 +5,8 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.datafixers.util.Pair;
-import de.dafuqs.starryskies.StarrySkies;
 import de.dafuqs.starryskies.Support;
+import de.dafuqs.starryskies.configs.StarrySkyConfig;
 import de.dafuqs.starryskies.registries.StarryRegistryKeys;
 import de.dafuqs.starryskies.worldgen.ConfiguredSphere;
 import net.minecraft.commands.CommandBuildContext;
@@ -30,7 +30,7 @@ public class ClosestSphereCommand {
 	
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess) {
 		dispatcher.register(Commands.literal("starryskies_locate")
-				.requires((source) -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(StarrySkies.CONFIG.locateSphereCommandRequiredPermissionLevel.get()))))
+				.requires((source) -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(StarrySkyConfig.CONFIG.locateSphereCommandRequiredPermissionLevel.get()))))
 				.executes((context -> execute(context.getSource())))
 				.then(Commands.argument("sphere", ResourceOrTagArgument.resourceOrTag(registryAccess, StarryRegistryKeys.CONFIGURED_SPHERE))
 						.executes(context -> execute(context.getSource(), ResourceOrTagArgument.getResourceOrTag(context, "sphere", StarryRegistryKeys.CONFIGURED_SPHERE)))));

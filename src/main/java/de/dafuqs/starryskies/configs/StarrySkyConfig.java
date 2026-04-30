@@ -5,6 +5,8 @@ import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.function.Predicate;
+
 public class StarrySkyConfig {
 
 	public static final StarrySkyConfig CONFIG;
@@ -34,7 +36,7 @@ public class StarrySkyConfig {
 		starrySkiesPortalFrameBlock = builder
 				.comment("The block the portal to the Starry Sky dimension needs to be built with.\n" +
 						"Build it like a nether portal & has to be activated with flint & steel")
-				.define("portal_frame_block", "minecraft:packed_ice");
+                .define("portal_frame_block", "minecraft:packed_ice", name -> name instanceof String string && isValidBlock(string));
 		starrySkiesPortalColor = builder
 				.comment("The Color for the Portal to Starry Skies")
 				.define("portal_color", 11983869);
@@ -60,11 +62,6 @@ public class StarrySkyConfig {
 		generateSphereCommandRequiredPermissionLevel = builder
 				.comment("The '/starryskies_generate' command lets users generate new spheres")
 				.define("generate_sphere_command_permission_level", 3);
-
-		// portal frame blocks
-		if (!isValidBlock(starrySkiesPortalFrameBlock.get())) {
-			starrySkiesPortalFrameBlock.set("PACKED_ICE");
-		}
 	}
 
 	private boolean isValidBlock(String blockName) {

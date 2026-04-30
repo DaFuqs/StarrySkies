@@ -1,6 +1,7 @@
 package de.dafuqs.starryskies;
 
 import com.mojang.datafixers.util.Pair;
+import de.dafuqs.starryskies.configs.StarrySkyConfig;
 import de.dafuqs.starryskies.worldgen.ConfiguredSphere;
 import de.dafuqs.starryskies.worldgen.PlacedSphere;
 import de.dafuqs.starryskies.worldgen.dimension.StarrySkyChunkGenerator;
@@ -106,7 +107,7 @@ public class Support {
 	}
 
 	public static @NonNull Point getSystemCoordinateFromChunkCoordinate(int chunkX, int chunkZ) {
-		int systemSizeChunks = StarrySkies.CONFIG.systemSizeChunks.get();
+        int systemSizeChunks = StarrySkyConfig.CONFIG.systemSizeChunks.get();
 
 		int sysX;
 		if (chunkX >= 0) {

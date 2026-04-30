@@ -1,6 +1,7 @@
 package de.dafuqs.starryskies.mixin;
 
 import de.dafuqs.starryskies.StarrySkies;
+import de.dafuqs.starryskies.configs.StarrySkyConfig;
 import de.dafuqs.starryskies.registries.StarryDimensionKeys;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +23,7 @@ public abstract class EndPortalBlockMixin {
 	
 	@Inject(at = @At("HEAD"), method = "getPortalDestination(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/portal/TeleportTransition;", cancellable = true)
 	void starryskies$createTeleportTarget(ServerLevel world, Entity entity, BlockPos pos, CallbackInfoReturnable<TeleportTransition> cir) {
-		if (StarrySkies.CONFIG.enableEndPortalsToStarryEnd.get()) {
+        if (StarrySkyConfig.CONFIG.enableEndPortalsToStarryEnd.get()) {
 			boolean sourceIsStarryEnd = world.dimension() == StarryDimensionKeys.END_KEY;
 			boolean sourceIsStarryOverworld = world.dimension() == StarryDimensionKeys.OVERWORLD_KEY;
 			

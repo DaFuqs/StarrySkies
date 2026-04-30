@@ -1,5 +1,6 @@
 package de.dafuqs.starryskies;
 
+import com.mojang.serialization.MapCodec;
 import de.dafuqs.starryskies.advancements.StarryAdvancementCriteria;
 import de.dafuqs.starryskies.commands.ClosestSphereCommand;
 import de.dafuqs.starryskies.commands.ConfiguredSphereArgumentType;
@@ -7,7 +8,6 @@ import de.dafuqs.starryskies.commands.GenerateSphereCommand;
 import de.dafuqs.starryskies.configs.StarrySkyConfig;
 import de.dafuqs.starryskies.data_loaders.UniqueBlockGroupDataLoader;
 import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupDataLoader;
-import de.dafuqs.starryskies.registries.StarryDimensionKeys;
 import de.dafuqs.starryskies.registries.StarryRegistries;
 import de.dafuqs.starryskies.registries.StarryRegistryKeys;
 import de.dafuqs.starryskies.state_providers.StarryStateProviders;
@@ -15,10 +15,12 @@ import de.dafuqs.starryskies.worldgen.*;
 import de.dafuqs.starryskies.worldgen.dimension.StarrySkyChunkGenerator;
 import de.dafuqs.starryskies.worldgen.dimension.SystemGenerator;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.commands.synchronization.ArgumentTypeInfos;
 import net.minecraft.commands.synchronization.SingletonArgumentInfo;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -39,6 +41,7 @@ import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +55,6 @@ public class StarrySkies {
 	
 	public static final String MOD_ID = "starry_skies";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static StarrySkyConfig CONFIG;
 	
 	public static Identifier id(String name) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, name);
@@ -67,6 +69,9 @@ public class StarrySkies {
 		return chunkGenerator instanceof StarrySkyChunkGenerator;
 	}
 
+	private static final DeferredRegister<ArgumentTypeInfo<?, ?>> COMMAND_ARGUMENT_REGISTRAR = DeferredRegister.create(Registries.COMMAND_ARGUMENT_TYPE, StarrySkies.MOD_ID);
+	private static final DeferredRegister<MapCodec<? extends ChunkGenerator>> CHUNK_GENERATOR_REGISTRAR = DeferredRegister.create(Registries.CHUNK_GENERATOR, StarrySkies.MOD_ID);
+
 	public StarrySkies(IEventBus modBus, ModContainer modContainer) {
 		LOGGER.info("Starting up...");
 		modContainer.registerConfig(ModConfig.Type.COMMON, StarrySkyConfig.CONFIG_SPEC);
@@ -78,20 +83,25 @@ public class StarrySkies {
 		});
 		
 		// Register all the stuff
-		Registry.register(BuiltInRegistries.CHUNK_GENERATOR, StarrySkies.id("starry_skies"), StarrySkyChunkGenerator.CODEC);
+		CHUNK_GENERATOR_REGISTRAR.register("starry_skies", () -> StarrySkyChunkGenerator.CODEC);
+		CHUNK_GENERATOR_REGISTRAR.register(modBus);
 
+		SingletonArgumentInfo<ConfiguredSphereArgumentType> singleton = SingletonArgumentInfo.contextAware(ConfiguredSphereArgumentType::configuredSphere);
+		ArgumentTypeInfos.registerByClass(ConfiguredSphereArgumentType.class, singleton);
+		COMMAND_ARGUMENT_REGISTRAR.register("starry_skies_configured_sphere", () -> singleton);
+		COMMAND_ARGUMENT_REGISTRAR.register(modBus);
+
+		modBus.addListener(StarryRegistries::registerRegistries);
 		modBus.addListener(StarryRegistries::registerDynamicRegistries);
-		StarryStateProviders.register();
-		Spheres.initialize();
-		StarryFeatures.initialize();
-		SphereDecorators.initialize();
-		StarryAdvancementCriteria.register();
-		
-		ArgumentTypeInfos.register(BuiltInRegistries.COMMAND_ARGUMENT_TYPE, "starry_skies_configured_sphere", ConfiguredSphereArgumentType.class, SingletonArgumentInfo.contextAware(ConfiguredSphereArgumentType::configuredSphere));
+		StarryStateProviders.register(modBus);
+		Spheres.register(modBus);
+		StarryFeatures.register(modBus);
+		SphereDecorators.register(modBus);
+		StarryAdvancementCriteria.register(modBus);
 
-		if (CONFIG.registerStarryPortal.get()) {
+		/*if (StarrySkyConfig.CONFIG.registerStarryPortal.get()) {
 			setupPortals();
-		}
+		}*/
 		
 		LOGGER.info("Finished loading.");
 	}
@@ -99,18 +109,18 @@ public class StarrySkies {
 	public static void setupPortals() {
 		StarrySkies.LOGGER.info("Setting up Portal to Starry Skies...");
 
-		Identifier portalFrameBlockIdentifier = Identifier.tryParse(StarrySkies.CONFIG.starrySkiesPortalFrameBlock.get().toLowerCase());
+		Identifier portalFrameBlockIdentifier = Identifier.tryParse(StarrySkyConfig.CONFIG.starrySkiesPortalFrameBlock.get().toLowerCase());
 		Block portalFrameBlock = BuiltInRegistries.BLOCK.getValue(portalFrameBlockIdentifier);
 
-		PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, StarryDimensionKeys.STARRY_SKIES_DIMENSION_ID, StarrySkies.CONFIG.starrySkiesPortalColor);
-		CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);
+		//PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, StarryDimensionKeys.STARRY_SKIES_DIMENSION_ID, StarrySkyConfig.CONFIG.starrySkiesPortalColor);
+		//CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);
 	}
 
 	private final static int ADVANCEMENT_CHECK_TICKS = 100;
 	private static int tickCounter;
 
 	@SubscribeEvent
-	public static void serverTick(ServerTickEvent event) {
+	public static void serverTick(ServerTickEvent.Post event) {
 		tickCounter++;
 		if (tickCounter % ADVANCEMENT_CHECK_TICKS == 0) {
 			tickCounter = 0;
@@ -123,7 +133,7 @@ public class StarrySkies {
 					Optional<Support.SphereDistance> distance = Support.getClosestSphere(serverPlayerEntity.level(), serverPlayerEntity.blockPosition());
 					if (distance.isPresent() && (Math.sqrt(distance.get().squaredDistance)) < distance.get().sphere.getRadius() + 2) {
 						PlacedSphere<?> sphere = distance.get().sphere;
-						StarryAdvancementCriteria.SPHERE_DISCOVERED.trigger(serverPlayerEntity, sphere);
+						StarryAdvancementCriteria.SPHERE_DISCOVERED.get().trigger(serverPlayerEntity, sphere);
 					}
 				}
 			}
@@ -165,8 +175,8 @@ public class StarrySkies {
 
 	@SubscribeEvent
 	public static void register(RegisterCommandsEvent event) {
-		ClosestSphereCommand.register(event.getDispatcher(), commandRegistryAccess);
-		GenerateSphereCommand.register(event.getDispatcher(), commandRegistryAccess);
+		ClosestSphereCommand.register(event.getDispatcher(), event.getBuildContext());
+		GenerateSphereCommand.register(event.getDispatcher(), event.getBuildContext());
 	}
 
 }

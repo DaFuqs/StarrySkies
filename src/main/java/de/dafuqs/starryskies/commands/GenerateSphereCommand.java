@@ -2,6 +2,7 @@ package de.dafuqs.starryskies.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import de.dafuqs.starryskies.StarrySkies;
+import de.dafuqs.starryskies.configs.StarrySkyConfig;
 import de.dafuqs.starryskies.worldgen.ConfiguredSphere;
 import de.dafuqs.starryskies.worldgen.PlacedSphere;
 import net.minecraft.commands.CommandBuildContext;
@@ -17,17 +18,18 @@ import net.minecraft.server.permissions.PermissionLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import org.jspecify.annotations.Nullable;
 
 public class GenerateSphereCommand {
 	
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess) {
 		dispatcher.register(Commands.literal("starryskies_generate")
-				.requires((source) -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(StarrySkies.CONFIG.generateSphereCommandRequiredPermissionLevel.get()))))
+				.requires((source) -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(StarrySkyConfig.CONFIG.generateSphereCommandRequiredPermissionLevel.get()))))
 				.then(Commands.argument("sphere", new ConfiguredSphereArgumentType(registryAccess))
-						.executes(context -> execute(context.getSource(), null, ResourceOrIdArgument.getResource(context, "sphere")))
+						.executes(context -> execute(context.getSource(), null, context.getArgument("sphere", Holder.class)))
 						.then(Commands.argument("pos", BlockPosArgument.blockPos())
-								.executes(context -> execute(context.getSource(), BlockPosArgument.getLoadedBlockPos(context, "pos"), ResourceOrIdArgument.getResource(context, "sphere"))))));
+								.executes(context -> execute(context.getSource(), BlockPosArgument.getLoadedBlockPos(context, "pos"), context.getArgument("sphere", Holder.class))))));
 	}
 	
 	private static int execute(CommandSourceStack source, @Nullable BlockPos pos, Holder<ConfiguredSphere<?, ?>> entry) {

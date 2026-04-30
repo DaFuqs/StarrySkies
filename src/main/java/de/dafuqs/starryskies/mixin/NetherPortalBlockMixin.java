@@ -1,6 +1,7 @@
 package de.dafuqs.starryskies.mixin;
 
 import de.dafuqs.starryskies.StarrySkies;
+import de.dafuqs.starryskies.configs.StarrySkyConfig;
 import de.dafuqs.starryskies.registries.StarryDimensionKeys;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -28,7 +29,7 @@ public abstract class NetherPortalBlockMixin {
 	
 	@Inject(at = @At("HEAD"), method = "getPortalDestination(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/portal/TeleportTransition;", cancellable = true)
 	void starryskies$createTeleportTarget(ServerLevel world, Entity entity, BlockPos pos, CallbackInfoReturnable<TeleportTransition> cir) {
-		if (StarrySkies.CONFIG.enableNetherPortalsToStarryNether.get()) {
+        if (StarrySkyConfig.CONFIG.enableNetherPortalsToStarryNether.get()) {
 			ResourceKey<Level> sourceWorldKey = world.dimension();
 			boolean sourceIsStarryNether = sourceWorldKey == StarryDimensionKeys.NETHER_KEY;
 			boolean sourceIsStarryOverworld = sourceWorldKey == StarryDimensionKeys.OVERWORLD_KEY;

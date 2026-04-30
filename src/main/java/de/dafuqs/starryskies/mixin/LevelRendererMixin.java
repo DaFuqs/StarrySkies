@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.LevelTargetBundle;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.server.packs.resources.ResourceManager;
+import org.joml.Matrix4fc;
 import org.jspecify.annotations.Nullable;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
@@ -45,8 +46,8 @@ public class LevelRendererMixin {
         StarrySkiesClient.SKYBOX = new StarrySkyBox(this.minecraft.getTextureManager());
     }
 
-    @Inject(method = "addSkyPass", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/state/level/LevelRenderState;skyRenderState:Lnet/minecraft/client/renderer/state/level/SkyRenderState;", opcode = Opcodes.GETFIELD), cancellable = true)
-    private void addStarrySky(FrameGraphBuilder frame, CameraRenderState cameraState, GpuBufferSlice skyFog, CallbackInfo ci) {
+    @Inject(method = "addSkyPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Matrix4fc;)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/state/level/LevelRenderState;skyRenderState:Lnet/minecraft/client/renderer/state/level/SkyRenderState;", opcode = Opcodes.GETFIELD), cancellable = true)
+    private void addStarrySky(FrameGraphBuilder frame, CameraRenderState cameraState, GpuBufferSlice skyFog, Matrix4fc modelViewMatrix, CallbackInfo ci) {
         if (StarrySkiesClient.SKYBOX == null || level == null || !StarryDimensionKeys.OVERWORLD_KEY.equals(level.dimension())) return;
         ci.cancel();
 
