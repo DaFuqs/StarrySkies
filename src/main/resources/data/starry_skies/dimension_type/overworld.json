@@ -18,10 +18,38 @@
     "min_inclusive": 0
   },
   "attributes": {
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2,
+        "sound": "minecraft:ambient.cave",
+        "tick_delay": 6000
+      }
+    },
+    "minecraft:audio/background_music": {
+      "creative": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "minecraft:music.creative"
+      },
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "minecraft:music.game"
+      }
+    },
+    "minecraft:gameplay/bed_rule": {
+      "can_set_spawn": "always",
+      "can_sleep": "when_dark",
+      "error_message": {
+        "translate": "block.minecraft.bed.no_sleep"
+      }
+    },
     "minecraft:gameplay/nether_portal_spawns_piglin": true,
-    "minecraft:visual/ambient_light_color": "#0a0a0a",
-    "minecraft:visual/cloud_color": "#ccffffff",
+    "minecraft:visual/sky_color": "#78a7ff",
     "minecraft:visual/fog_color": "#c0d8ff",
-    "minecraft:visual/sky_color": "#78a7ff"
+    "minecraft:visual/ambient_light_color": "#0a0a0a",
+    "minecraft:visual/cloud_height": 30,
+    "minecraft:visual/cloud_color": "#ccffffff"
   }
 }

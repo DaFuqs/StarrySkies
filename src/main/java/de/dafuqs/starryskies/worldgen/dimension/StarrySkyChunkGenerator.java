@@ -2,19 +2,18 @@ package de.dafuqs.starryskies.worldgen.dimension;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
-import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.*;
-import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.resources.*;
+import net.minecraft.server.level.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.biome.*;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.chunk.*;
 import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.levelgen.blending.Blender;
+import net.minecraft.world.level.levelgen.blending.*;
 import org.jspecify.annotations.*;
 
 import java.util.*;
@@ -65,9 +64,9 @@ public class StarrySkyChunkGenerator extends ChunkGenerator {
 		// generate spheres
 		for (PlacedSphere<?> sphere : systemGenerator.value().getSystem(chunk, seed, chunkRegion)) {
 			if (sphere.isInChunk(chunk.getPos())) {
-				StarrySkies.LOGGER.debug("Generating sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunk.getPos().x(), chunk.getPos().z(), chunk.getPos().getMinBlockX(), chunk.getPos().getMinBlockZ(), sphere.getDescription(structureAccessor.registryAccess()));
+                // StarrySkies.LOGGER.debug("Generating sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunk.getPos().x(), chunk.getPos().z(), chunk.getPos().getMinBlockX(), chunk.getPos().getMinBlockZ(), sphere.getDescription(structureAccessor.registryAccess()));
 				sphere.generate(chunk, chunkRegion);
-				StarrySkies.LOGGER.debug("Generation Finished.");
+                // StarrySkies.LOGGER.debug("Generation Finished.");
 			}
 		}
 	}

@@ -31,20 +31,16 @@ public class StarrySkies implements ModInitializer {
 	public static final String MOD_ID = "starry_skies";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static StarrySkyConfig CONFIG;
-	
+
 	public static Identifier id(String name) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, name);
 	}
-	
-	public static String idPlain(String name) {
-		return id(name).toString();
-	}
-	
+
 	public static boolean isStarryWorld(ServerLevel world) {
 		ChunkGenerator chunkGenerator = world.getChunkSource().getGenerator();
 		return chunkGenerator instanceof StarrySkyChunkGenerator;
 	}
-	
+
 	@Override
 	public void onInitialize() {
 		//Set up config
@@ -61,34 +57,35 @@ public class StarrySkies implements ModInitializer {
 		StarryRegistries.register();
 		StarryStateProviders.register();
 		Spheres.initialize();
+		StarryBlocks.register();
 		StarryFeatures.initialize();
 		SphereDecorators.initialize();
 		StarryAdvancementCriteria.register();
-		
+
 		ArgumentTypeInfos.register(BuiltInRegistries.COMMAND_ARGUMENT_TYPE, "starry_skies_configured_sphere", ConfiguredSphereArgumentType.class, SingletonArgumentInfo.contextAware(ConfiguredSphereArgumentType::configuredSphere));
 		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
 			ClosestSphereCommand.register(commandDispatcher, commandRegistryAccess);
 			GenerateSphereCommand.register(commandDispatcher, commandRegistryAccess);
 		});
 		ServerTickEvents.END_SERVER_TICK.register(new ProximityAdvancementCheckEvent());
-		
+
 		// Build a final map of sphere generation data for each chunk generator
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
 			Registry<GenerationGroup> generationGroupRegistry = server.registryAccess().lookupOrThrow(StarryRegistryKeys.GENERATION_GROUP);
 			Registry<SystemGenerator> systemGeneratorRegistry = server.registryAccess().lookupOrThrow(StarryRegistryKeys.SYSTEM_GENERATOR);
 			Registry<ConfiguredSphere<?, ?>> configuredSphereRegistry = server.registryAccess().lookupOrThrow(StarryRegistryKeys.CONFIGURED_SPHERE);
-			
+
 			for (GenerationGroup generationGroup : generationGroupRegistry) {
 				// cursed generator group id lookup. Using getEntries() does return random order, making worldgen undeterministic :C
 				Identifier generationGroupId = generationGroupRegistry.getResourceKey(generationGroup).orElseThrow().identifier();
 				Identifier systemGeneratorId = generationGroup.systemGeneratorId();
-				
+
 				SystemGenerator systemGenerator = systemGeneratorRegistry.getValue(systemGeneratorId);
 				if (systemGenerator == null) {
 					LOGGER.error("System generator with id {} referenced in starry skies generation group {} was not found", generationGroup.systemGeneratorId(), generationGroupId);
 					continue;
 				}
-				
+
 				Map<ConfiguredSphere<?, ?>, Float> weightedSpheres = new Object2ObjectArrayMap<>();
 				for (ConfiguredSphere<?, ?> sphere : configuredSphereRegistry) {
 					SphereConfig.Generation sphereGenerationGroup = sphere.getGenerationGroup();
@@ -96,30 +93,19 @@ public class StarrySkies implements ModInitializer {
 						weightedSpheres.put(sphere, sphereGenerationGroup.weight());
 					}
 				}
-				
+
 				if (!weightedSpheres.isEmpty()) {
 					systemGenerator.addGenerationGroup(weightedSpheres, generationGroup.weight());
 				}
 			}
 		});
-		
-		
+
+
 		if (CONFIG.registerStarryPortal) {
 			setupPortals();
 		}
-		
+
 		LOGGER.info("Finished loading.");
 	}
 
-	// TODO: replace with custom portal impl
-	public static void setupPortals() {
-		/*StarrySkies.LOGGER.info("Setting up Portal to Starry Skies...");
-		
-		Identifier portalFrameBlockIdentifier = Identifier.tryParse(StarrySkies.CONFIG.starrySkyPortalFrameBlock.toLowerCase());
-		Block portalFrameBlock = BuiltInRegistries.BLOCK.getValue(portalFrameBlockIdentifier);
-		
-		PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, StarryDimensionKeys.STARRY_SKIES_DIMENSION_ID, StarrySkies.CONFIG.starrySkyPortalColor);
-		CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);*/
-	}
-	
 }

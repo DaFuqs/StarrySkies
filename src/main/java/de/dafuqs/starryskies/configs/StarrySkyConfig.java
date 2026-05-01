@@ -3,8 +3,8 @@ package de.dafuqs.starryskies.configs;
 import me.shedaniel.autoconfig.*;
 import me.shedaniel.autoconfig.annotation.*;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.*;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.core.registries.*;
+import net.minecraft.resources.*;
 
 @Config(name = "StarrySky")
 public class StarrySkyConfig implements ConfigData {
@@ -40,7 +40,7 @@ public class StarrySkyConfig implements ConfigData {
 			Higher values make spheres spread out farther, having more air in between
 			Default: 50""")
 	public int systemSizeChunks = 50;
-	
+
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
 			Use a fancy rainbow skybox instead of a generic one.
@@ -65,7 +65,7 @@ public class StarrySkyConfig implements ConfigData {
 			The '/starryskies_locate' command lists all the data of the closest sphere (position, blocks, ...)
 			Default: 2""")
 	public int locateSphereCommandRequiredPermissionLevel = 2;
-	
+
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """

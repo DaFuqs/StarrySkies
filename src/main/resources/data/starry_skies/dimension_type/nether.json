@@ -13,8 +13,12 @@
   "coordinate_scale": 8.0,
   "has_skylight": true,
   "has_ceiling": false,
-  "monster_spawn_block_light_limit": 15,
-  "monster_spawn_light_level": 11,
+  "monster_spawn_block_light_limit": 0,
+  "monster_spawn_light_level": {
+    "type": "minecraft:uniform",
+    "max_inclusive": 7,
+    "min_inclusive": 0
+  },
   "attributes": {
     "minecraft:gameplay/bed_rule": {
       "can_set_spawn": "never",

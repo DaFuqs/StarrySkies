@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "starry_skies:block/portal_ns"
+    },
+    "axis=z": {
+      "model": "starry_skies:block/portal_ew"
+    }
+  }
+}

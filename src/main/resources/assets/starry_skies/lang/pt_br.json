@@ -1,28 +1,7 @@
 {
-  "biome.starry_skies.starry_skies_biome": "Céu Estrelado",
-  "biome.starry_skies.starry_skies_nether_biome": "Céu Assustador",
-  "biome.starry_skies.starry_skies_end_biome": "Céu Escasso",
-
-  "text.autoconfig.StarrySky.title": "Configuração do Starry Skies",
-  "text.autoconfig.StarrySky.category.GENERAL": "Geral",
-  "text.autoconfig.StarrySky.category.SYSTEM GENERATION": "Geração de Sistemas",
-  "text.autoconfig.StarrySky.category.WORLD FLOOR GENERATION": "Chão do Mundo",
-  "text.autoconfig.StarrySky.category.SPHERES": "Esferas Disponíveis",
-
-  "text.autoconfig.StarrySky.option.registerStarryPortal": "Registrar Portal Estrelado",
-  "text.autoconfig.StarrySky.option.starrySkyPortalFrameBlock.@PrefixText": "Os blocos com os quais os portais para as dimensões do Starry Sky precisam ser construídos. Construa-o como um portal do nether e ele deve ser ativado com pederneira.",
-  "text.autoconfig.StarrySky.option.starrySkyPortalFrameBlock": "Bloco de Estrutura do Portal do Céu Estrelado",
-  "text.autoconfig.StarrySky.option.starrySkyPortalColor": "Cor do Portal do Céu Estrelado",
-  "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel.@Tooltip": "O comando '/starry_skies_locate' lista todos os dados da esfera mais próxima (posição, blocos, ...)",
-  "text.autoconfig.StarrySky.option.sphereCommandRequiredPermissionLevel": "Nível de Permissão Necessário para o Comando /sphere",
-  "text.autoconfig.StarrySky.option.cloudHeight": "Altura das Nuvens",
-  "text.autoconfig.StarrySky.option.rainbowSkybox": "Usar um skybox de arco-íris elegante em vez do padrão",
-  "text.autoconfig.StarrySky.option.enableNetherPortalsToStarryNether": "Portais do Nether no Céu Estrelado levam ao Céu Assustador (desativar faz com que os portais não se formem)",
-  "text.autoconfig.StarrySky.option.enableEndPortalsToStarryEnd": "Portais do End no Céu Estrelado levam ao Céu Escasso (desativar leva ao end vanilla)",
-
-  "text.autoconfig.StarrySky.option.systemSizeChunks.@PrefixText": "As esferas são geradas em sistemas. Cada sistema consiste em x esferas ao longo de y chunks. Quão grande cada sistema deve ser em chunks². Valores mais altos tornam as 'lacunas' sutis na borda entre os sistemas menos comuns, mas como os sistemas são gerados todos de uma vez, valores altos podem resultar em pequenos picos de lag toda vez que um novo sistema for gerado (mas menos picos no total).",
-  "text.autoconfig.StarrySky.option.systemSizeChunks.@Tooltip": "Quão grande cada sistema deve ser em chunks²",
-  "text.autoconfig.StarrySky.option.systemSizeChunks": "Tamanho do Sistema em Chunks",
+  "biome.starry_skies.overworld": "Céu Estrelado",
+  "biome.starry_skies.nether": "Céu Assustador",
+  "biome.starry_skies.end": "Céu Escasso",
 
   "commands.starry_skies.locate.sphere.success": "O %s mais próximo está em %s (%s blocos de distância)",
   "commands.starry_skies.locate.sphere.noop": "Não foi possível encontrar uma esfera em uma distância razoável",

@@ -7,16 +7,16 @@ import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.*;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.core.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.*;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.chunk.*;
 import net.minecraft.world.level.levelgen.*;
 import org.jspecify.annotations.*;
 
 import java.awt.*;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 
 import static de.dafuqs.starryskies.Support.*;
 
@@ -211,8 +211,8 @@ public class SystemGenerator {
 					}
 					selectedSphere = getWeightedRandom(spheresInSelectedGroup, systemRandom);
 				} while (selectedSphere == null);
-				
-				StarrySkies.LOGGER.debug("Created a new sphere of type {} Next random: {}", selectedSphere, systemRandom.nextInt());
+
+                // StarrySkies.LOGGER.debug("Created a new sphere of type {} Next random: {}", selectedSphere, systemRandom.nextInt());
 				
 				// set position, check bounds with system edges on x and z
 				float radius = selectedSphere.getSize(systemRandom);
