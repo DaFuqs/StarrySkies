@@ -1,7 +1,7 @@
 {
   "logical_height": 256,
   "infiniburn": "#minecraft:infiniburn_end",
-  "ambient_light": 0.0,
+  "ambient_light": 0.25,
   "min_y": 0,
   "height": 256,
   "coordinate_scale": 1.0,
@@ -9,19 +9,33 @@
   "has_ceiling": false,
   "has_fixed_time": true,
   "default_clock": "minecraft:the_end",
+  "timelines": "#minecraft:in_end",
   "has_ender_dragon_fight": true,
   "monster_spawn_block_light_limit": 0,
-  "monster_spawn_light_level": {
-    "type": "minecraft:uniform",
-    "max_inclusive": 7,
-    "min_inclusive": 0
-  },
+  "monster_spawn_light_level": 15,
   "attributes": {
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2,
+        "sound": "minecraft:ambient.cave",
+        "tick_delay": 6000
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 6000,
+        "replace_current_music": true,
+        "sound": "minecraft:music.end"
+      }
+    },
     "minecraft:gameplay/bed_rule": {
       "can_set_spawn": "never",
       "can_sleep": "never",
       "explodes": true
     },
+    "minecraft:gameplay/respawn_anchor_works": false,
     "minecraft:visual/ambient_light_color": "#3f473f",
     "minecraft:visual/fog_color": "#181318",
     "minecraft:visual/sky_light_color": "#ac60cd",

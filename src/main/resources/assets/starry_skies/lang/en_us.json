@@ -1,16 +1,11 @@
 {
+  "block.starry_skies.portal": "Starry Portal",
+
   "biome.starry_skies.overworld": "Starry Sky",
   "biome.starry_skies.nether": "Scary Sky",
   "biome.starry_skies.end": "Scarcy Sky",
-
-  "text.autoconfig.StarrySky.title": "Starry Skies Config",
-  "text.autoconfig.StarrySky.category.GENERAL": "General",
-  "text.autoconfig.StarrySky.category.SYSTEM GENERATION": "System Generation",
-  "text.autoconfig.StarrySky.category.WORLD FLOOR GENERATION": "World Floor",
-  "text.autoconfig.StarrySky.category.SPHERES": "Available Spheres",
-  "starry_skies.configuration.register_starry_portal": "Register Starry Portal",
+  "starry_skies.configuration.enable_starry_portal": "Enable Starry Portal",
   "starry_skies.configuration.portal_frame_block": "Starry Sky Portal Frame Block",
-  "starry_skies.configuration.portal_color": "Starry Sky Portal Color",
   "starry_skies.configuration.locate_sphere_command_permission_level": "Required Permission Level for /starryskies_locate command",
   "starry_skies.configuration.generate_sphere_command_permission_level": "Required Permission Level for /starryskies_generate command",
   "starry_skies.configuration.cloud_height": "Cloud Height",

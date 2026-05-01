@@ -8,8 +8,8 @@ import de.dafuqs.starryskies.commands.GenerateSphereCommand;
 import de.dafuqs.starryskies.configs.StarrySkyConfig;
 import de.dafuqs.starryskies.data_loaders.UniqueBlockGroupDataLoader;
 import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupDataLoader;
-import de.dafuqs.starryskies.registries.StarryRegistries;
-import de.dafuqs.starryskies.registries.StarryRegistryKeys;
+import de.dafuqs.starryskies.portal.StarryPortalShape;
+import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.state_providers.StarryStateProviders;
 import de.dafuqs.starryskies.worldgen.*;
 import de.dafuqs.starryskies.worldgen.dimension.StarrySkyChunkGenerator;
@@ -18,6 +18,8 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.commands.synchronization.ArgumentTypeInfos;
 import net.minecraft.commands.synchronization.SingletonArgumentInfo;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -26,7 +28,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -39,6 +41,7 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -58,10 +61,6 @@ public class StarrySkies {
 	
 	public static Identifier id(String name) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, name);
-	}
-	
-	public static String idPlain(String name) {
-		return id(name).toString();
 	}
 	
 	public static boolean isStarryWorld(ServerLevel world) {
@@ -95,25 +94,12 @@ public class StarrySkies {
 		modBus.addListener(StarryRegistries::registerDynamicRegistries);
 		StarryStateProviders.register(modBus);
 		Spheres.register(modBus);
+		StarryBlocks.register(modBus);
 		StarryFeatures.register(modBus);
 		SphereDecorators.register(modBus);
 		StarryAdvancementCriteria.register(modBus);
-
-		/*if (StarrySkyConfig.CONFIG.registerStarryPortal.get()) {
-			setupPortals();
-		}*/
 		
 		LOGGER.info("Finished loading.");
-	}
-	
-	public static void setupPortals() {
-		StarrySkies.LOGGER.info("Setting up Portal to Starry Skies...");
-
-		Identifier portalFrameBlockIdentifier = Identifier.tryParse(StarrySkyConfig.CONFIG.starrySkiesPortalFrameBlock.get().toLowerCase());
-		Block portalFrameBlock = BuiltInRegistries.BLOCK.getValue(portalFrameBlockIdentifier);
-
-		//PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, StarryDimensionKeys.STARRY_SKIES_DIMENSION_ID, StarrySkyConfig.CONFIG.starrySkiesPortalColor);
-		//CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);
 	}
 
 	private final static int ADVANCEMENT_CHECK_TICKS = 100;
@@ -125,11 +111,11 @@ public class StarrySkies {
 		if (tickCounter % ADVANCEMENT_CHECK_TICKS == 0) {
 			tickCounter = 0;
 			PlayerList playerList = event.getServer().getPlayerList();
-			StarrySkies.LOGGER.debug("Advancement check start. Players: {}", playerList.getPlayerCount());
+			// StarrySkies.LOGGER.debug("Advancement check start. Players: {}", playerList.getPlayerCount());
 			for (ServerPlayer serverPlayerEntity : playerList.getPlayers()) {
-				StarrySkies.LOGGER.debug("Checking player {}", serverPlayerEntity.getName());
+				// StarrySkies.LOGGER.debug("Checking player {}", serverPlayerEntity.getName());
 				if (StarrySkies.isStarryWorld(serverPlayerEntity.level())) {
-					StarrySkies.LOGGER.debug("In starry world");
+					// StarrySkies.LOGGER.debug("In starry world");
 					Optional<Support.SphereDistance> distance = Support.getClosestSphere(serverPlayerEntity.level(), serverPlayerEntity.blockPosition());
 					if (distance.isPresent() && (Math.sqrt(distance.get().squaredDistance)) < distance.get().sphere.getRadius() + 2) {
 						PlacedSphere<?> sphere = distance.get().sphere;
@@ -141,7 +127,27 @@ public class StarrySkies {
 	}
 
 	@SubscribeEvent
+	public static void explosion(ExplosionEvent.Detonate event) {
+		if (StarrySkyConfig.CONFIG.enableStarryPortal.get() && event.getExplosion().canTriggerBlocks()) { // like wind charges
+			Level level = event.getLevel();
+			BlockPos pos = BlockPos.containing(event.getExplosion().center());
+			if (inPortalDimension(level)) {
+				Optional<StarryPortalShape> optionalShape = StarryPortalShape.findEmptyPortalShape(level, pos, Direction.Axis.X);
+				if (optionalShape.isPresent()) {
+					optionalShape.get().createPortalBlocks(level);
+				}
+			}
+		}
+	}
+
+	private static boolean inPortalDimension(Level level) {
+		return level.dimension() == Level.OVERWORLD || level.dimension() == StarryDimensionKeys.OVERWORLD_KEY;
+	}
+
+	@SubscribeEvent
 	public static void register(ServerStartingEvent event) {
+		StarryPoiTypes.bootstrap(BuiltInRegistries.POINT_OF_INTEREST_TYPE);
+
 		// Build a final map of sphere generation data for each chunk generator
 		MinecraftServer server = event.getServer();
 		Registry<GenerationGroup> generationGroupRegistry = server.registryAccess().lookupOrThrow(StarryRegistryKeys.GENERATION_GROUP);

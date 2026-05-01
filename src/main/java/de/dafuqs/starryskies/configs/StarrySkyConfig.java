@@ -2,10 +2,11 @@ package de.dafuqs.starryskies.configs;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.function.Predicate;
 
 public class StarrySkyConfig {
 
@@ -18,7 +19,7 @@ public class StarrySkyConfig {
 		CONFIG_SPEC = pair.getRight();
 	}
 
-	public ModConfigSpec.BooleanValue registerStarryPortal;
+	public ModConfigSpec.BooleanValue enableStarryPortal;
 	public ModConfigSpec.ConfigValue<String> starrySkiesPortalFrameBlock;
 	public ModConfigSpec.ConfigValue<Integer> starrySkiesPortalColor;
 	public ModConfigSpec.ConfigValue<Double> cloudHeight;
@@ -30,19 +31,13 @@ public class StarrySkyConfig {
 	public ModConfigSpec.ConfigValue<Integer> generateSphereCommandRequiredPermissionLevel;
 
 	private StarrySkyConfig(ModConfigSpec.Builder builder) {
-		registerStarryPortal = builder
-				.comment("Should Starry register Portal Blocks for Overworld <=> Starry Skies travel")
-				.define("register_starry_portal", true);
+		enableStarryPortal = builder
+				.comment("Should Starry Skies allow a Portal for Overworld <=> Starry Skies travel")
+				.define("enable_starry_portal", true);
 		starrySkiesPortalFrameBlock = builder
 				.comment("The block the portal to the Starry Sky dimension needs to be built with.\n" +
 						"Build it like a nether portal & has to be activated with flint & steel")
                 .define("portal_frame_block", "minecraft:packed_ice", name -> name instanceof String string && isValidBlock(string));
-		starrySkiesPortalColor = builder
-				.comment("The Color for the Portal to Starry Skies")
-				.define("portal_color", 11983869);
-		cloudHeight = builder
-				.comment("The height of clouds in the Starry Sky dimension")
-				.define("cloud_height", 270D);
 		systemSizeChunks = builder
 				.comment("The amount of chunks each sphere system spans.\n" +
 						"Higher values make spheres spread out farther, having more air in between")
@@ -76,4 +71,14 @@ public class StarrySkyConfig {
 		return true;
 	}
 
+	public Block getPortalFrameBlock() {
+		var b = BuiltInRegistries.BLOCK.get(Identifier.parse(starrySkiesPortalFrameBlock.get()));
+		if (b.isEmpty())
+			return Blocks.PACKED_ICE;
+		return b.get().value();
+	}
+
+	public BlockBehaviour.StatePredicate getPortalFrame() {
+		return (state, level, pos) -> state.is(getPortalFrameBlock());
+	}
 }

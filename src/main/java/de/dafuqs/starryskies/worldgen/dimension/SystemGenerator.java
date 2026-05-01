@@ -221,8 +221,8 @@ public class SystemGenerator {
 					}
 					selectedSphere = getWeightedRandom(spheresInSelectedGroup, systemRandom);
 				} while (selectedSphere == null);
-				
-				StarrySkies.LOGGER.debug("Created a new sphere of type {} Next random: {}", selectedSphere, systemRandom.nextInt());
+
+				// StarrySkies.LOGGER.debug("Created a new sphere of type {} Next random: {}", selectedSphere, systemRandom.nextInt());
 				
 				// set position, check bounds with system edges on x and z
 				float radius = selectedSphere.getSize(systemRandom);

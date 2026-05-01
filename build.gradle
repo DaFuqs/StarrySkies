@@ -8,8 +8,7 @@ version = mod_version
 group = mod_group_id
 
 repositories {
-	// maven { url = "https://maven.is-immensely.gay/releases" }
-	// maven { url = "https://maven.kyrptonaught.dev" }
+
 }
 
 base {
