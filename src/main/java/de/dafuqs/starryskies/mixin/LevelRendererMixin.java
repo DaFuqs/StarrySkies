@@ -1,38 +1,24 @@
 package de.dafuqs.starryskies.mixin;
 
-import com.mojang.blaze3d.buffers.GpuBufferSlice;
-import com.mojang.blaze3d.framegraph.FrameGraphBuilder;
-import de.dafuqs.starryskies.client.StarrySkiesClient;
-import de.dafuqs.starryskies.client.sky.StarrySkyBox;
-import de.dafuqs.starryskies.registries.StarryDimensionKeys;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.LevelTargetBundle;
-import net.minecraft.client.renderer.state.level.CameraRenderState;
-import net.minecraft.client.renderer.state.level.LevelRenderState;
-import net.minecraft.server.packs.resources.ResourceManager;
-import org.jspecify.annotations.Nullable;
-import org.objectweb.asm.Opcodes;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import com.mojang.blaze3d.buffers.*;
+import com.mojang.blaze3d.framegraph.*;
+import de.dafuqs.starryskies.client.*;
+import de.dafuqs.starryskies.client.sky.*;
+import de.dafuqs.starryskies.registries.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.state.level.*;
+import net.minecraft.server.packs.resources.*;
+import org.objectweb.asm.*;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.*;
 
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixin {
-    @Shadow
-    private @Nullable ClientLevel level;
 
     @Shadow
     @Final
     private LevelTargetBundle targets;
-
-    @Shadow
-    @Final
-    private Minecraft minecraft;
 
     @Shadow
     @Final
