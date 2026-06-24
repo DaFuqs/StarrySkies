@@ -1,5 +1,6 @@
 package de.dafuqs.starryskies.worldgen;
 
+import com.mojang.datafixers.util.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import net.minecraft.core.*;
@@ -7,8 +8,8 @@ import net.minecraft.resources.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
 import org.jspecify.annotations.*;
 
 import java.util.*;
@@ -19,12 +20,12 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 	protected ConfiguredSphere<? extends Sphere<SC>, SC> configuredSphere;
 	protected float radius;
 	protected List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators;
-	protected List<Tuple<EntityType<?>, Integer>> spawns;
+    protected List<Pair<EntityType<?>, Integer>> spawns;
 
 	protected BlockPos position;
 	protected WorldgenRandom random;
-	
-	public PlacedSphere(ConfiguredSphere<? extends Sphere<SC>, SC> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random) {
+
+    public PlacedSphere(ConfiguredSphere<? extends Sphere<SC>, SC> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, WorldgenRandom random) {
 		this.configuredSphere = configuredSphere;
 		this.radius = radius;
 		this.decorators = decorators;
@@ -127,14 +128,14 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 	public void populateEntities(ChunkPos chunkPos, WorldGenLevel chunkRegion, WorldgenRandom chunkRandom) {
 		if (isCenterInChunk(chunkPos)) {
 			StarrySkies.LOGGER.debug("Populating entities for sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunkPos.x(), chunkPos.z(), chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), this.getDescription(chunkRegion.registryAccess()));
-			for (Tuple<EntityType<?>, Integer> spawnEntry : spawns) {
+            for (Pair<EntityType<?>, Integer> spawnEntry : spawns) {
 
 				int xCord = chunkPos.getMinBlockX();
 				int zCord = chunkPos.getMinBlockZ();
 
 				chunkRandom.setDecorationSeed(chunkRegion.getSeed(), xCord, zCord);
 
-				for (int i = 0; i < spawnEntry.getB(); i++) {
+                for (int i = 0; i < spawnEntry.getSecond(); i++) {
 					int startingX = this.getPosition().getX();
 					int startingY = this.getPosition().getY() + this.getRadius() + 1;
 					int startingZ = this.getPosition().getZ();
@@ -143,7 +144,7 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 					int height = Support.getLowerGroundBlock(chunkRegion, blockPos, minHeight) + 1;
 
 					if (height != 0) {
-						Entity entity = spawnEntry.getA().create(chunkRegion.getLevel(), EntitySpawnReason.CHUNK_GENERATION);
+                        Entity entity = spawnEntry.getFirst().create(chunkRegion.getLevel(), EntitySpawnReason.CHUNK_GENERATION);
 						if (entity != null) {
 							float width = entity.getBbWidth();
 							double xPos = Mth.clamp(startingX, (double) xCord + (double) width, (double) xCord + 16.0D - (double) width);

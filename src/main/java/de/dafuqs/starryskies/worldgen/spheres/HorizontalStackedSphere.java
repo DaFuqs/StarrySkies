@@ -1,20 +1,18 @@
 package de.dafuqs.starryskies.worldgen.spheres;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.FloatProvider;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jspecify.annotations.Nullable;
+import net.minecraft.core.*;
+import net.minecraft.util.valueproviders.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -50,7 +48,7 @@ public class HorizontalStackedSphere extends Sphere<HorizontalStackedSphere.Conf
 		private final List<BlockState> states;
 		
 		public Placed(ConfiguredSphere<? extends Sphere<HorizontalStackedSphere.Config>, HorizontalStackedSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators,
-                      List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random, List<BlockState> states) {
+                      List<Pair<EntityType<?>, Integer>> spawns, WorldgenRandom random, List<BlockState> states) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.states = states;
 		}

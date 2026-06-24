@@ -1,23 +1,24 @@
 package de.dafuqs.starryskies.worldgen.spheres;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.state_providers.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.*;
 import net.minecraft.util.*;
-import net.minecraft.util.random.WeightedList;
+import net.minecraft.util.random.*;
 import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.entity.StructureBlockEntity;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.*;
+import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -66,8 +67,8 @@ public class StructureInteriorSphere extends ShellSphere<StructureInteriorSphere
 		// These should all be 9x9x9 in size
 		protected final WeightedList<Identifier> centerStructures;
 		protected final WeightedList<Identifier> outerStructures;
-		
-		public Placed(ConfiguredSphere<? extends Sphere<Config>, Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random,
+
+        public Placed(ConfiguredSphere<? extends Sphere<Config>, Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, WorldgenRandom random,
                       BlockStateProvider innerBlock, BlockStateProvider shellBlock, int shellRadius, float shellRadius1, WeightedList<Identifier> centerStructures, WeightedList<Identifier> outerStructures) {
 			super(configuredSphere, radius, decorators, spawns, random, innerBlock, shellBlock, shellRadius);
 			this.shellRadius = shellRadius1;

@@ -1,22 +1,18 @@
 package de.dafuqs.starryskies.mixin;
 
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.configs.StarrySkyConfig;
-import de.dafuqs.starryskies.registries.StarryDimensionKeys;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.EndPortalBlock;
-import net.minecraft.world.level.portal.TeleportTransition;
-import net.minecraft.world.phys.Vec3;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import de.dafuqs.starryskies.configs.*;
+import de.dafuqs.starryskies.registries.*;
+import net.minecraft.core.*;
+import net.minecraft.resources.*;
+import net.minecraft.server.level.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.portal.*;
+import net.minecraft.world.phys.*;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.*;
 
 @Mixin(EndPortalBlock.class)
 public abstract class EndPortalBlockMixin {
@@ -43,7 +39,7 @@ public abstract class EndPortalBlockMixin {
 					cir.cancel();
 				} else {
 					BlockPos targetPos = sourceIsStarryOverworld ? StarryDimensionKeys.STARRY_END_SPAWN_BLOCK_POS : StarryDimensionKeys.STARRY_OVERWORLD_SPAWN_BLOCK_POS;
-					Vec3 targetVec = targetPos.getBottomCenter();
+					Vec3 targetVec = Vec3.atBottomCenterOf(targetPos);
 					float entityYaw = entity.getYRot();
 					if (sourceIsStarryOverworld) {
 						entityYaw = Direction.WEST.toYRot();
@@ -54,8 +50,8 @@ public abstract class EndPortalBlockMixin {
 						if (entity instanceof ServerPlayer serverPlayerEntity) {
 							cir.setReturnValue(serverPlayerEntity.findRespawnPositionAndUseSpawnBlock(false, TeleportTransition.DO_NOTHING));
 						}
-						
-						targetVec = entity.adjustSpawnLocation(serverWorld, targetPos).getBottomCenter();
+
+						targetVec = Vec3.atBottomCenterOf(entity.adjustSpawnLocation(serverWorld, targetPos));
 					}
 					
 					cir.setReturnValue(new TeleportTransition(serverWorld, targetVec, entity.getDeltaMovement(), entityYaw, entity.getXRot(), TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET)));

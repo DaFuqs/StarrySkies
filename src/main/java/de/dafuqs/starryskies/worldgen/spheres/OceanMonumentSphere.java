@@ -1,5 +1,6 @@
 package de.dafuqs.starryskies.worldgen.spheres;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
@@ -9,11 +10,11 @@ import net.minecraft.util.*;
 import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jspecify.annotations.Nullable;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -58,8 +59,8 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 		
 		private final float coreRadius;
 		private final float shellRadius;
-		
-		public Placed(ConfiguredSphere<? extends Sphere<OceanMonumentSphere.Config>, OceanMonumentSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random, float coreRadius, float shellRadius) {
+
+        public Placed(ConfiguredSphere<? extends Sphere<OceanMonumentSphere.Config>, OceanMonumentSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, WorldgenRandom random, float coreRadius, float shellRadius) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.coreRadius = coreRadius;
 			this.shellRadius = shellRadius;
@@ -157,9 +158,9 @@ public class OceanMonumentSphere extends Sphere<OceanMonumentSphere.Config> {
 		private boolean spawnGuardian(ChunkPos chunkPos, WorldGenLevel chunkRegion, BlockPos guardianPosition) {
 			Mob mobentity;
 			if (random.nextFloat() < 0.08) {
-				mobentity = EntityType.ELDER_GUARDIAN.create(chunkRegion.getLevel(), EntitySpawnReason.CHUNK_GENERATION);
+                mobentity = EntityTypes.ELDER_GUARDIAN.create(chunkRegion.getLevel(), EntitySpawnReason.CHUNK_GENERATION);
 			} else {
-				mobentity = EntityType.GUARDIAN.create(chunkRegion.getLevel(), EntitySpawnReason.CHUNK_GENERATION);
+                mobentity = EntityTypes.GUARDIAN.create(chunkRegion.getLevel(), EntitySpawnReason.CHUNK_GENERATION);
 			}
 			
 			if (mobentity != null) {

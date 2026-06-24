@@ -1,19 +1,19 @@
 package de.dafuqs.starryskies.worldgen.spheres;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.state_providers.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.*;
-import net.minecraft.util.*;
 import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import org.jspecify.annotations.Nullable;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.feature.stateproviders.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -57,8 +57,8 @@ public class CoreSphere extends Sphere<CoreSphere.Config> {
 		private final BlockStateProvider mainBlock;
 		private final BlockStateProvider coreBlock;
 		private final float coreRadius;
-		
-		public Placed(ConfiguredSphere<? extends Sphere<CoreSphere.Config>, CoreSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random,
+
+        public Placed(ConfiguredSphere<? extends Sphere<CoreSphere.Config>, CoreSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, WorldgenRandom random,
                       BlockStateProvider coreBlock, BlockStateProvider mainBlock, float coreRadius) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.coreBlock = coreBlock;

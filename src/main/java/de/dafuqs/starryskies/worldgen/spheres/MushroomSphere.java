@@ -1,19 +1,19 @@
 package de.dafuqs.starryskies.worldgen.spheres;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.*;
 import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.util.*;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jspecify.annotations.Nullable;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -55,8 +55,8 @@ public class MushroomSphere extends Sphere<MushroomSphere.Config> {
 		private final BlockState stemBlock;
 		private final BlockState mushroomBlock;
 		private final float shellRadius;
-		
-		public Placed(ConfiguredSphere<? extends Sphere<MushroomSphere.Config>, MushroomSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random,
+
+        public Placed(ConfiguredSphere<? extends Sphere<MushroomSphere.Config>, MushroomSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, WorldgenRandom random,
                       BlockState stemBlock, BlockState mushroomBlock, float shellRadius) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.stemBlock = stemBlock;
