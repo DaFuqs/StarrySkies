@@ -2,12 +2,11 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.levelgen.feature.MultifaceGrowthFeature;
+import net.minecraft.core.*;
+import net.minecraft.util.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.levelgen.feature.*;
 
 import java.util.*;
 
@@ -26,6 +25,9 @@ public class MultifaceGrowthDecorator extends SphereDecorator<MultifaceGrowthDec
 		MultifaceGrowthDecoratorConfig config = context.config();
 
 		int sphereY = sphere.getPosition().getY();
+		if (!(config.featureConfig.placeBlock instanceof MultifaceSpreadeableBlock multifaceSpreadeableBlock)) {
+			return false;
+		}
 
 		for (BlockPos bp : getCaveBottomBlocks(world, origin, sphere)) {
 			if (random.nextFloat() < config.chance) {
@@ -33,7 +35,7 @@ public class MultifaceGrowthDecorator extends SphereDecorator<MultifaceGrowthDec
 				for (int i = 0; i < sphere.getRadius(); i++) {
 					if (!world.getBlockState(currentPos.above(i)).isAir()) {
 						if (world.getBlockState(currentPos.above(i - 1)).isAir()) {
-							MultifaceGrowthFeature.placeGrowthIfPossible(world, currentPos, world.getBlockState(bp), config.featureConfig, random, Arrays.asList(Direction.values()));
+							MultifaceGrowthFeature.placeGrowthIfPossible(multifaceSpreadeableBlock, world, currentPos, world.getBlockState(bp), config.featureConfig, random, Arrays.asList(Direction.values()));
 						}
 						break;
 					}
