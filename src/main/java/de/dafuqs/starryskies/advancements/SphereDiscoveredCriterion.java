@@ -3,10 +3,12 @@ package de.dafuqs.starryskies.advancements;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.advancements.criterion.*;
-import net.minecraft.resources.Identifier;
-import net.minecraft.server.level.ServerPlayer;
-import org.jspecify.annotations.NonNull;
+import net.minecraft.advancements.predicates.*;
+import net.minecraft.advancements.predicates.entity.*;
+import net.minecraft.advancements.triggers.*;
+import net.minecraft.resources.*;
+import net.minecraft.server.level.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 

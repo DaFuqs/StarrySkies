@@ -1,13 +1,13 @@
 package de.dafuqs.starryskies.worldgen;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.registries.*;
 import net.minecraft.core.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jspecify.annotations.Nullable;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.levelgen.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -34,8 +34,8 @@ public class ConfiguredSphere<S extends Sphere<SC>, SC extends SphereConfig> {
 	public List<Holder<ConfiguredSphereDecorator<?, ?>>> getDecorators(WorldgenRandom random) {
 		return config.selectDecorators(random);
 	}
-	
-	public List<Tuple<EntityType<?>, Integer>> getSpawns(WorldgenRandom random) {
+
+	public List<Pair<EntityType<?>, Integer>> getSpawns(WorldgenRandom random) {
 		return config.selectSpawns(random);
 	}
 	

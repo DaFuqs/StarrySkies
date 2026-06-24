@@ -2,14 +2,11 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.core.*;
+import net.minecraft.util.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.block.state.properties.*;
 
 public class PointedDripstoneDecorator extends SphereDecorator<PointedDripstoneDecoratorConfig> {
 	
@@ -36,9 +33,9 @@ public class PointedDripstoneDecorator extends SphereDecorator<PointedDripstoneD
 			
 			for (int i = 1; i <= height; i++) {
 				currPos.set(bp.getX(), bp.getY() - i, bp.getZ());
-				
-				DripstoneThickness thickness = i == height ? DripstoneThickness.TIP : i == height - 1 ? DripstoneThickness.FRUSTUM : i == 1 ? DripstoneThickness.BASE : DripstoneThickness.MIDDLE;
-				BlockState state = config.block().defaultBlockState().setValue(BlockStateProperties.VERTICAL_DIRECTION, Direction.DOWN).setValue(BlockStateProperties.DRIPSTONE_THICKNESS, thickness);
+
+				SpeleothemThickness thickness = i == height ? SpeleothemThickness.TIP : i == height - 1 ? SpeleothemThickness.FRUSTUM : i == 1 ? SpeleothemThickness.BASE : SpeleothemThickness.MIDDLE;
+				BlockState state = config.block().defaultBlockState().setValue(BlockStateProperties.VERTICAL_DIRECTION, Direction.DOWN).setValue(BlockStateProperties.SPELEOTHEM_THICKNESS, thickness);
 				world.setBlock(currPos, state, 3);
 			}
 			

@@ -3,13 +3,11 @@ package de.dafuqs.starryskies.worldgen.decorators;
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.*;
+import net.minecraft.util.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.*;
 
 
 public class RuinedPortalDecorator extends SphereDecorator<RuinedPortalDecoratorConfig> {
@@ -52,7 +50,7 @@ public class RuinedPortalDecorator extends SphereDecorator<RuinedPortalDecorator
 							case 0 -> world.setBlock(currentBlockPos, MAGMA_BLOCK, 3);
 							case 1 -> {
 								world.setBlock(currentBlockPos, LAVA, 3);
-								world.getChunk(currentBlockPos).markPosForPostprocessing(currentBlockPos);
+								world.getChunk(currentBlockPos).markPosForPostProcessing(currentBlockPos);
 							}
 							default -> world.setBlock(currentBlockPos, NETHERRACK, 3);
 						}

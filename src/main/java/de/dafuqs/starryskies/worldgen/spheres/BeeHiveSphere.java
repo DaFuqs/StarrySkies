@@ -1,5 +1,6 @@
 package de.dafuqs.starryskies.worldgen.spheres;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
@@ -8,15 +9,15 @@ import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.*;
 import net.minecraft.util.*;
 import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
-import org.jspecify.annotations.Nullable;
+import net.minecraft.world.level.block.entity.*;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -65,8 +66,8 @@ public class BeeHiveSphere extends Sphere<BeeHiveSphere.Config> {
 		private final int flowerRingRadius;
 		private final int flowerRingSpacing;
 		private final float beeNestChance;
-		
-		public Placed(ConfiguredSphere<? extends Sphere<BeeHiveSphere.Config>, BeeHiveSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random,
+
+		public Placed(ConfiguredSphere<? extends Sphere<BeeHiveSphere.Config>, BeeHiveSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, WorldgenRandom random,
                       int shellThickness, int flowerRingRadius, int flowerRingSpacing, float beeNestChance) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.shellThickness = shellThickness;

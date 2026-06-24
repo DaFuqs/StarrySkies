@@ -1,5 +1,6 @@
 package de.dafuqs.starryskies.worldgen.spheres;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
@@ -8,14 +9,14 @@ import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.core.*;
 import net.minecraft.util.*;
 import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import org.jspecify.annotations.Nullable;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.feature.stateproviders.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -83,8 +84,8 @@ public class CoralsSphere extends Sphere<CoralsSphere.Config> {
 		
 		private final BlockStateProvider shellBlock;
 		private final float shellRadius;
-		
-		public Placed(ConfiguredSphere<? extends Sphere<CoralsSphere.Config>, CoralsSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Tuple<EntityType<?>, Integer>> spawns, WorldgenRandom random,
+
+		public Placed(ConfiguredSphere<? extends Sphere<CoralsSphere.Config>, CoralsSphere.Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, WorldgenRandom random,
                       BlockStateProvider shellBlock, float shellRadius) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.shellBlock = shellBlock;

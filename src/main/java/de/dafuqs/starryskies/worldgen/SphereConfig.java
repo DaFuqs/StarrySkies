@@ -1,14 +1,15 @@
 package de.dafuqs.starryskies.worldgen;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.starryskies.*;
-import net.minecraft.core.Holder;
-import net.minecraft.resources.Identifier;
+import net.minecraft.core.*;
+import net.minecraft.resources.*;
 import net.minecraft.util.*;
 import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.EntityType;
-import org.jspecify.annotations.Nullable;
+import net.minecraft.world.entity.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -52,12 +53,12 @@ public class SphereConfig {
 		return result;
 	}
 
-	List<Tuple<EntityType<?>, Integer>> selectSpawns(RandomSource random) {
-		List<Tuple<EntityType<?>, Integer>> result = new ArrayList<>();
+	List<Pair<EntityType<?>, Integer>> selectSpawns(RandomSource random) {
+		List<Pair<EntityType<?>, Integer>> result = new ArrayList<>();
 		for (SphereEntitySpawnDefinition entry : spawns) {
 			if (random.nextFloat() < entry.chance) {
 				int count = Support.getRandomBetween(random, entry.minCount, entry.maxCount);
-				result.add(new Tuple<>(entry.entityType, count));
+				result.add(new Pair<>(entry.entityType, count));
 			}
 		}
 		return result;
