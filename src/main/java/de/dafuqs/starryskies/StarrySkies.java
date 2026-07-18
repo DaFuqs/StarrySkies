@@ -14,17 +14,14 @@ import me.shedaniel.autoconfig.serializer.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.command.v2.*;
 import net.fabricmc.fabric.api.event.lifecycle.v1.*;
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-import net.kyrptonaught.customportalapi.*;
-import net.kyrptonaught.customportalapi.util.*;
+import net.fabricmc.fabric.api.resource.v1.*;
 import net.minecraft.commands.synchronization.*;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.packs.PackType;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.*;
+import net.minecraft.resources.*;
+import net.minecraft.server.level.*;
+import net.minecraft.server.packs.*;
+import net.minecraft.world.level.chunk.*;
 import org.slf4j.*;
 
 import java.util.*;
@@ -113,15 +110,16 @@ public class StarrySkies implements ModInitializer {
 		
 		LOGGER.info("Finished loading.");
 	}
-	
+
+	// TODO: replace with custom portal impl
 	public static void setupPortals() {
-		StarrySkies.LOGGER.info("Setting up Portal to Starry Skies...");
+		/*StarrySkies.LOGGER.info("Setting up Portal to Starry Skies...");
 		
 		Identifier portalFrameBlockIdentifier = Identifier.tryParse(StarrySkies.CONFIG.starrySkyPortalFrameBlock.toLowerCase());
 		Block portalFrameBlock = BuiltInRegistries.BLOCK.getValue(portalFrameBlockIdentifier);
 		
 		PortalLink portalLink = new PortalLink(portalFrameBlockIdentifier, StarryDimensionKeys.STARRY_SKIES_DIMENSION_ID, StarrySkies.CONFIG.starrySkyPortalColor);
-		CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);
+		CustomPortalApiRegistry.addPortal(portalFrameBlock, portalLink);*/
 	}
 	
 }

@@ -2,13 +2,15 @@ package de.dafuqs.starryskies.mixin;
 
 import com.mojang.blaze3d.buffers.*;
 import com.mojang.blaze3d.framegraph.*;
-import de.dafuqs.starryskies.client.*;
 import de.dafuqs.starryskies.client.sky.*;
 import de.dafuqs.starryskies.registries.*;
+import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.state.level.*;
-import net.minecraft.server.packs.resources.*;
-import org.objectweb.asm.*;
+import net.minecraft.client.renderer.texture.*;
+import net.minecraft.client.resources.model.sprite.*;
+import net.minecraft.world.level.material.*;
+import org.jspecify.annotations.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
@@ -18,27 +20,39 @@ public class LevelRendererMixin {
 
     @Shadow
     @Final
-    private LevelTargetBundle targets;
+    private LevelRenderState levelRenderState;
+
+    @Shadow
+    private @Nullable SkyRenderer skyRenderer;
 
     @Shadow
     @Final
-    private LevelRenderState levelRenderState;
+    private TextureManager textureManager;
 
-    @Inject(method = "onResourceManagerReload", at = @At("RETURN"))
-    private void reloadStarrySky(ResourceManager resourceManager, CallbackInfo ci) {
-        if (StarrySkiesClient.SKYBOX != null) StarrySkiesClient.SKYBOX.close();
+    @Shadow
+    @Final
+    private AtlasManager atlasManager;
 
-        StarrySkiesClient.SKYBOX = new StarrySkyBox(this.minecraft.getTextureManager());
-    }
+    @Shadow
+    @Final
+    private GameRenderer gameRenderer;
 
-    @Inject(method = "addSkyPass", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/state/level/LevelRenderState;skyRenderState:Lnet/minecraft/client/renderer/state/level/SkyRenderState;", opcode = Opcodes.GETFIELD), cancellable = true)
+    @Inject(method = "addSkyPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V", at = @At(value = "HEAD"), cancellable = true)
     private void addStarrySky(FrameGraphBuilder frame, CameraRenderState cameraState, GpuBufferSlice skyFog, CallbackInfo ci) {
-        if (StarrySkiesClient.SKYBOX == null || level == null || !StarryDimensionKeys.OVERWORLD_KEY.equals(level.dimension())) return;
-        ci.cancel();
+        if (this.levelRenderState.shouldResetSkyRenderer || Minecraft.getInstance().level != null && StarryDimensionKeys.OVERWORLD_KEY.equals(Minecraft.getInstance().level.dimension())) {
+            FogType fogType = cameraState.fogType;
+            if (fogType != FogType.POWDER_SNOW && fogType != FogType.LAVA && !cameraState.entityRenderState.doesMobEffectBlockSky) {
+                if (this.levelRenderState.shouldResetSkyRenderer || this.skyRenderer == null) {
+                    if (this.skyRenderer != null) {
+                        this.skyRenderer.close();
+                    }
 
-        var pass = frame.addPass("starry_skies:sky");
-        this.targets.main = pass.readsAndWrites(this.targets.main);
-        pass.executes(() -> StarrySkiesClient.SKYBOX.renderStarrySky(this.levelRenderState.skyRenderState.skyColor));
+                    this.skyRenderer = new StarrySkyBox(this.textureManager, this.atlasManager, this.gameRenderer.mainRenderTarget());
+                    ci.cancel();
+                }
+            }
+        }
+
     }
 
 }
