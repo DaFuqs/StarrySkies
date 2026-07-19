@@ -5,14 +5,16 @@ import me.shedaniel.autoconfig.annotation.*;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.resources.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.*;
 
 @Config(name = "StarrySky")
 public class StarrySkyConfig implements ConfigData {
 
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
-			Should Starry register Portal Blocks for Overworld <=> Starry Skies travel""")
-	public boolean registerStarryPortal = true;
+			Should Starry generate a Portal for Overworld <=> Starry Skies travel""")
+	public boolean enableStarryPortal = true;
 
 	@ConfigEntry.Gui.PrefixText()
 	@ConfigEntry.Category("GENERAL")
@@ -21,18 +23,6 @@ public class StarrySkyConfig implements ConfigData {
 			Build it like a nether portal & has to be activated with flint & steel
 			Default: PACKED_ICE""")
 	public String starrySkyPortalFrameBlock = "PACKED_ICE";
-
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The Color for the Portal to Starry Skies
-			Default: 11983869 (light, grayish blue)""")
-	public int starrySkyPortalColor = 11983869;
-
-	@ConfigEntry.Category("GENERAL")
-	@Comment(value = """
-			The height of clouds in the Starry Sky dimension.
-			Default: 270""")
-	public float cloudHeight = 270F;
 
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
@@ -91,7 +81,15 @@ public class StarrySkyConfig implements ConfigData {
 		if (!isValidBlock(starrySkyPortalFrameBlock)) {
 			starrySkyPortalFrameBlock = "PACKED_ICE";
 		}
+	}
 
+	public Block getPortalFrameBlock() {
+		Identifier portalFrameBlockIdentifier = Identifier.tryParse(starrySkyPortalFrameBlock.toLowerCase());
+		return BuiltInRegistries.BLOCK.getValue(portalFrameBlockIdentifier);
+	}
+
+	public BlockBehaviour.StatePredicate getPortalFrame() {
+		return (state, level, pos) -> state.is(getPortalFrameBlock());
 	}
 
 }

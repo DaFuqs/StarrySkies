@@ -1,6 +1,6 @@
 package de.dafuqs.starryskies.portal;
 
-import de.dafuqs.starryskies.configs.*;
+import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
@@ -95,14 +95,14 @@ public class StarryPortalShape {
             blockPos.set(pos).move(direction, width);
             BlockState blockState = level.getBlockState(blockPos);
             if (!isEmpty(blockState)) {
-                if (StarrySkyConfig.CONFIG.getPortalFrame().test(blockState, level, blockPos)) {
+                if (StarrySkies.CONFIG.getPortalFrame().test(blockState, level, blockPos)) {
                     return width;
                 }
                 break;
             }
 
             BlockState belowState = level.getBlockState(blockPos.move(Direction.DOWN));
-            if (!StarrySkyConfig.CONFIG.getPortalFrame().test(belowState, level, blockPos)) {
+            if (!StarrySkies.CONFIG.getPortalFrame().test(belowState, level, blockPos)) {
                 break;
             }
         }
@@ -119,7 +119,7 @@ public class StarryPortalShape {
     private static boolean hasTopFrame(BlockGetter level, BlockPos bottomLeft, Direction rightDir, BlockPos.MutableBlockPos pos, int width, int height) {
         for (int i = 0; i < width; i++) {
             BlockPos.MutableBlockPos framePos = pos.set(bottomLeft).move(Direction.UP, height).move(rightDir, i);
-            if (!StarrySkyConfig.CONFIG.getPortalFrame().test(level.getBlockState(framePos), level, framePos)) {
+            if (!StarrySkies.CONFIG.getPortalFrame().test(level.getBlockState(framePos), level, framePos)) {
                 return false;
             }
         }
@@ -132,12 +132,12 @@ public class StarryPortalShape {
     ) {
         for (int height = 0; height < 21; height++) {
             pos.set(bottomLeft).move(Direction.UP, height).move(rightDir, -1);
-            if (!StarrySkyConfig.CONFIG.getPortalFrame().test(level.getBlockState(pos), level, pos)) {
+            if (!StarrySkies.CONFIG.getPortalFrame().test(level.getBlockState(pos), level, pos)) {
                 return height;
             }
 
             pos.set(bottomLeft).move(Direction.UP, height).move(rightDir, width);
-            if (!StarrySkyConfig.CONFIG.getPortalFrame().test(level.getBlockState(pos), level, pos)) {
+            if (!StarrySkies.CONFIG.getPortalFrame().test(level.getBlockState(pos), level, pos)) {
                 return height;
             }
 
@@ -148,7 +148,7 @@ public class StarryPortalShape {
                     return height;
                 }
 
-                if (state.is(StarryBlocks.STARRY_PORTAL.get())) {
+                if (state.is(StarryBlocks.STARRY_PORTAL)) {
                     portalBlockCount.increment();
                 }
             }
@@ -158,7 +158,7 @@ public class StarryPortalShape {
     }
 
     private static boolean isEmpty(BlockState state) {
-        return state.isAir() || state.is(BlockTags.FIRE) || state.is(StarryBlocks.STARRY_PORTAL.get());
+        return state.isAir() || state.is(BlockTags.FIRE) || state.is(StarryBlocks.STARRY_PORTAL);
     }
 
     public boolean isValid() {
@@ -166,7 +166,7 @@ public class StarryPortalShape {
     }
 
     public void createPortalBlocks(LevelAccessor level) {
-        BlockState portalState = StarryBlocks.STARRY_PORTAL.get().defaultBlockState().setValue(StarryPortalBlock.AXIS, this.axis);
+        BlockState portalState = StarryBlocks.STARRY_PORTAL.defaultBlockState().setValue(StarryPortalBlock.AXIS, this.axis);
         BlockPos.betweenClosed(this.bottomLeft, this.bottomLeft.relative(Direction.UP, this.height - 1).relative(this.rightDir, this.width - 1))
                 .forEach(pos -> level.setBlock(pos, portalState, 18));
     }

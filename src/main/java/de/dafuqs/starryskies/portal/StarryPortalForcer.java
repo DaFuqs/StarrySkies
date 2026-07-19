@@ -1,6 +1,6 @@
 package de.dafuqs.starryskies.portal;
 
-import de.dafuqs.starryskies.configs.*;
+import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.registries.*;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
@@ -100,7 +100,7 @@ public class StarryPortalForcer {
             for (int box = -1; box < 2; box++) {
                 for (int width = 0; width < 2; width++) {
                     for (int height = -1; height < 3; height++) {
-                        BlockState blockState = height < 0 ? StarrySkyConfig.CONFIG.getPortalFrameBlock().defaultBlockState() : Blocks.AIR.defaultBlockState();
+                        BlockState blockState = height < 0 ? StarrySkies.CONFIG.getPortalFrameBlock().defaultBlockState() : Blocks.AIR.defaultBlockState();
                         mutable.setWithOffset(closestFullPosition, width * direction.getStepX() + box * clockWise.getStepX(), height, width * direction.getStepZ() + box * clockWise.getStepZ());
                         level.setBlockAndUpdate(mutable, blockState);
                     }
@@ -112,12 +112,12 @@ public class StarryPortalForcer {
             for (int height = -1; height < 4; height++) {
                 if (width == -1 || width == 2 || height == -1 || height == 3) {
                     mutable.setWithOffset(closestFullPosition, width * direction.getStepX(), height, width * direction.getStepZ());
-                    level.setBlock(mutable, StarrySkyConfig.CONFIG.getPortalFrameBlock().defaultBlockState(), 3);
+                    level.setBlock(mutable, StarrySkies.CONFIG.getPortalFrameBlock().defaultBlockState(), 3);
                 }
             }
         }
 
-        BlockState portalBlockState = StarryBlocks.STARRY_PORTAL.get().defaultBlockState().setValue(NetherPortalBlock.AXIS, portalAxis);
+        BlockState portalBlockState = StarryBlocks.STARRY_PORTAL.defaultBlockState().setValue(NetherPortalBlock.AXIS, portalAxis);
 
         for (int width = 0; width < 2; width++) {
             for (int heightx = 0; heightx < 3; heightx++) {

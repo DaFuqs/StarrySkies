@@ -61,6 +61,7 @@ public class StarrySkies implements ModInitializer {
 		StarryFeatures.initialize();
 		SphereDecorators.initialize();
 		StarryAdvancementCriteria.register();
+		StarryPoiTypes.register();
 
 		ArgumentTypeInfos.register(BuiltInRegistries.COMMAND_ARGUMENT_TYPE, "starry_skies_configured_sphere", ConfiguredSphereArgumentType.class, SingletonArgumentInfo.contextAware(ConfiguredSphereArgumentType::configuredSphere));
 		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
@@ -99,11 +100,6 @@ public class StarrySkies implements ModInitializer {
 				}
 			}
 		});
-
-
-		if (CONFIG.registerStarryPortal) {
-			setupPortals();
-		}
 
 		LOGGER.info("Finished loading.");
 	}
