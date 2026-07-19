@@ -6,7 +6,8 @@
     "BaseFireBlockMixin",
     "EndPortalBlockMixin",
     "NetherPortalBlockMixin",
-    "ServerLevelMixin"
+    "ServerLevelMixin",
+    "WindChargeMixin"
   ],
   "client": [
     "LevelRendererMixin"
