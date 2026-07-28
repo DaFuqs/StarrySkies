@@ -9,9 +9,7 @@
     "NetherPortalBlockMixin",
     "ServerLevelMixin"
   ],
-  "client": [
-    "LevelRendererMixin"
-  ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

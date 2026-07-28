@@ -50,6 +50,7 @@
     "minecraft:visual/fog_color": "#c0d8ff",
     "minecraft:visual/ambient_light_color": "#0a0a0a",
     "minecraft:visual/cloud_height": 30,
-    "minecraft:visual/cloud_color": "#ccffffff"
+    "minecraft:visual/cloud_color": "#ccffffff",
+    "neoforge:custom_skybox": "starry_skies:overworld"
   }
 }

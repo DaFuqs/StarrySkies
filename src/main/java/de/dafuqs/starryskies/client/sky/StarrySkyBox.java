@@ -4,30 +4,41 @@ import com.mojang.blaze3d.*;
 import com.mojang.blaze3d.buffers.*;
 import com.mojang.blaze3d.pipeline.*;
 import com.mojang.blaze3d.systems.*;
-import com.mojang.blaze3d.textures.*;
 import com.mojang.blaze3d.vertex.*;
 import de.dafuqs.starryskies.client.*;
-import net.fabricmc.api.*;
+import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.state.level.*;
 import net.minecraft.client.renderer.texture.*;
-import net.minecraft.client.resources.model.sprite.*;
 import net.minecraft.util.*;
-import net.minecraft.world.level.*;
+import net.neoforged.neoforge.client.*;
+import org.joml.*;
 
 import java.util.*;
 
-// Replaces vanilla SkyRenderer in Starry Skies Overworld
-@Environment(EnvType.CLIENT)
-public class StarrySkyBox extends SkyRenderer implements AutoCloseable {
+public class StarrySkyBox implements AutoCloseable, CustomSkyboxRenderer {
 
 	private final GpuBuffer skyVertexBuffer;
-	private final RenderTarget renderTarget;
+	private final RenderSystem.AutoStorageIndexBuffer indices = RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS);
 
-	public final AbstractTexture[] TEXTURES;
+	public AbstractTexture[] TEXTURES;
 
-	public StarrySkyBox(final TextureManager textureManager, final AtlasManager atlasManager, final RenderTarget renderTarget) {
-		super(textureManager, atlasManager, renderTarget);
+	public static final int INDICES_PER_FACE = PrimitiveTopology.QUADS.indexCount(4);
+	public static final int INDEXBUFFER_SIZE = INDICES_PER_FACE * 6;
 
+	public StarrySkyBox() {
+		skyVertexBuffer = uploadStarrySky();
+	}
+
+	// See SkyRenderer.renderEndSky() + CubeMap for inspiration
+	@Override
+	public boolean renderSky(LevelRenderState levelRenderState, SkyRenderState skyRenderState, Matrix4fc modelViewMatrix, Runnable setupFog) {
+		// All defaults except for colorModulator (== sky color)
+		GpuBufferSlice colorTransform = RenderSystem.getDynamicUniforms()
+				.writeTransform(RenderSystem.getModelViewMatrixCopy(), ARGB.vector4fFromARGB32(levelRenderState.skyRenderState.skyColor));
+		GpuBuffer idxBuf = indices.getBuffer(INDEXBUFFER_SIZE);
+
+		TextureManager textureManager = Minecraft.getInstance().getTextureManager();
 		TEXTURES = new AbstractTexture[]{
 				textureManager.getTexture(StarrySkyBoxTextures.INSTANCE.NORTH),
 				textureManager.getTexture(StarrySkyBoxTextures.INSTANCE.SOUTH),
@@ -35,45 +46,33 @@ public class StarrySkyBox extends SkyRenderer implements AutoCloseable {
 				textureManager.getTexture(StarrySkyBoxTextures.INSTANCE.WEST),
 				textureManager.getTexture(StarrySkyBoxTextures.INSTANCE.UP),
 				textureManager.getTexture(StarrySkyBoxTextures.INSTANCE.DOWN)
-        };
-		this.renderTarget = renderTarget;
-        skyVertexBuffer = uploadStarrySky();
-	}
+		};
 
-	public void close() {
-		skyVertexBuffer.close();
-	}
-	
-	// See SkyRenderer.renderEndSky() + CubeMap for inspiration
-	@Override
-	public void renderSkyDisc(final int skyColor) {
-		// The number 36 comes from VertexFormat.Mode.QUADS.getIndexCount(24)
-		// the formula of which is vertexCount / 4 * 6, i.e. 6 indices per 4 vertices (1 quad)
-		RenderSystem.AutoStorageIndexBuffer autoIndices = RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS);
-		GpuBuffer indexBuffer = autoIndices.getBuffer(36);
-		GpuTextureView colorTexture = this.renderTarget.getColorTextureView();
-		GpuTextureView depthTexture = this.renderTarget.getDepthTextureView();
-		GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrixCopy(), ARGB.vector4fFromARGB32(skyColor));
+		RenderTarget skyTarget = Minecraft.getInstance().gameRenderer.mainRenderTarget();
 
-		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Starry sky", colorTexture, Optional.empty(), depthTexture, OptionalDouble.empty())) {
+		try (RenderPass renderPass = RenderSystem.getDevice()
+				.createCommandEncoder()
+				.createRenderPass(() -> "Starry Skies skybox", skyTarget.getColorTextureView(), Optional.empty(),
+						skyTarget.useDepth ? skyTarget.getDepthTextureView() : null, OptionalDouble.empty())) {
 			renderPass.setPipeline(RenderPipelines.END_SKY);
 			RenderSystem.bindDefaultUniforms(renderPass);
-			renderPass.setUniform("DynamicTransforms", dynamicTransforms);
-
-			renderPass.setIndexBuffer(indexBuffer, autoIndices.type());
+			renderPass.setUniform("DynamicTransforms", colorTransform);
+			renderPass.setIndexBuffer(idxBuf, indices.type());
 			renderPass.setVertexBuffer(0, this.skyVertexBuffer.slice());
 			// draw each quad (side) with a different texture
-			// 6 indices per quad, as per VertexFormat.Mode.QUADS.getIndexCount(4)
+			// 6 indices per quad, per PrimitiveTopology.QUADS.indexCount(4)
 			for (int i = 0; i < 6; ++i) {
 				renderPass.bindTexture("Sampler0", TEXTURES[i].getTextureView(), TEXTURES[i].getSampler());
-				renderPass.drawIndexed(36, 1, 0, 0, 0);
+				renderPass.drawIndexed(INDICES_PER_FACE, 1, INDICES_PER_FACE * i, 0, 0);
 			}
 		}
+
+		return true; // prevents vanilla sky rendering
 	}
 
 	@Override
-	public void renderSunMoonAndStars(final PoseStack poseStack, final float sunAngle, final float moonAngle, final float starAngle, final MoonPhase moonPhase, final float rainBrightness, final float starBrightness) {
-
+	public void close() {
+		skyVertexBuffer.close();
 	}
 	
 	// Write skybox vertices into skyVertexBuffer with the specified vertex color

@@ -1,11 +1,10 @@
 package de.dafuqs.starryskies.advancements;
 
 import de.dafuqs.starryskies.*;
-import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.advancements.triggers.*;
+import net.minecraft.core.registries.*;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 public class StarryAdvancementCriteria {
 
