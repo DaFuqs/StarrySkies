@@ -35,6 +35,7 @@ public class SphereDecorators {
 	public static SphereDecorator<MobSpawnerDecoratorConfig> MOB_SPAWNER = register("mob_spawner", new MobSpawnerDecorator(MobSpawnerDecoratorConfig.CODEC));
 	public static SphereDecorator<BottomBlocksDecoratorConfig> BOTTOM_BLOCKS = register("bottom_blocks", new BottomBlocksDecorator(BottomBlocksDecoratorConfig.CODEC));
 	public static SphereDecorator<SpeleothemDecoratorConfig> SPELEOTHEMS = register("speleothems", new SpeleothemDecorator(SpeleothemDecoratorConfig.CODEC));
+	public static SphereDecorator<ReplaceBlocksDecoratorConfig> REPLACE_BLOCKS = register("replace_blocks", new ReplaceBlocksDecorator(ReplaceBlocksDecoratorConfig.CODEC));
 
 	public static void initialize() {
 
