@@ -1,13 +1,12 @@
 package de.dafuqs.starryskies.worldgen;
 
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.registries.StarryRegistries;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.decorators.*;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class SphereDecorators {
 
@@ -40,7 +39,7 @@ public class SphereDecorators {
 	public static DeferredHolder<SphereDecorator<?>, ScatteredLootChestsDecorator> SCATTERED_LOOT_CHESTS = register("scattered_loot_chests", () -> new ScatteredLootChestsDecorator(ScatteredLootChestsDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, MobSpawnerDecorator> MOB_SPAWNER = register("mob_spawner", () -> new MobSpawnerDecorator(MobSpawnerDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, BottomBlocksDecorator> BOTTOM_BLOCKS = register("bottom_blocks", () -> new BottomBlocksDecorator(BottomBlocksDecoratorConfig.CODEC));
-	public static DeferredHolder<SphereDecorator<?>, PointedDripstoneDecorator> POINTED_DRIPSTONE = register("pointed_dripstone", () -> new PointedDripstoneDecorator(PointedDripstoneDecoratorConfig.CODEC));
+	public static DeferredHolder<SphereDecorator<?>, SpeleothemDecorator> SPELEOTHEMS = register("speleothems", () -> new SpeleothemDecorator(SpeleothemDecoratorConfig.CODEC));
 
 	public static void register(IEventBus modBus) {
 		REGISTRAR.register(modBus);

@@ -1,0 +1,13 @@
+{
+  "type": "starry_skies:center_pond",
+  "config": {
+    "beach_block": {
+      "Name": "minecraft:potent_sulfur"
+    },
+    "fluid_block": {
+      "Name": "minecraft:water"
+    },
+    "loot_table": "minecraft:chests/abandoned_mineshaft",
+    "loot_table_chance": 0.25
+  }
+}
