@@ -1,0 +1,83 @@
+{
+  "type": "starry_skies:single_block_provider",
+  "config": {
+    "block": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:dandelion"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:poppy"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:blue_orchid"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:allium"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:azure_bluet"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:oxeye_daisy"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:cornflower"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:lily_of_the_valley"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:sunflower"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:lilac"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:rose_bush"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:peony"
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "chance": 0.02
+  }
+}

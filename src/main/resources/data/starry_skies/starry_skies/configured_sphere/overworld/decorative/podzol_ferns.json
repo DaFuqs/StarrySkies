@@ -22,7 +22,8 @@
 
     "decorators": {
       "starry_skies:ferns": 0.7,
-      "starry_skies:large_ferns": 0.7
+      "starry_skies:large_ferns": 0.7,
+      "starry_skies:pumpkins": 0.1
     },
     "spawns": [],
     "generation": {
