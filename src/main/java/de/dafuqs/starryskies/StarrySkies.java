@@ -1,56 +1,40 @@
 package de.dafuqs.starryskies;
 
-import com.mojang.serialization.MapCodec;
-import de.dafuqs.starryskies.advancements.StarryAdvancementCriteria;
-import de.dafuqs.starryskies.commands.ClosestSphereCommand;
-import de.dafuqs.starryskies.commands.ConfiguredSphereArgumentType;
-import de.dafuqs.starryskies.commands.GenerateSphereCommand;
-import de.dafuqs.starryskies.configs.StarrySkyConfig;
-import de.dafuqs.starryskies.data_loaders.UniqueBlockGroupDataLoader;
-import de.dafuqs.starryskies.data_loaders.WeightedBlockGroupDataLoader;
-import de.dafuqs.starryskies.portal.StarryPortalShape;
+import com.mojang.serialization.*;
+import de.dafuqs.starryskies.advancements.*;
+import de.dafuqs.starryskies.commands.*;
+import de.dafuqs.starryskies.configs.*;
+import de.dafuqs.starryskies.data_loaders.*;
+import de.dafuqs.starryskies.portal.*;
 import de.dafuqs.starryskies.registries.*;
-import de.dafuqs.starryskies.state_providers.StarryStateProviders;
+import de.dafuqs.starryskies.state_providers.*;
 import de.dafuqs.starryskies.worldgen.*;
-import de.dafuqs.starryskies.worldgen.dimension.StarrySkyChunkGenerator;
-import de.dafuqs.starryskies.worldgen.dimension.SystemGenerator;
-import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import net.minecraft.commands.synchronization.ArgumentTypeInfo;
-import net.minecraft.commands.synchronization.ArgumentTypeInfos;
-import net.minecraft.commands.synchronization.SingletonArgumentInfo;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.players.PlayerList;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.level.ExplosionEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.dafuqs.starryskies.worldgen.dimension.*;
+import it.unimi.dsi.fastutil.objects.*;
+import net.minecraft.commands.synchronization.*;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.*;
+import net.minecraft.resources.*;
+import net.minecraft.server.*;
+import net.minecraft.server.level.*;
+import net.minecraft.server.players.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.chunk.*;
+import net.neoforged.bus.api.*;
+import net.neoforged.fml.*;
+import net.neoforged.fml.common.*;
+import net.neoforged.fml.config.*;
+import net.neoforged.neoforge.client.gui.*;
+import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.event.*;
+import net.neoforged.neoforge.event.level.*;
+import net.neoforged.neoforge.event.server.*;
+import net.neoforged.neoforge.event.tick.*;
+import net.neoforged.neoforge.registries.*;
+import org.slf4j.*;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
 @Mod(value = StarrySkies.MOD_ID)
 @EventBusSubscriber(modid = StarrySkies.MOD_ID)
@@ -58,11 +42,11 @@ public class StarrySkies {
 	
 	public static final String MOD_ID = "starry_skies";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	
+
 	public static Identifier id(String name) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, name);
 	}
-	
+
 	public static boolean isStarryWorld(ServerLevel world) {
 		ChunkGenerator chunkGenerator = world.getChunkSource().getGenerator();
 		return chunkGenerator instanceof StarrySkyChunkGenerator;
@@ -183,6 +167,7 @@ public class StarrySkies {
 	public static void register(RegisterCommandsEvent event) {
 		ClosestSphereCommand.register(event.getDispatcher(), event.getBuildContext());
 		GenerateSphereCommand.register(event.getDispatcher(), event.getBuildContext());
+		SystemStatisticsCommand.register(event.getDispatcher(), event.getBuildContext());
 	}
 
 }

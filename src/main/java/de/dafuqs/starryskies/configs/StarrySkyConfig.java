@@ -1,12 +1,11 @@
 package de.dafuqs.starryskies.configs;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.neoforged.neoforge.common.ModConfigSpec;
-import org.apache.commons.lang3.tuple.Pair;
+import net.minecraft.core.registries.*;
+import net.minecraft.resources.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.*;
+import net.neoforged.neoforge.common.*;
+import org.apache.commons.lang3.tuple.*;
 
 public class StarrySkyConfig {
 
@@ -21,14 +20,13 @@ public class StarrySkyConfig {
 
 	public ModConfigSpec.BooleanValue enableStarryPortal;
 	public ModConfigSpec.ConfigValue<String> starrySkiesPortalFrameBlock;
-	public ModConfigSpec.ConfigValue<Integer> starrySkiesPortalColor;
-	public ModConfigSpec.ConfigValue<Double> cloudHeight;
 	public ModConfigSpec.ConfigValue<Integer> systemSizeChunks;
 	public ModConfigSpec.BooleanValue rainbowSkybox;
 	public ModConfigSpec.BooleanValue enableNetherPortalsToStarryNether;
 	public ModConfigSpec.BooleanValue enableEndPortalsToStarryEnd;
 	public ModConfigSpec.ConfigValue<Integer> locateSphereCommandRequiredPermissionLevel;
 	public ModConfigSpec.ConfigValue<Integer> generateSphereCommandRequiredPermissionLevel;
+	public ModConfigSpec.ConfigValue<Integer> systemStatisticsCommandRequiredPermissionLevel;
 
 	private StarrySkyConfig(ModConfigSpec.Builder builder) {
 		enableStarryPortal = builder
@@ -57,6 +55,9 @@ public class StarrySkyConfig {
 		generateSphereCommandRequiredPermissionLevel = builder
 				.comment("The '/starryskies_generate' command lets users generate new spheres")
 				.define("generate_sphere_command_permission_level", 3);
+		systemStatisticsCommandRequiredPermissionLevel = builder
+				.comment("The '/starryskies_system_statistics' command lists the amount of generated spheres listed by id)")
+				.define("system_statistics_command_permission_level", 2);
 	}
 
 	private boolean isValidBlock(String blockName) {
