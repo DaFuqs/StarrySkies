@@ -35,6 +35,7 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 				config.topBlock != null ? config.topBlock.getForSphere(level, random, pos) : shellProvider,
 				config.bottomBlock != null ? config.bottomBlock.getForSphere(level, random, pos) : shellProvider,
 				config.caveFloorBlock != null  ? config.caveFloorBlock.getForSphere(level, random, pos) : shellProvider,
+				config.caveCeilingBlock != null ? config.caveCeilingBlock.getForSphere(level, random, pos) : shellProvider,
 				config.shellThickness.sample(random));
 	}
 	
@@ -46,23 +47,26 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 				SphereStateProvider.CODEC.optionalFieldOf("top_block").forGetter((config) -> Optional.ofNullable(config.topBlock)),
 				SphereStateProvider.CODEC.optionalFieldOf("bottom_block").forGetter((config) -> Optional.ofNullable(config.bottomBlock)),
 				SphereStateProvider.CODEC.optionalFieldOf("cave_floor_block").forGetter((config) -> Optional.ofNullable(config.caveFloorBlock)),
+				SphereStateProvider.CODEC.optionalFieldOf("cave_ceiling_block").forGetter((config) -> Optional.ofNullable(config.caveCeilingBlock)),
 				FloatProviders.codec(1.0F, 32.0F).fieldOf("shell_thickness").forGetter((config) -> config.shellThickness)
-		).apply(instance, (sphereConfig, shellBlock, topBlock, bottomBlock, caveFloorBlock, shellRadius) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, shellBlock, topBlock.orElse(null), bottomBlock.orElse(null), caveFloorBlock.orElse(null), shellRadius)));
+		).apply(instance, (sphereConfig, shellBlock, topBlock, bottomBlock, caveFloorBlock, caveCeilingBlock, shellRadius) -> new Config(sphereConfig.size, sphereConfig.decorators, sphereConfig.spawns, sphereConfig.generation, shellBlock, topBlock.orElse(null), bottomBlock.orElse(null), caveFloorBlock.orElse(null), caveCeilingBlock.orElse(null), shellRadius)));
 		
 		private final SphereStateProvider shellBlock;
 		private final @Nullable SphereStateProvider topBlock;
 		private final @Nullable SphereStateProvider bottomBlock;
 		private final @Nullable SphereStateProvider caveFloorBlock;
+		private final @Nullable SphereStateProvider caveCeilingBlock;
 		private final FloatProvider shellThickness;
 		
 		public Config(FloatProvider size, Map<Holder<ConfiguredSphereDecorator<?, ?>>, Float> decorators, List<SphereEntitySpawnDefinition> spawns, Generation generation, SphereStateProvider shellBlock,
-                      @Nullable SphereStateProvider topBlock, @Nullable SphereStateProvider bottomBlock, @Nullable SphereStateProvider caveFloorBlock, FloatProvider shellThickness) {
+		              @Nullable SphereStateProvider topBlock, @Nullable SphereStateProvider bottomBlock, @Nullable SphereStateProvider caveFloorBlock, @Nullable SphereStateProvider caveCeilingBlock, FloatProvider shellThickness) {
 			super(size, decorators, spawns, generation);
 			
 			this.shellBlock = shellBlock;
 			this.topBlock = topBlock;
 			this.bottomBlock = bottomBlock;
 			this.caveFloorBlock = caveFloorBlock;
+			this.caveCeilingBlock = caveCeilingBlock;
 			this.shellThickness = shellThickness;
 		}
 		
@@ -74,15 +78,17 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 		private final BlockStateProvider topBlock;
 		private final BlockStateProvider bottomBlock;
 		private final BlockStateProvider caveFloorBlock;
+		private final BlockStateProvider caveCeilingBlock;
 		private final float shellThickness;
 
         public Placed(ConfiguredSphere<? extends Sphere<Config>, Config> configuredSphere, float radius, List<Holder<ConfiguredSphereDecorator<?, ?>>> decorators, List<Pair<EntityType<?>, Integer>> spawns, WorldgenRandom random,
-                      BlockStateProvider shellBlock, BlockStateProvider topBlock, BlockStateProvider bottomBlock, BlockStateProvider caveFloorBlock, float shellRadius) {
+                      BlockStateProvider shellBlock, BlockStateProvider topBlock, BlockStateProvider bottomBlock, BlockStateProvider caveFloorBlock, BlockStateProvider caveCeilingBlock, float shellRadius) {
 			super(configuredSphere, radius, decorators, spawns, random);
 			this.shellBlock = shellBlock;
 			this.topBlock = topBlock;
 			this.bottomBlock = bottomBlock;
 			this.caveFloorBlock = caveFloorBlock;
+			this.caveCeilingBlock = caveCeilingBlock;
 			this.shellThickness = shellRadius;
 		}
 		
@@ -123,11 +129,15 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 						} else if (d <= this.radius - this.shellThickness) {
 							Point point = new Point(x2, z2);
 							if (!floorBlocks.containsKey(point)) {
-								floorBlocks.put(new Point(x2, z2), y2);
+								floorBlocks.put(point, y2);
 								chunk.setBlockState(currBlockPos.below(), this.caveFloorBlock.getState(level, random, currBlockPos));
 							}
 						} else if (d < this.radius) {
-							chunk.setBlockState(currBlockPos, this.shellBlock.getState(level, random, currBlockPos));
+							if (y2 > this.getPosition().getY() && chunk.getBlockState(currBlockPos.below()).isAir()) {
+								chunk.setBlockState(currBlockPos, this.caveCeilingBlock.getState(level, random, currBlockPos));
+							} else {
+								chunk.setBlockState(currBlockPos, this.shellBlock.getState(level, random, currBlockPos));
+							}
 						}
 					}
 				}
@@ -143,6 +153,7 @@ public class CaveSphere extends Sphere<CaveSphere.Config> {
 					"\nShellBlock: " + this.shellBlock +
 					"\nShellThickness: " + this.shellThickness +
 					"\nCaveFloorBlock: " + this.caveFloorBlock +
+					"\nCaveCeilingBlock: " + this.caveCeilingBlock +
 					"\nTopBlock: " + this.topBlock +
 					"\nBottomBlock: " + this.bottomBlock;
 		}
