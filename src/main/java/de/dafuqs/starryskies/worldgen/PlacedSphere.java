@@ -60,6 +60,10 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 		return Math.round(radius);
 	}
 
+	public int getCeiledRadius() {
+		return (int) Math.ceil(radius);
+	}
+
 	public abstract String getDescription(RegistryAccess registryManager);
 
 	public boolean isInChunk(@NonNull ChunkPos chunkPos) {
