@@ -59,6 +59,13 @@ public class StarrySkyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.Category("GENERAL")
 	@Comment(value = """
+			The '/starryskies_system_statistics' command lists the amount of generated spheres listed by id)
+			Default: 2""")
+	public int systemStatisticsCommandRequiredPermissionLevel = 2;
+
+	@ConfigEntry.Gui.Tooltip()
+	@ConfigEntry.Category("GENERAL")
+	@Comment(value = """
 			The '/starryskies_generate' command lets users generate new spheres
 			Default: 4""")
 	public int generateSphereCommandRequiredPermissionLevel = 4;

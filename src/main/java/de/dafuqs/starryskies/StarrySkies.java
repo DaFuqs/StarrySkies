@@ -67,6 +67,7 @@ public class StarrySkies implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register((commandDispatcher, commandRegistryAccess, registrationEnvironment) -> {
 			ClosestSphereCommand.register(commandDispatcher, commandRegistryAccess);
 			GenerateSphereCommand.register(commandDispatcher, commandRegistryAccess);
+			SystemStatisticsCommand.register(commandDispatcher, commandRegistryAccess);
 		});
 		ServerTickEvents.END_SERVER_TICK.register(new ProximityAdvancementCheckEvent());
 
