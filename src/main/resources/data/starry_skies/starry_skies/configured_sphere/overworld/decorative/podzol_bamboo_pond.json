@@ -22,7 +22,8 @@
 
     "decorators": {
       "starry_skies:center_pond_shipwreck_treasure_chest": 0.5,
-      "starry_skies:bamboo": 0.7
+      "starry_skies:bamboo": 0.7,
+      "starry_skies:melons": 0.1
     },
     "spawns": [
       {
