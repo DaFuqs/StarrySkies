@@ -17,5 +17,6 @@
       "z": 16,
       "sphere_id": "starry_skies:spawn/nether"
     }
-  ]
+  ],
+  "exclusion_zones": []
 }

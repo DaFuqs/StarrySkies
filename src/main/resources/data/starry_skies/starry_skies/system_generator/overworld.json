@@ -17,5 +17,15 @@
       "z": 16,
       "sphere_id": "starry_skies:spawn/overworld"
     }
+  ],
+  "exclusion_zones": [
+    {
+      "min_x": -100,
+      "min_y": -100,
+      "min_z": -100,
+      "max_x": 100,
+      "max_y": 100,
+      "max_z": 100
+    }
   ]
 }
