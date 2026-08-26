@@ -41,5 +41,6 @@
       "z": 0,
       "sphere_id": "starry_skies:spawn/end"
     }
-  ]
+  ],
+  "exclusion_zones": []
 }

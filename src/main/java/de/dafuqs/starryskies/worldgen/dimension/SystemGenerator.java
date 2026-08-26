@@ -12,6 +12,7 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.chunk.*;
 import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.phys.*;
 import org.jspecify.annotations.*;
 
 import java.awt.*;
@@ -21,7 +22,18 @@ import java.util.List;
 import static de.dafuqs.starryskies.Support.*;
 
 public class SystemGenerator {
-	
+
+	public static final Codec<AABB> AABB_CODEC = RecordCodecBuilder.create(
+			instance -> instance.group(
+					Codec.DOUBLE.fieldOf("min_x").forGetter(s -> s.minX),
+					Codec.DOUBLE.fieldOf("min_y").forGetter(s -> s.minY),
+					Codec.DOUBLE.fieldOf("min_z").forGetter(s -> s.minZ),
+					Codec.DOUBLE.fieldOf("max_x").forGetter(s -> s.maxX),
+					Codec.DOUBLE.fieldOf("max_y").forGetter(s -> s.maxY),
+					Codec.DOUBLE.fieldOf("max_z").forGetter(s -> s.maxZ)
+			).apply(instance, AABB::new)
+	);
+
 	public static final Codec<SystemGenerator> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(
 					Codec.INT.fieldOf("spheres_per_system").forGetter(generator -> generator.spheresPerSystem),
@@ -29,7 +41,8 @@ public class SystemGenerator {
 					Codec.INT.fieldOf("floor_height").forGetter(generator -> generator.floorHeight),
 					BlockState.CODEC.fieldOf("floor_state").forGetter(generator -> generator.floorState),
 					BlockState.CODEC.fieldOf("bottom_state").forGetter(generator -> generator.bottomState),
-					DefaultSphere.CODEC.listOf().fieldOf("fixed_spheres").forGetter(generator -> generator.defaultSpheres)
+					DefaultSphere.CODEC.listOf().fieldOf("fixed_spheres").forGetter(generator -> generator.defaultSpheres),
+					AABB_CODEC.listOf().fieldOf("exclusion_zones").forGetter(generator -> generator.exclusionZones)
 			).apply(instance, SystemGenerator::new)
 	);
 	
@@ -39,17 +52,19 @@ public class SystemGenerator {
 	private final BlockState floorState;
 	private final BlockState bottomState;
 	private final List<DefaultSphere> defaultSpheres;
-	
+	private final List<AABB> exclusionZones;
+
 	private final Map<Map<ConfiguredSphere<?, ?>, Float>, Float> generationGroups = new Object2FloatArrayMap<>();
 	private final Map<Point, System> systemCache = new Object2ObjectArrayMap<>();
 	
-	public SystemGenerator(int spheresPerSystem, int minDistanceBetweenSpheres, int floorHeight, BlockState floorState, BlockState bottomState, List<DefaultSphere> defaultSpheres) {
+	public SystemGenerator(int spheresPerSystem, int minDistanceBetweenSpheres, int floorHeight, BlockState floorState, BlockState bottomState, List<DefaultSphere> defaultSpheres, List<AABB> exclusionZones) {
 		this.spheresPerSystem = spheresPerSystem;
 		this.minDistanceBetweenSpheres = minDistanceBetweenSpheres;
 		this.floorHeight = floorHeight;
 		this.floorState = floorState;
 		this.bottomState = bottomState;
 		this.defaultSpheres = defaultSpheres;
+		this.exclusionZones = exclusionZones;
 	}
 	
 	public void addGenerationGroup(Map<ConfiguredSphere<?, ?>, Float> weightedSpheres, float weight) {
@@ -226,7 +241,15 @@ public class SystemGenerator {
 				
 				placed = selectedSphere.generate(systemRandom, level, spherePos, radius);
 				placed.setPosition(spherePos);
-				
+
+				// Check for exclusion zones
+				for(AABB exclusionZone : systemGenerator.exclusionZones) {
+					if(exclusionZone.intersects(spherePos)) {
+						placed = null;
+						break;
+					}
+				}
+
 				// Check for intersections with other spheres in this system
 				// if any collision, discard it
 				for (PlacedSphere<?> sphere : spheresInSystem) {
