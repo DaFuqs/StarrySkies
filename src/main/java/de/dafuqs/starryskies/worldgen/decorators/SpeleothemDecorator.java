@@ -8,21 +8,20 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 
-public class PointedDripstoneDecorator extends SphereDecorator<PointedDripstoneDecoratorConfig> {
+public class SpeleothemDecorator extends SphereDecorator<SpeleothemDecoratorConfig> {
 	
-	public PointedDripstoneDecorator(Codec<PointedDripstoneDecoratorConfig> codec) {
+	public SpeleothemDecorator(Codec<SpeleothemDecoratorConfig> codec) {
 		super(codec);
 	}
 	
 	@Override
-	public boolean generate(SphereFeatureContext<PointedDripstoneDecoratorConfig> context) {
+	public boolean generate(SphereFeatureContext<SpeleothemDecoratorConfig> context) {
 		WorldGenLevel world = context.world();
 		PlacedSphere<?> sphere = context.sphere();
 		ChunkPos origin = context.chunkPos();
 		RandomSource random = context.random();
-		PointedDripstoneDecoratorConfig config = context.config();
-		
-		
+		SpeleothemDecoratorConfig config = context.config();
+
 		BlockPos.MutableBlockPos currPos = new BlockPos.MutableBlockPos();
 		for (BlockPos bp : getBottomBlocks(world, origin, sphere)) {
 			if (random.nextFloat() > config.chance()) {

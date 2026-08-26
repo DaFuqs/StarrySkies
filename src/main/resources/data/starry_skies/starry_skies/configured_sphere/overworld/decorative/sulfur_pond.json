@@ -1,0 +1,55 @@
+{
+  "type": "starry_skies:simple",
+  "config": {
+    "block": {
+      "type": "minecraft:weighted_state_provider",
+      "reroll_for_every_pos": true,
+      "entries": [
+        {
+          "weight": 6,
+          "data": {
+            "Name": "minecraft:sulfur",
+            "Properties": {}
+          }
+        },
+        {
+          "weight": 2,
+          "data": {
+            "Name": "minecraft:cinnabar",
+            "Properties": {}
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "minecraft:magma_block",
+            "Properties": {}
+          }
+        }
+      ]
+    },
+
+    "size": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 8,
+      "max_exclusive": 12
+    },
+
+    "decorators": {
+      "starry_skies:center_pond_sulfur": 0.9,
+      "starry_skies:sulfur_spikes": 0.7
+    },
+    "spawns": [
+      {
+        "type": "minecraft:sulfur_cube",
+        "chance": 0.8,
+        "min_count": 2,
+        "max_count": 3
+      }
+    ],
+    "generation": {
+      "weight": 0.5,
+      "group": "starry_skies:overworld/decorative"
+    }
+  }
+}
