@@ -7,9 +7,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.*;
 
 import java.util.*;
 
@@ -31,47 +31,29 @@ public class DripleafDecorator extends SphereDecorator<DripleafDecoratorConfig> 
 		ChunkPos origin = context.chunkPos();
 		RandomSource random = context.random();
 		DripleafDecoratorConfig config = context.config();
-		
+
 		for (BlockPos bp : getRandomCaveBottomBlocks(world, origin, sphere, random, config.tries())) {
-			boolean canGenerate;
-
-			// check if all 4 sides of the future water pond are solid
-			canGenerate = true;
-			Iterator<Direction> direction = Direction.Plane.HORIZONTAL.iterator();
-			while (direction.hasNext() && canGenerate) {
-				BlockPos currentCheckBlockPos = bp.relative(direction.next());
-
-				if (!world.getBlockState(currentCheckBlockPos).isRedstoneConductor(world, currentCheckBlockPos) || !world.getBlockState(currentCheckBlockPos.above()).isAir()) {
-					canGenerate = false;
-				}
+			if (!world.getBlockState(bp.above()).is(Blocks.WATER)) {
+				continue;
 			}
 
-			if (canGenerate) {
-				// clay
-				world.setBlock(bp, CLAY_BLOCK_STATE, 3);
+			// the dripleaf
+			Direction randomDirection = Direction.Plane.HORIZONTAL.getRandomDirection(random);
+			int dripLeafHeight = random.nextInt(3) + 2;
+			for (int i = 1; i <= dripLeafHeight; i++) {
+				BlockState dripleafState = DRIPLEAF_BLOCK_STATE.setValue(HorizontalDirectionalBlock.FACING, randomDirection);
+				BlockPos currPos = bp.above(i);
+				if (dripleafState.canSurvive(world, currPos)) {
+					boolean waterLogged = world.getBlockState(currPos).is(Blocks.WATER);
 
-				// the dripleaf
-				Direction randomDirection = Direction.Plane.HORIZONTAL.getRandomDirection(random);
-				int dripLeafHeight = random.nextInt(3) + 1;
-				for (int i = 0; i <= dripLeafHeight; i++) {
-					BlockState dripleafState = DRIPLEAF_BLOCK_STATE.setValue(HorizontalDirectionalBlock.FACING, randomDirection);
-					if (dripleafState.canSurvive(world, bp.above(i))) {
-						if (i == dripLeafHeight) {
-							world.setBlock(bp.above(i), DRIPLEAF_BLOCK_STATE.setValue(HorizontalDirectionalBlock.FACING, randomDirection), 3);
-						} else {
-							world.setBlock(bp.above(i), DRIPLEAF_STEM_BLOCK_STATE.setValue(HorizontalDirectionalBlock.FACING, randomDirection), 3);
-						}
-
-					}
-				}
-
-				// surrounding water
-				direction = Direction.Plane.HORIZONTAL.iterator();
-				while (direction.hasNext()) {
-					Direction currentDirection = direction.next();
-					BlockPos offsetPos = bp.relative(currentDirection);
-					if (world.getBlockState(offsetPos.above()).isAir()) {
-						world.setBlock(offsetPos, WATER_BLOCK_STATE, 3);
+					if (i == dripLeafHeight) {
+						world.setBlock(currPos, DRIPLEAF_BLOCK_STATE
+								.setValue(HorizontalDirectionalBlock.FACING, randomDirection)
+								.setValue(BlockStateProperties.WATERLOGGED, waterLogged), 3);
+					} else {
+						world.setBlock(currPos, DRIPLEAF_STEM_BLOCK_STATE
+								.setValue(HorizontalDirectionalBlock.FACING, randomDirection)
+								.setValue(BlockStateProperties.WATERLOGGED, waterLogged), 3);
 					}
 				}
 			}

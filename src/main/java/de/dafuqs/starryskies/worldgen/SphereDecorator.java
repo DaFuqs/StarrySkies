@@ -93,6 +93,29 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 		}
 		return list;
 	}
+
+	protected List<BlockPos> getAllBlocksInChunk(WorldGenLevel world, ChunkPos chunkPos, PlacedSphere<?> sphere) {
+		List<BlockPos> list = new ArrayList<>();
+
+		int x = sphere.getPosition().getX();
+		int y = sphere.getPosition().getY();
+		int z = sphere.getPosition().getZ();
+
+		int rad = sphere.getRadius();
+		int minX = Math.max(chunkPos.getMinBlockX(), x - rad);
+		int minZ = Math.max(chunkPos.getMinBlockZ(), z - rad);
+		int maxX = Math.min(chunkPos.getMaxBlockX(), x + rad);
+		int maxZ = Math.min(chunkPos.getMaxBlockZ(), z + rad);
+
+		for (int x2 = minX; x2 <= maxX; x2++) {
+			for (int z2 = minZ; z2 <= maxZ; z2++) {
+				for (int y2 = y + rad; y2 > y - rad; y2--) {
+					list.add(new BlockPos(x2, y2, z2));
+				}
+			}
+		}
+		return list;
+	}
 	
 	protected List<BlockPos> getBottomBlocks(WorldGenLevel world, ChunkPos chunkPos, PlacedSphere<?> sphere) {
 		List<BlockPos> list = new ArrayList<>();
@@ -176,6 +199,41 @@ public abstract class SphereDecorator<FC extends SphereDecoratorConfig> {
 						hitShell = true;
 					} else {
 						list.add(mutable.below().immutable());
+						break;
+					}
+				}
+			}
+		}
+
+		return list;
+	}
+
+	protected List<BlockPos> getCaveCeilingBlocks(WorldGenLevel world, ChunkPos chunkPos, PlacedSphere<?> sphere) {
+		List<BlockPos> list = new ArrayList<>();
+
+		int x = sphere.getPosition().getX();
+		int y = sphere.getPosition().getY();
+		int z = sphere.getPosition().getZ();
+
+		int rad = sphere.getRadius();
+		int minX = Math.max(chunkPos.getMinBlockX(), x - rad);
+		int minZ = Math.max(chunkPos.getMinBlockZ(), z - rad);
+		int maxX = Math.min(chunkPos.getMaxBlockX(), x + rad);
+		int maxZ = Math.min(chunkPos.getMaxBlockZ(), z + rad);
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+		for (int x2 = minX; x2 <= maxX; x2++) {
+			for (int z2 = minZ; z2 <= maxZ; z2++) {
+				boolean hitShell = false;
+				for (int y2 = y + rad; y2 > y; y2--) {
+					mutable.set(x2, y2, z2);
+					BlockState state = world.getBlockState(mutable);
+					boolean airOrFluid = state.isAir() || state.getFluidState().getType() != Fluids.EMPTY;
+					if (airOrFluid && !hitShell) {
+
+					} else if (!airOrFluid) {
+						hitShell = true;
+					} else {
+						list.add(mutable.immutable());
 						break;
 					}
 				}

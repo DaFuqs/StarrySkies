@@ -1,0 +1,73 @@
+{
+  "type": "starry_skies:fluid",
+  "config": {
+    "fluid_block": {
+      "Name": "minecraft:water"
+    },
+    "fluid_fill_percent": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 0.05,
+      "max_exclusive": 0.1
+    },
+    "hole_in_bottom_chance": 0.25,
+    "shell_thickness": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 2,
+      "max_inclusive": 3
+    },
+    "shell_block": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "weight": 400,
+          "data": {
+            "Name": "minecraft:moss_block"
+          }
+        },
+        {
+          "weight": 100,
+          "data": {
+            "Name": "minecraft:stone"
+          }
+        },
+        {
+          "weight": 100,
+          "data": {
+            "Name": "minecraft:deepslate"
+          }
+        },
+        {
+          "weight": 25,
+          "data": {
+            "Name": "minecraft:mossy_cobblestone"
+          }
+        }
+      ]
+    },
+
+    "size": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 12,
+      "max_exclusive": 20
+    },
+
+    "decorators": {
+      "starry_skies:dripleaves": 1.0,
+      "starry_skies:spore_blossoms": 1.0,
+      "starry_skies:cave_vines": 1.0,
+      "starry_skies:vines": 0.1
+    },
+    "spawns": [
+      {
+        "type": "minecraft:axolotl",
+        "chance": 0.7,
+        "min_count": 2,
+        "max_count": 4
+      }
+    ],
+    "generation": {
+      "weight": 2.0,
+      "group": "starry_skies:overworld/decorative"
+    }
+  }
+}
