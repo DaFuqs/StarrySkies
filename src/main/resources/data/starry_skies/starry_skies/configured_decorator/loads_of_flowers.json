@@ -51,30 +51,6 @@
             "Name": "minecraft:lily_of_the_valley"
           },
           "weight": 1
-        },
-        {
-          "data": {
-            "Name": "minecraft:sunflower"
-          },
-          "weight": 1
-        },
-        {
-          "data": {
-            "Name": "minecraft:lilac"
-          },
-          "weight": 1
-        },
-        {
-          "data": {
-            "Name": "minecraft:rose_bush"
-          },
-          "weight": 1
-        },
-        {
-          "data": {
-            "Name": "minecraft:peony"
-          },
-          "weight": 1
         }
       ]
     },
