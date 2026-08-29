@@ -1,0 +1,24 @@
+{
+  "type": "starry_skies:simple",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:reinforced_deepslate"
+      }
+    },
+
+    "size": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 3,
+      "max_exclusive": 5
+    },
+
+    "decorators": {},
+    "spawns": [],
+    "generation": {
+      "weight": 0.1,
+      "group": "starry_skies:overworld/decorative"
+    }
+  }
+}
