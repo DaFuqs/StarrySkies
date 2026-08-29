@@ -41,6 +41,7 @@ public class SphereDecorators {
 	public static DeferredHolder<SphereDecorator<?>, BottomBlocksDecorator> BOTTOM_BLOCKS = register("bottom_blocks", () -> new BottomBlocksDecorator(BottomBlocksDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, SpeleothemDecorator> SPELEOTHEMS = register("speleothems", () -> new SpeleothemDecorator(SpeleothemDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, ReplaceBlocksDecorator> REPLACE_BLOCKS = register("replace_blocks", () -> new ReplaceBlocksDecorator(ReplaceBlocksDecoratorConfig.CODEC));
+	public static DeferredHolder<SphereDecorator<?>, VinesDecorator> VINES = register("vines", () -> new VinesDecorator(VinesDecoratorConfig.CODEC));
 
 	public static void register(IEventBus modBus) {
 		REGISTRAR.register(modBus);

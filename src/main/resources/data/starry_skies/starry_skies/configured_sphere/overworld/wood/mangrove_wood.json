@@ -27,8 +27,9 @@
       "min_inclusive": 5,
       "max_exclusive": 15
     },
-
-    "decorators": {},
+    "decorators": {
+      "starry_skies:vines": 0.8
+    },
     "spawns": [],
     "generation": {
       "weight": 0.5,

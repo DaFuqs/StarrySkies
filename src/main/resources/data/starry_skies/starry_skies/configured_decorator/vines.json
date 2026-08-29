@@ -1,0 +1,14 @@
+{
+  "type": "starry_skies:vines",
+  "config": {
+    "block": {
+      "Name": "minecraft:vine"
+    },
+    "height": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 1,
+      "max_inclusive": 12
+    },
+    "chance": 0.01
+  }
+}
