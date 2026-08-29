@@ -1,0 +1,16 @@
+{
+  "type": "starry_skies:hanging_cave_block",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:spore_blossom"
+      }
+    },
+    "height": {
+      "type": "minecraft:constant",
+      "value": 1
+    },
+    "chance": 0.1
+  }
+}

@@ -9,6 +9,6 @@
       "min_inclusive": 1,
       "max_inclusive": 12
     },
-    "chance": 0.01
+    "chance": 0.002
   }
 }
