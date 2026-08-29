@@ -36,6 +36,7 @@ public class SphereDecorators {
 	public static SphereDecorator<BottomBlocksDecoratorConfig> BOTTOM_BLOCKS = register("bottom_blocks", new BottomBlocksDecorator(BottomBlocksDecoratorConfig.CODEC));
 	public static SphereDecorator<SpeleothemDecoratorConfig> SPELEOTHEMS = register("speleothems", new SpeleothemDecorator(SpeleothemDecoratorConfig.CODEC));
 	public static SphereDecorator<ReplaceBlocksDecoratorConfig> REPLACE_BLOCKS = register("replace_blocks", new ReplaceBlocksDecorator(ReplaceBlocksDecoratorConfig.CODEC));
+	public static SphereDecorator<VinesDecoratorConfig> VINES = register("vines", new VinesDecorator(VinesDecoratorConfig.CODEC));
 
 	public static void initialize() {
 
