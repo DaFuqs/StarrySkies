@@ -15,8 +15,6 @@ import net.neoforged.neoforge.client.event.*;
 @EventBusSubscriber(modid = StarrySkies.MOD_ID)
 public class StarrySkiesClient {
 
-	public static StarrySkyBox SKYBOX;
-
     public StarrySkiesClient(IEventBus modBus, ModContainer modContainer) {
         modBus.addListener(StarrySkiesClient::registerSkyBox);
     }
