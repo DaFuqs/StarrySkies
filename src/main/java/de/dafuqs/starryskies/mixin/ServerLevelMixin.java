@@ -1,25 +1,42 @@
 package de.dafuqs.starryskies.mixin;
 
+import com.google.common.collect.*;
 import com.mojang.datafixers.util.*;
 import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
 import de.dafuqs.starryskies.worldgen.dimension.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.*;
+import net.minecraft.server.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.ai.village.*;
+import net.minecraft.world.entity.npc.*;
+import net.minecraft.world.entity.npc.wanderingtrader.*;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.dimension.*;
+import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.storage.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
 
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.*;
 
 @Mixin(ServerLevel.class)
 public abstract class ServerLevelMixin {
-	
+
+	@Shadow
+	public abstract ServerLevel getLevel();
+
+	@Shadow
+	public abstract MinecraftServer getServer();
+
 	/**
 	 * When we are in a Starry world the structure location logic auto-remaps structure tags to sphere tags,
 	 * for example, "eye_of_ender_located" structure tag (Eye of Ender) now locates spheres in the sphere tag "starry_skies:eye_of_ender_located"
@@ -40,5 +57,16 @@ public abstract class ServerLevelMixin {
 		}
 	}
 
+	@ModifyVariable(at = @At("TAIL"), method = "<init>", argsOnly = true)
+	public List<CustomSpawner> starryskies$spawners(List<CustomSpawner> original) {
+		if(!this.getLevel().dimension().identifier().equals(Identifier.fromNamespaceAndPath(StarrySkies.MOD_ID, "overworld"))) {
+			return original;
+		}
+
+		List<CustomSpawner> s = new ArrayList<>(original);
+		s.add(new PhantomSpawner());
+		s.add(new WanderingTraderSpawner(this.getServer().getDataStorage()));
+		return s;
+	}
 
 }
