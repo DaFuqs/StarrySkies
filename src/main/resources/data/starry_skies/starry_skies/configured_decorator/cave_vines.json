@@ -1,5 +1,5 @@
 {
-  "type": "starry_skies:hanging_cave_block",
+  "type": "starry_skies:hanging_cave_plant",
   "config": {
     "block": {
       "type": "minecraft:weighted_state_provider",

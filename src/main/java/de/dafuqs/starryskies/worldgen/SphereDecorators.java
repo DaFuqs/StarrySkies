@@ -1,9 +1,9 @@
 package de.dafuqs.starryskies.worldgen;
 
-import de.dafuqs.starryskies.StarrySkies;
-import de.dafuqs.starryskies.registries.StarryRegistries;
+import de.dafuqs.starryskies.*;
+import de.dafuqs.starryskies.registries.*;
 import de.dafuqs.starryskies.worldgen.decorators.*;
-import net.minecraft.core.Registry;
+import net.minecraft.core.*;
 
 public class SphereDecorators {
 
@@ -18,7 +18,7 @@ public class SphereDecorators {
 	public static SphereDecorator<CenterPondDecoratorConfig> CENTER_POND = register("center_pond", new CenterPondDecorator(CenterPondDecoratorConfig.CODEC));
 	public static SphereDecorator<MultifaceGrowthDecoratorConfig> MULTIFACE_GROWTH = register("multiface_growth", new MultifaceGrowthDecorator(MultifaceGrowthDecoratorConfig.CODEC));
 	public static SphereDecorator<HangingBlockDecoratorConfig> HANGING_BLOCK = register("hanging_block", new HangingBlockDecorator(HangingBlockDecoratorConfig.CODEC));
-	public static SphereDecorator<HangingCaveBlockDecoratorConfig> HANGING_CAVE_BLOCK = register("hanging_cave_block", new HangingCaveBlockDecorator(HangingCaveBlockDecoratorConfig.CODEC));
+	public static SphereDecorator<HugePlantDecoratorConfig> HANGING_CAVE_PLANT = register("hanging_cave_plant", new HangingCavePlantDecorator(HugePlantDecoratorConfig.CODEC));
 	public static SphereDecorator<XMarksTheSpotDecoratorConfig> X_SPOT = register("x_spot", new XMarksTheSpotDecorator(XMarksTheSpotDecoratorConfig.CODEC));
 	public static SphereDecorator<HugePlantDecoratorConfig> HUGE_PLANT = register("huge_plant", new HugePlantDecorator(HugePlantDecoratorConfig.CODEC));
 	public static SphereDecorator<HugePlantDecoratorConfig> HUGE_HANGING_PLANT = register("huge_hanging_plant", new HugeHangingPlantDecorator(HugePlantDecoratorConfig.CODEC));
