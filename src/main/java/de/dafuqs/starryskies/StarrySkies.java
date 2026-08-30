@@ -18,8 +18,10 @@ import net.minecraft.resources.*;
 import net.minecraft.server.*;
 import net.minecraft.server.level.*;
 import net.minecraft.server.players.*;
+import net.minecraft.world.entity.npc.wanderingtrader.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.levelgen.*;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.*;
 import net.neoforged.fml.common.*;
@@ -164,10 +166,11 @@ public class StarrySkies {
 	}
 
 	@SubscribeEvent
-	public static void register(RegisterCommandsEvent event) {
-		ClosestSphereCommand.register(event.getDispatcher(), event.getBuildContext());
-		GenerateSphereCommand.register(event.getDispatcher(), event.getBuildContext());
-		SystemStatisticsCommand.register(event.getDispatcher(), event.getBuildContext());
+	public static void register(ModifyCustomSpawnersEvent event) {
+		if (event.getLevel().dimension().identifier().equals(Identifier.fromNamespaceAndPath(StarrySkies.MOD_ID, "overworld"))) {
+			event.addCustomSpawner(new PhantomSpawner());
+			event.addCustomSpawner(new WanderingTraderSpawner(event.getLevel().getServer().getDataStorage()));
+		}
 	}
 
 }
