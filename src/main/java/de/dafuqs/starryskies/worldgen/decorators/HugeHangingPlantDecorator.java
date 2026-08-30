@@ -1,13 +1,11 @@
 package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
-import de.dafuqs.starryskies.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.*;
+import net.minecraft.util.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.state.*;
 
 public class HugeHangingPlantDecorator extends SphereDecorator<HugePlantDecoratorConfig> {
 
@@ -23,26 +21,27 @@ public class HugeHangingPlantDecorator extends SphereDecorator<HugePlantDecorato
 		RandomSource random = context.random();
 		HugePlantDecoratorConfig config = context.config();
 
+		outer:
 		for (BlockPos bp : getBottomBlocks(world, origin, sphere)) {
-			if (random.nextFloat() < config.chance()) {
-				int thisHeight = Support.getRandomBetween(random, config.minHeight(), config.maxHeight());
-				for (int i = 1; i < thisHeight + 1; i++) {
-					if (world.getBlockState(bp.below(i)).isAir()) {
+			bp = bp.below();
+			if (world.getBlockState(bp).isAir() && random.nextFloat() < config.chance()) {
+				BlockState base = config.getBlockFor(0, 1).getState(world, random, bp);
+				if (!base.canSurvive(world, bp)) {
+					continue;
+				}
+				int height = config.height().sample(random);
 
-						BlockState placementBlockState = config.block();
-						if (i == 1 && config.firstBlock() != null) {
-							placementBlockState = config.firstBlock();
-						} else if (i == thisHeight && config.lastBlock() != null) {
-							placementBlockState = config.lastBlock();
-						}
-
-						world.setBlock(bp.below(i), placementBlockState, 3);
-					} else {
-						if (i > 1 && config.lastBlock() != null) {
-							world.setBlock(bp.below(i - 1), config.lastBlock(), 3);
-						}
-						break;
+				// is there enough room?
+				for (int i = 0; i < height; i++) {
+					if (!world.getBlockState(bp.below(i)).isAir()) {
+						continue outer;
 					}
+				}
+
+				// place
+				for (int i = 0; i < height; i++) {
+					BlockState stateToPlace = config.getBlockFor(i, height).getState(world, random, bp);
+					world.setBlock(bp.below(i), stateToPlace, 2);
 				}
 			}
 		}

@@ -2,25 +2,24 @@ package de.dafuqs.starryskies.worldgen.decorators;
 
 import com.mojang.serialization.*;
 import de.dafuqs.starryskies.worldgen.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.core.*;
+import net.minecraft.util.*;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.*;
 
-public class HangingCaveBlockDecorator extends SphereDecorator<HangingCaveBlockDecoratorConfig> {
+public class HangingCavePlantDecorator extends SphereDecorator<HugePlantDecoratorConfig> {
 
-	public HangingCaveBlockDecorator(Codec<HangingCaveBlockDecoratorConfig> codec) {
+    public HangingCavePlantDecorator(Codec<HugePlantDecoratorConfig> codec) {
 		super(codec);
 	}
 
 	@Override
-	public boolean generate(SphereFeatureContext<HangingCaveBlockDecoratorConfig> context) {
+    public boolean generate(SphereFeatureContext<HugePlantDecoratorConfig> context) {
 		WorldGenLevel world = context.world();
 		PlacedSphere<?> sphere = context.sphere();
 		ChunkPos origin = context.chunkPos();
 		RandomSource random = context.random();
-		HangingCaveBlockDecoratorConfig config = context.config();
+        HugePlantDecoratorConfig config = context.config();
 
 		outer:
 		for (BlockPos bp : getCaveCeilingBlocks(world, origin, sphere)) {

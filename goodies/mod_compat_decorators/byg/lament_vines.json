@@ -1,11 +1,23 @@
 {
   "type": "starry_skies:huge_hanging_plant",
   "config": {
-    "block": "byg:lament_vine_plant",
-    "last_block": "byg:lament_vine",
-    "min_height": 2,
-    "max_height": 5,
-    "chance": 0.1
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "byg:lament_vine_plant"
+      }
+    },
+    "tip_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "byg:lament_vine"
+      }
+    },
+    "height": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 2,
+      "max_inclusive": 5
+    }
   },
   "fabric:load_conditions": [
     {

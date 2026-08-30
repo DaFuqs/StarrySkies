@@ -2,11 +2,22 @@
   "type": "starry_skies:huge_hanging_plant",
   "config": {
     "block": {
-      "Name": "minecraft:weeping_vines_plant"
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:weeping_vines_plant"
+      }
     },
-    "last_block": "minecraft:weeping_vines",
-    "min_height": 1,
-    "max_height": 6,
+    "tip_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:weeping_vines"
+      }
+    },
+    "height": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 1,
+      "max_inclusive": 6
+    },
     "chance": 0.1
   }
 }

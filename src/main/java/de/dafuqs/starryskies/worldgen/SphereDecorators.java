@@ -23,7 +23,7 @@ public class SphereDecorators {
 	public static DeferredHolder<SphereDecorator<?>, CenterPondDecorator> CENTER_POND = register("center_pond", () -> new CenterPondDecorator(CenterPondDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, MultifaceGrowthDecorator> MULTIFACE_GROWTH = register("multiface_growth", () -> new MultifaceGrowthDecorator(MultifaceGrowthDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, HangingBlockDecorator> HANGING_BLOCK = register("hanging_block", () -> new HangingBlockDecorator(HangingBlockDecoratorConfig.CODEC));
-	public static DeferredHolder<SphereDecorator<?>, HangingCaveBlockDecorator> HANGING_CAVE_BLOCK = register("hanging_cave_block", () -> new HangingCaveBlockDecorator(HangingCaveBlockDecoratorConfig.CODEC));
+	public static DeferredHolder<SphereDecorator<?>, HangingCavePlantDecorator> HANGING_CAVE_PLANT = register("hanging_cave_plant", () -> new HangingCavePlantDecorator(HugePlantDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, XMarksTheSpotDecorator> X_SPOT = register("x_spot", () -> new XMarksTheSpotDecorator(XMarksTheSpotDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, HugePlantDecorator> HUGE_PLANT = register("huge_plant", () -> new HugePlantDecorator(HugePlantDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, HugeHangingPlantDecorator> HUGE_HANGING_PLANT = register("huge_hanging_plant", () -> new HugeHangingPlantDecorator(HugePlantDecoratorConfig.CODEC));
