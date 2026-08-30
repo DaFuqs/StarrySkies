@@ -96,13 +96,13 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 	public void decorate(WorldGenLevel world, BlockPos origin, RandomSource random) {
 		if (!this.decorators.isEmpty()) {
 			for (Holder<ConfiguredSphereDecorator<?, ?>> decorator : this.decorators) {
-				StarrySkies.LOGGER.debug("Decorator: {}", decorator.getClass());
+				//StarrySkies.LOGGER.debug("Decorator: {}", decorator.getClass());
 				try {
 					decorator.value().generate(world, random, origin, this);
 				} catch (RuntimeException e) {
 					// Are we asking a region for a chunk out of bounds? ಠ_ಠ
 				}
-				StarrySkies.LOGGER.debug("Decorator finished");
+				//StarrySkies.LOGGER.debug("Decorator finished");
 			}
 		}
 	}
@@ -127,7 +127,7 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 	
 	public void populateEntities(ChunkPos chunkPos, WorldGenLevel chunkRegion, WorldgenRandom chunkRandom) {
 		if (isCenterInChunk(chunkPos)) {
-			StarrySkies.LOGGER.debug("Populating entities for sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunkPos.x(), chunkPos.z(), chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), this.getDescription(chunkRegion.registryAccess()));
+			//StarrySkies.LOGGER.debug("Populating entities for sphere in chunk x:{} z:{} (StartX:{} StartZ:{}) {}", chunkPos.x(), chunkPos.z(), chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), this.getDescription(chunkRegion.registryAccess()));
             for (Pair<EntityType<?>, Integer> spawnEntry : spawns) {
 
 				int xCord = chunkPos.getMinBlockX();
@@ -168,7 +168,7 @@ public abstract class PlacedSphere<SC extends SphereConfig> {
 					}
 				}
 			}
-			StarrySkies.LOGGER.debug("Finished populating");
+			//StarrySkies.LOGGER.debug("Finished populating");
 		}
 	}
 
