@@ -1,4 +1,13 @@
 {
-  "type": "starry_skies:cocoa",
-  "config": {}
+  "type": "starry_skies:wall_attached_center",
+  "config": {
+    "block": {
+      "id": "minecraft:cocoa",
+      "properties": {
+        "age": "2"
+      }
+    },
+    "chance": 1.0,
+    "facing_outwards": true
+  }
 }

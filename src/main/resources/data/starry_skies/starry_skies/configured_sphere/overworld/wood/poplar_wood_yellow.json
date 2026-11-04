@@ -25,7 +25,9 @@
       "min_inclusive": 5,
       "max_exclusive": 12
     },
-    "decorators": {},
+    "decorators": {
+      "starry_skies:shelf_mushrooms": 0.5
+    },
     "spawns": [],
     "generation": {
       "weight": 0.5,
