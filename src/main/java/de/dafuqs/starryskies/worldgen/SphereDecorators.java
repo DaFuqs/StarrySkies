@@ -28,7 +28,7 @@ public class SphereDecorators {
 	public static DeferredHolder<SphereDecorator<?>, HugePlantDecorator> HUGE_PLANT = register("huge_plant", () -> new HugePlantDecorator(HugePlantDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, HugeHangingPlantDecorator> HUGE_HANGING_PLANT = register("huge_hanging_plant", () -> new HugeHangingPlantDecorator(HugePlantDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, DripleafDecorator> DRIPLEAF = register("dripleaf", () -> new DripleafDecorator(DripleafDecoratorConfig.CODEC));
-	public static DeferredHolder<SphereDecorator<?>, CocoaDecorator> COCOA = register("cocoa", () -> new CocoaDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));
+	public static DeferredHolder<SphereDecorator<?>, WallAttachedCenterDecorator> WALL_ATTACHED_CENTER = register("wall_attached_center", () -> new WallAttachedCenterDecorator(WallAttachedCenterDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, SeaGreensDecorator> SEA_GREENS = register("sea_greens", () -> new SeaGreensDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, RuinedPortalDecorator> RUINED_PORTAL = register("ruined_portal", () -> new RuinedPortalDecorator(RuinedPortalDecoratorConfig.CODEC));
 	public static DeferredHolder<SphereDecorator<?>, EndGatewayDecorator> END_GATEWAY = register("end_gateway", () -> new EndGatewayDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));

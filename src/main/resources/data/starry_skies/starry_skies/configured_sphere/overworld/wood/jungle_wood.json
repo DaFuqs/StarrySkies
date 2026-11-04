@@ -30,7 +30,7 @@
 
     "decorators": {
       "starry_skies:vines": 0.8,
-      "starry_skies:cocoa": 0.4
+      "starry_skies:cocoa": 1.0
     },
     "spawns": [],
     "generation": {

@@ -173,4 +173,11 @@ public class StarrySkies {
 		}
 	}
 
+	@SubscribeEvent
+	public static void registerCommands(RegisterCommandsEvent event) {
+		ClosestSphereCommand.register(event.getDispatcher(), event.getBuildContext());
+		GenerateSphereCommand.register(event.getDispatcher(), event.getBuildContext());
+		SystemStatisticsCommand.register(event.getDispatcher(), event.getBuildContext());
+	}
+
 }
