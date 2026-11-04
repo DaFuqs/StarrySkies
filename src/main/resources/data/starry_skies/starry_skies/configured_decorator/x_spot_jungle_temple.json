@@ -3,7 +3,7 @@
   "config": {
     "loot_table": "minecraft:chests/jungle_temple",
     "marking_block": {
-      "Name": "minecraft:mossy_cobblestone"
+      "id": "minecraft:mossy_cobblestone"
     }
   }
 }

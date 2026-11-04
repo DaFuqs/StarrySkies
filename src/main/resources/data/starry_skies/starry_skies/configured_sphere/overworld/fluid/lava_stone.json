@@ -2,7 +2,7 @@
   "type": "starry_skies:fluid",
   "config": {
     "fluid_block": {
-      "Name": "minecraft:lava"
+      "id": "minecraft:lava"
     },
     "fluid_fill_percent": {
       "type": "minecraft:uniform",
@@ -11,36 +11,36 @@
     },
     "hole_in_bottom_chance": 0.25,
     "shell_block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "entries": [
         {
           "weight": 5,
           "data": {
-            "Name": "minecraft:stone"
+            "id": "minecraft:stone"
           }
         },
         {
           "weight": 2,
           "data": {
-            "Name": "minecraft:deepslate"
+            "id": "minecraft:deepslate"
           }
         },
         {
           "weight": 1,
           "data": {
-            "Name": "minecraft:granite"
+            "id": "minecraft:granite"
           }
         },
         {
           "weight": 1,
           "data": {
-            "Name": "minecraft:diorite"
+            "id": "minecraft:diorite"
           }
         },
         {
           "weight": 1,
           "data": {
-            "Name": "minecraft:andesite"
+            "id": "minecraft:andesite"
           }
         }
       ]

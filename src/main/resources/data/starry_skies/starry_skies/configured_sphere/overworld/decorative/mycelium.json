@@ -2,15 +2,15 @@
   "type": "starry_skies:modular",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:dirt"
+        "id": "minecraft:dirt"
       }
     },
     "top_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:mycelium"
+        "id": "minecraft:mycelium"
       }
     },
 

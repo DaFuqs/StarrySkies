@@ -2,15 +2,15 @@
   "type": "starry_skies:shell_core",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:ice"
+        "id": "minecraft:ice"
       }
     },
     "core_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:blue_ice"
+        "id": "minecraft:blue_ice"
       }
     },
     "core_radius": {
@@ -19,9 +19,9 @@
       "max_exclusive": 2
     },
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:snow_block"
+        "id": "minecraft:snow_block"
       }
     },
     "shell_thickness": {

@@ -8,27 +8,25 @@
       "max_exclusive": 6
     },
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:obsidian"
+        "id": "minecraft:obsidian"
       }
     },
     "shell_block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "reroll_for_every_pos": true,
       "entries": [
         {
           "weight": 7,
           "data": {
-            "Name": "minecraft:obsidian",
-            "Properties": {}
+            "id": "minecraft:obsidian"
           }
         },
         {
           "weight": 1,
           "data": {
-            "Name": "minecraft:crying_obsidian",
-            "Properties": {}
+            "id": "minecraft:crying_obsidian"
           }
         }
       ]

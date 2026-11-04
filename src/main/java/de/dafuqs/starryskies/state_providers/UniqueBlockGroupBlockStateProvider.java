@@ -4,12 +4,12 @@ import com.mojang.serialization.*;
 import de.dafuqs.starryskies.data_loaders.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.*;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 import org.jspecify.annotations.NonNull;
 
-public class UniqueBlockGroupBlockStateProvider extends BlockStateProvider {
+public class UniqueBlockGroupBlockStateProvider implements BlockStateProvider {
 	public static final MapCodec<UniqueBlockGroupBlockStateProvider> CODEC;
 	private final String group;
 	
@@ -17,11 +17,11 @@ public class UniqueBlockGroupBlockStateProvider extends BlockStateProvider {
 		this.group = group;
 	}
 	
-	public @NonNull BlockStateProviderType<?> type() {
+	public @NonNull MapCodec<UniqueBlockGroupBlockStateProvider> codec() {
 		return StarryStateProviders.UNIQUE_BLOCK_GROUP_STATE_PROVIDER;
 	}
 	
-	public @NonNull BlockState getState(@NonNull WorldGenLevel level, @NonNull RandomSource random, @NonNull BlockPos pos) {
+	public @NonNull BlockState getState(@NonNull LevelAccessor level, @NonNull RandomSource random, @NonNull BlockPos pos) {
 		return UniqueBlockGroupDataLoader.INSTANCE.getEntry(group, random);
 	}
 	

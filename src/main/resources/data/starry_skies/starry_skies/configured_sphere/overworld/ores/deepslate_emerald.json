@@ -2,32 +2,32 @@
   "type": "starry_skies:core",
   "config": {
     "main_block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "entries": [
         {
           "weight": 10,
           "data": {
-            "Name": "minecraft:infested_deepslate"
+            "id": "minecraft:infested_deepslate"
           }
         },
         {
           "weight": 5,
           "data": {
-            "Name": "minecraft:deepslate"
+            "id": "minecraft:deepslate"
           }
         },
         {
           "weight": 2,
           "data": {
-            "Name": "minecraft:cobbled_deepslate"
+            "id": "minecraft:cobbled_deepslate"
           }
         }
       ]
     },
     "core_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:deepslate_emerald_ore"
+        "id": "minecraft:deepslate_emerald_ore"
       }
     },
     "core_radius": {

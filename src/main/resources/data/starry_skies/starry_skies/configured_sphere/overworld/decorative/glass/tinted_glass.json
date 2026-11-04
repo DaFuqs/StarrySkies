@@ -2,9 +2,9 @@
   "type": "starry_skies:simple",
   "config": {
     "block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:tinted_glass"
+        "id": "minecraft:tinted_glass"
       }
     },
 

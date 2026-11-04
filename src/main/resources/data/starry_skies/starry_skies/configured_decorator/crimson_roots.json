@@ -2,7 +2,7 @@
   "type": "starry_skies:single_block",
   "config": {
     "block": {
-      "Name": "minecraft:crimson_roots"
+      "id": "minecraft:crimson_roots"
     },
     "chance": 0.08
   }

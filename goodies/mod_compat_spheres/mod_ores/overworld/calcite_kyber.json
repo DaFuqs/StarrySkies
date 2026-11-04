@@ -6,9 +6,9 @@
       "group": "calcite_kyber_ore"
     },
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:calcite"
+        "id": "minecraft:calcite"
       }
     },
     "core_radius": {

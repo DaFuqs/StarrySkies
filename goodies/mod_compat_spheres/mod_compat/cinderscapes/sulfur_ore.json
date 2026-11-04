@@ -2,9 +2,9 @@
   "type": "starry_skies:core",
   "config": {
     "core_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "cinderscapes:sulfur_ore"
+        "id": "cinderscapes:sulfur_ore"
       }
     },
     "shell_block": {

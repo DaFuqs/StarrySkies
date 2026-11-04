@@ -2,13 +2,13 @@
   "type": "starry_skies:hanging_cave_plant",
   "config": {
     "block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "entries": [
         {
           "weight": 4,
           "data": {
-            "Name": "minecraft:cave_vines_plant",
-            "Properties": {
+            "id": "minecraft:cave_vines_plant",
+            "properties": {
               "berries": "false"
             }
           }
@@ -16,8 +16,8 @@
         {
           "weight": 1,
           "data": {
-            "Name": "minecraft:cave_vines_plant",
-            "Properties": {
+            "id": "minecraft:cave_vines_plant",
+            "properties": {
               "berries": "true"
             }
           }
@@ -25,13 +25,13 @@
       ]
     },
     "tip_block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "entries": [
         {
           "weight": 4,
           "data": {
-            "Name": "minecraft:cave_vines",
-            "Properties": {
+            "id": "minecraft:cave_vines",
+            "properties": {
               "age": "0",
               "berries": "false"
             }
@@ -40,8 +40,8 @@
         {
           "weight": 1,
           "data": {
-            "Name": "minecraft:cave_vines",
-            "Properties": {
+            "id": "minecraft:cave_vines",
+            "properties": {
               "age": "0",
               "berries": "true"
             }

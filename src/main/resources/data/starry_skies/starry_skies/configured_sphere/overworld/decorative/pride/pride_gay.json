@@ -3,22 +3,22 @@
   "config": {
     "blocks": [
       {
-        "Name": "minecraft:red_wool"
+        "id": "minecraft:red_wool"
       },
       {
-        "Name": "minecraft:orange_wool"
+        "id": "minecraft:orange_wool"
       },
       {
-        "Name": "minecraft:yellow_wool"
+        "id": "minecraft:yellow_wool"
       },
       {
-        "Name": "minecraft:green_wool"
+        "id": "minecraft:green_wool"
       },
       {
-        "Name": "minecraft:cyan_wool"
+        "id": "minecraft:cyan_wool"
       },
       {
-        "Name": "minecraft:purple_wool"
+        "id": "minecraft:purple_wool"
       }
     ],
 

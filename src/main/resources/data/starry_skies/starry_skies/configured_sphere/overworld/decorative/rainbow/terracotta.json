@@ -6,52 +6,52 @@
       "reroll_for_every_pos": true,
       "states": [
         {
-          "Name": "minecraft:white_terracotta"
+          "id": "minecraft:white_terracotta"
         },
         {
-          "Name": "minecraft:light_gray_terracotta"
+          "id": "minecraft:light_gray_terracotta"
         },
         {
-          "Name": "minecraft:gray_terracotta"
+          "id": "minecraft:gray_terracotta"
         },
         {
-          "Name": "minecraft:black_terracotta"
+          "id": "minecraft:black_terracotta"
         },
         {
-          "Name": "minecraft:brown_terracotta"
+          "id": "minecraft:brown_terracotta"
         },
         {
-          "Name": "minecraft:red_terracotta"
+          "id": "minecraft:red_terracotta"
         },
         {
-          "Name": "minecraft:orange_terracotta"
+          "id": "minecraft:orange_terracotta"
         },
         {
-          "Name": "minecraft:yellow_terracotta"
+          "id": "minecraft:yellow_terracotta"
         },
         {
-          "Name": "minecraft:lime_terracotta"
+          "id": "minecraft:lime_terracotta"
         },
         {
-          "Name": "minecraft:green_terracotta"
+          "id": "minecraft:green_terracotta"
         },
         {
-          "Name": "minecraft:cyan_terracotta"
+          "id": "minecraft:cyan_terracotta"
         },
         {
-          "Name": "minecraft:light_blue_terracotta"
+          "id": "minecraft:light_blue_terracotta"
         },
         {
-          "Name": "minecraft:blue_terracotta"
+          "id": "minecraft:blue_terracotta"
         },
         {
-          "Name": "minecraft:purple_terracotta"
+          "id": "minecraft:purple_terracotta"
         },
         {
-          "Name": "minecraft:magenta_terracotta"
+          "id": "minecraft:magenta_terracotta"
         },
         {
-          "Name": "minecraft:pink_terracotta"
+          "id": "minecraft:pink_terracotta"
         }
       ]
     },

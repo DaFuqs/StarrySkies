@@ -6,8 +6,10 @@ import de.dafuqs.starryskies.worldgen.*;
 import net.minecraft.advancements.predicates.*;
 import net.minecraft.advancements.predicates.entity.*;
 import net.minecraft.advancements.triggers.*;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import org.jspecify.annotations.*;
 
 import java.util.*;
@@ -23,12 +25,12 @@ public class SphereDiscoveredCriterion extends SimpleCriterionTrigger<SphereDisc
 		this.trigger(player, (conditions) -> conditions.matches(sphere.getID(player.registryAccess())));
 	}
 
-	public record Conditions(Optional<ContextAwarePredicate> player,
+	public record Conditions(Optional<Holder<LootItemCondition>> player,
 							 List<Identifier> identifiers) implements SimpleCriterionTrigger.SimpleInstance {
 
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(
 				(instance) -> instance.group(
-						EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+						LootItemCondition.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
 						Identifier.CODEC.listOf().optionalFieldOf("ids", List.of()).forGetter(Conditions::identifiers)
 				).apply(instance, Conditions::new)
 		);

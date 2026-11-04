@@ -9,11 +9,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionEvents;
 
 public class StarrySkiesClient implements ClientModInitializer {
 	public static StarrySkyBox SKYBOX;
-    public static RenderStateDataKey<Boolean> USE_SKYBOX;
+    public static RenderStateDataKey<Boolean> USE_SKYBOX = RenderStateDataKey.create(() -> "USE_SKYBOX");
 
 	@Override
 	public void onInitializeClient() {
-        LevelExtractionEvents.END_EXTRACTION.register(ctx -> ctx.levelState().setData(USE_SKYBOX, ctx.level() != null && StarryDimensionKeys.OVERWORLD_KEY.equals(ctx.level().dimension())));
+        LevelExtractionEvents.END_EXTRACTION.register(ctx -> ctx.levelState().setData(USE_SKYBOX, StarryDimensionKeys.OVERWORLD_KEY.equals(ctx.level().dimension())));
         if (StarrySkies.CONFIG.rainbowSkybox)
             StarrySkyBoxTextures.INSTANCE.set("textures/skybox/rainbow_up.png", "textures/skybox/rainbow_down.png", "textures/skybox/rainbow_hori.png", "textures/skybox/rainbow_hori.png", "textures/skybox/rainbow_hori.png", "textures/skybox/rainbow_hori.png");
         else

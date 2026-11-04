@@ -2,16 +2,16 @@
   "type": "starry_skies:shell",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "terrestria:redwood_log"
+        "id": "terrestria:redwood_log"
       }
     },
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "terrestria:redwood_leaves",
-        "Properties": {
+        "id": "terrestria:redwood_leaves",
+        "properties": {
           "distance": "1"
         }
       }

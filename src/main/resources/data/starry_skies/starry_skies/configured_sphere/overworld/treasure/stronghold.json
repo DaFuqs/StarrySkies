@@ -3,95 +3,91 @@
   "config": {
     "main_block": {
       "reroll_for_every_pos": true,
-      "type": "minecraft:noise_provider",
+      "type": "minecraft:noise",
       "noise": {
-        "amplitudes": [
-          1
-        ],
-        "firstOctave": 0
+        "base_amplitude": 0.955388882960065,
+        "base_octave": 0
       },
       "scale": 0.020833334,
       "seed": 2345,
       "states": [
         {
-          "Name": "minecraft:infested_stone_bricks"
+          "id": "minecraft:infested_stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:infested_stone_bricks"
+          "id": "minecraft:infested_stone_bricks"
         }
       ]
     },
     "shell_block": {
       "reroll_for_every_pos": true,
-      "type": "minecraft:noise_provider",
+      "type": "minecraft:noise",
       "noise": {
-        "amplitudes": [
-          1
-        ],
-        "firstOctave": 0
+        "base_amplitude": 0.955388882960065,
+        "base_octave": 0
       },
       "scale": 0.020833334,
       "seed": 2345,
       "states": [
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         },
         {
-          "Name": "minecraft:mossy_stone_bricks"
+          "id": "minecraft:mossy_stone_bricks"
         },
         {
-          "Name": "minecraft:stone_bricks"
+          "id": "minecraft:stone_bricks"
         }
       ]
     },

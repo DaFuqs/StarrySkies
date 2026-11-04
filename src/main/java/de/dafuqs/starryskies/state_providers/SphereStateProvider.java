@@ -10,7 +10,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 
 public class SphereStateProvider {
 	
-	public static final MapCodec<BlockStateProvider> BLOCK_STATE_PROVIDER_MAP_CODEC = BuiltInRegistries.BLOCKSTATE_PROVIDER_TYPE.byNameCodec().dispatchMap(BlockStateProvider::type, BlockStateProviderType::codec);
+	public static final MapCodec<BlockStateProvider> BLOCK_STATE_PROVIDER_MAP_CODEC = BuiltInRegistries.BLOCK_STATE_PROVIDER_TYPE.byNameCodec().dispatchMap(BlockStateProvider::codec, c -> c);
 	
 	public static final Codec<SphereStateProvider> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
 			BLOCK_STATE_PROVIDER_MAP_CODEC.forGetter((provider) -> provider.provider),
@@ -29,7 +29,7 @@ public class SphereStateProvider {
 		if (rerollForEveryPos) {
 			return provider;
 		} else {
-			return BlockStateProvider.simple(provider.getState(level, random, spherePos));
+			return new SimpleStateProvider(provider.getState(level, random, spherePos));
 		}
 	}
 	
