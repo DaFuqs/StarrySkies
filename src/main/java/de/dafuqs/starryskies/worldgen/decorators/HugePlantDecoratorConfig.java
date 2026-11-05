@@ -14,9 +14,9 @@ public record HugePlantDecoratorConfig(BlockStateProvider block, Optional<BlockS
 
 	public static final Codec<HugePlantDecoratorConfig> CODEC = RecordCodecBuilder.create((instance) ->
 			instance.group(
-					BlockStateProvider.CODEC.fieldOf("block").forGetter(decorator -> decorator.block),
-					BlockStateProvider.CODEC.optionalFieldOf("base_block").forGetter(decorator -> decorator.baseBlock),
-					BlockStateProvider.CODEC.optionalFieldOf("tip_block").forGetter(decorator -> decorator.tipBlock),
+					BlockStateProvider.DIRECT_CODEC.fieldOf("block").forGetter(decorator -> decorator.block),
+					BlockStateProvider.DIRECT_CODEC.optionalFieldOf("base_block").forGetter(decorator -> decorator.baseBlock),
+					BlockStateProvider.DIRECT_CODEC.optionalFieldOf("tip_block").forGetter(decorator -> decorator.tipBlock),
 					IntProviders.CODEC.fieldOf("height").forGetter(decorator -> decorator.height),
 					Codec.FLOAT.fieldOf("chance").forGetter(decorator -> decorator.chance)
 			).apply(instance, HugePlantDecoratorConfig::new));

@@ -1,0 +1,46 @@
+{
+  "type": "starry_skies:shell",
+  "config": {
+    "main_block": {
+      "type": "minecraft:simple",
+      "state": {
+        "id": "minecraft:poplar_log"
+      }
+    },
+    "shell_block": {
+      "type": "starry_skies:alternating_state_provider",
+      "reroll_for_every_pos": true,
+      "states": [
+        {
+          "id": "minecraft:orange_poplar_leaves"
+        },
+        {
+          "id": "minecraft:red_poplar_leaves"
+        },
+        {
+          "id": "minecraft:orange_poplar_leaves"
+        },
+        {
+          "id": "minecraft:yellow_poplar_leaves"
+        }
+      ]
+    },
+    "shell_thickness": {
+      "type": "minecraft:constant",
+      "value": 2
+    },
+    "size": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 5,
+      "max_exclusive": 12
+    },
+    "decorators": {
+      "starry_skies:shelf_mushrooms": 1.0
+    },
+    "spawns": [],
+    "generation": {
+      "weight": 0.25,
+      "group": "starry_skies:overworld/wood"
+    }
+  }
+}

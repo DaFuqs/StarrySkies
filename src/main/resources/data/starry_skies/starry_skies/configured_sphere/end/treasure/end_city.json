@@ -3,95 +3,91 @@
   "config": {
     "main_block": {
       "reroll_for_every_pos": true,
-      "type": "minecraft:noise_provider",
+      "type": "minecraft:noise",
       "noise": {
-        "amplitudes": [
-          1
-        ],
-        "firstOctave": 0
+        "base_amplitude": 0.955388882960065,
+        "base_octave": 0
       },
       "scale": 0.020833334,
       "seed": 2345,
       "states": [
         {
-          "Name": "minecraft:magenta_stained_glass"
+          "id": "minecraft:magenta_stained_glass"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:magenta_stained_glass"
+          "id": "minecraft:magenta_stained_glass"
         }
       ]
     },
     "shell_block": {
       "reroll_for_every_pos": true,
-      "type": "minecraft:noise_provider",
+      "type": "minecraft:noise",
       "noise": {
-        "amplitudes": [
-          1
-        ],
-        "firstOctave": 0
+        "base_amplitude": 0.955388882960065,
+        "base_octave": 0
       },
       "scale": 0.020833334,
       "seed": 2345,
       "states": [
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         },
         {
-          "Name": "minecraft:purpur_block"
+          "id": "minecraft:purpur_block"
         },
         {
-          "Name": "minecraft:end_stone_bricks"
+          "id": "minecraft:end_stone_bricks"
         }
       ]
     },

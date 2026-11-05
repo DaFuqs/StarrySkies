@@ -3,7 +3,7 @@
   "config": {
     "loot_table": "minecraft:chests/buried_treasure",
     "marking_block": {
-      "Name": "minecraft:prismarine"
+      "id": "minecraft:prismarine"
     }
   }
 }

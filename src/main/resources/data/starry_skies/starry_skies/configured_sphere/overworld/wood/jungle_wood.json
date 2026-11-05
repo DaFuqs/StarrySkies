@@ -2,16 +2,16 @@
   "type": "starry_skies:shell",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:jungle_log"
+        "id": "minecraft:jungle_log"
       }
     },
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:jungle_leaves",
-        "Properties": {
+        "id": "minecraft:jungle_leaves",
+        "properties": {
           "distance": "1"
         }
       }
@@ -30,7 +30,7 @@
 
     "decorators": {
       "starry_skies:vines": 0.8,
-      "starry_skies:cocoa": 0.4
+      "starry_skies:cocoa": 1.0
     },
     "spawns": [],
     "generation": {

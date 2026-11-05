@@ -2,10 +2,10 @@
   "type": "starry_skies:center_pond",
   "config": {
     "beach_block": {
-      "Name": "minecraft:sand"
+      "id": "minecraft:sand"
     },
     "fluid_block": {
-      "Name": "minecraft:water"
+      "id": "minecraft:water"
     },
     "loot_table": "minecraft:chests/shipwreck_treasure",
     "loot_table_chance": 0.5

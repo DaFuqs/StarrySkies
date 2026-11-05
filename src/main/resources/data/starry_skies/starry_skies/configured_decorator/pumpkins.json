@@ -2,7 +2,7 @@
   "type": "starry_skies:single_block",
   "config": {
     "block": {
-      "Name": "minecraft:pumpkin"
+      "id": "minecraft:pumpkin"
     },
     "chance": 0.02
   }

@@ -2,15 +2,15 @@
   "type": "starry_skies:modular",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "terrestria:basalt_sand"
+        "id": "terrestria:basalt_sand"
       }
     },
     "bottom_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "terrestria:basalt_cobblestone"
+        "id": "terrestria:basalt_cobblestone"
       }
     },
 

@@ -1,0 +1,9 @@
+{
+  "type": "starry_skies:single_block",
+  "config": {
+    "block": {
+      "id": "minecraft:red_shrub"
+    },
+    "chance": 0.03
+  }
+}

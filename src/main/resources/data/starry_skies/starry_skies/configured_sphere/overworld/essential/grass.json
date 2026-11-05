@@ -2,15 +2,15 @@
   "type": "starry_skies:modular",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:dirt"
+        "id": "minecraft:dirt"
       }
     },
     "top_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:grass_block"
+        "id": "minecraft:grass_block"
       }
     },
 
@@ -29,6 +29,7 @@
       "starry_skies:loads_of_flowers": 0.05,
       "starry_skies:tulips": 0.2,
       "starry_skies:bushes": 0.15,
+      "starry_skies:red_shrubs": 0.05,
       "starry_skies:pink_petals": 0.01,
       "starry_skies:wildflowers": 0.15
     },

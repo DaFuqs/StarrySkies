@@ -6,9 +6,9 @@
       "group": "nether_stones"
     },
     "core_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:nether_quartz_ore"
+        "id": "minecraft:nether_quartz_ore"
       }
     },
     "core_radius": {

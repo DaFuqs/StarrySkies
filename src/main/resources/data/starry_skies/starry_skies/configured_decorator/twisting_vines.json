@@ -2,15 +2,15 @@
   "type": "starry_skies:huge_plant",
   "config": {
     "block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:twisting_vines_plant"
+        "id": "minecraft:twisting_vines_plant"
       }
     },
     "tip_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:twisting_vines"
+        "id": "minecraft:twisting_vines"
       }
     },
     "height": {

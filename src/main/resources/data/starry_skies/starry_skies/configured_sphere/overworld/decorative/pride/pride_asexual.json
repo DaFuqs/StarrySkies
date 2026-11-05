@@ -3,16 +3,16 @@
   "config": {
     "blocks": [
       {
-        "Name": "minecraft:black_wool"
+        "id": "minecraft:black_wool"
       },
       {
-        "Name": "minecraft:gray_wool"
+        "id": "minecraft:gray_wool"
       },
       {
-        "Name": "minecraft:white_wool"
+        "id": "minecraft:white_wool"
       },
       {
-        "Name": "minecraft:purple_wool"
+        "id": "minecraft:purple_wool"
       }
     ],
 

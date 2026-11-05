@@ -10,7 +10,7 @@ public record SingleBlockProviderDecoratorConfig(BlockStateProvider state,
 	
 	public static final Codec<SingleBlockProviderDecoratorConfig> CODEC = RecordCodecBuilder.create((instance) ->
 			instance.group(
-					BlockStateProvider.CODEC.fieldOf("block").forGetter(decorator -> decorator.state),
+					BlockStateProvider.DIRECT_CODEC.fieldOf("block").forGetter(decorator -> decorator.state),
 					Codec.floatRange(0.0F, 1.0F).fieldOf("chance").forGetter(decorator -> decorator.chance)
 			).apply(instance, SingleBlockProviderDecoratorConfig::new));
 	

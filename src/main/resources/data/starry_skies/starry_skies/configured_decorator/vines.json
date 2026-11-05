@@ -2,12 +2,12 @@
   "type": "starry_skies:vines",
   "config": {
     "block": {
-      "Name": "minecraft:vine"
+      "id": "minecraft:vine"
     },
     "height":  {
       "type": "minecraft:uniform",
       "min_inclusive": 1,
-      "max_inclusive": 12
+      "max_inclusive": 6
     },
     "chance": 0.002
   }

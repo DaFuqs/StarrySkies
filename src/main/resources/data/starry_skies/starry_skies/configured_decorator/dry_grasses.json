@@ -2,18 +2,17 @@
   "type": "starry_skies:single_block_provider",
   "config": {
     "block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "entries": [
         {
           "data": {
-            "Name": "minecraft:short_dry_grass",
-            "Properties": {}
+            "id": "minecraft:short_dry_grass"
           },
           "weight": 3
         },
         {
           "data": {
-            "Name": "minecraft:tall_dry_grass"
+            "id": "minecraft:tall_dry_grass"
           },
           "weight": 2
         }

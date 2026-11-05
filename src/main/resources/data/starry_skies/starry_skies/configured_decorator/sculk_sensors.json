@@ -2,7 +2,7 @@
   "type": "starry_skies:cave_bottom_block",
   "config": {
     "block": {
-      "Name": "minecraft:sculk_sensor"
+      "id": "minecraft:sculk_sensor"
     },
     "chance": 0.05
   }

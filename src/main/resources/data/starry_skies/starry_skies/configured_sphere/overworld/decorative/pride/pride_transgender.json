@@ -3,19 +3,19 @@
   "config": {
     "blocks": [
       {
-        "Name": "minecraft:light_blue_wool"
+        "id": "minecraft:light_blue_wool"
       },
       {
-        "Name": "minecraft:pink_wool"
+        "id": "minecraft:pink_wool"
       },
       {
-        "Name": "minecraft:white_wool"
+        "id": "minecraft:white_wool"
       },
       {
-        "Name": "minecraft:pink_wool"
+        "id": "minecraft:pink_wool"
       },
       {
-        "Name": "minecraft:light_blue_wool"
+        "id": "minecraft:light_blue_wool"
       }
     ],
 

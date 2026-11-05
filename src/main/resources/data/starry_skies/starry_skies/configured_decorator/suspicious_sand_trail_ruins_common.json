@@ -2,7 +2,7 @@
   "type": "starry_skies:brushable_block",
   "config": {
     "block": {
-      "Name": "minecraft:suspicious_sand"
+      "id": "minecraft:suspicious_sand"
     },
     "loot_table": "minecraft:archaeology/trail_ruins_common",
     "chance": 0.1

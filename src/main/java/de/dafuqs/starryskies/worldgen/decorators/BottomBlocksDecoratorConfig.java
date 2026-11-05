@@ -14,9 +14,9 @@ public record BottomBlocksDecoratorConfig(Optional<BlockStateProvider> topState,
 	
 	public static final Codec<BottomBlocksDecoratorConfig> CODEC = RecordCodecBuilder.create((instance) ->
 			instance.group(
-					BlockStateProvider.CODEC.optionalFieldOf("top_block").forGetter(decorator -> decorator.topState),
-					BlockStateProvider.CODEC.fieldOf("block").forGetter(decorator -> decorator.state),
-					BlockStateProvider.CODEC.optionalFieldOf("bottom_block").forGetter(decorator -> decorator.bottomState),
+					BlockStateProvider.DIRECT_CODEC.optionalFieldOf("top_block").forGetter(decorator -> decorator.topState),
+					BlockStateProvider.DIRECT_CODEC.fieldOf("block").forGetter(decorator -> decorator.state),
+					BlockStateProvider.DIRECT_CODEC.optionalFieldOf("bottom_block").forGetter(decorator -> decorator.bottomState),
 					IntProviders.codec(0, 8).fieldOf("height").forGetter(decorator -> decorator.height)
 			).apply(instance, BottomBlocksDecoratorConfig::new));
 	

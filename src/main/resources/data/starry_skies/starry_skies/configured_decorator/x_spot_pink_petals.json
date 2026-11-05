@@ -3,7 +3,7 @@
   "config": {
     "loot_table": "starry_skies:chests/pink_petals",
     "marking_block": {
-      "Name": "minecraft:stripped_cherry_wood"
+      "id": "minecraft:stripped_cherry_wood"
     }
   }
 }

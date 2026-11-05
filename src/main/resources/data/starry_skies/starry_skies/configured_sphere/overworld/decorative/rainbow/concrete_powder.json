@@ -6,52 +6,52 @@
       "reroll_for_every_pos": true,
       "states": [
         {
-          "Name": "minecraft:white_concrete_powder"
+          "id": "minecraft:white_concrete_powder"
         },
         {
-          "Name": "minecraft:light_gray_concrete_powder"
+          "id": "minecraft:light_gray_concrete_powder"
         },
         {
-          "Name": "minecraft:gray_concrete_powder"
+          "id": "minecraft:gray_concrete_powder"
         },
         {
-          "Name": "minecraft:black_concrete_powder"
+          "id": "minecraft:black_concrete_powder"
         },
         {
-          "Name": "minecraft:brown_concrete_powder"
+          "id": "minecraft:brown_concrete_powder"
         },
         {
-          "Name": "minecraft:red_concrete_powder"
+          "id": "minecraft:red_concrete_powder"
         },
         {
-          "Name": "minecraft:orange_concrete_powder"
+          "id": "minecraft:orange_concrete_powder"
         },
         {
-          "Name": "minecraft:yellow_concrete_powder"
+          "id": "minecraft:yellow_concrete_powder"
         },
         {
-          "Name": "minecraft:lime_concrete_powder"
+          "id": "minecraft:lime_concrete_powder"
         },
         {
-          "Name": "minecraft:green_concrete_powder"
+          "id": "minecraft:green_concrete_powder"
         },
         {
-          "Name": "minecraft:cyan_concrete_powder"
+          "id": "minecraft:cyan_concrete_powder"
         },
         {
-          "Name": "minecraft:light_blue_concrete_powder"
+          "id": "minecraft:light_blue_concrete_powder"
         },
         {
-          "Name": "minecraft:blue_concrete_powder"
+          "id": "minecraft:blue_concrete_powder"
         },
         {
-          "Name": "minecraft:purple_concrete_powder"
+          "id": "minecraft:purple_concrete_powder"
         },
         {
-          "Name": "minecraft:magenta_concrete_powder"
+          "id": "minecraft:magenta_concrete_powder"
         },
         {
-          "Name": "minecraft:pink_concrete_powder"
+          "id": "minecraft:pink_concrete_powder"
         }
       ]
     },
@@ -60,52 +60,52 @@
       "reroll_for_every_pos": true,
       "states": [
         {
-          "Name": "minecraft:white_concrete"
+          "id": "minecraft:white_concrete"
         },
         {
-          "Name": "minecraft:light_gray_concrete"
+          "id": "minecraft:light_gray_concrete"
         },
         {
-          "Name": "minecraft:gray_concrete"
+          "id": "minecraft:gray_concrete"
         },
         {
-          "Name": "minecraft:black_concrete"
+          "id": "minecraft:black_concrete"
         },
         {
-          "Name": "minecraft:brown_concrete"
+          "id": "minecraft:brown_concrete"
         },
         {
-          "Name": "minecraft:red_concrete"
+          "id": "minecraft:red_concrete"
         },
         {
-          "Name": "minecraft:orange_concrete"
+          "id": "minecraft:orange_concrete"
         },
         {
-          "Name": "minecraft:yellow_concrete"
+          "id": "minecraft:yellow_concrete"
         },
         {
-          "Name": "minecraft:lime_concrete"
+          "id": "minecraft:lime_concrete"
         },
         {
-          "Name": "minecraft:green_concrete"
+          "id": "minecraft:green_concrete"
         },
         {
-          "Name": "minecraft:cyan_concrete"
+          "id": "minecraft:cyan_concrete"
         },
         {
-          "Name": "minecraft:light_blue_concrete"
+          "id": "minecraft:light_blue_concrete"
         },
         {
-          "Name": "minecraft:blue_concrete"
+          "id": "minecraft:blue_concrete"
         },
         {
-          "Name": "minecraft:purple_concrete"
+          "id": "minecraft:purple_concrete"
         },
         {
-          "Name": "minecraft:magenta_concrete"
+          "id": "minecraft:magenta_concrete"
         },
         {
-          "Name": "minecraft:pink_concrete"
+          "id": "minecraft:pink_concrete"
         }
       ]
     },

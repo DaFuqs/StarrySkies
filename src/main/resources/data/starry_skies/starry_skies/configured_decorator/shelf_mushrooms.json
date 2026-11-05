@@ -1,0 +1,13 @@
+{
+  "type": "starry_skies:wall_attached_center",
+  "config": {
+    "block": {
+      "id": "minecraft:shelf_mushroom",
+      "properties": {
+        "age": "1"
+      }
+    },
+    "chance": 0.75,
+    "facing_outwards": false
+  }
+}

@@ -23,7 +23,7 @@ public class SphereDecorators {
 	public static SphereDecorator<HugePlantDecoratorConfig> HUGE_PLANT = register("huge_plant", new HugePlantDecorator(HugePlantDecoratorConfig.CODEC));
 	public static SphereDecorator<HugePlantDecoratorConfig> HUGE_HANGING_PLANT = register("huge_hanging_plant", new HugeHangingPlantDecorator(HugePlantDecoratorConfig.CODEC));
 	public static SphereDecorator<DripleafDecoratorConfig> DRIPLEAF = register("dripleaf", new DripleafDecorator(DripleafDecoratorConfig.CODEC));
-	public static SphereDecorator<SphereDecoratorConfig.DefaultSphereDecoratorConfig> COCOA = register("cocoa", new CocoaDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));
+	public static SphereDecorator<WallAttachedCenterDecoratorConfig> WALL_ATTACHED_CENTER = register("wall_attached_center", new WallAttachedCenterDecorator(WallAttachedCenterDecoratorConfig.CODEC));
 	public static SphereDecorator<SphereDecoratorConfig.DefaultSphereDecoratorConfig> SEA_GREENS = register("sea_greens", new SeaGreensDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));
 	public static SphereDecorator<RuinedPortalDecoratorConfig> RUINED_PORTAL = register("ruined_portal", new RuinedPortalDecorator(RuinedPortalDecoratorConfig.CODEC));
 	public static SphereDecorator<SphereDecoratorConfig.DefaultSphereDecoratorConfig> END_GATEWAY = register("end_gateway", new EndGatewayDecorator(SphereDecoratorConfig.DefaultSphereDecoratorConfig.CODEC));

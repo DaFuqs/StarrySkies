@@ -2,7 +2,7 @@
   "type": "starry_skies:fluid",
   "config": {
     "fluid_block": {
-      "Name": "minecraft:lava"
+      "id": "minecraft:lava"
     },
     "fluid_fill_percent": {
       "type": "minecraft:uniform",

@@ -13,7 +13,7 @@ public record ReplaceBlocksDecoratorConfig(Direction towardsDirection, IntProvid
 			instance -> instance.group(
 					Direction.CODEC.fieldOf("towards_direction").forGetter(decorator -> decorator.towardsDirection),
 					IntProviders.CODEC.fieldOf("depth").forGetter(decorator -> decorator.depth),
-					BlockStateProvider.CODEC.fieldOf("block").forGetter(decorator -> decorator.state)
+					BlockStateProvider.DIRECT_CODEC.fieldOf("block").forGetter(decorator -> decorator.state)
 			).apply(instance, ReplaceBlocksDecoratorConfig::new)
 	);
 

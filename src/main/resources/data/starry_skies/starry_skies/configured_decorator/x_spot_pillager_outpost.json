@@ -3,7 +3,7 @@
   "config": {
     "loot_table": "minecraft:chests/pillager_outpost",
     "marking_block": {
-      "Name": "minecraft:stripped_dark_oak_wood"
+      "id": "minecraft:stripped_dark_oak_wood"
     }
   }
 }

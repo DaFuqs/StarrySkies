@@ -2,7 +2,7 @@
   "type": "starry_skies:fluid",
   "config": {
     "fluid_block": {
-      "Name": "minecraft:water"
+      "id": "minecraft:water"
     },
     "fluid_fill_percent": {
       "type": "minecraft:uniform",
@@ -11,9 +11,9 @@
     },
     "hole_in_bottom_chance": 0.25,
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:mud"
+        "id": "minecraft:mud"
       }
     },
     "shell_thickness": {

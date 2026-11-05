@@ -3,7 +3,7 @@
   "config": {
     "loot_table": "minecraft:chests/desert_pyramid",
     "marking_block": {
-      "Name": "minecraft:orange_terracotta"
+      "id": "minecraft:orange_terracotta"
     }
   }
 }

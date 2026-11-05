@@ -10,8 +10,8 @@ public record CaveColumnDecoratorConfig(BlockStateProvider centerState,
 	
 	public static final Codec<CaveColumnDecoratorConfig> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(
-					BlockStateProvider.CODEC.fieldOf("center_block").forGetter(decorator -> decorator.centerState),
-					BlockStateProvider.CODEC.fieldOf("column_block").forGetter(decorator -> decorator.columnState)
+					BlockStateProvider.DIRECT_CODEC.fieldOf("center_block").forGetter(decorator -> decorator.centerState),
+					BlockStateProvider.DIRECT_CODEC.fieldOf("column_block").forGetter(decorator -> decorator.columnState)
 			).apply(instance, CaveColumnDecoratorConfig::new)
 	);
 	

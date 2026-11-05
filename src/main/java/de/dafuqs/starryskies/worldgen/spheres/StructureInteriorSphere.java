@@ -90,7 +90,7 @@ public class StructureInteriorSphere extends ShellSphere<StructureInteriorSphere
 		public void decorate(WorldGenLevel world, BlockPos origin, RandomSource random) {
 			super.decorate(world, origin, random);
 			
-			StructureTemplateManager templateManager = world.getServer().getStructureManager();
+			StructureTemplateManager templateManager = world.getServer().getStructureTemplateManager();
 			
 			ChunkPos chunkPos = ChunkPos.containing(origin);
 			BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();

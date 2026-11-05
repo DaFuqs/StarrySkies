@@ -2,10 +2,10 @@
   "type": "starry_skies:simple",
   "config": {
     "block": {
-      "type": "minecraft:rotated_block_provider",
+      "type": "minecraft:rotated",
       "state": {
-        "Name": "minecraft:hay_block",
-        "Properties": {
+        "id": "minecraft:hay_block",
+        "properties": {
           "axis": "y"
         }
       }

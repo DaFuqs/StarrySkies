@@ -28,14 +28,8 @@ import java.util.*;
 public class StarryPortalBlock extends Block implements Portal {
 
     private static final Logger LOGGER = LogUtils.getLogger();
-    public static final MapCodec<StarryPortalBlock> CODEC = simpleCodec(StarryPortalBlock::new);
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     private static final Map<Direction.Axis, VoxelShape> SHAPES = Shapes.rotateHorizontalAxis(Block.column(4.0, 16.0, 0.0, 16.0));
-
-    @Override
-    public MapCodec<StarryPortalBlock> codec() {
-        return CODEC;
-    }
 
     public StarryPortalBlock(BlockBehaviour.Properties properties) {
         super(properties);

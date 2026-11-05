@@ -8,26 +8,24 @@
       "max_exclusive": 10
     },
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:blackstone"
+        "id": "minecraft:blackstone"
       }
     },
     "shell_block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "entries": [
         {
           "weight": 7,
           "data": {
-            "Name": "minecraft:blackstone",
-            "Properties": {}
+            "id": "minecraft:blackstone"
           }
         },
         {
           "weight": 1,
           "data": {
-            "Name": "minecraft:gilded_blackstone",
-            "Properties": {}
+            "id": "minecraft:gilded_blackstone"
           }
         }
       ]

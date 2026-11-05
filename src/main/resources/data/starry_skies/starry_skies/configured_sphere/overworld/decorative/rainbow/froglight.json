@@ -6,13 +6,13 @@
       "reroll_for_every_pos": true,
       "states": [
         {
-          "Name": "minecraft:pearlescent_froglight"
+          "id": "minecraft:pearlescent_froglight"
         },
         {
-          "Name": "minecraft:verdant_froglight"
+          "id": "minecraft:verdant_froglight"
         },
         {
-          "Name": "minecraft:ochre_froglight"
+          "id": "minecraft:ochre_froglight"
         }
       ]
     },

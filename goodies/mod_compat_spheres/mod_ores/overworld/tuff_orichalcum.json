@@ -6,9 +6,9 @@
       "group": "tuff_orichalcum_ore"
     },
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:tuff"
+        "id": "minecraft:tuff"
       }
     },
     "core_radius": {

@@ -2,7 +2,7 @@
   "type": "starry_skies:brushable_block",
   "config": {
     "block": {
-      "Name": "minecraft:suspicious_gravel"
+      "id": "minecraft:suspicious_gravel"
     },
     "loot_table": "minecraft:archaeology/ocean_ruin_cold",
     "chance": 0.1

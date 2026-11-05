@@ -25,7 +25,7 @@ public class MultifaceGrowthDecorator extends SphereDecorator<MultifaceGrowthDec
 		MultifaceGrowthDecoratorConfig config = context.config();
 
 		int sphereY = sphere.getPosition().getY();
-		if (!(config.featureConfig.placeBlock instanceof MultifaceSpreadeableBlock multifaceSpreadeableBlock)) {
+		if (!(config.featureConfig.placeBlock() instanceof MultifaceSpreadeableBlock multifaceSpreadeableBlock)) {
 			return false;
 		}
 
@@ -35,7 +35,7 @@ public class MultifaceGrowthDecorator extends SphereDecorator<MultifaceGrowthDec
 				for (int i = 0; i < sphere.getRadius(); i++) {
 					if (!world.getBlockState(currentPos.above(i)).isAir()) {
 						if (world.getBlockState(currentPos.above(i - 1)).isAir()) {
-							MultifaceGrowthFeature.placeGrowthIfPossible(multifaceSpreadeableBlock, world, currentPos, world.getBlockState(bp), config.featureConfig, random, Arrays.asList(Direction.values()));
+							config.featureConfig.placeGrowthIfPossible(multifaceSpreadeableBlock, world, currentPos, world.getBlockState(bp), random, Arrays.asList(Direction.values()));
 						}
 						break;
 					}

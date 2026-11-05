@@ -2,7 +2,7 @@
   "type": "starry_skies:cave_bottom_block",
   "config": {
     "block": {
-      "Name": "minecraft:sculk_catalyst"
+      "id": "minecraft:sculk_catalyst"
     },
     "chance": 0.05
   }
