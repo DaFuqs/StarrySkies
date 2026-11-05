@@ -6,7 +6,8 @@
   "name": "Starry Skies",
   "description": "An implementation of the planetoids world gen for fabric",
   "authors": [
-    "DaFuqs"
+    "DaFuqs",
+    "pizzer"
   ],
   "contact": {
     "homepage": "https://github.com/DaFuqs/StarrySkies",
