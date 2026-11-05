@@ -3,7 +3,7 @@
   "config": {
     "loot_table": "minecraft:chests/ruined_portal",
     "marking_block": {
-      "Name": "minecraft:obsidian"
+      "id": "minecraft:obsidian"
     }
   }
 }

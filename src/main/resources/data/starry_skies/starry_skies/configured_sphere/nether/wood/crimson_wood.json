@@ -8,20 +8,20 @@
       "max_exclusive": 15
     },
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:crimson_stem"
+        "id": "minecraft:crimson_stem"
       }
     },
     "shell_block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "reroll_for_every_pos": true,
       "entries": [
         {
           "weight": 9,
           "data": {
-            "Name": "minecraft:nether_wart_block",
-            "Properties": {
+            "id": "minecraft:nether_wart_block",
+            "properties": {
               "distance": "1"
             }
           }
@@ -29,8 +29,8 @@
         {
           "weight": 1,
           "data": {
-            "Name": "minecraft:shroomlight",
-            "Properties": {
+            "id": "minecraft:shroomlight",
+            "properties": {
               "distance": "1"
             }
           }

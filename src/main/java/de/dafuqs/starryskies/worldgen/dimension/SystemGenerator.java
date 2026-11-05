@@ -102,7 +102,8 @@ public class SystemGenerator {
 		Point systemPos = Support.getSystemCoordinateFromChunkCoordinate(chunkPos.x(), chunkPos.z());
 		return getSystem(world, world.getSeed(), systemPos);
 	}
-	
+
+	// TODO: deduplicate system get-or-create code
 	public System getSystem(WorldGenLevel world, Point systemPos) {
 		System system = systemCache.get(systemPos);
 		
@@ -203,7 +204,7 @@ public class SystemGenerator {
 					ConfiguredSphere<?, ?> template = templateRegistry.getValue(defaultSphere.sphereId);
 					if (template != null) {
 						BlockPos pos = new BlockPos(defaultSphere.x, defaultSphere.y, defaultSphere.z);
-						PlacedSphere<?> sphere = template.generate(systemRandom, level, new BlockPos(pos), template.getSize(systemRandom));
+						PlacedSphere<?> sphere = template.generate(systemRandom, level, pos, template.getSize(systemRandom));
 						sphere.setPosition(pos);
 						defaultSpheres.add(sphere);
 					}

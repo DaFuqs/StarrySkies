@@ -2,8 +2,7 @@
   "type": "starry_skies:simple",
   "config": {
     "block": {
-      "Name": "cinderscapes:ash_block",
-      "Properties": {}
+      "id": "cinderscapes:ash_block"
     },
 
     "size": {

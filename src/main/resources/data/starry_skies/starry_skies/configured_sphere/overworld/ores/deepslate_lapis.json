@@ -6,9 +6,9 @@
       "group": "deepslates"
     },
     "core_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:deepslate_lapis_ore"
+        "id": "minecraft:deepslate_lapis_ore"
       }
     },
     "core_radius": {

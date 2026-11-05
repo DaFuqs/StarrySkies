@@ -2,28 +2,25 @@
   "type": "starry_skies:simple",
   "config": {
     "block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "reroll_for_every_pos": true,
       "entries": [
         {
           "weight": 6,
           "data": {
-            "Name": "minecraft:sulfur",
-            "Properties": {}
+            "id": "minecraft:sulfur"
           }
         },
         {
           "weight": 2,
           "data": {
-            "Name": "minecraft:cinnabar",
-            "Properties": {}
+            "id": "minecraft:cinnabar"
           }
         },
         {
           "weight": 1,
           "data": {
-            "Name": "minecraft:magma_block",
-            "Properties": {}
+            "id": "minecraft:magma_block"
           }
         }
       ]

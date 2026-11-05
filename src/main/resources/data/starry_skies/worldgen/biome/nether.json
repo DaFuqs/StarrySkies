@@ -3,80 +3,78 @@
   "downfall": 0,
   "has_precipitation": false,
   "effects": {
-    "sky_color": 7254527,
-    "fog_color": 3344392,
-    "water_color": 4159204,
-    "water_fog_color": 329011,
-    "ambient_sound": "minecraft:ambient.nether_wastes.loop",
-    "mood_sound": {
-      "sound": "minecraft:ambient.nether_wastes.mood",
-      "tick_delay": 6000,
-      "block_search_extent": 8,
-      "offset": 2
+    "water_color": "#3f76e4"
+  },
+  "attributes": {
+    "minecraft:audio/ambient_sounds": {
+      "additions": {
+        "sound": "minecraft:ambient.nether_wastes.additions",
+        "tick_chance": 0.0111
+      },
+      "loop": "minecraft:ambient.nether_wastes.loop",
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2.0,
+        "sound": "minecraft:ambient.nether_wastes.mood",
+        "tick_delay": 6000
+      }
     },
-    "additions_sound": {
-      "sound": "minecraft:ambient.nether_wastes.additions",
-      "tick_chance": 0.0111
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "minecraft:music.nether.nether_wastes"
+      }
     },
-    "music": [
-      {
-        "weight": 1,
-        "data": {
-          "sound": "minecraft:music.nether.nether_wastes",
-          "min_delay": 12000,
-          "max_delay": 24000,
-          "replace_current_music": false
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "creature": [
+            {
+              "type": "minecraft:strider",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 60
+            }
+          ],
+          "monster": [
+            {
+              "type": "minecraft:ghast",
+              "count": 4,
+              "weight": 50
+            },
+            {
+              "type": "minecraft:zombified_piglin",
+              "count": 4,
+              "weight": 100
+            },
+            {
+              "type": "minecraft:magma_cube",
+              "count": 4,
+              "weight": 2
+            },
+            {
+              "type": "minecraft:enderman",
+              "count": 4,
+              "weight": 25
+            },
+            {
+              "type": "minecraft:piglin",
+              "count": 4,
+              "weight": 15
+            }
+          ]
         }
-      }
-    ]
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/fog_color": "#330808",
+    "minecraft:visual/sky_color": "#6eb1ff"
   },
-  "spawners": {
-    "monster": [
-      {
-        "type": "minecraft:ghast",
-        "weight": 50,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:zombified_piglin",
-        "weight": 100,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:magma_cube",
-        "weight": 2,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:enderman",
-        "weight": 25,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "minecraft:piglin",
-        "weight": 15,
-        "minCount": 4,
-        "maxCount": 4
-      }
-    ],
-    "creature": [
-      {
-        "type": "minecraft:strider",
-        "weight": 60,
-        "minCount": 1,
-        "maxCount": 2
-      }
-    ],
-    "ambient": [],
-    "water_creature": [],
-    "water_ambient": [],
-    "misc": []
-  },
-  "spawn_costs": {},
   "carvers": [],
   "features": [
     [],

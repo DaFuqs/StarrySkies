@@ -2,12 +2,12 @@
   "type": "starry_skies:single_block_provider",
   "config": {
     "block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "entries": [
         {
           "data": {
-            "Name": "minecraft:pink_petals",
-            "Properties": {
+            "id": "minecraft:pink_petals",
+            "properties": {
               "facing": "north"
             }
           },
@@ -15,8 +15,8 @@
         },
         {
           "data": {
-            "Name": "minecraft:pink_petals",
-            "Properties": {
+            "id": "minecraft:pink_petals",
+            "properties": {
               "facing": "east"
             }
           },
@@ -24,8 +24,8 @@
         },
         {
           "data": {
-            "Name": "minecraft:pink_petals",
-            "Properties": {
+            "id": "minecraft:pink_petals",
+            "properties": {
               "facing": "south"
             }
           },
@@ -33,8 +33,8 @@
         },
         {
           "data": {
-            "Name": "minecraft:pink_petals",
-            "Properties": {
+            "id": "minecraft:pink_petals",
+            "properties": {
               "facing": "west"
             }
           },

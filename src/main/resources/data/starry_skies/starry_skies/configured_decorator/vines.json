@@ -2,7 +2,7 @@
   "type": "starry_skies:vines",
   "config": {
     "block": {
-      "Name": "minecraft:vine"
+      "id": "minecraft:vine"
     },
     "height": {
       "type": "minecraft:uniform",

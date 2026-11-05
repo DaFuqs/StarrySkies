@@ -2,8 +2,8 @@
   "type": "starry_skies:single_block",
   "config": {
     "block": {
-      "Name": "minecraft:sweet_berry_bush",
-      "Properties": {
+      "id": "minecraft:sweet_berry_bush",
+      "properties": {
         "age": "3"
       }
     },

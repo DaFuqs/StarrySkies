@@ -2,7 +2,7 @@
   "type": "starry_skies:fluid",
   "config": {
     "fluid_block": {
-      "Name": "minecraft:water"
+      "id": "minecraft:water"
     },
     "fluid_fill_percent": {
       "type": "minecraft:uniform",
@@ -16,30 +16,30 @@
       "max_inclusive": 3
     },
     "shell_block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "entries": [
         {
           "weight": 400,
           "data": {
-            "Name": "minecraft:moss_block"
+            "id": "minecraft:moss_block"
           }
         },
         {
           "weight": 100,
           "data": {
-            "Name": "minecraft:stone"
+            "id": "minecraft:stone"
           }
         },
         {
           "weight": 100,
           "data": {
-            "Name": "minecraft:deepslate"
+            "id": "minecraft:deepslate"
           }
         },
         {
           "weight": 25,
           "data": {
-            "Name": "minecraft:mossy_cobblestone"
+            "id": "minecraft:mossy_cobblestone"
           }
         }
       ]

@@ -3,10 +3,10 @@
   "min_distance_between_spheres": 7,
   "floor_height": 3,
   "floor_state": {
-    "Name": "minecraft:lava"
+    "id": "minecraft:lava"
   },
   "bottom_state": {
-    "Name": "minecraft:bedrock"
+    "id": "minecraft:bedrock"
   },
   "fixed_spheres": [
     {

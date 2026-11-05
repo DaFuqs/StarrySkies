@@ -4,7 +4,7 @@
   "ambient_light": 0.1,
   "cardinal_light": "nether",
   "has_ender_dragon_fight": false,
-  "skybox": "none",
+  "skybox": "end",
   "timelines": "#minecraft:in_nether",
   "has_fixed_time": true,
   "bed_works": false,
@@ -23,7 +23,12 @@
     "minecraft:gameplay/bed_rule": {
       "can_set_spawn": "never",
       "can_sleep": "never",
-      "explodes": true
+      "destroy_on_use": true
+    },
+    "minecraft:gameplay/straw_bed_rule": {
+      "can_set_spawn": "never",
+      "can_sleep": "never",
+      "destroy_on_use": true
     },
     "minecraft:gameplay/can_start_raid": false,
     "minecraft:gameplay/fast_lava": true,

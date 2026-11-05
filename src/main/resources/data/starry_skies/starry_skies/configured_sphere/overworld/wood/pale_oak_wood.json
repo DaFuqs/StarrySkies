@@ -2,15 +2,15 @@
   "type": "starry_skies:shell_core",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:pale_oak_log"
+        "id": "minecraft:pale_oak_log"
       }
     },
     "core_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:cave_air"
+        "id": "minecraft:cave_air"
       }
     },
     "core_radius": {
@@ -18,10 +18,10 @@
       "value": 4
     },
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:pale_oak_leaves",
-        "Properties": {
+        "id": "minecraft:pale_oak_leaves",
+        "properties": {
           "distance": "1"
         }
       }

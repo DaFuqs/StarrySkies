@@ -2,7 +2,7 @@
   "type": "starry_skies:fluid_core",
   "config": {
     "fluid_block": {
-      "Name": "minecraft:water"
+      "id": "minecraft:water"
     },
     "fluid_fill_percent": {
       "type": "minecraft:uniform",
@@ -20,9 +20,9 @@
       "max_inclusive": 2
     },
     "core_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:sea_lantern"
+        "id": "minecraft:sea_lantern"
       }
     },
     "core_radius": {

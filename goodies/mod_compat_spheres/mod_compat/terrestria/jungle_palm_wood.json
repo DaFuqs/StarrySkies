@@ -2,16 +2,16 @@
   "type": "starry_skies:shell",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:jungle_wood"
+        "id": "minecraft:jungle_wood"
       }
     },
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "terrestria:jungle_palm_leaves",
-        "Properties": {
+        "id": "terrestria:jungle_palm_leaves",
+        "properties": {
           "distance": "1"
         }
       }

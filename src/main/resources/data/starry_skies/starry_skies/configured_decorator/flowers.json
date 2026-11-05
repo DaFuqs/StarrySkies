@@ -2,53 +2,53 @@
   "type": "starry_skies:single_block_provider",
   "config": {
     "block": {
-      "type": "minecraft:weighted_state_provider",
+      "type": "minecraft:weighted",
       "entries": [
         {
           "data": {
-            "Name": "minecraft:dandelion"
+            "id": "minecraft:dandelion"
           },
           "weight": 1
         },
         {
           "data": {
-            "Name": "minecraft:poppy"
+            "id": "minecraft:poppy"
           },
           "weight": 1
         },
         {
           "data": {
-            "Name": "minecraft:blue_orchid"
+            "id": "minecraft:blue_orchid"
           },
           "weight": 1
         },
         {
           "data": {
-            "Name": "minecraft:allium"
+            "id": "minecraft:allium"
           },
           "weight": 1
         },
         {
           "data": {
-            "Name": "minecraft:azure_bluet"
+            "id": "minecraft:azure_bluet"
           },
           "weight": 1
         },
         {
           "data": {
-            "Name": "minecraft:oxeye_daisy"
+            "id": "minecraft:oxeye_daisy"
           },
           "weight": 1
         },
         {
           "data": {
-            "Name": "minecraft:cornflower"
+            "id": "minecraft:cornflower"
           },
           "weight": 1
         },
         {
           "data": {
-            "Name": "minecraft:lily_of_the_valley"
+            "id": "minecraft:lily_of_the_valley"
           },
           "weight": 1
         }

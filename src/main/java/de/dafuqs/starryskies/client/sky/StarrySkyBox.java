@@ -1,10 +1,11 @@
 package de.dafuqs.starryskies.client.sky;
 
-import com.mojang.blaze3d.*;
-import com.mojang.blaze3d.buffers.*;
 import com.mojang.blaze3d.pipeline.*;
 import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.renderpearl.api.buffers.*;
+import com.mojang.renderpearl.api.commands.*;
+import com.mojang.renderpearl.api.pipeline.*;
 import de.dafuqs.starryskies.client.*;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
@@ -13,6 +14,7 @@ import net.minecraft.client.renderer.texture.*;
 import net.minecraft.util.*;
 import net.neoforged.neoforge.client.*;
 import org.joml.*;
+import org.jspecify.annotations.*;
 
 import java.util.*;
 
@@ -32,10 +34,8 @@ public class StarrySkyBox implements AutoCloseable, CustomSkyboxRenderer {
 
 	// See SkyRenderer.renderEndSky() + CubeMap for inspiration
 	@Override
-	public boolean renderSky(LevelRenderState levelRenderState, SkyRenderState skyRenderState, Matrix4fc modelViewMatrix, Runnable setupFog) {
-		// All defaults except for colorModulator (== sky color)
-		GpuBufferSlice colorTransform = RenderSystem.getDynamicUniforms()
-				.writeTransform(RenderSystem.getModelViewMatrixCopy(), ARGB.vector4fFromARGB32(levelRenderState.skyRenderState.skyColor));
+	public boolean renderSky(@NonNull LevelRenderState levelRenderState, SkyRenderState skyRenderState, @NonNull Matrix4fc modelViewMatrix, @NonNull GpuBufferSlice skyFog) {
+		GpuBufferSlice colorTransform = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrixCopy(), new Vector4f(skyRenderState.skyColor, 1F));
 		GpuBuffer idxBuf = indices.getBuffer(INDEXBUFFER_SIZE);
 
 		TextureManager textureManager = Minecraft.getInstance().getTextureManager();
@@ -53,8 +53,8 @@ public class StarrySkyBox implements AutoCloseable, CustomSkyboxRenderer {
 		try (RenderPass renderPass = RenderSystem.getDevice()
 				.createCommandEncoder()
 				.createRenderPass(() -> "Starry Skies skybox", skyTarget.getColorTextureView(), Optional.empty(),
-						skyTarget.useDepth ? skyTarget.getDepthTextureView() : null, OptionalDouble.empty())) {
-			renderPass.setPipeline(RenderPipelines.END_SKY);
+						skyTarget.hasDepth() ? skyTarget.getDepthTextureView() : null, OptionalDouble.empty())) {
+			renderPass.setPipeline(RenderSystem.getCompiledPipeline(RenderPipelines.END_SKY));
 			RenderSystem.bindDefaultUniforms(renderPass);
 			renderPass.setUniform("DynamicTransforms", colorTransform);
 			renderPass.setIndexBuffer(idxBuf, indices.type());
@@ -62,7 +62,7 @@ public class StarrySkyBox implements AutoCloseable, CustomSkyboxRenderer {
 			// draw each quad (side) with a different texture
 			// 6 indices per quad, per PrimitiveTopology.QUADS.indexCount(4)
 			for (int i = 0; i < 6; ++i) {
-				renderPass.bindTexture("Sampler0", TEXTURES[i].getTextureView(), TEXTURES[i].getSampler());
+				renderPass.setUniform("Sampler0", TEXTURES[i].getTextureView(), TEXTURES[i].getSampler());
 				renderPass.drawIndexed(INDICES_PER_FACE, 1, INDICES_PER_FACE * i, 0, 0);
 			}
 		}

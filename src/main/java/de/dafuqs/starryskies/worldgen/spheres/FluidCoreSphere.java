@@ -119,7 +119,7 @@ public class FluidCoreSphere extends Sphere<FluidCoreSphere.Config> {
 						currBlockPos.set(x2, y2, z2);
 						
 						if (this.holeInBottom && (x - x2) == 0 && (z - z2) == 0 && (y - y2 + 1) >= liquidRadius) {
-							chunk.setBlockState(new BlockPos(currBlockPos), this.fluidBlock);
+                            chunk.setBlockState(currBlockPos, this.fluidBlock);
 							chunk.markPosForPostProcessing(currBlockPos); // makes it drop down after generation is complete
 						} else if (d <= this.coreRadius) {
 							chunk.setBlockState(currBlockPos, this.coreBlock.getState(level, random, currBlockPos));

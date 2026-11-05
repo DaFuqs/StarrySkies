@@ -2,16 +2,16 @@
   "type": "starry_skies:shell",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:oak_log"
+        "id": "minecraft:oak_log"
       }
     },
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "traverse:yellow_autumnal_leaves",
-        "Properties": {
+        "id": "traverse:yellow_autumnal_leaves",
+        "properties": {
           "distance": "1"
         }
       }

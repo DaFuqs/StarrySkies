@@ -2,9 +2,9 @@
   "type": "starry_skies:cave",
   "config": {
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:sulfur"
+        "id": "minecraft:sulfur"
       }
     },
     "shell_thickness": {

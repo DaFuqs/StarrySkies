@@ -2,16 +2,16 @@
   "type": "starry_skies:shell",
   "config": {
     "main_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:cherry_log"
+        "id": "minecraft:cherry_log"
       }
     },
     "shell_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:cherry_leaves",
-        "Properties": {
+        "id": "minecraft:cherry_leaves",
+        "properties": {
           "distance": "1"
         }
       }

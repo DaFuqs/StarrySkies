@@ -6,9 +6,9 @@
       "group": "stones"
     },
     "core_block": {
-      "type": "minecraft:simple_state_provider",
+      "type": "minecraft:simple",
       "state": {
-        "Name": "minecraft:coal_ore"
+        "id": "minecraft:coal_ore"
       }
     },
     "core_radius": {

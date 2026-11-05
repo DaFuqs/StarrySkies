@@ -2,7 +2,7 @@
   "type": "starry_skies:single_block",
   "config": {
     "block": {
-      "Name": "minecraft:flowering_azalea"
+      "id": "minecraft:flowering_azalea"
     },
     "chance": 0.03
   }

@@ -59,7 +59,7 @@ public class StarrySkies {
 
 	public StarrySkies(IEventBus modBus, ModContainer modContainer) {
 		LOGGER.info("Starting up...");
-		modContainer.registerConfig(ModConfig.Type.COMMON, StarrySkyConfig.CONFIG_SPEC);
+		modContainer.registerConfig(ModConfig.Type.STARTUP, StarrySkyConfig.CONFIG_SPEC);
 		modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
 		NeoForge.EVENT_BUS.addListener((Consumer<AddServerReloadListenersEvent>) event -> {

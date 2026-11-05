@@ -45,6 +45,14 @@
         "translate": "block.minecraft.bed.no_sleep"
       }
     },
+    "minecraft:gameplay/straw_bed_rule": {
+      "can_set_spawn": "never",
+      "can_sleep": "when_dark",
+      "destroy_on_leave": true,
+      "error_message": {
+        "translate": "block.minecraft.bed.no_sleep"
+      }
+    },
     "minecraft:gameplay/nether_portal_spawns_piglin": true,
     "minecraft:visual/sky_color": "#78a7ff",
     "minecraft:visual/fog_color": "#c0d8ff",

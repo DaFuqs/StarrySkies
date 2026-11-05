@@ -11,6 +11,7 @@
   "default_clock": "minecraft:the_end",
   "timelines": "#minecraft:in_end",
   "has_ender_dragon_fight": true,
+  "skybox": "none",
   "monster_spawn_block_light_limit": 0,
   "monster_spawn_light_level": 15,
   "attributes": {
@@ -33,7 +34,12 @@
     "minecraft:gameplay/bed_rule": {
       "can_set_spawn": "never",
       "can_sleep": "never",
-      "explodes": true
+      "destroy_on_use": true
+    },
+    "minecraft:gameplay/straw_bed_rule": {
+      "can_set_spawn": "never",
+      "can_sleep": "never",
+      "destroy_on_use": true
     },
     "minecraft:gameplay/respawn_anchor_works": false,
     "minecraft:visual/ambient_light_color": "#3f473f",
