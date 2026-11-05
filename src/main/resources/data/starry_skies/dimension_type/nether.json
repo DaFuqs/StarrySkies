@@ -4,7 +4,7 @@
   "ambient_light": 0.1,
   "cardinal_light": "nether",
   "has_ender_dragon_fight": false,
-  "skybox": "end",
+  "skybox": "none",
   "timelines": "#minecraft:in_nether",
   "has_fixed_time": true,
   "bed_works": false,
